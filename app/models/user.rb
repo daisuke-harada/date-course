@@ -7,7 +7,9 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX},
             #一意性
             uniqueness: true
-  # validates :sex, presence: true
-  # validates :password_digest, presence: true
+  #パスワードをハッシュ化する。
+  has_secure_password
+  validates :password, presence: true, length: {minimum: 6}
+  validates :sex, presence: true
   # validates :remember_digest, presence: true
 end
