@@ -1,0 +1,27 @@
+header{
+  background-color: #FA8072;
+  height: 70px;
+}
+
+h1.logo {
+  float:left;
+  height: 100%;
+  padding: 7px;
+  margin-left: 20px;
+  margin-right: 150px;
+  a{
+    color: white;
+  }
+}
+
+.menu-group {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+  li{
+    padding:23px 7px;
+    a{
+      color: white;
+    }
+  }
+}
