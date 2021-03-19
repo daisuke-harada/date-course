@@ -1,2 +1,23 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="container">
+  <div class="user-new-form-area">
+    <h1>Sign up</h1>
+    <%= form_with(model:@user, local: true) do |f|%>
+      <%= f.label :name, "名前"%>
+      <%= f.text_field :name %>
+
+      <%= f.label :email, "メール" %>
+      <%= f.email_field :email %>
+
+      <span>
+        <%= f.radio_button :sex, 1%>男
+        <%= f.radio_button :sex, 2%>女
+      </span>
+
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "パスワード(確認)" %>
+      <%= f.password_field :password_confirmation %>
+    <% end %>
+  </div>
+</div>

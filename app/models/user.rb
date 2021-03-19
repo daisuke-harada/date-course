@@ -11,5 +11,6 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}
   validates :sex, presence: true
-  # validates :remember_digest, presence: true
+  
+  has_one_attached :profile_image
 end
