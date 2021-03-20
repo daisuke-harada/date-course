@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 * {
   margin: 0;
   padding: 0;
@@ -19,4 +22,39 @@ ul {
   width: 90%;
   margin-right: auto;
   margin-left: auto;
+}
+
+/* errorメッセージのスタイル */
+#error_explanation {
+  color: red;
+  ul{
+    color:red;
+    margin: 0 0 30px 0;
+  }
+}
+
+// .alert-danger {
+//   color: #a94442;
+//   background-color: #f2dede;
+//   border-color: #ebccd1;
+// }
+// .alert {
+//   padding: 15px;
+//   margin-bottom: 20px;
+//   border: 1px solid transparent;
+//   border-radius: 4px;
+// }
+
+/* buttonのスタイル */
+
+.normal-btn {
+  background-color: #FA8072;
+  border: #FA8072;
+  border-radius: 3px;
+  padding: 3px;
+  color: white;
+  &:hover {
+    color: #FA8072;
+    cursor: pointer;
+  }
 }

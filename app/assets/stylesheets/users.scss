@@ -1,7 +1,24 @@
 .user-new-form-area{
-  display: flex;
+  margin-top: 50px;
   margin-right: auto;
   margin-left: auto;
-  width: 70%;
+  max-width: 70%;
+  min-width: 40%;
   background-color: white;
+  border: black solid 1px;
+  padding:30px;
+  padding-bottom: 20px;
+  h1{
+    text-align: center;
+  }
+  input[type="text"], input[type="email"], input[type="password"]{
+    width: 100%;
+    margin: 20px 0;
+  }
+  .radio-btn-group{
+    margin: 20px 0;
+  }
+  .field_with_errors {
+    display: inline;
+  }
 }

@@ -1,23 +1,28 @@
 <div class="container">
   <div class="user-new-form-area">
-    <h1>Sign up</h1>
+    <h1>新規登録</h1>
     <%= form_with(model:@user, local: true) do |f|%>
+      <%= render 'shared/error_messages', target: @user %>
       <%= f.label :name, "名前"%>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: 'form-control'%>
 
       <%= f.label :email, "メール" %>
-      <%= f.email_field :email %>
+      <%= f.email_field :email, class: 'form-control' %>
 
-      <span>
-        <%= f.radio_button :sex, 1%>男
-        <%= f.radio_button :sex, 2%>女
-      </span>
+      <div class="radio-btn-group">
+        <%= f.radio_button :sex, 1 %>
+        <%= f.label :sex, "男性", {value: 1} %>
+        <%= f.radio_button :sex, 2 %>
+        <%= f.label :sex, "女性", {value: 2} %>
+      </div>
 
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.label :password_confirmation, "パスワード(確認)" %>
-      <%= f.password_field :password_confirmation %>
-    <% end %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "登録", class: "normal-btn"%>
+    <% end %> 
   </div>
 </div>
