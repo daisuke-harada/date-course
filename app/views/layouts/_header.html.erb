@@ -1,12 +1,18 @@
 <header>
-  <h1 class="logo"><%= link_to "DateCourse", '#' %></h1>
+  <h1 class="logo"><%= link_to "DateCourse", root_path %></h1>
   <!-- ログイン前 -->
   <ul class="menu-group">
     <li><%= link_to "デートスポットを探す", '#' %></li>
     <li><%= link_to "デートコースを探す", '#' %></li>
-    <li><%= link_to "ユーザーを探す", '#' %></li>
-    <li><%= link_to "新規登録", '#' %></li>
-    <li><%= link_to "ログイン", '#' %></li>
-    <li><%= link_to "ゲストログイン(1クリック)", '#' %></li>
+    <li><%= link_to "ユーザーを探す", users_path %></li>
+    <% if logged_in? %>
+      <li><%= link_to "デートコース作成", '#' %></li>
+      <li><%= link_to "マイメニュー", current_user %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "新規登録", new_user_path %></li>
+      <li><%= link_to "ログイン", login_path %></li>
+      <li><%= link_to "ゲストログイン(1クリック)", '#' %></li>
+    <% end %>
   </ul>
 </header>

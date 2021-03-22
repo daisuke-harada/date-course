@@ -4,10 +4,10 @@
     <%= form_with(model:@user, local: true) do |f|%>
       <%= render 'shared/error_messages', target: @user %>
       <%= f.label :name, "名前"%>
-      <%= f.text_field :name, class: 'form-control'%>
+      <%= f.text_field :name %>
 
       <%= f.label :email, "メール" %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.email_field :email %>
 
       <div class="radio-btn-group">
         <%= f.radio_button :sex, 1 %>
@@ -17,10 +17,10 @@
       </div>
 
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password %>
 
       <%= f.label :password_confirmation, "パスワード(確認)" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <%= f.password_field :password_confirmation %>
 
       <%= f.submit "登録", class: "normal-btn"%>
     <% end %> 
