@@ -13,4 +13,8 @@ class User < ApplicationRecord
   validates :sex, presence: true
   
   has_one_attached :profile_image
+
+  def sex_status
+    return sex == 1 ? "男": "女"
+  end
 end
