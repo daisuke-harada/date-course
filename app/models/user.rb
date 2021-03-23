@@ -17,4 +17,16 @@ class User < ApplicationRecord
   def sex_status
     return sex == 1 ? "男": "女"
   end
+
+  //渡された文字列のハッシュを返す
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
 end
