@@ -59,3 +59,24 @@ ul {
     cursor: pointer;
   }
 }
+
+.guest-login-btn {
+  background-color: #00ccff;
+  border: #00ccff;
+  border-radius: 3px;
+  padding: 3px;
+  color: white;
+  &:hover {
+    color: #00ccff;
+    cursor: pointer;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}

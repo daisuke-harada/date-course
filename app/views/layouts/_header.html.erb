@@ -12,7 +12,13 @@
     <% else %>
       <li><%= link_to "新規登録", new_user_path %></li>
       <li><%= link_to "ログイン", login_path %></li>
-      <li><%= link_to "ゲストログイン(1クリック)", '#' %></li>
+      <li>
+        <%= form_with(url: login_path, scope: :session, local: true) do |f|%>
+          <%= f.hidden_field :name, :value => guest_name %>
+          <%= f.hidden_field :password, :value => guest_password %>
+          <%= f.submit "ゲストログイン(1クリック)", class: "guest-login-btn"%>
+        <% end %> 
+      </li>
     <% end %>
   </ul>
 </header>

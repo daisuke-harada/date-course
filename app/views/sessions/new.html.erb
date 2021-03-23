@@ -8,7 +8,13 @@
       <%= f.label :password, "パスワード" %>
       <%= f.password_field :password %>
 
-      <%= f.submit "ログイン", class: "normal-btn"%>
+      <%= f.label :remember_me, class: "checkbox" do%>
+        <%= f.check_box :remember_me %>
+        <span>次回から自動的にログインする</span>
+      <% end %><br/>
+      <div style="text-align :center">
+        <%= f.submit "ログイン", class: "normal-btn"%>
+      </div>
     <% end %> 
   </div>
 </div>
