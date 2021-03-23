@@ -22,6 +22,9 @@
       <%= f.label :password_confirmation, "パスワード(確認)" %>
       <%= f.password_field :password_confirmation %>
 
+      <%= f.label :profile_image, "サムネイル"%>
+      <%= f.file_field :image %>
+
       <div style="text-align :center">
         <%= f.submit "登録", class: "normal-btn"%>
       </div>
