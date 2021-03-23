@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore vscode
-.vscode
+.vscode/
 
 # Ignore all logfiles and tempfiles.
 /log/*
