@@ -1,3 +1,5 @@
 <h1>Users#show</h1>
-<%= image_tag (@user.profile_image.url) %>
+
+<%= image_tag @user.image.variant(resize_to_limit: [225, 225]) || "no_image.jpg" %>
 <%= @user.name%><%= @user.sex_status %><%= @user.email %>
+<%= link_to "アカウント情報を編集する", edit_user_path(@user), class: "normal-btn" if @user == current_user && @user.name != guest_name %>

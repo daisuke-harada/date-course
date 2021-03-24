@@ -13,8 +13,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}
   validates :sex, presence: true
-  
-  has_one_attached :profile_image
+  has_one_attached :image
 
   def sex_status
     return sex == 1 ? "男": "女"

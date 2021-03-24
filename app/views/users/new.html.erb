@@ -1,33 +1,3 @@
 <div class="container">
-  <div class="user-new-form-area">
-    <h1>新規登録</h1>
-    <%= form_with(model:@user, local: true) do |f|%>
-      <%= render 'shared/error_messages', target: @user %>
-      <%= f.label :name, "名前"%>
-      <%= f.text_field :name %>
-
-      <%= f.label :email, "メール" %>
-      <%= f.email_field :email %>
-
-      <div class="radio-btn-group">
-        <%= f.radio_button :sex, 1 %>
-        <%= f.label :sex, "男性", {value: 1} %>
-        <%= f.radio_button :sex, 2 %>
-        <%= f.label :sex, "女性", {value: 2} %>
-      </div>
-
-      <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "パスワード(確認)" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.label :profile_image, "サムネイル"%>
-      <%= f.file_field :image %>
-
-      <div style="text-align :center">
-        <%= f.submit "登録", class: "normal-btn"%>
-      </div>
-    <% end %> 
-  </div>
+  <%= render 'user_regist_form', {user: @user, user_input_area_title: "新規登録", regist_button: "登録"}%>
 </div>
