@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_aciton :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
 
   def show
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       flash.now[:success] = "新規登録が完了しました。"
       log_in @user
-      redirect_to @user
+      redirect_back_or @user
     else
       render 'new'
     end
@@ -35,6 +35,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find_by(params[:id]).destroy
+    log_out
+    flash[:success] = "退会しました"
+    redirect_to root_url
+  end
+
   def index
   end
 
@@ -46,6 +53,7 @@ class UsersController < ApplicationController
 
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "ログインしてください"
         redirect_to login_url
       end
@@ -53,6 +61,7 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      redirect_to(root_url) unless @user == current_user 
     end
 end
+

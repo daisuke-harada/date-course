@@ -24,8 +24,10 @@
       <%= f.label :image, "サムネイル"%>
       <%= f.file_field :image %>
 
+      <%= link_to "退会する", user, method: :delete, data: { confirm: "本当に退会しますか？" }, class: "norbal-btn" if logged_in? %>
+
       <div style="text-align :center">
-        <%= f.submit regist_button, class: "normal-btn"%>
+        <%= f.submit regist_button, class: "normal-btn" %>
       </div>
     <% end %> 
   </div>
