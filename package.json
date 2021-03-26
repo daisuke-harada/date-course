@@ -2,11 +2,16 @@
   "name": "date-course",
   "private": true,
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "autoprefixer": "^9.8.6",
     "node-sass": "^5.0.0",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
