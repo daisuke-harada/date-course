@@ -29,7 +29,6 @@
       </div>
       <div class="btn-style">
         <%= link_to "退会する", user_path(user), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "danger-btn" if logged_in? %>
-        <% binding.pry %>
       </div>
     <% end %> 
   </div>

@@ -36,11 +36,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    
-    @user = User.find(params[:id])
-    @user.destroy
+    User.find(params[:id]).destroy
     log_out if logged_in?
-    binding.pry
     flash[:success] = "退会しました"
     redirect_to root_url
   end
