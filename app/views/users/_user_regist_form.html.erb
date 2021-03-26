@@ -24,10 +24,12 @@
       <%= f.label :image, "サムネイル"%>
       <%= f.file_field :image %>
 
-      <%= link_to "退会する", user, method: :delete, data: { confirm: "本当に退会しますか？" }, class: "norbal-btn" if logged_in? %>
-
-      <div style="text-align :center">
+      <div class="btn-style">
         <%= f.submit regist_button, class: "normal-btn" %>
+      </div>
+      <div class="btn-style">
+        <%= link_to "退会する", user_path(user), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "danger-btn" if logged_in? %>
+        <% binding.pry %>
       </div>
     <% end %> 
   </div>

@@ -60,6 +60,18 @@ ul {
   }
 }
 
+.danger-btn {
+  background-color: red;
+  border: red;
+  border-radius: 3px;
+  padding: 3px;
+  color: white;
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+
 .guest-login-btn {
   background-color: #00ccff;
   border: #00ccff;
@@ -79,4 +91,9 @@ ul {
     margin-left: 20px;
     font-weight: normal;
   }
+}
+
+.btn-style {
+  text-align: center;
+  padding: 5px;
 }
