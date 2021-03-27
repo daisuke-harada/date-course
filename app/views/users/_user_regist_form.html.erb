@@ -1,14 +1,14 @@
-<div class="user-new-form-area">
-    <h1><%= user_input_area_title %></h1>
+<div class="user-form">
+    <h1 class="text-center"><%= user_input_area_title %></h1>
     <%= form_with(model: user, local: true) do |f|%>
       <%= render 'shared/error_messages', target: user %>
       <%= f.label :name, "名前"%>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "my-5 w-full border-b-2 outline-none" %>
 
       <%= f.label :email, "メール" %>
-      <%= f.email_field :email %>
+      <%= f.email_field :email, class: "my-5 w-full border-b-2 outline-none" %>
 
-      <div class="radio-btn-group">
+      <div class="my-5">
         <%= f.radio_button :sex, 1 %>
         <%= f.label :sex, "男性", {value: 1} %>
         <%= f.radio_button :sex, 2 %>
@@ -16,19 +16,19 @@
       </div>
 
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: "my-5 w-full border-b-2 outline-none" %>
 
       <%= f.label :password_confirmation, "パスワード(確認)" %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "my-5 w-full border-b-2 outline-none" %>
 
       <%= f.label :image, "サムネイル"%>
       <%= f.file_field :image %>
 
-      <div class="btn-style">
-        <%= f.submit regist_button, class: "normal-btn" %>
+      <div class="text-center p-1">
+        <%= f.submit regist_button, class: "btn btn-salmon" %>
       </div>
-      <div class="btn-style">
-        <%= link_to "退会する", user_path(user), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "danger-btn" if logged_in? %>
+      <div class="text-center p-1">
+        <%= link_to "退会する", user_path(user), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "btn btn-red" if logged_in? %>
       </div>
     <% end %> 
   </div>
