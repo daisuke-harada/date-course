@@ -1,5 +1,5 @@
 <% if target.errors.any? %>
-  <div id ="error_explanation">
+  <div class=" text-red-600 mb-7">
     <div class="alert alert-danger">
       <!--　これにより、"1 errors" のような英語の文法に合わない文字列を避けることができる -->
       The form contains <%= pluralize(target.errors.count, "error") %>.
