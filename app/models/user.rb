@@ -12,7 +12,8 @@ class User < ApplicationRecord
             uniqueness: true
   # パスワードをハッシュ化する。
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  
   validates :sex, presence: true
   has_one_attached :image
 

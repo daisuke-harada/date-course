@@ -67,12 +67,6 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:sex]).to include("can't be blank")
       end
-
-      it "パスワードとパスワード確認の値が違うと保存できないこと" do
-        user.password_confirmation = nil
-        user.valid?
-        expect(user.errors[:password]).to include("confirmation doesn't match Password")
-      end
     end
   end
 end
