@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
       end
 
       it "パスワードが6文字以上なら保存できること" do
-        user.password = "a"*6
+        user.password = user.password_confirmation = "a"*6
         expect(user).to be_valid
       end
     end
@@ -37,6 +37,12 @@ RSpec.describe User, type: :model do
         expect(user.errors[:name]).to include("is too long (maximum is 50 characters)")
       end
 
+      it "すでに登録されている名前は保存できないこと" do
+        FactoryBot.create(:user)
+        user.valid?
+        expect(user.errors[:name]).to include("has already been taken")
+      end
+
       it "メールアドレスが入力されていなければ保存できないこと" do
         user.email = nil
         user.valid?
@@ -49,14 +55,23 @@ RSpec.describe User, type: :model do
         expect(user.errors[:email]).to include("is too long (maximum is 250 characters)")
       end
 
-      it "すでに登録されているメールアドレスは保存できないこと"
-        other_user = FactoryBot.create(:user)
-        
+      it "すでに登録されているメールアドレスは保存できないこと" do
+        FactoryBot.create(:user)
+        user.valid?
+        expect(user.errors[:email]).to include("has already been taken")
+      end
+
 
       it "性別が入力されていなければ保存できないこと" do
         user.sex = nil
         user.valid?
         expect(user.errors[:sex]).to include("can't be blank")
+      end
+
+      it "パスワードとパスワード確認の値が違うと保存できないこと" do
+        user.password_confirmation = nil
+        user.valid?
+        expect(user.errors[:password]).to include("confirmation doesn't match Password")
       end
     end
   end
