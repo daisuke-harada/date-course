@@ -1,7 +1,7 @@
 module UsersHelper
 
   def guest_name
-    return User.find_by(id: 1).name
+    return "guest"
   end
 
   def guest_password

@@ -3,7 +3,7 @@
     <%= image_tag @user.image.variant(resize_to_limit: [225, 225]) || "no_image.jpg", class:"m-auto"%>
     <p class="m-2">
       <span class="p-2 m-auto"><%= @user.name%></span>
-      <span class="p-2"><%= @user.sex_status %></span>
+      <span class="p-2"><%= @user.change_sex_data_string %></span>
     </p>
     <p class="m-2 w- border-b-2 border-black">
       <span class="p-2">6フォロー</span>

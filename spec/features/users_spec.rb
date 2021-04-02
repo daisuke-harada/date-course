@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
-  before do
-    guest = FactoryBot.create(:guest)
-  end
-
   scenario "新規登録画面で新規登録を行う" do
     user = FactoryBot.build(:user)
     visit root_url
@@ -17,7 +13,12 @@ RSpec.feature "Users", type: :feature do
     expect {
       click_button "登録"
       expect(page).to have_content "#{user.name}"
-      expect(page).to have_content "#{user.sex_status}"
+      expect(page).to have_content "#{user.change_sex_data_string}"
     }.to change(User.all, :count).by(1)
+  end
+
+  scenario "ログインを行う" do
+    user = FactoryBot.build(:user)
+    sign_in_as user
   end
 end
