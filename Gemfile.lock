@@ -98,6 +98,8 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -279,6 +281,7 @@ DEPENDENCIES
   factory_bot_rails
   image_processing
   jbuilder (~> 2.7)
+  launchy (~> 2.4.3)
   listen (~> 3.3)
   mysql2 (~> 0.5)
   pre-commit
