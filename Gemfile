@@ -22,6 +22,8 @@ gem 'image_processing'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+#住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
+gem 'active_hash'
 
 # Use Active Storage variant
 
