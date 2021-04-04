@@ -1,4 +1,15 @@
-<div class="container">
-  <h1>Homes#top</h1>
-  <p>Find me in app/views/homes/top.html.erb</p>
+<div class="m-5 mt-10 border border-black flex">
+  <div class="w-3/12 border border-black">
+    <%= render "layouts/date_spot_top3" %>
+    <%= render "layouts/date_spot_ransack", title_target: "デートスポットを場所で検索" %>
+    <%= render "layouts/date_spot_ransack", title_target: "デートスポットを名前で検索" %>
+  </div>
+  <div class="w-9/12">
+    <div class="bg-black w-full h-72">
+      <h1 class="text-white text-center">
+        ランディングページ用の画像をここに表示
+      </h1>
+    </div>
+  </div>
 </div>
+
