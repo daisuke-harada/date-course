@@ -1,0 +1,8 @@
+<div class="w-6/12 h-28 border bg-white">
+  <h1 class="m-2"><%= area.name %></h1>
+  <% area.prefectures.each do |prefecture| %>
+    <div class="inline-block">
+      <%= link_to prefecture.name, "#", class: "m-2" %>
+    </div>
+  <% end %>
+</div>

@@ -10,19 +10,15 @@
         ランディングページ用の画像をここに表示
       </h1>
     </div>
+    <h1 class="m-5">エリアでデートスポットを探す</h1>
     <div class="flex flex-wrap">
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
-      <div class="w-4/12 h-28 border bg-black">
-      </div>
+      <% @main_prefectures.each do |prefecture| %>
+        <%= render "prefectures/prefecture", prefecture: prefecture %>
+      <% end %>
+      
+      <% @areas.each do |area| %>
+        <%= render "areas/area", area: area %>
+      <% end %>
     </div>
   </div>
 </div>

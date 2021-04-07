@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+a {
+  @apply text-blue-400 hover:text-yellow-300;
+}
+
 /* error */
 .field_with_errors {
   @apply inline;
@@ -14,6 +18,7 @@
 .alert-danger {
   @apply text-red-900 bg-red-200 border-red-100;
 }
+
 /* header */
 .logo {
   @apply h-full p-2 float-left ml-5 flex items-center;
