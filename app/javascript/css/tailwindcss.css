@@ -1,7 +1,20 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/* flash-message */
+.flash-message {
+  @apply text-white;
+}
 
+.success {
+  @apply h-14 bg-green-300;
+}
+
+.danger {
+  @apply h-14 bg-red-200;
+}
+
+/* tag */
 a {
   @apply text-blue-400 hover:text-yellow-300;
 }

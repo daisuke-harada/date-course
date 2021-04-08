@@ -11,6 +11,12 @@
   </head>
   <body class="bg-gray-100">
     <%= render 'layouts/header' %>
+    <div class="flash-message">
+      <% flash.each do |key, value| %>
+        <!-- content_tagはHTMLタグを生成するメソッドです。classにflashメッセージの種類が入る。 valueに表示したいメッセージが入る -->
+        <%= content_tag(:div, value, class: key) %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
