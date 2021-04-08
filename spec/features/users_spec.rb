@@ -36,6 +36,7 @@ RSpec.feature "Users", type: :feature do
     fill_in "パスワード(確認)", with: user.password_confirmation
     click_button "更新"
     aggregate_failures do
+      expect(user.reload.name).to eq "test"
       expect(page).to have_content "test"
       expect(page).to have_content "#{user.change_sex_data_string}"
     end
