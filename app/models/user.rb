@@ -36,7 +36,7 @@ class User < ApplicationRecord
   def remember
     # update_attributeメソッドはバリデーションを素通りさせる
     self.remember_token = User.new_token
-    # 記憶ダイジェストを更新する。
+    # 記憶ダイジェストを更新する。自動ログイン機能に使用する。
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
