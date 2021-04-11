@@ -1,6 +1,6 @@
 class Area < ActiveHash::Base
   include ActiveHash::Associations
-  
+  #prefectureクラスとactive_hash同士のアソシエーションを結ぶ
   has_many :prefectures
 
   self.data = [

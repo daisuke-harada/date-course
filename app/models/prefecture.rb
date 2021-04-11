@@ -1,5 +1,6 @@
 class Prefecture < ActiveHash::Base
   include ActiveHash::Associations
+  #areaクラスとactive_hash同士のアソシエーションを結ぶ。
   belongs_to :area
   
   #active_hashによってPrefectureモデルをデータベースに保存せずに作成
