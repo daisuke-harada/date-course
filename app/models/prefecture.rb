@@ -3,7 +3,7 @@ class Prefecture < ActiveHash::Base
   #areaクラスとactive_hash同士のアソシエーションを結ぶ。
   belongs_to :area
   
-  #active_hashによってPrefectureモデルをデータベースに保存せずに作成する
+  #active_hashによってPrefectureモデルをデータベースに保存せずに作成していく。
   self.data = [
       {id: 1, name: '北海道', area_id: 1}, {id: 2, name: '青森県', area_id: 1}, {id: 3, name: '岩手県', area_id: 1},
       {id: 4, name: '宮城県', area_id: 1}, {id: 5, name: '秋田県', area_id: 1}, {id: 6, name: '山形県', area_id: 1},
