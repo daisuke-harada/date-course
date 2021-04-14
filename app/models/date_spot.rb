@@ -1,0 +1,2 @@
+class DateSpot < ApplicationRecord
+end
