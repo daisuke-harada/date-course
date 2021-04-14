@@ -5,9 +5,12 @@
     <li class="my-5"><%= link_to "デートスポットを探す", '#' %></li>
     <li class="my-5"><%= link_to "デートコースを探す", '#' %></li>
     <li class="my-5"><%= link_to "ユーザーを探す", users_path %></li>
-    <% if logged_in? %>
+    <% if logged_in? && current_user.admin == false %>
       <li class="my-5"><%= link_to "デートコース作成", '#' %></li>
       <li class="my-5"><%= link_to "マイメニュー", current_user %></li>
+      <li class="my-5"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+    <% elsif admin_logged_in? %>
+      <li class="my-5"><%= link_to "デートスポット作成", '#' %></li>
       <li class="my-5"><%= link_to "ログアウト", logout_path, method: :delete %></li>
     <% else %>
       <li class="my-5"><%= link_to "新規登録", new_user_path %></li>
