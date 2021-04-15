@@ -16,6 +16,7 @@ class User < ApplicationRecord
   
   validates :sex, presence: true
   has_one_attached :image
+  has_many :date_spot, dependent: :destory
 
   def change_sex_data_string
     return sex == 1 ? "男" : "女"

@@ -15,4 +15,13 @@ FactoryBot.define do
     password {"foobar"}
     password_confirmation {"foobar"}
   end
+
+  factory :admin, class: User do
+    name {"admin"}
+    email {"adminstrator@gmail.com"}
+    sex {1}
+    password {"adminlogin1099"}
+    password_confirmation {"adminlogin1099"}
+    admin {true}
+  end
 end
