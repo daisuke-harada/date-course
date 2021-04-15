@@ -10,12 +10,6 @@ RSpec.describe DateSpot, type: :model do
     end
 
     context "dates_spotを保存できない場合" do
-      it "user_idがnilの場合は保存できないこと" do
-        date_spot.user_id = nil
-        date_spot.valid?
-        expect(date_spot.errors[:user_id]).to include("can't be blank")
-      end
-
       it "名前が入力されていなければ保存できないこと" do
         date_spot.name = nil
         date_spot.valid?

@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2021_04_14_232619) do
 
   create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "category_id"
-    t.integer "user_id"
     t.string "name"
     t.string "business_hour"
     t.datetime "created_at", precision: 6, null: false
