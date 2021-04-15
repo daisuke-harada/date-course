@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :user do
+    id {1}
     name {"田中健太郎"}
     email {"kenta@gmail.com"}
     sex {1}
@@ -8,7 +9,7 @@ FactoryBot.define do
   end
 
   factory :guest, class: User do
-    id {1}
+    id {2}
     name {"guest"}
     email {"guest@gmail.com"}
     sex {1}
@@ -17,6 +18,7 @@ FactoryBot.define do
   end
 
   factory :admin, class: User do
+    id {3}
     name {"admin"}
     email {"adminstrator@gmail.com"}
     sex {1}

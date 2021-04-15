@@ -8,6 +8,11 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
 
+      it "正常値の場合、admin属性がtrueのuserも保存できること" do
+        admin = FactoryBot.build(:admin)
+        expect(admin).to be_valid
+      end
+
       it "名前が50文字以内なら保存できること" do
         user.name = "a" * 50
         expect(user).to be_valid

@@ -21,6 +21,12 @@ RSpec.describe Address, type: :model do
         address.valid?
         expect(address.errors[:city]).to include("can't be blank")
       end
+
+      it "date_spot_idがnilならば保存できないこと" do
+        address.date_spot_id = nil
+        address.valid?
+        expect(address.errors[:date_spot_id]).to include("can't be blank")
+      end
     end
   end
 end

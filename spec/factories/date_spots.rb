@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :date_spot do
+    id {1}
     name { "MyString" }
-    business_hour { "2021-04-15 08:26:19" }
-    #第一引数がmodel名第二引数がモデルで定義されている名前
+    business_hour { "08:00 ~ 21:00" }
+    #第一引数がmodel名 第二引数がモデルで定義されている名前
     association :user, factory: :admin
-    association :address
   end
 end
