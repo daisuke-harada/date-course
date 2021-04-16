@@ -1,2 +1,15 @@
-<h1>DateSpots#new</h1>
-<p>Find me in app/views/date_spots/new.html.erb</p>
+<div class="max-w-xl mx-auto mt-10 bg-white p-5 border-gray-900">
+  <h1 class="text-center text-lg m-5 mb-5">デートスポット新規登録</h1>
+  <%= form_with(model: @date_spot, local: true) do |f| %>
+    <%= render 'shared/error_messages', target: @date_spot %>
+    <%= f.label :name, "デートスポット名" %>
+    <%= f.text_field :name, class: "mb-5 border-b-2 outline-none w-full" %>
+
+    <!--<%= f.label :address_id, "住所" %>
+    <%= f.text_field :address_id, class: "mb-5 border-b-2 outline-none w-full" %> -->
+    <%= f.fields_for :address do |address| %>
+      <%= address.collection_select(:prefecture_id, @prefectures, :id, :name, prompt: "選択してください") %>
+      <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none" %>
+    <% end %>
+  <% end %>
+</div>

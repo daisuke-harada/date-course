@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_232619) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "prefecture_id"
     t.integer "date_spot_id"
-    t.string "city"
+    t.string "city_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
