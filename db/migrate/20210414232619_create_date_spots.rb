@@ -3,7 +3,8 @@ class CreateDateSpots < ActiveRecord::Migration[6.1]
     create_table :date_spots do |t|
       t.integer :category_id
       t.string :name
-      t.string :business_hour
+      t.time :opening_time
+      t.time :closing_time
 
       t.timestamps
     end

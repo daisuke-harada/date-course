@@ -27,9 +27,11 @@
       <div class="text-center p-1">
         <%= f.submit regist_button, class: "btn btn-salmon my-5" %>
       </div>
+
       <div class="text-center">
         <%= link_to "ログインはこちら", login_path if !logged_in? %>
       </div>
+      
       <div class="text-center p-1">
         <%= link_to "退会する", user_path(user), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "btn btn-red" if logged_in? %>
       </div>

@@ -5,11 +5,23 @@
     <%= f.label :name, "デートスポット名" %>
     <%= f.text_field :name, class: "mb-5 border-b-2 outline-none w-full" %>
 
-    <!--<%= f.label :address_id, "住所" %>
-    <%= f.text_field :address_id, class: "mb-5 border-b-2 outline-none w-full" %> -->
+    <%= f.label :address, "住所" %><br/>
     <%= f.fields_for :address do |address| %>
-      <%= address.collection_select(:prefecture_id, @prefectures, :id, :name, prompt: "選択してください") %>
-      <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none" %>
+      <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %>
+      <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none w-full" %>
     <% end %>
+
+    <label>営業時間 (始業時間~就業時間)</label><br/>
+    <p class="mb-5 border-b-2 outline-none w-5/12">
+      <%= f.time_field :opening_time, class: "mr-5" %>~<%= f.time_field :closing_time, class: "ml-5" %>
+    </p>
+
+    <%= f.label :image, "サムネイル"%>
+    <%= f.file_field :image %>
+
+    <div class="text-center p-1">
+      <%= f.submit "登録", class: "btn btn-salmon my-5" %>
+    </div>
+
   <% end %>
 </div>
