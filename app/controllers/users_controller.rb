@@ -59,6 +59,7 @@ class UsersController < ApplicationController
       end
     end
 
+    # そのアカウントを持っている人以外がアクセスすることを防ぐ
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless @user == current_user 

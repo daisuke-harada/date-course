@@ -1,4 +1,6 @@
 class DateSpotsController < ApplicationController
+  before_action :logged_in_admin, only: [:new, :create, :edit, :update, :destroy]
+
   def new
     @date_spot = DateSpot.new
     @date_spot.build_address
@@ -33,5 +35,13 @@ class DateSpotsController < ApplicationController
         address_attributes: [:prefecture_id,
                              :city_name]
         )
+    end
+
+    def logged_in_admin
+      unless admin_logged_in?
+        store_location
+        flash[:danger] = "管理者権限を持つアカウントでログインしてください"
+        redirect_to login_url
+      end
     end
 end
