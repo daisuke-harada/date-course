@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2021_04_14_232619) do
   create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "category_id"
     t.string "name"
-    t.time "opening_time"
-    t.time "closing_time"
+    t.string "opening_time"
+    t.string "closing_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
