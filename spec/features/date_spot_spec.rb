@@ -19,6 +19,17 @@ RSpec.feature "DateSpots", type: :feature do
       click_button "登録"
       expect(page).to have_content "デートスポットの登録が完了しました"
       "TODO: デートスポットを新規登録に成功した際の遷移先ページを書く"
+      date_spot_display(date_spot)
     }.to change(DateSpot.all, :count).by(1)
+  end
+end
+
+def date_spot_display(date_spot)
+  aggregate_failures do
+    expect(page).to have_content "#{date_spot.name}"
+    expect(page).to have_content "#{date_spot.opening_time}"
+    expect(page).to have_content "#{date_spot.closing_time}"
+    expect(page).to have_content "#{date_spot.address.prefecture_name}"
+    expect(page).to have_content "#{date_spot.address.city_name}"
   end
 end
