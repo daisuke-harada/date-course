@@ -8,9 +8,9 @@ RSpec.feature "DateSpots", type: :feature do
     fill_in "スポット名", with: date_spot.name
     "TODO: 都道府県と市とかを選択する"
     select "県", from: date_spot.address.prefecture.name
-    select "市", from: date_spot.address.city
-    select "番地", from: "番地モデル"
+    select "市", from: date_spot.address.city_name
     "TODO: 営業時間"
+    
     "TODO: カテゴリ登録"
     expect {
       click_button "登録"
