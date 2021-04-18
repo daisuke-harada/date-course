@@ -7,13 +7,14 @@
 
     <%= f.label :address, "住所" %><br/>
     <%= f.fields_for :address do |address| %>
-      <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %>
+      <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %><br/>
+      <%= address.label :city_name, "市町村名、番地" %>
       <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none w-full" %>
     <% end %>
 
-    <label>営業時間 (始業時間~就業時間)</label><br/>
-    <p class="mb-5 border-b-2 outline-none w-5/12">
-      <%= f.time_field :opening_time, class: "mr-5" %>~<%= f.time_field :closing_time, class: "ml-5" %>
+    <label>営業時間</label><br/>
+    <p class="mb-5 border-b-2 outline-none">
+      <%= f.label :opening_time, "始業時間" %><%= f.time_field :opening_time, class: "mr-5" %>~<%= f.label :opening_time, "終業時間", class: "ml-5" %><%= f.time_field :closing_time %>
     </p>
 
     <%= f.label :image, "サムネイル"%>
