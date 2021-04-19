@@ -13,6 +13,7 @@ RSpec.feature "DateSpots", type: :feature do
     find("#date_spot_address_attributes_prefecture_id").find("option[value='#{date_spot.address.prefecture_id}']").select_option
     fill_in "市町村名、番地", with: date_spot.address.city_name 
     "TODO: 営業時間"
+    
     fill_in "始業時間", with: date_spot.opening_time
     fill_in "終業時間", with: date_spot.closing_time
     
@@ -29,9 +30,8 @@ end
 def date_spot_display(date_spot)
   aggregate_failures do
     expect(page).to have_content "#{date_spot.name}"
-    expect(page).to have_content "#{date_spot.opening_time}"
-    expect(page).to have_content "#{date_spot.closing_time}"
-    expect(page).to have_content "#{"福岡県"}"
+    expect(page).to have_content "営業時間#{date_spot.opening_time} ~ #{date_spot.closing_time}"
+    expect(page).to have_content "#{date_spot.address.prefecture.name}"
     expect(page).to have_content "#{date_spot.address.city_name}"
   end
 end
