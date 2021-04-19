@@ -1,12 +1,16 @@
 <div class="border border-black mt-10 m-20">
   <h1 class="w-full m-5"><%= @date_spot.name %></h1>
-  <%= image_tag @date_spot.image || "no_image.jpg", class: "pr-5 pl-5 w-full" %>
+  <%= image_tag @date_spot.image.variant(resize_to_limit: [400, 400]) || "no_image.jpg", class: "pr-5 pl-5" %>
+  <% if admin_logged_in? %>
+    <div class="m-5">
+      <%= link_to "デートスポット情報の編集", edit_date_spot_path(@date_spot), class:"btn btn-salmon" %>
+    </div>
+  <% end %>
   <div class="flex">
     <div class="w-2/6">
       <div class="m-5"><%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %></div>
       <div class="m-5">営業時間<%= @date_spot.opening_time%> ~ <%= @date_spot.closing_time %></div>
     </div>
-
     <div class="w-4/6 p-5">
       <div class="w-full h-full bg-gray-500">
         <h1 class="text-center">地図</h1>
@@ -16,6 +20,4 @@
   <div class="text-center">
       <button class="btn btn-salmon my-5">デートコースに追加する<button>
   </div>
-
-    
 </div>

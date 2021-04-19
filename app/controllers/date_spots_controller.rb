@@ -21,6 +21,7 @@ class DateSpotsController < ApplicationController
   end
 
   def edit
+    @date_spot = DateSpot.find(params[:id])
   end
 
   def index
