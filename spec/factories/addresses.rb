@@ -7,4 +7,13 @@ FactoryBot.define do
     association :date_spot
     association :prefecture
   end
+
+  factory :other_address, class: Address do
+    id {2}
+    prefecture_id { Prefecture.find_by(id: 40).id }
+    date_spot_id {1}
+    city_name { "福岡市南区長丘5丁目100-14" }
+    association :date_spot
+    association :prefecture
+  end
 end

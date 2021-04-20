@@ -19,5 +19,6 @@
   </div>
   <div class="text-center">
       <button class="btn btn-salmon my-5">デートコースに追加する<button>
+      <%= link_to "このデートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
   </div>
 </div>

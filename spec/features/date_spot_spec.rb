@@ -21,10 +21,15 @@ RSpec.feature "DateSpots", type: :feature do
     admin = FactoryBot.create(:admin)
     date_spot = FactoryBot.create(:date_spot) 
     date_spot.create_address(FactoryBot.attributes_for(:address))
+    other_spot = FactoryBot.build(:other_spot)
+    other_spot.build_address(FactoryBot.attributes_for(:other_address))
     date_spot.save
     sign_in_as admin
     click_link "デートスポットを探す"
     click_button "このデートスポットを見る"
+    date_spot_display(date_spot)
+    click_button "このデートスポットを編集する"
+    date_spot_information_insert(other_spot)
   end
 end
 
