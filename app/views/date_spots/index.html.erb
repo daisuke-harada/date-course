@@ -1,2 +1,16 @@
-<h1>DateSpots#index</h1>
-<p>Find me in app/views/date_spots/index.html.erb</p>
+<div class="m-5 mt-10 border border-black flex">
+  <div class="w-3/12 border border-black">
+    <%= render "layouts/date_spot_top3" %>
+    <%= render "layouts/date_spot_ransack", title_target: "デートスポットを場所で検索" %>
+    <%= render "layouts/date_spot_ransack", title_target: "デートスポットを名前で検索" %>
+  </div>
+  <div class="w-9/12">
+    <div class="mr-5 ml-5 bg-white">
+      <h1>デートスポット一覧</h1>
+      <div class="text-center">デートスポットレビューランキング</div>
+    </div>
+    <div class="mr-5 ml-5 bg-white">
+      <div class="w-">
+    </div>
+  </div>
+</div>

@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.feature "DateSpots", type: :feature do
   scenario "新規投稿画面で新規投稿に成功する" do
     user = FactoryBot.create(:admin)
-
     date_spot = FactoryBot.build(:date_spot) 
     address = date_spot.build_address(FactoryBot.attributes_for(:address))
-
     sign_in_as user
     click_link "デートスポット作成"
     fill_in "デートスポット名", with: date_spot.name
@@ -24,6 +22,12 @@ RSpec.feature "DateSpots", type: :feature do
       "TODO: デートスポットを新規登録に成功した際の遷移先ページを書く"
       date_spot_display(date_spot)
     }.to change(DateSpot.all, :count).by(1)
+  end
+
+  scenario "デートスポット詳細ページからデートスポット編集ページに遷移し、デートスポット情報を編集する" do
+    user = FactoryBot.create(:admin)
+    date_spot = FactoryBot.create(:date_spot)
+    sign_in_as user
   end
 end
 
