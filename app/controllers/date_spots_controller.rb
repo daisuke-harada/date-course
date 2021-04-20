@@ -25,7 +25,7 @@ class DateSpotsController < ApplicationController
   end
 
   def index
-    @daet_spots = DateSpot.all
+    @date_spots = DateSpot.all
   end
 
   private

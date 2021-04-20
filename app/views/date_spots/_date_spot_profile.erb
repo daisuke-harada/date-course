@@ -1,0 +1,18 @@
+<div class="p-5 m-5 bg-white">
+  <div class="flex">
+    <div class="w-5/12">
+      <p><%= date_spot.name %></p>
+      <p>⭐️⭐️⭐️⭐️⭐️</p>
+      <p>営業時間 <%= date_spot.opening_time %> ~ <%= date_spot.closing_time %></p>
+      <p> 住所 <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
+    </div>
+    <div class="w-7/12">
+      <%= image_tag date_spot.image.variant(resize_to_limit: [400, 400]) || "no_image.jpg", class: "pr-5 pl-5" %>
+      <p>口コミ数64</p>
+    </div>
+  </div>
+  <div class="text-center p-1">
+    <button class="btn btn-salmon m-5">デートコースに追加する<button>
+    <%= link_to "このデートスポットを見る", date_spot_path(date_spot), class:"btn btn-salmon m-5"%>
+  </div>
+</div>
