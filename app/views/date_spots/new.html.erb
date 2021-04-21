@@ -1,28 +1,4 @@
 <div class="max-w-xl mx-auto mt-10 bg-white p-5 border-gray-900">
   <h1 class="text-center text-lg m-5 mb-5">デートスポット新規登録</h1>
-  <%= form_with(model: @date_spot, local: true) do |f| %>
-    <%= render 'shared/error_messages', target: @date_spot %>
-    <%= f.label :name, "デートスポット名" %>
-    <%= f.text_field :name, class: "mb-5 border-b-2 outline-none w-full" %>
-
-    <%= f.label :address, "住所" %><br/>
-    <%= f.fields_for :address do |address| %>
-      <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %><br/>
-      <%= address.label :city_name, "市町村名、番地" %>
-      <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none w-full" %>
-    <% end %>
-
-    <label>営業時間</label><br/>
-    <p class="mb-5 border-b-2 outline-none">
-      <%= f.label :opening_time, "始業時間" %><%= f.time_field :opening_time, class: "mr-5" %>~<%= f.label :closing_time, "終業時間", class: "ml-5" %><%= f.time_field :closing_time %>
-    </p>
-
-    <%= f.label :image, "サムネイル"%>
-    <%= f.file_field :image %>
-
-    <div class="text-center p-1">
-      <%= f.submit "登録", class: "btn btn-salmon my-5" %>
-    </div>
-
-  <% end %>
+  <%= render 'date_spots/date_spot_form', {date_spot: @date_spot, btn_name: "登録"} %>
 </div>
