@@ -12,7 +12,6 @@ RSpec.feature "DateSpots", type: :feature do
     expect {
       click_button "登録"
       expect(page).to have_content "デートスポットの登録が完了しました"
-      "TODO: デートスポットを新規登録に成功した際の遷移先ページを書く"
       date_spot_display(date_spot)
     }.to change(DateSpot.all, :count).by(1)
   end
@@ -29,6 +28,11 @@ RSpec.feature "DateSpots", type: :feature do
     date_spot_display(date_spot)
     click_button "このデートスポットを編集する"
     date_spot_information_insert(other_spot)
+    expect {
+      click_button "登録"
+      expect(page).to have_content "デートスポット情報の更新が完了しました"
+      date_spot_display(other_spot)
+    }.to change(DateSpot.all, :count).by(1)
   end
 end
 
@@ -47,5 +51,4 @@ def date_spot_information_insert(date_spot)
   fill_in "市町村名、番地", with: date_spot.address.city_name 
   fill_in "始業時間", with: date_spot.opening_time
   fill_in "終業時間", with: date_spot.closing_time
-  "TODO: カテゴリ登録"
 end
