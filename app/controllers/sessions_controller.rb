@@ -16,15 +16,17 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
-end
 
-def administrator_confirm_log_in (user)
-  log_in user
-  params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-  flash[:success] = "ログインに成功しました。"
-  if user.admin == false
-    redirect_to user
-  elsif user.admin == true
-    redirect_to root_path
-  end
+  private
+
+    def administrator_confirm_log_in (user)
+      log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:success] = "ログインに成功しました。"
+      if user.admin == false
+        redirect_to user
+      elsif user.admin == true
+        redirect_to root_path
+      end
+    end
 end

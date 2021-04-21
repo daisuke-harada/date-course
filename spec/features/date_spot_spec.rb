@@ -16,7 +16,7 @@ RSpec.feature "DateSpots", type: :feature do
     }.to change(DateSpot.all, :count).by(1)
   end
 
-  scenario "デートスポット詳細ページからデートスポット編集ページに遷移し、デートスポット情報を更新する" do
+  scenario "デートスポット編集ページに遷移し、デートスポット情報を更新する" do
     admin = FactoryBot.create(:admin)
     date_spot = FactoryBot.create(:date_spot) 
     date_spot.create_address(FactoryBot.attributes_for(:address))
@@ -33,6 +33,21 @@ RSpec.feature "DateSpots", type: :feature do
       expect(page).to have_content "デートスポット情報の更新が完了しました"
       date_spot_display(other_spot)
     }.to change(DateSpot.all, :count).by(0)
+  end
+
+  scenario "デートスポット編集ページに遷移し、デートスポット情報を削除する" do
+    admin = FactoryBot.create(:admin)
+    date_spot = FactoryBot.create(:date_spot) 
+    date_spot.create_address(FactoryBot.attributes_for(:address))
+    sign_in_as admin
+    click_link "デートスポットを探す"
+    click_link "このデートスポットを見る"
+    date_spot_display(date_spot)
+    click_link "このデートスポットを編集する"
+    expect {
+      click_link "このデートスポットを削除する"
+      expect(page).to have_content "デートスポットを削除しました"
+    }.to change(DateSpot.all, :count).by(-1)
   end
 end
 

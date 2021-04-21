@@ -61,6 +61,9 @@ class DateSpotsController < ApplicationController
       unless admin_logged_in?
         store_location
         flash[:danger] = "管理者権限を持つアカウントでログインしてください"
+        if logged_in?
+          log_out
+        end
         redirect_to login_url
       end
     end
