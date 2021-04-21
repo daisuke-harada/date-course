@@ -24,22 +24,22 @@ RSpec.feature "DateSpots", type: :feature do
     other_spot.build_address(FactoryBot.attributes_for(:other_address))
     sign_in_as admin
     click_link "デートスポットを探す"
-    click_button "このデートスポットを見る"
+    click_link "このデートスポットを見る"
     date_spot_display(date_spot)
-    click_button "このデートスポットを編集する"
+    click_link "このデートスポットを編集する"
     date_spot_information_insert(other_spot)
     expect {
-      click_button "登録"
+      click_button "更新"
       expect(page).to have_content "デートスポット情報の更新が完了しました"
       date_spot_display(other_spot)
-    }.to change(DateSpot.all, :count).by(1)
+    }.to change(DateSpot.all, :count).by(0)
   end
 end
 
 def date_spot_display(date_spot)
   aggregate_failures do
     expect(page).to have_content "#{date_spot.name}"
-    expect(page).to have_content "営業時間#{date_spot.opening_time} ~ #{date_spot.closing_time}"
+    expect(page).to have_content "営業時間 #{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
     expect(page).to have_content "#{date_spot.address.prefecture.name}"
     expect(page).to have_content "#{date_spot.address.city_name}"
   end

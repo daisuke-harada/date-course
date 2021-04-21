@@ -1,6 +1,6 @@
 class DateSpotsController < ApplicationController
   before_action :logged_in_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :date_spot_find_id, only: [:show, :edit, :update]
+  before_action :date_spot_find_id, only: [:show, :edit, :update, :destroy]
 
   def new
     @date_spot = DateSpot.new
@@ -30,6 +30,12 @@ class DateSpotsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @date_spot.destroy
+    flash[:success] = "デートスポットを削除しました"
+    redirect_to date_spots_path
   end
 
   def index
