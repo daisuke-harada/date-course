@@ -3,7 +3,7 @@
     <div class="w-5/12">
       <p><%= date_spot.name %></p>
       <p>⭐️⭐️⭐️⭐️⭐️</p>
-      <p>営業時間 <%= date_spot.opening_time %> ~ <%= date_spot.closing_time %></p>
+      <p><%= render 'date_spot_business_hour', date_spot: date_spot %></p>
       <p> 住所 <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
     </div>
     <div class="w-7/12">

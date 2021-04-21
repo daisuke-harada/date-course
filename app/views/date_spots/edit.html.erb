@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="w-6/12">
       <h1 class="text-center text-lg m-5 mb-5">デートスポット編集ページ</h1>
-      <%= render 'date_spots/date_spot_form', {date_spot: @date_spot, btn_name: "更新"} %>
+      <%= render 'date_spot_form', {date_spot: @date_spot, btn_name: "更新"} %>
     </div>
     <div class="w-5/12">
       <%= image_tag @date_spot.image.variant(resize_to_limit: [400, 400]) || "no_image.jpg", class: "pr-5 pl-5" %>

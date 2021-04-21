@@ -9,9 +9,7 @@
   <div class="flex">
     <div class="w-2/6">
       <div class="m-5"><%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %></div>
-      <div class="m-5">
-        営業時間<%= @date_spot.opening_time.strftime('%H:%M') %> ~ <%= @date_spot.closing_time.strftime('%H:%M') %>
-      </div>
+      <%= render 'date_spot_business_hour', date_spot: @date_spot %>
     </div>
     <div class="w-4/6 p-5">
       <div class="w-full h-full bg-gray-500">

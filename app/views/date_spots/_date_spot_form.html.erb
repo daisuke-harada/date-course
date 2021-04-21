@@ -1,5 +1,5 @@
 <%= form_with(model: date_spot, local: true) do |f| %>
-  <%= render 'shared/error_messages', target: @date_spot %>
+  <%= render 'shared/error_messages', target: date_spot %>
   <%= f.label :name, "デートスポット名" %>
   <%= f.text_field :name, class: "mb-5 border-b-2 outline-none w-full" %>
 

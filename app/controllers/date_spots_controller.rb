@@ -1,5 +1,6 @@
 class DateSpotsController < ApplicationController
   before_action :logged_in_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :date_spot_find_id, only: [:show, :edit, :update]
 
   def new
     @date_spot = DateSpot.new
@@ -17,11 +18,18 @@ class DateSpotsController < ApplicationController
   end
 
   def show
-    @date_spot = DateSpot.find(params[:id])
   end
 
   def edit
-    @date_spot = DateSpot.find(params[:id])
+  end
+
+  def update
+    if @date_spot.update(date_spot_params)
+      flash[:success] = "デートスポット情報の更新が完了しました"
+      redirect_to @date_spot
+    else
+      render 'edit'
+    end
   end
 
   def index
@@ -29,6 +37,10 @@ class DateSpotsController < ApplicationController
   end
 
   private
+    def date_spot_find_id
+      @date_spot = DateSpot.find(params[:id])
+    end
+
     def date_spot_params
       params.require(:date_spot).permit(
         :name,:opening_time,
