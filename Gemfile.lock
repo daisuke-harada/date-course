@@ -286,6 +286,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   launchy (~> 2.4.3)
   listen (~> 3.3)
+  mini_magick
   mysql2 (~> 0.5)
   pre-commit
   pry-rails

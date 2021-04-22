@@ -59,11 +59,10 @@ class DateSpotsController < ApplicationController
 
     def logged_in_admin
       unless admin_logged_in?
-        store_location
-        flash[:danger] = "管理者権限を持つアカウントでログインしてください"
         if logged_in?
           log_out
         end
+        flash[:danger] = "管理者権限を持つアカウントでログインしてください"
         redirect_to login_url
       end
     end
