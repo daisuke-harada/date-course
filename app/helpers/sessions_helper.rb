@@ -47,11 +47,13 @@ module SessionsHelper
     user && user == current_user
   end
 
+  # store_locationで保存されたurlに遷移させる
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
 
+  # 見ようとしていたurlを保存しておく。
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
