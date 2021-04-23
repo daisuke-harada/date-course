@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_211335) do
+ActiveRecord::Schema.define(version: 2021_04_22_213058) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -49,12 +49,16 @@ ActiveRecord::Schema.define(version: 2021_04_22_211335) do
   end
 
   create_table "date_spot_reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "spot_id"
     t.integer "rate"
     t.text "content"
+    t.bigint "user_id"
+    t.bigint "date_spot_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["date_spot_id", "created_at"], name: "index_date_spot_reviews_on_date_spot_id_and_created_at"
+    t.index ["date_spot_id"], name: "index_date_spot_reviews_on_date_spot_id"
+    t.index ["user_id", "created_at"], name: "index_date_spot_reviews_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_date_spot_reviews_on_user_id"
   end
 
   create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -81,4 +85,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_211335) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "date_spot_reviews", "date_spots"
+  add_foreign_key "date_spot_reviews", "users"
 end

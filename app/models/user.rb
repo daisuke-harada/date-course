@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  
+  has_one_attached :image
+  has_many :date_spot_reviews, dependent: :destroy
   # 仮想の属性を作成 データベースに保存せず、一定期間だけ用いたい属性
   attr_accessor :remember_token
   # データベースに保存される直前にすべての文字列を小文字に変換する一意性を確実にするために
@@ -15,7 +16,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   validates :sex, presence: true
-  has_one_attached :image
 
   def change_sex_data_string
     return sex == 1 ? "男" : "女"
