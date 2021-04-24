@@ -22,3 +22,6 @@
       <%= link_to "このデートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
   </div>
 </div>
+<div class="border border-black mt-10 m-20">
+  <%= link_to "レビューする", new_date_spot_date_spot_review_path(@date_spot), class: "btn btn-salmon m-5" %>
+</div>
