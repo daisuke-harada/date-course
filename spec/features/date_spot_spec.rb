@@ -3,29 +3,27 @@ require 'rails_helper'
 RSpec.feature "DateSpots", type: :feature do
   scenario "新規投稿画面で新規投稿に成功する" do
     admin = FactoryBot.create(:admin)
-    date_spot = FactoryBot.build(:date_spot) 
-    address = date_spot.build_address(FactoryBot.attributes_for(:address))
+    address = FactoryBot.build(:address)
     sign_in_as admin
     click_link "デートスポット作成"
-    date_spot_information_insert(date_spot)
+    date_spot_information_insert(address.date_spot)
     
     expect {
       click_button "登録"
       expect(page).to have_content "デートスポットの登録が完了しました"
-      date_spot_display(date_spot)
+      date_spot_display(address.date_spot)
     }.to change(DateSpot.all, :count).by(1)
   end
 
   scenario "デートスポット編集ページに遷移し、デートスポット情報を更新する" do
     admin = FactoryBot.create(:admin)
-    date_spot = FactoryBot.create(:date_spot) 
-    date_spot.create_address(FactoryBot.attributes_for(:address))
+    address = FactoryBot.create(:address)
     other_spot = FactoryBot.build(:other_spot)
     other_spot.build_address(FactoryBot.attributes_for(:other_address))
     sign_in_as admin
     click_link "デートスポットを探す"
     click_link "このデートスポットを見る"
-    date_spot_display(date_spot)
+    date_spot_display(address.date_spot)
     click_link "このデートスポットを編集する"
     date_spot_information_insert(other_spot)
     expect {
@@ -37,12 +35,11 @@ RSpec.feature "DateSpots", type: :feature do
 
   scenario "デートスポット編集ページに遷移し、デートスポット情報を削除する" do
     admin = FactoryBot.create(:admin)
-    date_spot = FactoryBot.create(:date_spot) 
-    date_spot.create_address(FactoryBot.attributes_for(:address))
+    address = FactoryBot.create(:address)
     sign_in_as admin
     click_link "デートスポットを探す"
     click_link "このデートスポットを見る"
-    date_spot_display(date_spot)
+    date_spot_display(address.date_spot)
     click_link "このデートスポットを編集する"
     expect {
       click_link "このデートスポットを削除する"

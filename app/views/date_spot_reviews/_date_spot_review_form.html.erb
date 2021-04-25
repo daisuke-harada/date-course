@@ -1,0 +1,25 @@
+<div class="flex">
+  <div class="w-2/3">
+    <%= form_with model: date_spot_review, local: true do |f| %>
+      <%= render 'shared/error_messages', target: date_spot_review %>
+      <%= f.hidden_field :date_spot_id, :value => date_spot_review.date_spot_id %>
+      <%= f.hidden_field :user_id, :value => date_spot_review.user_id %>
+      <div class="m-5">
+        <%= user.name %>
+      </div>
+      <div class="m-5">
+        ⭐️⭐️⭐️⭐️⭐️
+      </div>
+      <div class="m-5">
+        <%= f.label :content, "コメント"%><br/>
+        <%= f.text_area :content, size: "30x5", class:"border border-black" %>
+        <span class="text-center">
+          <%= f.submit btn_name, class: "btn btn-salmon my-5" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div class="w-1/3 p-5">
+    <%= render 'users/user_image', {user: user, width: 250, height: 250}%>
+  </div>
+</div>

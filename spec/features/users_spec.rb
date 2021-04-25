@@ -8,7 +8,7 @@ RSpec.feature "Users", type: :feature do
     input_registration user
     expect {
       click_button "登録"
-      expect(page).to have_content "新規登録が完了しました。"
+      expect(page).to have_content "新規登録が完了しました"
       user_show_display user
     }.to change(User.all, :count).by(1)
   end

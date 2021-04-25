@@ -1,6 +1,6 @@
 <div class="m-5 mt-10 border border-black">
   <div class="border border-black p-5 w-auto inline-block">
-    <%= image_tag @user.image.variant(gravity: :center, resize:"250x250^", crop:"250x250+0+0") || "no_image.jpg", class:"m-auto"%>
+    <%= render 'user_image', {user: @user, width: 250, height: 250} %>
     <p class="m-2">
       <span class="p-2 m-auto"><%= @user.name%></span>
       <span class="p-2"><%= @user.change_sex_data_string %></span>

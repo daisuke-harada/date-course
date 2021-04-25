@@ -8,8 +8,17 @@ FactoryBot.define do
     password_confirmation {"foobar"}
   end
 
-  factory :guest, class: User do
+  factory :other_user, class: User do
     id {2}
+    name {"原田大輔"}
+    email {"daisuke@gmail.com"}
+    sex {1}
+    password {"foobar"}
+    password_confirmation {"foobar"}
+  end
+
+  factory :guest, class: User do
+    id {3}
     name {"guest"}
     email {"guest@gmail.com"}
     sex {1}
@@ -18,7 +27,7 @@ FactoryBot.define do
   end
 
   factory :admin, class: User do
-    id {3}
+    id {4}
     name {"admin"}
     email {"adminstrator@gmail.com"}
     sex {1}

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "新規登録が完了しました。"
+      flash[:success] = "新規登録が完了しました"
       redirect_back_or @user
     else
       render 'new'
