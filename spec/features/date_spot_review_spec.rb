@@ -25,7 +25,7 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "レビューを編集する"
     fill_in "コメント", with: "My String2"
     click_button "更新する"
-    expect(page).to have_content "投稿内容を更新しました"
+    expect(page).to have_content "レビューを更新しました"
   end
 
   scenario "デートスポット詳細ページからレビュー編集ページに遷移して、レビューを削除する" do
@@ -36,8 +36,20 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "このデートスポットを見る"
     click_link "レビューを編集する"
     expect {
-      click_button "削除"
-      expect(page).to have_content "投稿内容を削除しました"
+      click_link "削除する"
+      expect(page).to have_content "レビューを削除しました"
+    }.to change(DateSpotReview.all, :count).by(-1)
+  end
+
+  scenario "デートスポット詳細ページから、レビューを削除する" do
+    date_spot_review = FactoryBot.create(:date_spot_review)
+    date_spot_review.date_spot.create_address(FactoryBot.attributes_for(:address))
+    sign_in_as date_spot_review.user
+    click_link "デートスポットを探す"
+    click_link "このデートスポットを見る"
+    expect {
+      click_link "削除する"
+      expect(page).to have_content "レビューを削除しました"
     }.to change(DateSpotReview.all, :count).by(-1)
   end
 

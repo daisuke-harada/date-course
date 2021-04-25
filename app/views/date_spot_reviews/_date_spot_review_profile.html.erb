@@ -15,9 +15,12 @@
       <%= link_to user_path(date_spot_review.user) do %>
         <%= render 'users/user_image', {user: date_spot_review.user, width: 250, height: 250}%>
       <% end %>
-      <div class="text-center m-5">
-        <%= link_to "レビューを編集する", edit_date_spot_review_path(date_spot_review), class:"btn btn-salmon" if current_user && date_spot_review.user == current_user %>
-      </div>
+      <%  if current_user && date_spot_review.user == current_user %>
+        <div class="text-center m-5">
+          <%= link_to "レビューを編集する", edit_date_spot_review_path(date_spot_review), class:"btn btn-salmon m-5" %>
+          <%= link_to "削除する", date_spot_review_path(date_spot_review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -23,16 +23,18 @@ class DateSpotReviewsController < ApplicationController
 
   def update
     if @date_spot_review.update(date_spot_review_params)
-      flash[:success] = "投稿内容を更新しました"
+      flash[:success] = "レビューを更新しました"
       redirect_to @date_spot_review.date_spot
     else
-      flash[:danger] = "投稿内容を更新できませんでした"
+      flash[:danger] = "レビューを更新できませんでした"
       render 'edit'
     end
   end
 
   def destroy
-
+    @date_spot_review.destroy
+    flash[:sucess] = "レビューを削除しました"
+    redirect_to @date_spot_review.date_spot
   end
 
   private
