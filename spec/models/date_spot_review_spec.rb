@@ -50,9 +50,8 @@ RSpec.describe DateSpotReview, type: :model do
       end
 
       it "1人のユーザーが1つデートスポットに二回以上レビューが保存できないこと" do
-        FactoryBot.create(:date_spot_review)
-        other_date_spot_review = FactoryBot.build(:other_date_spot_review)
-        other_date_spot_review.date_spot_id = 1
+        date_spot_review = FactoryBot.create(:date_spot_review)
+        other_date_spot_review = FactoryBot.build(:date_spot_review)
         other_date_spot_review.valid?
         expect(other_date_spot_review.errors[:user_id]).to include("has already been taken")
       end

@@ -56,7 +56,8 @@ class DateSpotReviewsController < ApplicationController
 
     # そのアカウントを持っている人以外がアクセスすることを防ぐ
     def correct_user
-      @user = User.find(params[:id])
+      @date_spot_review = DateSpotReview.find(params[:id])
+      @user = @date_spot_review.user
       redirect_to(root_url) unless @user == current_user 
     end
 end

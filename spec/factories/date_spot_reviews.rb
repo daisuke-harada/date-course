@@ -9,7 +9,7 @@ FactoryBot.define do
   factory :other_date_spot_review, class: DateSpotReview do
     rate { 1 }
     content { "MyText2" }
-    association :other_spot
-    association :user
+    association :date_spot, factory: :other_spot
+    association :user, factory: :other_user
   end
 end

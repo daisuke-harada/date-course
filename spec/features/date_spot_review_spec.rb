@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.feature "DateSpotReviews", type: :feature do
   scenario "デートスポット詳細ページからレビュー新規投稿ページへ遷移し、レビューを新規投稿する" do
     user = FactoryBot.create(:user)
-    date_spot = FactoryBot.create(:date_spot)
-    date_spot.create_address(FactoryBot.attributes_for(:address))
+    address = FactoryBot.create(:address)
     date_spot_review = FactoryBot.build(:date_spot_review)
     sign_in_as user
     click_link "デートスポットを探す"

@@ -16,7 +16,7 @@
         <%= render 'users/user_image', {user: date_spot_review.user, width: 250, height: 250}%>
       <% end %>
       <div class="text-center m-5">
-        <%= link_to "レビューを編集する", edit_date_spot_review_path(date_spot_review), class:"btn btn-salmon" if current_user %>
+        <%= link_to "レビューを編集する", edit_date_spot_review_path(date_spot_review), class:"btn btn-salmon" if current_user && date_spot_review.user == current_user %>
       </div>
     </div>
   </div>
