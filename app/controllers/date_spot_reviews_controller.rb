@@ -1,7 +1,7 @@
 class DateSpotReviewsController < ApplicationController
-  before_action :date_spot_review_find_id, only: [:edit, :update, :destroy]
-  before_action :logged_in_general_user, only: [:new, :edit, :create, :update, :destroy]
-  before_action :correct_user,           only: [:edit, :update, :destroy]
+  before_action :date_spot_review_find_param_id, only: [:edit, :update, :destroy]
+  before_action :logged_in_general_user,         only: [:new, :edit, :create, :update, :destroy]
+  before_action :correct_user,                   only: [:edit, :update, :destroy]
 
   def new
     @date_spot_review = DateSpotReview.new(date_spot_id: params[:date_spot_id], user_id: current_user.id)
@@ -38,7 +38,7 @@ class DateSpotReviewsController < ApplicationController
   end
 
   private
-    def date_spot_review_find_id
+    def date_spot_review_find_param_id
       @date_spot_review = DateSpotReview.find(params[:id])
     end
 

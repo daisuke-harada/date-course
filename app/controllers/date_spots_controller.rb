@@ -1,6 +1,6 @@
 class DateSpotsController < ApplicationController
-  before_action :logged_in_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :date_spot_find_id, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_admin,         only: [:new, :create, :edit, :update, :destroy]
+  before_action :date_spot_find_param_id, only: [:show, :edit, :update, :destroy]
 
   def new
     @date_spot = DateSpot.new
@@ -43,10 +43,6 @@ class DateSpotsController < ApplicationController
   end
 
   private
-    def date_spot_find_id
-      @date_spot = DateSpot.find(params[:id])
-    end
-
     def date_spot_params
       params.require(:date_spot).permit(
         :name,:opening_time,
@@ -55,6 +51,10 @@ class DateSpotsController < ApplicationController
         address_attributes: [:prefecture_id,
                              :city_name]
         )
+    end
+
+    def date_spot_find_param_id
+      @date_spot = DateSpot.find(params[:id])
     end
 
     def logged_in_admin
