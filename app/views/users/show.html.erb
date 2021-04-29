@@ -19,4 +19,7 @@
     </div>
   </div>
   <!--  この部分に選択したメニューが表示される -->
+  <% @user.date_spot_reviews.each do |date_spot_review| %>
+    <%= render 'date_spot_review_profile', date_spot_review: date_spot_review %>
+  <% end %>
 </div>
