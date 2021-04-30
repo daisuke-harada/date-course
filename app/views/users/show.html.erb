@@ -1,6 +1,6 @@
-<div class="m-5 mt-10 border border-black">
-  <div class="border border-black p-5 w-auto inline-block">
-    <%= render 'user_image', {user: @user, width: 250, height: 250} %>
+<div class="m-5 mt-10 border border-black flex">
+  <div class="border border-black p-5 w-3/12 inline-block">
+    <%= render 'layouts/image', {target: @user, width: 250, height: 250} %>
     <p class="m-2">
       <span class="p-2 m-auto"><%= @user.name%></span>
       <span class="p-2"><%= @user.change_sex_data_string %></span>
@@ -18,8 +18,9 @@
       <p class="my-10 w-full text-center"><%= link_to "デートコースを作成する", "#", class: "btn btn-salmon" %></p>
     </div>
   </div>
-  <!--  この部分に選択したメニューが表示される -->
-  <% @user.date_spot_reviews.each do |date_spot_review| %>
-    <%= render 'date_spot_review_profile', date_spot_review: date_spot_review %>
-  <% end %>
+  <div class="w-9/12">
+    <% @user.date_spot_reviews.each do |date_spot_review| %>
+      <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target: date_spot_review.date_spot} %>
+    <% end %>
+  </div>
 </div>
