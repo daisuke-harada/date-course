@@ -13,7 +13,7 @@
     </div>
     <div class="w-1/3 p-5">
       <%= link_to user_path(date_spot_review.user) do %>
-        <%= render 'layouts/image', {target: target, width: 250, height: 250} %>
+        <%= render 'layouts/image', {target_image: target_image, width: 250, height: 250} %>
       <% end %>
       <%  if current_user && date_spot_review.user == current_user %>
         <div class="text-center m-5">
