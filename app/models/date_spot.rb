@@ -5,4 +5,7 @@ class DateSpot < ApplicationRecord
   has_many :date_spot_reviews, dependent: :destroy
   has_one_attached :image
   validates :name, presence: true
+
+  # 画像のファイルのバリデーション
+  validate :image_type
 end

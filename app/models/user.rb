@@ -17,6 +17,9 @@ class User < ApplicationRecord
   
   validates :sex, presence: true
 
+  # 画像ファイルのバリデーション
+  validate :image_type
+
   def change_sex_data_string
     return sex == 1 ? "男" : "女"
   end

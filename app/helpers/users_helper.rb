@@ -1,5 +1,4 @@
 module UsersHelper
-
   def guest_name
     return "guest"
   end
