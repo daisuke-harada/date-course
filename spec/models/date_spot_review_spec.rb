@@ -49,7 +49,7 @@ RSpec.describe DateSpotReview, type: :model do
         expect(date_spot_review.errors[:date_spot_id]).to include("can't be blank")
       end
 
-      it "1人のユーザーが1つデートスポットに二回以上レビューが保存できないこと" do
+      it "1人のユーザーが1つのデートスポットに二回以上レビューが保存できないこと" do
         date_spot_review = FactoryBot.create(:date_spot_review)
         other_date_spot_review = FactoryBot.build(:date_spot_review)
         other_date_spot_review.valid?
