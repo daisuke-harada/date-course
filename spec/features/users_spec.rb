@@ -55,6 +55,21 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_current_path "/users/#{user.id}"
   end
 
+  scenario "ユーザーの編集ページによるフレンドリーフォワーディング機能のテスト" do
+    user = FactoryBot.create(:user)
+    visit edit_user_path(user)
+    sign_in_as user
+    expect(page).to have_current_path edit_user_path(user)
+  end
+
+  scenario "フレンドリーフォワーディング機能によって記憶されたURLが違うユーザーの物だったらそのユーザーのページには遷移しない" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    visit edit_user_path(other_user)
+    sign_in_as user
+    expect(page).to have_current_path user_path(user)
+  end
+
   scenario "退会をする" do
     user = FactoryBot.create(:user)
     sign_in_as user

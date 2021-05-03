@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "新規登録が完了しました"
-      redirect_back_or @user
+      redirect_to @user
     else
       render 'new'
     end
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     # そのアカウントを持っている人以外がアクセスすることを防ぐ
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user 
+      redirect_to(current_user) unless @user == current_user 
     end
 end
 
