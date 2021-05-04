@@ -8,7 +8,7 @@ jobs:
     services:
       db:
         image: mysql:8.0.23
-        volumes: 
+        volumes:
           - mysqlconf.d:/etc/mysql/conf.d
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
@@ -56,10 +56,11 @@ jobs:
       run: bundle install --path=vendor/bundle --jobs 4 --retry 3
     - name: Yarn install
       run: bundle exec rails yarn:install
-    - name: DB setup
-      run: 
-        - bundle exec rails db:create
-        - bundle exec rails db:migrate
-        - bundle exec rails db:seed
+    - name: DB create
+      run: bundle exec rails db:create
+    - name: Rails db:migrate
+      run: bundle exec rails db:migrate
+    - name: Rails db:seed
+      run: bundle exec rails db:seed
     - name: Run rspec
       run: bundle exec rspec
