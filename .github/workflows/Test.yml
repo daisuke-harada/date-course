@@ -11,8 +11,6 @@ jobs:
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
           MYSQL_ROOT_PASSWORD: password
-        volumes:
-          - ./mysqlconf.d:/etc/mysql/conf.d
     container:
       image: ruby:2.7.2
       env:
