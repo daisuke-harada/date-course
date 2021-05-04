@@ -1,0 +1,66 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    
+    services:
+      db:
+        image: mysql:8.0.23
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_ROOT_PASSWORD: password
+    container:
+      image: ruby:2.7.2
+      env:
+        DATABASE_HOST: db
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # npm キャッシュファイルは Linux/macOS の「~/.npm」に保存される
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Cache bundle gems
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-${{ env.cache-name }}-
+          ${{ runner.os }}-gem-
+          ${{ runner.os }}-
+    - name: Install Node.js and Yarn
+      run: |
+        # https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+        curl -sL https://deb.nodesource.com/setup_12.x | bash -
+        apt-get install -y nodejs
+        # https://classic.yarnpkg.com/en/docs/install#debian-stable
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        apt update && apt install yarn
+    - name: Install Bundler
+      run: gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+    - name: Bundle install
+      run: bundle install --path=vendor/bundle --jobs 4 --retry 3
+    - name: Yarn install
+      run: bundle exec rails yarn:install
+    - name: DB setup
+      run: bundle exec rails db:create
+      run: bundle exec rails db:migrate
+      run: bundle exec rails db:seed
+    - name: Run rspec
+      run: bundle exec rspec
