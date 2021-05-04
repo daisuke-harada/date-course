@@ -9,7 +9,7 @@ jobs:
       db:
         image: mysql:8.0.23
         volumes:
-          - mysqlconf.d:/etc/mysql/conf.d
+          - ./mysqlconf.d:/etc/mysql/conf.d
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
           MYSQL_ROOT_PASSWORD: password
@@ -58,9 +58,9 @@ jobs:
       run: bundle exec rails yarn:install
     - name: DB create
       run: bundle exec rails db:create
-    - name: Rails db:migrate
+    - name: Rails migrate
       run: bundle exec rails db:migrate
-    - name: Rails db:seed
+    - name: Rails seed
       run: bundle exec rails db:seed
     - name: Run rspec
       run: bundle exec rspec
