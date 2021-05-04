@@ -9,8 +9,8 @@ jobs:
       db:
         image: mysql:8.0.23
         volumes:
-          - ./mysqlconf.d:/etc/mysql/conf.d
-        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+          - ../mysqlconf.d:/etc/mysql/conf.d
+        #options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
           MYSQL_ROOT_PASSWORD: password
     container:
