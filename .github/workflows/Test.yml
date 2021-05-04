@@ -1,6 +1,6 @@
 name: Test
 
-on: [pushgit]
+on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
