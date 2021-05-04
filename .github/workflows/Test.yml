@@ -1,14 +1,14 @@
 name: Test
 
 on: [push]
+
 jobs:
   run:
     runs-on: ubuntu-latest
     services:
       db:
         image: mysql:8.0.23
-        volumes:
-          - mysqlconf.d:/etc/mysql/conf.d
+        volumes: mysqlconf.d:/etc/mysql/conf.d
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
           MYSQL_ROOT_PASSWORD: password
@@ -56,6 +56,9 @@ jobs:
     - name: Yarn install
       run: bundle exec rails yarn:install
     - name: DB setup
-      run: bundle exec rails db:setup
+      run: 
+        - bundle exec rails db:create
+        - bundle exec rails db:migrate
+        - bundle exec rails db:seed
     - name: Run rspec
       run: bundle exec rspec
