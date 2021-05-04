@@ -15,6 +15,7 @@ jobs:
       image: ruby:2.7.2
       env:
         DATABASE_HOST: db
+        MYSQL_ROOT_PASSWORD: password
     steps:
     - uses: actions/checkout@v2
     - name: Cache node modules
