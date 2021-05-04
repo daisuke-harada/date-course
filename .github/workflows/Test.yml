@@ -57,6 +57,6 @@ jobs:
     - name: Yarn install
       run: bundle exec rails yarn:install
     - name: DB setup
-      run: bundle exec rails db:set
+      run: bundle exec rails db:setup
     - name: Run rspec
       run: bundle exec rspec
