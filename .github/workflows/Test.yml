@@ -27,12 +27,11 @@ jobs:
         run: |
           apt-get update -qq 
           apt-get install -y nodejs yarn
-      - name: setup seed
+      - name: setup migrate
         run: |
           rails db:create
           rails db:migrate
       - name: run spec
         run: |
           rails webpacker:install
-          RAILS_ENV=test bundle exec rails webpacker:compile
           bundle exec rspec spec
