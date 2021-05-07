@@ -4,7 +4,7 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     services:
-      db:
+      mysql:
         image: mysql:8.0.23
         ports:
           - 3306:3306
@@ -28,7 +28,7 @@ jobs:
           apt-get install -y nodejs yarn
       - name: set plugin
         run: |
-          db -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
+          mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
       - name: setup seed
         run: |
           rails db:create
