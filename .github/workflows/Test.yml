@@ -1,4 +1,4 @@
-name: Ruby
+name: Test
 
 on: [push]
 
@@ -12,14 +12,20 @@ jobs:
     - name: Setup docker
       shell: bash
       run: |
+        docker-compose run app yarn install --check-files
+        docker-compose run app yarn upgrade
         # イメージのビルド
         docker-compose build
         # データベースの作成
         docker-compose exec web rails db:create
         docker-compose exec web rails db:migrate
         docker-compose exec web rails db:seed
+      env:
+        RAILS_ENV: test
 
     - name: Run RSpec
       shell: bash
       run:  |
         docker-compose run web bundle exec rspec
+      env:
+        RAILS_ENV: test
