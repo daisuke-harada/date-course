@@ -11,28 +11,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    container:
-      image: ruby:2.7.2
     steps:
-      - uses: actions/checkout@v2
-      - name: setup bundle
-        run: |
-          bundle install
-      - name: setup yarn
-        run: |
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list 
-      - name: setup nodejs
-        run: |
-          apt-get update -qq 
-          apt-get install -y nodejs yarn
       - name: set plugin
         run: |
           mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
-      - name: setup seed
-        run: |
-          rails db:create
-          rails db:migrate
-          rails db:seed 
-      - name: run spec
-        run: bundle exec rspec spec     
