@@ -29,8 +29,8 @@ jobs:
           apt-get install -y nodejs yarn
       - name: setup seed
         run: |
-          rails db:create
-          rails db:migrate
-          rails db:seed 
+          rails db:create RAILS_ENV=test
+          rails db:migrate RAILS_ENV=test
+          rails db:seed RAILS_ENV=test
       - name: run spec
-        run: bundle exec rspec spec
+        run: bundle exec rspec
