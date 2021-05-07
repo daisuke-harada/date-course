@@ -7,7 +7,7 @@ jobs:
       db:
         image: mysql:8.0.23
         volumes:
-          - mysqlconf.d:/etc/mysql/conf.d
+          - /mysqlconf.d:/etc/mysql/conf.d
         ports:
           - 3306:3306
         env:
