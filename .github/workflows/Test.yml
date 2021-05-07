@@ -6,6 +6,8 @@ jobs:
     services:
       mysql:
         image: mysql:8.0.23
+        volumes:
+          - mysqlconf.d:/etc/mysql/conf.d
         ports:
           - 3306:3306
         env:
@@ -14,9 +16,6 @@ jobs:
     container:
       image: ruby:2.7.2
     steps:
-      - name: set plugin
-        run: |
-          mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
       - uses: actions/checkout@v2
       - name: setup bundle
         run: |
