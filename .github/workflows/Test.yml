@@ -9,8 +9,7 @@ jobs:
         ports:
           - 3306:3306
         env:
-          ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: db
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     container:
