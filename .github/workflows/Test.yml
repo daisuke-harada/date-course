@@ -14,4 +14,6 @@ jobs:
     steps:
       - name: set plugin
         run: |
+          docker-compose down --volumes
+          docker-compose up -d --build
           mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
