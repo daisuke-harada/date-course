@@ -28,7 +28,7 @@ jobs:
           apt-get install -y nodejs yarn
       - name: set plugin
         run: |
-          mysql --version
+          db --version
       - name: setup seed
         run: |
           rails db:create
