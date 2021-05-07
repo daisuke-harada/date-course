@@ -1,31 +1,35 @@
 name: Test
-
 on: [push]
-
 jobs:
-  test:
-
+  rspec:
     runs-on: ubuntu-latest
-
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    container:
+      image: ruby:2.7.2
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup docker
-      shell: bash
-      run: |
-        docker-compose run web yarn install --check-files
-        docker-compose run web yarn upgrade
-        # イメージのビルド
-        docker-compose build
-        # データベースの作成
-        docker-compose exec web rails db:create
-        docker-compose exec web rails db:migrate
-        docker-compose exec web rails db:seed
-      env:
-        RAILS_ENV: test
-
-    - name: Run RSpec
-      shell: bash
-      run:  |
-        docker-compose run web bundle exec rspec
-      env:
-        RAILS_ENV: test
+      - uses: actions/checkout@v2
+      - name: setup bundle
+        run: |
+          gem install bundler
+          bundle install
+      - name: setup yarn
+        run: |
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 
+          && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list 
+      - name: setup nodejs
+        run: |
+          && apt-get update -qq 
+          && apt-get install -y nodejs yarn 
+      - name: setup seed
+        run: |
+          rails db:create
+          rails db:migrate
+          rails db:seed 
+      - name: run spec
+        run: bundle exec rspec spec     
