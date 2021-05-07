@@ -26,10 +26,9 @@ jobs:
         run: |
           apt-get update -qq 
           apt-get install -y nodejs yarn
-      - name: set Plugin
+      - name: set plugin
         run: |
-          mysql -u root
-          ALTER USER <User>@<Host> IDENTIFIED WITH mysql_native_password BY '<password>'
+          mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
       - name: setup seed
         run: |
           rails db:create
