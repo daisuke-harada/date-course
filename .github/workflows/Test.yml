@@ -34,4 +34,5 @@ jobs:
       - name: run spec
         run: |
           rails webpacker:install
+          bundle exec rails webpacker:compile
           bundle exec rspec spec
