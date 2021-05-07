@@ -28,7 +28,7 @@ jobs:
           apt-get install -y nodejs yarn
       - name: set plugin
         run: |
-          mysql -h 127.0.0.1 --port 3306 -u root -password -e "$(cat $(find ./ -name hoge.sql))"
+          mysql --version
       - name: setup seed
         run: |
           rails db:create
