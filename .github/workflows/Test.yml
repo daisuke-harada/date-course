@@ -6,13 +6,13 @@ jobs:
     services:
       db:
         image: mysql:8.0.23
-        volumes:
-          - mysqlconfd:/etc/mysql/conf.d
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: password
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=root -e MYSQL_DATABASE=db --entrypoint sh mysql:8 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
+          ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: db
+          MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     container:
       image: ruby:2.7.2
     steps:
@@ -34,4 +34,4 @@ jobs:
           rails db:migrate
           rails db:seed 
       - name: run spec
-        run: bundle exec rspec spec     
+        run: bundle exec rspec spec
