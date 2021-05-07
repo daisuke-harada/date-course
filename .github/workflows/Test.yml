@@ -12,6 +12,8 @@ jobs:
     - name: Setup docker
       shell: bash
       run: |
+        docker-compose run web yarn install --check-files
+        docker-compose run web yarn upgrade
         # イメージのビルド
         docker-compose build
         # データベースの作成
