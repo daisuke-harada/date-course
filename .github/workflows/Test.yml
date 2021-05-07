@@ -23,7 +23,11 @@ jobs:
       - name: setup nodejs
         run: |
           apt-get update -qq 
-          apt-get install -y nodejs yarn 
+          apt-get install -y nodejs yarn
+      - name: set Plugin
+        run: |
+          mysql -u root
+          ALTER USER <User>@<Host> IDENTIFIED WITH mysql_native_password BY '<password>'
       - name: setup seed
         run: |
           rails db:create
