@@ -10,8 +10,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=root -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=db --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     container:
       image: ruby:2.7.2
     steps:
