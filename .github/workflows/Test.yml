@@ -29,7 +29,11 @@ jobs:
           apt-get install -y nodejs yarn
       - name: setup migrate
         run: |
-          rails db:create RAILS_ENV=test
-          rails db:migrate RAILS_ENV=test
+          rails db:create
+          rails db:migrate
       - name: run spec
-        run: bundle exec rspec
+        run: |
+          rm -rf bin/webpack*
+          rails webpacker:install
+          bundle exec rails webpacker:compile
+          bundle exec rspec
