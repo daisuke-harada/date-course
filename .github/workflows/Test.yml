@@ -31,6 +31,8 @@ jobs:
         run: |
           rails db:create
           rails db:migrate
+      - name: webpacker compile
+        run: |
           rails webpacker:install
           bundle exec rails webpacker:compile RAILS_ENV=test 
       - name: run spec
