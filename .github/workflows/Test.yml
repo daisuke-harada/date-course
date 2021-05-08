@@ -26,6 +26,10 @@ jobs:
           echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list 
           apt-get update -qq 
           apt-get install -y nodejs yarn
+      - name: yarn install
+        run: |
+          yarn install
+          bundle exec bin/webpack
       - name: setup migrate
         run: |
           rails db:create
