@@ -27,5 +27,9 @@ jobs:
           apt-get update -qq
           apt-get install -y nodejs yarn
           npm install -g yarn
+      - name: setup migrate
+        run: |
+          rails db:create
+          raild db:migrate
       - name: run spec
         run: bundle exec rspec spec
