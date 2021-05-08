@@ -27,13 +27,14 @@ jobs:
         run: |
           apt-get update -qq 
           apt-get install -y nodejs yarn
+      - name: setup webpacker
+        run: |
+          rm -rf bin/webpack*
+          rails webpacker:install
+          bundle exec rails webpacker:compile
       - name: setup migrate
         run: |
           rails db:create
           rails db:migrate
       - name: run spec
-        run: |
-          rm -rf bin/webpack*
-          rails webpacker:install
-          bundle exec rails webpacker:compile
-          bundle exec rspec
+        run: bundle exec rspec spec
