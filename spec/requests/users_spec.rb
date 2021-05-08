@@ -42,8 +42,6 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /index" do
     it "ユーザー一覧ページに遷移できること" do
-      get "/users/index"
-      expect(response).to have_http_status(:success)
     end
   end
 end
