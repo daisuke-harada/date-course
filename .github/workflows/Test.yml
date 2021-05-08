@@ -29,6 +29,6 @@ jobs:
       - name: setup migrate
         run: |
           rails db:create
-          raild db:migrate
+          rails db:migrate
       - name: run spec
         run: bundle exec rspec spec
