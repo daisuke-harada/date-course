@@ -27,6 +27,7 @@ jobs:
           apt-get update -qq
           apt-get install -y nodejs yarn
           npm install -g yarn
+          yarn install
       - name: setup migrate
         run: |
           rails db:create
