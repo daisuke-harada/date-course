@@ -15,15 +15,6 @@ FactoryBot.define do
     sex { 1 }
     password {"foobar"}
     password_confirmation {"foobar"}
-    # initialize_with do
-    #   OtherUser.find_or_initialize_by(
-    #     id { 2 },
-    #     name {"原田大輔"},
-    #     email {"daisuke@gmail.com"},
-    #     sex { 1 },
-    #     password {"foobar"},
-    #     password_confirmation {"foobar"}）
-    # end
   end
 
   factory :guest, class: User do
