@@ -5,10 +5,17 @@
 
   <%= f.label :address, "住所" %><br/>
   <%= f.fields_for :address do |address| %>
-    <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %><br/>
+    <p class="mb-5">
+      <%= address.grouped_collection_select(:prefecture_id, Area.all, :prefectures, :name, :id, :name, prompt: "都道府県を選択してください") %>
+    </p>
     <%= address.label :city_name, "市町村名、番地" %>
     <%= address.text_field :city_name, class: "mb-5 border-b-2 outline-none w-full" %>
   <% end %>
+
+  <%= f.label :genre_id, "ジャンル" %><br/>
+  <p class="mb-5">
+    <%= f.collection_select(:genre_id, Genre.all, :id, :name, prompt: "ジャンルを選択してください") %>
+  </p>
 
   <label>営業時間</label><br/>
   <p class="mb-5 border-b-2 outline-none">

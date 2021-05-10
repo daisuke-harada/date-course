@@ -46,6 +46,7 @@ class DateSpotsController < ApplicationController
     def date_spot_params
       params.require(:date_spot).permit(
         :name,:opening_time,
+        :genre_id,
         :closing_time,
         :image,
         address_attributes: [:prefecture_id,

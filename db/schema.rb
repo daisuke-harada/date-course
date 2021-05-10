@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_213058) do
   end
 
   create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "category_id"
+    t.integer "genre_id"
     t.string "name"
     t.time "opening_time"
     t.time "closing_time"

@@ -52,6 +52,7 @@ def date_spot_display(date_spot)
   aggregate_failures do
     expect(page).to have_content "#{date_spot.name}"
     expect(page).to have_content "営業時間 #{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
+    expect(page).to have_content "#{date_spot.genre.name}"
     expect(page).to have_content "#{date_spot.address.prefecture.name}"
     expect(page).to have_content "#{date_spot.address.city_name}"
   end
@@ -60,6 +61,7 @@ end
 def date_spot_information_insert(date_spot)
   fill_in "デートスポット名", with: date_spot.name
   find("#date_spot_address_attributes_prefecture_id").find("option[value='#{date_spot.address.prefecture_id}']").select_option
+  find("#date_spot_genre_id").find("option[value='#{date_spot.genre_id}']").select_option
   fill_in "市町村名、番地", with: date_spot.address.city_name 
   fill_in "始業時間", with: date_spot.opening_time
   fill_in "終業時間", with: date_spot.closing_time
