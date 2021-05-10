@@ -4,7 +4,8 @@
       <p><%= date_spot.name %></p>
       <p>⭐️⭐️⭐️⭐️⭐️</p>
       <p><%= render 'date_spot_business_hour', date_spot: date_spot %></p>
-      <p> 住所 <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
+      <p class="m-5"> 住所 <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
+      <p class="m-5"> ジャンル <%= date_spot.genre.name %></p>
     </div>
     <div class="w-7/12">
       <%= image_tag date_spot.image.variant(gravity: :center, resize:"400x400^", crop:"400x400+0+0") || "no_image.jpg", class: "pr-5 pl-5" %>
