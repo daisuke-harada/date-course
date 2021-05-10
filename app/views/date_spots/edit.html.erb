@@ -4,7 +4,7 @@
     <%= render 'date_spot_form', {date_spot: @date_spot, btn_name: "更新"} %>
   </div>
   <div class="w-5/12">
-    <%= image_tag @date_spot.image.variant(gravity: :center, resize:"400x400^", crop:"400x400+0+0") || "no_image.jpg", class: "pr-5 pl-5" %><br/>
+    <%= render 'layouts/image', {target_image: @date_spot, width: 400, height: 400}%><br/>
     <%= link_to "このデートスポットを削除する", date_spot_path(@date_spot), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red" %>
   </div>
 </div>

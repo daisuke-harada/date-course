@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.where(admin: false)
   end
 
   private

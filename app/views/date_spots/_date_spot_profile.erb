@@ -8,7 +8,7 @@
       <p class="m-5"> ジャンル <%= date_spot.genre.name %></p>
     </div>
     <div class="w-7/12">
-      <%= image_tag date_spot.image.variant(gravity: :center, resize:"400x400^", crop:"400x400+0+0") || "no_image.jpg", class: "pr-5 pl-5" %>
+      <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
       <p>口コミ数64</p>
     </div>
   </div>
