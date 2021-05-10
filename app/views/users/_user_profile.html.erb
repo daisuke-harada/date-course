@@ -1,0 +1,11 @@
+<div class="border border-black bg-white m-5 p-5">
+  <%= link_to user_path(user) do %>
+    <%= render 'layouts/image', {target_image: user, width: 250, height: 250} %>
+  <% end %>
+  <p class="m-5"><%= user.name %></p>
+  <p class="m-5"><%= user.change_sex_data_string %></p>
+  <p class="m-2 w- border-b-2 border-black">
+    <span class="p-2">6フォロー</span>
+    <span class="p-2">8フォロワー</span>
+  </p>
+</div>
