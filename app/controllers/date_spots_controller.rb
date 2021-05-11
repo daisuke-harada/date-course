@@ -40,12 +40,7 @@ class DateSpotsController < ApplicationController
 
   def index
     # 検索パラメータはデフォルトでparams[:q]に設定されています。
-    @search_result_params = DateSpot.ransack(params[:q])
-    if @search_result_params
-      @date_spots = @search_result_params.result(distinct: true)
-    else
-      @date_spots = DateSpot.all
-    end
+      @date_spots = @date_spot_search_params.result(distinct: true)
   end
 
   private
