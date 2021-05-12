@@ -79,6 +79,32 @@ RSpec.feature "Users", type: :feature do
       expect(page).to have_content "退会しました"
     }.to change(User.all, :count).by(-1)
   end
+
+  scenario "TOPページからユーザーを名前で検索する" do
+    user = FactoryBot.create(:user)
+    visit root_path
+    fill_in "q_name_cont 2", with: user.name
+    click_button "検索"
+    user_show_display(user)
+  end
+
+  scenario "ユーザー一覧ページからユーザーを名前で検索する" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    visit users_path
+    fill_in "q_name_cont 2", with: user.name
+    click_button "検索"
+    user_show_display(user)
+  end
+
+  scenario "デートスポット一覧ページからユーザーを名前で検索する" do
+    FactoryBot.create(:address)
+    user = FactoryBot.create(:user)
+    visit date_spots_path
+    fill_in "q_name_cont 2", with: user.name
+    click_button "検索"
+    user_show_display(user)
+  end
 end
 
 # ユーザーのshowページの情報を表示する

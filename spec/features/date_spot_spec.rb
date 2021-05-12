@@ -50,8 +50,8 @@ RSpec.feature "DateSpots", type: :feature do
   scenario "TOPページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     visit root_path
-    fill_in "q_name_cont", with: address.date_spot.name
-    click_button "検索"
+    fill_in "q_name_cont", with: address.date_spot.name, match: :first
+    click_button "検索", match: :first
     date_spot_display(address.date_spot)
   end
 

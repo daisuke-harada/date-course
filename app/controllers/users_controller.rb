@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :logged_in_user,     only: [:edit, :update, :destroy]
   before_action :correct_user,       only: [:edit, :update, :destroy]
   before_action :user_find_param_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_q_for_date_spot
+  before_action :set_q_for_user
 
   def show
   end
@@ -41,7 +43,9 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.where(admin: false)
+    # @users = User.where(admin: false)
+    # 管理者以外のユーザーを検索結果から全て表示する
+    @users = @user_search_params.result(distinct: true).where(admin: false)
   end
 
   private

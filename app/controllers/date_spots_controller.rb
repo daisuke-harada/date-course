@@ -1,6 +1,8 @@
 class DateSpotsController < ApplicationController
   before_action :logged_in_admin,         only: [:new, :create, :edit, :update, :destroy]
   before_action :date_spot_find_param_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_q_for_date_spot
+  before_action :set_q_for_user
 
   def new
     @date_spot = DateSpot.new
@@ -40,7 +42,7 @@ class DateSpotsController < ApplicationController
 
   def index
     # 検索パラメータはデフォルトでparams[:q]に設定されています。
-      @date_spots = @date_spot_search_params.result(distinct: true)
+    @date_spots = @date_spot_search_params.result(distinct: true)
   end
 
   private
