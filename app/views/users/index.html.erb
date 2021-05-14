@@ -1,7 +1,7 @@
 <div class="m-5 mt-10 border border-black flex">
   <div class="w-3/12 border border-black">
     <%= render "layouts/name_search", { title_target: "デートスポットを名前で検索", search_target: @date_spot_search_params } %>
-    <%= render "layouts/name_search", { title_target: "ユーザーを名前で検索", search_target: @user_search_params } %>
+    <%= render "layouts/name_search", { title_target: "ユーザーを名前で検索", search_target: @user_search_params, as: :p } %>
   </div>
   <div class="w-9/12">
     <div class="mr-5 ml-5 mb-5 bg-white">

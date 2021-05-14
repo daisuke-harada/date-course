@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   def index
     # @users = User.where(admin: false)
     # 管理者以外のユーザーを検索結果から全て表示する
+    binding.pry
     @users = @user_search_params.result(distinct: true).where(admin: false)
   end
 
