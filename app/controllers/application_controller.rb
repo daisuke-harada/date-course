@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   
   #デートスポットの名前検索の際に使用する
   def set_q_for_date_spot
-    @date_spot_search_params = DateSpot.ransack(params[:q])
+    @date_spot_search_params = DateSpot.ransack(params[:date_spot_search], search_key: :date_spot_search)
   end
 
   #ユーザーの名前検索の際に使用する
