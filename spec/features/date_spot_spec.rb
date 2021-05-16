@@ -50,8 +50,8 @@ RSpec.feature "DateSpots", type: :feature do
   scenario "TOPページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     visit root_path
-    fill_in "q_name_cont", with: address.date_spot.name, match: :first
-    click_button "検索", match: :first
+    fill_in "date_spot_search_name_cont", with: address.date_spot.name
+    click_button "date_spot_name_search"
     date_spot_display(address.date_spot)
   end
 
@@ -59,8 +59,8 @@ RSpec.feature "DateSpots", type: :feature do
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
     visit date_spots_path
-    fill_in "q_name_cont", with: address.date_spot.name
-    click_button "検索"
+    fill_in "date_spot_search_name_cont", with: address.date_spot.name
+    click_button "date_spot_name_search"
     date_spot_display(address.date_spot)
   end
 
@@ -68,8 +68,8 @@ RSpec.feature "DateSpots", type: :feature do
     address = FactoryBot.create(:address)
     FactoryBot.create(:user)
     visit users_path
-    fill_in "q_name_cont", with: address.date_spot.name
-    click_button "検索"
+    fill_in "date_spot_search_name_cont", with: address.date_spot.name
+    click_button "date_spot_name_search"
     date_spot_display(address.date_spot)
   end
 end

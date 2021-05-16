@@ -83,8 +83,8 @@ RSpec.feature "Users", type: :feature do
   scenario "TOPページからユーザーを名前で検索する" do
     user = FactoryBot.create(:user)
     visit root_path
-    fill_in "q_name_cont 2", with: user.name
-    click_button "検索"
+    fill_in "q_name_cont", with: user.name
+    click_button "user_name_search"
     user_show_display(user)
   end
 
@@ -92,8 +92,8 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     visit users_path
-    fill_in "q_name_cont 2", with: user.name
-    click_button "検索"
+    fill_in "q_name_cont", with: user.name
+    click_button "user_name_search"
     user_show_display(user)
   end
 
@@ -101,8 +101,8 @@ RSpec.feature "Users", type: :feature do
     FactoryBot.create(:address)
     user = FactoryBot.create(:user)
     visit date_spots_path
-    fill_in "q_name_cont 2", with: user.name
-    click_button "検索"
+    fill_in "q_name_cont", with: user.name
+    click_button "user_name_search"
     user_show_display(user)
   end
 end

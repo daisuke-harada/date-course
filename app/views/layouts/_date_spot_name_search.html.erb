@@ -3,7 +3,7 @@
     <%= f.label :name, title_target %>
     <%= f.search_field :name_cont, class: "my-5 w-full border-b-2 outline-none" %> <!-- name_contはnameカラムの単語の一部分を含むものを検索するという意味になります。 -->
     <div class="text-center">
-      <%= f.submit "検索", class: "btn btn-salmon my-2" %>
+      <%= f.submit "検索", class: "btn btn-salmon my-2", id:"date_spot_name_search" %>
     </div>
   <% end %>
 </div>
