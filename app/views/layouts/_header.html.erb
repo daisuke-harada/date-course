@@ -1,26 +1,41 @@
 <header class="bg-white h-40">
-  <div class="w-full border-b-2 border-black">
-    <% if logged_in?  %>
-      <h1>
+  <div class="w-full border-b-2 border-black flex justify-around">
+    <% if logged_in? && current_user.admin == false%>
+      <div class="mt-11">
+        <%= link_to "デートコース作成", "#", class: "btn btn-salmon" %>
+      </div>
+      <div class="m-6">
         <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
-      </h1>
-      <div class="m-5 items-center flex justify-center"><%= link_to "ログアウト", logout_path, method: :delete %></div>
+      </div>
+      <div class="mt-11">
+        <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-pink" %>
+      </div>
+    <% elsif admin_logged_in? %>
+      <div class="mt-11">
+        <%= link_to "デートスポット作成", new_date_spot_path, class: "btn btn-salmon" %>
+      </div>
+      <div class="m-6">
+        <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
+      </div>
+      <div class="mt-11">
+        <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-pink" %>
+      </div>
     <% else %>
-      <div class="flex justify-around">
-        <ul class="m-6 items-center flex justify-center">
-          <li class="m-5"><%= link_to "新規登録", new_user_path, class:"btn btn-salmon" %></li>
-          <li class="m-5"><%= link_to "ログイン", login_path %></li>
-        </ul>
-        <div class="m-6">
-          <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
-        </div>
+      <ul class="mt-12 flex justify-center">
+        <li class="mx-5"><%= link_to "新規登録", new_user_path, class:"btn btn-salmon" %></li>
+        <li class="mx-5"><%= link_to "ログイン", login_path, class:"btn btn-pink" %></li>
+      </ul>
+      <div class="m-6">
+        <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
+      </div>
+      <div class="mt-10">
         <%= form_with(url: login_path, scope: :session, local: true) do |f|%>
           <%= f.hidden_field :name, :value => guest_name %>
           <%= f.hidden_field :password, :value => guest_password %>
-          <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-yellow-green m-6 mt-10"%>
-        <% end %> 
+          <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-yellow-green"%>
+        <% end %>
       </div>
-    <% end %>
+  <% end %>
   </div>
   <!--
   <ul class="menu-group">

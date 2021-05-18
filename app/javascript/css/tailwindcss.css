@@ -53,7 +53,7 @@ a {
 }
 
 .btn-yellow-green {
-  @apply border-green-300 text-white;
+  @apply bg-green-300 text-white;
 }
 
 .btn-yellow-green:hover {
@@ -66,6 +66,14 @@ a {
 
 .btn-salmon:hover {
   @apply bg-red-500 text-white;
+}
+
+.btn-pink {
+  @apply bg-pink-400 text-white;
+}
+
+.btn-pink:hover {
+  @apply bg-pink-500 text-white;
 }
 
 .btn-red {
