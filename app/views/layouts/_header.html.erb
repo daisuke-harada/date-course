@@ -1,4 +1,4 @@
-<header class="bg-white h-40">
+<header class="bg-white">
   <div class="w-full border-b-2 border-black flex justify-around">
     <% if logged_in? && current_user.admin == false%>
       <div class="mt-11">
@@ -37,28 +37,9 @@
       </div>
   <% end %>
   </div>
-  <!--
-  <ul class="menu-group">
-    <li class="my-5"><%= link_to "デートスポットを探す", date_spots_path %></li>
-    <li class="my-5"><%= link_to "デートコースを探す", '#' %></li>
-    <li class="my-5"><%= link_to "ユーザーを探す", users_path %></li>
-    <% if logged_in? && current_user.admin == false %>
-      <li class="my-5"><%= link_to "デートコース作成", '#' %></li>
-      <li class="my-5"><%= link_to "マイメニュー", current_user %></li>
-      <li class="my-5"><%= link_to "ログアウト", logout_path, method: :delete %></li>
-    <% elsif admin_logged_in? %>
-      <li class="my-5"><%= link_to "デートスポット作成", new_date_spot_path %></li>
-      <li class="my-5"><%= link_to "ログアウト", logout_path, method: :delete %></li>
-    <% else %>
-      <li class="my-5"><%= link_to "新規登録", new_user_path %></li>
-      <li class="my-5"><%= link_to "ログイン", login_path %></li>
-      <li class="my-3">
-        <%= form_with(url: login_path, scope: :session, local: true) do |f|%>
-          <%= f.hidden_field :name, :value => guest_name %>
-          <%= f.hidden_field :password, :value => guest_password %>
-          <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-blue"%>
-        <% end %> 
-      </li>
-    <% end %>
-  </ul> -->
+  <ul class="flex flex-wrap text-base justify-center">
+    <li class="m-6"><%= link_to "デートスポットを探す", date_spots_path, class: "text-black" %></li>
+    <li class="m-6"><%= link_to "デートコースを探す", '#', class: "text-black" %></li>
+    <li class="m-6"><%= link_to "ユーザーを探す", users_path, class: "text-black" %></li>
+  </ul>
 </header>
