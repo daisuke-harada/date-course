@@ -1,24 +1,25 @@
-<div class="border border-black">
-  <div class="bg-no-repeat bg-cover bg-top" style="background-image: url('<%= asset_url('lp.jpg') %>'); height: 600px;">
+<div class="bg-no-repeat bg-cover bg-top flex items-end" style="background-image: url('<%= asset_url('lp.jpg') %>'); height: 600px;">
+  <div class="m-5">
+    <%= link_to "デートコースを作成してみよう", "#", class: "btn btn-pink text-3xl" %>
   </div>
-  <!--
-  <div class="w-9/12">
-    <div class="bg-black w-full h-72">
-      <h1 class="text-white text-center">
-        ランディングページ用の画像をここに表示
-      </h1>
-    </div>
-    <h1 class="m-5">エリアでデートスポットを探す</h1>
-    <div class="flex flex-wrap">
-      <% @main_prefectures.each do |prefecture| %>
-        <%= render "prefectures/prefecture", prefecture: prefecture %>
-      <% end %>
-      
-      <% @areas.each do |area| %>
-        <%= render "areas/area", area: area %>
-      <% end %>
-    </div>
-  </div> 
-    -->
 </div>
+<!--
+<div class="w-9/12">
+  <div class="bg-black w-full h-72">
+    <h1 class="text-white text-center">
+      ランディングページ用の画像をここに表示
+    </h1>
+  </div>
+  <h1 class="m-5">エリアでデートスポットを探す</h1>
+  <div class="flex flex-wrap">
+    <% @main_prefectures.each do |prefecture| %>
+      <%= render "prefectures/prefecture", prefecture: prefecture %>
+    <% end %>
+    
+    <% @areas.each do |area| %>
+      <%= render "areas/area", area: area %>
+    <% end %>
+  </div>
+</div> 
+  -->
 
