@@ -7,13 +7,14 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       administrator_confirm_log_in user
     else
-      flash.now[:danger] = "ログインに失敗しました。"
+      flash[:danger] = "ログインに失敗しました。"
       render 'new'
     end
   end
 
   def destroy
     log_out if logged_in?
+    flash[:success] = "ログアウトしました"
     redirect_to root_url
   end
 

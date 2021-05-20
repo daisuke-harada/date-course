@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="bg-gray-100">
     <%= render 'layouts/header' %>
-    <div class="flash-message">
-      <% flash.each do |key, value| %>
-        <!-- content_tagはHTMLタグを生成するメソッドです。classにflashメッセージの種類が入る。 valueに表示したいメッセージが入る -->
-        <%= content_tag(:div, value, class: key) %>
-      <% end %>
-    </div>
     <div class="pt-44">
+      <div class="flash-message">
+        <% flash.each do |key, value| %>
+          <!-- content_tagはHTMLタグを生成するメソッドです。classにflashメッセージの種類が入る。 valueに表示したいメッセージが入る -->
+          <%= content_tag(:div, value, class: key) %>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
   </body>
