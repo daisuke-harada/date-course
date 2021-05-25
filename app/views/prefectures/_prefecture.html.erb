@@ -2,6 +2,6 @@
   <div class="w-6/12 border bg-no-repeat bg-cover bg-top" style="background-image: url('<%= asset_url("#{prefecture.name}.jpg") %>');">
   </div>
   <div class="w-6/12 p-5 text-3xl font-bold">
-    <%= prefecture.name %>
+    <%= link_to prefecture.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:address_prefecture_id_eq=>"#{prefecture.id}"}}, as: :date_spot_search %>
   </div>
 </div>

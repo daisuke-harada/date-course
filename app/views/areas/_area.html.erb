@@ -2,7 +2,7 @@
   <h1 class="m-2"><%= area.name %></h1>
   <% area.prefectures.each do |prefecture| %>
     <div class="inline-block">
-      <%= link_to prefecture.name, "#", class: "m-2" %>
+      <%= link_to prefecture.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:address_prefecture_id_eq=>"#{prefecture.id}"}}, as: :date_spot_search, class: "m-2" %>
     </div>
   <% end %>
 </div>

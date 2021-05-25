@@ -41,7 +41,6 @@ class DateSpotsController < ApplicationController
   end
 
   def index
-    # 検索パラメータはデフォルトでparams[:q]に設定されています。
     @date_spots = @date_spot_search_params.result
   end
 
