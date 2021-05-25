@@ -1,3 +1,7 @@
-<div class="w-4/12 h-28 border bg-white">
-  <%= display_prefecture_name prefecture %>
+<div class="w-4/12 h-30 border flex" >
+  <div class="w-6/12 border bg-no-repeat bg-cover bg-top" style="background-image: url('<%= asset_url("#{prefecture.name}.jpg") %>');">
+  </div>
+  <div class="w-6/12 p-5 text-3xl font-bold">
+    <%= prefecture.name %>
+  </div>
 </div>

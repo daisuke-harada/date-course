@@ -6,35 +6,16 @@
 <div class="bg-white">
   <p class="p-10 text-center text-3xl">エリアでデートスポットを探す</p>
   <div class="flex">
-    <div class="flex flex-wrap w-3/12">
+    <div class="flex flex-wrap w-3/12 p-5">
       <% @areas.each do |area| %>
         <%= render "areas/area", area: area %>
       <% end %>
     </div>
-    <div class="flex flex-wrap w-9/12">
+    <div class="flex flex-wrap w-9/12 p-5">
       <% @main_prefectures.each do |prefecture| %>
         <%= render "prefectures/prefecture", prefecture: prefecture %>
       <% end %>
     </div>
   </div>
-<div>
-<div class="bg-white">
-  <p class="p-10 text-center text-3xl">エリアでデートスポットを探す</p>
-  <div class="flex">
-    <div class="flex flex-wrap w-3/12">
-      <% @areas.each do |area| %>
-        <%= render "areas/area", area: area %>
-      <% end %>
-    </div>
-    <div class="flex flex-wrap w-9/12">
-      <% @main_prefectures.each do |prefecture| %>
-        <%= render "prefectures/prefecture", prefecture: prefecture %>
-      <% end %>
-    </div>
-  </div>
-<div>
-<div class="w-3/12 border border-black">
-  <%= render "layouts/date_spot_name_search", { title_target: "デートスポットを名前で検索", search_target: @date_spot_search_params } %>
-  <%= render "layouts/user_name_search", { title_target: "ユーザーを名前で検索", search_target: @user_search_params } %>
 </div>
 
