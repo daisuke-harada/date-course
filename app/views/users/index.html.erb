@@ -7,10 +7,16 @@
     <div class="mr-5 ml-5 mb-5 bg-white">
       <h1>ユーザー一覧</h1>
     </div>
-    <div class="flex flex-wrap">
-      <% @users.each do |user| %>
-        <%= render "users/user_profile", user: user %>
-      <% end %>
-    </div>
+    <% if @users == []%>
+      <div class="text-red-900">
+        ⚠︎検索結果はありませんでした。
+      </div>
+    <% else %>
+      <div class="flex flex-wrap">
+        <% @users.each do |user| %>
+          <%= render "users/user_profile", user: user %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
