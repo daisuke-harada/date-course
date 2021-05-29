@@ -42,13 +42,14 @@ class DateSpotsController < ApplicationController
 
   def index
     @date_spots = @date_spot_search_params.result
+    binding.pry
   end
 
   private
     def date_spot_params
       params.require(:date_spot).permit(
-        :name,:opening_time,
-        :genre_id,
+        :name, :genre_id,
+        :opening_time,
         :closing_time,
         :image,
         address_attributes: [:prefecture_id,
