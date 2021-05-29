@@ -20,10 +20,10 @@
   <label>営業時間</label><br/>
   <p class="mb-5 border-b-2 outline-none">
     <%= f.label :opening_time, "始業時間" %>
-    <%= f.time_field :opening_time, class: "mr-5" %>
+    <%= f.time_select :opening_time, { ignore_date: true, minute_step: 30, include_blank: true, :time_separator => ":", class: "mr-5"} %>
     ~
     <%= f.label :closing_time, "終業時間", class: "ml-5" %>
-    <%= f.time_field :closing_time %>
+    <%= f.time_select :closing_time, { ignore_date: true, minute_step: 30, include_blank: true, :time_separator => ":", class: "mr-5"} %>
   </p>
 
   <%= f.label :image, "サムネイル"%>
