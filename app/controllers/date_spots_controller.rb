@@ -42,7 +42,6 @@ class DateSpotsController < ApplicationController
 
   def index
     @date_spots = @date_spot_search_params.result
-    binding.pry
   end
 
   private

@@ -2,7 +2,7 @@
   <%= search_form_for @date_spot_search_params, as: :date_spot_search  do |f| %>
     <%= f.grouped_collection_select(:address_prefecture_id_eq, Area.all, :prefectures, :name, :id, :name, {prompt: "都道府県を選択してください"}, class:"m-2 p-2 border border-gray-400 rounded") %>
     <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, {prompt: "ジャンルを選択してください"}, class:"m-2 p-2 border border-gray-400 rounded" %>
-    <%= f.collection_select :closing_time_lteq, BusinessHour.all, :hour, :hour, {prompt: "閉店時間"}, class:"m-2 p-2 border border-gray-400 rounded" %>
+    <%= f.collection_select :opening_time_lteq, BusinessTime.all, :value_time, :time, {prompt: "来店時間"}, class:"m-2 p-2 border border-gray-400 rounded" %>
     <%= f.submit '検索', class: "btn btn-salmon my-2" %>
   <% end %>
 </div>

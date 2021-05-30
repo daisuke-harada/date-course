@@ -20,9 +20,9 @@
   <label>営業時間</label><br/>
   <p class="mb-5 border-b-2 outline-none">
     <%= f.label :opening_time, "始業時間" %>
-    <%= f.collection_select :opening_time, BusinessHour.all, :hour, :hour %>
+    <%= f.collection_select :opening_time, BusinessTime.all, :value_time, :time %>
     ~
-    <%= f.collection_select :closing_time, BusinessHour.all, :hour, :hour %>
+    <%= f.collection_select :closing_time, BusinessTime.all, :value_time, :time %>
   </p>
 
   <%= f.label :image, "サムネイル"%>

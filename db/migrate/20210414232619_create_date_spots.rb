@@ -3,8 +3,8 @@ class CreateDateSpots < ActiveRecord::Migration[6.1]
     create_table :date_spots do |t|
       t.integer :genre_id
       t.string :name
-      t.time :opening_time
-      t.time :closing_time
+      t.datetime :opening_time
+      t.datetime :closing_time
 
       t.timestamps
     end

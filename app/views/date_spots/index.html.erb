@@ -3,8 +3,8 @@
     <%= render "layouts/date_spot_name_search", { title_target: "デートスポットを名前で検索", search_target: @date_spot_search_params } %>
     <%= render "layouts/user_name_search", { title_target: "ユーザーを名前で検索", search_target: @user_search_params } %>
   </div>
-  <div class="w-9/12">
-    <div class="mr-5 ml-5 mb-5 p-5 bg-white">
+  <div class="w-9/12 bg-white">
+    <div class="mr-5 ml-5 mb-5 p-5">
       <h1>デートスポット一覧</h1>
       <div class="w-full h-52 bg-gray-700">
         <div class="text-center">デートスポットレビューランキング</div>
@@ -12,7 +12,7 @@
       <%= render "date_spot_sort_bar" %>
     </div>
     <% if @date_spots == []%>
-      <div class="text-red-900">
+      <div class="text-red-900 text-center m-10 text-3xl">
         ⚠︎検索結果はありませんでした。
       </div>
     <% else %>
