@@ -41,7 +41,8 @@ class DateSpotsController < ApplicationController
   end
 
   def index
-    @date_spots = @date_spot_search_params.result
+    date_spot_search_params_decided = @date_spot_search_params.result.ransack(closing_time_gteq: @date_spot_search_params.opening_time_lteq)
+    @date_spots = date_spot_search_params_decided.result
   end
 
   private
