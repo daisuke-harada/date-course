@@ -50,8 +50,9 @@ RSpec.feature "DateSpots", type: :feature do
   scenario "TOPページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     visit root_path
-    fill_in "date_spot_search_name_cont", with: address.date_spot.name
-    click_button "date_spot_name_search"
+    choose "select_search_target_Date"
+    fill_in "search_name", with: address.date_spot.name
+    click_button "検索"
     date_spot_display(address.date_spot)
   end
 
@@ -89,6 +90,6 @@ def date_spot_information_insert(date_spot)
   find("#date_spot_address_attributes_prefecture_id").find("option[value='#{date_spot.address.prefecture_id}']").select_option
   find("#date_spot_genre_id").find("option[value='#{date_spot.genre_id}']").select_option
   fill_in "市町村名、番地", with: date_spot.address.city_name 
-  fill_in "始業時間", with: date_spot.opening_time
-  fill_in "終業時間", with: date_spot.closing_time
+  find("#date_spot_opening_time").find("option[value='#{date_spot.opening_time}']").select_option
+  find("#date_spot_closing_time").find("option[value='#{date_spot.closing_time}']").select_option
 end

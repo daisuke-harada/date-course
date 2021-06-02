@@ -83,8 +83,9 @@ RSpec.feature "Users", type: :feature do
   scenario "TOPページからユーザーを名前で検索する" do
     user = FactoryBot.create(:user)
     visit root_path
-    fill_in "q_name_cont", with: user.name
-    click_button "user_name_search"
+    choose "select_search_target_User"
+    fill_in "search_name", with: user.name
+    click_button "検索"
     user_show_display(user)
   end
 

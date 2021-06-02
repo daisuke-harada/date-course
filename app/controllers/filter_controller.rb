@@ -12,7 +12,6 @@ class FilterController < ApplicationController
     else
       @date_spot_custom_search_params = DateSpot.ransack(name_cont: params[:search_name])
       @date_spots = @date_spot_custom_search_params.result
-      binding.pry
       render template: "date_spots/index"
     end
   end
