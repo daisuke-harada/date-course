@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     let(:user) { FactoryBot.build(:user) }
     context "userを保存できる場合" do
       it "正常値の場合、保存できること" do
+        user.image = fixture_file_upload('app/assets/images/no_image.jpg')
         expect(user).to be_valid
       end
 
