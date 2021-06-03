@@ -12,9 +12,9 @@
       <%= render "date_spots/date_spot_sort_bar" %>
     </div>
     <% if @date_spots == []%>
-      <div class="text-red-900 text-center m-10 text-3xl">
+      <p class="text-red-900 text-center m-10 text-3xl" id="search_result">
         ⚠︎検索結果はありませんでした。
-      </div>
+      </p>
     <% else %>
       <% @date_spots.each do |date_spot| %>
         <%= render "date_spots/date_spot_profile", date_spot: date_spot %>

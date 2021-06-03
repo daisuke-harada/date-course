@@ -65,6 +65,53 @@ RSpec.feature "DateSpots", type: :feature do
     date_spot_display(address.date_spot)
   end
 
+  scenario "デートスポット一覧ページからデートスポットをジャンル、県名、来店時間で検索する" do
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_search_address_prefecture_id_eq").find("option[value='#{address.prefecture_id}']").select_option
+    find("#date_spot_search_genre_id_eq").find("option[value='#{address.date_spot.genre_id}']").select_option
+    find("#date_spot_search_opening_time_lteq").find("option[value= '2000-01-01 10:00:00 UTC']").select_option
+    click_button "date_spot_sort_search"
+    date_spot_display(address.date_spot)
+  end
+
+  scenario "デートスポット一覧ページからデートスポットをジャンルで検索する" do
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_search_genre_id_eq").find("option[value='#{address.date_spot.genre_id}']").select_option
+    click_button "date_spot_sort_search"
+    date_spot_display(address.date_spot)
+  end
+
+  scenario "デートスポット一覧ページからデートスポットを県名で検索する" do
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_search_address_prefecture_id_eq").find("option[value='#{address.prefecture_id}']").select_option
+    click_button "date_spot_sort_search"
+    date_spot_display(address.date_spot)
+  end
+
+  scenario "デートスポット一覧ページからデートスポットを来店時間で検索する" do
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_search_opening_time_lteq").find("option[value= '2000-01-01 10:00:00 UTC']").select_option
+    click_button "date_spot_sort_search"
+    date_spot_display(address.date_spot)
+  end
+
+  scenario "デートスポット一覧ページからデートスポットを来店時間で検索した際に、対応した検索結果がない場合、検索結果がないというメッセージが表示される" do
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_search_opening_time_lteq").find("option[value='2000-01-02 01:00:00 UTC']").select_option
+    click_button "date_spot_sort_search"
+    expect(find('#search_result').text).to eq '⚠︎検索結果はありませんでした。'
+  end
+
   scenario "ユーザー一覧ページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     FactoryBot.create(:user)
