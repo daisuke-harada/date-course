@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Users", type: :feature do
   scenario "新規登録画面で新規登録を行う" do
     user = FactoryBot.build(:user)
+    user.image = fixture_file_upload('app/assets/images/test_image.jpg')
     visit root_path
     click_link "新規登録"
     input_registration user

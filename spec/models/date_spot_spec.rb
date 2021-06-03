@@ -6,7 +6,7 @@ RSpec.describe DateSpot, type: :model do
 
     context "dates_spotを保存できる場合" do
       it "正常値の場合、保存できること" do
-        date_spot.image = fixture_file_upload('app/assets/images/date_spot_images/canal.jpeg')
+        date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
         expect(date_spot).to be_valid
       end
     end
