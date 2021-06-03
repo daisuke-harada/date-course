@@ -109,7 +109,7 @@ RSpec.feature "DateSpots", type: :feature do
     visit date_spots_path
     find("#date_spot_search_opening_time_lteq").find("option[value='2000-01-02 01:00:00 UTC']").select_option
     click_button "date_spot_sort_search"
-    expect(find('#search_result').text).to eq '⚠︎検索結果はありませんでした。'
+    expect(find('#search_no_result').text).to eq '⚠︎検索結果はありませんでした。'
   end
 
   scenario "ユーザー一覧ページからデートスポットを名前で検索する" do
