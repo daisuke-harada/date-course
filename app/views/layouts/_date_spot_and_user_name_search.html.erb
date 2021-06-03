@@ -1,13 +1,13 @@
-<div class="my-2 mx-20 px-20 border border-gray-400">
+<div class="px-20 w-full" style="background-color: #FC9267;">
   <%= form_with url: filter_search_path, method: :get, local: :true do |f| %>
     <%= f.text_field :search_name, class: "my-1 w-3/4 border-b-2 outline-none" %> <!-- name_contはnameカラムの単語の一部分を含むものを検索するという意味になります。 -->
     <span class="mx-5">
       <%= radio_button_tag(:select_search_target, "User", {checked: true}) %>
-      <%= label_tag("select_param_radio", "ユーザー") %>
+      <%= label_tag("select_param_radio", "ユーザー", class:"text-white") %>
     </span>
     <span class="ml-5">
       <%= radio_button_tag(:select_search_target, "Date") %>
-      <%= label_tag("select_param_radio", "デート") %>
+      <%= label_tag("select_param_radio", "デート", class:"text-white") %>
     </span>
       <%= f.submit "検索", class: "btn btn-salmon my-2" %>
   <% end %>

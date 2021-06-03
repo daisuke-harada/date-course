@@ -1,0 +1,7 @@
+<div class="w-4/12 h-30 border flex" >
+  <div class="w-6/12 border bg-no-repeat bg-cover bg-top" style="background-image: url('<%= asset_url("genre_images/#{genre.name}.jpg") %>');">
+  </div>
+  <div class="w-6/12 p-5 text-3xl font-bold">
+    <%= link_to genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{genre.id}"}}, as: :date_spot_search %>
+  </div>
+</div>
