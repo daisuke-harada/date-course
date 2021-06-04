@@ -16,6 +16,7 @@ RSpec.feature "Users", type: :feature do
 
   scenario "ログイン画面から新規登録画面に遷移し、新規登録する" do
     user = FactoryBot.build(:user)
+    user.image = fixture_file_upload('app/assets/images/test_image.jpg')
     visit root_path
     click_link "ログイン"
     click_link "新規登録はこちら"
@@ -28,6 +29,7 @@ RSpec.feature "Users", type: :feature do
 
   scenario "ユーザー情報の編集に成功する" do
     user = FactoryBot.create(:user)
+    user.image = fixture_file_upload('app/assets/images/test_image.jpg')
     sign_in_as user
     click_link "アカウント情報を編集する"
     fill_in "名前", with: "test"
@@ -45,6 +47,7 @@ RSpec.feature "Users", type: :feature do
 
   scenario "ユーザー情報の編集に失敗する" do
     user = FactoryBot.create(:user)
+    user.image = fixture_file_upload('app/assets/images/test_image.jpg')
     sign_in_as user
     click_link "アカウント情報を編集する"
     fill_in "名前", with: nil
