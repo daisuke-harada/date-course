@@ -4,6 +4,7 @@ RSpec.feature "DateSpots", type: :feature do
   scenario "新規投稿画面で新規投稿に成功する" do
     admin = FactoryBot.create(:admin)
     address = FactoryBot.build(:address)
+    address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
     sign_in_as admin
     click_link "デートスポット作成"
     date_spot_information_insert(address.date_spot)
@@ -18,6 +19,7 @@ RSpec.feature "DateSpots", type: :feature do
   scenario "デートスポット編集ページに遷移し、デートスポット情報を更新する" do
     admin = FactoryBot.create(:admin)
     address = FactoryBot.create(:address)
+    address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
     other_spot = FactoryBot.build(:other_spot)
     other_spot.build_address(FactoryBot.attributes_for(:other_address))
     sign_in_as admin
