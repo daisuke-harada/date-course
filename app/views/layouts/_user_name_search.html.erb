@@ -1,7 +1,7 @@
-<div class ="bg-white bg-white inline-block p-5 m-5">
+<div class ="bg-white bg-white inline-block p-5 m-5 w-9/12">
   <%= search_form_for @user_search_params do |f| %>
-    <%= f.label :name, "ユーザーを名前で検索" %>
-    <%= f.search_field :name_cont, class: "my-5 w-full border-b-2 outline-none" %> <!-- name_contはnameカラムの単語の一部分を含むものを検索するという意味になります。 -->
+    <%= f.label :name, "ユーザー" %>
+    <%= f.search_field :name_cont, class: "my-5 w-full border-b-2 outline-none", placeholder: "名前で検索" %> <!-- name_contはnameカラムの単語の一部分を含むものを検索するという意味になります。 -->
     <div class="text-center">
       <%= f.submit "検索", class: "btn btn-salmon my-2", id:"user_name_search" %>
     </div>
