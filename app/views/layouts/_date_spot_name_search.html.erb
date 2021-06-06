@@ -1,4 +1,4 @@
-<div class ="bg-white w-72 inline-block p-2 m-2">
+<div class ="bg-white inline-block p-5 mx-5 mb-5">
   <%= search_form_for @date_spot_search_params, as: :date_spot_search do |f| %>
     <%= f.label :name, "デートスポットを名前で検索" %>
     <%= f.search_field :name_cont, class: "my-5 w-full border-b-2 outline-none" %> <!-- name_contはnameカラムの単語の一部分を含むものを検索するという意味になります。 -->
