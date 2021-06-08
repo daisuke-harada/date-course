@@ -46,6 +46,14 @@ a {
   @apply bg-green-400 text-white;
 }
 
+.btn-blue {
+  @apply bg-blue-300 text-white;
+}
+
+.btn-blue:hover {
+  @apply bg-blue-400 text-white;
+}
+
 .btn-salmon {
   @apply bg-red-400 text-white;
 }
