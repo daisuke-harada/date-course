@@ -1,4 +1,4 @@
-<div class="flex mt-5 p-5 border border-gray-400" style="background-color: #FC9267;" >
+<div class="flex mt-5 p-5 bg-white" >
   <%= search_form_for @date_spot_search_params, as: :date_spot_search  do |f| %>
     <%= f.grouped_collection_select(:address_prefecture_id_eq, Area.all, :prefectures, :name, :id, :name, {prompt: "都道府県を選択してください"}, class:"m-2 p-2 border border-gray-400 rounded") %>
     <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, {prompt: "ジャンルを選択してください"}, class:"m-2 p-2 border border-gray-400 rounded" %>
