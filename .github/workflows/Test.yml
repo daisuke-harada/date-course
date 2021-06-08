@@ -19,6 +19,7 @@ jobs:
       - name: setup bundle
         run: |
           gem install bundler
+          gem update --system
           bundle install
       - name: setup yarn
         run: |
