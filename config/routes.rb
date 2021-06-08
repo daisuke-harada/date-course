@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
   # このルーティングにより、date_spotから_date_spot_reviewsのネストを浅くする
   resources :date_spot_reviews, only: [:create, :edit, :update, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end

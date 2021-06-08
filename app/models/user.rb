@@ -1,6 +1,13 @@
 class User < ApplicationRecord
   has_one_attached :image
   has_many :date_spot_reviews, dependent: :destroy
+  has_many :relationships
+  # 架空のfollowingクラスを作成し、中間テーブルをrelationshipsに設定し、follow_idを参考にしてアクセスする。sourceは出口。
+  has_many :followings, through: :relationships, source: :follow
+  # relationshipにアクセスする時、follow_idを入り口として使用する。foreign_keyは入り口となる。
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
+  has_many :followers, through: :reverse_of_relationships, source: :user
+
   # 仮想の属性を作成 データベースに保存せず、一定期間だけ用いたい属性
   attr_accessor :remember_token
   # データベースに保存される直前にすべての文字列を小文字に変換する一意性を確実にするために
@@ -50,5 +57,21 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # フォロー機能のメソッド
+  def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
   end
 end
