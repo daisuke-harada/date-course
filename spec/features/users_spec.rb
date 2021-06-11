@@ -110,6 +110,26 @@ RSpec.feature "Users", type: :feature do
     click_button "user_name_search"
     user_show_display(user)
   end
+
+  scenario "ログインしてユーザーを探すページからユーザーをフォローする" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    visit users_path
+    find("#follow_id_2").click
+    expect(page).to have_content "ユーザーをフォローしました"
+  end
+
+  scenario "ログインしてユーザーを探すページからユーザーをフォローして、そのユーザーのフォローを解除する" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    visit users_path
+    find("#follow_id_2").click
+    expect(page).to have_content "ユーザーをフォローしました"
+    find("#un_follow_id_2").click
+    expect(page).to have_content "ユーザーのフォローを解除しました"
+  end
 end
 
 # ユーザーのshowページの情報を表示する
