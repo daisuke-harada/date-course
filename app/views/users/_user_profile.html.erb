@@ -1,5 +1,5 @@
 <div class="border border-black bg-white m-5 p-5">
-  <%= link_to user_path(user) do %>
+  <%= link_to user_path(user), id:"user_image_id_#{user.id}" do %>
     <%= render 'layouts/image', {target_image: user, width: 250, height: 250} %>
   <% end %>
   <div class="m-5 text-center">
