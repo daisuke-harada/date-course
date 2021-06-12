@@ -13,6 +13,7 @@
       </div>
     <% else %>
       <div class="flex flex-wrap">
+        <!-- 非同期機能実装 -->
         <% @users.each do |user| %>
           <%= render "users/user_profile", user: user %>
         <% end %>

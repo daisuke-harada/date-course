@@ -1,4 +1,5 @@
 <% if logged_in? && current_user.admin == false %>
+  <!-- 非同期機能実装 -->
   <% unless current_user == user %>
     <% if current_user.following?(user) %>
       <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }, local: true) do |f| %>
