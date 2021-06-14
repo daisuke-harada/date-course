@@ -1,16 +1,11 @@
 <% if logged_in? && current_user.admin == false %>
-  <!-- 非同期機能実装 -->
-  <% unless current_user == user %>
-    <% if current_user.following?(user) %>
-      <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }, local: true) do |f| %>
-        <%= f.hidden_field :follow_id, :value => user.id %>
-        <%= f.submit 'フォロー中', class: "btn btn-blue", id:"un_follow_id_#{user.id}" %>
-      <% end %>
-    <% else %>
-      <%= form_with(model: current_user.relationships.build, local: true) do |f| %>
-        <%= f.hidden_field :follow_id, :value => user.id %>
-        <%= f.submit 'フォロー', class: "btn btn-yellow-green", id:"follow_id_#{user.id}" %>
+  <div id="follow_action">
+    <% unless current_user == user %>
+      <% if current_user.following?(user) %>
+          <%= render 'relationships/unfollow', user: user %>
+      <% else %>
+          <%= render 'relationships/follow', user: user %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
