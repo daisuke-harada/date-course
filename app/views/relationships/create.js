@@ -1,1 +1,0 @@
-$("#follow_action").html('<%= j(render partial: "relationships/unfollow") %>');
