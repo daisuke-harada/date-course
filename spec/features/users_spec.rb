@@ -116,8 +116,7 @@ RSpec.feature "Users", type: :feature do
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
     visit users_path
-    find("#follow_id_2").click
-    expect(page).to have_content "ユーザーをフォローしました"
+    find("#follow_action_2").click
   end
 
   scenario "ログインしてユーザーを探すページから、ユーザーをフォローして、そのユーザーのフォローを解除する" do
@@ -125,10 +124,8 @@ RSpec.feature "Users", type: :feature do
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
     visit users_path
-    find("#follow_id_2").click
-    expect(page).to have_content "ユーザーをフォローしました"
-    find("#un_follow_id_2").click
-    expect(page).to have_content "ユーザーのフォローを解除しました"
+    find("#follow_action_2").click # フォローする。
+    find("#follow_action_2").click # アンフォローする。
   end
 
   scenario "ログインしてユーザーを探すページから、ユーザー詳細ページに遷移してユーザーをフォローする" do
@@ -137,9 +134,7 @@ RSpec.feature "Users", type: :feature do
     sign_in_as user
     visit users_path
     find("#user_image_id_2").click
-    user_show_display other_user
-    find("#follow_id_2").click
-    expect(page).to have_content "ユーザーをフォローしました"
+    find("#follow_action_2").click
   end
 
   scenario "ログインしてユーザーを探すページから、ユーザーをフォローして、ユーザー詳細ページに遷移して、そのユーザーのフォローを解除する" do
@@ -147,12 +142,9 @@ RSpec.feature "Users", type: :feature do
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
     visit users_path
-    find("#follow_id_2").click
-    expect(page).to have_content "ユーザーをフォローしました"
+    find("#follow_action_2").click # フォローする。
     find("#user_image_id_2").click
-    user_show_display other_user
-    find("#un_follow_id_2").click
-    expect(page).to have_content "ユーザーのフォローを解除しました"
+    find("#follow_action_2").click # アンフォローする。
   end
 end
 
