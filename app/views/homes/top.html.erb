@@ -1,18 +1,13 @@
-<div class="bg-no-repeat bg-cover bg-top flex items-end" style="background-image: url('<%= asset_url('lp.jpg') %>'); height: 600px;">
+<div class="bg-no-repeat bg-cover bg-top flex items-end" style="background-image: url('<%= asset_url('lp.jpg') %>'); height: 500px;">
   <div class="m-5">
     <%= link_to "デートコースを作成してみよう", "#", class: "btn btn-pink text-3xl" %>
   </div>
 </div>
 <%= render 'layouts/date_spot_and_user_name_search'%>
 <div class="bg-white">
-  <p class="p-10 text-center text-3xl">デートスポットをエリアで探す</p>
+  <p class="pt-10 text-center text-3xl">デートスポットをエリアで探す</p>
   <div class="flex">
-    <div class="flex flex-wrap w-3/12 p-5">
-      <% @areas.each do |area| %>
-        <%= render "areas/area", area: area %>
-      <% end %>
-    </div>
-    <div class="flex flex-wrap w-9/12 p-5">
+    <div class="flex  justify-center flex-wrap w-full p-5">
       <% @main_prefectures.each do |prefecture| %>
         <%= render "prefectures/prefecture", prefecture: prefecture %>
       <% end %>
@@ -20,11 +15,9 @@
   </div>
 </div>
 <div class="bg-white">
-  <p class="p-10 text-center text-3xl">デートスポットをジャンルで探す</p>
+  <p class="pt-10 text-center text-3xl">デートスポットをジャンルで探す</p>
   <div class="flex">
-    <div class="flex flex-wrap w-3/12 p-5">
-    </div>
-    <div class="flex flex-wrap w-9/12 p-5">
+    <div class="flex  justify-center flex-wrap w-full p-5">
       <% @main_genres.each do |genre| %>
         <%= render "genres/genre", genre: genre %>
       <% end %>
