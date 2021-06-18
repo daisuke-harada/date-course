@@ -1,8 +1,8 @@
-<div class="flex mt-5 p-5 bg-white" >
+<div class="p-2 mt-5 justify-center flex bg-white" >
   <%= search_form_for @date_spot_search_params, as: :date_spot_search  do |f| %>
-    <%= f.grouped_collection_select(:address_prefecture_id_eq, Area.all, :prefectures, :name, :id, :name, {prompt: "都道府県を選択してください"}, class:"m-2 p-2 border border-gray-400 rounded") %>
-    <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, {prompt: "ジャンルを選択してください"}, class:"m-2 p-2 border border-gray-400 rounded" %>
-    <%= f.collection_select :opening_time_lteq, BusinessTime.all, :value_time, :time, {selected: @date_spot_search_params.opening_time_lteq.to_s, prompt: "来店時間"}, class:"m-2 p-2 border border-gray-400 rounded" %>
-    <%= f.submit '検索', class: "btn btn-salmon my-2", id: "date_spot_sort_search" %>
+    <%= f.grouped_collection_select(:address_prefecture_id_eq, Area.all, :prefectures, :name, :id, :name, {prompt: "都道府県"}, class:"w-1/4 md:m-1 md:p-1 md:text-sm text-xs border border-gray-400 rounded") %>
+    <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, {prompt: "ジャンル"}, class:"w-1/4 md:m-1 md:p-1 md:text-sm text-xs border border-gray-400 rounded" %>
+    <%= f.collection_select :opening_time_lteq, BusinessTime.all, :value_time, :time, {selected: @date_spot_search_params.opening_time_lteq.to_s, prompt: "来店時間"}, class:"w-1/4 md:m-1md:p-1 md:text-sm text-xs border border-gray-400 rounded" %>
+    <%= f.submit '検索', class: "btn btn-salmon md:my-2 md:m-1", id: "date_spot_sort_search" %>
   <% end %>
 </div>

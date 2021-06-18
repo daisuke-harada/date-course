@@ -39,43 +39,43 @@ a {
 }
 
 .btn-yellow-green {
-  @apply bg-green-300 text-white;
+  @apply bg-green-300 shadow-lg text-white;
 }
 
 .btn-yellow-green:hover {
-  @apply bg-green-400 text-white;
+  @apply bg-green-400 shadow-none text-white;
 }
 
 .btn-blue {
-  @apply bg-blue-300 text-white;
+  @apply bg-blue-300 shadow-lg text-white;
 }
 
 .btn-blue:hover {
-  @apply bg-blue-400 text-white;
+  @apply bg-blue-400 shadow-none text-white;
 }
 
 .btn-salmon {
-  @apply bg-red-400 text-white;
+  @apply bg-red-400 shadow-lg text-white;
 }
 
 .btn-salmon:hover {
-  @apply bg-red-500 text-white;
+  @apply bg-red-500 shadow-none text-white;
 }
 
 .btn-pink {
-  @apply bg-pink-400 text-white;
+  @apply bg-pink-400 shadow-lg text-white;
 }
 
 .btn-pink:hover {
-  @apply bg-pink-500 text-white;
+  @apply bg-pink-500 shadow-none text-white;
 }
 
 .btn-red {
-  @apply bg-red-600 text-white;
+  @apply bg-red-600 shadow-lg text-white;
 }
 
 .btn-red:hover {
-  @apply bg-red-700 text-white;
+  @apply bg-red-700 shadow-none text-white;
 }
 
 /* user */

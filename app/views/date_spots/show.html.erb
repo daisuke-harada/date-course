@@ -1,9 +1,9 @@
-<div class="border border-black mt-10 m-20">
+<div class="border border-black bg-white mt-10 m-20">
   <h1 class="w-full m-5">
     <%= @date_spot.name %>
   </h1>
   
-  <%= render 'layouts/image', {target_image: @date_spot, width: 400, height: 400}%><br/>
+  <%= render 'layouts/image', {target_image: @date_spot, width: 600, height: 600}%><br/>
 
   <% if admin_logged_in? %>
     <div class="m-5">

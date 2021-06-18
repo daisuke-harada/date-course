@@ -1,4 +1,4 @@
-<header class="bg-white h-44 w-full fixed">
+<header class="bg-white h-44 w-full shadow-xl fixed">
   <div class="w-full border-b-2 border-gray-400 flex justify-around">
     <% if logged_in? && current_user.admin == false%>
       <div class="mt-11">
@@ -21,7 +21,7 @@
         <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-pink" %>
       </div>
     <% else %>
-      <ul class="mt-12 flex justify-center">
+      <ul class="mt-10 flex justify-center">
         <li class="mx-5"><%= link_to "新規登録", new_user_path, class:"btn btn-salmon" %></li>
         <li class="mx-5"><%= link_to "ログイン", login_path, class:"btn btn-pink" %></li>
       </ul>
