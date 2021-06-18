@@ -7,7 +7,7 @@
 <div class="bg-white">
   <p class="pt-10 text-center text-3xl">デートスポットをエリアで探す</p>
   <div class="flex">
-    <div class="flex  justify-center flex-wrap w-full p-5">
+    <div class="flex justify-center flex-wrap w-full p-5">
       <% @main_prefectures.each do |prefecture| %>
         <%= render "prefectures/prefecture", prefecture: prefecture %>
       <% end %>
@@ -17,7 +17,7 @@
 <div class="bg-white">
   <p class="pt-10 text-center text-3xl">デートスポットをジャンルで探す</p>
   <div class="flex">
-    <div class="flex  justify-center flex-wrap w-full p-5">
+    <div class="flex justify-center flex-wrap w-full p-5">
       <% @main_genres.each do |genre| %>
         <%= render "genres/genre", genre: genre %>
       <% end %>

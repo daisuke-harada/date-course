@@ -1,6 +1,6 @@
-<div class="m-5">
+<div class="mt-5">
   <% if date_spot.opening_time || date_spot.closing_time %>
-    営業時間
+  <p class="font-bold mb-2">営業時間</p>
     <%= date_spot.opening_time.strftime('%H:%M') %> <!-- strftime('%H:%M')は00:00の書式でtime型を表す-->
     ~ 
     <%= date_spot.closing_time.strftime('%H:%M') %>
