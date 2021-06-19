@@ -10,7 +10,7 @@
       <p><%= render 'date_spots/date_spot_business_hour', date_spot: date_spot %></p>
       <p class="mt-5 font-bold"> 住所</p>
       <p class="mt-2"><%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
-      <p class="mt-5"><span class="font-bold">ジャンル</span> <%= date_spot.genre.name %></p>
+      <p class="mt-5"><span class="font-bold">ジャンル</span><%= date_spot.genre.name %></p>
     </div>
   </div>
   <div class="md:flex md:justify-center text-center">

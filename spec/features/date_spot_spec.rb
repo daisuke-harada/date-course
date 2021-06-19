@@ -24,9 +24,9 @@ RSpec.feature "DateSpots", type: :feature do
     other_spot.build_address(FactoryBot.attributes_for(:other_address))
     sign_in_as admin
     click_link "デートスポットを探す"
-    click_link "このデートスポットを見る"
+    click_link "デートスポットを見る"
     date_spot_display(address.date_spot)
-    click_link "このデートスポットを編集する"
+    click_link "デートスポットを編集する"
     date_spot_information_insert(other_spot)
     expect {
       click_button "更新"
@@ -40,9 +40,9 @@ RSpec.feature "DateSpots", type: :feature do
     address = FactoryBot.create(:address)
     sign_in_as admin
     click_link "デートスポットを探す"
-    click_link "このデートスポットを見る"
+    click_link "デートスポットを見る"
     date_spot_display(address.date_spot)
-    click_link "このデートスポットを編集する"
+    click_link "デートスポットを編集する"
     expect {
       click_link "このデートスポットを削除する"
       expect(page).to have_content "デートスポットを削除しました"
@@ -127,7 +127,8 @@ end
 def date_spot_display(date_spot)
   aggregate_failures do
     expect(page).to have_content "#{date_spot.name}"
-    expect(page).to have_content "営業時間 #{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
+    expect(page).to have_content "営業時間"
+    expect(page).to have_content "#{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
     expect(page).to have_content "#{date_spot.genre.name}"
     expect(page).to have_content "#{date_spot.address.prefecture.name}"
     expect(page).to have_content "#{date_spot.address.city_name}"
