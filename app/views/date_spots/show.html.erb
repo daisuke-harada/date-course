@@ -1,36 +1,32 @@
-<div class="border border-black bg-white mt-10 m-20">
-  <h1 class="w-full m-5">
+<div class="border border-black bg-white mt-10 m-20 p-5">
+  <h1 class="w-full m-5 text-sm font-bold md:text-3xl">
     <%= @date_spot.name %>
   </h1>
-  
-  <h1 class="w-full mx-5">
-    ⭐️⭐️⭐️⭐️⭐️
-  </h1>
 
-  <%= render 'layouts/image', {target_image: @date_spot, width: 600, height: 600}%><br/>
+  <div class="w-full h-1/2">
+    <div class="m-0 md:h-96 xl:m-20 2xl:m-40">
+      <%= image_tag @date_spot.image.variant(gravity: :center) || 'no_image.jpg' , class:"object-fill max-h-96 w-full" %>
+    </div>
+    <h1 class="w-full m-5 text-sm font-bold md:text-3xl">
+      ⭐️⭐️⭐️⭐️⭐️ 口コミ36件
+    </h1>
+  </div>
 
-  <% if admin_logged_in? %>
-    <div class="m-5">
-      <%= link_to "デートスポット情報の編集", edit_date_spot_path(@date_spot), class:"btn btn-salmon" %>
-    </div>
-  <% end %>
-
-  <div class="flex">
-    <div class="w-2/6">
-      <div class="m-5"><%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %></div>
-      <%= render 'date_spot_business_hour', date_spot: @date_spot %>
-      <div class="m-5"><%= @date_spot.genre.name %></div>
-    </div>
-    <div class="w-4/6 p-5">
-      <div class="w-full h-full bg-gray-500">
-        <h1 class="text-center">地図</h1>
-      </div>
-    </div>
+  <div class="mx-5 my-10 text-sm font-bold md:text-xl">
+    <%= render 'date_spot_business_hour', date_spot: @date_spot %>
+  </div>
+  <div class="mx-5 my-10 text-sm font-bold md:text-xl">
+    <span class="font-bold">ジャンル:</span>
+    <%= @date_spot.genre.name %>
+  </div>
+  <div class="m-5 text-center text-sm font-bold md:text-xl"><%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %></div>
+  <div class="w-full h-full bg-gray-500">
+    <h1 class="text-center">地図</h1>
   </div>
 
   <div class="text-center">
       <button class="btn btn-salmon my-5">デートコースに追加する<button>
-      <%= link_to "このデートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
+      <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
   </div>
 </div>
 
