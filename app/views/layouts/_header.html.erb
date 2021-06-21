@@ -1,5 +1,5 @@
 <header class="bg-white h-44 w-full shadow-xl fixed">
-  <div class="w-full border-b-2 border-gray-400 flex justify-around">
+  <div class="w-full flex justify-around" style="border-bottom: solid 2px; border-color: #FC9267;">
     <% if logged_in? && current_user.admin == false%>
       <div class="mt-11">
         <%= link_to "デートコース作成", "#", class: "btn btn-salmon" %>
