@@ -1,45 +1,45 @@
-<header class="bg-white h-44 w-full shadow-xl fixed">
+<header class="bg-white h-32 w-full shadow-xl fixed">
   <div class="w-full flex justify-around" style="border-bottom: solid 2px; border-color: #FC9267;">
     <% if logged_in? && current_user.admin == false%>
-      <div class="mt-11">
+      <div class="mt-6">
         <%= link_to "デートコース作成", "#", class: "btn btn-salmon" %>
       </div>
-      <div class="m-6">
+      <div class="m-3">
         <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
       </div>
-      <div class="mt-11">
+      <div class="mt-6">
         <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-pink" %>
       </div>
     <% elsif admin_logged_in? %>
-      <div class="mt-11">
+      <div class="mt-6">
         <%= link_to "デートスポット作成", new_date_spot_path, class: "btn btn-salmon" %>
       </div>
-      <div class="m-6">
+      <div class="m-3">
         <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
       </div>
-      <div class="mt-11">
+      <div class="mt-6">
         <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-pink" %>
       </div>
     <% else %>
-      <ul class="mt-10 flex justify-center">
+      <ul class="mt-5 flex justify-center">
         <li class="mx-5"><%= link_to "新規登録", new_user_path, class:"btn btn-salmon" %></li>
         <li class="mx-5"><%= link_to "ログイン", login_path, class:"btn btn-pink" %></li>
       </ul>
-      <div class="m-6">
+      <div class="m-3">
         <%= link_to "DateCourse", root_url, class: "text-black text-6xl" %>
       </div>
-      <div class="mt-10">
+      <div class="mt-5">
         <%= form_with(url: login_path, scope: :session, local: true) do |f|%>
           <%= f.hidden_field :name, :value => guest_name %>
           <%= f.hidden_field :password, :value => guest_password %>
           <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-yellow-green"%>
         <% end %>
       </div>
-  <% end %>
+    <% end %>
   </div>
   <ul class="flex flex-wrap text-base justify-center">
-    <li class="m-6"><%= link_to "デートスポットを探す", date_spots_path, class: "text-black" %></li>
-    <li class="m-6"><%= link_to "デートコースを探す", '#', class: "text-black" %></li>
-    <li class="m-6"><%= link_to "ユーザーを探す", users_path, class: "text-black" %></li>
+    <li class="my-3 mx-6"><%= link_to "デートスポットを探す", date_spots_path, class: "text-black" %></li>
+    <li class="my-3 mx-6"><%= link_to "デートコースを探す", '#', class: "text-black" %></li>
+    <li class="my-3 mx-6"><%= link_to "ユーザーを探す", users_path, class: "text-black" %></li>
   </ul>
 </header>
