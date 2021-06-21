@@ -4,18 +4,19 @@
   </div>
 </div>
 <%= render 'layouts/date_spot_and_user_name_search'%>
-<div class="bg-white">
-  <p class="pt-10 text-center text-3xl">デートスポットをエリアで探す</p>
-  <div class="flex">
-    <div class="flex justify-center flex-wrap w-full p-5">
-      <% @main_prefectures.each do |prefecture| %>
-        <%= render "prefectures/prefecture", prefecture: prefecture %>
-      <% end %>
-    </div>
+<div>
+  <p class="md:text-3xl text-xl pt-10 text-center">デートスポットをエリアから探す</p>
+  <div class="flex justify-center flex-wrap w-full p-5">
+    <% @main_prefectures.each do |prefecture| %>
+      <%= render "prefectures/prefecture", prefecture: prefecture %>
+    <% end %>
+    <% @areas.each do |area| %>
+      <%= render 'areas/area', area: area %>
+    <% end %>
   </div>
 </div>
 <div class="bg-white">
-  <p class="pt-10 text-center text-3xl">デートスポットをジャンルで探す</p>
+  <p class="md:text-3xl text-xl pt-10 text-center">デートスポットをジャンルで探す</p>
   <div class="flex">
     <div class="flex justify-center flex-wrap w-full p-5">
       <% @main_genres.each do |genre| %>

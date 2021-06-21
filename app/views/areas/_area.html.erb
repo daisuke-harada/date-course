@@ -1,8 +1,8 @@
-<div class="w-6/12 h-28 border bg-white">
+<div class="md:w-3/12 m-3 w-1/3" >
   <h1 class="m-2"><%= area.name %></h1>
   <% area.prefectures.each do |prefecture| %>
     <div class="inline-block">
-      <%= link_to prefecture.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:address_prefecture_id_eq=>"#{prefecture.id}"}}, as: :date_spot_search, class: "m-2" %>
+      <%= link_to prefecture.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:address_prefecture_id_eq=>"#{prefecture.id}"}}, as: :date_spot_search, class: "m-1" %>
     </div>
   <% end %>
 </div>
