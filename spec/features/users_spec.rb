@@ -111,7 +111,7 @@ RSpec.feature "Users", type: :feature do
     user_show_display(user)
   end
 
-  scenario "ログインしてユーザーを探すページからユーザーをフォローする" do
+  scenario "ユーザーを探すページからユーザーをフォローする" do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
@@ -119,7 +119,7 @@ RSpec.feature "Users", type: :feature do
     find("#follow_action_2").click
   end
 
-  scenario "ログインしてユーザーを探すページから、ユーザーをフォローして、そのユーザーのフォローを解除する" do
+  scenario "ユーザーを探すページから、ユーザーをフォローして、そのユーザーのフォローを解除する" do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
@@ -128,7 +128,7 @@ RSpec.feature "Users", type: :feature do
     find("#follow_action_2").click # アンフォローする。
   end
 
-  scenario "ログインしてユーザーを探すページから、ユーザー詳細ページに遷移してユーザーをフォローする" do
+  scenario "ユーザーを探すページから、ユーザー詳細ページに遷移してユーザーをフォローする" do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
@@ -137,7 +137,7 @@ RSpec.feature "Users", type: :feature do
     find("#follow_action_2").click
   end
 
-  scenario "ログインしてユーザーを探すページから、ユーザーをフォローして、ユーザー詳細ページに遷移して、そのユーザーのフォローを解除する" do
+  scenario "ユーザーを探すページから、ユーザーをフォローして、ユーザー詳細ページに遷移して、そのユーザーのフォローを解除する" do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
@@ -145,6 +145,11 @@ RSpec.feature "Users", type: :feature do
     find("#follow_action_2").click # フォローする。
     find("#user_image_id_2").click
     find("#follow_action_2").click # アンフォローする。
+  end
+
+  scenario "マイページから、フォローしているユーザーの一覧を表示する。" do
+  end
+  scenario "マイページから、フォローされているユーザーの一覧を表示する。" do
   end
 end
 
