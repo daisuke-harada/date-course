@@ -51,7 +51,7 @@ a {
 }
 
 .btn-unfollow:hover {
-  @apply bg-red-700 shadow-none text-white;
+  @apply bg-red-600 shadow-none text-white;
 }
 
 .btn-salmon {
