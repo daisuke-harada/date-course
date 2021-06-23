@@ -122,6 +122,12 @@ RSpec.feature "DateSpots", type: :feature do
     click_button "date_spot_name_search"
     date_spot_display(address.date_spot)
   end
+
+  scenario "TOPページから福岡県を選択し、福岡県のデートスポット一覧画面に遷移する" do
+  end
+
+  scenario "TOPページから北海道を選択し、北海道のデートスポット一覧画面に遷移する" do
+  end
 end
 
 def date_spot_display(date_spot)

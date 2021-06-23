@@ -46,12 +46,12 @@ a {
   @apply bg-green-400 shadow-none text-white;
 }
 
-.btn-blue {
+.btn-unfollow {
   @apply bg-blue-300 shadow-lg text-white;
 }
 
-.btn-blue:hover {
-  @apply bg-blue-400 shadow-none text-white;
+.btn-unfollow:hover {
+  @apply bg-red-600 shadow-none text-white;
 }
 
 .btn-salmon {
