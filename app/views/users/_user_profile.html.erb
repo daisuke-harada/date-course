@@ -4,15 +4,22 @@
       <%= render 'layouts/image', {target_image: user, width: 250, height: 250} %>
     <% end %>
   </div>
-  <div class="m-5 text-center">
-    <span class="mx-5 font-bold"><%= user.name %></span>
-    <span class="inline-block">
-      <%= render 'relationships/follow_button', user: user %>
+  <div class="m-5 flex">
+    <span class="mx-5 font-bold">
+      <%= user.name %>
     </span>
+    <div class="ml-2">
+      <%= user.change_sex_data_string %>
+    </div>
   </div>
-  <p class="m-5"><%= user.change_sex_data_string %></p>
+  <div class="flex justify-end mb-10">
+    <%= render 'relationships/follow_button', user: user %>
+  </div>
   <p class="m-2">
     <%= render 'relationships/following_count', user: user %>
     <span class="p-2">8フォロワー</span>
   </p>
 </div>
+
+
+
