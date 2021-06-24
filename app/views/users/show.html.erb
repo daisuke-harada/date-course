@@ -11,7 +11,7 @@
     </div>
     <span class="p-3"><%= @user.change_sex_data_string %></span>
     <p class="m-2 w- border-b-2 border-black">
-      <span class="p-2">6フォロー</span>
+      <%= render 'relationships/following_count', user: @user %>
       <span class="p-2">8フォロワー</span>
     </p>
     <div class="my-10">

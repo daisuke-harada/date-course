@@ -1,7 +1,9 @@
-<div class="border border-black bg-white m-5 p-5">
-  <%= link_to user_path(user), id:"user_image_id_#{user.id}" do %>
-    <%= render 'layouts/image', {target_image: user, width: 250, height: 250} %>
-  <% end %>
+<div class="border border-black bg-white m-5 p-5 w-72">
+  <div class="m-5">
+    <%= link_to user_path(user), id:"user_image_id_#{user.id}" do %>
+      <%= render 'layouts/image', {target_image: user, width: 250, height: 250} %>
+    <% end %>
+  </div>
   <div class="m-5 text-center">
     <span class="mx-5 font-bold"><%= user.name %></span>
     <span class="inline-block">
@@ -9,6 +11,8 @@
     </span>
   </div>
   <p class="m-5"><%= user.change_sex_data_string %></p>
-  <p class="m-2 border-b-2 border-black">
+  <p class="m-2">
+    <%= render 'relationships/following_count', user: user %>
+    <span class="p-2">8フォロワー</span>
   </p>
 </div>
