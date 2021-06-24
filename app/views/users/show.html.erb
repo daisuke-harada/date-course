@@ -2,16 +2,18 @@
   <div class="border border-black p-5 w-3/12 bg-white inline-block">
     <%= render 'layouts/image', {target_image: @user, width: 250, height: 250} %>
     <div class="m-5 text-center">
-      <span class="mx-5 font-bold">
+      <span class="mx-5 text-3xl font-bold">
         <%= @user.name %>
       </span>
-      <span class="inline-block">
-        <%= render 'relationships/follow_button', user: @user %>
-      </span>
     </div>
-    <span class="p-3"><%= @user.change_sex_data_string %></span>
+    <div class="flex justify-center mb-10">
+      <div class="text-3xl mr-10">
+        <%= @user.change_sex_data_string %>
+      </div>
+      <%= render 'relationships/follow_button', user: @user %>
+    </div>
     <p class="m-2 w- border-b-2 border-black">
-      <span class="p-2">6フォロー</span>
+      <%= render 'relationships/following_count', user: @user %>
       <span class="p-2">8フォロワー</span>
     </p>
     <div class="my-10">
