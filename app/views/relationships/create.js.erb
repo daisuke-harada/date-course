@@ -1,1 +1,11 @@
+// フォローボタン
 document.getElementById('follow_action_<%= @user.id %>').innerHTML = "<%= j(render('relationships/unfollow', user: @user)) %>";
+
+// フォローしているユーザーの数を非同期で変更
+// ユーザー一覧ページの時のみしかフォロー数の変化は必要ないので、current_user.idのフォロー数があるページのに、作用するようにする。
+if(document.getElementById('followings_count_user_id_<%= current_user.id %>')){
+  document.getElementById('followings_count_user_id_<%= current_user.id %>').innerHTML = "<%= j(render('relationships/following_count', user: current_user)) %>";
+}
+
+// フォローされているユーザーの数を非同期で変更
+document.getElementById('followers_count_user_id_<%= @user.id %>').innerHTML = "<%= j(render('relationships/followers_count', user: @user)) %>";
