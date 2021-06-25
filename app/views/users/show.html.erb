@@ -14,7 +14,9 @@
     </div>
     <p class="m-2 w- border-b-2 border-black">
       <%= render 'relationships/following_count', user: @user %>
-      <span class="p-2">8フォロワー</span>
+      <span id ="followers_count_user_id_<%= @user.id %>" >
+        <%= render 'relationships/followers_count', user: @user %>
+      </span>
     </p>
     <div class="my-10">
       <p class="my-10 w-full text-center"><%= link_to "アカウント情報を編集する", edit_user_path(@user), class: "btn btn-salmon" if @user == current_user && @user.name != guest_name %></p>

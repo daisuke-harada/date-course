@@ -16,8 +16,12 @@
     <%= render 'relationships/follow_button', user: user %>
   </div>
   <p class="m-2">
-    <%= render 'relationships/following_count', user: user %>
-    <span class="p-2">8フォロワー</span>
+    <span id ="followings_count_user_id_<%= user.id %>" class="m-2" >
+      <%= render 'relationships/following_count', user: user %>
+    </span>
+    <span id ="followers_count_user_id_<%= user.id %>" class="m-2" >
+      <%= render 'relationships/followers_count', user: user %>
+    </span>
   </p>
 </div>
 
