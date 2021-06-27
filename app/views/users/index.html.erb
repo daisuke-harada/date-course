@@ -4,20 +4,6 @@
     <%= render "layouts/user_name_search" %>
   </div>
   <div class="md:w-9/12 bg-white w-full">
-    <div class="m-5">
-      <h1 class="text-3xl pb-5">ユーザー一覧</h1>
-    </div>
-    <% if @users == []%>
-      <div class="text-red-900">
-        ⚠︎検索結果はありませんでした。
-      </div>
-    <% else %>
-      <div class="flex flex-wrap">
-        <!-- 非同期機能実装 -->
-        <% @users.each do |user| %>
-          <%= render "users/user_profile", user: user %>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render "users/users", { users: @users, title: "すべてのユーザー" }%>
   </div>
 </div>

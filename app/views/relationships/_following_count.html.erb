@@ -1,1 +1,1 @@
-<span><%= user.followings.count %>フォロー</span>
+<%= link_to "#{user.followings.count}フォロー", user_followings_path(user.id), class:"text-black" %>
