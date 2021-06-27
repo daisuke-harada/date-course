@@ -11,13 +11,6 @@ class RelationshipsController < ApplicationController
     following.destroy
   end
 
-  def following_user
-  end
-
-  def followers
-    
-  end
-
   private
   def set_user
     @user = User.find(params[:relationship][:follow_id])
