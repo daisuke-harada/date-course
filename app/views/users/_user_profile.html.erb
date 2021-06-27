@@ -7,12 +7,8 @@
   <div class="m-5 flex">
     <span class="mx-5 font-bold">
       <%= user.name %>
-    </span>
-    <div class="ml-2">
       <%= user.change_sex_data_string %>
-    </div>
-  </div>
-  <div class="flex justify-end mb-10">
+    </span>
     <%= render 'relationships/follow_button', user: user %>
   </div>
   <p class="m-2">

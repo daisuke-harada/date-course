@@ -1,0 +1,15 @@
+<div class="m-5">
+  <h1 class="text-3xl pb-5"><%= title %></h1>
+</div>
+<% if users == []%>
+  <div class="text-red-900">
+    ⚠︎検索結果はありませんでした。
+  </div>
+<% else %>
+  <div class="flex flex-wrap">
+    <!-- 非同期機能実装 -->
+    <% users.each do |user| %>
+      <%= render "users/user_profile", user: user %>
+    <% end %>
+  </div>
+<% end %>
