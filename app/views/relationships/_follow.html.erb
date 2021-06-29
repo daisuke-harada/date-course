@@ -1,4 +1,4 @@
 <%= form_with(model: current_user.relationships.build) do |f| %>
   <%= f.hidden_field :follow_id, :value => user.id %>
-  <%= f.submit 'フォロー', class: "btn btn-yellow-green", id:"follow_id_#{user.id}" %>
+  <%= f.submit 'フォロー', class: "btn btn-yellow-green text-sm", id:"follow_id_#{user.id}" %>
 <% end %>

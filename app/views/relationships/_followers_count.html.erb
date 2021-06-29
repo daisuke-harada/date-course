@@ -1,1 +1,1 @@
-<span><%= user.followers.count %>フォロワー</span>
+<%= link_to "#{user.followers.count}フォロワー", user_followers_path(user.id), class:"text-black"%>

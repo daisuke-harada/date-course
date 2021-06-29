@@ -12,9 +12,11 @@
     <div class="m-5 flex justify-end">
       <%= render 'relationships/follow_button', user: @user %>
     </div>
-    <p class="m-2 w- border-b-2 border-black">
-      <%= render 'relationships/following_count', user: @user %>
-      <span id ="followers_count_user_id_<%= @user.id %>" >
+    <p class="m-2 p-2 border-b-2 border-black text-center">
+      <span id ="followings_count_user_id_<%= @user.id %>" class="mr-2">
+        <%= render 'relationships/following_count', user: @user %>
+      </span>
+      <span id ="followers_count_user_id_<%= @user.id %>" class="ml-2">
         <%= render 'relationships/followers_count', user: @user %>
       </span>
     </p>

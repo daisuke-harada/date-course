@@ -145,6 +145,7 @@ RSpec.feature "Users", type: :feature do
     find("#follow_action_#{other_user.id}").click # フォローする。
     click_link("user_image_id_#{other_user.id}")
     find("#follow_action_#{other_user.id}").click # アンフォローする。
+
   end
 
   scenario "マイページから、フォローしているユーザーの一覧を表示する。" do
@@ -153,8 +154,9 @@ RSpec.feature "Users", type: :feature do
     sign_in_as user
     click_link "ユーザーを探す"
     find("#follow_action_#{other_user.id}").click # フォローする。
-    click_link "マイページ"
-    user_show_display(user)
+    click_link 'マイページ'
+    click_link("followings_count_user_id_#{user.id}")
+    expect(page).to have_content "すべてのフォローしているユーザー"
   end
   scenario "マイページから、フォローされているユーザーの一覧を表示する。" do
   end
