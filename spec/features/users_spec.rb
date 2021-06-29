@@ -115,7 +115,7 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
-    visit users_path
+    click_link "ユーザーを探す"
     find("#follow_action_2").click
   end
 
@@ -123,7 +123,7 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
-    visit users_path
+    click_link "ユーザーを探す"
     find("#follow_action_2").click # フォローする。
     find("#follow_action_2").click # アンフォローする。
   end
@@ -132,7 +132,7 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
-    visit users_path
+    click_link "ユーザーを探す"
     find("#user_image_id_2").click
     find("#follow_action_2").click
   end
@@ -141,13 +141,20 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
-    visit users_path
-    find("#follow_action_2").click # フォローする。
-    find("#user_image_id_2").click
-    find("#follow_action_2").click # アンフォローする。
+    click_link "ユーザーを探す"
+    find("#follow_action_#{other_user.id}").click # フォローする。
+    click_link("user_image_id_#{other_user.id}")
+    find("#follow_action_#{other_user.id}").click # アンフォローする。
   end
 
   scenario "マイページから、フォローしているユーザーの一覧を表示する。" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    click_link "ユーザーを探す"
+    find("#follow_action_#{other_user.id}").click # フォローする。
+    click_link "マイページ"
+    user_show_display(user)
   end
   scenario "マイページから、フォローされているユーザーの一覧を表示する。" do
   end
