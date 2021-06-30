@@ -148,17 +148,28 @@ RSpec.feature "Users", type: :feature do
 
   end
 
-  scenario "マイページから、フォローしているユーザーの一覧を表示する。" do
+  scenario "マイページから、フォローしているユーザーの一覧を表示する。", js: true do
     user = FactoryBot.create(:user)
     other_user = FactoryBot.create(:other_user)
     sign_in_as user
     click_link "ユーザーを探す"
-    find("#follow_action_#{other_user.id}").click # フォローする。
+    click_button "follow_id_#{other_user.id}"  # フォローする。
     click_link 'マイページ'
-    click_link("followings_count_user_id_#{user.id}")
-    expect(page).to have_content "すべてのフォローしているユーザー"
+    click_link("followings_link_#{user.id}")
+    expect(reload).to have_content "すべてのフォローしているユーザー"
+    user_show_display(other_user)
   end
   scenario "マイページから、フォローされているユーザーの一覧を表示する。" do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    click_link "ユーザーを探す"
+    find("#follow_id_#{other_user.id}").click # フォローする。
+    click_link "ログアウト"
+    sign_in_as other_user
+    click_link("followers_link_#{other_user.id}")
+    expect(page).to have_content "すべてのフォロワー"
+    user_show_display(user)
   end
 end
 
