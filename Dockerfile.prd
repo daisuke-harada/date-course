@@ -1,27 +1,39 @@
-FROM ruby:2.7.2 
+FROM ruby:2.7.2
+
+ENV RAILS_ENV=production
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update -qq \
+    && apt-get update -qq && apt-get install -y build-essential libpq-dev sudo vim \
+    && apt-get update && apt-get install -y curl apt-transport-https wget \
     && apt-get install -y nodejs yarn --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-    && apt-get update && apt-get install -y yarn && apt-get install imagemagick \ 
-    && mkdir /date_course
+    && apt-get install -y yarn && apt-get install imagemagick
+
+RUN mkdir /date_course
 
 WORKDIR /date_course
-
+RUN mkdir -p tmp/pids
+RUN mkdir -p tmp/sockets
 COPY Gemfile /date_course/Gemfile
 COPY Gemfile.lock /date_course/Gemfile.lock
+COPY yarn.lock /app
+COPY package.json /app
 
 RUN gem install bundler
 RUN bundle install
+RUN yarn install
 
 COPY . /date_course
 
-COPY entrypoint.sh /usr/bin/
+RUN NODE_ENV=production ./bin/webpack
 
+COPY entrypoint_production.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
+ENTRYPOINT ["entrypoint_production.sh"]
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+# 以下の記述があることでnginxから見ることができる
+VOLUME /app/public
+VOLUME /app/tmp
+
+CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
