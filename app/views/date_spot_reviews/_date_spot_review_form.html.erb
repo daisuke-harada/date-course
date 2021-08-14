@@ -7,8 +7,7 @@
       <div class="m-5">
         <%= user.name %>
       </div>
-      <div class="m-5">
-        ⭐️⭐️⭐️⭐️⭐️
+      <div class="m-5 flex" id="rate">
       </div>
       <div class="m-5">
         <%= f.label :content, "コメント"%><br/>
@@ -23,3 +22,29 @@
     <%= render 'layouts/image', { target_image: user, width: 250, height: 250 }%>
   </div>
 </div>
+
+<script>
+  let rate = document.getElementById("rate");
+  for(let idNumber = 1; idNumber <=5; idNumber++){
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", "<%= asset_url('star-off.png') %>");
+    imgElement.setAttribute("id", `star-${idNumber}`);
+    imgElement.setAttribute("alt", "レビューによる評価用の星");
+    rate.appendChild(imgElement);
+    let star = document.getElementById(`star-${idNumber}`);
+    star.addEventListener("mouseover", function(){
+      star.setAttribute("src", "<%= asset_url('star-on.png') %>");
+      rate_management(idNumber, "<%= asset_url('star-on.png') %>");
+    });
+    star.addEventListener("mouseout", function(){
+      star.setAttribute("src", "<%= asset_url('star-off.png') %>");
+      rate_management(idNumber, "<%= asset_url('star-off.png') %>");
+    });
+  };
+
+  let rate_management = function(idNumber, targetImage){
+    for(let j = 1; j <= 4; j++){
+      document.getElementById(`star-${idNumber - j}`).setAttribute("src", targetImage);
+    }
+  }
+</script>
