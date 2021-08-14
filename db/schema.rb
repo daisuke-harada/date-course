@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_114737) do
   end
 
   create_table "date_spot_reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "rate"
+    t.float "rate"
     t.text "content"
     t.bigint "user_id"
     t.bigint "date_spot_id"
