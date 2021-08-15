@@ -4,14 +4,23 @@
       <%= render 'shared/error_messages', target: date_spot_review %>
       <%= f.hidden_field :date_spot_id, :value => date_spot_review.date_spot_id %>
       <%= f.hidden_field :user_id, :value => date_spot_review.user_id %>
+
       <div class="m-5">
         <%= user.name %>
       </div>
-      <div class="m-5">
-        ⭐️⭐️⭐️⭐️⭐️
+
+      <div class="m-5 flex" id="rate">
+        <img src ="<%= asset_url('star-off.png') %>" id ="star-1">
+        <img src ="<%= asset_url('star-off.png') %>" id ="star-2">
+        <img src ="<%= asset_url('star-off.png') %>" id ="star-3">
+        <img src ="<%= asset_url('star-off.png') %>" id ="star-4">
+        <img src ="<%= asset_url('star-off.png') %>" id ="star-5">
+        <%= f.label :rate, "評価", class: "mx-4" %>
+        <%= f.number_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
       </div>
+
       <div class="m-5">
-        <%= f.label :content, "コメント"%><br/>
+        <%= f.label :content, "コメント" %><br/>
         <%= f.text_area :content, size: "30x5", class:"border border-black" %>
         <span class="text-center">
           <%= f.submit btn_name, class: "btn btn-salmon my-5" %>
@@ -23,3 +32,110 @@
     <%= render 'layouts/image', { target_image: user, width: 250, height: 250 }%>
   </div>
 </div>
+
+<script>
+　
+  // 星にカーソルを合わせた場合の挙動の関数
+  let starMouseover = function(star, idNumber){
+    star.addEventListener("mouseover", function(){
+      rate_management(idNumber, "<%= asset_url('star-on.png') %>");
+      rateNumber.value = idNumber
+    }, false);
+  };
+
+　// 星からカーソルを外した場合の挙動の関数
+  let starMouseout = function(star, idNumber){
+    star.addEventListener("mouseout", function(){
+      rate_management(idNumber, "<%= asset_url('star-off.png') %>");
+      starOffCount();
+    }, false);
+  };
+
+  // 星をクリックした場合の挙動を行う関数
+  let starClick = function(star, idNumber){
+    star.addEventListener("click", function(){
+      rate_management_clicked(idNumber, "<%= asset_url('star-on.png') %>");
+      rateNumber.value = idNumber
+    }, false);
+  };
+
+  // カーソルを合わせた星より前の星も変化するようにする関数。
+  let rate_management = function(idNumber, targetImage){
+    for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
+
+      if(!document.getElementById(`star-${idNumber - subtractNumber}`)){
+        continue;
+      };
+
+      document.getElementById(`star-${idNumber - subtractNumber}`).setAttribute("src", targetImage);
+    };
+  };
+
+　// クリックした星より前の星も変化するようにする関数。
+  let rate_management_clicked = function(idNumber, targetImage){
+    for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
+
+      if(!document.getElementById(`star-${idNumber - subtractNumber}`)){
+        continue;
+      };
+
+      let starClicked = document.getElementById(`star-${idNumber - subtractNumber}`);
+      starClicked.setAttribute("id", `star-clicked-${idNumber - subtractNumber}`);
+      starClicked.setAttribute("src", targetImage);
+    };
+  };
+
+  // 色が変わっていない星の数を数えて評価値から引く関数。
+  let starOffCount = function(){
+    let number = 0;
+
+    for(let i = 1; i <= 5; i++){
+
+      if(!document.getElementById(`star-${i}`)){
+        continue;
+      }
+
+      if(target.getAttribute("src") == "<%= asset_url('star-off.png') %>"){
+        number +=　1;
+      };
+
+    };
+
+    rateNumber.value -= number;
+  };
+
+  // 星による評価の数値
+  let rateNumber = document.getElementById("rate-number");
+  rateNumber.value = 0;
+
+  // mouseが星の上にカーソルが乗っているとき
+  for(let i = 1; i <= 5; i++){
+
+    if(!document.getElementById(`star-${i}`)){
+      continue;
+    }
+
+    starMouseover(document.getElementById(`star-${i}`), i);
+  }
+
+  // 星をクリックしたとき
+  for(let i = 1; i <= 5; i++){
+
+    if(!document.getElementById(`star-${i}`)){
+      continue;
+    }
+
+    starClick(document.getElementById(`star-${i}`), i);
+  }
+
+  // mouseが星の上からカーソルを外したとき
+  for(let i = 1; i <= 5; i++){
+
+    if(!document.getElementById(`star-${i}`)){
+      continue;
+    }
+
+    starMouseout(document.getElementById(`star-${i}`), i);
+  }
+
+</script>
