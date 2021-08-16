@@ -39,7 +39,7 @@
   let starMouseover = function(star, idNumber){
     star.addEventListener("mouseover", function(){
       rate_management(idNumber, "<%= asset_url('star-on.png') %>");
-      rateNumber.value = idNumber
+      rateNumber.value = starOnCount();
     }, false);
   };
 
@@ -47,7 +47,7 @@
   let starMouseout = function(star, idNumber){
     star.addEventListener("mouseout", function(){
       rate_management(idNumber, "<%= asset_url('star-off.png') %>");
-      starOffCount();
+      rateNumber.value = starOnCount();
     }, false);
   };
 
@@ -55,11 +55,11 @@
   let starClick = function(star, idNumber){
     star.addEventListener("click", function(){
       rate_management_clicked(idNumber, "<%= asset_url('star-on.png') %>");
-      rateNumber.value = idNumber
+      rateNumber.value = starOnCount();
     }, false);
   };
 
-  // カーソルを合わせた星より前の星も変化するようにする関数。
+  // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も変化させる関数。
   let rate_management = function(idNumber, targetImage){
     for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
 
@@ -85,28 +85,23 @@
     };
   };
 
-  // 色が変わっていない星の数を数えて評価値から引く関数。
-  let starOffCount = function(){
-    let number = 0;
+  // src属性が"<%= asset_url('star-off.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
+  let starOnCount = function(){
+    let images = document.getElementById("rate").childNodes;
+    let count = 0;
 
-    for(let i = 1; i <= 5; i++){
-
-      if(!document.getElementById(`star-${i}`)){
-        continue;
-      }
-
-      if(target.getAttribute("src") == "<%= asset_url('star-off.png') %>"){
-        number +=　1;
+    for (let i = 1; i <= 9; i += 2){
+      if(images[i].getAttribute("src") == "<%= asset_url('star-on.png') %>"){
+        count += 1;
       };
-
     };
 
-    rateNumber.value -= number;
+    return count;
   };
 
   // 星による評価の数値
   let rateNumber = document.getElementById("rate-number");
-  rateNumber.value = 0;
+  rateNumber.value = starCount();
 
   // mouseが星の上にカーソルが乗っているとき
   for(let i = 1; i <= 5; i++){
@@ -114,27 +109,14 @@
     if(!document.getElementById(`star-${i}`)){
       continue;
     }
-
+    
+    // mouseが星の上にカーソルが乗っているとき
     starMouseover(document.getElementById(`star-${i}`), i);
-  }
 
-  // 星をクリックしたとき
-  for(let i = 1; i <= 5; i++){
-
-    if(!document.getElementById(`star-${i}`)){
-      continue;
-    }
-
+    // mouseが星をクリックしたとき
     starClick(document.getElementById(`star-${i}`), i);
-  }
 
-  // mouseが星の上からカーソルを外したとき
-  for(let i = 1; i <= 5; i++){
-
-    if(!document.getElementById(`star-${i}`)){
-      continue;
-    }
-
+    // mouseが星の上から離れたとき
     starMouseout(document.getElementById(`star-${i}`), i);
   }
 
