@@ -54,12 +54,39 @@
   // 星をクリックした場合の挙動を行う関数
   let starClick = function(star, idNumber){
     star.addEventListener("click", function(){
-      rate_management_clicked(idNumber, "<%= asset_url('star-on.png') %>");
-      rateNumber.value = starOnCount();
+      // rate_management_clicked(idNumber, "<%= asset_url('star-on.png') %>");
+      // rateNumber.value == starOnCount();
+      star_clicked_when_of_branch(star, idNumber);
     }, false);
   };
 
-  // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も変化させる関数。
+  let star_clicked_when_of_branch = function(star, idNumber){
+    if(star.getAttribute("id") == `star-${idNumber}`){
+      // クリックした際に評価され、星に色がつく
+      rate_management_clicked(idNumber, "<%= asset_url('star-on.png') %>");
+      rateNumber.value = starOnCount();
+    }else if(star.getAttribute("id") == `star-clicked-${idNumber}`){
+      // 星の評価を解除する。
+      starOffAll();
+      rateNumber.value = starOnCount();
+    };
+  };
+
+  // 評価されている星すべての評価を解除する関数。
+  let starOffAll = function(){
+    let images = document.getElementById("rate").childNodes;
+    for (let i= 1, idNumber = 1; i <= 9; i += 2, idNumber++){
+
+      if(images[i].getAttribute("src") == "<%= asset_url('star-off.png') %>"){
+        continue;
+      };
+
+      images[i].setAttribute("id", `star-${idNumber}`);
+      images[i].setAttribute("src", "<%= asset_url('star-off.png') %>");
+    };
+  };
+
+  // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
   let rate_management = function(idNumber, targetImage){
     for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
 
@@ -101,7 +128,7 @@
 
   // 星による評価の数値
   let rateNumber = document.getElementById("rate-number");
-  rateNumber.value = starCount();
+  rateNumber.value = starOnCount();
 
   // mouseが星の上にカーソルが乗っているとき
   for(let i = 1; i <= 5; i++){
