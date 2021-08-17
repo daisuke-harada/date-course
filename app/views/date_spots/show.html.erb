@@ -15,7 +15,7 @@
       <img src ="<%= asset_url('star-off.png') %>" id ="star-average-4" class ="w-14 h-14">
       <img src ="<%= asset_url('star-off.png') %>" id ="star-average-5" class ="w-14 h-14">
       <div class="mx-4 font-bold mt-3 md:text-3xl">評価</div>
-      <div class="font-bold mt-3 md:text-3xl" id = "date_spot_reviews_rate_average_number">
+      <div class="font-bold mt-3 md:text-3xl" id = "rate_average_number">
         <%= @date_spot_reviews_rate_average %>
       </div>
     </div>
@@ -55,9 +55,35 @@
 
   (function(){
     let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
-    let date_spot_reviews_rate_average_number = Number(document.getElementById("date_spot_reviews_rate_average_number").innerText);
-    for (let i= 1; i <= date_spot_reviews_rate_average_number; i++){
-      document.getElementById(`star-average-${i}`).setAttribute("src", "<%= asset_url('star-on.png') %>");
+    let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
+
+    // 小数点第二以下を切り捨てる。
+    rate_average_number = Math.floor(rate_average_number * 10) / 10;
+
+    // viewに小数点第二以下を切り捨てた数字を反映する。
+    document.getElementById("rate_average_number").innerText = rate_average_number;
+
+    // 小数
+    let rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
+
+    // 整数
+    let rate_integral_value = Math.trunc(rate_average_number);
+    
+    // 整数値部分の評価を画像に反映
+    for (let i= 1; i <= rate_integral_value; i++){
+      let image = document.getElementById(`star-average-${i}`);
+      image.setAttribute("src", "<%= asset_url('star-on.png') %>");
     };
+
+　　 // 小数点部分の評価を画像に反映させる。反映
+    if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
+      let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+      image.setAttribute("src", "<%= asset_url('star-half.png') %>");
+    }else if(rate_decimal_value >= 0.6){
+      let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+      image.setAttribute("src", "<%= asset_url('star-on.png') %>");
+    };
+
   }());
+  
 </script>
