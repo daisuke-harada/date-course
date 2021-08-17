@@ -9,11 +9,11 @@
     </div>
 
     <div class="w-full flex m-5" id = "date_spot_reviews_rate_average" >
-      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-1" class ="w-14 h-14">
-      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-2" class ="w-14 h-14">
-      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-3" class ="w-14 h-14">
-      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-4" class ="w-14 h-14">
-      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-5" class ="w-14 h-14">
+      <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-1" class ="w-14 h-14">
+      <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-2" class ="w-14 h-14">
+      <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-3" class ="w-14 h-14">
+      <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4" class ="w-14 h-14">
+      <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5" class ="w-14 h-14">
       <div class="mx-4 font-bold mt-3 md:text-3xl">評価</div>
       <div class="font-bold mt-3 md:text-3xl" id = "rate_average_number">
         <%= @date_spot_reviews_rate_average %>
@@ -72,16 +72,16 @@
     // 整数値部分の評価を画像に反映
     for (let i= 1; i <= rate_integral_value; i++){
       let image = document.getElementById(`star-average-${i}`);
-      image.setAttribute("src", "<%= asset_url('star-on.png') %>");
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
 　　 // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
       let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
-      image.setAttribute("src", "<%= asset_url('star-half.png') %>");
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
     }else if(rate_decimal_value >= 0.6){
       let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
-      image.setAttribute("src", "<%= asset_url('star-on.png') %>");
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
   }());

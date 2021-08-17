@@ -7,11 +7,11 @@
         </div>
 
         <div class="m-5 flex" id = "rate-#{<%= date_spot_review.id%>}">
-          <img src ="<%= asset_url('star-off.png') %>" id ="star-1">
-          <img src ="<%= asset_url('star-off.png') %>" id ="star-2">
-          <img src ="<%= asset_url('star-off.png') %>" id ="star-3">
-          <img src ="<%= asset_url('star-off.png') %>" id ="star-4">
-          <img src ="<%= asset_url('star-off.png') %>" id ="star-5">
+          <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-1">
+          <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-2">
+          <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-3">
+          <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-4">
+          <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-5">
           <label class="mx-4" for="date_spot_review_rate">評価</label>
           <div id ="rateNumber-#{<%= date_spot_review.id%>}">
             <%= date_spot_review.rate %>
@@ -46,7 +46,7 @@
     let starNumber = Number(document.getElementById("rateNumber-#{<%= date_spot_review.id%>}").innerText);
     let changeCount = (starNumber * 2) - 1;
     for (let i= 1; i <= changeCount; i += 2){
-      images[i].setAttribute("src", "<%= asset_url('star-on.png') %>");
+      images[i].setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
   }());
 
