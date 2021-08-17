@@ -7,9 +7,18 @@
     <div class="m-0 md:h-96 xl:m-20 2xl:m-40">
       <%= image_tag @date_spot.image.variant(gravity: :center) || 'no_image.jpg' , class:"object-fill max-h-96 w-full" %>
     </div>
-    <h1 class="w-full m-5 text-sm font-bold md:text-3xl">
-      ⭐️⭐️⭐️⭐️⭐️ 口コミ36件
-    </h1>
+
+    <div class="w-full flex m-5" id = "date_spot_reviews_rate_average" >
+      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-1" class ="w-14 h-14">
+      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-2" class ="w-14 h-14">
+      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-3" class ="w-14 h-14">
+      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-4" class ="w-14 h-14">
+      <img src ="<%= asset_url('star-off.png') %>" id ="star-average-5" class ="w-14 h-14">
+      <div class="mx-4 font-bold mt-3 md:text-3xl">評価</div>
+      <div class="font-bold mt-3 md:text-3xl" id = "date_spot_reviews_rate_average_number">
+        <%= @date_spot_reviews_rate_average %>
+      </div>
+    </div>
   </div>
 
   <div class="mx-5 my-10 text-sm font-bold md:text-xl">
@@ -32,11 +41,23 @@
 
 <div class="border border-black mt-10 m-20">
   <div class="m-5">
-    <%= link_to "レビューする", new_date_spot_date_spot_review_path(@date_spot), class: "btn btn-salmon" %>
+    <%= link_to "レビューする", new_date_spot_date_spot_review_path(@date_spot), class: "btn btn-salmon" unless @current_user_date_spot_review %>
   </div>
 
   <!-- 非同期機能実装 -->
-  <% @date_spot.date_spot_reviews.each do |date_spot_review| %>
-    <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.user }%>
+  <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: @current_user_date_spot_review, target_image: @current_user_date_spot_review.user } if @current_user_date_spot_review %>
+  <% @reviews.each do |date_spot_review| %>
+    <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.user } %>
   <% end %>
 </div>
+
+<script>
+
+  (function(){
+    let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
+    let date_spot_reviews_rate_average_number = Number(document.getElementById("date_spot_reviews_rate_average_number").innerText);
+    for (let i= 1; i <= date_spot_reviews_rate_average_number; i++){
+      document.getElementById(`star-average-${i}`).setAttribute("src", "<%= asset_url('star-on.png') %>");
+    };
+  }());
+</script>
