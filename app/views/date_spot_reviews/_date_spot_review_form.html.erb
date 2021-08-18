@@ -10,11 +10,16 @@
       </div>
 
       <div class="m-5 flex" id="rate">
-        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-1">
-        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-2">
-        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-3">
-        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-4">
-        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-0.5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-1">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-1.5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-2">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-2.5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-3">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-3.5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-4">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-4.5">
+        <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-5">
         <%= f.label :rate, "評価", class: "mx-4" %>
         <%= f.number_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
       </div>
@@ -38,7 +43,7 @@
   // 星にカーソルを合わせた場合の挙動の関数
   let starMouseover = function(star, idNumber){
     star.addEventListener("mouseover", function(){
-      rate_management(idNumber, "<%= asset_url('date_spot_review_images/star-on.png') %>");
+      rate_management(idNumber, "starOn");
       rateNumber.value = starOnCount();
     }, false);
   };
@@ -46,7 +51,7 @@
 　// 星からカーソルを外した場合の挙動の関数
   let starMouseout = function(star, idNumber){
     star.addEventListener("mouseout", function(){
-      rate_management(idNumber, "<%= asset_url('date_spot_review_images/star-off.png') %>");
+      rate_management(idNumber, "starOff");
       rateNumber.value = starOnCount();
     }, false);
   };
@@ -87,14 +92,26 @@
   };
 
   // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
-  let rate_management = function(idNumber, targetImage){
-    for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
+  let rate_management = function(idNumber, starCondition){
+    for(let subtractNumber = 0.5; subtractNumber <= idNumber; subtractNumber += 0.5){
 
-      if(!document.getElementById(`star-${idNumber - subtractNumber}`)){
+      if(!document.getElementById(`star-${subtractNumber}`)){
         continue;
       };
-
-      document.getElementById(`star-${idNumber - subtractNumber}`).setAttribute("src", targetImage);
+      
+      if(starCondition == "starOn"){
+        if(!Number.isInteger(subtractNumber)){
+          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-left.png') %>")
+        }else if(Number.isInteger(subtractNumber)){
+          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-right.png') %>")
+        };
+      } else if(starCondition == "starOff"){
+        if(!Number.isInteger(subtractNumber)){
+          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-left.png') %>")
+        }else if(Number.isInteger(subtractNumber)){
+          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-right.png') %>")
+        };
+      };
     };
   };
 
@@ -131,7 +148,7 @@
   rateNumber.value = starOnCount();
 
   // mouseが星の上にカーソルが乗っているとき
-  for(let i = 1; i <= 5; i++){
+  for(let i = 0.5; i <= 5; i+= 0.5){
 
     if(!document.getElementById(`star-${i}`)){
       continue;
