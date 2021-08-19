@@ -39,130 +39,145 @@
 </div>
 
 <script>
-　
-  // 星にカーソルを合わせた場合の挙動の関数
-  let starMouseover = function(star, idNumber){
-    star.addEventListener("mouseover", function(){
-      rate_management(idNumber, "starOn");
-      rateNumber.value = starOnCount();
-    }, false);
-  };
+  (function(){
 
-　// 星からカーソルを外した場合の挙動の関数
-  let starMouseout = function(star, idNumber){
-    star.addEventListener("mouseout", function(){
-      rate_management(idNumber, "starOff");
-      rateNumber.value = starOnCount();
-    }, false);
-  };
-
-  // 星をクリックした場合の挙動を行う関数
-  let starClick = function(star, idNumber){
-    star.addEventListener("click", function(){
-      // rate_management_clicked(idNumber, "<%= asset_url('date_spot_review_images/star-on.png') %>");
-      // rateNumber.value == starOnCount();
-      star_clicked_when_of_branch(star, idNumber);
-    }, false);
-  };
-
-  let star_clicked_when_of_branch = function(star, idNumber){
-    if(star.getAttribute("id") == `star-${idNumber}`){
-      // クリックした際に評価され、星に色がつく
-      rate_management_clicked(idNumber, "<%= asset_url('date_spot_review_images/star-on.png') %>");
-      rateNumber.value = starOnCount();
-    }else if(star.getAttribute("id") == `star-clicked-${idNumber}`){
-      // 星の評価を解除する。
-      starOffAll();
-      rateNumber.value = starOnCount();
+    // 星にカーソルを合わせた場合の挙動の関数
+    let starMouseover = function(element, idNumber){
+      element.addEventListener("mouseover", function(){
+        rate_management(idNumber, "starOn");
+        rateNumber.value = starOnCount();
+      }, false);
     };
-  };
 
-  // 評価されている星すべての評価を解除する関数。
-  let starOffAll = function(){
-    let images = document.getElementById("rate").childNodes;
-    for (let i= 1, idNumber = 1; i <= 9; i += 2, idNumber++){
-
-      if(images[i].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
-        continue;
-      };
-
-      images[i].setAttribute("id", `star-${idNumber}`);
-      images[i].setAttribute("src", "<%= asset_url('date_spot_review_images/star-off.png') %>");
+  　// 星からカーソルを外した場合の挙動の関数
+    let starMouseout = function(element, idNumber){
+      element.addEventListener("mouseout", function(){
+        rate_management(idNumber, "starOff");
+        rateNumber.value = starOnCount();
+      }, false);
     };
-  };
 
-  // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
-  let rate_management = function(idNumber, starCondition){
-    for(let subtractNumber = 0.5; subtractNumber <= idNumber; subtractNumber += 0.5){
+    // 星をクリックした場合の挙動を行う関数
+    let starClick = function(element, idNumber){
+      element.addEventListener("click", function(){
+        star_clicked_when_of_branch(element, idNumber);
+      }, false);
+    };
 
-      if(!document.getElementById(`star-${subtractNumber}`)){
-        continue;
+  　// クリックした際に、既に星が判定されているを判定する関数。
+    let star_clicked_when_of_branch = function(element, idNumber){
+      if(element.getAttribute("id") == `star-${idNumber}`){
+        // クリックした際に評価され、星に色がつく
+        rate_management_clicked(idNumber);
+        rateNumber.value = starOnCount();
+      }else if(element.getAttribute("id") == `star-clicked-${idNumber}`){
+        // 星の評価を解除する。
+        starOffAll();
+        rateNumber.value = starOnCount();
       };
-      
-      if(starCondition == "starOn"){
-        if(!Number.isInteger(subtractNumber)){
-          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-left.png') %>")
-        }else if(Number.isInteger(subtractNumber)){
-          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-right.png') %>")
+    };
+
+    // 判定する星が右か左かを決定する関数
+    let starOnRightLeft = function(element, idNumber){
+      if(!Number.isInteger(idNumber)){
+        element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-left.png') %>");
+      }else if(Number.isInteger(idNumber)){
+        element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-right.png') %>");
+      };
+    };
+
+    // 解除する星が右か左かを決定する関数
+    let starOffRightLeft = function(element, idNumber){
+      if(!Number.isInteger(idNumber)){
+        element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-left.png') %>");
+      }else if(Number.isInteger(idNumber)){
+        element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-right.png') %>");
+      };
+    };
+
+    // 評価されている星すべての評価を解除する関数。
+    let starOffAll = function(){
+      let images = document.getElementById("rate").childNodes;
+      for (let collectionnumber= 1, idNumber = 0.5; collectionnumber <= 19; collectionnumber += 2, idNumber += 0.5){
+
+        if(images[collectionnumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
+          continue;
         };
-      } else if(starCondition == "starOff"){
-        if(!Number.isInteger(subtractNumber)){
-          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-left.png') %>")
-        }else if(Number.isInteger(subtractNumber)){
-          document.getElementById(`star-${subtractNumber}`).setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-right.png') %>")
+
+        images[collectionnumber].setAttribute("id", `star-${idNumber}`);
+        starOffRightLeft(document.getElementById(`star-${idNumber}`), idNumber);
+      };
+    };
+
+    // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
+    let rate_management = function(idNumber, starCondition){
+      for(let subtractNumber = 0.5; subtractNumber <= idNumber; subtractNumber += 0.5){
+
+        if(!document.getElementById(`star-${subtractNumber}`)){
+          continue;
+        };
+        
+        if(starCondition == "starOn"){
+          starOnRightLeft(document.getElementById(`star-${subtractNumber}`), subtractNumber);
+        } else if(starCondition == "starOff"){
+          starOffRightLeft(document.getElementById(`star-${subtractNumber}`), subtractNumber);
+        };
+
+      };
+    };
+
+  　// クリックした星より前の星も変化するようにする関数。
+    let rate_management_clicked = function(idNumber){
+      for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber += 0.5){
+
+        if(!document.getElementById(`star-${subtractNumber}`)){
+          continue;
+        };
+
+        let starClicked = document.getElementById(`star-${subtractNumber}`);
+        starClicked.setAttribute("id", `star-clicked-${subtractNumber}`);
+        
+        starOnRightLeft(document.getElementById(`star-clicked-${subtractNumber}`), subtractNumber);
+      };
+    };
+
+    // src属性が"<%= asset_url('date_spot_review_images/star-off.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
+    let starOnCount = function(){
+      let images = document.getElementById("rate").childNodes;
+      let count = 0;
+
+      for (let collectionNumber = 1; collectionNumber <= 19; collectionNumber += 2){
+        if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-left.png') %>"){
+          count += 0.5;
+        }else if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-right.png') %>"){
+          count += 0.5;
         };
       };
-    };
-  };
 
-　// クリックした星より前の星も変化するようにする関数。
-  let rate_management_clicked = function(idNumber, targetImage){
-    for(let subtractNumber = 0; subtractNumber <= idNumber; subtractNumber++){
-
-      if(!document.getElementById(`star-${idNumber - subtractNumber}`)){
-        continue;
-      };
-
-      let starClicked = document.getElementById(`star-${idNumber - subtractNumber}`);
-      starClicked.setAttribute("id", `star-clicked-${idNumber - subtractNumber}`);
-      starClicked.setAttribute("src", targetImage);
-    };
-  };
-
-  // src属性が"<%= asset_url('date_spot_review_images/star-off.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
-  let starOnCount = function(){
-    let images = document.getElementById("rate").childNodes;
-    let count = 0;
-
-    for (let i = 1; i <= 9; i += 2){
-      if(images[i].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on.png') %>"){
-        count += 1;
-      };
+      return count;
     };
 
-    return count;
-  };
+    // 星による評価の数値
+    let rateNumber = document.getElementById("rate-number");
+    rateNumber.value = starOnCount();
 
-  // 星による評価の数値
-  let rateNumber = document.getElementById("rate-number");
-  rateNumber.value = starOnCount();
-
-  // mouseが星の上にカーソルが乗っているとき
-  for(let i = 0.5; i <= 5; i+= 0.5){
-
-    if(!document.getElementById(`star-${i}`)){
-      continue;
-    }
-    
     // mouseが星の上にカーソルが乗っているとき
-    starMouseover(document.getElementById(`star-${i}`), i);
+    for(let idNumber = 0.5; idNumber <= 5; idNumber+= 0.5){
 
-    // mouseが星をクリックしたとき
-    starClick(document.getElementById(`star-${i}`), i);
+      if(!document.getElementById(`star-${idNumber}`)){
+        continue;
+      }
+      
+      // mouseが星の上にカーソルが乗っているとき
+      starMouseover(document.getElementById(`star-${idNumber}`), idNumber);
 
-    // mouseが星の上から離れたとき
-    starMouseout(document.getElementById(`star-${i}`), i);
-  }
+      // mouseが星をクリックしたとき
+      starClick(document.getElementById(`star-${idNumber}`), idNumber);
+
+      // mouseが星の上から離れたとき
+      starMouseout(document.getElementById(`star-${idNumber}`), idNumber);
+    }
+  }());
 
 </script>
 

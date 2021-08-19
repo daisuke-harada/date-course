@@ -20,14 +20,8 @@ class DateSpotsController < ApplicationController
   end
 
   def show
-
-    rate_total_value = 0
-    @date_spot.date_spot_reviews.each do |date_spot_review|
-      rate_total_value += date_spot_review.rate
-    end
     
-    # 何もレビューされておらず、評価がゼロの際にはZeroDivisionError(整数に対して整数の 0 で除算を行ったときに発生します。)が発生するため、条件演算子で回避する。
-    @date_spot_reviews_rate_average = @date_spot.date_spot_reviews.count > 0 ? rate_total_value / @date_spot.date_spot_reviews.count : 0
+    @date_spot_reviews_rate_average = review_average_calculation(@date_spot)
 
     # デートスポットのレビューをすべて表示する際に、先頭に自分がレビューしたレビューが来るようにする。
     if current_user && @date_spot.date_spot_reviews.where(user_id: current_user.id)

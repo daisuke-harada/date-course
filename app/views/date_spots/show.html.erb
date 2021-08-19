@@ -45,14 +45,13 @@
   </div>
 
   <!-- 非同期機能実装 -->
-  <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: @current_user_date_spot_review, target_image: @current_user_date_spot_review.user } if @current_user_date_spot_review %>
+  <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: @current_user_date_spot_review, target_image: @current_user_date_spot_review.user, target_name: @current_user_date_spot_review.user.name } if @current_user_date_spot_review %>
   <% @reviews.each do |date_spot_review| %>
-    <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.user } %>
+    <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.user, target_name: date_spot_review.user.name } %>
   <% end %>
 </div>
 
 <script>
-
   (function(){
     let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
     let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
@@ -64,7 +63,12 @@
     document.getElementById("rate_average_number").innerText = rate_average_number;
 
     // 小数
-    let rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
+    let rate_decimal_value = 0;
+
+    // 小数かどうかを判定する。
+    if(!Number.isInteger(rate_average_number)){
+      rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
+    };
 
     // 整数
     let rate_integral_value = Math.trunc(rate_average_number);
@@ -85,5 +89,4 @@
     };
 
   }());
-  
 </script>

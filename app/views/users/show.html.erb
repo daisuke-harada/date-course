@@ -31,7 +31,7 @@
   </div>
   <div class="w-9/12">
     <% @user.date_spot_reviews.each do |date_spot_review| %>
-      <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.date_spot} %>
+      <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.date_spot, target_name: date_spot_review.date_spot.name} %>
     <% end %>
   </div>
 </div>
