@@ -55,6 +55,11 @@ RSpec.describe DateSpotReview, type: :model do
         other_date_spot_review.valid?
         expect(other_date_spot_review.errors[:user_id]).to include("has already been taken")
       end
+
+      it "デートスポットの星による評価を行う。"　do
+        
+      end
+      
     end
   end
 end
