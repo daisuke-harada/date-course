@@ -5,6 +5,11 @@ module DateSpotReviewsHelper
     rate_total_value = 0
 
     average_target.date_spot_reviews.each do |date_spot_review|
+
+      if date_spot_review.rate == nil
+        date_spot_review.rate = 0
+      end
+
       rate_total_value += date_spot_review.rate
     end
 
