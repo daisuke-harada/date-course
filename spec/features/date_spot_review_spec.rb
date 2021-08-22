@@ -10,6 +10,7 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
     click_link "レビューする"
+    find("#star-5").click
     fill_in "コメント", with: date_spot_review.content
     expect {
       click_button "投稿する"
@@ -71,6 +72,12 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "デートスポットを見る"
     click_link "レビューする"
     expect(page).to have_content "一般ステータスのアカウントでログインしてください"
+  end
+
+  it "デートスポット詳細画面からレビューを投稿し、削除する。" do
+  end
+
+  it "デートスポット詳細画面からレビューを投稿し、編集する" do
   end
 
 end
