@@ -21,7 +21,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-4.5">
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-5">
         <%= f.label :rate, "評価", class: "mx-4" %>
-        <%= f.number_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
+        <%= f.text_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
       </div>
 
       <div class="m-5">
