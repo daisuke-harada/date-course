@@ -21,7 +21,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-4.5">
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-5">
         <%= f.label :rate, "評価", class: "mx-4" %>
-        <%= f.number_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
+        <%= f.text_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
       </div>
 
       <div class="m-5">
@@ -31,8 +31,10 @@
           <%= f.submit btn_name, class: "btn btn-salmon my-5" %>
         </span>
       </div>
+
     <% end %>
   </div>
+  
   <div class="w-1/3 p-5">
     <%= render 'layouts/image', { target_image: user, width: 250, height: 250 }%>
   </div>
