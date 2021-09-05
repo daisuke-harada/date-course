@@ -10,7 +10,7 @@
       </div>
 
       <div class="m-5 flex" id="rate">
-      
+
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-0.5">
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-1">
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-1.5">
@@ -148,6 +148,7 @@
     // src属性が"<%= asset_url('date_spot_review_images/star-off.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
     let starOnCount = function(){
       let images = document.getElementById("rate").childNodes;
+
       let count = 0;
 
       for (let collectionNumber = 1; collectionNumber <= 19; collectionNumber += 2){
@@ -163,7 +164,13 @@
 
     // 星による評価の数値
     let rateNumber = document.getElementById("rate-number");
-    rateNumber.value = starOnCount();
+
+    // レビューを編集する場合は評価値が決まっているため、初期状態で星が塗り潰されている状態となる。
+    if(rateNumber.value == ""){
+      document.getElementById("rate-number").value = 0;
+    }else{
+      rate_management(Number(rateNumber.value), "starOn");
+    };
 
     // mouseが星の上にカーソルが乗っているとき
     for(let idNumber = 0.5; idNumber <= 5; idNumber+= 0.5){
