@@ -123,10 +123,14 @@
         
         if(starCondition == "starOn"){
           starOnRightLeft(document.getElementById(`star-${subtractNumber}`), subtractNumber);
+
+          // 編集画面などの初期値が入っている際に、星にドラッグした時にドラッグした星より大きい数の星がOff状態になるようにする。
+          for(let offNumber = idNumber +0.5 ; offNumber <= 5; offNumber += 0.5){
+            starOffRightLeft(document.getElementById(`star-${offNumber}`), offNumber);
+          };
         } else if(starCondition == "starOff"){
           starOffRightLeft(document.getElementById(`star-${subtractNumber}`), subtractNumber);
         };
-
       };
     };
 
@@ -165,19 +169,27 @@
     // 星による評価の数値
     let rateValue = document.getElementById("rate-value");
 
+    // 編集画面の星に初期値を設定する際に使用する。
+    let rateValueId = rateValue.getAttribute("id");
+
+
     // レビューを編集する場合は評価値が決まっているため、初期状態で星が塗り潰されている状態となる。
     if(rateValue.value == ""){
       document.getElementById("rate-value").value = 0;
     }else{
-      rate_management_clicked(Number(rateValue.value), "starOn");
+      // データベース上で設定されている値と現在の評価の値が同じ場合は星の評価を初期値として与える。
+      rate_management(rateValue.value, "starOn")
     };
+    
+    
+
 
     // mouseが星の上にカーソルが乗っているとき
     for(let idNumber = 0.5; idNumber <= 5; idNumber+= 0.5){
 
       if(!document.getElementById(`star-${idNumber}`)){
         continue;
-      }
+      };
       
       // mouseが星の上にカーソルが乗っているとき
       starMouseover(document.getElementById(`star-${idNumber}`), idNumber);
