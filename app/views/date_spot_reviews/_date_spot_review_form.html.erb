@@ -22,7 +22,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-4.5">
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-5">
         <%= f.label :rate, "評価", class: "mx-4" %>
-        <%= f.text_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-number" %>
+        <%= f.text_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-value" %>
 
       </div>
 
@@ -49,7 +49,7 @@
     let starMouseover = function(element, idNumber){
       element.addEventListener("mouseover", function(){
         rate_management(idNumber, "starOn");
-        rateNumber.value = starOnCount();
+        rateValue.value = starOnCount();
       }, false);
     };
 
@@ -57,7 +57,7 @@
     let starMouseout = function(element, idNumber){
       element.addEventListener("mouseout", function(){
         rate_management(idNumber, "starOff");
-        rateNumber.value = starOnCount();
+        rateValue.value = starOnCount();
       }, false);
     };
 
@@ -73,11 +73,11 @@
       if(element.getAttribute("id") == `star-${idNumber}`){
         // クリックした際に評価され、星に色がつく
         rate_management_clicked(idNumber);
-        rateNumber.value = starOnCount();
+        rateValue.value = starOnCount();
       }else if(element.getAttribute("id") == `star-clicked-${idNumber}`){
         // 星の評価を解除する。
         starOffAll();
-        rateNumber.value = starOnCount();
+        rateValue.value = starOnCount();
       };
     };
 
@@ -163,13 +163,13 @@
     };
 
     // 星による評価の数値
-    let rateNumber = document.getElementById("rate-number");
+    let rateValue = document.getElementById("rate-value");
 
     // レビューを編集する場合は評価値が決まっているため、初期状態で星が塗り潰されている状態となる。
-    if(rateNumber.value == ""){
-      document.getElementById("rate-number").value = 0;
+    if(rateValue.value == ""){
+      document.getElementById("rate-value").value = 0;
     }else{
-      rate_management_clicked(Number(rateNumber.value), "starOn");
+      rate_management_clicked(Number(rateValue.value), "starOn");
     };
 
     // mouseが星の上にカーソルが乗っているとき
