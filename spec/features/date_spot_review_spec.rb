@@ -10,26 +10,54 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
     click_link "レビューする"
-    find("#star-4.5").click
+    find("#star-5-left").click
     fill_in "コメント", with: date_spot_review.content
     expect {
       click_button "投稿する"
       expect(page).to have_content "投稿しました"
-      expect(page).to hava_content "4.5"
-      expect(page).to hava_content "MyText"
+      expect(page).to have_content "4.5"
+      expect(page).to have_content "MyText"
     }.to change(DateSpotReview.all, :count).by(1)
   end
 
-  scenario "デートスポット詳細ページからレビュー編集ページに遷移して、レビューを編集する" do
+  scenario "レビューを評価値3で新規投稿し、その後、評価値を0.5に編集する。", js: true do
+    user = FactoryBot.create(:user)
+    address = FactoryBot.create(:address)
+    address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
+    date_spot_review = FactoryBot.build(:date_spot_review)
+    sign_in_as user
+    click_link "デートスポットを探す"
+    click_link "デートスポットを見る"
+    click_link "レビューする"
+    find("#star-3-right").click
+    fill_in "コメント", with: date_spot_review.content
+    expect {
+      click_button "投稿する"
+      expect(page).to have_content "投稿しました"
+      expect(page).to have_content "3"
+      expect(page).to have_content "MyText"
+    }.to change(DateSpotReview.all, :count).by(1)
+    click_link "レビューを編集する"
+    find("#star-1-left").click
+    click_button "更新する"
+    expect(page).to have_content "レビューを更新しました"
+    expect(page).to have_content "0.5"
+    expect(page).to have_content "MyText"
+  end
+
+  scenario "デートスポット詳細ページからレビュー編集ページに遷移して、レビューを編集する", js: true do
     date_spot_review = FactoryBot.create(:date_spot_review)
     date_spot_review.date_spot.create_address(FactoryBot.attributes_for(:address))
     sign_in_as date_spot_review.user
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
     click_link "レビューを編集する"
+    find("#star-3-left").click
     fill_in "コメント", with: "My String2"
     click_button "更新する"
     expect(page).to have_content "レビューを更新しました"
+    expect(page).to have_content "2.5"
+    expect(page).to have_content "My String2"
   end
 
   scenario "デートスポット詳細ページからレビュー編集ページに遷移して、レビューを削除する" do
@@ -75,11 +103,4 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "レビューする"
     expect(page).to have_content "一般ステータスのアカウントでログインしてください"
   end
-
-  it "デートスポット詳細画面から評価値を４で入力し、レビューを投稿する。" do
-  end
-
-  it "デートスポット詳細画面からレビューを投稿し、編集する" do
-  end
-
 end
