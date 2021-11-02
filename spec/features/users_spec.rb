@@ -62,6 +62,7 @@ RSpec.feature "Users", type: :feature do
   scenario "ユーザーの編集ページによるフレンドリーフォワーディング機能のテスト" do
     user = FactoryBot.create(:user)
     visit edit_user_path(user)
+    expect(page).to have_content "ログインしてください"
     sign_in_as user
     expect(page).to have_current_path edit_user_path(user)
   end
@@ -80,6 +81,40 @@ RSpec.feature "Users", type: :feature do
     click_link "アカウント情報を編集する"
     expect {
       click_link "退会する"
+      expect(page).to have_content "退会しました"
+    }.to change(User.all, :count).by(-1)
+  end
+
+  scenario "ユーザーをフォローしている状態で、退会をする", js: true do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    click_link "ユーザーを探す"
+    click_button "follow_id_#{other_user.id}" # フォローする。
+    click_link "マイページ"
+    click_link "アカウント情報を編集する"
+    expect {
+      click_link "退会する"
+      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' #alertの中身を確認する。
+      page.driver.browser.switch_to.alert.accept #okを押す。
+      expect(page).to have_content "退会しました"
+    }.to change(User.all, :count).by(-1)
+  end
+
+  scenario "ユーザーがフォローされている状態で、退会をする", js: true do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:other_user)
+    sign_in_as user
+    click_link "ユーザーを探す"
+    click_button "follow_id_#{other_user.id}" # フォローする。
+    click_link "ログアウト"
+    sign_in_as other_user
+    click_link "マイページ"
+    click_link "アカウント情報を編集する"
+    expect {
+      click_link "退会する"
+      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' #alertの中身を確認する。
+      page.driver.browser.switch_to.alert.accept #okを押す。
       expect(page).to have_content "退会しました"
     }.to change(User.all, :count).by(-1)
   end
