@@ -11,15 +11,27 @@ services:
       - mysql-data:/var/lib/mysql
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/date_course # カレントディレクトリを/date_courseにバインドマウントしている
-    ports:
-      - 3000:3000
+      - public-data:/date_course/public
+      - tmp-data:/date_course/tmp
+      - log-data:/date_course/log
     depends_on:
       db: # dbサーバーに依存する
         condition: service_started #dbコンテナが起動してから起動する
     tty: true # binding.pryをdockerの環境でするために必要
     stdin_open: true # binding.pryをdockerの環境でするために必要
+
+  nginx:
+    build: nginx/
+    volumes:
+      - public-data:/date_course/public
+      - tmp-data:/date_course/tmp
+    ports:
+      - 80:80
 volumes:
   mysql-data:
+  public-data:
+  tmp-data:
+  log-data:
