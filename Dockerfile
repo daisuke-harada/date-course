@@ -34,7 +34,7 @@ COPY . /date_course
 COPY entrypoint.sh /usr/bin/
 
 #デプロイ時に必要
-RUN mkdir -p tmp/sockets
+RUN mkdir tmp/sockets
 
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
