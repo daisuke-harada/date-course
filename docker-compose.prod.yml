@@ -13,7 +13,7 @@ services:
     build:
       context: .
       args:
-        - START = bundle exec puma
+        - START=bundle exec puma
     command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/date_course # カレントディレクトリを/date_courseにバインドマウントしている
