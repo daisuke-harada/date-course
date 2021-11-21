@@ -32,7 +32,7 @@ services:
       - public-data:/date_course/public
       - tmp-data:/date_course/tmp
     ports:
-      - 80:3000
+      - 80:80
       
 volumes:
   mysql-data:
