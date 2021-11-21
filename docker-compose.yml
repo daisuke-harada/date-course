@@ -10,7 +10,8 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
   web:
-    build: .
+    build:
+      dockerfile: Dockerfile.development
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/date_course # カレントディレクトリを/date_courseにバインドマウントしている
