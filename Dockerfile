@@ -33,6 +33,8 @@ COPY . /date_course
 
 COPY entrypoint.sh /usr/bin/
 
+RUN mkdir -p tmp/sockets
+
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
