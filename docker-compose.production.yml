@@ -13,24 +13,28 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.production
-    command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/date_course # カレントディレクトリを/date_courseにバインドマウントしている
       - public-data:/date_course/public
       - tmp-data:/date_course/tmp
       - log-data:/date_course/log
+    ports:
+      - "3000:3000"
     depends_on:
-      db: # dbサーバーに依存する
-        condition: service_started #dbコンテナが起動してから起動する
+      - db
     tty: true # binding.pryをdockerの環境でするために必要
     stdin_open: true # binding.pryをdockerの環境でするために必要
+    command: bundle exec puma -C config/puma.rb
   nginx:
-    build: nginx/
+    build: 
+      context: containers/nginx
     volumes:
       - public-data:/date_course/public
       - tmp-data:/date_course/tmp
     ports:
       - 80:80
+    depends_on:
+      - web
 volumes:
   mysql-data:
   public-data:
