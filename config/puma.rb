@@ -43,5 +43,5 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 plugin :tmp_restart
 
 #デプロイ時に必要
-bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-
+app_root = File.expand_path("../..", __FILE__)
+bind "unix://#{app_root}/tmp/sockets/puma.sock"
