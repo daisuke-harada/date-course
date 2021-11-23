@@ -1,3 +1,7 @@
+const { environment } = require('@rails/webpacker')
+
+module.exports = environment
+
 function hotfixPostcssLoaderConfig (subloader) {
   const subloaderName = subloader.loader
   if (subloaderName === 'postcss-loader') {
