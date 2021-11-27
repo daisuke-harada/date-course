@@ -1,7 +1,7 @@
-const environment = {
+module.exports = {
   plugins: [
-    require("tailwindcss"),
-    require("autoprefixer"),
+    require('tailwindcss'),
+    require('autoprefixer'),
     require('postcss-import'),
     require('postcss-flexbugs-fixes'),
     require('postcss-preset-env')({
@@ -12,18 +12,3 @@ const environment = {
     })
   ]
 }
-
-if (process.env.RAILS_ENV === "production") {
-  environment.plugins.push(
-    require('@fullhuman/postcss-purgecss')({
-      content: [
-        './app/**/*.html.erb',
-        './app/**/*.js.erb',
-        './app/helpers/**/*.rb',
-      ],
-      whitelist: ['img', 'video', ':root'],
-    })
-  )
-}
-
-module.exports = environment
