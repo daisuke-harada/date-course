@@ -16,6 +16,6 @@ Rails.application.config.assets.precompile += %w( admin.js admin.css )
 # Add node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join("node_modules")
 
-Rails.application.config.assets.configure do |env|
-  env.cache = ActiveSupport::Cache.lookup_store(:null_store)
-end
+# Rails.application.config.assets.configure do |env|
+#   env.cache = ActiveSupport::Cache.lookup_store(:null_store)
+# end
