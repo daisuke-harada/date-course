@@ -9,7 +9,6 @@
     "@rails/webpacker": "5.4.3",
     "autoprefixer": "^9",
     "postcss": "^7",
-    "postcss-loader": "4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
