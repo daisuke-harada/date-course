@@ -1,6 +1,6 @@
 const environment = {
   plugins: [
-    require("tailwindcss")("./app/javascript/css/tailwind.config.js"),
+    require("tailwindcss"),
     require("autoprefixer"),
     require('postcss-import'),
     require('postcss-flexbugs-fixes'),
