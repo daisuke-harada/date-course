@@ -47,6 +47,6 @@ jobs:
       - name: webpacker compile
         run: |
           rails webpacker:install
-          bundle exec rails webpacker:compile RAILS_ENV=test 
+          bundle exec rails assets:precompile RAILS_ENV=test 
       - name: run spec
         run: bundle exec bin/rspec
