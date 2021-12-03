@@ -23,13 +23,5 @@ services:
         condition: service_started #dbコンテナが起動してから起動する
     tty: true # binding.pryをdockerの環境でするために必要
     stdin_open: true # binding.pryをdockerの環境でするために必要
-    # environment:
-    #   WEBPACKER_DEV_SERVER_HOST: frontend
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.development
-  #   # webpack-dev-serverを起動
-  #   command: bash -c "./node_modules/.bin/webpack-dev-server --config config/webpack/development --host 0.0.0.0 --port 3035"
 volumes:
   mysql-data:
