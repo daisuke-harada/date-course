@@ -11,5 +11,6 @@ class ApplicationController < ActionController::Base
   #ユーザーの名前検索の際に使用する
   def set_q_for_user
     # 同時に１画面で同じパラメータを検索するため、違うパラメータを用意する。
-    @user_search_params = User.ransack(params[:
+    @user_search_params = User.ransack(params[:q])
+  end
 end
