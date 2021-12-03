@@ -9,7 +9,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password # 認証プラグインがmysql8からcaching_sha2_passwordになっているので変更する。
     volumes:
       - mysql-data:/var/lib/mysql
-  backend:
+  web:
     build:
       context: .
       dockerfile: Dockerfile.development

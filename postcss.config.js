@@ -1,5 +1,8 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 module.exports = {
   plugins: [
+    new HardSourceWebpackPlugin(),
     require('tailwindcss'),
     require('autoprefixer'),
     require('postcss-import'),
@@ -11,4 +14,4 @@ module.exports = {
       stage: 3
     })
   ]
-}
+};
