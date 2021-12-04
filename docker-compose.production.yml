@@ -23,7 +23,6 @@ services:
     depends_on:
       - web
 volumes:
-  mysql-data:
   public-data:
   tmp-data:
   log-data:
