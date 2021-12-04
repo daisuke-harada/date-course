@@ -15,10 +15,6 @@ gem 'sass-rails', '>= 6'
 gem 'uglifier'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '5.4.3'
-# gem "webpacker", github: "rails/webpacker"
-
-# gem 'tailwindcss-rails'
-
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -29,9 +25,10 @@ gem 'mini_magick'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-#住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
+# 住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
 gem 'active_hash'
-
+# 環境変数の管理
+gem 'dotenv-rails'
 # Use Active Storage variant
 
 # Reduces boot times through caching; required in config/boot.rb
