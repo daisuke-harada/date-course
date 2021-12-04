@@ -11,6 +11,7 @@ jobs:
         env:
           MYSQL_USER: ${MYSQL_USER}
           MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         options:
           -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     container:
