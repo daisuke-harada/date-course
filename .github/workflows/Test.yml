@@ -9,11 +9,9 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_USER: ${MYSQL_USER}
-          MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_ROOT_PASSWORD: password
         options:
-          -e MYSQL_ROOT_PASSWORD= --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
+          -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     container:
       image: ruby:2.7.2
     steps:
