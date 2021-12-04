@@ -3,6 +3,7 @@ services:
   db:
     image: mysql:8.0.23
     environment:
+      MYSQL_DATABASE: ${DATE_COURSE_DATABASE_NAME}
       MYSQL_USER: ${DATE_COURSE_DATABASE_USER}
       MYSQL_PASSWORD: ${DATE_COURSE_DATABASE_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
