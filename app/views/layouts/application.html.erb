@@ -6,7 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="bg-gray-100">
     <%= render 'layouts/header' %>
@@ -17,7 +18,10 @@
           <%= content_tag(:div, value, class: key) %>
         <% end %>
       </div>
-      <%= yield %>
+    <main class="container mx-auto">
+    <main class="container mx-auto">
+          <%= yield %>
+    </main>
     </div>
   </body>
 </html>

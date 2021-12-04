@@ -19,8 +19,7 @@ RUN apt-get update && apt-get install -y unzip \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list \
     && apt-get update && apt-get install -y google-chrome-stable
 
-RUN mkdir /date_course
-
+#WORKDIRは指定するディレクトリがもし存在しない場合は　作成してくれる。そのためRUN mkdir /date_courseを省略
 WORKDIR /date_course
 
 COPY Gemfile /date_course/Gemfile
@@ -30,9 +29,3 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /date_course
-
-COPY entrypoint.sh /usr/bin/
-
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000

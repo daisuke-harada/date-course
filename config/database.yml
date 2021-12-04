@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
-  database: date_course_production
-  username: date_course
+  database: <%= ENV['DATE_COURSE_DATABASE_NAME'] %>
+  username: <%= ENV['DATE_COURSE_DATABASE_USER'] %>
   password: <%= ENV['DATE_COURSE_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATE_COURSE_DATABASE_HOST'] %>
