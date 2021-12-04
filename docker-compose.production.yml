@@ -11,10 +11,6 @@ services:
       - log-data:/date_course/log
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-    tty: true # binding.pryをdockerの環境でするために必要
-    stdin_open: true # binding.pryをdockerの環境でするために必要
     command: bash -c "bundle exec puma -C config/puma.rb -e production"
   nginx:
     build: 
