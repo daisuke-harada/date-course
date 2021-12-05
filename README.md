@@ -3,8 +3,8 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-ホーブページのIPアドレス
-datecourses.com
+IPアドレス
+http://datecourses.com/
 
 Things you may want to cover:
 
