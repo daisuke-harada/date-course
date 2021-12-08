@@ -38,7 +38,7 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
   # 本番環境で
-  config.action_controller.asset_host=ENV['S3_ENDPOINT']
+  config.action_controller.asset_host="https://mydatecoursesassets.s3.ap-northeast-1.amazonaws.com"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
