@@ -60,6 +60,9 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  
+  # S3からアセットファイルをコンパイルするのに必要
+  config.action_controller.asset_host=ENV['S3_ENDPOINT']
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
