@@ -62,8 +62,8 @@ Rails.application.configure do
   config.assets.quiet = true
   
   # S3からアセットファイルをコンパイルするのに必要
-  config.action_controller.asset_host="https://mydatecoursesassets.s3.ap-northeast-1.amazonaws.com"
-
+   config.action_controller.asset_host="https://mydatecoursesassets.s3.ap-northeast-1.amazonaws.com"
+  #config.asset_host = "https://mydatecoursesassets.s3.ap-northeast-1.amazonaws.com"
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
