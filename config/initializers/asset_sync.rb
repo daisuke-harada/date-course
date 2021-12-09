@@ -1,9 +1,4 @@
 if defined?(AssetSync)
-  # Webpackerによるビルドが完了した後にアセットファイルの同期処理が実行されるようにするため、rakeファイルを新規作成
-  Rake::Task['webpacker:compile'].enhance do
-    Rake::Task["assets:sync"].invoke
-  end
-
   AssetSync.configure do |config|
     config.enabled = false if Rails.env.development? # ここを追記
     config.fog_provider = 'AWS'
