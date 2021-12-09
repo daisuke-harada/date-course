@@ -1,6 +1,6 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    config.enabled = false if Rails.env.development? # ここを追記
+    # config.enabled = false if Rails.env.development? # ここを追記
     config.fog_provider = 'AWS'
     config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
     config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
@@ -17,7 +17,7 @@ if defined?(AssetSync)
     # config.aws_acl = nil 
     #
     # Change host option in fog (only if you need to)
-    # config.fog_host = "https://mydatecourses.s3.ap-northeast-1.amazonaws.com"
+    # config.fog_host =
     #
     # Change port option in fog (only if you need to)
     # config.fog_port = "9000"
