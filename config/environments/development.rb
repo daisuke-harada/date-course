@@ -65,7 +65,6 @@ Rails.application.configure do
   
   # S3からアセットファイルをコンパイルするのに必要
   # config.action_controller.asset_host = ENV['S3_ENDPOINT']
-  # config.asset_host = "https://mydatecoursesassets.s3.ap-northeast-1.amazonaws.com"
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
