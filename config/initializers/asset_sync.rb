@@ -1,6 +1,6 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    config.enabled = false if Rails.env.development? || if Rails.env.test? # ここを追記
+    config.enabled = false if Rails.env.development? # ここを追記
     config.fog_provider = 'AWS'
     config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
     config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
