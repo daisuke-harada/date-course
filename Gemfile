@@ -37,6 +37,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # 検索機能実装
 gem 'ransack'
 
+# アセットをS3パケットに同期できるようにする。
+gem 'asset_sync'
+
+# AWSの連携に必要なクラウドサービス
+gem 'fog-aws'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
