@@ -1,9 +1,9 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    if Rails.env.development? # ここを追記
+    if Rails.env.productoin? # 開発環境とテスト環境ではfalseにする。
+      config.enabled = true
+    else
       config.enabled = false
-    elsif Rails.env.test?
-      config.enabled =false
     end
     
     config.fog_provider = 'AWS'
