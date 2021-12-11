@@ -19,13 +19,13 @@ RUN apt-get update && apt-get install -y unzip \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list \
     && apt-get update && apt-get install -y google-chrome-stable
 
-#WORKDIRは指定するディレクトリがもし存在しない場合は　作成してくれる。そのためRUN mkdir /date_courseを省略
-WORKDIR /date_course
+#WORKDIRは指定するディレクトリがもし存在しない場合は　作成してくれる。そのためRUN mkdir /date-courseを省略
+WORKDIR /date-course
 
-COPY Gemfile /date_course/Gemfile
-COPY Gemfile.lock /date_course/Gemfile.lock
+COPY Gemfile /date-course/Gemfile
+COPY Gemfile.lock /date-course/Gemfile.lock
 
 RUN gem install bundler
 RUN bundle install
 
-COPY . /date_course
+COPY . /date-course
