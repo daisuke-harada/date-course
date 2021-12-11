@@ -5,10 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile.production
     volumes:
-      - .:/date_course # カレントディレクトリを/date_courseにバインドマウントしている
-      - public-data:/date_course/public
-      - tmp-data:/date_course/tmp
-      - log-data:/date_course/log
+      - .:/date-course # カレントディレクトリを/date-courseにバインドマウントしている
+      - public-data:/date-course/public
+      - tmp-data:/date-course/tmp
+      - log-data:/date-course/log
     ports:
       - "3000:3000"
     command: bash -c "bundle exec puma -C config/puma.rb -e production"
@@ -16,8 +16,8 @@ services:
     build: 
       context: containers/nginx
     volumes:
-      - public-data:/date_course/public
-      - tmp-data:/date_course/tmp
+      - public-data:/date-course/public
+      - tmp-data:/date-course/tmp
     ports:
       - 80:80
     depends_on:
