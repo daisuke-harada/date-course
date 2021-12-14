@@ -70,7 +70,7 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
 
-  # capistranoに必要なgemをinstall
+  # Capistranoに必要なgemをinstall
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano3-puma', '~>5.0'
