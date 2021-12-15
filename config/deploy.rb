@@ -6,38 +6,18 @@ set :repo_url, "https://github.com/daisuke-harada/date-course.git"
 set :deploy_to, "/home/ec2-user/date-course"
 set :rbenv_ruby, '2.7.2'
 set :linked_files, %w{config/master.key .env}
-set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
-# append :linked_dirs, "log", "public", "tmp"
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
-
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
-
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
-
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for local_user is ENV['USER']
-# set :local_user, -> { `git config user.name`.chomp }
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
-# Uncomment the following to require manually verifying the host key before first deploy.
-# set :ssh_options, verify_host_key: :secure
+task :deployment do
+  application = fetch :application
+  on roles(:web) do # onブロックの「対象サーバ」の箇所には、前述の「ステージ名.rb」で設定したサーバの条件を指定することができます。例えば、「Webサーバ(:web)のロールが与えられているサーバ」のみを作業対象とする場合は、以下のように書きます。
+    # if test "[ -d #{application} ]"
+    #   output = capture "cd #{application}; git pull origin master"
+    #   info output
+    # else
+    #   output = capture "git clone #{fetch :repo_url} #{application}"
+    #   info output
+    # end
+    output = capture "sudo docker-compose -f docker-compose.production.yml up build"
+    info output    
+  end
+end

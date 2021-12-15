@@ -71,9 +71,14 @@ group :development do
   gem 'rubocop-rspec'
 
   # Capistranoに必要なgemをinstall
-  gem 'capistrano'
-  gem 'capistrano3-puma', '~>5.0'
+  gem 'capistrano', '~> 3.15'
+  gem 'capistrano3-puma', '~> 5.0'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-collection'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rake'
   gem 'capistrano-rbenv'
+  gem 'capistrano-sidekiq', '1.0.2'
 end
 
 group :test do
