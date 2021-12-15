@@ -72,9 +72,6 @@ group :development do
 
   # Capistranoに必要なgemをinstall
   gem 'capistrano', '~> 3.15'
-  # gem 'capistrano3-puma', '~> 5.0'
-  # gem 'capistrano-rbenv'
-  # gem 'capistrano-rails'
 end
 
 group :test do
