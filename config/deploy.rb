@@ -3,9 +3,11 @@ lock "~> 3.16.0"
 
 set :application, "date-course"
 set :repo_url, "https://github.com/daisuke-harada/date-course.git"
+set :deploy_to, "/home/ec2-user/date-course"
 set :rbenv_ruby, '2.7.2'
 set :linked_files, %w{config/master.key .env}
-append :linked_dirs, "log", "public", "tmp"
+set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
+# append :linked_dirs, "log", "public", "tmp"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
