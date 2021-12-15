@@ -62,13 +62,16 @@ group :development do
   gem 'spring'
 
 
-  #静的解析ツール
-  #コミット時に指導でrubocopを走らせる
+  # 静的解析ツール
+  # コミット時に指導でrubocopを走らせる
   gem 'pre-commit'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
+
+  # Capistranoに必要なgemをinstall
+  gem 'capistrano', '~> 3.15'
 end
 
 group :test do
