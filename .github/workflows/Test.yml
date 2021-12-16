@@ -1,4 +1,4 @@
-name: Test
+name: Rspec-deploy
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       image: ruby:2.7.2
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 #
       - name: setup bundle
         run: |
           gem install bundler
@@ -57,3 +57,22 @@ jobs:
           bundle exec rails webpacker:compile RAILS_ENV=test 
       - name: run spec
         run: bundle exec bin/rspec
+  deploy: # ここからdeploy
+    needs: rspec # rspecが実行できた場合のみ実行
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+    - name: Set up Ruby ruby:2.7.2
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+    - uses: miloserdow/capistrano-deploy@master
+      with:
+        target: production
+        deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
+      run: bundle exec cap production deploy:application_set_up
+        
+
