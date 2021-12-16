@@ -69,6 +69,4 @@ jobs:
         target: production
         enc_rsa_key_pth: config/id_rsa_enc
         deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
-        run: bundle exec cap production deploy:application_set_up
-        
 
