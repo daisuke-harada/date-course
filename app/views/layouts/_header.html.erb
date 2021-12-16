@@ -32,7 +32,7 @@
         <%= form_with(url: login_path, scope: :session, local: true) do |f|%>
           <%= f.hidden_field :name, :value => guest_name %>
           <%= f.hidden_field :password, :value => guest_password %>
-          <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-salmon" %>
+          <%= f.submit "ゲストログイン(1クリック)", class: "btn btn-yellow-green" %>
         <% end %>
       </div>
     <% end %>
