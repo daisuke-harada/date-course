@@ -1,11 +1,9 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.16.0"
 
-set :application, "date-course"
-set :repo_url, "https://github.com/daisuke-harada/date-course.git"
-set :deploy_to, "/home/ec2-user/date-course"
-set :rbenv_ruby, '2.7.2'
-set :linked_files, %w{config/master.key .env}
+set :application, "date-course" #アプリケーション名
+set :repo_url, "https://github.com/daisuke-harada/date-course.git" # githubのurl
+set :deploy_to, "/home/ec2-user/date-course" # applicationをdeployする場所
 set :docker_compose_path, "docker-compose -f docker-compose.production.yml"
 set :RAILS_ENV, "RAILS_ENV=production"
 
@@ -20,7 +18,7 @@ namespace :deploy do
   db_seed = "#{docker_compose_path} exec -T web rails db:seed #{rails_env}"
 
   task :application_update do
-    on roles(:web) do # onブロックの「対象サーバ」の箇所には、前述の「ステージ名.rb」で設定したサーバの条件を指定することができます。例えば、「Webサーバ(:web)のロールが与えられているサーバ」のみを作業対象とする場合は、以下のように書きます。
+    on roles(:web) do # config/deploy/production.rbのroles: %w{web}を指定している。
       execute "cd #{application};" "git pull origin master"
     end
   end
