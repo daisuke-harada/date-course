@@ -66,7 +66,8 @@ jobs:
         ruby-version: 2.7.2
     - uses: miloserdow/capistrano-deploy@master
       with:
-        target: deploy
+        target: production
+        enc_rsa_key_pth: config/id_rsa_enc
         deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
         run: bundle exec cap production deploy:application_set_up
         
