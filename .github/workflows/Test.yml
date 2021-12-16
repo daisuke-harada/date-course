@@ -64,9 +64,17 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
-    - uses: miloserdow/capistrano-deploy@master
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.1.1
       with:
-        target: production
-        enc_rsa_key_pth: config/id_rsa_enc
-        deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
+        ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+    - name: Install Libmysqlclient-dev
+      run: |
+        sudo apt-get install libmysqlclient-dev
+    - name: Bundle install
+      run: |
+        bundle install
+    - name: Deploy Production Application Set Up
+      run: |
+        bundle exec cap production deploy:application_set_up
 
