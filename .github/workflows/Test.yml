@@ -3,58 +3,58 @@ on:
   push:
     branches: [ master ]
 jobs:
-  rspec:
-    runs-on: ubuntu-latest
-    services:
-      db:
-        image: mysql:8.0.23
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        options:
-          -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
-    container:
-      image: ruby:2.7.2
+  # rspec:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     db:
+  #       image: mysql:8.0.23
+  #       ports:
+  #         - 3306:3306
+  #       env:
+  #         MYSQL_ROOT_PASSWORD: password
+  #       options:
+  #         -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
+  #   container:
+  #     image: ruby:2.7.2
 
-    steps:
-      - uses: actions/checkout@v2 #
-      - name: setup bundle
-        run: |
-          gem install bundler
-          bundle install
-      - name: setup yarn
-        run: |
-          curl -sL https://deb.nodesource.com/setup_14.x | bash -
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-          apt-get update -qq
-          apt-get install -y nodejs yarn
-      - name: setup chrome
-        run: |
-          apt-get update && apt-get install -y unzip
-          CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
-          wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
-          unzip ~/chromedriver_linux64.zip -d ~/
-          rm ~/chromedriver_linux64.zip
-          chown root:root ~/chromedriver
-          chmod 755 ~/chromedriver
-          mv ~/chromedriver /usr/bin/chromedriver
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
-          apt-get update && apt-get install -y google-chrome-stable
-      - name: setup migrate
-        run: |
-          rails db:create
-          rails db:migrate
-      - name: webpacker compile
-        run: |
-          rails webpacker:install
-          bundle exec rails webpacker:compile RAILS_ENV=test 
-      - name: run spec
-        run: bundle exec bin/rspec
+  #   steps:
+  #     - uses: actions/checkout@v2 #
+  #     - name: setup bundle
+  #       run: |
+  #         gem install bundler
+  #         bundle install
+  #     - name: setup yarn
+  #       run: |
+  #         curl -sL https://deb.nodesource.com/setup_14.x | bash -
+  #         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+  #         echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+  #         apt-get update -qq
+  #         apt-get install -y nodejs yarn
+  #     - name: setup chrome
+  #       run: |
+  #         apt-get update && apt-get install -y unzip
+  #         CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+  #         wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
+  #         unzip ~/chromedriver_linux64.zip -d ~/
+  #         rm ~/chromedriver_linux64.zip
+  #         chown root:root ~/chromedriver
+  #         chmod 755 ~/chromedriver
+  #         mv ~/chromedriver /usr/bin/chromedriver
+  #         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+  #         echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+  #         apt-get update && apt-get install -y google-chrome-stable
+  #     - name: setup migrate
+  #       run: |
+  #         rails db:create
+  #         rails db:migrate
+  #     - name: webpacker compile
+  #       run: |
+  #         rails webpacker:install
+  #         bundle exec rails webpacker:compile RAILS_ENV=test 
+  #     - name: run spec
+  #       run: bundle exec bin/rspec
   deploy: # ここからdeploy
-    needs: rspec # rspecが実行できた場合のみ実行
+    # needs: rspec # rspecが実行できた場合のみ実行
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -64,10 +64,17 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
-    - uses: miloserdow/capistrano-deploy@master
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.4.1
       with:
-        target: production
-        deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
-        run: bundle exec cap production deploy:application_set_up
-        
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Install Libmysqlclient-dev
+      run: |
+        sudo apt-get install libmysqlclient-dev
+    - name: Bundle install
+      run: |
+        bundle install
+    - name: Deploy Production
+      run: |
+        bundle exec cap production deploy:application_set_up
 
