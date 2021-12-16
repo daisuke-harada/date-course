@@ -74,7 +74,7 @@ jobs:
     - name: Bundle install
       run: |
         bundle install
-    - name: Deploy Production Application Set Up
+    - name: Deploy Production
       run: |
         bundle exec cap production deploy:application_set_up
 
