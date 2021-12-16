@@ -1,13 +1,10 @@
-name: Rspec-deploy
-
+name: Test
 on:
   push:
     branches: [ master ]
-
 jobs:
   rspec:
     runs-on: ubuntu-latest
-
     services:
       db:
         image: mysql:8.0.23
@@ -17,7 +14,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
         options:
           -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
-
     container:
       image: ruby:2.7.2
 
@@ -73,6 +69,6 @@ jobs:
       with:
         target: production
         deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
-      run: bundle exec cap production deploy:application_set_up
+        run: bundle exec cap production deploy:application_set_up
         
 
