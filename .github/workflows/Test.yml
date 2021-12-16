@@ -1,4 +1,4 @@
-name: Rspec-deploy
+name: Test
 on:
   push:
     branches: [ master ]
@@ -69,6 +69,6 @@ jobs:
       with:
         target: production
         deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }} 
-      run: bundle exec cap production deploy:application_set_up
+        run: bundle exec cap production deploy:application_set_up
         
 
