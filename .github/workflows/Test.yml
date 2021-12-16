@@ -64,7 +64,6 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.7.2
-        bundler-cache: true
     - uses: miloserdow/capistrano-deploy@master
       with:
         target: production
