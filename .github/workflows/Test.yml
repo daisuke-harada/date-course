@@ -65,7 +65,7 @@ jobs:
       with:
         ruby-version: 2.7.2
     - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.1.1
+      uses: webfactory/ssh-agent@v0.4.1
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Install Libmysqlclient-dev
