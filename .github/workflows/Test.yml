@@ -61,7 +61,7 @@ jobs:
       with:
         ref: master
     - name: Set up Ruby ruby:2.7.2
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
     - uses: miloserdow/capistrano-deploy@master
