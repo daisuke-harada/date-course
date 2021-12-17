@@ -20,12 +20,12 @@ RSpec.describe User, type: :model do
       end
 
       it "メールアドレスが250文字以内なら保存できること" do
-        user.email = "a"* 240 + "@gamil.com" 
+        user.email = "a" * 240 + "@gamil.com"
         expect(user).to be_valid
       end
 
       it "パスワードが6文字以上なら保存できること" do
-        user.password = user.password_confirmation = "a"*6
+        user.password = user.password_confirmation = "a" * 6
         expect(user).to be_valid
       end
     end
@@ -66,7 +66,6 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:email]).to include("has already been taken")
       end
-
 
       it "性別が入力されていなければ保存できないこと" do
         user.sex = nil
