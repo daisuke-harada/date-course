@@ -1,6 +1,6 @@
 class BusinessTime < ActiveHash::Base
   self.data = [
-    {time: '来店時間', value_time:' '},
+    {time: '--:--', value_time:' '},
     {time: '06:00', value_time: '2000-01-01 06:00:00 UTC'}, {time: '07:00', value_time: '2000-01-01 07:00:00 UTC'},
     {time: '08:00', value_time: '2000-01-01 08:00:00 UTC'}, {time: '09:00', value_time: '2000-01-01 09:00:00 UTC'},
     {time: '10:00', value_time: '2000-01-01 10:00:00 UTC'}, {time: '10:30', value_time: '2000-01-01 10:30:00 UTC'},
