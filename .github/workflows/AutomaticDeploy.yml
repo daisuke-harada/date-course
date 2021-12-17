@@ -52,7 +52,7 @@ jobs:
           rails webpacker:install
           bundle exec rails webpacker:compile RAILS_ENV=test
       - name: run rubocop
-        run: bundle exec rubocop
+        run: bundle exec rubocop --fail-level E --display-only-fail-level-offenses
       - name: run spec
         run: bundle exec bin/rspec
   deploy: # ここからdeploy
