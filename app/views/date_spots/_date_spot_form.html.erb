@@ -22,6 +22,7 @@
     <%= f.label :opening_time, "始業時間" %>
     <%= f.collection_select :opening_time, BusinessTime.all, :value_time, :time %>
     ~
+    <%= f.label :opening_time, "終業時間" %>
     <%= f.collection_select :closing_time, BusinessTime.all, :value_time, :time %>
   </p>
 
