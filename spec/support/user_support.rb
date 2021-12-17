@@ -1,5 +1,5 @@
 module UserSupport
-   # ログインを行う
+  # ログインを行う
   def sign_in_as(user)
     visit root_path
     click_link "ログイン"

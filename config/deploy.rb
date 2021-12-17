@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.16.0"
 
-set :application, "date-course" #アプリケーション名
+set :application, "date-course" # アプリケーション名
 set :repo_url, "https://github.com/daisuke-harada/date-course.git" # githubのurl
 set :deploy_to, "/home/ec2-user/date-course" # applicationをdeployする場所
 set :docker_compose_path, "docker-compose -f docker-compose.production.yml"
