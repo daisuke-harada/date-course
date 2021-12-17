@@ -1,9 +1,9 @@
-name: AutomaticDeployment
+name: AutomaticDeploy
 on:
   push:
     branches: [ master ]
 jobs:
-  rspec:
+  rspec_rubocop:
     runs-on: ubuntu-latest
     services:
       db:
@@ -50,7 +50,9 @@ jobs:
       - name: webpacker compile
         run: |
           rails webpacker:install
-          bundle exec rails webpacker:compile RAILS_ENV=test 
+          bundle exec rails webpacker:compile RAILS_ENV=test
+      - name: run rubocop
+        run: bundle exec rubocop
       - name: run spec
         run: bundle exec bin/rspec
   deploy: # ここからdeploy
