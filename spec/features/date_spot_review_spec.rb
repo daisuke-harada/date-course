@@ -86,7 +86,7 @@ RSpec.feature "DateSpotReviews", type: :feature do
   end
 
   scenario "ログインせずにレビュー新規投稿ページへ遷移しようとすると、ログインページにリダイレクトされる" do
-    address = FactoryBot.create(:address)
+    FactoryBot.create(:address)
     visit root_path
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
@@ -95,7 +95,7 @@ RSpec.feature "DateSpotReviews", type: :feature do
   end
 
   scenario "管理者でレビュー新規投稿ページへ遷移しようとすると、ログインページにリダイレクトされる" do
-    address = FactoryBot.create(:address)
+    FactoryBot.create(:address)
     admin = FactoryBot.create(:admin)
     sign_in_as admin
     click_link "デートスポットを探す"

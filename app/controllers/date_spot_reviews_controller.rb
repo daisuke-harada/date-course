@@ -18,7 +18,8 @@ class DateSpotReviewsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @date_spot_review.update(date_spot_review_params)

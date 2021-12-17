@@ -95,7 +95,7 @@ RSpec.feature "Users", type: :feature do
     click_link "アカウント情報を編集する"
     expect do
       click_link "退会する"
-      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' # alertの中身を確認する。
+      page.driver.browser.switch_to.alert.text.should == "本当に退会しますか？" # alertの中身を確認する。
       page.driver.browser.switch_to.alert.accept # okを押す。
       expect(page).to have_content "退会しました"
     end.to change(User.all, :count).by(-1)
@@ -130,7 +130,7 @@ RSpec.feature "Users", type: :feature do
 
   scenario "ユーザー一覧ページからユーザーを名前で検索する" do
     user = FactoryBot.create(:user)
-    other_user = FactoryBot.create(:other_user)
+    FactoryBot.create(:other_user)
     visit users_path
     fill_in "q_name_cont", with: user.name
     click_button "user_name_search"

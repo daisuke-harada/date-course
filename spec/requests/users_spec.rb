@@ -42,9 +42,9 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /index" do
     it "ユーザー一覧ページに遷移できること" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
-      guest = FactoryBot.create(:guest)
+      FactoryBot.create(:user)
+      FactoryBot.create(:other_user)
+      FactoryBot.create(:guest)
       get users_path
       expect(response).to have_http_status(:success)
     end

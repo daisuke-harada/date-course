@@ -31,7 +31,8 @@ class DateSpotsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @date_spot.update(date_spot_params)
