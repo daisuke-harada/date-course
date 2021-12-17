@@ -7,11 +7,11 @@ RSpec.feature "Users", type: :feature do
     visit root_path
     click_link "新規登録"
     input_registration user
-    expect {
+    expect do
       click_button "登録"
       expect(page).to have_content "新規登録が完了しました"
       user_show_display user
-    }.to change(User.all, :count).by(1)
+    end.to change(User.all, :count).by(1)
   end
 
   scenario "ログイン画面から新規登録画面に遷移し、新規登録する" do
@@ -21,10 +21,10 @@ RSpec.feature "Users", type: :feature do
     click_link "ログイン"
     click_link "新規登録はこちら"
     input_registration user
-    expect {
+    expect do
       click_button "登録"
       user_show_display user
-    }.to change(User.all, :count).by(1)
+    end.to change(User.all, :count).by(1)
   end
 
   scenario "ユーザー情報の編集に成功する" do
@@ -41,7 +41,7 @@ RSpec.feature "Users", type: :feature do
     aggregate_failures do
       expect(user.reload.name).to eq "test"
       expect(page).to have_content "test"
-      expect(page).to have_content "#{user.change_sex_data_string}"
+      expect(page).to have_content user.change_sex_data_string.to_s
     end
   end
 
@@ -79,10 +79,10 @@ RSpec.feature "Users", type: :feature do
     user = FactoryBot.create(:user)
     sign_in_as user
     click_link "アカウント情報を編集する"
-    expect {
+    expect do
       click_link "退会する"
       expect(page).to have_content "退会しました"
-    }.to change(User.all, :count).by(-1)
+    end.to change(User.all, :count).by(-1)
   end
 
   scenario "ユーザーをフォローしている状態で、退会をする", js: true do
@@ -93,12 +93,12 @@ RSpec.feature "Users", type: :feature do
     click_button "follow_id_#{other_user.id}" # フォローする。
     click_link "マイページ"
     click_link "アカウント情報を編集する"
-    expect {
+    expect do
       click_link "退会する"
-      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' #alertの中身を確認する。
-      page.driver.browser.switch_to.alert.accept #okを押す。
+      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' # alertの中身を確認する。
+      page.driver.browser.switch_to.alert.accept # okを押す。
       expect(page).to have_content "退会しました"
-    }.to change(User.all, :count).by(-1)
+    end.to change(User.all, :count).by(-1)
   end
 
   scenario "ユーザーがフォローされている状態で、退会をする", js: true do
@@ -111,12 +111,12 @@ RSpec.feature "Users", type: :feature do
     sign_in_as other_user
     click_link "マイページ"
     click_link "アカウント情報を編集する"
-    expect {
+    expect do
       click_link "退会する"
-      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' #alertの中身を確認する。
-      page.driver.browser.switch_to.alert.accept #okを押す。
+      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' # alertの中身を確認する。
+      page.driver.browser.switch_to.alert.accept # okを押す。
       expect(page).to have_content "退会しました"
-    }.to change(User.all, :count).by(-1)
+    end.to change(User.all, :count).by(-1)
   end
 
   scenario "TOPページからユーザーを名前で検索する" do
@@ -210,8 +210,8 @@ end
 # ユーザーのshowページの情報を表示する
 def user_show_display(user)
   aggregate_failures do
-    expect(page).to have_content "#{user.name}"
-    expect(page).to have_content "#{user.change_sex_data_string}"
+    expect(page).to have_content user.name.to_s
+    expect(page).to have_content user.change_sex_data_string.to_s
   end
 end
 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :date_spot do
-    id {1}
+    id { 1 }
     name { "test1" }
     genre_id { Genre.find_by(id: 1).id }
     opening_time { "2000-01-01 08:00:00 UTC" }
@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :other_spot, class: DateSpot do
-    id {2}
+    id { 2 }
     name { "test2" }
     genre_id { Genre.find_by(id: 1).id }
     opening_time { "2000-01-01 08:00:00 UTC" }

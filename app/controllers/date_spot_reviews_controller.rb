@@ -18,8 +18,7 @@ class DateSpotReviewsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @date_spot_review.update(date_spot_review_params)
@@ -38,27 +37,28 @@ class DateSpotReviewsController < ApplicationController
   end
 
   private
-    def date_spot_review_find_param_id
-      @date_spot_review = DateSpotReview.find(params[:id])
-    end
 
-    def date_spot_review_params
-      params.require(:date_spot_review).permit(:rate, :content, :user_id, :date_spot_id)
-    end
+  def date_spot_review_find_param_id
+    @date_spot_review = DateSpotReview.find(params[:id])
+  end
 
-    def logged_in_general_user
-      if logged_in? && current_user.admin == true
-        flash[:danger] = "一般ステータスのアカウントでログインしてください"
-        redirect_to login_url
-      elsif !logged_in?
-        flash[:danger] = "ログインしてください"
-        redirect_to login_url
-      end
-    end
+  def date_spot_review_params
+    params.require(:date_spot_review).permit(:rate, :content, :user_id, :date_spot_id)
+  end
 
-    # そのアカウントを持っている人以外がアクセスすることを防ぐ
-    def correct_user
-      date_spot_review = DateSpotReview.find(params[:id])
-      redirect_to(root_url) unless date_spot_review.user == current_user 
+  def logged_in_general_user
+    if logged_in? && current_user.admin == true
+      flash[:danger] = "一般ステータスのアカウントでログインしてください"
+      redirect_to login_url
+    elsif !logged_in?
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
     end
+  end
+
+  # そのアカウントを持っている人以外がアクセスすることを防ぐ
+  def correct_user
+    date_spot_review = DateSpotReview.find(params[:id])
+    redirect_to(root_url) unless date_spot_review.user == current_user
+  end
 end

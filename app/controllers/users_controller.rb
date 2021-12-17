@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   before_action :set_q_for_date_spot
   before_action :set_q_for_user
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -23,8 +22,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -50,26 +48,25 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :sex, :password, :password_confirmation, :image)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :sex, :password, :password_confirmation, :image)
+  end
 
-    def user_find_param_id
-      @user = User.find(params[:id])
-    end
+  def user_find_param_id
+    @user = User.find(params[:id])
+  end
 
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "ログインしてください"
-        redirect_to login_url
-      end
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
     end
+  end
 
-    # そのアカウントを持っている人以外がアクセスすることを防ぐ
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(current_user) unless @user == current_user 
-    end
+  # そのアカウントを持っている人以外がアクセスすることを防ぐ
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(current_user) unless @user == current_user
+  end
 end
-

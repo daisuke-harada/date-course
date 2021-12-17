@@ -1,9 +1,9 @@
 module UsersHelper
   def guest_name
-    return "guest"
+    "guest"
   end
 
   def guest_password
-    return "foobar"
+    "foobar"
   end
 end

@@ -1,11 +1,11 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    if Rails.env.productoin? # 開発環境とテスト環境ではfalseにする。
-      config.enabled = true
-    else
-      config.enabled = false
-    end
-    
+    config.enabled = if Rails.env.productoin? # 開発環境とテスト環境ではfalseにする。
+                       true
+                     else
+                       false
+                     end
+
     config.fog_provider = 'AWS'
     config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
     config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
@@ -18,8 +18,8 @@ if defined?(AssetSync)
     #
     # Change canned ACL of uploaded object. Default is unset. Will override fog_public if set.
     # Choose from: private | public-read | public-read-write | aws-exec-read |
-    #              authenticated-read | bucket-owner-read | bucket-owner-full-control 
-    # config.aws_acl = nil 
+    #              authenticated-read | bucket-owner-read | bucket-owner-full-control
+    # config.aws_acl = nil
     #
     # Change host option in fog (only if you need to)
     # config.fog_host =

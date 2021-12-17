@@ -12,12 +12,12 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "レビューする"
     find("#star-5-left").click
     fill_in "コメント", with: date_spot_review.content
-    expect {
+    expect do
       click_button "投稿する"
       expect(page).to have_content "投稿しました"
       expect(page).to have_content "4.5"
       expect(page).to have_content "MyText"
-    }.to change(DateSpotReview.all, :count).by(1)
+    end.to change(DateSpotReview.all, :count).by(1)
   end
 
   scenario "レビューを評価値3で新規投稿し、その後、評価値を0.5に編集する。", js: true do
@@ -31,12 +31,12 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "レビューする"
     find("#star-3-right").click
     fill_in "コメント", with: date_spot_review.content
-    expect {
+    expect do
       click_button "投稿する"
       expect(page).to have_content "投稿しました"
       expect(page).to have_content "3"
       expect(page).to have_content "MyText"
-    }.to change(DateSpotReview.all, :count).by(1)
+    end.to change(DateSpotReview.all, :count).by(1)
     click_link "レビューを編集する"
     find("#star-1-left").click
     click_button "更新する"
@@ -67,10 +67,10 @@ RSpec.feature "DateSpotReviews", type: :feature do
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
     click_link "レビューを編集する"
-    expect {
+    expect do
       click_link "削除する"
       expect(page).to have_content "レビューを削除しました"
-    }.to change(DateSpotReview.all, :count).by(-1)
+    end.to change(DateSpotReview.all, :count).by(-1)
   end
 
   scenario "デートスポット詳細ページから、レビューを削除する" do
@@ -79,10 +79,10 @@ RSpec.feature "DateSpotReviews", type: :feature do
     sign_in_as date_spot_review.user
     click_link "デートスポットを探す"
     click_link "デートスポットを見る"
-    expect {
+    expect do
       click_link "削除する"
       expect(page).to have_content "レビューを削除しました"
-    }.to change(DateSpotReview.all, :count).by(-1)
+    end.to change(DateSpotReview.all, :count).by(-1)
   end
 
   scenario "ログインせずにレビュー新規投稿ページへ遷移しようとすると、ログインページにリダイレクトされる" do

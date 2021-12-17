@@ -1,5 +1,4 @@
 module SessionsHelper
-  
   # 渡されたユーザーでログインをする
   def log_in(user)
     session[:user_id] = user.id
@@ -42,7 +41,7 @@ module SessionsHelper
   def admin_logged_in?
     !current_user.nil? && current_user.admin == true
   end
-  
+
   def current_user?(user)
     user && user == current_user
   end

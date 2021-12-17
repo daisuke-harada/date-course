@@ -4,7 +4,7 @@ class FilterController < ApplicationController
 
   def search
     @select_search_target = params[:select_search_target]
-    
+
     if @select_search_target == "User"
       @user_custom_search_params = User.ransack(name_cont: params[:search_name])
       @users = @user_custom_search_params.result

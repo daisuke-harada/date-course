@@ -34,7 +34,7 @@ end
 # ユーザーのshowページの情報を表示する
 def user_show_display(user)
   aggregate_failures do
-    expect(page).to have_content "#{user.name}"
-    expect(page).to have_content "#{user.change_sex_data_string}"
+    expect(page).to have_content user.name.to_s
+    expect(page).to have_content user.change_sex_data_string.to_s
   end
 end

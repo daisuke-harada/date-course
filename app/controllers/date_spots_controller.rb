@@ -20,7 +20,6 @@ class DateSpotsController < ApplicationController
   end
 
   def show
-    
     @date_spot_reviews_rate_average = review_average_calculation(@date_spot)
 
     # デートスポットのレビューをすべて表示する際に、先頭に自分がレビューしたレビューが来るようにする。
@@ -32,8 +31,7 @@ class DateSpotsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @date_spot.update(date_spot_params)
@@ -56,28 +54,27 @@ class DateSpotsController < ApplicationController
   end
 
   private
-    def date_spot_params
-      params.require(:date_spot).permit(
-        :name, :genre_id,
-        :opening_time,
-        :closing_time,
-        :image,
-        address_attributes: [:prefecture_id,
-                             :city_name]
-        )
-    end
 
-    def date_spot_find_param_id
-      @date_spot = DateSpot.find(params[:id])
-    end
+  def date_spot_params
+    params.require(:date_spot).permit(
+      :name, :genre_id,
+      :opening_time,
+      :closing_time,
+      :image,
+      address_attributes: [:prefecture_id,
+                           :city_name]
+    )
+  end
 
-    def logged_in_admin
-      unless admin_logged_in?
-        if logged_in?
-          log_out
-        end
-        flash[:danger] = "管理者権限を持つアカウントでログインしてください"
-        redirect_to login_url
-      end
+  def date_spot_find_param_id
+    @date_spot = DateSpot.find(params[:id])
+  end
+
+  def logged_in_admin
+    unless admin_logged_in?
+      log_out if logged_in?
+      flash[:danger] = "管理者権限を持つアカウントでログインしてください"
+      redirect_to login_url
     end
+  end
 end

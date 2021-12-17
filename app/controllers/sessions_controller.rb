@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(name: params[:session][:name])
@@ -20,14 +19,14 @@ class SessionsController < ApplicationController
 
   private
 
-    def administrator_confirm_log_in (user)
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      flash[:success] = "ログインに成功しました。"
-      if user.admin == false
-        redirect_back_or user
-      elsif user.admin == true
-        redirect_back_or root_path
-      end
+  def administrator_confirm_log_in(user)
+    log_in user
+    params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+    flash[:success] = "ログインに成功しました。"
+    if user.admin == false
+      redirect_back_or user
+    elsif user.admin == true
+      redirect_back_or root_path
     end
+  end
 end
