@@ -94,9 +94,10 @@ RSpec.feature "Users", type: :feature do
     click_link "マイページ"
     click_link "アカウント情報を編集する"
     expect do
-      click_link "退会する"
-      page.driver.browser.switch_to.alert.text.should == "本当に退会しますか？" # alertの中身を確認する。
-      page.driver.browser.switch_to.alert.accept # okを押す。
+      # この記述は退会するlinkをクリックした後にokボタンを押す実装になっている。キャンセルを押す場合はpage.dismiss_confirm do...endの記述になる。
+      page.accept_confirm("本当に退会しますか？") do
+        click_link("退会する")
+      end
       expect(page).to have_content "退会しました"
     end.to change(User.all, :count).by(-1)
   end
@@ -112,9 +113,9 @@ RSpec.feature "Users", type: :feature do
     click_link "マイページ"
     click_link "アカウント情報を編集する"
     expect do
-      click_link "退会する"
-      page.driver.browser.switch_to.alert.text.should == '本当に退会しますか？' # alertの中身を確認する。
-      page.driver.browser.switch_to.alert.accept # okを押す。
+      page.accept_confirm("本当に退会しますか？") do
+        click_link("退会する")
+      end
       expect(page).to have_content "退会しました"
     end.to change(User.all, :count).by(-1)
   end
