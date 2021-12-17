@@ -52,11 +52,11 @@ jobs:
           rails webpacker:install
           bundle exec rails webpacker:compile RAILS_ENV=test
       - name: run rubocop
-        run: bundle exec rubocop
+        run: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
       - name: run spec
         run: bundle exec bin/rspec
   deploy: # ここからdeploy
-    needs: rspec # rspecが実行できた場合のみ実行
+    needs: rspec_rubocop # rspecが実行できた場合のみ実行
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
