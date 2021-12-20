@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_114737) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_114737) do
   create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 2021_06_08_114737) do
     t.bigint "date_spot_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index %w[date_spot_id created_at], name: "index_date_spot_reviews_on_date_spot_id_and_created_at"
+    t.index ["date_spot_id", "created_at"], name: "index_date_spot_reviews_on_date_spot_id_and_created_at"
     t.index ["date_spot_id"], name: "index_date_spot_reviews_on_date_spot_id"
-    t.index %w[user_id created_at], name: "index_date_spot_reviews_on_user_id_and_created_at"
+    t.index ["user_id", "created_at"], name: "index_date_spot_reviews_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_date_spot_reviews_on_user_id"
   end
 
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_114737) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index %w[user_id follow_id], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
