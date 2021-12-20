@@ -1,5 +1,5 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
-  <h1 class="w-full m-5 text-sm font-bold md:text-3xl">
+  <h1 class="w-full m-5 text-sm font-bold md:text-3xl" id="date_spot_name">
     <%= @date_spot.name %>
   </h1>
 
@@ -24,13 +24,17 @@
   <div class="mx-5 my-10 text-sm font-bold md:text-xl">
     <%= render 'date_spot_business_hour', date_spot: @date_spot %>
   </div>
+
   <div class="mx-5 my-10 text-sm font-bold md:text-xl">
     <span class="font-bold">ジャンル:</span>
     <%= @date_spot.genre.name %>
   </div>
-  <div class="m-5 text-center text-sm font-bold md:text-xl"><%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %></div>
-  <div class="w-full h-full bg-gray-500">
-    <h1 class="text-center">地図</h1>
+
+  <div class="m-5 text-center text-sm font-bold md:text-xl" id="address">
+    <%= @date_spot.address.prefecture.name %><%= @date_spot.address.city_name %>
+  </div>
+
+  <div class="h-96 m-auto" id="map" >
   </div>
 
   <div class="text-center">
@@ -79,7 +83,7 @@
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
-　　 // 小数点部分の評価を画像に反映させる。反映
+    // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
       let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
@@ -87,6 +91,52 @@
       let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
-
   }());
+
+  function initMap(){
+    //地図を表示する領域の div 要素のオブジェクトを変数に代入
+    const target = document.getElementById('map');
+    //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
+    const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
+    //表示したい住所を取得
+    const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
+    //ジオコーディングのインスタンスの生成
+    const geocoder = new google.maps.Geocoder();
+
+    //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
+    geocoder.geocode({ address: inputAddress }, function(results, status){
+    //ステータスが OK で results[0] が存在すれば、地図を生成
+      if (status === 'OK' && results[0]){
+        //マップのインスタンスを変数に代入
+        const map = new google.maps.Map(target, {
+        //results[0].geometry.location に緯度・経度のオブジェクトが入っている
+          center: results[0].geometry.location,
+          zoom: 15
+        });
+        //マーカーの生成
+        const marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map,
+        });
+        //取得した座標の生成
+        const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+        //情報ウィンドウに表示するコンテンツを作成
+        const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+        //情報ウィンドウのインスタンスを生成
+        var infowindow = new google.maps.InfoWindow({
+          content: content,
+        });
+        //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+        google.maps.event.addListener(marker, 'click', function() {
+          //第2引数にマーカーを指定して紐付け
+          infowindow.open(map, marker);
+        });
+      } else {
+      //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
+        alert("住所から位置の取得ができませんでした。: " + status);
+        return;
+      }
+    });
+  };
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
