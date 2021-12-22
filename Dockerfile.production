@@ -13,7 +13,7 @@ COPY Gemfile /date-course/Gemfile
 COPY Gemfile.lock /date-course/Gemfile.lock
 
 RUN gem install bundler
-RUN bundle install
+RUN /bin/sh -c bundle install
 
 COPY . /date-course
 
