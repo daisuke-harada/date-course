@@ -1,11 +1,8 @@
 if defined?(AssetSync)
   AssetSync.configure do |config|
-    config.enabled = if Rails.env.productoin? # 開発環境とテスト環境ではfalseにする。
-                       true
-                     else
-                       false
-                     end
-
+    unless Rails.env.productoin? # 開発環境とテスト環境ではS3からアセットファイルを配信しないようにする。
+      config.enabled = false
+    end
     config.fog_provider = 'AWS'
     config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
     config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
