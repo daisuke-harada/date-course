@@ -1,4 +1,5 @@
 class DateCoursesController < ApplicationController
+  
   def new
   end
 
