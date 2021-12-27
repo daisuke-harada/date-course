@@ -20,4 +20,5 @@ class DateCoursesController < ApplicationController
 
   def destroy
   end
+  
 end
