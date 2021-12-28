@@ -1,15 +1,14 @@
-class DateCoursesController < ApplicationController
-  
+class ManagementCoursesController < ApplicationController
   def new
-  end
-
-  def edit
   end
 
   def show
   end
 
   def index
+  end
+
+  def edit
   end
 
   def create
@@ -20,5 +19,4 @@ class DateCoursesController < ApplicationController
 
   def destroy
   end
-  
 end

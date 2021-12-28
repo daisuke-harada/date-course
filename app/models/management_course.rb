@@ -1,0 +1,2 @@
+class ManagementCourse < ApplicationRecord
+end

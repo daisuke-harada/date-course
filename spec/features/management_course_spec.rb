@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "DateCourses", type: :feature do
+RSpec.feature "ManagementCourses", type: :feature do
   scenario "ヘッダーからデートコース一覧画面に遷移する" do
     visit root_path
     click_link "デートコースを探す"
