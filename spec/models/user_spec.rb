@@ -68,9 +68,9 @@ RSpec.describe User, type: :model do
       end
 
       it "性別が入力されていなければ保存できないこと" do
-        user.sex = nil
+        user.gender = nil
         user.valid?
-        expect(user.errors[:sex]).to include("can't be blank")
+        expect(user.errors[:gender]).to include("can't be blank")
       end
     end
   end
