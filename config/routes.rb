@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :date_spot_reviews, only: [:create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :courses, only: [:create, :destroy, :show, :index, :update]
+  resources :create_courses, only: [:index]
 end
