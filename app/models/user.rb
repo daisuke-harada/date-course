@@ -27,13 +27,13 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  validates :sex, presence: true
+  validates :gender, presence: true
 
   # 画像ファイルのバリデーション
   validate :image_type
 
-  def change_sex_data_string
-    sex == 1 ? "男" : "女"
+  def change_gender_data_string
+    gender == 1 ? "男" : "女"
   end
 
   # 渡された文字列のハッシュを返す

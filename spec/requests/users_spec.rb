@@ -12,7 +12,7 @@ RSpec.describe "Users", type: :request do
       user = FactoryBot.create(:user)
       sign_in_request_as user
       expect(user.admin).to eq false
-      admin_change_params = { user: { name: user.name, email: user.email, sex: user.sex, password: user.password, password_confirmation: user.password_confirmation, admin: true } }
+      admin_change_params = { user: { name: user.name, email: user.email, gender: user.gender, password: user.password, password_confirmation: user.password_confirmation, admin: true } }
       patch user_path(user), params: admin_change_params
       expect(user.reload.admin).to eq false
     end
