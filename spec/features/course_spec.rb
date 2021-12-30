@@ -6,11 +6,4 @@ RSpec.feature "ManagementCourses", type: :feature do
     click_link "デートコースを探す"
     expect(page).to have_content "デートコース一覧"
   end
-
-  scenario "ヘッダーからデートコース作成画面に遷移する" do
-    user = FactoryBot.create(:user)
-    sign_in_as(user)
-    click_link "デートコース作成"
-    expect(page).to have_content "デートコースを作成する"
-  end
 end
