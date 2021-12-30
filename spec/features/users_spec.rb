@@ -41,7 +41,7 @@ RSpec.feature "Users", type: :feature do
     aggregate_failures do
       expect(user.reload.name).to eq "test"
       expect(page).to have_content "test"
-      expect(page).to have_content user.change_sex_data_string.to_s
+      expect(page).to have_content user.change_gender_data_string.to_s
     end
   end
 
@@ -212,7 +212,7 @@ end
 def user_show_display(user)
   aggregate_failures do
     expect(page).to have_content user.name.to_s
-    expect(page).to have_content user.change_sex_data_string.to_s
+    expect(page).to have_content user.change_gender_data_string.to_s
   end
 end
 

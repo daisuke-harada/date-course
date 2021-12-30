@@ -35,6 +35,6 @@ end
 def user_show_display(user)
   aggregate_failures do
     expect(page).to have_content user.name.to_s
-    expect(page).to have_content user.change_sex_data_string.to_s
+    expect(page).to have_content user.change_gender_data_string.to_s
   end
 end

@@ -11,7 +11,8 @@ class User < ApplicationRecord
   # ユーザーが他のユーザーにフォローされている状態で退会した場合にrelationshipのデータが一緒に消えるようにdependent: :destroyを追加。
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
-
+  
+  has_many :courses, dependent: :destroy
   # 仮想の属性を作成 データベースに保存せず、一定期間だけ用いたい属性
   attr_accessor :remember_token
 
@@ -27,13 +28,13 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  validates :sex, presence: true
+  validates :gender, presence: true
 
   # 画像ファイルのバリデーション
   validate :image_type
 
-  def change_sex_data_string
-    sex == 1 ? "男" : "女"
+  def change_gender_data_string
+    gender == 1 ? "男" : "女"
   end
 
   # 渡された文字列のハッシュを返す

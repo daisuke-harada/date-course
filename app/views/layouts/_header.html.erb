@@ -2,7 +2,7 @@
   <div class="w-full flex justify-around" style="border-bottom: solid 1px; border-color: #E06F5C;">
     <% if logged_in? && current_user.admin == false%>
       <div class="mt-6">
-        <%= link_to "デートコース作成", new_date_course_path, class: "btn btn-salmon" %>
+        <%= link_to "デートコース作成", new_management_course_path, class: "btn btn-salmon" %>
       </div>
       <div class="m-3">
         <%= link_to "DateCourses", root_url, class: "text-black text-6xl" %>
@@ -39,7 +39,7 @@
   </div>
   <ul class="flex flex-wrap text-base justify-center">
     <li class="my-3 mx-6"><%= link_to "デートスポットを探す", date_spots_path, class: "text-black" %></li>
-    <li class="my-3 mx-6"><%= link_to "デートコースを探す", date_courses_path, class: "text-black" %></li>
+    <li class="my-3 mx-6"><%= link_to "デートコースを探す", management_courses_path, class: "text-black" %></li>
     <li class="my-3 mx-6"><%= link_to "ユーザーを探す", users_path, class: "text-black" %></li>
     <% if logged_in? && current_user.admin == false%>
       <li class="my-3 mx-6"><%= link_to "マイページ", user_path(current_user), class: "text-black" %></li>
