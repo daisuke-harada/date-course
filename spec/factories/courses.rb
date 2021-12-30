@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :course do
-    user { nil }
-    procedure { 1 }
+    id { 1 }
     authority { false }
+    association :user
   end
 end

@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#create" do
+    let(:relationship) { FactoryBot.build(:relationship) }
+    context "relationshipを保存できる場合" do
+      it "正常値の場合、保存できること" do
+        expect(relationship).to be_valid
+      end
+    end
+  end
 end

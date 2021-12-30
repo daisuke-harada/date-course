@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :management_course do
-    course { nil }
-    date_spot { nil }
+    id { 1 }
+    association :course
+    association :date_spot
   end
 end
