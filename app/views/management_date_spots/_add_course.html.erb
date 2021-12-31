@@ -1,1 +1,6 @@
-<button class="btn btn-salmon my-5">デートコースに追加する<button>
+<%= form_with url: add_course_path do |f| %>
+  <div class="text-center p-1">
+    <%= hidden_field_tag :date_spot_id, date_spot.id %>
+    <%= f.submit "デートコースに追加する", class: "btn btn-salmon my-5" %>
+  </div>
+<% end %>
