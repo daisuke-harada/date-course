@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :courses, only: [:create, :destroy, :show, :index, :update]
   resources :create_courses, only: [:index]
+  # get '/my_course' => 'courses#my_course'
+  # post '/add_course' => 'courses#add_course'
+  # post '/update_course' => 'courses#update_course'
+  # delete '/delete_course' => 'courses#delete_course'
 end
