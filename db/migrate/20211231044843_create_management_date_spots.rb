@@ -7,6 +7,6 @@ class CreateManagementDateSpots < ActiveRecord::Migration[6.1]
       t.timestamps
     end
     add_index :management_date_spots, [:management_id, :created_at]
-    add_index :management_date_spots, [:date_spot_id, :created_at]
+    add_index :management_date_spots, [:date_spot_id, :created_at], unique: true
   end
 end

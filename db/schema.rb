@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
     t.bigint "date_spot_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date_spot_id", "created_at"], name: "index_management_date_spots_on_date_spot_id_and_created_at"
+    t.index ["date_spot_id", "created_at"], name: "index_management_date_spots_on_date_spot_id_and_created_at", unique: true
     t.index ["date_spot_id"], name: "index_management_date_spots_on_date_spot_id"
     t.index ["management_id", "created_at"], name: "index_management_date_spots_on_management_id_and_created_at"
     t.index ["management_id"], name: "index_management_date_spots_on_management_id"

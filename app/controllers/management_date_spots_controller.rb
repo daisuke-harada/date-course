@@ -6,6 +6,11 @@ class ManagementDateSpotsController < ApplicationController
   end
 
   def add_course
+    unless logged_in?
+      flash[:alert] = 'ログインしてください'
+      redirect_to login_path
+    end
+
     @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id])
     if @management_date_spot.save
       redirect_to my_course_path
