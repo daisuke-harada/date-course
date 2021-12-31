@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :date_spot_reviews, only: [:create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
   get '/my_course' => 'courses#my_course'
-  post '/update_course' => 'courses#update_course'
+  post '/add_course' => 'courses#add_course'
   delete '/delete_course' => 'courses#delete_course'
   resources :course, only: [:index, :show]
 end
