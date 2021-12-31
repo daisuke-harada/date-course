@@ -7,8 +7,8 @@ class ManagementDateSpotsController < ApplicationController
 
   def add_course
     unless logged_in?
-      flash[:alert] = 'ログインしてください'
-      redirect_to login_path
+      flash[:danger] = 'ログインしてください'
+      return redirect_to login_path
     end
 
     @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id])
@@ -21,9 +21,9 @@ class ManagementDateSpotsController < ApplicationController
 
   def delete_course
     if @management_date_spot.destroy
-      flash[:notice] = 'デートコースからデートスポットが削除されました'
+      flash[:success] = 'デートコースからデートスポットが削除されました'
     else
-      flash[:alert] = '削除に失敗しました'
+      flash[:danger] = '削除に失敗しました'
     end
     redirect_to my_course_path
   end
