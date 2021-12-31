@@ -38,8 +38,8 @@
   </div>
 
   <div class="text-center">
-      <button class="btn btn-salmon my-5">デートコースに追加する<button>
-      <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
+    <%= render 'management_date_spots/add_course'%>
+    <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), class:"btn btn-salmon m-5" if admin_logged_in? %>
   </div>
 </div>
 
