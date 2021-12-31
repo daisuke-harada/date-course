@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_31_042129) do
+ActiveRecord::Schema.define(version: 2021_12_31_044843) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -93,14 +93,24 @@ ActiveRecord::Schema.define(version: 2021_12_31_042129) do
     t.index ["date_spot_id"], name: "index_information_courses_on_date_spot_id"
   end
 
-  create_table "management_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "management_date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "management_id", null: false
     t.bigint "date_spot_id", null: false
     t.integer "procedure"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date_spot_id"], name: "index_management_courses_on_date_spot_id"
-    t.index ["user_id"], name: "index_management_courses_on_user_id"
+    t.index ["date_spot_id", "created_at"], name: "index_management_date_spots_on_date_spot_id_and_created_at"
+    t.index ["date_spot_id"], name: "index_management_date_spots_on_date_spot_id"
+    t.index ["management_id", "created_at"], name: "index_management_date_spots_on_management_id_and_created_at"
+    t.index ["management_id"], name: "index_management_date_spots_on_management_id"
+  end
+
+  create_table "managements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "created_at"], name: "index_managements_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_managements_on_user_id"
   end
 
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -133,8 +143,9 @@ ActiveRecord::Schema.define(version: 2021_12_31_042129) do
   add_foreign_key "date_spot_reviews", "users"
   add_foreign_key "information_courses", "courses"
   add_foreign_key "information_courses", "date_spots"
-  add_foreign_key "management_courses", "date_spots"
-  add_foreign_key "management_courses", "users"
+  add_foreign_key "management_date_spots", "date_spots"
+  add_foreign_key "management_date_spots", "managements"
+  add_foreign_key "managements", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
 end
