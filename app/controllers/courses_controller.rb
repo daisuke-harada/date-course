@@ -1,16 +1,14 @@
 class CoursesController < ApplicationController
-  def show
+  def my_course
+
   end
 
-  def index
+  def add_course
   end
 
-  def create
+  def update_course
   end
 
-  def update
-  end
-
-  def destroy
+  def delete_course
   end
 end

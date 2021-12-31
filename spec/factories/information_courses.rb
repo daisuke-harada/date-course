@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :management_course do
+  factory :information_course do
     procedure { 1 }
-    association :user
     association :date_spot
+    association :course
   end
 end

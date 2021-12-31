@@ -1,7 +1,7 @@
-class ManagementCourse < ApplicationRecord
-  belongs_to :user
+class InformationCourse < ApplicationRecord
+  belongs_to :course
   belongs_to :date_spot
-  validates :user_id, presence: true
+  validates :course_id, presence: true
   validates :date_spot_id, presence: true
   validates :procedure, presence: true
 end
