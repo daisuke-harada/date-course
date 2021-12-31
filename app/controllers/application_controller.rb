@@ -17,10 +17,13 @@ class ApplicationController < ActionController::Base
   end
 
   def current_management
-    if current_user
-      current_management = current_user.management || current_user.create_management!
-    else
-    end
+   if session[:management_id]
+     current_management = Management.find_by(id: session[:management_id])
+   else
+     current_mangement = Management.create
+   end
+   session[:management_id] = current_management.id
+   current_management
   end
 
 end
