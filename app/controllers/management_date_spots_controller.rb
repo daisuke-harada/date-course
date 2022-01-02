@@ -6,7 +6,7 @@ class ManagementDateSpotsController < ApplicationController
   end
 
   def add_course
-    unless logged_in?
+     if !logged_in?
       flash[:danger] = 'ログインしてください'
       return redirect_to login_path
     end
