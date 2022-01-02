@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="md:flex md:justify-center text-center">
-    <button class="btn btn-salmon w-60 m-2">デートコースに追加<button>
+    <%= render 'management_date_spots/add_course', date_spot: date_spot %>
     <%= link_to "デートスポットを見る", date_spot_path(date_spot), class:"btn btn-salmon w-60 m-2"%>
   </div>
 </div>

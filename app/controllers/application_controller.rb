@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UsersHelper
   include DateSpotReviewsHelper
+  include ManagementDateSpotsHelper
 
   # デートスポットの名前検索の際に使用する
   def set_q_for_date_spot
@@ -13,4 +14,5 @@ class ApplicationController < ActionController::Base
     # 同時に１画面で同じパラメータを検索するため、違うパラメータを用意する。
     @user_search_params = User.ransack(params[:q])
   end
+
 end
