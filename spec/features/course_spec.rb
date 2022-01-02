@@ -1,16 +1,9 @@
 require 'rails_helper'
 
-RSpec.feature "ManagementCourses", type: :feature do
-  scenario "ヘッダーからデートコース一覧画面に遷移する" do
+RSpec.feature "Courses", type: :feature do
+  scenario "デートコース一覧画に遷移する" do
     visit root_path
     click_link "デートコースを探す"
-    expect(page).to have_content "デートコース一覧"
-  end
-
-  scenario "ヘッダーからデートコース作成画面に遷移する" do
-    user = FactoryBot.create(:user)
-    sign_in_as(user)
-    click_link "デートコース作成"
-    expect(page).to have_content "デートコースを作成する"
+    expect(page).to have_content "デートコース一覧画面"
   end
 end

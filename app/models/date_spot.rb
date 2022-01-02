@@ -7,6 +7,8 @@ class DateSpot < ApplicationRecord
   accepts_nested_attributes_for :address
   has_many :date_spot_reviews, dependent: :destroy
   has_one_attached :image
+  has_many :information_courses, dependent: :destroy
+  has_many :management_date_spots, dependent: :destroy
   validates :name, presence: true
 
   # 画像のファイルのバリデーション

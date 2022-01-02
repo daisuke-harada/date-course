@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :user
   
   has_many :courses, dependent: :destroy
+  has_one :management, dependent: :destroy
   # 仮想の属性を作成 データベースに保存せず、一定期間だけ用いたい属性
   attr_accessor :remember_token
 

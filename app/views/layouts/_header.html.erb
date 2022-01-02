@@ -2,7 +2,7 @@
   <div class="w-full flex justify-around" style="border-bottom: solid 1px; border-color: #E06F5C;">
     <% if logged_in? && current_user.admin == false%>
       <div class="mt-6">
-        <%= link_to "デートコース作成", new_course_path, class: "btn btn-salmon" %>
+        <%= link_to "デートコース作成", my_course_path, class: "btn btn-salmon" %>
       </div>
       <div class="m-3">
         <%= link_to "DateCourses", root_url, class: "text-black text-6xl" %>
