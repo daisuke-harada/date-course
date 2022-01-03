@@ -6,10 +6,17 @@ class ManagementDateSpotsController < ApplicationController
   end
 
   def add_course
+    # ログインしてない場合には処理ができないようにする。
     if !logged_in?
       flash[:danger] = 'ログインしてください'
       return redirect_to login_path
     end
+
+    if current_management.management_date_spots.find_by(date_spot_id: params[:date_spot_id])
+      flash[:danger] = 'このデートスポットはすでに追加されています'
+      return redirect_to root_path
+    end
+
 
     @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id])
     if @management_date_spot.save
