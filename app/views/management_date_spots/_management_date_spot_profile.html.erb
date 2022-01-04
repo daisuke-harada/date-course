@@ -1,0 +1,70 @@
+<div class="p-5 m-5 shadow-lg bg-white border border-gray-200">
+  <div class="md:flex">
+    <div class="md:w-5/12 w-full">
+      <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
+    </div>
+    <div class="md:w-7/12 w-full p-3">
+      <p class="font-bold"><%= date_spot.name %></p>
+      <p class="my-5">口コミ<span class="ml-5">12<span></p>
+      <div class="w-full flex my-5" id = "date_spot_reviews_rate_average-<%= date_spot.id %>" >
+        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-1-id-<%= date_spot.id %>" class ="w-7 h-7">
+        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-2-id-<%= date_spot.id %>" class ="w-7 h-7">
+        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-3-id-<%= date_spot.id %>" class ="w-7 h-7">
+        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4-id-<%= date_spot.id %>" class ="w-7 h-7">
+        <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5-id-<%= date_spot.id %>" class ="w-7 h-7">
+        <div class="mx-4 mt-1 font-bold">評価</div>
+        <div class="font-bold mt-1" id = "rate_average_number-<%= date_spot.id %>">
+          <%= review_average_calculation(date_spot) %>
+        </div>
+      </div>
+      <p><%= render 'date_spots/date_spot_business_hour', date_spot: date_spot %></p>
+      <p class="mt-5 font-bold"> 住所</p>
+      <p class="mt-2"><%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
+      <p class="mt-5"><span class="font-bold">ジャンル</span><%= date_spot.genre.name %></p>
+    </div>
+  </div>
+  <div class="md:flex md:justify-center text-center">
+    <%= render 'management_date_spots/add_course', date_spot: date_spot %>
+    <%= link_to "デートスポットを見る", date_spot_path(date_spot), class:"btn btn-salmon w-60 m-2"%>
+  </div>
+</div>
+
+<script>
+  (function(){
+    let images = document.getElementById("date_spot_reviews_rate_average-<%= date_spot.id %>").childNodes;
+    let rate_average_number = Number(document.getElementById("rate_average_number-<%= date_spot.id %>").innerText);
+
+    // 小数点第二以下を切り捨てる。
+    rate_average_number = Math.floor(rate_average_number * 10) / 10;
+
+    // viewに小数点第二以下を切り捨てた数字を反映する。
+    document.getElementById("rate_average_number-<%= date_spot.id %>").innerText = rate_average_number;
+
+    // 小数
+    let rate_decimal_value = 0;
+
+    // 小数かどうかを判定する。
+    if(!Number.isInteger(rate_average_number)){
+      rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
+    };
+
+    // 整数
+    let rate_integral_value = Math.trunc(rate_average_number);
+    
+    // 整数値部分の評価を画像に反映
+    for (let i= 1; i <= rate_integral_value; i++){
+      let image = document.getElementById(`star-average-${i}-id-<%= date_spot.id %>`);
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+    };
+
+    // 小数点部分の評価を画像に反映させる。反映
+    if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
+      let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
+    }else if(rate_decimal_value >= 0.6){
+      let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+    };
+
+  }());
+</script>
