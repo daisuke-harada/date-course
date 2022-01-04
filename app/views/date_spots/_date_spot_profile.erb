@@ -1,7 +1,9 @@
 <div class="p-5 m-5 shadow-lg bg-white border border-gray-200">
   <div class="md:flex">
     <div class="md:w-5/12 w-full">
-      <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
+      <%= link_to date_spot_path(date_spot), id:"date_spot_image_id_#{date_spot.id}" do %>
+        <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
+      <% end %>
     </div>
     <div class="md:w-7/12 w-full p-3">
       <p class="font-bold"><%= date_spot.name %></p>

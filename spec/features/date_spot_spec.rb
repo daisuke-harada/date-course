@@ -114,6 +114,18 @@ RSpec.feature "DateSpots", type: :feature do
     expect(find('#search_no_result').text).to eq '⚠︎検索結果はありませんでした。'
   end
 
+  scenario "デートスポット一覧ページからデートスポットを一つ選択し、そのデートスポットの詳細ページに遷移する" do
+    FactoryBot.create(:address)
+    visit date_spots_path
+    click_link "デートスポットを見る"
+  end
+  scenario "デートスポット一覧ページからデートスポットを一つ選択し、そのデートスポットの画像をクリックして詳細ページに遷移する" do
+    address = FactoryBot.create(:address)
+    address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
+    visit date_spots_path
+    find("#date_spot_image_id_#{address.date_spot.id}").click
+  end
+
   scenario "ユーザー一覧ページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     FactoryBot.create(:user)

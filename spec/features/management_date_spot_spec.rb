@@ -32,4 +32,15 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     click_button "デートコースに追加する"
     expect(page).to have_content "このデートスポットはすでに追加されています"
   end
+
+  scenario "デートコースに追加されたデートスポットから、デートスポット詳細ページに移動する" do
+    user = FactoryBot.create(:user)
+    address = FactoryBot.create(:address)
+    date_spot = address.date_spot
+    date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
+    sign_in_as user
+    click_link "デートスポットを探す"
+    click_button "デートコースに追加する"
+    find("#date_spot_image_id_#{address.date_spot.id}").click
+  end
 end
