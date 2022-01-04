@@ -1,6 +1,17 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
-<h1 class="text-3xl">デートコース作成画面</h1>
-<% @management_date_spots.each do |management_date_spot| %>
-  <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
-<% end %>
+  <h1 class="text-3xl">デートコース作成画面</h1>
+  <div class="w-full">
+    <% if @management_date_spots == []%>
+      <p class="text-blue-400 text-center m-10 text-3xl">
+        デートスポットをデートコースに追加してみましょう
+      </p>
+    <% else %>
+      <% @management_date_spots.each do |management_date_spot| %>
+        <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="text-center">
+    <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+  </div>
 </div>

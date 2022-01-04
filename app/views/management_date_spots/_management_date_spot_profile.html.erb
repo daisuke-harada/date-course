@@ -29,6 +29,7 @@
     <span class="m-5 font-bold">住所</span>
     <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %>
   </p>
+  <%= link_to "デートコースから削除する", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
 </div>
 
 <script>

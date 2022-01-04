@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get '/my_course' => 'management_date_spots#my_course'
   post '/add_course' => 'management_date_spots#add_course'
   delete '/delete_course' => 'management_date_spots#delete_course'
+  delete '/all_delete_date_spots' => 'management_date_spots#all_delete_date_spots'
   resources :courses, only: [:index, :show, :edit, :create, :update, :destroy]
 end
