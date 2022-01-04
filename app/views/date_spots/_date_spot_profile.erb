@@ -57,7 +57,7 @@
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
-  　　 // 小数点部分の評価を画像に反映させる。反映
+    // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
       let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
