@@ -10,8 +10,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
 
   scenario "デートスポットをデートコースに追加する" do
     user = FactoryBot.create(:user)
-    address = FactoryBot.create(:address)
-    date_spot = address.date_spot
+    FactoryBot.create(:address)
     sign_in_as user
     click_link "デートスポットを探す"
     expect do
@@ -23,8 +22,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
 
   scenario "一度追加したデートスポットはデートコースに追加できない" do
     user = FactoryBot.create(:user)
-    address = FactoryBot.create(:address)
-    date_spot = address.date_spot
+    FactoryBot.create(:address)
     sign_in_as user
     click_link "デートスポットを探す"
     click_button "デートコースに追加する"
