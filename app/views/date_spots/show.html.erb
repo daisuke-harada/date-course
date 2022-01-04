@@ -27,7 +27,7 @@
 
   <div class="mx-5 my-10 text-sm font-bold md:text-xl">
     <span class="font-bold">ジャンル:</span>
-    <%= @date_spot.genre.name %>
+    <%= link_to @date_spot.genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{@date_spot.genre.id}"}}, as: :date_spot_search, class:"font-bold" %>
   </div>
 
   <div class="m-5 text-center text-sm font-bold md:text-xl" id="address">

@@ -15,7 +15,8 @@
         </span>
       </p>
       <p class="m-3">
-        <span class="font-bold">ジャンル</span><%= date_spot.genre.name %>
+        <span class="font-bold">ジャンル:</span>
+        <%= link_to date_spot.genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{date_spot.genre.id}"}}, as: :date_spot_search, class:"font-bold" %>
       </p>
     </div>
     <div class="w-6/12">

@@ -138,6 +138,16 @@ RSpec.feature "DateSpots", type: :feature do
     expect(page).to have_content "キャナルシティ博多"
   end
 
+  scenario "デートスポットの詳細ページから、ジャンル一覧ページに移動する" do
+    address = FactoryBot.create(:address)
+    date_spot = address.date_spot
+    FactoryBot.create(:other_address)
+    visit date_spots_path
+    find("#date_spot_link_id_#{date_spot.id}").click
+    click_link "ショッピングモール"
+    expect(page).to have_content "キャナルシティ博多"
+  end
+
   scenario "ユーザー一覧ページからデートスポットを名前で検索する" do
     address = FactoryBot.create(:address)
     FactoryBot.create(:user)
