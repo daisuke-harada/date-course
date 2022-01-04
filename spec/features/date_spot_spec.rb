@@ -118,12 +118,24 @@ RSpec.feature "DateSpots", type: :feature do
     FactoryBot.create(:address)
     visit date_spots_path
     click_link "デートスポットを見る"
+    expect(page).to have_content "キャナルシティ博多"
   end
   scenario "デートスポット一覧ページからデートスポットを一つ選択し、そのデートスポットの画像をクリックして詳細ページに遷移する" do
     address = FactoryBot.create(:address)
     address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
     visit date_spots_path
     find("#date_spot_image_id_#{address.date_spot.id}").click
+    expect(page).to have_content "キャナルシティ博多"
+  end
+
+  scenario "デートスポット一覧ページからそのデートスポットのジャンルを選択し、ジャンル一覧ページに移動する" do
+    address = FactoryBot.create(:address)
+    address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
+    other_address = FactoryBot.create(:other_address)
+    other_address.date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
+    visit date_spots_path
+    click_link "ショッピングモール"
+    expect(page).to have_content "キャナルシティ博多"
   end
 
   scenario "ユーザー一覧ページからデートスポットを名前で検索する" do
