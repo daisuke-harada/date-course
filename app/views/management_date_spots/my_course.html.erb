@@ -12,6 +12,8 @@
     <% end %>
   </div>
   <div class="text-center">
-    <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+    <% if @management_date_spots.count >= 1%>
+      <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+    <% end %>
   </div>
 </div>
