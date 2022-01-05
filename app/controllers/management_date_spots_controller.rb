@@ -36,9 +36,12 @@ class ManagementDateSpotsController < ApplicationController
   end
 
   def all_delete_date_spots
-    current_management.management_date_spots.destroy_all
-    session.delete(:management_id)
-    flash[:success] = "デートコースからデートスポットを全て削除しました。"
+    if current_management.management_date_spots.destroy_all
+      session.delete(:management_id)
+      flash[:success] = "デートコースからデートスポットを全て削除しました。"
+    else
+      flash[:danger] = "デートコースからデートスポットを全て削除するのに失敗しました。"
+    end
     redirect_to my_course_path
   end
 
