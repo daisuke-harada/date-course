@@ -9,6 +9,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4-id-<%= date_spot.id %>" class ="w-7 h-7">
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5-id-<%= date_spot.id %>" class ="w-7 h-7">
       </div>
+      <p>目的地<%= ManagementDateSpot.find_by(date_spot_id: date_spot.id).procedure %></p>
       <p class="font-bold m-3">評価
         <span class="font-bold" id = "rate_average_number-<%= date_spot.id %>">
           <%= review_average_calculation(date_spot) %>

@@ -18,7 +18,7 @@ class ManagementDateSpotsController < ApplicationController
     end
 
 
-    @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id])
+    @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id], procedure: current_management.management_date_spots.count + 1)
     if @management_date_spot.save
       redirect_to my_course_path
     else
