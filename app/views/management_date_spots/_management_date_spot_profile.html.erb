@@ -1,4 +1,4 @@
-<div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12">
+<div class="p-5 m-5 shadow-lg bg-white border border-gray-200">
   <div class="w-full flex">
     <div class="w-6/12">
       <p class="font-bold m-3"><%= date_spot.name %></p>
@@ -9,7 +9,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4-id-<%= date_spot.id %>" class ="w-7 h-7">
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5-id-<%= date_spot.id %>" class ="w-7 h-7">
       </div>
-      <p>目的地<%= ManagementDateSpot.find_by(date_spot_id: date_spot.id).position %></p>
+      <p class="m-3">目的地<%= ManagementDateSpot.find_by(date_spot_id: date_spot.id).position %></p>
       <p class="font-bold m-3">評価
         <span class="font-bold" id = "rate_average_number-<%= date_spot.id %>">
           <%= review_average_calculation(date_spot) %>
@@ -26,11 +26,13 @@
       <% end %>
     </div>
   </div>
-  <p class="mt-5">
-    <span class="m-5 font-bold">住所</span>
-    <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %>
-  </p>
-  <%= link_to "デートコースから削除する", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+  <div class="text-center">
+    <p class="mt-5">
+      <span class="m-5 font-bold">住所</span>
+      <%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %>
+    </p>
+    <%= link_to "デートコースから削除する", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+  </div>
 </div>
 
 <script>

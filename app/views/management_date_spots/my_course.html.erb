@@ -1,14 +1,19 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
   <h1 class="text-3xl">デートコース作成画面</h1>
-  <div class="w-full">
+  <div class="w-full flex">
     <% if @management_date_spots == []%>
       <p class="text-blue-400 text-center m-10 text-3xl">
         デートスポットをデートコースに追加してみましょう
       </p>
     <% else %>
-      <% @management_date_spots.each do |management_date_spot| %>
-        <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
-      <% end %>
+      <div class="w-6/12">
+        <% @management_date_spots.each do |management_date_spot| %>
+          <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
+        <% end %>
+      </div>
+      <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12">
+        地図を表示する
+      </div>
     <% end %>
   </div>
   <div class="text-center">
