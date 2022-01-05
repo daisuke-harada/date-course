@@ -123,7 +123,7 @@
         //情報ウィンドウに表示するコンテンツを作成
         const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
         //情報ウィンドウのインスタンスを生成
-        var infowindow = new google.maps.InfoWindow({
+        let infowindow = new google.maps.InfoWindow({
           content: content,
         });
         //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
