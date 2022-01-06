@@ -117,8 +117,17 @@
         const marker = new google.maps.Marker({
           position: results[0].geometry.location,
           map: map,
+          title: title,
+          icon: {
+            fillCollor: "#FA8072", //マーカーの色
+            fillOpacity: .9, //マーカーの透明度
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
+            scale: 10,
+            srokeColor: "#E35D72", //枠の色
+            strokeWeight: 3.0
+          }
         });
-        //取得した座標の生成
+        //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
         const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
         //情報ウィンドウに表示するコンテンツを作成
         const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
