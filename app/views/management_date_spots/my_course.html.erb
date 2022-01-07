@@ -11,7 +11,7 @@
           <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
         <% end %>
       </div>
-      <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12">
+      <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12" id="map">
         地図を表示する
       </div>
     <% end %>
@@ -22,3 +22,9 @@
     <% end %>
   </div>
 </div>
+<script>
+  function initMap(value){
+    console.log();
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
