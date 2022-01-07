@@ -1,5 +1,10 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
   <h1 class="text-3xl">デートコース作成画面</h1>
+  <div>
+    現在のデートスポットの数は
+    <span id="date-spots-count"><%= @management_date_spots.count %></span>
+    つです.
+  </div>
   <div class="w-full flex">
     <% if @management_date_spots == []%>
       <p class="text-blue-400 text-center m-10 text-3xl">
@@ -12,7 +17,6 @@
         <% end %>
       </div>
       <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12" id="map">
-        地図を表示する
       </div>
     <% end %>
   </div>
@@ -23,8 +27,75 @@
   </div>
 </div>
 <script>
-  function initMap(value){
-    console.log();
-  }
+  // function initMap(){
+  //   // idから、デートスポットの数を抜き出す。
+  //   let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+  //   if(date_spots_count == 1){
+  //     console.log("1つです。");
+  //   }else if(date_spots_count == 2){
+  //     console.log("2つです。");
+  //   }else if(date_spots_count == 0){
+  //     console.log("デートスポットが登録されていません。");
+  //   }else{
+  //     console.log("3つ以上です");
+  //   }
+  // }
+  function initMap(){
+    let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+    if(date_spots_count == 1){
+      //地図を表示する領域の div 要素のオブジェクトを変数に代入
+      const target = document.getElementById('map');
+      //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
+      const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
+      //表示したい住所を取得
+      const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
+      //ジオコーディングのインスタンスの生成
+      const geocoder = new google.maps.Geocoder();
+
+      //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
+      geocoder.geocode({ address: inputAddress }, function(results, status){
+      //ステータスが OK で results[0] が存在すれば、地図を生成
+        if (status === 'OK' && results[0]){
+          //マップのインスタンスを変数に代入
+          const map = new google.maps.Map(target, {
+          //results[0].geometry.location に緯度・経度のオブジェクトが入っている
+            center: results[0].geometry.location,
+            zoom: 15
+          });
+          //マーカーの生成
+          const marker = new google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map,
+            title: title,
+            icon: {
+              fillCollor: "#FA8072", //マーカーの色
+              fillOpacity: .9, //マーカーの透明度
+              path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
+              scale: 10,
+              srokeColor: "#E35D72", //枠の色
+              strokeWeight: 3.0
+            }
+          });
+          //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
+          const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+          //情報ウィンドウに表示するコンテンツを作成
+          const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+          //情報ウィンドウのインスタンスを生成
+          let infowindow = new google.maps.InfoWindow({
+            content: content,
+          });
+          //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+          google.maps.event.addListener(marker, 'click', function() {
+            //第2引数にマーカーを指定して紐付け
+            infowindow.open(map, marker);
+          });
+        } else {
+        //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
+          alert("住所から位置の取得ができませんでした。: " + status);
+          return;
+        }
+     });
+    }
+  };
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
