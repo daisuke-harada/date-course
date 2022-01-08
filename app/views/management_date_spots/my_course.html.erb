@@ -26,7 +26,7 @@
     <% end %>
   </div>
 </div>
-<script>
+<script>  
   function initMap(){
     let date_spots_count = document.getElementById("date-spots-count").innerHTML;
     if(date_spots_count == 1) {
@@ -84,10 +84,13 @@
         }
      })
     } else if(date_spots_count == 2) {
-      let map = new google.maps.Map(document.getElementById("map"), {
+
+      let mapOptions = {
         zoom: 13,
         mapTypeId: "roadmap" // これはなんぞや？
-      });
+      };
+
+      let map = new google.maps.Map(document.getElementById("map"), mapOptions);
       
       //DirectionsService のオブジェクトを生成
       let directionsService = new google.maps.DirectionsService();
@@ -125,6 +128,8 @@
           alert("取得できませんでした：" + status);
         }
       });
+    } else if(date_spots_count >= 3) {
+      
     }
   };
 </script>
