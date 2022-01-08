@@ -27,28 +27,15 @@
   </div>
 </div>
 <script>
-  // function initMap(){
-  //   // idから、デートスポットの数を抜き出す。
-  //   let date_spots_count = document.getElementById("date-spots-count").innerHTML;
-  //   if(date_spots_count == 1){
-  //     console.log("1つです。");
-  //   }else if(date_spots_count == 2){
-  //     console.log("2つです。");
-  //   }else if(date_spots_count == 0){
-  //     console.log("デートスポットが登録されていません。");
-  //   }else{
-  //     console.log("3つ以上です");
-  //   }
-  // }
   function initMap(){
     let date_spots_count = document.getElementById("date-spots-count").innerHTML;
-    if(date_spots_count == 1){
+    if(date_spots_count == 1) {
       //地図を表示する領域の div 要素のオブジェクトを変数に代入
       const target = document.getElementById('map');
       //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
       const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
       //表示したい住所を取得
-      const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
+      const inputAddress = document.getElementById('address_1').textContent.replace(/\r?\n/g,'');
       //ジオコーディングのインスタンスの生成
       const geocoder = new google.maps.Geocoder();
 
@@ -57,11 +44,12 @@
       //ステータスが OK で results[0] が存在すれば、地図を生成
         if (status === 'OK' && results[0]){
           //マップのインスタンスを変数に代入
-          const map = new google.maps.Map(target, {
-          //results[0].geometry.location に緯度・経度のオブジェクトが入っている
+          let mapOptions = {
             center: results[0].geometry.location,
             zoom: 15
-          });
+          };
+
+          let map = new google.maps.Map(document.getElementById("map"), mapOptions);
           //マーカーの生成
           const marker = new google.maps.Marker({
             position: results[0].geometry.location,
@@ -94,7 +82,49 @@
           alert("住所から位置の取得ができませんでした。: " + status);
           return;
         }
-     });
+     })
+    } else if(date_spots_count == 2) {
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        mapTypeId: "roadmap" // これはなんぞや？
+      });
+      
+      //DirectionsService のオブジェクトを生成
+      let directionsService = new google.maps.DirectionsService();
+
+      //DirectionsRenderer のオブジェクトを生成
+      let directionsRenderer = new google.maps.DirectionsRenderer();
+
+      //let mode = document.getElementById("mode").value;
+      
+      //directionsRenderer と地図を紐付け
+      directionsRenderer.setMap(map);
+
+      //リクエストの出発点の位置（Empire State Building 出発地点の緯度経度）
+      let start = document.getElementById("address_1").innerHTML;
+
+      //リクエストの終着点の位置（Grand Central Station 到着地点の緯度経度）
+      let end = document.getElementById("address_2").innerHTML;
+
+      let request = {
+        origin: start,
+        destination: end,
+        travelMode: "WALKING"
+      };
+
+      //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、
+      //コールバック関数で結果を setDirections(result) で directionsRenderer にセットして表示
+      directionsService.route(request, function(result, status) {
+        //ステータスがOKの場合、
+        if (status === 'OK') {
+          directionsRenderer.setDirections(result); //取得したルート（結果：result）をセット
+          let currentDirections = directionsRenderer.getDirections();
+          let route = currentDirections.routes[0];
+          //document.getElementById("routeTime").innerHTML = route.legs[0].duration.text;
+        }else{
+          alert("取得できませんでした：" + status);
+        }
+      });
     }
   };
 </script>
