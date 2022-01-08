@@ -54,98 +54,97 @@
     <%= render 'date_spot_reviews/date_spot_review_profile', {date_spot_review: date_spot_review, target_image: date_spot_review.user, target_name: date_spot_review.user.name } %>
   <% end %>
 </div>
-
 <script>
-  (function(){
-    let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
-    let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
+(function(){
+  let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
+  let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
 
-    // 小数点第二以下を切り捨てる。
-    rate_average_number = Math.floor(rate_average_number * 10) / 10;
+  // 小数点第二以下を切り捨てる。
+  rate_average_number = Math.floor(rate_average_number * 10) / 10;
 
-    // viewに小数点第二以下を切り捨てた数字を反映する。
-    document.getElementById("rate_average_number").innerText = rate_average_number;
+  // viewに小数点第二以下を切り捨てた数字を反映する。
+  document.getElementById("rate_average_number").innerText = rate_average_number;
 
-    // 小数
-    let rate_decimal_value = 0;
+  // 小数
+  let rate_decimal_value = 0;
 
-    // 小数かどうかを判定する。
-    if(!Number.isInteger(rate_average_number)){
-      rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
-    };
-
-    // 整数
-    let rate_integral_value = Math.trunc(rate_average_number);
-    
-    // 整数値部分の評価を画像に反映
-    for (let i= 1; i <= rate_integral_value; i++){
-      let image = document.getElementById(`star-average-${i}`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-    };
-
-    // 小数点部分の評価を画像に反映させる。反映
-    if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
-      let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
-    }else if(rate_decimal_value >= 0.6){
-      let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-    };
-  }());
-
-  function initMap(){
-    //地図を表示する領域の div 要素のオブジェクトを変数に代入
-    const target = document.getElementById('map');
-    //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
-    const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
-    //表示したい住所を取得
-    const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
-    //ジオコーディングのインスタンスの生成
-    const geocoder = new google.maps.Geocoder();
-
-    //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
-    geocoder.geocode({ address: inputAddress }, function(results, status){
-    //ステータスが OK で results[0] が存在すれば、地図を生成
-      if (status === 'OK' && results[0]){
-        //マップのインスタンスを変数に代入
-        const map = new google.maps.Map(target, {
-        //results[0].geometry.location に緯度・経度のオブジェクトが入っている
-          center: results[0].geometry.location,
-          zoom: 15
-        });
-        //マーカーの生成
-        const marker = new google.maps.Marker({
-          position: results[0].geometry.location,
-          map: map,
-          title: title,
-          icon: {
-            fillCollor: "#FA8072", //マーカーの色
-            fillOpacity: .9, //マーカーの透明度
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
-            scale: 10,
-            srokeColor: "#E35D72", //枠の色
-            strokeWeight: 3.0
-          }
-        });
-        //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
-        const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-        //情報ウィンドウに表示するコンテンツを作成
-        const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
-        //情報ウィンドウのインスタンスを生成
-        let infowindow = new google.maps.InfoWindow({
-          content: content,
-        });
-        //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
-        google.maps.event.addListener(marker, 'click', function() {
-          //第2引数にマーカーを指定して紐付け
-          infowindow.open(map, marker);
-        });
-      } else {
-      //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
-        alert("住所から位置の取得ができませんでした。: " + status);
-        return;
-      }
-    });
+  // 小数かどうかを判定する。
+  if(!Number.isInteger(rate_average_number)){
+    rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
   };
+
+  // 整数
+  let rate_integral_value = Math.trunc(rate_average_number);
+  
+  // 整数値部分の評価を画像に反映
+  for (let i= 1; i <= rate_integral_value; i++){
+    let image = document.getElementById(`star-average-${i}`);
+    image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+  };
+
+  // 小数点部分の評価を画像に反映させる。反映
+  if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
+    let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+    image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
+  }else if(rate_decimal_value >= 0.6){
+    let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+    image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+  };
+}());
+
+function initMap(){
+  //地図を表示する領域の div 要素のオブジェクトを変数に代入
+  const target = document.getElementById('map');
+  //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
+  const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
+  //表示したい住所を取得
+  const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
+  //ジオコーディングのインスタンスの生成
+  const geocoder = new google.maps.Geocoder();
+
+  //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
+  geocoder.geocode({ address: inputAddress }, function(results, status){
+  //ステータスが OK で results[0] が存在すれば、地図を生成
+    if (status === 'OK' && results[0]){
+      //マップのインスタンスを変数に代入
+      const map = new google.maps.Map(target, {
+      //results[0].geometry.location に緯度・経度のオブジェクトが入っている
+        center: results[0].geometry.location,
+        zoom: 15
+      });
+      //マーカーの生成
+      const marker = new google.maps.Marker({
+        position: results[0].geometry.location,
+        map: map,
+        title: title,
+        icon: {
+          fillCollor: "#FA8072", //マーカーの色
+          fillOpacity: .9, //マーカーの透明度
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
+          scale: 10,
+          srokeColor: "#E35D72", //枠の色
+          strokeWeight: 3.0
+        }
+      });
+      //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
+      const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      //情報ウィンドウに表示するコンテンツを作成
+      const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+      //情報ウィンドウのインスタンスを生成
+      let infowindow = new google.maps.InfoWindow({
+        content: content,
+      });
+      //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+      google.maps.event.addListener(marker, 'click', function() {
+        //第2引数にマーカーを指定して紐付け
+        infowindow.open(map, marker);
+      });
+    } else {
+    //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
+      alert("住所から位置の取得ができませんでした。: " + status);
+      return;
+    }
+  });
+};
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
