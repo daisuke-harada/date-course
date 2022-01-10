@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
     t.integer "prefecture_id"
     t.integer "date_spot_id"
     t.string "city_name"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date_spot_id", "created_at"], name: "index_addresses_on_date_spot_id_and_created_at"

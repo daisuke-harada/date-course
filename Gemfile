@@ -43,6 +43,9 @@ gem 'asset_sync'
 # AWSの連携に必要なクラウドサービス
 gem 'fog-aws'
 
+# 住所から緯度と経度を取得するGemを実装
+gem 'geocoder'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
