@@ -11,6 +11,7 @@ class DateSpotsController < ApplicationController
 
   def create
     @date_spot = DateSpot.create(date_spot_params)
+    # addressクラスのcity_nameカラムに県名を追加させる。
     if @date_spot.save
       flash[:success] = "デートスポットの登録が完了しました"
       redirect_to @date_spot
