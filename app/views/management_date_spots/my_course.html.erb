@@ -3,12 +3,14 @@
   <div>
     現在のデートスポットの数は
     <span id="date-spots-count"><%= @management_date_spots.count %></span>
-    つです.
+    つです。
   </div>
+  <div id="lat"></div>
+  <div id="lng"></div>
   <div class="w-full flex">
     <% if @management_date_spots == []%>
-      <p class="text-blue-400 text-center m-10 text-3xl">
-        デートスポットをデートコースに追加してみましょう
+      <p class="text-blue-600 text-center m-10 text-3xl">
+        目的地は登録されていません。デートスポットをデートコースに追加してみましょう
       </p>
     <% else %>
       <div class="w-6/12">
@@ -29,6 +31,17 @@
 <script>
   function initMap(){
     let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+    let points = [];
+
+    // 追加したデートスポットの情報を挿入する。
+    if(date_spots_count > 0){
+      for(let spot = 1; spot <= date_spots_count; spot++){
+        points.push(document.getElementById(`address_${spot}`).textContent.replace(/\r?\n/g,''));
+      }
+    }
+
+    //ジオコーディングのインスタンスの生成
+    const geocoder = new google.maps.Geocoder();
 
     if(date_spots_count == 1) {
       //地図を表示する領域の div 要素のオブジェクトを変数に代入
@@ -36,9 +49,7 @@
       //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
       const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
       //表示したい住所を取得
-      const inputAddress = document.getElementById('address_1').textContent.replace(/\r?\n/g,'');
-      //ジオコーディングのインスタンスの生成
-      const geocoder = new google.maps.Geocoder();
+      const inputAddress = points[0]; //デートスポットが1つしかないので、最初の配列を指定する。
 
       //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
       geocoder.geocode({ address: inputAddress }, function(results, status){
@@ -83,96 +94,117 @@
           alert("住所から位置の取得ができませんでした。: " + status);
           return;
         }
-     })
-    } else if(date_spots_count == 2) {
-
+     });
+    } else if(date_spots_count >= 2) {
+      // 二つ以上の場合。
       let mapOptions = {
-        zoom: 13,
-        mapTypeId: "roadmap" // これはなんぞや？
-      };
+        center: null,
+        zoom: 10
+      }
 
+      // geocoder.geocode({ address: points[0] }, function(resolve, status){
+      //   //ステータスが OK で results[0] が存在すれば、地図を生成
+      //   if (status === 'OK' && resolve[0]){
+      //     //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
+      //     resolve(new google.maps.LatLng(resolve[0].geometry.location.lat(), resolve[0].geometry.location.lng()));
+      //   }
+      // });
+
+      
       let map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      
-      //DirectionsService のオブジェクトを生成
-      let directionsService = new google.maps.DirectionsService();
+      let routeSearch = new google.maps.DirectionsService(); // ルート検索オブジェクト
+      let origin = null;
+      let waypoints = [];
+      let destination = null;
+      let resultMap = {};
+      let requestIndex = 0; // 検索番号
+      let routeSearchComplete = 0; // ルート検索が完了した数
 
-      //DirectionsRenderer のオブジェクトを生成
-      let directionsRenderer = new google.maps.DirectionsRenderer();
-
-      //let mode = document.getElementById("mode").value;
-      
-      //directionsRenderer と地図を紐付け
-      directionsRenderer.setMap(map);
-
-      //リクエストの出発点の位置（Empire State Building 出発地点の緯度経度）
-      let start = document.getElementById("address_1").innerHTML;
-
-      //リクエストの終着点の位置（Grand Central Station 到着地点の緯度経度）
-      let end = document.getElementById("address_2").innerHTML;
-
-      let request = {
-        origin: start,
-        destination: end,
-        travelMode: "WALKING"
-      };
-
-      //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、
-      //コールバック関数で結果を setDirections(result) で directionsRenderer にセットして表示
-      directionsService.route(request, function(result, status) {
-        //ステータスがOKの場合、
-        if (status === 'OK') {
-          directionsRenderer.setDirections(result); //取得したルート（結果：result）をセット
-          let currentDirections = directionsRenderer.getDirections();
-          let route = currentDirections.routes[0];
-          //document.getElementById("routeTime").innerHTML = route.legs[0].duration.text;
-        }else{
-          alert("取得できませんでした：" + status);
+      for (let spot = 0, length = points.length; spot < length; spot++){
+        if(origin == null){
+          origin = points[spot]
         }
-      });
-    } else if(date_spots_count >= 3) {
-      let mapOptions = {
-        zoom: 13,
-        mapTypeId: "roadmap" // これはなんぞや？
-      };
+        // 経由地が8つたまったか最後の地点の場合、ルート検索
+        else if (waypoints.length == 8 || spot == length -1){
+          destination = points[spot];
 
-      let map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      
-      //DirectionsService のオブジェクトを生成
-      let directionsService = new google.maps.DirectionsService();
+          (function(index){
+            // ルート検索の条件
+            let request = {
+              origin: origin, // 出発地
+              destination: destination, // 目的地
+              waypoints: waypoints, // 経由地
+              travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段
+            };
+            console.log(request);
+            // ルート検索
+            routeSearch.route(request, function(result, status){
+              if (status == google.maps.DirectionsStatus.OK){
+                resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
+                routeSearchComplete++;
+              }else {
+                console.log(status); // デバッグ
+              }
+            });
+          })(requestIndex);
 
-      //DirectionsRenderer のオブジェクトを生成
-      let directionsRenderer = new google.maps.DirectionsRenderer();
-
-      //let mode = document.getElementById("mode").value;
-      
-      //directionsRenderer と地図を紐付け
-      directionsRenderer.setMap(map);
-
-      //リクエストの出発点の位置（Empire State Building 出発地点の緯度経度）
-      let start = document.getElementById("address_1").innerHTML;
-
-      //リクエストの終着点の位置（Grand Central Station 到着地点の緯度経度）
-      let end = document.getElementById("address_2").innerHTML;
-
-      let request = {
-        origin: start,
-        destination: end,
-        travelMode: "WALKING"
-      };
-
-      //DirectionsService のオブジェクトのメソッド route() にリクエストを渡し、
-      //コールバック関数で結果を setDirections(result) で directionsRenderer にセットして表示
-      directionsService.route(request, function(result, status) {
-        //ステータスがOKの場合、
-        if (status === 'OK') {
-          directionsRenderer.setDirections(result); //取得したルート（結果：result）をセット
-          let currentDirections = directionsRenderer.getDirections();
-          let route = currentDirections.routes[0];
-          //document.getElementById("routeTime").innerHTML = route.legs[0].duration.text;
-        }else{
-          alert("取得できませんでした：" + status);
+          requestIndex++;
+          origin = points[spot]; // 今回の目的地を次回の出発地にします。
+          waypoints = [];
+        } else {
+          waypoints.push({ location: points[spot] });
         }
-      });
+      }
+
+      let infoWindow = new google.maps.InfoWindow();
+      let mark = function(position, content) {
+        let marker = new google.maps.Marker({
+          map: map, // 描画先の地図
+          position: position //座標
+        });
+        // クリック時吹き出しを表示
+        marker.addListener("click", function(){
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+      };
+
+      let interval = setInterval(function(){
+        // 分割したすべての検索が完了するまで待ちます。
+        if (requestIndex > routeSearchComplete) return;
+        clearInterval(interval);
+
+        // すべての結果のルート座標を順番に取得して平坦な配列にします。
+        let path = [];
+        let result;
+        for (let i = 0, length = requestIndex; i < length; i++) {
+          result = resultMap[i];
+          let legs = result.routes[0].legs;
+          for (let li = 0, llen = legs.length; li < llen; li++) {
+            let leg = legs[li]; // DirectionLeg
+            let steps = leg.steps; // Array<DirectionsStep>
+            // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
+            let _path = steps.map(function(step){ return step.path })
+              .reduce(function(all, paths){ return all.concat(paths) });
+            peth = path.concat(_path);
+
+            mark(leg.start_location, leg.start_address);
+          }
+        }
+        // マーカーが必要ならマーカーを表示します。 (最終)
+        let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
+        mark(endLeg.end_location, endLeg.end_address);
+
+        let line = new google.maps.Polyline({
+          map: map, // 描画先の地図
+          strokeColor: "#2196f3", // 線の色
+          strokeOpacity: 0.8, // 線の不透明度
+          strokeWeight: 6, // 先の太さ
+          path: path // 描画するパスデータ
+        });
+      },1000);
+    }else {
+      console.log("目的地は設定されていません");
     }
   };
 </script>
