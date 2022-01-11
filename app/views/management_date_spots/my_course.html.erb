@@ -98,18 +98,9 @@
     } else if(date_spots_count >= 2) {
       // 二つ以上の場合。
       let mapOptions = {
-        center: null,
+        //center: ,
         zoom: 10
       }
-
-      // geocoder.geocode({ address: points[0] }, function(resolve, status){
-      //   //ステータスが OK で results[0] が存在すれば、地図を生成
-      //   if (status === 'OK' && resolve[0]){
-      //     //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
-      //     resolve(new google.maps.LatLng(resolve[0].geometry.location.lat(), resolve[0].geometry.location.lng()));
-      //   }
-      // });
-
       
       let map = new google.maps.Map(document.getElementById("map"), mapOptions);
       let routeSearch = new google.maps.DirectionsService(); // ルート検索オブジェクト
