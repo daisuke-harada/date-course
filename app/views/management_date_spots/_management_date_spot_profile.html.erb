@@ -9,7 +9,7 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4-id-<%= date_spot.id %>" class ="w-7 h-7">
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5-id-<%= date_spot.id %>" class ="w-7 h-7">
       </div>
-      <p class="m-3">目的地<%= ManagementDateSpot.find_by(date_spot_id: date_spot.id).position %></p>
+      <p class="m-3">目的地<%= position_number %></p>
       <p class="font-bold m-3">評価
         <span class="font-bold" id = "rate_average_number-<%= date_spot.id %>">
           <%= review_average_calculation(date_spot) %>
@@ -29,7 +29,7 @@
   <div class="text-center">
     <p class="mt-5">
       <span class="m-5 font-bold">住所</span>
-      <span id="address_<%= ManagementDateSpot.find_by(date_spot_id: date_spot.id).position %>"><%= date_spot.address.city_name %></span>
+      <span id="address_<%= position_number %>"><%= date_spot.address.city_name %></span>
     </p>
     <%= link_to "デートコースから削除する", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
   </div>
