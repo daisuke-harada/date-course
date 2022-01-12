@@ -11,13 +11,14 @@ class ManagementDateSpotsController < ApplicationController
       flash[:danger] = 'ログインしてください'
       return redirect_to login_path
     end
-    
-    # 同じデートスポットは登録できないようにする。
+
     if current_management.management_date_spots.find_by(date_spot_id: params[:date_spot_id])
       flash[:danger] = 'このデートスポットはすでに追加されています'
       return redirect_to root_path
     end
 
+
+    @management_date_spot ||= current_management.management_date_spots.build(date_spot_id: params[:date_spot_id])
     if @management_date_spot.save
       redirect_to my_course_path
     else
