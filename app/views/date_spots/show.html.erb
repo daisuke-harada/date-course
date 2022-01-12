@@ -93,58 +93,37 @@
 }());
 
 function initMap(){
-  //地図を表示する領域の div 要素のオブジェクトを変数に代入
-  const target = document.getElementById('map');
-  //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
-  const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
-  //表示したい住所を取得
-  const inputAddress = document.getElementById('address').textContent.replace(/\r?\n/g,'');
-  //ジオコーディングのインスタンスの生成
-  const geocoder = new google.maps.Geocoder();
+  // 座標を作成
+  let point = {lat: <%= @date_spot.address.latitude %>, lng: <%= @date_spot.address.longitude %>}
+  // マーカーのタイトルを作成
+  let title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
+  let address = document.getElementById('address').textContent.replace(/\r?\n/g,'');
 
-  //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
-  geocoder.geocode({ address: inputAddress }, function(results, status){
-  //ステータスが OK で results[0] が存在すれば、地図を生成
-    if (status === 'OK' && results[0]){
-      //マップのインスタンスを変数に代入
-      const map = new google.maps.Map(target, {
-      //results[0].geometry.location に緯度・経度のオブジェクトが入っている
-        center: results[0].geometry.location,
-        zoom: 15
-      });
-      //マーカーの生成
-      const marker = new google.maps.Marker({
-        position: results[0].geometry.location,
-        map: map,
-        title: title,
-        icon: {
-          fillCollor: "#FA8072", //マーカーの色
-          fillOpacity: .9, //マーカーの透明度
-          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
-          scale: 10,
-          srokeColor: "#E35D72", //枠の色
-          strokeWeight: 3.0
-        }
-      });
-      //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
-      const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-      //情報ウィンドウに表示するコンテンツを作成
-      const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
-      //情報ウィンドウのインスタンスを生成
-      let infowindow = new google.maps.InfoWindow({
-        content: content,
-      });
-      //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
-      google.maps.event.addListener(marker, 'click', function() {
-        //第2引数にマーカーを指定して紐付け
-        infowindow.open(map, marker);
-      });
-    } else {
-    //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
-      alert("住所から位置の取得ができませんでした。: " + status);
-      return;
-    }
+  // マーカーをクリックした際に表示する文面を作成
+  let content = '<div id="map_content"><p>' + title + '<br/>' + address + '<br/><a href="https://maps.google.co.jp/maps?q=' + point + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+
+  let mapOptions = {
+    center:  new google.maps.LatLng(point.lat, point.lng),
+    zoom: 15
+  };
+  let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  let marker = new google.maps.Marker({
+    position: point,
+    map: map,
+    title: title
   });
+
+  //情報ウィンドウのインスタンスを生成
+  let infowindow = new google.maps.InfoWindow({
+    content: content,
+  });
+  
+  //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+  google.maps.event.addListener(marker, 'click', function() {
+    //第2引数にマーカーを指定して紐付け
+    infowindow.open(map, marker);
+  });
+
 };
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
