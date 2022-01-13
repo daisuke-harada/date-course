@@ -14,15 +14,21 @@
       </p>
     <% else %>
       <div class="w-6/12">
+
+        <% if @management_date_spots.count >= 2%>
+          <div class="m-5">
+            移動手段を選択してください
+            <%= select_tag 'traffic[mode]',options_for_select([["歩き", "WALKING"], ["車", "DRIVING"], ["自転車", "BICYCLING"], ["電車", "TRANSIT"]], :selected => "DRIVING") %>
+          </div>
+        <% end %>
+
         <% @management_date_spots.each_with_index do |management_date_spot, position| %>
           <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
           <% if @management_date_spots.count != position + 1 %>
-            <div class="h-10 flex justify-center">
+            <div class="h-16 flex justify-center">
               <div class="border-r-4 border-indigo-500">
-                ボックス1
               </div>
               <div>
-                ボックス2
               </div>
             </div>
           <% end %>
@@ -109,9 +115,9 @@
               origin: origin, // 出発地
               destination: dest, // 目的地
               waypoints: waypoints, // 経由地
-              travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段(歩行。DRIVINGの場合は車)
+              travelMode: document.getElementById("traffic_mode").value // 交通手段(歩行。DRIVINGの場合は車)
             };
-            console.log(request);
+            
             // ルート検索
             d.route(request, function(result, status){
               // OKの場合ルートデータ保持
@@ -176,7 +182,7 @@
           // パスを描画します。
           let line = new google.maps.Polyline({
             map: map, // 描画先の地図
-            strokeColor: "#2196f3", // 線の色
+            strokeColor: "#6366f1",//"#2196f3", // 線の色
             strokeOpacity: 0.8, // 線の不透明度
             strokeWeight: 10, // 先の太さ
             path: path // 描画するパスデータ
