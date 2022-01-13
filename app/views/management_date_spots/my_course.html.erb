@@ -18,7 +18,7 @@
         <% if @management_date_spots.count >= 2%>
           <div class="m-5">
             移動手段を選択してください
-            <%= select_tag 'traffic[mode]',options_for_select([["歩き", "WALKING"], ["車", "DRIVING"], ["自転車", "BICYCLING"], ["電車", "TRANSIT"]], :selected => "DRIVING") %>
+            <%= select_tag 'traffic[mode]',options_for_select([["歩き", "WALKING"], ["車", "DRIVING"], ["自転車", "BICYCLING"], ["電車", "TRANSIT"]]) %>
           </div>
         <% end %>
 
@@ -94,7 +94,6 @@
       });
 
       // 地点を分割してルート検索を行います。
-
       let d = new google.maps.DirectionsService(); // ルート検索オブジェクト
       let origin = null, waypoints = [], dest = null; // 出発地、経由地、目的地
       let resultMap = {}; // 分割してルート検索した結果データ
