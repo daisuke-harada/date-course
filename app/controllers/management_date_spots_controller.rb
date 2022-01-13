@@ -3,6 +3,12 @@ class ManagementDateSpotsController < ApplicationController
 
   def my_course
     @management_date_spots = current_management.management_date_spots
+    
+    # 追加されたデートスポットの住所モデルが登録されている配列を作成
+    @date_spot_addresses = []
+    @management_date_spots.each do |management_date_spot|
+      @date_spot_addresses.push(management_date_spot.date_spot.address)
+    end
   end
 
   def add_course

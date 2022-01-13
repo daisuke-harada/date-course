@@ -31,169 +31,150 @@
 <script>
   function initMap(){
     let date_spots_count = document.getElementById("date-spots-count").innerHTML;
-    let points = [];
 
-    // 追加したデートスポットの情報を挿入する。
-    if(date_spots_count > 0){
-      for(let spot = 1; spot <= date_spots_count; spot++){
-        points.push(document.getElementById(`address_${spot}`).textContent.replace(/\r?\n/g,''));
-      }
-    }
-
-    //ジオコーディングのインスタンスの生成
-    const geocoder = new google.maps.Geocoder();
+    // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
+    let points = <%= @date_spot_addresses.to_json.html_safe %>;
 
     if(date_spots_count == 1) {
-      //地図を表示する領域の div 要素のオブジェクトを変数に代入
-      const target = document.getElementById('map');
-      //マーカーのタイトルを設定 replaceについて 変数.replace(【元の文字列】,【置換後の文字列】)
-      const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
-      //表示したい住所を取得
-      const inputAddress = points[0]; //デートスポットが1つしかないので、最初の配列を指定する。
+      // マーカーのタイトルを作成
+      let title = document.getElementById('date_spot_name_position_number_1').textContent.replace(/\r?\n/g,'');
+      let address = document.getElementById('address_position_number_1').textContent.replace(/\r?\n/g,'');
 
-      //geocoder.geocode()にアドレスを渡してコールバック関数を記述して処理
-      geocoder.geocode({ address: inputAddress }, function(results, status){
-      //ステータスが OK で results[0] が存在すれば、地図を生成
-        if (status === 'OK' && results[0]){
-          //マップのインスタンスを変数に代入
-          let mapOptions = {
-            center: results[0].geometry.location,
-            zoom: 15
-          };
+      // 座標を作成
+      // latitudeが緯度で、longitudeが経度を示している。
+      let point = {lat: points[0].latitude, lng: points[0].longitude };
 
-          let map = new google.maps.Map(document.getElementById("map"), mapOptions);
-          //マーカーの生成
-          const marker = new google.maps.Marker({
-            position: results[0].geometry.location,
-            map: map,
-            title: title,
-            icon: {
-              fillCollor: "#FA8072", //マーカーの色
-              fillOpacity: .9, //マーカーの透明度
-              path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //下向きの矢印画像を指定
-              scale: 10,
-              srokeColor: "#E35D72", //枠の色
-              strokeWeight: 3.0
-            }
-          });
-          //取得した座標の生成。results[0].geometry.location.lat()に経度。results[0].geometry.location.lng()に緯度が入っている。
-          const latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-          //情報ウィンドウに表示するコンテンツを作成
-          const content = '<div id="map_content"><p>' + title + '<br/>' + inputAddress + '<br/><a href="https://maps.google.co.jp/maps?q=' + latlng + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
-          //情報ウィンドウのインスタンスを生成
-          let infowindow = new google.maps.InfoWindow({
-            content: content,
-          });
-          //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
-          google.maps.event.addListener(marker, 'click', function() {
-            //第2引数にマーカーを指定して紐付け
-            infowindow.open(map, marker);
-          });
-        } else {
-        //ステータスが OK 以外の場合や results[0] が存在しなければ、アラートを表示して処理を中断
-          alert("住所から位置の取得ができませんでした。: " + status);
-          return;
-        }
-     });
-    } else if(date_spots_count >= 2) {
-      // 二つ以上の場合。
+      // マーカーをクリックした際に表示する文面を作成
+      let content = '<div id="map_content"><p>' + title + '<br/>' + address + '<br/><a href="https://maps.google.co.jp/maps?q=' + point + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+
       let mapOptions = {
-        //center: ,
-        zoom: 10
-      }
-      
-      let map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      let routeSearch = new google.maps.DirectionsService(); // ルート検索オブジェクト
-      let origin = null;
-      let waypoints = [];
-      let destination = null;
-      let resultMap = {};
-      let requestIndex = 0; // 検索番号
-      let routeSearchComplete = 0; // ルート検索が完了した数
-
-      for (let spot = 0, length = points.length; spot < length; spot++){
-        if(origin == null){
-          origin = points[spot]
-        }
-        // 経由地が8つたまったか最後の地点の場合、ルート検索
-        else if (waypoints.length == 8 || spot == length -1){
-          destination = points[spot];
-
-          (function(index){
-            // ルート検索の条件
-            let request = {
-              origin: origin, // 出発地
-              destination: destination, // 目的地
-              waypoints: waypoints, // 経由地
-              travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段
-            };
-            console.log(request);
-            // ルート検索
-            routeSearch.route(request, function(result, status){
-              if (status == google.maps.DirectionsStatus.OK){
-                resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
-                routeSearchComplete++;
-              }else {
-                console.log(status); // デバッグ
-              }
-            });
-          })(requestIndex);
-
-          requestIndex++;
-          origin = points[spot]; // 今回の目的地を次回の出発地にします。
-          waypoints = [];
-        } else {
-          waypoints.push({ location: points[spot] });
-        }
-      }
-
-      let infoWindow = new google.maps.InfoWindow();
-      let mark = function(position, content) {
-        let marker = new google.maps.Marker({
-          map: map, // 描画先の地図
-          position: position //座標
-        });
-        // クリック時吹き出しを表示
-        marker.addListener("click", function(){
-          infoWindow.setContent(content);
-          infoWindow.open(map, marker);
-        });
+        center:  new google.maps.LatLng(point.lat, point.lng),
+        zoom: 15
       };
 
-      let interval = setInterval(function(){
-        // 分割したすべての検索が完了するまで待ちます。
-        if (requestIndex > routeSearchComplete) return;
-        clearInterval(interval);
+      let map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        // すべての結果のルート座標を順番に取得して平坦な配列にします。
-        let path = [];
-        let result;
-        for (let i = 0, length = requestIndex; i < length; i++) {
-          result = resultMap[i];
-          let legs = result.routes[0].legs;
-          for (let li = 0, llen = legs.length; li < llen; li++) {
-            let leg = legs[li]; // DirectionLeg
-            let steps = leg.steps; // Array<DirectionsStep>
-            // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
-            let _path = steps.map(function(step){ return step.path })
-              .reduce(function(all, paths){ return all.concat(paths) });
-            peth = path.concat(_path);
+      let marker = new google.maps.Marker({
+        position: point,
+        map: map,
+        title: title
+      });
 
-            mark(leg.start_location, leg.start_address);
+      //情報ウィンドウのインスタンスを生成
+      let infowindow = new google.maps.InfoWindow({
+        content: content,
+      });
+      
+      //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+      google.maps.event.addListener(marker, 'click', function() {
+        //第2引数にマーカーを指定して紐付け
+        infowindow.open(map, marker);
+      });
+    } else if(date_spots_count >= 2) {
+      // マップの生成
+      let map = new google.maps.Map(document.getElementById("map"), {
+          center: new google.maps.LatLng(points[0].latitude, points[0].longitude),
+          zoom: 12, // ズームレベル
+      });
+
+      // 地点を分割してルート検索を行います。
+
+      let d = new google.maps.DirectionsService(); // ルート検索オブジェクト
+      let origin = null, waypoints = [], dest = null; // 出発地、経由地、目的地
+      let resultMap = {}; // 分割してルート検索した結果データ
+      let requestIndex = 0; // 検索番号
+      let done = 0; // ルート検索が完了した数
+      for (let i = 0, len = points.length; i < len; i++) {
+          // 最初の場合、originに値をセット
+          if (origin == null) {
+              origin = new google.maps.LatLng(points[i].latitude, points[i].longitude);
           }
-        }
-        // マーカーが必要ならマーカーを表示します。 (最終)
-        let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
-        mark(endLeg.end_location, endLeg.end_address);
+          // 経由地が8つたまったか最後の地点の場合、ルート検索
+          else if (waypoints.length == 8 || i == len - 1) {
+              dest = new google.maps.LatLng(points[i].latitude, points[i].longitude);
 
-        let line = new google.maps.Polyline({
-          map: map, // 描画先の地図
-          strokeColor: "#2196f3", // 線の色
-          strokeOpacity: 0.8, // 線の不透明度
-          strokeWeight: 6, // 先の太さ
-          path: path // 描画するパスデータ
-        });
-      },1000);
+              (function(index){
+                  // ルート検索の条件
+                  let request = {
+                      origin: origin, // 出発地
+                      destination: dest, // 目的地
+                      waypoints: waypoints, // 経由地
+                      travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段(歩行。DRIVINGの場合は車)
+                  };
+                  console.log(request);
+                  // ルート検索
+                  d.route(request, function(result, status){
+                      // OKの場合ルートデータ保持
+                      if (status == google.maps.DirectionsStatus.OK) {
+                          resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
+                          done++;
+                      }
+                      else {
+                          console.log(status); // デバッグ
+                      }
+                  });
+              })(requestIndex);
+
+              requestIndex++;
+              origin = new google.maps.LatLng(points[i].latitude, points[i].longitude); // 今回の目的地を次回の出発地にします。
+              waypoints = [];
+          }
+          // 上記以外、waypointsに地点を追加
+          else {
+              waypoints.push({ location: new google.maps.LatLng(points[i].latitude, points[i].longitude), stopover: true });
+          }
+      }
+
+      // マーカーを表示する場合の準備
+      let infoWindow = new google.maps.InfoWindow();
+      let mark = function(position, content) {
+          let marker = new google.maps.Marker({
+              map: map, // 描画先の地図
+              position: position // 座標
+          });
+          // クリック時吹き出しを表示
+          marker.addListener("click", function(){
+              infoWindow.setContent(content);
+              infoWindow.open(map, marker);
+          });
+      };
+
+      let sid = setInterval(function(){
+          // 分割したすべての検索が完了するまで待ちます。
+          if (requestIndex > done) return;
+          clearInterval(sid);
+
+          // すべての結果のルート座標を順番に取得して平坦な配列にします。
+          let path = [];
+          let result;
+          for (let i = 0, len = requestIndex; i < len; i++) {
+              result = resultMap[i]; // 検索結果
+              let legs = result.routes[0].legs; // Array<DirectionsLeg>
+              for (let li = 0, llen = legs.length; li < llen; li++) {
+                  let leg = legs[li]; // DirectionLeg
+                  let steps = leg.steps; // Array<DirectionsStep>
+                  // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
+                  let _path = steps.map(function(step){ return step.path })
+                      .reduce(function(all, paths){ return all.concat(paths) });
+                  path = path.concat(_path);
+
+                  // マーカーが必要ならマーカーを表示します。
+                  mark(leg.start_location, leg.start_address);
+              }
+          }
+          // マーカーが必要ならマーカーを表示します。(最終)
+          let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
+          mark(endLeg.end_location, endLeg.end_address);
+
+          // パスを描画します。
+          let line = new google.maps.Polyline({
+              map: map, // 描画先の地図
+              strokeColor: "#2196f3", // 線の色
+              strokeOpacity: 0.8, // 線の不透明度
+              strokeWeight: 10, // 先の太さ
+              path: path // 描画するパスデータ
+          });
+      }, 1000);
     }else {
       console.log("目的地は設定されていません");
     }
