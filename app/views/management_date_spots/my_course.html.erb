@@ -50,6 +50,23 @@
 
     // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
     let points = <%= @date_spot_addresses.to_json.html_safe %>;
+    
+    // selecteタグのoptionsタグの中からselected="selected"を削除する関数
+    const deleteOptionSelected = (select) => {
+      const elementOptions = Array.from(select.children);
+      elementOptions.forEach(option => {
+        if (option.hasAttribute('selected')) option.removeAttribute('selected');
+      });
+    };
+    
+    // selecte_tagを選択する
+    let mode = document.getElementById('traffic_mode');
+
+    // 選択したものにselected属性を付与し、selected属性を付与されていた属性を削除する。
+    mode.addEventListener('change', (event) => {
+      deleteOptionSelected(mode);
+      mode.options[mode.selectedIndex].setAttribute('selected', "selected");
+    });
 
     if(date_spots_count == 1) {
       // マーカーのタイトルを作成
@@ -91,6 +108,7 @@
       let map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(points[0].latitude, points[0].longitude),
         zoom: 12, // ズームレベル
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
       // 地点を分割してルート検索を行います。
@@ -114,7 +132,7 @@
               origin: origin, // 出発地
               destination: dest, // 目的地
               waypoints: waypoints, // 経由地
-              travelMode: document.getElementById("traffic_mode").value // 交通手段(歩行。DRIVINGの場合は車)
+              travelMode: mode.value // 交通手段(歩行。DRIVINGの場合は車)
             };
             
             // ルート検索
