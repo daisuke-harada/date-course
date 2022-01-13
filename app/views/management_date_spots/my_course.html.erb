@@ -16,6 +16,16 @@
       <div class="w-6/12">
         <% @management_date_spots.each_with_index do |management_date_spot, position| %>
           <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
+          <% if @management_date_spots.count != position + 1 %>
+            <div class="h-10 flex justify-center">
+              <div class="border-r-4 border-indigo-500">
+                ボックス1
+              </div>
+              <div>
+                ボックス2
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
       <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12" id="map">
