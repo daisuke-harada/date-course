@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
     t.integer "prefecture_id"
     t.integer "date_spot_id"
     t.string "city_name"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date_spot_id", "created_at"], name: "index_addresses_on_date_spot_id_and_created_at"
@@ -84,7 +86,7 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
   create_table "information_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "date_spot_id", null: false
-    t.integer "procedure"
+    t.integer "position", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id", "created_at"], name: "index_information_courses_on_course_id_and_created_at"
@@ -106,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
 
   create_table "managements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "traffic_mode", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_managements_on_user_id_and_created_at"

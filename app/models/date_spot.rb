@@ -10,6 +10,7 @@ class DateSpot < ApplicationRecord
   has_many :information_courses, dependent: :destroy
   has_many :management_date_spots, dependent: :destroy
   validates :name, presence: true
+  validates :genre_id, presence: true
 
   # 画像のファイルのバリデーション
   validate :image_type

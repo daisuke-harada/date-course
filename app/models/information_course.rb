@@ -3,5 +3,5 @@ class InformationCourse < ApplicationRecord
   belongs_to :date_spot
   validates :course_id, presence: true
   validates :date_spot_id, presence: true
-  validates :procedure, presence: true
+  validates :position, presence: true
 end

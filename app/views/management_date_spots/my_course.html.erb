@@ -1,6 +1,213 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
-<h1 class="text-3xl">デートコース作成画面</h1>
-<% @management_date_spots.each do |management_date_spot| %>
-  <%= render "management_date_spots/management_date_spot_profile", date_spot: management_date_spot.date_spot %>
-<% end %>
+  <h1 class="text-3xl">デートコース作成画面</h1>
+  <div>
+    現在のデートスポットの数は
+    <span id="date-spots-count"><%= @management_date_spots.count %></span>
+    つです。
+  </div>
+  <div id="lat"></div>
+  <div id="lng"></div>
+  <div class="w-full flex">
+    <% if @management_date_spots == []%>
+      <p class="text-blue-600 text-center m-10 text-3xl">
+        目的地は登録されていません。デートスポットをデートコースに追加してみましょう
+      </p>
+    <% else %>
+      <div class="w-6/12">
+        <% if @management_date_spots.count >= 2 %>
+          <div class="m-5">
+            <%= form_with model: current_user.management, local: true do |f| %>
+              移動手段を選択してください
+              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"], ["電車", "TRANSIT"]] %>
+              <%= f.submit '交通手段を決定', class:"btn btn-salmon" %>
+            <% end %>
+          </div>
+        <% end %>
+        <% @management_date_spots.each_with_index do |management_date_spot, position| %>
+          <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
+          <% if @management_date_spots.count != position + 1 %>
+            <div class="h-16 flex justify-center">
+              <div class="border-r-4 border-indigo-500">
+              </div>
+              <div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12" id="map">
+      </div>
+    <% end %>
+  </div>
+  <div class="text-center">
+    <% if @management_date_spots.count >= 1%>
+      <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+    <% end %>
+  </div>
 </div>
+<script>
+  function initMap(){
+    let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+
+    // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
+    let points = <%= @date_spot_addresses.to_json.html_safe %>;
+
+    if(date_spots_count == 1) {
+      // マーカーのタイトルを作成
+      let title = document.getElementById('date_spot_name_position_number_1').textContent.replace(/\r?\n/g,'');
+      let address = document.getElementById('address_position_number_1').textContent.replace(/\r?\n/g,'');
+
+      // 座標を作成
+      // latitudeが緯度で、longitudeが経度を示している。
+      let point = {lat: points[0].latitude, lng: points[0].longitude };
+
+      // マーカーをクリックした際に表示する文面を作成
+      let content = '<div id="map_content"><p>' + title + '<br/>' + address + '<br/><a href="https://maps.google.co.jp/maps?q=' + point + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+
+      let mapOptions = {
+        center:  new google.maps.LatLng(point.lat, point.lng),
+        zoom: 15
+      };
+
+      let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      let marker = new google.maps.Marker({
+        position: point,
+        map: map,
+        title: title
+      });
+
+      //情報ウィンドウのインスタンスを生成
+      let infowindow = new google.maps.InfoWindow({
+        content: content
+      });
+      
+      //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+      google.maps.event.addListener(marker, 'click', function() {
+        //第2引数にマーカーを指定して紐付け
+        infowindow.open(map, marker);
+      });
+    } else if(date_spots_count >= 2) {
+      //selecteタグのoptionsタグの中からselected="selected"を削除する関数ここから、selectタグの変更になる。
+      const deleteOptionSelected = (select) => {
+        const elementOptions = Array.from(select.children);
+        elementOptions.forEach(option => {
+          if (option.hasAttribute('selected')) option.removeAttribute('selected');
+        });
+      };
+      
+      // selecte_tagを選択する
+      let mode = document.getElementById('management_traffic_mode');
+      // 選択したものにselected属性を付与し、selected属性を付与されていた属性を削除する。
+      mode.addEventListener('change', (event) => {
+        deleteOptionSelected(mode);
+        mode.options[mode.selectedIndex].setAttribute('selected', "selected");
+      });
+
+      // マップの生成
+      let map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(points[0].latitude, points[0].longitude),
+        zoom: 12, // ズームレベル
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      // 地点を分割してルート検索を行います。
+      let d = new google.maps.DirectionsService(); // ルート検索オブジェクト
+      let origin = null, waypoints = [], dest = null; // 出発地、経由地、目的地
+      let resultMap = {}; // 分割してルート検索した結果データ
+      let requestIndex = 0; // 検索番号
+      let done = 0; // ルート検索が完了した数
+      for (let i = 0, len = points.length; i < len; i++) {
+        // 最初の場合、originに値をセット
+        if (origin == null) {
+          origin = new google.maps.LatLng(points[i].latitude, points[i].longitude);
+        }
+        // 経由地が8つたまったか最後の地点の場合、ルート検索
+        else if (waypoints.length == 8 || i == len - 1) {
+          dest = new google.maps.LatLng(points[i].latitude, points[i].longitude);
+
+          (function(index){
+            // ルート検索の条件
+            let request = {
+              origin: origin, // 出発地
+              destination: dest, // 目的地
+              waypoints: waypoints, // 経由地
+              travelMode: mode.value // 交通手段(歩行。DRIVINGの場合は車)
+            };
+            
+            // ルート検索
+            d.route(request, function(result, status){
+              // OKの場合ルートデータ保持
+              if (status == google.maps.DirectionsStatus.OK) {
+                resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
+                done++;
+              }
+              else {
+                console.log(status); // デバッグ
+              }
+            });
+          })(requestIndex);
+            requestIndex++;
+            origin = new google.maps.LatLng(points[i].latitude, points[i].longitude); // 今回の目的地を次回の出発地にします。
+            waypoints = [];
+        }else {
+          // 上記以外、waypointsに地点を追加
+          waypoints.push({ location: new google.maps.LatLng(points[i].latitude, points[i].longitude), stopover: true });
+        }
+      }
+
+      // マーカーを表示する場合の準備
+      let infoWindow = new google.maps.InfoWindow();
+      let mark = function(position, content) {
+        let marker = new google.maps.Marker({
+          map: map, // 描画先の地図
+          position: position // 座標
+        });
+        // クリック時吹き出しを表示
+        marker.addListener("click", function(){
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+      };
+
+      let sid = setInterval(function(){
+        // 分割したすべての検索が完了するまで待ちます。
+        if (requestIndex > done) return;
+        clearInterval(sid);
+
+        // すべての結果のルート座標を順番に取得して平坦な配列にします。
+        let path = [];
+        let result;
+        for (let i = 0, len = requestIndex; i < len; i++) {
+          result = resultMap[i]; // 検索結果
+          let legs = result.routes[0].legs; // Array<DirectionsLeg>
+          for (let li = 0, llen = legs.length; li < llen; li++) {
+            let leg = legs[li]; // DirectionLeg
+            let steps = leg.steps; // Array<DirectionsStep>
+            // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
+            let _path = steps.map(function(step){ return step.path })
+                .reduce(function(all, paths){ return all.concat(paths) });
+            path = path.concat(_path);
+
+            // マーカーが必要ならマーカーを表示します。
+            mark(leg.start_location, leg.start_address);
+          }
+        }
+        // マーカーが必要ならマーカーを表示します。(最終)
+        let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
+        mark(endLeg.end_location, endLeg.end_address);
+          // パスを描画します。
+          let line = new google.maps.Polyline({
+            map: map, // 描画先の地図
+            strokeColor: "#6366f1",//"#2196f3", // 線の色
+            strokeOpacity: 0.8, // 線の不透明度
+            strokeWeight: 10, // 先の太さ
+            path: path // 描画するパスデータ
+          });
+      }, 1000);
+    }else {
+      console.log("目的地は設定されていません");
+    }
+  };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
