@@ -19,7 +19,7 @@
             <%= form_with model: current_user.management, local: true do |f| %>
               移動手段を選択してください
               <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"], ["電車", "TRANSIT"]] %>
-              <%= f.submit '交通手段を決定', id:"btn btn-salmon" %>
+              <%= f.submit '交通手段を決定', class:"btn btn-salmon" %>
             <% end %>
           </div>
         <% end %>
