@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
 
   create_table "managements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "traffic_mode", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_managements_on_user_id_and_created_at"

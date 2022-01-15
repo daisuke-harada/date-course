@@ -14,14 +14,6 @@
       </p>
     <% else %>
       <div class="w-6/12">
-
-        <% if @management_date_spots.count >= 2%>
-          <div class="m-5">
-            移動手段を選択してください
-            <%= select_tag 'traffic[mode]',options_for_select([["歩き", "WALKING"], ["車", "DRIVING"], ["自転車", "BICYCLING"], ["電車", "TRANSIT"]]) %>
-          </div>
-        <% end %>
-
         <% @management_date_spots.each_with_index do |management_date_spot, position| %>
           <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
           <% if @management_date_spots.count != position + 1 %>
@@ -50,22 +42,6 @@
 
     // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
     let points = <%= @date_spot_addresses.to_json.html_safe %>;
-
-    // selecteタグのoptionsタグの中からselected="selected"を削除する関数ここから、selectタグの変更になる。
-    const deleteOptionSelected = (select) => {
-      const elementOptions = Array.from(select.children);
-      elementOptions.forEach(option => {
-        if (option.hasAttribute('selected')) option.removeAttribute('selected');
-      });
-    };
-
-    // selecte_tagを選択する
-    let mode = document.getElementById('traffic_mode');
-    // 選択したものにselected属性を付与し、selected属性を付与されていた属性を削除する。
-    mode.addEventListener('change', (event) => {
-      deleteOptionSelected(mode);
-      mode.options[mode.selectedIndex].setAttribute('selected', "selected");
-    });
 
     if(date_spots_count == 1) {
       // マーカーのタイトルを作成
@@ -103,6 +79,22 @@
         infowindow.open(map, marker);
       });
     } else if(date_spots_count >= 2) {
+      //selecteタグのoptionsタグの中からselected="selected"を削除する関数ここから、selectタグの変更になる。
+      const deleteOptionSelected = (select) => {
+        const elementOptions = Array.from(select.children);
+        elementOptions.forEach(option => {
+          if (option.hasAttribute('selected')) option.removeAttribute('selected');
+        });
+      };
+      
+      // selecte_tagを選択する
+      let mode = document.getElementById('management_traffic_mode');
+      // 選択したものにselected属性を付与し、selected属性を付与されていた属性を削除する。
+      mode.addEventListener('change', (event) => {
+        deleteOptionSelected(mode);
+        mode.options[mode.selectedIndex].setAttribute('selected', "selected");
+      });
+
       // マップの生成
       let map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(points[0].latitude, points[0].longitude),
