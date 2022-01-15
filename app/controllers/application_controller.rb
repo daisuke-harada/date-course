@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UsersHelper
   include DateSpotReviewsHelper
-  include ManagementDateSpotsHelper
+  include ManagementsHelper
 
   # デートスポットの名前検索の際に使用する
   def set_q_for_date_spot

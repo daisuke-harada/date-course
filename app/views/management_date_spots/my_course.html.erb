@@ -14,6 +14,15 @@
       </p>
     <% else %>
       <div class="w-6/12">
+        <% if @management_date_spots.count >= 2 %>
+          <div class="m-5">
+            <%= form_with model: current_user.management, local: true do |f| %>
+              移動手段を選択してください
+              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"], ["電車", "TRANSIT"]] %>
+              <%= f.submit '交通手段を決定', id:"btn btn-salmon" %>
+            <% end %>
+          </div>
+        <% end %>
         <% @management_date_spots.each_with_index do |management_date_spot, position| %>
           <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
           <% if @management_date_spots.count != position + 1 %>
