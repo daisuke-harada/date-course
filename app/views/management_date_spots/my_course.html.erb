@@ -27,9 +27,10 @@
           <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1} %>
           <% if @management_date_spots.count != position + 1 %>
             <div class="h-16 flex justify-center">
-              <div class="border-r-4 border-indigo-500">
+              <div class="border-r-4 border-indigo-500 w-1/2">
               </div>
-              <div>
+              <div class="p-5">
+                移動にかかる時間は<span id="traffic_means_<%= position %>"></span>
               </div>
             </div>
           <% end %>
@@ -112,7 +113,7 @@
       });
 
       // 地点を分割してルート検索を行います。
-      let d = new google.maps.DirectionsService(); // ルート検索オブジェクト
+      let routeResult = new google.maps.DirectionsService(); // ルート検索オブジェクト
       let origin = null, waypoints = [], dest = null; // 出発地、経由地、目的地
       let resultMap = {}; // 分割してルート検索した結果データ
       let requestIndex = 0; // 検索番号
@@ -136,7 +137,7 @@
             };
             
             // ルート検索
-            d.route(request, function(result, status){
+            routeResult.route(request, function(result, status){
               // OKの場合ルートデータ保持
               if (status == google.maps.DirectionsStatus.OK) {
                 resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
@@ -183,7 +184,12 @@
           let legs = result.routes[0].legs; // Array<DirectionsLeg>
           for (let li = 0, llen = legs.length; li < llen; li++) {
             let leg = legs[li]; // DirectionLeg
+            
+            // 現在のデートスポットから次のデートスポットに移動する際にかかる時間を表示。
+            document.getElementById(`traffic_means_${li}`).innerHTML= leg.duration.text;
+
             let steps = leg.steps; // Array<DirectionsStep>
+
             // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
             let _path = steps.map(function(step){ return step.path })
                 .reduce(function(all, paths){ return all.concat(paths) });
@@ -193,6 +199,7 @@
             mark(leg.start_location, leg.start_address);
           }
         }
+
         // マーカーが必要ならマーカーを表示します。(最終)
         let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
         mark(endLeg.end_location, endLeg.end_address);
