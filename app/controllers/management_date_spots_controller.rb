@@ -3,9 +3,20 @@ class ManagementDateSpotsController < ApplicationController
 
   def my_course
     @management_date_spots = current_management.management_date_spots
-    
     # 追加されたデートスポットの住所モデルが登録されている配列を作成
     @date_spot_addresses = []
+
+    # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成
+    @date_spot_names = Array.new(@management_date_spots.count);
+    
+    # 追加されたデートスポットの数だけ、名前の配列を用意する。なぜなら、デートスポットによって配列の中身が違うからです。
+    for num in 0..(@management_date_spots.count - 1) do
+      @date_spot_names[num] = []
+      @management_date_spots.each do |management_date_spot|
+        @date_spot_names[num].push(management_date_spot.date_spot.name)
+      end
+    end
+
     @management_date_spots.each do |management_date_spot|
       @date_spot_addresses.push(management_date_spot.date_spot.address)
     end
@@ -30,6 +41,37 @@ class ManagementDateSpotsController < ApplicationController
     else
       redirect_to date_spot_url(params[:date_spot_id])
     end
+  end
+
+  def change_course
+    # 入れ替える元の配列
+    original_arrangement_number = 0
+
+    # 入れ替える対象の配列
+    change_arrangement_number = 0
+    count = 0
+    change_id = 0
+    original_id = params[:original_id].to_i
+    # 名前が同じ場合に入れ替える対象の配列や、入れ替える元の配列の番号を設定する
+    current_management.management_date_spots.each do |management_date_spot|
+      if management_date_spot.date_spot.id == params[:original_id]
+        original_arrangement_number = count
+      end
+
+      if management_date_spot.date_spot.name == params[:change_name]
+        change_arrangement_number = count
+        change_id = management_date_spot.date_spot.id
+      end
+
+      count += 1
+    end
+    
+    # デートスポットのIDをいれかえて、更新する。
+    current_management.management_date_spots[original_arrangement_number].update(date_spot_id: change_id)
+    current_management.management_date_spots[change_arrangement_number].update(date_spot_id: original_id)
+
+    @management_date_spots = current_management.management_date_spots
+    redirect_to my_course_path
   end
 
   def delete_course

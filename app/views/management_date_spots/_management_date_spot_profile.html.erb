@@ -9,7 +9,6 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-4-id-<%= date_spot.id %>" class ="w-7 h-7">
         <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-5-id-<%= date_spot.id %>" class ="w-7 h-7">
       </div>
-      <p class="m-3">目的地<%= position_number %></p>
       <p class="font-bold m-3">評価
         <span class="font-bold" id = "rate_average_number-<%= date_spot.id %>">
           <%= review_average_calculation(date_spot) %>
@@ -31,7 +30,13 @@
       <span class="m-5 font-bold">住所</span>
       <span id="address_position_number_<%= position_number %>"><%= date_spot.address.city_name %></span>
     </p>
-    <%= link_to "デートコースから削除する", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+    <%= form_with url:change_course_path, local: true do |f| %>
+      <%= f.hidden_field :original_id, :value => date_spot.id %>
+      <% date_spot_names.delete(date_spot.name) %>
+      <%= f.select :change_name, date_spot_names %>
+      <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon" %>
+    <% end %>
+    <%= link_to "デートコースから削除", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
   </div>
 </div>
 
@@ -71,5 +76,19 @@
       let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
+
+    // // 順番を入れ替える際のセレクトタグの設定をJavaScriptで行う
+    // let selectValues = document.getElementById("change_name");
+    // let dateSpotName = document.getElementById("date_spot_name_position_number_<%= position_number %>").innerHTML;
+    // let deleteNumber = null;
+    // //console.log(selectValues.length);
+    // for (let selectNumber = 0; selectNumber <= selectValues.length -1; selectNumber++){
+    //   if (selectValues[selectNumber].value == dateSpotName) {
+    //     selectValues.remove(selectNumber);
+    //   }
+    //   // console.log(selectNumber);
+    //   // console.log(dateSpotName);
+    //   // console.log(selectValues[selectNumber].value);
+    // }
   }());
 </script>
