@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
+  def confirm
+  end
+  
   def show
-    
   end
 
   def edit
