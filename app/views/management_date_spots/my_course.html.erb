@@ -24,7 +24,7 @@
           </div>
         <% end %>
         <% @management_date_spots.each_with_index do |management_date_spot, position| %>
-          <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spot_names: @date_spot_names[position] } %>
+          <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @management_date_spots,date_spot_names: @date_spot_names[position] } %>
           <% if @management_date_spots.count != position + 1 %>
             <div class="h-16 w-full flex justify-center">
               <div class="border-r-4 border-indigo-500 w-1/2">
@@ -43,6 +43,10 @@
   <div class="text-center">
     <% if @management_date_spots.count >= 1%>
       <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
+    <% end %>
+
+    <% if @management_date_spots.count >= 2%>
+      <%= link_to "このデートコースを登録する。", "#", class: "btn btn-salmon m-5" %>
     <% end %>
   </div>
 </div>

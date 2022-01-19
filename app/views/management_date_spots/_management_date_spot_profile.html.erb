@@ -30,11 +30,13 @@
       <span class="m-5 font-bold">住所</span>
       <span id="address_position_number_<%= position_number %>"><%= date_spot.address.city_name %></span>
     </p>
-    <%= form_with url:change_course_path, local: true do |f| %>
-      <%= f.hidden_field :original_id, :value => date_spot.id %>
-      <% date_spot_names.delete(date_spot.name) %>
-      <%= f.select :change_name, date_spot_names %>
-      <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon" %>
+    <% if date_spots.count >= 2 %>
+      <%= form_with url:change_course_path, local: true do |f| %>
+        <%= f.hidden_field :original_id, :value => date_spot.id %>
+        <% date_spot_names.delete(date_spot.name) %>
+        <%= f.select :change_name, date_spot_names %>
+        <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon" %>
+      <% end %>
     <% end %>
     <%= link_to "デートコースから削除", delete_course_path(date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
   </div>

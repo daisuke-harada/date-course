@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :managements, only: [:update]
   resources :courses, only: [:index, :show, :edit, :create, :update, :destroy]
+  resources :information_courses, only: [:index, :show, :edit, :create, :update, :destroy]
   get '/my_course' => 'management_date_spots#my_course'
   post '/change_course' => 'management_date_spots#change_course'
   post '/add_course' => 'management_date_spots#add_course'
