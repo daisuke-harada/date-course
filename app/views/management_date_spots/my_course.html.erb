@@ -1,12 +1,5 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
   <h1 class="text-3xl">デートコース作成画面</h1>
-  <div>
-    現在のデートスポットの数は
-    <span id="date-spots-count"><%= @management_date_spots.count %></span>
-    つです。
-  </div>
-  <div id="lat"></div>
-  <div id="lng"></div>
   <div class="w-full flex">
     <% if @management_date_spots == []%>
       <p class="text-blue-600 text-center m-10 text-3xl">
@@ -41,18 +34,13 @@
     <% end %>
   </div>
   <div class="text-center">
-    <% if @management_date_spots.count >= 1%>
-      <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
-    <% end %>
-
-    <% if @management_date_spots.count >= 2%>
-      <%= link_to "このデートコースを登録する。", confirm_path, class: "btn btn-salmon m-5" %>
-    <% end %>
+    <%= link_to "デートコースの内容をすべて削除する。", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" if @management_date_spots.count >= 1 %>
+    <%= link_to "このデートコースを登録する。", confirm_path, class: "btn btn-salmon m-5" if @management_date_spots.count >= 2 %>
   </div>
 </div>
 <script>
   function initMap(){
-    let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+    let date_spots_count = <%= @management_date_spots.count %>;
 
     // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
     let points = <%= @date_spot_addresses.to_json.html_safe %>;
