@@ -9,6 +9,9 @@ class ManagementDateSpotsController < ApplicationController
 
     # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成する。
     @date_spot_names = create_array_date_spot_name(@management_date_spots)
+
+    # デートコースでデートする予定や、他のユーザーに公開するかをform入力できるようにする。
+    # @course = Course.new
   end
 
   def add_course
@@ -20,7 +23,7 @@ class ManagementDateSpotsController < ApplicationController
 
     if current_management.management_date_spots.find_by(date_spot_id: params[:date_spot_id])
       flash[:danger] = 'このデートスポットはすでに追加されています'
-      return redirect_to root_path
+      return redirect_to request.referer
     end
 
 
