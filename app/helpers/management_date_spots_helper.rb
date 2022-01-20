@@ -15,14 +15,14 @@ module ManagementDateSpotsHelper
     names = Array.new(date_spots.count);
     
     # 追加されたデートスポットの数だけ、名前の配列を用意する。なぜなら、デートスポットによって配列の中身が違うからです。
-    for num in 0..(date_spots.count - 1) do
-      names[num] = []
+    for array in 0..(date_spots.count - 1) do
+      names[array] = []
       date_spots.each do |date_spot|
-        names[num].push(date_spot.date_spot.name)
+        names[array].push(date_spot.date_spot.name)
       end
 
       # デートスポットによって配列の中身を変える作業を行う。自身の名前がデートスポットの入れ替えの選択肢にあったらおかしいので、自分自身の名前を削除する。
-      names[num].delete_at(num)
+      names[array].delete_at(array)
     end
 
     return names
