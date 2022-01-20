@@ -4,4 +4,5 @@ module ApplicationHelper
   include DateSpotReviewsHelper
   include ManagementsHelper
   include ManagementDateSpotsHelper
+  include CoursesHelper
 end

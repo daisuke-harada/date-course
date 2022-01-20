@@ -8,7 +8,9 @@
   <div class="w-full flex">
     <div class="w-6/12">
       <div class="m-5">
-        移動手段は<%= management_traffic_mode_text(current_management.traffic_mode) %>
+        <p>移動手段は<%= management_traffic_mode_text(current_management.traffic_mode) %></p>
+        <p><%= date_schedule_text(@course.scheduled_time) %></p>
+        <p><%= authority_text(@course.authority) %></p>
       </div>
       <% @management_date_spots.each_with_index do |management_date_spot, position| %>
         <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @management_date_spots, date_spot_names: nil } %>
@@ -28,6 +30,12 @@
   </div>
   <div class="text-center">
     <%= link_to "デートコース作成画面に戻る", my_course_path, class: "btn btn-salmon m-5" %>
+    <%= form_with(url: courses_path, local: true) do |f| %>
+      <%= f.hidden_field :user_id, :value => @course.user_id %>
+      <%= f.hidden_field :scheduled_time, :value => @course.scheduled_time %>
+      <%= f.hidden_field :authority, :value => @course.authority %>
+      <%= f.submit "デートコースの登録を決定する。", class: "btn btn-salmon my-5" %>
+    <% end %>
   </div>
 </div>
 <script>
