@@ -1,0 +1,159 @@
+<div class="border border-black bg-white mt-10 m-20 p-5">
+  <h1 class="text-3xl">デートコース登録確認画面</h1>
+  <div>
+    現在追加されているデートスポットの数は
+    <span id="date-spots-count"><%= @management_date_spots.count %></span>
+    つです。
+  </div>
+  <div class="w-full flex">
+    <div class="w-6/12">
+      <div class="m-5">
+        <p>移動手段は<%= management_traffic_mode_text(current_management.traffic_mode) %></p>
+        <p><%= date_schedule_text(@course.scheduled_time) %></p>
+        <p><%= authority_text(@course.authority) %></p>
+      </div>
+      <% @management_date_spots.each_with_index do |management_date_spot, position| %>
+        <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @management_date_spots, date_spot_names: nil } %>
+        <% if @management_date_spots.count != position + 1 %>
+          <div class="h-16 w-full flex justify-center">
+            <div class="border-r-4 border-indigo-500 w-1/2">
+            </div>
+            <div class="p-5 w-1/2">
+              移動にかかる時間は<span id="traffic_means_<%= position %>"></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="p-5 m-5 shadow-lg bg-white border border-gray-200 w-6/12" id="map">
+    </div>
+  </div>
+  <div class="text-center">
+    <%= link_to "デートコース作成画面に戻る", my_course_path, class: "btn btn-salmon m-5" %>
+    <%= form_with(url: courses_path, local: true) do |f| %>
+      <%= f.hidden_field :user_id, :value => @course.user_id %>
+      <%= f.hidden_field :scheduled_time, :value => @course.scheduled_time %>
+      <%= f.hidden_field :authority, :value => @course.authority %>
+      <%= f.submit "デートコースの登録を決定する", class: "btn btn-salmon my-5" %>
+    <% end %>
+  </div>
+</div>
+<script>
+  function initMap(){
+    let date_spots_count = document.getElementById("date-spots-count").innerHTML;
+
+    // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
+    let points = <%= @date_spot_addresses.to_json.html_safe %>;
+
+    // マップの生成
+    let map = new google.maps.Map(document.getElementById("map"), {
+      center: new google.maps.LatLng(points[0].latitude, points[0].longitude),
+      zoom: 12, // ズームレベル
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    let mode = "<%= current_management.traffic_mode %>";
+
+    // 地点を分割してルート検索を行います。
+    let routeResult = new google.maps.DirectionsService(); // ルート検索オブジェクト
+    let origin = null, waypoints = [], dest = null; // 出発地、経由地、目的地
+    let resultMap = {}; // 分割してルート検索した結果データ
+    let requestIndex = 0; // 検索番号
+    let done = 0; // ルート検索が完了した数
+    for (let i = 0, len = points.length; i < len; i++) {
+      // 最初の場合、originに値をセット
+      if (origin == null) {
+        origin = new google.maps.LatLng(points[i].latitude, points[i].longitude);
+      }
+      // 経由地が8つたまったか最後の地点の場合、ルート検索
+      else if (waypoints.length == 8 || i == len - 1) {
+        dest = new google.maps.LatLng(points[i].latitude, points[i].longitude);
+
+        (function(index){
+          // ルート検索の条件
+          let request = {
+            origin: origin, // 出発地
+            destination: dest, // 目的地
+            waypoints: waypoints, // 経由地
+            travelMode: mode // 交通手段(歩行。DRIVINGの場合は車)
+          };
+          
+          // ルート検索
+          routeResult.route(request, function(result, status){
+            // OKの場合ルートデータ保持
+            if (status == google.maps.DirectionsStatus.OK) {
+              resultMap[index] = result; // 並行でリクエストするので配列だとリクエスト順とずれる場合があります
+              done++;
+            }
+            else {
+              console.log(status); // デバッグ
+            }
+          });
+        })(requestIndex);
+          requestIndex++;
+          origin = new google.maps.LatLng(points[i].latitude, points[i].longitude); // 今回の目的地を次回の出発地にします。
+          waypoints = [];
+      }else {
+        // 上記以外、waypointsに地点を追加
+        waypoints.push({ location: new google.maps.LatLng(points[i].latitude, points[i].longitude), stopover: true });
+      }
+    }
+
+    // マーカーを表示する場合の準備
+    let infoWindow = new google.maps.InfoWindow();
+    let mark = function(position, content) {
+      let marker = new google.maps.Marker({
+        map: map, // 描画先の地図
+        position: position // 座標
+      });
+      // クリック時吹き出しを表示
+      marker.addListener("click", function(){
+        infoWindow.setContent(content);
+        infoWindow.open(map, marker);
+      });
+    };
+
+    let sid = setInterval(function(){
+      // 分割したすべての検索が完了するまで待ちます。
+      if (requestIndex > done) return;
+      clearInterval(sid);
+
+      // すべての結果のルート座標を順番に取得して平坦な配列にします。
+      let path = [];
+      let result;
+      for (let i = 0, len = requestIndex; i < len; i++) {
+        result = resultMap[i]; // 検索結果
+        let legs = result.routes[0].legs; // Array<DirectionsLeg>
+        for (let li = 0, llen = legs.length; li < llen; li++) {
+          let leg = legs[li]; // DirectionLeg
+          
+          // 現在のデートスポットから次のデートスポットに移動する際にかかる時間を表示。
+          document.getElementById(`traffic_means_${li}`).innerHTML= leg.duration.text;
+
+          let steps = leg.steps; // Array<DirectionsStep>
+
+          // DirectionsStepが持っているpathを取得して平坦(2次元配列→1次元配列)にします。
+          let _path = steps.map(function(step){ return step.path })
+              .reduce(function(all, paths){ return all.concat(paths) });
+          path = path.concat(_path);
+
+          // マーカーが必要ならマーカーを表示します。
+          mark(leg.start_location, leg.start_address);
+        }
+      }
+
+      // マーカーが必要ならマーカーを表示します。(最終)
+      let endLeg = result.routes[0].legs[result.routes[0].legs.length-1];
+      mark(endLeg.end_location, endLeg.end_address);
+        // パスを描画します。
+        let line = new google.maps.Polyline({
+          map: map, // 描画先の地図
+          strokeColor: "#6366f1",//"#2196f3", // 線の色
+          strokeOpacity: 0.8, // 線の不透明度
+          strokeWeight: 10, // 先の太さ
+          path: path // 描画するパスデータ
+        });
+    }, 1000);
+  };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>

@@ -29,3 +29,8 @@ DateSpot.create(id: 5, name: "恵比寿ガーデンプレイス", genre_id: 1, o
 DateSpot.find_by(id: 5).image.attach(io: File.open('app/assets/images/date_spot_images/garden_place.jpeg'),
                                      filename: 'garden_place.jpeg')
 Address.create(prefecture_id: 13, date_spot_id: 5, city_name: Prefecture.find(13).name + "渋谷区恵比寿4丁目20 ガーデンプレイス")
+
+DateSpot.create(id: 6, name: "あか牛丼いわさき", genre_id: 2, opening_time: "2000-01-01 11:00", closing_time: "2000-01-02 00:00")
+DateSpot.find_by(id: 6).image.attach(io: File.open('app/assets/images/date_spot_images/aka_ushi_iwasaki.jpg'),
+                                     filename: 'aka_ushi_iwasaki.jpg')
+Address.create(prefecture_id: 43, date_spot_id: 6, city_name: Prefecture.find(43).name + "阿蘇市乙姫２００６-２")

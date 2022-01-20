@@ -54,7 +54,9 @@ ActiveRecord::Schema.define(version: 2021_12_31_044843) do
 
   create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.boolean "authority", default: false
+    t.datetime "scheduled_time"
+    t.string "traffic_mode", null: false
+    t.boolean "authority", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
