@@ -10,8 +10,10 @@ class ManagementDateSpotsController < ApplicationController
     # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成する。
     @date_spot_names = create_array_date_spot_name(@management_date_spots)
 
-    # デートコースでデートする予定や、他のユーザーに公開するかをform入力できるようにする。
-    # @course = Course.new
+    # デートコース作成画面のラジオボタンの初期値を挿入する。
+    unless session[:authority_false]
+      session[:authority_true] = true
+    end
   end
 
   def add_course

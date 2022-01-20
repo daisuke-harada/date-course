@@ -36,17 +36,15 @@
   <%= form_with(url: confirm_path, local: true) do |f| %>
     <% if @management_date_spots.count >= 2 %>
       <p class="m-5">
-        <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.label :scheduled_time, "デート実行日", class:"text-3xl mr-2" %>
-        <%= f.date_field :scheduled_time, class:"text-3xl m-2" %>
-        
+        <%= f.date_field :scheduled_time, value: session[:scheduled_time],class:"text-3xl m-2" %>
       </p>
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
         <%= f.label :authority, "公開", class:"text-3xl m-2" %>
-        <%= f.radio_button :authority, true, checked: true, class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2" %>
         <%= f.label :authority, "非公開", class:"text-3xl m-2" %>
-        <%= f.radio_button :authority, false, class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2" %>
       </p>
     <% end %>
     <div class="text-center">

@@ -5,7 +5,16 @@ class CoursesController < ApplicationController
     # 追加されたデートスポットの住所モデルが登録されている配列を作成
     @date_spot_addresses = create_array_address_date_spot(@management_date_spots)
 
-    @course = Course.new(user_id: params[:user_id], scheduled_time: params[:scheduled_time], authority: params[:authority])
+    @course = Course.new(user_id: current_user.id, scheduled_time: params[:scheduled_time], authority: params[:authority])
+
+    session[:scheduled_time] = params[:scheduled_time]
+    if params[:authority] == "false"
+      session[:authority_false] = true
+      session.delete(:authority_true)
+    else
+      session[:authority_true] = true
+      session.delete(:authority_false)
+    end
   end
   
   def show
@@ -18,7 +27,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(user_id: params[:user_id], scheduled_time: params[:scheduled_time], authority: params[:authority])
+    @course = Course.new(user_id: params[:user_id], scheduled_time: params[:scheduled_time], traffic_mode: current_management.traffic_mode, authority: params[:authority])
     if @course.save
       
       @management_date_spots = current_management.management_date_spots
@@ -32,8 +41,10 @@ class CoursesController < ApplicationController
 
       current_management.destroy
       session.delete(:management_id)
+      session.delete(:scheduled_time)
+      session.delete(:authority_true) if params[:authority] == "true"
+      session.delete(:authority_false) if params[:authority] == "false"
       
-      binding.pry
       flash[:success] = "デートコースの登録が完了しました"
       redirect_to users_path(params[:user_id])
     else
