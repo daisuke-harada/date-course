@@ -1,9 +1,6 @@
 <div class="border border-black w-11/12 m-5">
-  <%= course.scheduled_time.strftime("%Y年%m月%d日") %>
-  <div class="w-full">
-    <%= link_to user_path(course.user), id:"user_image_id_#{course.user.id}" do %>
-      <%= render 'layouts/image', {target_image: course.user, width: 150, height: 150} %>
-    <% end %>
+  <div class="m-5">
+    <%= course.scheduled_time.strftime("%Y年%m月%d日") %>にデートの予定
   </div>
   <div class="flex justify-evenly">
     <% course.information_courses.first(3).each do |information_course| %>
@@ -26,6 +23,29 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="m-2 flex">
+    <div class="w-1/6">
+      <%= link_to user_path(course.user), id:"user_image_id_#{course.user.id}" do %>
+        <% if course.user.image.attached? %>
+          <%= image_tag course.user.image.variant(gravity: :center, resize:"100x100^", crop:"100x100+0+0"), class: "m-2" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "100x100", class: "m-2" %>
+        <% end %>
+      <% end %>
+      <div class="text-center">
+        <%= render 'relationships/follow_button', user: course.user %>
+      </div>
+    </div>
+    <div class="w-3/6 mt-9 mx-5">
+      <span class="my-3">
+        <div>感想文・どのようなテーマで作成したかなどを表示</div>
+        <%= link_to user_path(course.user), id:"user_name_id_#{course.user.id}" do %>
+          <%= course.user.name %>
+          (<%= course.user.change_gender_data_string %>)さんが作成したデートコースです。
+        <% end %>
+      </span>
+    </div>
   </div>
   <div class="text-center">
     <%= link_to "デートコース詳細画面に行く", course_path(course.id), class:"btn btn-salmon m-5" %>
