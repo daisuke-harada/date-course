@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :course_find_param_id, only: [:show, :edit, :update, :destroy]
+
   def confirm
     @management_date_spots = current_management.management_date_spots
 
@@ -18,6 +20,9 @@ class CoursesController < ApplicationController
   end
   
   def show
+    @information_courses = InformationCourse.where(course_id: @course.id).order("position")
+    # 追加されたデートスポットの住所モデルが登録されている配列を作成
+    @date_spot_addresses = create_array_address_date_spot(@information_courses)
   end
 
   def edit
@@ -28,6 +33,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(user_id: params[:user_id], scheduled_time: params[:scheduled_time], traffic_mode: current_management.traffic_mode, authority: params[:authority])
+    
     if @course.save
       
       @management_date_spots = current_management.management_date_spots
@@ -46,7 +52,7 @@ class CoursesController < ApplicationController
       session.delete(:authority_false) if params[:authority] == "false"
       
       flash[:success] = "デートコースの登録が完了しました"
-      redirect_to users_path(params[:user_id])
+      redirect_to course_path(@course.id)
     else
       flash[:danger] = "デートコースの登録に失敗しました"
       render 'confirm'
@@ -59,4 +65,11 @@ class CoursesController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  def course_find_param_id
+    @course = Course.find(params[:id])
+  end
+
 end
