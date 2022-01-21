@@ -1,0 +1,19 @@
+<div class="border border-black w-11/12 m-5">
+  <h1 class="text-3xl">
+    <%= course.scheduled_time.strftime("%Y年%m月%d日") %>
+    <div class="flex justify-evenly">
+      <% course.information_courses.first(3).each do |information_course| %>
+        <%= render "courses/information_course_profile", information_course: information_course %>
+      <% end %>
+      <% if course.information_courses.count < 3 %>
+        <div class="m-2">
+          <div class="bg-gray-300 w-52 h-52">
+          </div>
+          <div class="text-xs text-center">
+            デートコースは2つしか登録されていない
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </h1>
+</div>

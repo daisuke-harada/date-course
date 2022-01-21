@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   before_action :course_find_param_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_q_for_date_spot
+  before_action :set_q_for_user
 
   def confirm
     @management_date_spots = current_management.management_date_spots
@@ -29,6 +31,7 @@ class CoursesController < ApplicationController
   end
 
   def index
+    @courses = Course.where(authority: true)
   end
 
   def create

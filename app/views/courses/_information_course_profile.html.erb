@@ -1,0 +1,9 @@
+<div class="m-2">
+  <%= link_to date_spot_path(information_course.date_spot), id:"date_spot_image_id_#{information_course.date_spot.id}" do %>
+    <%= render 'layouts/image', {target_image: information_course.date_spot, width: 208, height: 208}%>
+  <% end %>
+  <div class="text-xs text-center">
+    <p class="m-2"><%= information_course.date_spot.name %></p>
+    <p class="m-2"><%= information_course.date_spot.address.city_name %></p>
+  </div>
+</div>
