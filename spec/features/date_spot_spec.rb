@@ -170,7 +170,6 @@ def date_spot_display(date_spot)
     expect(page).to have_content "営業時間"
     expect(page).to have_content "#{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
     expect(page).to have_content date_spot.genre.name.to_s
-    expect(page).to have_content date_spot.address.prefecture.name.to_s
     expect(page).to have_content date_spot.address.city_name.to_s
   end
 end

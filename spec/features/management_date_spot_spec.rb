@@ -61,7 +61,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     click_link "デートスポットを探す"
     find("#add_date_course_date_spot_id_#{address.date_spot.id}").click
     expect do
-      click_link "デートコースから削除する"
+      click_link "デートコースから削除"
       expect(page).to have_content "デートコースから#{address.date_spot.name}が削除されました"
     end.to change(ManagementDateSpot.all, :count).by(-1)
   end
@@ -76,7 +76,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     click_link "デートスポットを探す"
     find("#add_date_course_date_spot_id_#{other_address.date_spot.id}").click
     expect do
-      click_link "デートコースの内容をすべて削除する。"
+      click_link "デートコースの内容をすべて削除する"
       expect(page).to have_content "デートコースからデートスポットを全て削除しました。"
       expect(page).to have_content "デートスポットをデートコースに追加してみましょう"
     end.to change(ManagementDateSpot.all, :count).by(-2)
