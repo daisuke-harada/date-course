@@ -22,13 +22,13 @@ class CoursesController < ApplicationController
   end
   
   def show
-    @information_courses = InformationCourse.where(course_id: @course.id).order("position")
+    @information_courses = InformationCourse.where(course_id: @course.id)
     # 追加されたデートスポットの住所モデルが登録されている配列を作成
     @date_spot_addresses = create_array_address_date_spot(@information_courses)
   end
 
   def edit
-    @information_courses = InformationCourse.where(course_id: @course.id).order("position")
+    @information_courses = InformationCourse.where(course_id: @course.id)
 
     # 追加されたデートスポットの住所モデルが登録されている配列を作成
     @date_spot_addresses = create_array_address_date_spot(@information_courses)
@@ -51,8 +51,7 @@ class CoursesController < ApplicationController
       # information_coursesにデートスポットを登録する。
       for array in 0..(@management_date_spots.count - 1) do
         InformationCourse.create(course_id: @course.id,
-          date_spot_id: @management_date_spots[array].date_spot_id,
-          position: array + 1)
+          date_spot_id: @management_date_spots[array].date_spot_id)
       end
 
       current_management.destroy
@@ -81,10 +80,17 @@ class CoursesController < ApplicationController
     else
       flash[:danger] = '削除に失敗しました'
     end
-    redirect_to edit_courses_path(params[:id])
+    redirect_to edit_course_path(params[:id])
   end
 
   def destroy
+    if @course.destroy
+      flash[:success] = "デートコースがすべて削除されました"
+    else
+      flash[:danger] = '削除に失敗しました'
+    end
+
+    redirect_to user_path(@course.user_id)
   end
 
   private

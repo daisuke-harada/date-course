@@ -33,7 +33,7 @@
       </div>
     <% end %>
   </div>
-  <%= form_with(url: confirm_path, local: true) do |f| %>
+  <%= form_with model: @course, local: true do |f| %>
     <% if @information_courses.count >= 2 %>
       <p class="m-5">
         <%= f.label :scheduled_time, "デート実行日", class:"text-3xl mr-2" %>
@@ -42,16 +42,16 @@
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
         <%= f.label :authority, "公開", class:"text-3xl m-2" %>
-        <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, true, class:"text-3xl m-2" %>
         <%= f.label :authority, "非公開", class:"text-3xl m-2" %>
-        <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, false, class:"text-3xl m-2" %>
       </p>
     <% end %>
     <div class="text-center">
       <% if @information_courses.count >= 2 %>
         <%= f.submit "デートコースを登録する", class: "btn btn-salmon my-5" %>
       <% end %>
-      <%= link_to "デートコースの内容をすべて削除する", all_delete_date_spots_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" if @information_courses.count >= 1 %>
+      <%= link_to "デートコースの内容をすべて削除する", course_path(@course.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" if @information_courses.count >= 1 %>
     </div>
   <% end %>
 </div>
