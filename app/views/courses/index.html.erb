@@ -4,9 +4,6 @@
     <%= render "layouts/user_name_search" %>
   </div>
   <div class="md:w-9/12 bg-white w-full">
-    <h1 class="font-bold text-3xl">デートコース一覧ページ</h1>
-    <% @courses.each do |course| %>
-      <%= render "courses/course_profile", course: course %>
-    <% end %>
+    <%= render "courses/courses", {courses_title: "デートコース一覧ページ", courses: @courses} %>
   </div>
 </div>
