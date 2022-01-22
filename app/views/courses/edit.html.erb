@@ -49,7 +49,7 @@
     <% end %>
     <div class="text-center">
       <% if @information_courses.count >= 2 %>
-        <%= f.submit "デートコースを登録する", class: "btn btn-salmon my-5" %>
+        <%= f.submit "デートコースの内容を変更する", class: "btn btn-salmon my-5" %>
       <% end %>
       <%= link_to "デートコースの内容をすべて削除する", course_path(@course.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" if @information_courses.count >= 1 %>
     </div>

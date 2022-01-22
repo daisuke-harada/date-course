@@ -72,9 +72,47 @@ class CoursesController < ApplicationController
   def update
   end
 
-  def information_delete_course
+  def change_information_course
+    @information_courses = InformationCourse.where(course_id: params[:course_id])
+
+    # 元の配列を指定するための番号を入れるための変数
+    original_array_number = 0
+
+    # 入れ替える対象の配列を指定するための番号を入れるための変数
+    change_array_number = 0
+
+    count = 0
+    change_id = 0
+    original_id = params[:original_id].to_i
+
+    # 入れ替え元の配列の番号を設定するために繰り返し処理を行う。
+    @information_courses.each do |information_course|
+      if information_course.date_spot_id == original_id
+        original_array_number = count
+      end
+
+      if information_course.date_spot.name == params[:change_name]
+        change_array_number = count
+        change_id = information_course.date_spot_id
+      end
+
+      count += 1
+    end
+    
+    # デートスポットのIDをいれかえて、更新する。
+    # 元の配列のデートスポットのIDを入れ替えたいIDに変更することで入れ替える。
+    @information_courses[original_array_number].update(date_spot_id: change_id)
+
+    # 入れ替えたい番号の配列に元のデートスポットのIDに変更することで入れ替える。
+    @information_courses[change_array_number].update(date_spot_id: original_id)
+
+    redirect_to edit_course_path(params[:course_id])
+  end
+
+  def delete_information_course
     @information_courses = InformationCourse.where(course_id: params[:id])
     @information_course = @information_courses.find_by(date_spot_id: params[:date_spot_id])
+
     if @information_course.destroy
       flash[:success] = "デートコースから#{@information_course.date_spot.name}が削除されました"
     else
