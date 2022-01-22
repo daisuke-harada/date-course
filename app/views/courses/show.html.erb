@@ -23,6 +23,7 @@
     </div>
   </div>
   <div class="text-center">
+    <%= link_to "デートコースの内容を編集する", edit_course_path(@course.id), class: "btn btn-salmon m-5" if current_user == @course.user %>
   </div>
 </div>
 <script>

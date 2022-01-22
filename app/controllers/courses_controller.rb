@@ -28,6 +28,13 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @information_courses = InformationCourse.where(course_id: @course.id).order("position")
+
+    # 追加されたデートスポットの住所モデルが登録されている配列を作成
+    @date_spot_addresses = create_array_address_date_spot(@information_courses)
+
+    # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成する。
+    @date_spot_names = create_array_date_spot_name(@information_courses)
   end
 
   def index
@@ -64,6 +71,17 @@ class CoursesController < ApplicationController
   end
 
   def update
+  end
+
+  def information_delete_course
+    @information_courses = InformationCourse.where(course_id: params[:id])
+    @information_course = @information_courses.find_by(date_spot_id: params[:date_spot_id])
+    if @information_course.destroy
+      flash[:success] = "デートコースから#{@information_course.date_spot.name}が削除されました"
+    else
+      flash[:danger] = '削除に失敗しました'
+    end
+    redirect_to edit_courses_path(params[:id])
   end
 
   def destroy
