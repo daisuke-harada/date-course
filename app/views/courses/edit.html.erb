@@ -7,15 +7,6 @@
       </p>
     <% else %>
       <div class="w-6/12">
-        <% if @information_courses.count >= 2 %>
-          <div class="m-5">
-            <%= form_with model: @course, local: true do |f| %>
-              移動手段を選択してください
-              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]] %>
-              <%= f.submit '交通手段を決定', class:"btn btn-salmon" %>
-            <% end %>
-          </div>
-        <% end %>
         <% @information_courses.each_with_index do |information_course, position| %>
           <%= render "courses/edit_course_profile", {course: @course, date_spot: information_course.date_spot, position_number: position + 1, date_spots: @information_courses, date_spot_names: @date_spot_names[position] } %>
           <% if @information_courses.count != position + 1 %>
@@ -35,6 +26,10 @@
   </div>
   <%= form_with model: @course, local: true do |f| %>
     <% if @information_courses.count >= 2 %>
+      <p class="m-5 text-3xl">
+        移動手段を選択してください
+        <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]] %>
+      </p>
       <p class="m-5">
         <%= f.label :scheduled_time, "デート実行日", class:"text-3xl mr-2" %>
         <%= f.date_field :scheduled_time, value: session[:scheduled_time],class:"text-3xl m-2" %>

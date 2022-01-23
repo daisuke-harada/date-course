@@ -70,6 +70,13 @@ class CoursesController < ApplicationController
   end
 
   def update
+    if @course.update(course_params)
+      flash[:success] = "デートコースの移動手段の更新が完了しました"
+      redirect_to course_path(@course.id)
+    else
+      lash[:danger] = "デートコースの更新に失敗しました"
+      render 'edit'
+    end
   end
 
   def change_information_course
@@ -135,6 +142,15 @@ class CoursesController < ApplicationController
 
   def course_find_param_id
     @course = Course.find(params[:id])
+  end
+
+  def course_params
+    params.require(:course).permit(
+      :user_id,
+      :scheduled_time,
+      :traffic_mode,
+      :authority,
+    )
   end
 
 end
