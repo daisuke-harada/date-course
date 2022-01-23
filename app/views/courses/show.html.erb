@@ -1,6 +1,12 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
   <h1 class="text-3xl">デートコース詳細画面</h1>
-  <h1><%= @course.scheduled_time.strftime("%Y年%m月%d日")  if @course.scheduled_time %></h1>
+  <h1>
+    <% if @course.scheduled_time %>
+      <%= @course.scheduled_time.strftime("%Y年%m月%d日") %>
+    <% else %>
+      日程は未定です。
+    <% end %>
+  </h1>
   <div class="w-full flex">
     <div class="w-6/12">
       <div class="m-5">

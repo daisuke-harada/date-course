@@ -2,6 +2,8 @@
   <div class="m-5">
     <% if course.scheduled_time %>
       <%= course.scheduled_time.strftime("%Y年%m月%d日") %>にデートの予定
+    <% else %>
+      日程は未定です。
     <% end %>
   </div>
   <div class="flex justify-evenly">
