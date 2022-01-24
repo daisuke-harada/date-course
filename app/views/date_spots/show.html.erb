@@ -55,7 +55,7 @@
   <% end %>
 </div>
 <script>
-(function(){
+(() => {
   let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
   let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
 
@@ -90,7 +90,7 @@
     let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
     image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
   };
-}());
+})();
 
 function initMap(){
   // 座標を作成
