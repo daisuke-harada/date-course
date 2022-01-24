@@ -45,7 +45,7 @@
     // viewに小数点第二以下を切り捨てた数字を反映する。
     document.getElementById("rate_average_number-<%= date_spot.id %>").innerText = rate_average_number;
 
-    // 小数
+    // 評価値の小数部分
     let rate_decimal_value = 0;
 
     // 小数かどうかを判定する。
@@ -53,14 +53,18 @@
       rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
     };
 
-    // 整数
+    // 評価値の整数部分
     let rate_integral_value = Math.trunc(rate_average_number);
-    
+
+    // 星の個数
+    const starAverageNumber = [1, 2, 3, 4, 5];
     // 整数値部分の評価を画像に反映
-    for (let i= 1; i <= rate_integral_value; i++){
-      let image = document.getElementById(`star-average-${i}-id-<%= date_spot.id %>`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-    };
+    starAverageNumber.map((number) => {
+      if(number <= rate_integral_value ){
+        let image = document.getElementById(`star-average-${number}-id-<%= date_spot.id %>`);
+        image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+      }
+    });
 
     // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
