@@ -79,9 +79,10 @@
   // 星の個数
   // 整数値部分の評価を画像に反映
   let count = 0;
-  [1, 2, 3, 4, 5].map((number) => {
-    if(number <= rate_integral_value ){
-      let image = document.getElementById(`star-average-${number}`);
+  //.map(要素用の変数, インデックス番号用の変数)
+  [...Array(5)].map((_, number) => {
+    if(number + 1 <= rate_integral_value ){
+      let image = document.getElementById(`star-average-${number + 1}`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     }
   });

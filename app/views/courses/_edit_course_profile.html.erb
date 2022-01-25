@@ -65,9 +65,10 @@
     let rate_integral_value = Math.trunc(rate_average_number);
     
     // 整数値部分の評価を画像に反映
-    [1, 2, 3, 4, 5].map((number) => {
-      if(number <= rate_integral_value ){
-        let image = document.getElementById(`star-average-${number}-id-<%= date_spot.id %>`);
+    //.map(要素用の変数, インデックス番号用の変数)
+    [...Array(5)].map((_, number) => {
+      if(number + 1 <= rate_integral_value ){
+        let image = document.getElementById(`star-average-${number + 1}-id-<%= date_spot.id %>`);
         image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
       }
     });
