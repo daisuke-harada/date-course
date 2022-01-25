@@ -77,9 +77,9 @@
   let rate_integral_value = Math.trunc(rate_average_number);
 
   // 星の個数
-  const starAverageNumber = [1, 2, 3, 4, 5];
   // 整数値部分の評価を画像に反映
-  starAverageNumber.map((number) => {
+  let count = 0;
+  [1, 2, 3, 4, 5].map((number) => {
     if(number <= rate_integral_value ){
       let image = document.getElementById(`star-average-${number}`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
