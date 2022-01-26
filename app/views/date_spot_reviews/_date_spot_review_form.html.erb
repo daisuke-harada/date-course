@@ -10,7 +10,6 @@
       </div>
 
       <div class="m-5 flex" id="rate">
-
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-1-left">
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-1-right">
         <img src ="<%= asset_url('date_spot_review_images/star-off-left.png') %>" id ="star-2-left">
@@ -23,7 +22,6 @@
         <img src ="<%= asset_url('date_spot_review_images/star-off-right.png') %>" id ="star-5-right">
         <%= f.label :rate, "評価", class: "mx-4" %>
         <%= f.text_field :rate, readonly: true, class:"outline-none pointer-events-none", id: "rate-value" %>
-
       </div>
 
       <div class="m-5">
@@ -112,7 +110,7 @@
       };
     };
 
-    // カーソルを合わせた星以下の星も変化させる関数　例　3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
+    // カーソルを合わせた星以下の星も変化させる関数 例3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
     let rate_management = (idNumber, starCondition) => {
       for(let subtractNumber = 0.5; subtractNumber <= idNumber; subtractNumber += 0.5){
 
@@ -148,10 +146,10 @@
       };
     };
 
-    // src属性が"<%= asset_url('date_spot_review_images/star-off.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
+    // src属性が"<%= asset_url('date_spot_review_images/star-on.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
     let starOnCount = () => {
       let images = document.getElementById("rate").childNodes;
-
+      console.log(images);
       let count = 0;
 
       for (let collectionNumber = 1; collectionNumber <= 19; collectionNumber += 2){
