@@ -226,4 +226,4 @@
     }
   };
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials[:GOOGLE_MAP_API_KEY] %>&callback=initMap"></script>
