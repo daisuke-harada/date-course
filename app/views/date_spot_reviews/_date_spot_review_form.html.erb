@@ -126,9 +126,15 @@
         if(starCondition == "starOn"){
           starOnRightLeft(document.getElementById(`star-${starFloat(subtractNumber)}`), subtractNumber);
           // 編集画面などの初期値が入っている際に、星にドラッグした時にドラッグした星より大きい数の星がOff状態になるようにする。
-          for(let offNumber = idNumber +0.5 ; offNumber <= 5; offNumber += 0.5){
-            starOffRightLeft(document.getElementById(`star-${starFloat(offNumber)}`), offNumber);
-          };
+          // 0.5から0.5ずつ5までの連番の配列を作成する。
+          const array = [...Array(10).keys()].map(i => (i + 1) / 2);
+          const offNumber = idNumber + 0.5;
+          const starArray = array.filter((value) => {
+            return offNumber <= value;
+          });
+          starArray.map((idValue) => {
+            starOffRightLeft(document.getElementById(`star-${starFloat(idValue)}`), idValue);
+          });
         } else if(starCondition == "starOff"){
           starOffRightLeft(document.getElementById(`star-${starFloat(subtractNumber)}`), subtractNumber);
         };
