@@ -99,21 +99,26 @@
 
     // 評価されている星すべての評価を解除する関数。
     const starOffAll = () => {
-      let images = document.getElementById("rate").childNodes;
-      for (let collectionnumber= 1, idNumber = 0.5; collectionnumber <= 19; collectionnumber += 2, idNumber += 0.5){
+      const images = document.getElementById("rate").childNodes;
 
-        if(images[collectionnumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
-          continue;
+      // images変数の子要素の配列を作成
+      const starArray = [...Array(10).keys()].map(i => ((i + 1) * 2) -1);
+      // idの配列を作成
+      const idArray = [...Array(10).keys()].map(i => (i + 1) / 2);
+
+      starArray.map((collectionNumber, index) => {
+        // すでに星が解除されている場合は処理を飛ばす。
+        if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
+          return;
         };
-
-        images[collectionnumber].setAttribute("id", `star-${starFloat(idNumber)}`);
-        starOffRightLeft(document.getElementById(`star-${starFloat(idNumber)}`), idNumber);
-      };
+        images[collectionNumber].setAttribute("id", `star-${starFloat(idArray[index])}`);
+        starOffRightLeft(document.getElementById(`star-${starFloat(idArray[index])}`), idArray[index]);
+      });
     };
 
     // カーソルを合わせた星以下の星も変化させる関数 例3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
     const rate_management = (idNumber, starCondition) => {
-    // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
+      // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
       [...Array(idNumber * 2)].map((_,index) => {
         // 配列の数に+1するのは、配列が0から始まるため。
         // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
@@ -142,41 +147,43 @@
     };
 
     // クリックした星より前の星も変化するようにする関数。
-    let rate_management_clicked = (idNumber) => {
-        // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
-        [...Array(idNumber * 2)].map((_,index) => {
-          // 配列の数に+1するのは、配列が0から始まるため。
-          // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
-          const subtractNumber = (index + 1) /2
-          console.log(subtractNumber);
-          if(!document.getElementById(`star-${starFloat(subtractNumber)}`)){
-            return;
-          };
+    const rate_management_clicked = (idNumber) => {
+      // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
+      [...Array(idNumber * 2)].map((_,index) => {
+        // 配列の数に+1するのは、配列が0から始まるため。
+        // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
+        const subtractNumber = (index + 1) /2
+        if(!document.getElementById(`star-${starFloat(subtractNumber)}`)){
+          return;
+        };
 
-          let starClicked = document.getElementById(`star-${starFloat(subtractNumber)}`);
-          starClicked.setAttribute("id", `star-clicked-${starFloat(subtractNumber)}`);
-          
-          starOnRightLeft(document.getElementById(`star-clicked-${starFloat(subtractNumber)}`), subtractNumber);
-        });
+        const starClicked = document.getElementById(`star-${starFloat(subtractNumber)}`);
+        starClicked.setAttribute("id", `star-clicked-${starFloat(subtractNumber)}`);
+        
+        starOnRightLeft(document.getElementById(`star-clicked-${starFloat(subtractNumber)}`), subtractNumber);
+      });
     };
 
     // src属性が"<%= asset_url('date_spot_review_images/star-on.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
-    let starOnCount = () => {
-      let images = document.getElementById("rate").childNodes;
-      let count = 0;
+    const starOnCount = () => {
+      const images = document.getElementById("rate").childNodes;
 
-      for (let collectionNumber = 1; collectionNumber <= 19; collectionNumber += 2){
+      // images変数の子要素の配列を作成
+      const starArray = [...Array(10).keys()].map(i => ((i + 1) * 2) -1);
+      const idArray = [...Array(10).keys()].map(i => (i + 1) / 2);
+      let count = 0;
+      
+      starArray.map((collectionNumber) => {
         if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-left.png') %>"){
           count += 0.5;
         }else if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-right.png') %>"){
           count += 0.5;
         };
-      };
-
+      });
       return count;
     };
 
-    let starFloat = (idNumber) => {
+    const starFloat = (idNumber) => {
       if(!Number.isInteger(idNumber)){
         return (idNumber + 0.5) + "-left"
       }else if(Number.isInteger(idNumber)){
@@ -185,10 +192,10 @@
     }
 
     // 星による評価の数値
-    let rateValue = document.getElementById("rate-value");
+    const rateValue = document.getElementById("rate-value");
 
     // 編集画面の星に初期値を設定する際に使用する。
-    let rateValueId = rateValue.getAttribute("id");
+    const rateValueId = rateValue.getAttribute("id");
 
 
     // レビューを編集する場合は評価値が決まっているため、初期状態で星が塗り潰されている状態となる。
@@ -202,7 +209,7 @@
     // 全ての星の挙動を実装
     [...Array(10)].map((_,index) => {
       // idNumberを実装
-      let idNumber = (index + 1) / 2;
+      const idNumber = (index + 1) / 2;
 
       if(!document.getElementById(`star-${starFloat(idNumber)}`)){
         return;
