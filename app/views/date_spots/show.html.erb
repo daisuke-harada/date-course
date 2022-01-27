@@ -56,70 +56,62 @@
 </div>
 <script>
 (() => {
-  let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
-  let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
+  const images = document.getElementById("date_spot_reviews_rate_average").childNodes;
+  const rate_average = Number(document.getElementById("rate_average_number").innerText);
 
   // 小数点第二以下を切り捨てる。
-  rate_average_number = Math.floor(rate_average_number * 10) / 10;
+  const rate_average_number = Math.floor(rate_average * 10) / 10;
 
   // viewに小数点第二以下を切り捨てた数字を反映する。
   document.getElementById("rate_average_number").innerText = rate_average_number;
 
-  // 小数
-  let rate_decimal_value = 0;
+  // 小数部分
+  const rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
 
-  // 小数かどうかを判定する。
-  if(!Number.isInteger(rate_average_number)){
-    rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
-  };
+  // 整数部分
+  const rate_integral_value = Math.trunc(rate_average_number);
 
-  // 整数
-  let rate_integral_value = Math.trunc(rate_average_number);
-
-  // 星の個数
-  // 整数値部分の評価を画像に反映
-  let count = 0;
   //.map(要素用の変数, インデックス番号用の変数)
   [...Array(5)].map((_, number) => {
     if(number + 1 <= rate_integral_value ){
-      let image = document.getElementById(`star-average-${number + 1}`);
+      const image = document.getElementById(`star-average-${number + 1}`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     }
   });
 
   // 小数点部分の評価を画像に反映させる。反映
   if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
-    let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+    const image = document.getElementById(`star-average-${rate_integral_value + 1}`);
     image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
   }else if(rate_decimal_value >= 0.6){
-    let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
+    const image = document.getElementById(`star-average-${rate_integral_value + 1}`);
     image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
   };
 })();
 
 function initMap(){
   // 座標を作成
-  let point = {lat: <%= @date_spot.address.latitude %>, lng: <%= @date_spot.address.longitude %> };
+  const point = {lat: <%= @date_spot.address.latitude %>, lng: <%= @date_spot.address.longitude %> };
   // マーカーのタイトルを作成
-  let title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
-  let address = document.getElementById('address').textContent.replace(/\r?\n/g,'');
+  const title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
+  const address = document.getElementById('address').textContent.replace(/\r?\n/g,'');
 
   // マーカーをクリックした際に表示する文面を作成
-  let content = '<div id="map_content"><p>' + title + '<br/>' + address + '<br/><a href="https://maps.google.co.jp/maps?q=' + point + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
+  const content = '<div id="map_content"><p>' + title + '<br/>' + address + '<br/><a href="https://maps.google.co.jp/maps?q=' + [point.lat, point.lng] + '&iwloc=J" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></div>';
 
-  let mapOptions = {
+  const mapOptions = {
     center:  new google.maps.LatLng(point.lat, point.lng),
     zoom: 15
   };
-  let map = new google.maps.Map(document.getElementById('map'), mapOptions);
-  let marker = new google.maps.Marker({
+  const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  const marker = new google.maps.Marker({
     position: point,
     map: map,
     title: title
   });
 
   //情報ウィンドウのインスタンスを生成
-  let infowindow = new google.maps.InfoWindow({
+  const infowindow = new google.maps.InfoWindow({
     content: content,
   });
   

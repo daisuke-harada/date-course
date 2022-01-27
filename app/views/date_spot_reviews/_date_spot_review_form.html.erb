@@ -42,9 +42,9 @@
 
 <script>
   (() => {
-    console.log(array);
+
     // 星にカーソルを合わせた場合の挙動の関数
-    let starMouseover = (element, idNumber) => {
+    const starMouseover = (element, idNumber) => {
       element.addEventListener("mouseover", () => {
         rate_management(idNumber, "starOn");
         rateValue.value = starOnCount();
@@ -52,7 +52,7 @@
     };
 
     // 星からカーソルを外した場合の挙動の関数
-    let starMouseout = (element, idNumber) => {
+    const starMouseout = (element, idNumber) => {
       element.addEventListener("mouseout", () => {
         rate_management(idNumber, "starOff");
         rateValue.value = starOnCount();
@@ -60,14 +60,14 @@
     };
 
     // 星をクリックした場合の挙動を行う関数
-    let starClick = (element, idNumber) => {
+    const starClick = (element, idNumber) => {
       element.addEventListener("click", () => {
         star_clicked_when_of_branch(element, idNumber);
       }, false);
     };
 
     // クリックした際に、既に星が判定されているを判定する関数。
-    let star_clicked_when_of_branch = (element, idNumber) => {
+    const star_clicked_when_of_branch = (element, idNumber) => {
       if(element.getAttribute("id") == `star-${starFloat(idNumber)}`){
         // クリックした際に評価され、星に色がつく
         rate_management_clicked(idNumber);
@@ -80,7 +80,7 @@
     };
 
     // 判定する星が右か左かを決定する関数
-    let starOnRightLeft = (element, idNumber) => {
+    const starOnRightLeft = (element, idNumber) => {
       if(!Number.isInteger(idNumber)){
         element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on-left.png') %>");
       }else if(Number.isInteger(idNumber)){
@@ -89,7 +89,7 @@
     };
 
     // 解除する星が右か左かを決定する関数
-    let starOffRightLeft = (element, idNumber) => {
+    const starOffRightLeft = (element, idNumber) => {
       if(!Number.isInteger(idNumber)){
         element.setAttribute("src", "<%= asset_url('date_spot_review_images/star-off-left.png') %>");
       }else if(Number.isInteger(idNumber)){
@@ -98,22 +98,27 @@
     };
 
     // 評価されている星すべての評価を解除する関数。
-    let starOffAll = () => {
-      let images = document.getElementById("rate").childNodes;
-      for (let collectionnumber= 1, idNumber = 0.5; collectionnumber <= 19; collectionnumber += 2, idNumber += 0.5){
+    const starOffAll = () => {
+      const images = document.getElementById("rate").childNodes;
 
-        if(images[collectionnumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
-          continue;
+      // images変数の子要素の配列を作成
+      const starArray = [...Array(10).keys()].map(i => ((i + 1) * 2) -1);
+      // idの配列を作成
+      const idArray = [...Array(10).keys()].map(i => (i + 1) / 2);
+
+      starArray.map((collectionNumber, index) => {
+        // すでに星が解除されている場合は処理を飛ばす。
+        if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-off.png') %>"){
+          return;
         };
-
-        images[collectionnumber].setAttribute("id", `star-${starFloat(idNumber)}`);
-        starOffRightLeft(document.getElementById(`star-${starFloat(idNumber)}`), idNumber);
-      };
+        images[collectionNumber].setAttribute("id", `star-${starFloat(idArray[index])}`);
+        starOffRightLeft(document.getElementById(`star-${starFloat(idArray[index])}`), idArray[index]);
+      });
     };
 
     // カーソルを合わせた星以下の星も変化させる関数 例3番目の星にチェックを入れていたら、1番目と2番目も画像を変化させる関数。
-    let rate_management = (idNumber, starCondition) => {
-    // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
+    const rate_management = (idNumber, starCondition) => {
+      // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
       [...Array(idNumber * 2)].map((_,index) => {
         // 配列の数に+1するのは、配列が0から始まるため。
         // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
@@ -125,11 +130,16 @@
         
         if(starCondition == "starOn"){
           starOnRightLeft(document.getElementById(`star-${starFloat(subtractNumber)}`), subtractNumber);
-
           // 編集画面などの初期値が入っている際に、星にドラッグした時にドラッグした星より大きい数の星がOff状態になるようにする。
-          for(let offNumber = idNumber +0.5 ; offNumber <= 5; offNumber += 0.5){
-            starOffRightLeft(document.getElementById(`star-${starFloat(offNumber)}`), offNumber);
-          };
+          // 0.5から0.5ずつ5までの連番の配列を作成する。
+          const array = [...Array(10).keys()].map(i => (i + 1) / 2);
+          const offNumber = idNumber + 0.5;
+          const starArray = array.filter((value) => {
+            return offNumber <= value;
+          });
+          starArray.map((idValue) => {
+            starOffRightLeft(document.getElementById(`star-${starFloat(idValue)}`), idValue);
+          });
         } else if(starCondition == "starOff"){
           starOffRightLeft(document.getElementById(`star-${starFloat(subtractNumber)}`), subtractNumber);
         };
@@ -137,41 +147,43 @@
     };
 
     // クリックした星より前の星も変化するようにする関数。
-    let rate_management_clicked = (idNumber) => {
-        // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
-        [...Array(idNumber * 2)].map((_,index) => {
-          // 配列の数に+1するのは、配列が0から始まるため。
-          // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
-          const subtractNumber = (index + 1) /2
-          console.log(subtractNumber);
-          if(!document.getElementById(`star-${starFloat(subtractNumber)}`)){
-            return;
-          };
+    const rate_management_clicked = (idNumber) => {
+      // idNumberの数の2倍の配列を作成し、その配列の数に+1する。
+      [...Array(idNumber * 2)].map((_,index) => {
+        // 配列の数に+1するのは、配列が0から始まるため。
+        // 2で割るのは0.5ずつsubtractNumberが増えるようにするため。
+        const subtractNumber = (index + 1) /2
+        if(!document.getElementById(`star-${starFloat(subtractNumber)}`)){
+          return;
+        };
 
-          let starClicked = document.getElementById(`star-${starFloat(subtractNumber)}`);
-          starClicked.setAttribute("id", `star-clicked-${starFloat(subtractNumber)}`);
-          
-          starOnRightLeft(document.getElementById(`star-clicked-${starFloat(subtractNumber)}`), subtractNumber);
-        });
+        const starClicked = document.getElementById(`star-${starFloat(subtractNumber)}`);
+        starClicked.setAttribute("id", `star-clicked-${starFloat(subtractNumber)}`);
+        
+        starOnRightLeft(document.getElementById(`star-clicked-${starFloat(subtractNumber)}`), subtractNumber);
+      });
     };
 
     // src属性が"<%= asset_url('date_spot_review_images/star-on.png') %>"のものを数えて返す。 この関数により、評価値を設定できている。
-    let starOnCount = () => {
-      let images = document.getElementById("rate").childNodes;
-      let count = 0;
+    const starOnCount = () => {
+      const images = document.getElementById("rate").childNodes;
 
-      for (let collectionNumber = 1; collectionNumber <= 19; collectionNumber += 2){
+      // images変数の子要素の配列を作成
+      const starArray = [...Array(10).keys()].map(i => ((i + 1) * 2) -1);
+      const idArray = [...Array(10).keys()].map(i => (i + 1) / 2);
+      let count = 0;
+      
+      starArray.map((collectionNumber) => {
         if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-left.png') %>"){
           count += 0.5;
         }else if(images[collectionNumber].getAttribute("src") == "<%= asset_url('date_spot_review_images/star-on-right.png') %>"){
           count += 0.5;
         };
-      };
-
+      });
       return count;
     };
 
-    let starFloat = (idNumber) => {
+    const starFloat = (idNumber) => {
       if(!Number.isInteger(idNumber)){
         return (idNumber + 0.5) + "-left"
       }else if(Number.isInteger(idNumber)){
@@ -180,10 +192,10 @@
     }
 
     // 星による評価の数値
-    let rateValue = document.getElementById("rate-value");
+    const rateValue = document.getElementById("rate-value");
 
     // 編集画面の星に初期値を設定する際に使用する。
-    let rateValueId = rateValue.getAttribute("id");
+    const rateValueId = rateValue.getAttribute("id");
 
 
     // レビューを編集する場合は評価値が決まっているため、初期状態で星が塗り潰されている状態となる。
@@ -197,7 +209,7 @@
     // 全ての星の挙動を実装
     [...Array(10)].map((_,index) => {
       // idNumberを実装
-      let idNumber = (index + 1) / 2;
+      const idNumber = (index + 1) / 2;
 
       if(!document.getElementById(`star-${starFloat(idNumber)}`)){
         return;
