@@ -55,7 +55,7 @@
   <% end %>
 </div>
 <script>
-(function(){
+(() => {
   let images = document.getElementById("date_spot_reviews_rate_average").childNodes;
   let rate_average_number = Number(document.getElementById("rate_average_number").innerText);
 
@@ -75,12 +75,17 @@
 
   // 整数
   let rate_integral_value = Math.trunc(rate_average_number);
-  
+
+  // 星の個数
   // 整数値部分の評価を画像に反映
-  for (let i= 1; i <= rate_integral_value; i++){
-    let image = document.getElementById(`star-average-${i}`);
-    image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-  };
+  let count = 0;
+  //.map(要素用の変数, インデックス番号用の変数)
+  [...Array(5)].map((_, number) => {
+    if(number + 1 <= rate_integral_value ){
+      let image = document.getElementById(`star-average-${number + 1}`);
+      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+    }
+  });
 
   // 小数点部分の評価を画像に反映させる。反映
   if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
@@ -90,11 +95,11 @@
     let image = document.getElementById(`star-average-${rate_integral_value + 1}`);
     image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
   };
-}());
+})();
 
 function initMap(){
   // 座標を作成
-  let point = {lat: <%= @date_spot.address.latitude %>, lng: <%= @date_spot.address.longitude %>}
+  let point = {lat: <%= @date_spot.address.latitude %>, lng: <%= @date_spot.address.longitude %> };
   // マーカーのタイトルを作成
   let title = document.getElementById('date_spot_name').textContent.replace(/\r?\n/g,'');
   let address = document.getElementById('address').textContent.replace(/\r?\n/g,'');
@@ -123,7 +128,7 @@ function initMap(){
     //第2引数にマーカーを指定して紐付け
     infowindow.open(map, marker);
   });
-
 };
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY']%>&callback=initMap"></script>

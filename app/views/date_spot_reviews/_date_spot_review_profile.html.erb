@@ -41,7 +41,7 @@
 <script>
 
   // 評価の値に応じて、星の画像を変化させる。
-  (function(){
+  (() => {
     let images = document.getElementById("rate-<%= date_spot_review.id%>").childNodes;
     let star_number = Number(document.getElementById("rateNumber-<%= date_spot_review.id%>").innerText);
 
@@ -53,12 +53,16 @@
     };
 
     let rate_integral_value = Math.trunc(star_number);
-
+    
+    // 星の個数
     // 整数値部分の評価を画像に反映
-    for (let i= 1; i <= rate_integral_value; i++){
-      let image = document.getElementById(`star-${i}-id-<%= date_spot_review.id %>`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-    };
+    //.map(要素用の変数, インデックス番号用の変数)
+    [...Array(5)].map((_, number) => {
+      if(number + 1 <= rate_integral_value ){
+        let image = document.getElementById(`star-${number + 1}-id-<%= date_spot_review.id %>`);
+        image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+      }
+    });
 
     // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
@@ -71,6 +75,6 @@
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
-  }());
+  })();
 
 </script>

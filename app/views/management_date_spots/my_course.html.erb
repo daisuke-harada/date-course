@@ -12,7 +12,7 @@
             <%= form_with model: current_user.management, local: true do |f| %>
               移動手段を選択してください
               <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]] %>
-              <%= f.submit '交通手段を決定', class:"btn btn-salmon" %>
+              <%= f.submit '交通手段を変更する', class:"btn btn-salmon" %>
             <% end %>
           </div>
         <% end %>
@@ -22,8 +22,8 @@
             <div class="h-16 w-full flex justify-center">
               <div class="border-r-4 border-indigo-500 w-1/2">
               </div>
-              <div class="p-5 w-1/2">
-                移動にかかる時間は<span id="traffic_means_<%= position %>"></span>
+              <div class="p-5 w-1/2 text-sm">
+                <%= management_traffic_mode_text(current_management.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
               </div>
             </div>
           <% end %>
