@@ -20,7 +20,7 @@ Rails.application.configure do
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
 
-  config.action_controller.asset_host = ENV['S3_ENDPOINT']
+  config.action_controller.asset_host = Rails.application.credentials[:S3_ENDPOINT]
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
