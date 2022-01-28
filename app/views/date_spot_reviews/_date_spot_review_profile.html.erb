@@ -31,7 +31,7 @@
           <%= link_to "レビューを編集する", edit_date_spot_review_path(date_spot_review), class:"btn btn-salmon" %>
         </div>
         <div class="text-center m-5">
-          <%= link_to "削除する", date_spot_review_path(date_spot_review), method: :deconste, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red" %>
+          <%= link_to "削除する", date_spot_review_path(date_spot_review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red" %>
         </div>
       <% end %>
     </div>
