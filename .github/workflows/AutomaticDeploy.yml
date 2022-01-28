@@ -19,8 +19,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
       - name: setup bundle
         run: |
           gem install bundler
@@ -46,6 +44,8 @@ jobs:
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
           apt-get update && apt-get install -y google-chrome-stable
       - name: setup migrate
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: |
           rails db:create
           rails db:migrate
@@ -54,6 +54,8 @@ jobs:
           rails webpacker:install
           bundle exec rails webpacker:compile RAILS_ENV=test
       - name: run rubocop
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
       - name: run spec
         run: bundle exec bin/rspec
