@@ -10,7 +10,7 @@ module ManagementsHelper
     current_management
   end
 
-  def management_traffic_mode_text(text)
+  def traffic_mode_text(text)
     if text == "DRIVING"
       return "車での移動"
     elsif text == "WALKING"

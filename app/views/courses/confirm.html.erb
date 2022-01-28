@@ -8,7 +8,7 @@
   <div class="w-full flex">
     <div class="w-6/12">
       <div class="m-5">
-        <p>移動手段は<%= management_traffic_mode_text(current_management.traffic_mode) %></p>
+        <p>移動手段は<%= traffic_mode_text(current_management.traffic_mode) %></p>
         <p><%= date_schedule_text(@course.scheduled_time) %></p>
         <p><%= authority_text(@course.authority) %></p>
       </div>
@@ -19,7 +19,7 @@
             <div class="border-r-4 border-indigo-500 w-1/2">
             </div>
             <div class="p-5 w-1/2 text-sm">
-              <%= management_traffic_mode_text(current_management.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
+              <%= traffic_mode_text(current_management.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
             </div>
           </div>
         <% end %>

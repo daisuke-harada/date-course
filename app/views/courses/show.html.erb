@@ -10,7 +10,7 @@
   <div class="w-full flex">
     <div class="w-6/12">
       <div class="m-5">
-        移動手段は<%= management_traffic_mode_text(current_management.traffic_mode) %>
+        移動手段は<%= traffic_mode_text(@course.traffic_mode) %>
       </div>
       <% @information_courses.each_with_index do |management_date_spot, position| %>
         <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @information_courses, date_spot_names: nil } %>
@@ -19,7 +19,7 @@
             <div class="border-r-4 border-indigo-500 w-1/2">
             </div>
             <div class="p-5 w-1/2 text-sm">
-              <%= management_traffic_mode_text(current_management.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
+              <%= traffic_mode_text(@course.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
             </div>
           </div>
         <% end %>
@@ -46,7 +46,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    let mode = "<%= current_management.traffic_mode %>";
+    let mode = "<%= @course.traffic_mode %>";
 
     // 地点を分割してルート検索を行います。
     let routeResult = new google.maps.DirectionsService(); // ルート検索オブジェクト
