@@ -11,7 +11,7 @@ jobs:
         ports:
           - 3306:3306
         env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+          MYSQL_ROOT_PASSWORD: password
         options:
           -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     container:
@@ -44,6 +44,8 @@ jobs:
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
           apt-get update && apt-get install -y google-chrome-stable
       - name: setup migrate
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: |
           rails db:create
           rails db:migrate
