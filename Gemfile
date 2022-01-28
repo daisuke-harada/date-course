@@ -27,8 +27,6 @@ gem 'mini_magick'
 gem 'bcrypt', '~> 3.1.7'
 # 住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
 gem 'active_hash'
-# 環境変数の管理
-gem 'dotenv-rails'
 # Use Active Storage variant
 
 # Reduces boot times through caching; required in config/boot.rb
