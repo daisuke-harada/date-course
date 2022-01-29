@@ -92,7 +92,8 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
     two_add_date_spot(address, other_address)
-
+    find("#date_course_true_button").click
+    click_button "デートコースを登録する"
   end
 
   scenario "デートスポットをデートコースに追加した後に、デートコース登録確認画面に遷移し、再びデートコース作成画面に遷移する。" do

@@ -44,9 +44,9 @@
       </p>
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
-        <%= f.label :authority, "公開", class:"text-3xl m-2" %>
+        <%= f.label :authority, "公開", class:"text-3xl m-2", id:"date_course_true_button" %>
         <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2" %>
-        <%= f.label :authority, "非公開", class:"text-3xl m-2" %>
+        <%= f.label :authority, "非公開", class:"text-3xl m-2", id:"date_course_false_button" %>
         <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2" %>
       </p>
     <% end %>
