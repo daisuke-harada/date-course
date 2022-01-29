@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   post '/change_information_course' => 'courses#change_information_course'
   delete '/delete_information_course' => 'courses#delete_information_course'
   get '/my_course' => 'management_date_spots#my_course'
-  post '/change_course' => 'management_date_spots#change_course'
+  post '/change_management_course' => 'management_date_spots#change_course'
   post '/add_course' => 'management_date_spots#add_course'
   delete '/delete_course' => 'management_date_spots#delete_course'
   delete '/all_delete_date_spots' => 'management_date_spots#all_delete_date_spots'
