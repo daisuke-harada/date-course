@@ -8,7 +8,12 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     expect(page).to have_content "デートコース作成"
   end
 
-  scenario "デートコース作成画面にデートコースが存在しない場合デートコースを探すページに移動できる。" do
+  scenario "デートコース作成画面にデートコースが存在しない場合メッセージが表示される" do
+    user = FactoryBot.create(:user)
+    sign_in_as user
+    click_link "デートコース作成"
+    expect(page).to have_content "デートコース作成"
+    expect(page).to have_content "目的地は登録されていません。デートスポットをデートコースに追加してみましょう。"
   end
 
   scenario "デートスポットをデートコース作成画面に追加する" do
@@ -77,11 +82,26 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     expect do
       click_link "デートコースの内容をすべて削除する"
       expect(page).to have_content "デートコースからデートスポットを全て削除しました。"
-      expect(page).to have_content "デートスポットをデートコースに追加してみましょう"
+      expect(page).to have_content "目的地は登録されていません。デートスポットをデートコースに追加してみましょう"
     end.to change(ManagementDateSpot.all, :count).by(-2)
   end
 
-  scenario "デートコース作成画面に追加されたデートスポットをデートコースとして登録する" do
+  scenario "デートコース作成画面に追加されたデートスポットをデートコースとして他のユーザーに公開して、登録する" do
+    user = FactoryBot.create(:user)
+    sign_in_as user
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    two_add_date_spot(address, other_address)
+
+  end
+
+  scenario "デートスポットをデートコースに追加した後に、デートコース登録確認画面に遷移し、再びデートコース作成画面に遷移する。" do
+    user = FactoryBot.create(:user)
+    sign_in_as user
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    two_add_date_spot(address, other_address)
+
   end
 
 end
