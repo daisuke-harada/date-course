@@ -14,7 +14,7 @@
           <div class="m-5">
             <%= form_with model: current_user.management, local: true do |f| %>
               移動手段を選択してください
-              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]], id:"traffic_mode_change_select" %>
+              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]] %>
               <%= f.submit '交通手段を変更する', class:"btn btn-salmon", id:"traffic_mode_change_button" %>
             <% end %>
           </div>
@@ -44,10 +44,10 @@
       </p>
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
-        <%= f.label :authority, "公開", class:"text-3xl m-2", id:"date_course_true_button" %>
-        <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2" %>
-        <%= f.label :authority, "非公開", class:"text-3xl m-2", id:"date_course_false_button" %>
-        <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2" %>
+        <%= f.label :authority, "公開", class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2", id:"date_course_true_button" %>
+        <%= f.label :authority, "非公開", class:"text-3xl m-2" %>
+        <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2", id:"date_course_false_button" %>
       </p>
     <% end %>
     <div class="text-center">

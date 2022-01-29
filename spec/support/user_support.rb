@@ -11,6 +11,10 @@ module UserSupport
     fill_in "パスワード", with: user.password
     click_button "ログイン"
   end
+
+  def change_gender_data_string(gender)
+    gender == 1 ? "男" : "女"
+  end
 end
 
 RSpec.configure do |config|
