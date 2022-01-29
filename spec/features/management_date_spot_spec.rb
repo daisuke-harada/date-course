@@ -101,6 +101,11 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     find("#date_course_true_button").click
     click_button "デートコースを登録する"
     result_after_date_course_information("DRIVING", true)
+    date_spot_names_display(date_spot_addresses)
+    expect do
+      click_button "デートコースの登録を決定する"
+      date_spot_names_display(date_spot_addresses)
+    end.to change(InformationCourse.all, :count).by(2)
   end
 
   scenario "デートスポットをデートコースに追加した後に、デートコース登録確認画面に遷移し、再びデートコース作成画面に遷移する。" do
@@ -110,7 +115,13 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     other_address = FactoryBot.create(:other_address)
     date_spot_addresses = [address, other_address]
     add_date_spot_array(date_spot_addresses)
-
+    fill_in 'date_course_scheduled_time', with: '2022-03-04'
+    find("#date_course_true_button").click
+    click_button "デートコースを登録する"
+    result_after_date_course_information("DRIVING", "2022年03月04日", true)
+    date_spot_names_display(date_spot_addresses)
+    click_link "デートコース作成画面に戻る"
+    date_spot_names_display(date_spot_addresses)
   end
 
 end
@@ -125,10 +136,19 @@ def add_date_spot_array(date_spot_addresses_array)
   end
 end
 
-def result_after_date_course_information(traffic_mode, authority)
+# 配列を引数として受け取り、デートスポットの名前があるか確認する
+def date_spot_names_display(date_spot_addresses_array)
+  aggregate_failures do
+    date_spot_addresses_array.each do |date_spot_address|
+      expect(page).to have_content "#{date_spot_address.date_spot.name}"
+    end
+  end
+end
+
+def result_after_date_course_information(traffic_mode, scheduled_time, authority)
   aggregate_failures do
     expect(page).to have_content "移動手段は#{traffic_mode_text(traffic_mode)}"
-    # expect(page).to have_content "#{date_schedule_text(scheduled_time)}"
+    expect(page).to have_content "デートの日程は#{scheduled_time}です。"
     expect(page).to have_content "#{authority_text(authority)}"
   end
 end
