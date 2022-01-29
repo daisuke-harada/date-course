@@ -1,5 +1,6 @@
 class ManagementDateSpotsController < ApplicationController
   before_action :set_management_date_spot, only: [:add_course, :delete_course]
+  before_action :set_q_for_date_spot, onley: [:my_course]
 
   def my_course
     @management_date_spots = current_management.management_date_spots

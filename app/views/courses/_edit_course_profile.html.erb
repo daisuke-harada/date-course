@@ -38,6 +38,11 @@
         <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon" %>
       <% end %>
     <% end %>
+    <%= render 'management_date_spots/change_course', {url: change_information_course_path,
+                                                       names: date_spot_names, 
+                                                       date_spots: date_spots,
+                                                       date_spot: date_spot,
+                                                       course: course } %>
     <%= link_to "デートコースから削除", delete_information_course_path(id: course.id ,date_spot_id: date_spot.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" if date_spots.count > 2 %>
   </div>
 </div>

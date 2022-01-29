@@ -1,5 +1,5 @@
 <div class="p-2 mt-5 justify-center flex bg-white" >
-  <%= search_form_for @date_spot_search_params, as: :date_spot_search  do |f| %>
+  <%= search_form_for date_spot_search_params, as: :date_spot_search  do |f| %>
     <%= f.grouped_collection_select(:address_prefecture_id_eq, Area.all, :prefectures, :name, :id, :name, {prompt: "都道府県"}, class:"w-1/4 md:m-1 md:p-1 md:text-sm text-xs border border-gray-400 rounded") %>
     <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, {prompt: "ジャンル"}, class:"w-1/4 md:m-1 md:p-1 md:text-sm text-xs border border-gray-400 rounded" %>
     <%= f.collection_select :opening_time_lteq, BusinessTime.all, :value_time, :time, {selected: @date_spot_search_params.opening_time_lteq.to_s, prompt: "来店希望時間"}, class:"w-1/4 md:m-1md:p-1 md:text-sm text-xs border border-gray-400 rounded" %>

@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="bg-gray-200 shadow-lg pb-5">
-      <%= render "date_spots/date_spot_sort_bar" %>
+      <%= render "date_spots/date_spot_sort_bar", date_spot_search_params: @date_spot_search_params %>
       <% if @date_spots == []%>
         <p class="text-red-900 text-center m-10 text-3xl" id="search_no_result">
           ⚠︎検索結果はありませんでした。

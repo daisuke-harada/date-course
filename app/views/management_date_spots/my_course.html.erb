@@ -1,9 +1,12 @@
-<div class="border border-black bg-white mt-10 m-20 p-5">
-  <h1 class="text-3xl">デートコース作成画面</h1>
+
+
+<h1 class="font-bold text-3xl pb-5">デートコース作成</h1>
+<%= render "date_spots/date_spot_sort_bar", date_spot_search_params: @date_spot_search_params %>
+<div class="mt-10 bg-white p-5 w-full">
   <div class="w-full mt-5 flex">
     <% if @management_date_spots == []%>
       <p class="text-blue-600 text-center m-10 text-3xl">
-        目的地は登録されていません。デートスポットをデートコースに追加してみましょう
+        目的地は登録されていません。デートスポットをデートコースに追加してみましょう。
       </p>
     <% else %>
       <div class="w-6/12">
@@ -41,9 +44,9 @@
       </p>
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
-        <%= f.label :authority, "公開", class:"text-3xl m-2" %>
+        <%= f.label :authority, "公開", class:"text-3xl m-2", id:"date_course_true_button" %>
         <%= f.radio_button :authority, true, checked: session[:authority_true], class:"text-3xl m-2" %>
-        <%= f.label :authority, "非公開", class:"text-3xl m-2" %>
+        <%= f.label :authority, "非公開", class:"text-3xl m-2", id:"date_course_false_button" %>
         <%= f.radio_button :authority, false, checked: session[:authority_false], class:"text-3xl m-2" %>
       </p>
     <% end %>
