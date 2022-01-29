@@ -100,7 +100,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     fill_in 'date_course_scheduled_time', with: '2022-03-04'
     find("#date_course_true_button").click
     click_button "デートコースを登録する"
-    result_after_date_course_information("DRIVING", true)
+    result_after_date_course_information("DRIVING", "2022年03月04日", true)
     date_spot_names_display(date_spot_addresses)
     expect do
       click_button "デートコースの登録を決定する"
