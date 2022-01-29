@@ -34,7 +34,8 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     sign_in_as user
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
     click_link "デートスポットを探す"
     find("#add_date_course_date_spot_id_#{address.date_spot.id}").click
     expect(page).to have_content "このデートスポットはすでに追加されています"
@@ -45,7 +46,8 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
     sign_in_as user
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
     date_spot = address.date_spot
     date_spot.image = fixture_file_upload('app/assets/images/test_image.jpg')
     find("#date_spot_image_id_#{date_spot.id}").click
@@ -57,7 +59,8 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     sign_in_as user
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
     click_link "ショッピングモール"
   end
 
@@ -78,7 +81,8 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     sign_in_as user
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
     expect do
       click_link "デートコースの内容をすべて削除する"
       expect(page).to have_content "デートコースからデートスポットを全て削除しました。"
@@ -91,10 +95,12 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     sign_in_as user
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
     fill_in 'date_course_scheduled_time', with: '2022-03-04'
     find("#date_course_true_button").click
     click_button "デートコースを登録する"
+    result_after_date_course_information("DRIVING", true)
   end
 
   scenario "デートスポットをデートコースに追加した後に、デートコース登録確認画面に遷移し、再びデートコース作成画面に遷移する。" do
@@ -102,26 +108,27 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     sign_in_as user
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
-    two_add_date_spot(address, other_address)
+    date_spot_addresses = [address, other_address]
+    add_date_spot_array(date_spot_addresses)
 
   end
 
 end
 
-# 配列スプレッド構文に変更
-def two_add_date_spot(date_spot_address, other_spot_address)
+# 配列を引数として受け取り、デートスポットの数だけ追加する。
+def add_date_spot_array(date_spot_addresses_array)
   aggregate_failures do
-    click_link "デートスポットを探す"
-    find("#add_date_course_date_spot_id_#{date_spot_address.date_spot.id}").click
-    click_link "デートスポットを探す"
-    find("#add_date_course_date_spot_id_#{other_spot_address.date_spot.id}").click
+    date_spot_addresses_array.each do |date_spot_address|
+      click_link "デートスポットを探す"
+      find("#add_date_course_date_spot_id_#{date_spot_address.date_spot.id}").click
+    end
   end
 end
 
-def result_after_date_course_creation
+def result_after_date_course_information(traffic_mode, authority)
   aggregate_failures do
-    expect(page).to have_content "移動手段は#{}での移動"
-    expect(page).to have_content "デートの日程は#{}です。"
-    expect(page).to have_content "このデートコースは"
+    expect(page).to have_content "移動手段は#{traffic_mode_text(traffic_mode)}"
+    # expect(page).to have_content "#{date_schedule_text(scheduled_time)}"
+    expect(page).to have_content "#{authority_text(authority)}"
   end
 end

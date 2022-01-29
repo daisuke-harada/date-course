@@ -14,8 +14,8 @@
           <div class="m-5">
             <%= form_with model: current_user.management, local: true do |f| %>
               移動手段を選択してください
-              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]] %>
-              <%= f.submit '交通手段を変更する', class:"btn btn-salmon" %>
+              <%= f.select :traffic_mode, [["歩き", "WALKING"], ["自転車", "BICYCLING"], ["車", "DRIVING"]], id:"traffic_mode_change_select" %>
+              <%= f.submit '交通手段を変更する', class:"btn btn-salmon", id:"traffic_mode_change_button" %>
             <% end %>
           </div>
         <% end %>
