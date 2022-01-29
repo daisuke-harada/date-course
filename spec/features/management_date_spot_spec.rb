@@ -92,6 +92,7 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     address = FactoryBot.create(:address)
     other_address = FactoryBot.create(:other_address)
     two_add_date_spot(address, other_address)
+    fill_in 'date_course_scheduled_time', with: '2022-03-04'
     find("#date_course_true_button").click
     click_button "デートコースを登録する"
   end
@@ -107,11 +108,22 @@ RSpec.feature "ManagementDateSpot", type: :feature do
 
 end
 
+# 配列スプレッド構文に変更
 def two_add_date_spot(date_spot_address, other_spot_address)
   aggregate_failures do
     click_link "デートスポットを探す"
     find("#add_date_course_date_spot_id_#{date_spot_address.date_spot.id}").click
     click_link "デートスポットを探す"
     find("#add_date_course_date_spot_id_#{other_spot_address.date_spot.id}").click
+  end
+end
+
+def date_spot_display(date_spot)
+  aggregate_failures do
+    expect(page).to have_content date_spot.name.to_s
+    expect(page).to have_content "営業時間"
+    expect(page).to have_content "#{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
+    expect(page).to have_content date_spot.genre.name.to_s
+    expect(page).to have_content date_spot.address.city_name.to_s
   end
 end

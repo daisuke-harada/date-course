@@ -40,7 +40,7 @@
     <% if @management_date_spots.count >= 2 %>
       <p class="m-5">
         <%= f.label :scheduled_time, "デート実行日", class:"text-3xl mr-2" %>
-        <%= f.date_field :scheduled_time, value: session[:scheduled_time],class:"text-3xl m-2" %>
+        <%= f.date_field :scheduled_time, value: session[:scheduled_time], class:"text-3xl m-2", id:"date_course_scheduled_time" %>
       </p>
       <p class="m-5">
         <span class="text-3xl">デートスポットを他のユーザーに</span>
