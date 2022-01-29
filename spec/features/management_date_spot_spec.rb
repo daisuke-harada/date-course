@@ -118,12 +118,10 @@ def two_add_date_spot(date_spot_address, other_spot_address)
   end
 end
 
-def date_spot_display(date_spot)
+def result_after_date_course_creation
   aggregate_failures do
-    expect(page).to have_content date_spot.name.to_s
-    expect(page).to have_content "営業時間"
-    expect(page).to have_content "#{date_spot.opening_time.strftime('%H:%M')} ~ #{date_spot.closing_time.strftime('%H:%M')}"
-    expect(page).to have_content date_spot.genre.name.to_s
-    expect(page).to have_content date_spot.address.city_name.to_s
+    expect(page).to have_content "移動手段は#{}での移動"
+    expect(page).to have_content "デートの日程は#{}です。"
+    expect(page).to have_content "このデートコースは"
   end
 end
