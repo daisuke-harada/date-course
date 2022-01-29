@@ -10,6 +10,6 @@
       <div class="text-center">デートコースレビューランキング</div>
     </div>
   </div>
-    <%= render "courses/courses", courses: @courses %>
+    <%= render "courses/courses", {courses: @courses, message: "公開されたデートコースは登録されていません"} %>
   </div>
 </div>
