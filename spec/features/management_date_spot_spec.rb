@@ -173,7 +173,25 @@ RSpec.feature "ManagementDateSpot", type: :feature do
     date_spot_names_display(date_spot_addresses)
   end
 
-  scenario "デートコースを構築後、1番目と3番目のデートスポットの順番を入れ替える" do
+  scenario "デートコースを構築後、1番目と2番目のデートスポットの順番を入れ替える" do
+    user = FactoryBot.create(:user)
+    sign_in_as user
+    address = FactoryBot.create(:address)
+    other_address = FactoryBot.create(:other_address)
+    date_spot_addresses = [address, other_address]
+    date_spot_position_arry = Array.new(2)
+    add_date_spot_position_array(date_spot_addresses, date_spot_position_arry)
+    # それぞれのデートスポットの追加された順番を変数に代入する。
+    date_spot_position = date_spot_position_arry[0];
+    other_position = date_spot_position_arry[1];
+
+    # デートスポットの順番を入れ替えるボタンをクリックする
+    find("#change_button_id_#{address.date_spot.id}").click
+    # 元々デートスポットの順番の数字が入っていたidを指定して、入れ替わった住所が表示されているか確認する。
+    expect(find("#address_position_number_#{date_spot_position}")).to have_content "#{other_address.city_name}"
+    
+    # 元々2番目のに追加されたデートスポットの順番の数字が入っていたidを指定して、入れ替わった住所が表示されているか確認する。
+    expect(find("#address_position_number_#{other_position}")).to have_content "#{address.city_name}"
   end
 
 end
@@ -187,6 +205,19 @@ def add_date_spot_array(date_spot_addresses_array)
     end
   end
 end
+
+# 配列を引数として受け取り、デートスポットの数だけ順番をつけて追加する。
+def add_date_spot_position_array(date_spot_addresses_array, date_spot_position_arry)
+  aggregate_failures do
+    date_spot_addresses_array.each_with_index do |date_spot_address, position|
+      click_link "デートスポットを探す"
+      find("#add_date_course_date_spot_id_#{date_spot_address.date_spot.id}").click
+      date_spot_position_arry[position] = position + 1
+    end
+  end
+end
+
+
 
 # 配列を引数として受け取り、デートスポットの名前があるか確認する
 def date_spot_names_display(date_spot_addresses_array)
