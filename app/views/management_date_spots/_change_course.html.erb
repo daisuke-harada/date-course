@@ -4,6 +4,6 @@
     <%= f.hidden_field :course_id, :value => course.id if course %>
     <%= f.hidden_field :original_id, :value => date_spot.id %>
     <%= f.select :change_name, names %>
-    <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon" %>
+    <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon", id:"change_button_id_#{date_spot.id}" %>
   <% end %>
 <% end %>
