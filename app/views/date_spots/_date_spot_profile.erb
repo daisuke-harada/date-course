@@ -1,7 +1,9 @@
 <div class="p-5 m-5 shadow-lg bg-white border border-gray-200">
   <div class="md:flex">
     <div class="md:w-5/12 w-full">
-      <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
+      <%= link_to date_spot_path(date_spot), id:"date_spot_image_id_#{date_spot.id}" do %>
+        <%= render 'layouts/image', {target_image: date_spot, width: 400, height: 400}%>
+      <% end %>
     </div>
     <div class="md:w-7/12 w-full p-3">
       <p class="font-bold"><%= date_spot.name %></p>
@@ -19,52 +21,56 @@
       </div>
       <p><%= render 'date_spots/date_spot_business_hour', date_spot: date_spot %></p>
       <p class="mt-5 font-bold"> 住所</p>
-      <p class="mt-2"><%= date_spot.address.prefecture.name %><%= date_spot.address.city_name %></p>
-      <p class="mt-5"><span class="font-bold">ジャンル</span><%= date_spot.genre.name %></p>
+      <p class="mt-2"><%= date_spot.address.city_name %></p>
+      <p class="mt-5">
+        <span class="font-bold">ジャンル:</span>
+        <%= link_to date_spot.genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{date_spot.genre.id}"}}, as: :date_spot_search, class:"font-bold" %>
+      </p>
     </div>
   </div>
-  <div class="md:flex md:justify-center text-center">
+  <div class="flex flex-col">
     <%= render 'management_date_spots/add_course', date_spot: date_spot %>
-    <%= link_to "デートスポットを見る", date_spot_path(date_spot), class:"btn btn-salmon w-60 m-2"%>
+    <div class="text-center p-1">
+      <%= link_to "デートスポットを見る", date_spot_path(date_spot), class:"btn btn-pink w-60 m-2", id:"date_spot_link_id_#{date_spot.id}" %>
+    </div>
   </div>
 </div>
 
 <script>
-  (function(){
-    let images = document.getElementById("date_spot_reviews_rate_average-<%= date_spot.id %>").childNodes;
-    let rate_average_number = Number(document.getElementById("rate_average_number-<%= date_spot.id %>").innerText);
+  (() => {
+    const images = document.getElementById("date_spot_reviews_rate_average-<%= date_spot.id %>").childNodes;
+    const rate_average = Number(document.getElementById("rate_average_number-<%= date_spot.id %>").innerText);
 
     // 小数点第二以下を切り捨てる。
-    rate_average_number = Math.floor(rate_average_number * 10) / 10;
+    const rate_average_number = Math.floor(rate_average * 10) / 10;
 
     // viewに小数点第二以下を切り捨てた数字を反映する。
     document.getElementById("rate_average_number-<%= date_spot.id %>").innerText = rate_average_number;
 
-    // 小数
-    let rate_decimal_value = 0;
+    // 評価値の小数部分
+    const rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
 
-    // 小数かどうかを判定する。
-    if(!Number.isInteger(rate_average_number)){
-      rate_decimal_value = Number(String(rate_average_number).split(".")[1]) / 10;
-    };
+    // 評価値の整数部分
+    const rate_integral_value = Math.trunc(rate_average_number);
 
-    // 整数
-    let rate_integral_value = Math.trunc(rate_average_number);
-    
+    // 星の個数
     // 整数値部分の評価を画像に反映
-    for (let i= 1; i <= rate_integral_value; i++){
-      let image = document.getElementById(`star-average-${i}-id-<%= date_spot.id %>`);
-      image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
-    };
+    //.map(要素用の変数, インデックス番号用の変数)
+    [...Array(5)].map((_, number) => {
+      if(number + 1 <= rate_integral_value ){
+        const image = document.getElementById(`star-average-${number + 1}-id-<%= date_spot.id %>`);
+        image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
+      }
+    });
 
-  　　 // 小数点部分の評価を画像に反映させる。反映
+    // 小数点部分の評価を画像に反映させる。反映
     if(rate_decimal_value > 0 && rate_decimal_value <= 0.5){
-      let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
+      const image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-half.png') %>");
     }else if(rate_decimal_value >= 0.6){
-      let image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
+      const image = document.getElementById(`star-average-${rate_integral_value + 1}-id-<%= date_spot.id %>`);
       image.setAttribute("src", "<%= asset_url('date_spot_review_images/star-on.png') %>");
     };
 
-  }());
+  })();
 </script>

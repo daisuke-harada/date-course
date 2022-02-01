@@ -27,8 +27,6 @@ gem 'mini_magick'
 gem 'bcrypt', '~> 3.1.7'
 # 住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
 gem 'active_hash'
-# 環境変数の管理
-gem 'dotenv-rails'
 # Use Active Storage variant
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -42,6 +40,9 @@ gem 'asset_sync'
 
 # AWSの連携に必要なクラウドサービス
 gem 'fog-aws'
+
+# 住所から緯度と経度を取得するGemを実装
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

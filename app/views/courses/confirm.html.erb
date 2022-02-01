@@ -1,25 +1,25 @@
 <div class="border border-black bg-white mt-10 m-20 p-5">
-  <h1 class="text-3xl">デートコース詳細画面</h1>
-  <h1>
-    <% if @course.scheduled_time %>
-      <%= @course.scheduled_time.strftime("%Y年%m月%d日") %>
-    <% else %>
-      日程は未定です。
-    <% end %>
-  </h1>
+  <h1 class="text-3xl">デートコース登録確認画面</h1>
+  <div>
+    現在追加されているデートスポットの数は
+    <span id="date-spots-count"><%= @management_date_spots.count %></span>
+    つです。
+  </div>
   <div class="w-full flex">
     <div class="w-6/12">
       <div class="m-5">
-        移動手段は<%= traffic_mode_text(@course.traffic_mode) %>
+        <p>移動手段は<%= traffic_mode_text(current_management.traffic_mode) %></p>
+        <p><%= date_schedule_text(@course.scheduled_time) %></p>
+        <p><%= authority_text(@course.authority) %></p>
       </div>
-      <% @information_courses.each_with_index do |management_date_spot, position| %>
-        <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @information_courses, date_spot_names: nil } %>
-        <% if @information_courses.count != position + 1 %>
+      <% @management_date_spots.each_with_index do |management_date_spot, position| %>
+        <%= render "management_date_spots/management_date_spot_profile", {date_spot: management_date_spot.date_spot, position_number: position + 1, date_spots: @management_date_spots, date_spot_names: nil } %>
+        <% if @management_date_spots.count != position + 1 %>
           <div class="h-16 w-full flex justify-center">
             <div class="border-r-4 border-indigo-500 w-1/2">
             </div>
             <div class="p-5 w-1/2 text-sm">
-              <%= traffic_mode_text(@course.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
+              <%= traffic_mode_text(current_management.traffic_mode) %>で<span id="traffic_means_<%= position %>"></span>
             </div>
           </div>
         <% end %>
@@ -29,12 +29,18 @@
     </div>
   </div>
   <div class="text-center">
-    <%= link_to "デートコースの内容を編集する", edit_course_path(@course.id), class: "btn btn-salmon m-5" if current_user == @course.user %>
+    <%= link_to "デートコース作成画面に戻る", my_course_path, class: "btn btn-salmon m-5" %>
+    <%= form_with(url: courses_path, local: true) do |f| %>
+      <%= f.hidden_field :user_id, :value => @course.user_id %>
+      <%= f.hidden_field :scheduled_time, :value => @course.scheduled_time %>
+      <%= f.hidden_field :authority, :value => @course.authority %>
+      <%= f.submit "デートコースの登録を決定する", class: "btn btn-salmon my-5" %>
+    <% end %>
   </div>
 </div>
 <script>
   function initMap(){
-    let date_spots_count = <%= @information_courses.count %>;
+    let date_spots_count = document.getElementById("date-spots-count").innerHTML;
 
     // 追加したデートスポットの住所が入っているRails側の配列を一旦Jsonにし、JavaScript側でそのJsonをパースし配列にしました。
     let points = <%= @date_spot_addresses.to_json.html_safe %>;
@@ -46,7 +52,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    let mode = "<%= @course.traffic_mode %>";
+    let mode = "<%= current_management.traffic_mode %>";
 
     // 地点を分割してルート検索を行います。
     let routeResult = new google.maps.DirectionsService(); // ルート検索オブジェクト

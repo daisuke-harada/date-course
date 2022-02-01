@@ -1,1 +1,15 @@
-<h1>デートコース一覧画面</h1>
+<div class="m-5 mt-10 flex">
+  <div class="md:w-3/12 md:inline hidden">
+    <%= render "layouts/date_spot_name_search" %>
+    <%= render "layouts/user_name_search" %>
+  </div>
+  <div class="md:w-9/12 w-full">
+    <div class="p-5 bg-white shadow-lg mb-10">
+    <h1 class="font-bold text-3xl pb-5">デートコース一覧</h1>
+    <div class="w-full h-52 bg-gray-700">
+      <div class="text-center">デートコースレビューランキング</div>
+    </div>
+  </div>
+    <%= render "courses/courses", {courses: @courses, message: "公開されたデートコースは登録されていません"} %>
+  </div>
+</div>

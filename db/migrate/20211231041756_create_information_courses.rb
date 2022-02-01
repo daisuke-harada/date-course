@@ -3,7 +3,6 @@ class CreateInformationCourses < ActiveRecord::Migration[6.1]
     create_table :information_courses do |t|
       t.references :course, null: false, foreign_key: true
       t.references :date_spot, null: false, foreign_key: true
-      t.integer :procedure
 
       t.timestamps
     end

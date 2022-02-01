@@ -17,6 +17,12 @@ RSpec.describe DateSpot, type: :model do
         date_spot.valid?
         expect(date_spot.errors[:name]).to include("can't be blank")
       end
+
+      it "ジャンルが選択されていなければ保存できないこと" do
+        date_spot.genre_id = nil
+        date_spot.valid?
+        expect(date_spot.errors[:genre_id]).to include("can't be blank")
+      end
     end
   end
 end
