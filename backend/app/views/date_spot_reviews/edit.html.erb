@@ -1,7 +1,0 @@
-<div class="max-w-2xl mx-auto mt-10 bg-white p-5 border-gray-900">
-  <h1 class="text-center text-lg m-5">
-    デートスポットレビュー編集機能
-  </h1>
-  <%= render 'date_spot_review_form', {date_spot_review: @date_spot_review, user: current_user, btn_name: "更新する"} %>
-  <%= link_to "削除する", date_spot_review_path(@date_spot_review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-red m-5" %>
-</div>

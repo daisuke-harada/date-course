@@ -13,20 +13,20 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= Rails.application.credentials[:MYSQL_USER] %>
-  password: <%= Rails.application.credentials[:MYSQL_PASSWORD] %>
-  host: <%= Rails.application.credentials[:MYSQL_HOST] %>
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: date_course_development
+  database: backend_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: date_course_test
+  database: backend_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,7 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_NAME] %>
-  username: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_USER] %>
-  password: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_PASSWORD] %>
-  host: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_HOST] %>
+  database: backend_production
+  username: backend
+  password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
