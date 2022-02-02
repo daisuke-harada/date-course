@@ -12,11 +12,11 @@ module ManagementsHelper
 
   def traffic_mode_text(text)
     if text == "DRIVING"
-      return "車での移動"
+      "車での移動"
     elsif text == "WALKING"
-      return "徒歩による移動"
+      "徒歩による移動"
     elsif text == "BICYCLING"
-      return "自転車による移動"
+      "自転車による移動"
     end
   end
 end

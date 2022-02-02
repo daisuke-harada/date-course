@@ -16,6 +16,5 @@ RSpec.describe Management, type: :model do
         expect(management.errors[:traffic_mode]).to include("can't be blank")
       end
     end
-
   end
 end

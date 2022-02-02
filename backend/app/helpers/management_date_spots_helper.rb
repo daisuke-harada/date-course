@@ -6,16 +6,16 @@ module ManagementDateSpotsHelper
       addresses.push(date_spot.date_spot.address)
     end
 
-    return addresses
+    addresses
   end
-  
+
   # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成する。
   def create_array_date_spot_name(date_spots)
     # 追加されたデートスポットモデルが登録されている配列を追加された数だけ作成
-    names = Array.new(date_spots.count);
-    
+    names = Array.new(date_spots.count)
+
     # 追加されたデートスポットの数だけ、名前の配列を用意する。なぜなら、デートスポットによって配列の中身が違うからです。
-    for array in 0..(date_spots.count - 1) do
+    (0..(date_spots.count - 1)).each do |array|
       names[array] = []
       date_spots.each do |date_spot|
         names[array].push(date_spot.date_spot.name)
@@ -25,6 +25,6 @@ module ManagementDateSpotsHelper
       names[array].delete_at(array)
     end
 
-    return names
+    names
   end
 end
