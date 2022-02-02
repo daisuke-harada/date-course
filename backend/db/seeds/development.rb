@@ -4,16 +4,16 @@ User.create(name: "daisuke", email: "daisuke@gmail.com", gender: 1, password: "f
 User.create(name: "kenta", email: "kenta@gmail.com", gender: 1, password: "foobar", password_confirmation: "foobar")
 User.create(name: "admin", email: "adminstrator@gmail.com", gender: 1, password: "adminlogin1099", password_confirmation: "adminlogin1099", admin: true)
 
-## date_spotデータとaddressデータ
-# DateSpot.create(id: 1, name: "キャナルシティ博多", genre_id: 1, opening_time: "2000-01-01 08:00", closing_time: "2000-01-01 23:00")
+# date_spotデータとaddressデータ
+DateSpot.create(id: 1, name: "キャナルシティ博多", genre_id: 1, opening_time: "2000-01-01 08:00", closing_time: "2000-01-01 23:00")
 # DateSpot.find_by(id: 1).image.attach(io: File.open('app/assets/images/date_spot_images/canal.jpeg'),
 #                                      filename: 'canal.jpeg')
-# Address.create(prefecture_id: 40, date_spot_id: 1, city_name: Prefecture.find(40).name + "福岡市博多区住吉1丁目2")
+Address.create(prefecture_id: 40, date_spot_id: 1, city_name: Prefecture.find(40).name + "福岡市博多区住吉1丁目2")
 
-# DateSpot.create(id: 2, name: "つなぐダイニング ZINO 天神店", genre_id: 8, opening_time: "2000-01-01 20:00", closing_time: "2000-01-02 05:00")
+DateSpot.create(id: 2, name: "つなぐダイニング ZINO 天神店", genre_id: 8, opening_time: "2000-01-01 20:00", closing_time: "2000-01-02 05:00")
 # DateSpot.find_by(id: 2).image.attach(io: File.open('app/assets/images/date_spot_images/tunagu_zino_hukuoka.jpeg'),
 #                                      filename: 'tunagu_zino_hukuoka.jpeg')
-# Address.create(prefecture_id: 40, date_spot_id: 2, city_name: Prefecture.find(40).name + "福岡市中央区大名1-11-22-1")
+Address.create(prefecture_id: 40, date_spot_id: 2, city_name: Prefecture.find(40).name + "福岡市中央区大名1-11-22-1")
 
 # DateSpot.create(id: 3, name: "東京ディズニーランド", genre_id: 5, opening_time: "2000-01-01 10:00", closing_time: "2000-01-01 19:00")
 # DateSpot.find_by(id: 3).image.attach(io: File.open('app/assets/images/date_spot_images/disny.jpeg'),
