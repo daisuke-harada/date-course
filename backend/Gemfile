@@ -33,7 +33,7 @@ gem 'fog-aws'
 # 住所から緯度と経度を取得するGemを実装
 gem 'geocoder'
 
-# corsについて調べる
+# 同一生成元ポリシー (Same-Origin Policy)」というポリシーによって設けられた制限を緩める(JavaScript で自由にやりとりできるところは、その JavaScript をとってきたところと同一の場所だけに制限する)
 gem 'rack-cors'
 
 group :development, :test do
