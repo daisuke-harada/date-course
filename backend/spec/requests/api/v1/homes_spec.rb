@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Homes", type: :request do
+RSpec.describe "Api::V1::Homes", type: :request do
   describe "GET /top" do
     it "returns http success" do
-      get "/homes/top"
+      get "/api/v1/homes/top"
       expect(response).to have_http_status(:success)
     end
   end
