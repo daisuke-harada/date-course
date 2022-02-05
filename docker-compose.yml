@@ -3,17 +3,15 @@ services:
   db:
     image: mysql:8.0.23
     environment:
-      MYSQL_ROOT_PASSWORD: <%= Rails.application.credentials[:MYSQL_PASSWORD] %>
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     command: --default-authentication-plugin=mysql_native_password # 認証プラグインがmysql8からcaching_sha2_passwordになっているので変更する。
     volumes:
       - mysql-data:/var/lib/mysql
-      - /tmp/dockerdir:/etc/mysql/conf.d/
     ports:
       - "3306:3306" # コンテナ側:ホスト側
-  api:
+  backend:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./backend
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/date-course # カレントディレクトリを/date-courseにバインドマウントしている
