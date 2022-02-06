@@ -9,6 +9,14 @@ services:
       - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306" # コンテナ側:ホスト側
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/usr/src/reactapp
+    command: sh -c "yarn start"
+    ports:
+      - "3000:3000"
   backend:
     build:
       context: ./backend
