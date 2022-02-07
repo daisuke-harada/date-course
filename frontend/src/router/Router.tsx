@@ -5,9 +5,7 @@ import { Top } from "../components/pages/homes/Top";
 export const Router: VFC = memo(() => {
   return(
     <Routes>
-      <Route path="/">
-        <Top/>
-      </Route>
+      <Route path="/" element={<Top/>} />
     </Routes>
   )
 });
