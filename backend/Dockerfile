@@ -1,9 +1,9 @@
 FROM ruby:2.7.2 
 # 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-# WORKDIRは指定するディレクトリがもし存在しない場合は作成してくれる。そのためRUN mkdir /date-courseを省略
+# WORKDIRは指定するディレクトリがもし存在しない場合は作成してくれる。そのためRUN mkdir /date-course-apiを省略
 # backendディレクトリもアプリと同じく作成する。そうしなければ、Could not locate Gemfile or .bundle/ directoryとなり、Gemfileを見つけれなくなる
-ENV APP_PATH /backend/date-course
+ENV APP_PATH /backend/date-course-api
 WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile

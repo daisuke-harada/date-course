@@ -13,7 +13,7 @@ services:
     build:
       context: ./frontend
     volumes:
-      - ./frontend:/usr/src/reactapp
+      - ./frontend:/usr/src/datecourses
     command: sh -c "yarn start"
     ports:
       - "3000:3000"
@@ -22,7 +22,7 @@ services:
       context: ./backend
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/date-course # カレントディレクトリを/date-courseにバインドマウントしている
+      - .:/date-course-api # カレントディレクトリを/date-course-apiにバインドマウントしている
     ports:
       - 3001:3000
     depends_on:
