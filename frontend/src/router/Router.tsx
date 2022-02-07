@@ -19,5 +19,5 @@ export const Router: VFC = memo(() => {
         ))}
       </Route>
     </Routes>
-  )
+  );
 });
