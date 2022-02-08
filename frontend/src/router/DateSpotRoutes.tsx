@@ -2,6 +2,7 @@ import { Edit } from "../components/pages/dateSpots/Edit";
 import { Index } from "../components/pages/dateSpots/Index";
 import { New } from "../components/pages/dateSpots/New";
 import { Show } from "../components/pages/dateSpots/Show";
+import { Page404 } from "../components/pages/Page404";
 
 export const dateSpotRoutes = [
   {
@@ -19,5 +20,9 @@ export const dateSpotRoutes = [
   {
     path: "new",
     element: <New />
+  },
+  {
+    path: "*",
+    element: <Page404 />
   },
 ];

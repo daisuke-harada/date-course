@@ -2,6 +2,7 @@ import { memo, VFC } from "react";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { Top } from "../components/pages/homes/Top";
+import { Page404 } from "../components/pages/Page404";
 import { dateSpotRoutes } from "./DateSpotRoutes";
 import { userRoutes } from "./UserRoutes";
 export const Router: VFC = memo(() => {
@@ -18,6 +19,7 @@ export const Router: VFC = memo(() => {
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Route>
+      <Route path='*' element={<Page404 />} />
     </Routes>
   );
 });

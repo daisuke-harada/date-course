@@ -1,3 +1,4 @@
+import { Page404 } from "../components/pages/Page404";
 import { Edit } from "../components/pages/users/Edit";
 import { Index } from "../components/pages/users/Index";
 import { New } from "../components/pages/users/New";
@@ -19,5 +20,9 @@ export const userRoutes = [
   {
     path: "new",
     element: <New />
+  },
+  {
+    path: "*",
+    element: <Page404 />
   },
 ];
