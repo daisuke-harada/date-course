@@ -1,4 +1,6 @@
 import { memo, VFC } from "react";
+import { Link } from "react-router-dom";
+
 import { BaseButton } from "../../atoms/button/BaseButton";
 import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
 import { SecondaryButton } from "../../atoms/button/SecondaryButton";
@@ -18,8 +20,8 @@ export const Header: VFC = memo(() => {
             <div className="mr-4"><BaseButton>新規登録ボタン</BaseButton></div>
             <div className="ml-4"><SecondaryButton>ログイン</SecondaryButton></div>
           </div>
-          <div className="lg:mr-28 lg:my-3 lg:mx-0 sm:text-6xl sm:mt-7 text-5xl text-black  mt-10 mx-3">
-            DateCourses
+          <div className="lg:mr-28 lg:my-3 lg:mx-0 sm:text-6xl sm:mt-7 text-5xl mt-10 mx-4">
+            <Link to="/" className="text-black">DateCourses</Link>
             {/* DateCourses toppageに遷移する */}
           </div>
           <div className="lg:block hidden mt-5">

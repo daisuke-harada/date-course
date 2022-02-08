@@ -4,10 +4,10 @@ import { Router} from "./router/Router"
 
 export const App = () => {
   return (
-    <HeaderLayout>
       <BrowserRouter>
-        <Router/>
+        <HeaderLayout>
+          <Router/>
+        </HeaderLayout>
       </BrowserRouter>
-    </HeaderLayout>
   );
 }
