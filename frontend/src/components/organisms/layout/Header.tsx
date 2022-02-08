@@ -7,6 +7,7 @@ import { SecondaryButton } from "../../atoms/button/SecondaryButton";
 
 export const Header: VFC = memo(() => {
   return(
+    <>
     <header className="h-32 bg-white w-full shadow-xl z-50 fixed">
       <div className="lg:flex lg:border-b-2 w-full flex-wrap justify-around font-bold">
         {/* 管理者ユーザーでないユーザーがログインしている場合 */}
@@ -36,5 +37,6 @@ export const Header: VFC = memo(() => {
           {/* <li className="my-3 mx-6">マイページ</li> */}
       </ul>
     </header>
+    </>
   );
 });
