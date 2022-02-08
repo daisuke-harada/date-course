@@ -10,7 +10,7 @@ export const HeaderLayout: VFC<Props> = memo((props) => {
   return(
     <>
       <Header />
-        <div className="pt-32">
+        <div className="lg:pt-32 pt-24">
           { children }
         </div>
     </>
