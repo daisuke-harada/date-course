@@ -25,7 +25,9 @@ export const Header: VFC = memo(() => {
             <Link to="/" className="text-black">DateCourses</Link>
           </div>
           <div className="lg:hidden ">
-            <HamburgerButton onClickNavBarSwitch={onClickNavBarSwitch} isOpen={isOpen} />
+            <div className="sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400">
+              <HamburgerButton onClickNavBarSwitch={onClickNavBarSwitch} isOpen={isOpen} />
+            </div>
           </div>
           <div className="lg:block hidden mt-5">
             <GuestLoginButton>ゲストログイン</GuestLoginButton>
