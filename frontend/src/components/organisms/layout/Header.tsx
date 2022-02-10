@@ -18,7 +18,7 @@ export const Header: VFC = memo(() => {
       <header className="lg:h-32 sm:h-24 bg-white w-full shadow-xl z-40 fixed">
         <div className="lg:border-b-2 lg:flex-wrap w-full flex  justify-around font-bold">
           <div className="lg:flex hidden mt-5 justify-center">
-            {headerTopLeftRoutes.map((route) =><div className="mx-2"><Link to={route.path} >{route.element}</Link></div>)}
+            {headerTopLeftRoutes.map((route) =><div className="mx-2" key={route.path}><Link to={route.path} >{route.element}</Link></div>)}
           </div>
           <div className="lg:mr-20 lg:my-3 lg:mx-0 sm:text-6xl sm:m-3 text-4xl m-5 mx-4">
             <Link to="/" className="text-black">DateCourses</Link>
@@ -33,7 +33,7 @@ export const Header: VFC = memo(() => {
           </div>
         </div>
         <ul className="lg:flex hidden flex-wrap text-base justify-center font-bold">
-          {headerBottomRoutes.map((route) => <li className="my-3 mx-6 "><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
+          {headerBottomRoutes.map((route) => <li className="my-3 mx-6 " key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
         </ul>
       </header>
       <NavBar isOpen={isOpen}/>
