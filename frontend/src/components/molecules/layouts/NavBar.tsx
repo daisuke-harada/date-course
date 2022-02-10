@@ -6,7 +6,7 @@ import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
 
 type Props = {
   isOpen: boolean;
-  onClickNavBarSwitch: any;
+  onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> ;
 }
 export const NavBar: VFC<Props> = memo((props) => {
   const { isOpen, onClickNavBarSwitch } = props;

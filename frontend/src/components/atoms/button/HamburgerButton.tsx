@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 
 type Props = {
-  onClickNavBarSwitch: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClickNavBarSwitch: React.MouseEventHandler<HTMLElement>;
   isOpen: boolean;
 };
 
