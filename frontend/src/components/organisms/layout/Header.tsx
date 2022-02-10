@@ -12,7 +12,7 @@ import { NavBar } from "../../molecules/layouts/NavBar";
 export const Header: VFC = memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // onClickの型を型推論からを参考に設定した
-  const onClickNavBarSwitch: React.MouseEventHandler<HTMLButtonElement> | undefined = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const onClickNavBarSwitch: any = useCallback(() => setIsOpen(!isOpen), [isOpen]);
   return(
     <>
       <header className="lg:h-32 sm:h-24 bg-white w-full shadow-xl z-40 fixed">
@@ -36,7 +36,7 @@ export const Header: VFC = memo(() => {
           {headerBottomRoutes.map((route) => <li className="my-3 mx-6 " key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
         </ul>
       </header>
-      <NavBar isOpen={isOpen} />
+      <NavBar isOpen={isOpen} onClickNavBarSwitch={onClickNavBarSwitch} />
     </>
   );
 });
