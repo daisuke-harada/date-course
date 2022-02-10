@@ -5,14 +5,14 @@ import { headerTopLeftRoutes } from "../../../router/HeaderTopLeftRoutes";
 import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
 
 type Props = {
-  isOpen: boolean
+  isOpen: boolean;
 }
 export const NavBar: VFC<Props> = memo((props) => {
   const { isOpen } = props;
   return(
   <div className={`${isOpen? `fixed`: `hidden`} lg:hidden sm:top-24 top-20 text-center border border-red-200 bg-red-200 z-50 w-2/3 right-0`}>
     <ul>
-      {headerBottomRoutes.map((route) => <li className=" border-b-2 p-2 my-3" key={route.path}><Link className="text-black font-bold" to={route.path}>{route.text}</Link></li>)}
+      {headerBottomRoutes.map((route) => <li className=" border-b-2 p-2 my-3" key={route.path} ><Link className="text-black font-bold" to={route.path} >{route.text}</Link></li>)}
       {headerTopLeftRoutes.map((route) =><li className="p-2 my-3" key={route.path}><Link to={route.path} >{route.element}</Link></li>)}
       <li className="p-2 my-3"><GuestLoginButton buttonSize={"w-full"}>ゲストログイン</GuestLoginButton></li>
     </ul>

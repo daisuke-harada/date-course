@@ -36,7 +36,7 @@ export const Header: VFC = memo(() => {
           {headerBottomRoutes.map((route) => <li className="my-3 mx-6 " key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
         </ul>
       </header>
-      <NavBar isOpen={isOpen}/>
+      <NavBar isOpen={isOpen} />
     </>
   );
 });
