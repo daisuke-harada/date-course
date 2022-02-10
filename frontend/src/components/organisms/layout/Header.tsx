@@ -35,9 +35,7 @@ export const Header: VFC = memo(() => {
           </div>
         </div>
         <ul className="lg:flex hidden flex-wrap text-base justify-center font-bold">
-          {headerBottomRoutes.map((route) => {
-            return(<li className="my-3 mx-6"><Link to={route.path}>{route.text}</Link></li>)
-          })}
+          {headerBottomRoutes.map((route) => <li className="my-3 mx-6 "><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
         </ul>
       </header>
       <NavBar isOpen={isOpen}/>
