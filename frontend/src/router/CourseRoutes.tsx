@@ -6,18 +6,18 @@ import { Page404 } from "../components/pages/Page404";
 export const courseRoutes = [
   {
     path: "index",
-    element: <Index />
+    element: <Index />,
   },
   {
     path: ":id",
-    element: <Show />
+    element: <Show />,
   },
   {
     path: ":id/edit",
-    element: <Edit />
+    element: <Edit />,
   },
   {
     path: "*",
-    element: <Page404 />
+    element: <Page404 />,
   },
 ];
