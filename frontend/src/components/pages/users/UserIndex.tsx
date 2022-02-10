@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 
-export const Index: VFC = memo(() => {
+export const UserIndex: VFC = memo(() => {
   return(
    <h1>userのindexページです</h1>
   );

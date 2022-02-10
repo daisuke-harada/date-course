@@ -1,25 +1,25 @@
 import { Page404 } from "../components/pages/Page404";
-import { Edit } from "../components/pages/users/Edit";
-import { Index } from "../components/pages/users/Index";
-import { New } from "../components/pages/users/New";
-import { Show } from "../components/pages/users/Show";
+import { UserEdit } from "../components/pages/users/UserEdit";
+import { UserIndex } from "../components/pages/users/UserIndex";
+import { UserNew } from "../components/pages/users/UserNew";
+import { UserShow } from "../components/pages/users/UserShow";
 
 export const userRoutes = [
   {
     path: ":id",
-    element: <Show />
+    element: <UserShow />
   },
   {
     path: ":id/edit",
-    element: <Edit />
+    element: <UserEdit />
   },
   {
     path: "index",
-    element: <Index />
+    element: <UserIndex />
   },
   {
     path: "new",
-    element: <New />
+    element: <UserNew />
   },
   {
     path: "*",

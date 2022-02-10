@@ -1,18 +1,23 @@
-import { Edit } from "../components/pages/courses/Edit";
-import { Index } from "../components/pages/courses/Index";
-import { Show } from "../components/pages/courses/Show";
+import { CourseEdit } from "../components/pages/courses/CourseEdit";
+import { CourseIndex } from "../components/pages/courses/CourseIndex";
+import { CourseShow } from "../components/pages/courses/CourseShow";
+import { Page404 } from "../components/pages/Page404";
 
 export const courseRoutes = [
   {
     path: "index",
-    element: <Index />
+    element: <CourseIndex />
   },
   {
     path: ":id",
-    element: <Show />
+    element: <CourseShow />
   },
   {
     path: ":id/edit",
-    element: <Edit />
+    element: <CourseEdit />
+  },
+  {
+    path: "*",
+    element: <Page404 />
   },
 ];
