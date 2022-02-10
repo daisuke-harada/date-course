@@ -3,6 +3,8 @@ import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { Top } from "../components/pages/homes/Top";
 import { Page404 } from "../components/pages/Page404";
+import { courseRoutes } from "./CourseRoutes";
+import { dateSpotReviewRoutes } from "./DateSpotReviewRoutes";
 import { dateSpotRoutes } from "./DateSpotRoutes";
 import { userRoutes } from "./UserRoutes";
 export const Router: VFC = memo(() => {
@@ -14,8 +16,18 @@ export const Router: VFC = memo(() => {
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Route>
+      <Route path="courses" >
+        {courseRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+      </Route>
       <Route path="dateSpots" >
         {dateSpotRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+      </Route>
+      <Route path="dateSpotReviews" >
+        {dateSpotReviewRoutes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Route>
