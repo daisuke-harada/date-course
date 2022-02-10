@@ -1,25 +1,25 @@
-import { DateSpotEdit } from "../components/pages/dateSpots/DateSpotEdit";
-import { DateSpotIndex } from "../components/pages/dateSpots/DateSpotIndex";
-import { DateSpotNew } from "../components/pages/dateSpots/DateSpotNew";
-import { DateSpotShow } from "../components/pages/dateSpots/DateSpotShow";
+import { Edit } from "../components/pages/dateSpots/Edit";
+import { Index } from "../components/pages/dateSpots/Index";
+import { New } from "../components/pages/dateSpots/New";
+import { Show } from "../components/pages/dateSpots/Show";
 import { Page404 } from "../components/pages/Page404";
 
 export const dateSpotRoutes = [
   {
     path: ":id",
-    element: <DateSpotShow />
+    element: <Show />
   },
   {
     path: ":id/edit",
-    element: <DateSpotEdit />
+    element: <Edit />
   },
   {
     path: "index",
-    element: <DateSpotIndex />
+    element: <Index />
   },
   {
     path: "new",
-    element: <DateSpotNew />
+    element: <New />
   },
   {
     path: "*",

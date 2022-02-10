@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import {memo, useState, VFC } from "react";
 import { Link } from "react-router-dom";
+import { headerBottomRoutes } from "../../../router/HeaderBottomRoutes";
 
 import { BaseButton } from "../../atoms/button/BaseButton";
 import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
@@ -34,9 +35,9 @@ export const Header: VFC = memo(() => {
           </div>
         </div>
         <ul className="lg:flex hidden flex-wrap text-base justify-center font-bold">
-          <li className="my-3 mx-6">デートスポットを探す</li>
-          <li className="my-3 mx-6">デートコースを探す</li>
-          <li className="my-3 mx-6">ユーザーを探す</li>
+          {headerBottomRoutes.map((route) => {
+            return(<li className="my-3 mx-6"><Link to={route.path}>{route.text}</Link></li>)
+          })}
         </ul>
       </header>
       <NavBar isOpen={isOpen}/>

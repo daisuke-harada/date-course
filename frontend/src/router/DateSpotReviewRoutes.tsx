@@ -1,15 +1,15 @@
-import { DateSpotReviewEdit } from "../components/pages/dateSpotReviews/DateSpotReviewEdit";
-import { DateSpotReviewNew } from "../components/pages/dateSpotReviews/DateSpotReviewNew";
+import { Edit } from "../components/pages/dateSpotReviews/Edit";
+import { New } from "../components/pages/dateSpotReviews/New";
 import { Page404 } from "../components/pages/Page404";
 
 export const dateSpotReviewRoutes = [
   {
     path: "new",
-    element: <DateSpotReviewNew />
+    element: <New />
   },
   {
     path: ":id/edit",
-    element: <DateSpotReviewEdit />
+    element: <Edit />
   },
   {
     path: "*",

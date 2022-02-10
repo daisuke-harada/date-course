@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 
-export const DateSpotReviewEdit: VFC = memo(() => {
+export const Edit: VFC = memo(() => {
   return(
     <p>dateSpotReviewsのeditページ</p>
   );
