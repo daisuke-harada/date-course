@@ -5,7 +5,7 @@ import { headerBottomRoutes } from "../../../router/HeaderBottomRoutes";
 import { headerTopLeftRoutes } from "../../../router/HeaderTopLeftRoutes";
 
 import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
-import { HamburgerButton } from "../../atoms/button/HamburgerButton";
+import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { NavBar } from "../../molecules/layouts/NavBar";
 
 
@@ -25,7 +25,7 @@ export const Header: VFC = memo(() => {
           </div>
           <div className="lg:hidden ">
             <div className="sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400">
-              <HamburgerButton onClickNavBarSwitch={onClickNavBarSwitch} isOpen={isOpen} />
+              <MenuIconButton onClickNavBarSwitch={onClickNavBarSwitch} isOpen={isOpen} />
             </div>
           </div>
           <div className="lg:block hidden mt-5">
