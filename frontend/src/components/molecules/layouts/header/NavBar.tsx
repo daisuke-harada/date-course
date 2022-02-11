@@ -2,9 +2,9 @@ import { memo, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
-import { headerBottomRoutes } from "../../../router/HeaderBottomRoutes";
-import { headerTopLeftRoutes } from "../../../router/HeaderTopLeftRoutes";
-import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
+import { headerBottomRoutes } from "../../../../router/HeaderBottomRoutes";
+import { headerTopLeftRoutes } from "../../../../router/HeaderTopLeftRoutes";
+import { GuestLoginButton } from "../../../atoms/button/GuestLoginButton";
 
 type Props = {
   isOpen: boolean;
