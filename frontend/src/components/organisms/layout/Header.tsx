@@ -15,7 +15,11 @@ const TopLeftDiv = tw.div`lg:flex hidden mt-5 justify-center`;
 const TopLeftDivChild = tw.div`mx-2`;
 const TitleDiv = tw.div`lg:my-3 lg:mx-0 sm:text-6xl sm:m-3 text-4xl m-5 mx-4`;
 const MenuIconDivParent = tw.div`lg:hidden`;
+const MenuIconDivChild = tw.div`sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400`;
+const GuestLoginParentDiv = tw.div`lg:block hidden mt-5`;
+const Span = tw.div`text-xs`;
 const BottomUl = tw.ul`lg:flex hidden flex-wrap text-base justify-center font-bold`;
+const BottomUlList = tw.li`my-3 mx-6`;
 
 
 export const Header: VFC = memo(() => {
@@ -33,16 +37,16 @@ export const Header: VFC = memo(() => {
             <Link to="/" className="text-black">DateCourses</Link>
           </TitleDiv>
           <MenuIconDivParent>
-            <div className="sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400">
+            <MenuIconDivChild>
               <MenuIconButton onClickNavBarSwitch={onClickNavBarSwitch} isOpen={isOpen} />
-            </div>
+            </MenuIconDivChild>
           </MenuIconDivParent>
-          <div className="lg:block hidden mt-5">
-            <GuestLoginButton>ゲストログイン<span className="text-xs">(簡単ログイン)</span></GuestLoginButton>
-          </div>
+          <GuestLoginParentDiv>
+            <GuestLoginButton>ゲストログイン<Span>(簡単ログイン)</Span></GuestLoginButton>
+          </GuestLoginParentDiv>
         </TopDiv>
         <BottomUl>
-          {headerBottomRoutes.map((route) => <li className="my-3 mx-6 " key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></li>)}
+          {headerBottomRoutes.map((route) => <BottomUlList key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></BottomUlList>)}
         </BottomUl>
       </MainHeader>
       <NavBar isOpen={isOpen} onClickNavBarSwitch={onClickNavBarSwitch} />
