@@ -15,7 +15,7 @@ export const Header: VFC = memo(() => {
   const onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> = useCallback(() => setIsOpen(!isOpen), [isOpen]);
   return(
     <>
-      <header className="lg:h-32 sm:h-24 bg-white w-full shadow-xl z-40 fixed">
+      <header className="lg:h-32 sm:h-24 bg-white w-full shadow-xl z-50 fixed">
         <div className="lg:border-b-2 lg:flex-wrap w-full flex  justify-around font-bold">
           <div className="lg:flex hidden mt-5 justify-center">
             {headerTopLeftRoutes.map((route) =><div className="mx-2" key={route.path}><Link to={route.path} >{route.element}</Link></div>)}
