@@ -20,7 +20,7 @@ export const Header: VFC = memo(() => {
           <div className="lg:flex hidden mt-5 justify-center">
             {headerTopLeftRoutes.map((route) =><div className="mx-2" key={route.path}><Link to={route.path} >{route.element}</Link></div>)}
           </div>
-          <div className="lg:mr-20 lg:my-3 lg:mx-0 sm:text-6xl sm:m-3 text-4xl m-5 mx-4">
+          <div className="lg:my-3 lg:mx-0 sm:text-6xl sm:m-3 text-4xl m-5 mx-4">
             <Link to="/" className="text-black">DateCourses</Link>
           </div>
           <div className="lg:hidden ">
@@ -29,7 +29,7 @@ export const Header: VFC = memo(() => {
             </div>
           </div>
           <div className="lg:block hidden mt-5">
-            <GuestLoginButton addClassNames="w-full">ゲストログイン</GuestLoginButton>
+            <GuestLoginButton addClassNames="w-full">ゲストログイン<span className="text-xs">(簡単ログイン)</span></GuestLoginButton>
           </div>
         </div>
         <ul className="lg:flex hidden flex-wrap text-base justify-center font-bold">
