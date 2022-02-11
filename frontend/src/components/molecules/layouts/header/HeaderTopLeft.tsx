@@ -10,7 +10,7 @@ const TopLeftDivChild = tw.div`mx-2`;
 export const HeaderTopLeft: VFC = memo(() => {
   return(
     <TopLeftDiv>
-      {headerTopLeftRoutes.map((route) =><TopLeftDivChild className="" key={route.path}><Link to={route.path} >{route.element}</Link></TopLeftDivChild>)}
+      {headerTopLeftRoutes.map((route) =><TopLeftDivChild key={route.path}><Link to={route.path} >{route.element}</Link></TopLeftDivChild>)}
     </TopLeftDiv>
   );
 });
