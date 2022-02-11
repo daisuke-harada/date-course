@@ -1,12 +1,20 @@
 import { memo, ReactNode, VFC } from "react";
+import tw  from "tailwind-styled-components"
 
 type Props = {
   children: ReactNode
-  addClassNames: string
 }
+
+const Button = tw.button`
+  btn
+  btn-salmon
+  w-full
+`
 export const BaseButton: VFC<Props> = memo((props) => {
-  const {children, addClassNames} = props;
+  const {children} = props;
   return(
-   <button className={`btn btn-salmon ${addClassNames}`}>{children}</button>
+   <Button>
+     {children}
+   </Button>
   );
 });

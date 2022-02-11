@@ -29,7 +29,7 @@ export const Header: VFC = memo(() => {
             </div>
           </div>
           <div className="lg:block hidden mt-5">
-            <GuestLoginButton addClassNames="w-full">ゲストログイン<span className="text-xs">(簡単ログイン)</span></GuestLoginButton>
+            <GuestLoginButton>ゲストログイン<span className="text-xs">(簡単ログイン)</span></GuestLoginButton>
           </div>
         </div>
         <ul className="lg:flex hidden flex-wrap text-base justify-center font-bold">

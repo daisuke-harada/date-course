@@ -3,11 +3,11 @@ import { SecondaryButton } from "../components/atoms/button/SecondaryButton";
 
 export const headerTopLeftRoutes = [
   {
-    element: <BaseButton addClassNames={"w-full"}>新規登録</BaseButton>,
+    element: <BaseButton>新規登録</BaseButton>,
     path: "users/new"
   },
   {
-    element: <SecondaryButton addClassNames={"w-full"}>ログイン</SecondaryButton>,
+    element: <SecondaryButton>ログイン</SecondaryButton>,
     path: "login"
   },
 ]
