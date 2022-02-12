@@ -11,15 +11,15 @@ type Props = {
   onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> ;
 }
 
-const Ul = tw.ul`lg:hidden sm:top-24 duration-500 fixed top-20 text-center border-r-2 border-b-2 bg-red-100 z-40 w-2/3 right-0`;
-const IndexList = tw.li`border-b-2 p-2 py-3 text-black font-bold hover:bg-red-300 hover:text-black`;
-const ButtonList = tw.li`p-2 my-3`;
+const Ul = tw.ul`lg:hidden duration-500 fixed top-20 text-center border-b-2 border-red-100 rounded-b-lg bg-red-100 z-40 w-2/3 right-0`;
+const IndexList = tw.li`px-2 py-4 text-black font-bold hover:bg-red-300 hover:text-black`;
+const ButtonList = tw.li`p-2 mt-3`;
 const Span = tw.span`text-xs`;
 
 export const NavBar: VFC<Props> = memo((props) => {
   const { isOpen, onClickNavBarSwitch } = props;
   return(
-    <Ul className={`${isOpen? `-translate-y-0`: `-translate-y-96`} `}>
+    <Ul className={`${isOpen? `-translate-y-0`: `-translate-y-full`} `}>
       {headerBottomRoutes.map((route) => <Link to={route.path} key={route.path} onClick={onClickNavBarSwitch} ><IndexList>{route.text}</IndexList></Link>)}
       {headerTopLeftRoutes.map((route) => <ButtonList onClick={onClickNavBarSwitch} key={route.path} ><Link to={route.path} >{route.element}</Link></ButtonList>)}
       <ButtonList onClick={onClickNavBarSwitch} ><GuestLoginButton>ゲストログイン<Span>(簡単ログイン)</Span></GuestLoginButton></ButtonList>

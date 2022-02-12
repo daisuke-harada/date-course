@@ -4,9 +4,10 @@ import tw from "tailwind-styled-components";
 import { BaseButton } from "../../atoms/button/BaseButton";
 import { DangerButton } from "../../atoms/button/DangerButton";
 
-const MainDiv = tw.div`max-w-md mx-auto mt-10 bg-white p-5 border-gray-900`;
-const Title = tw.h1`text-center`
-const Input = tw.input`my-5 w-full border-b-2 outline-none`
+const MainDiv = tw.div`user-form`;
+const Title = tw.h1`text-center font-bold`;
+const Input = tw.input`my-5 w-full border-b-2 outline-none`;
+const ButtonParentDiv = tw.div`text-center p-1 my-4 w-28 m-auto`;
 
 type Props = {
   userFormTitle: string,
@@ -21,10 +22,10 @@ export const UserForm: VFC<Props> = memo((props) => {
       {/* <%= form_with(model: user, local: true) do |f|%> */}
       {/* <%= render 'shared/error_messages', target: user %> エラーメッセージ 表示 */}
         {/* <%= f.label :name, "名前" %> */}
-        <Input placeholder="名前を入力してください" />
+        <Input placeholder="名前を入力" />
 
         {/* <%= f.label :email, "メール" %> */}
-        <Input placeholder="メールを入力してください" />
+        <Input placeholder="メールアドレスを入力" />
 
         {/* <div class="my-5"> */}
           {/* <%= f.radio_button :gender, 1 %> */}
@@ -34,25 +35,25 @@ export const UserForm: VFC<Props> = memo((props) => {
         {/* </div> */}
 
         {/* <%= f.label :password, "パスワード" %> */}
-        <Input placeholder="パスワードを入力してください" />
+        <Input placeholder="パスワードを入力" />
 
         {/* <%= f.label :password_confirmation, "パスワード(確認)" %> */}
-        <Input placeholder="確認のためパスワードをもう一度入力してください" />
+        <Input placeholder="パスワードを再入力" />
 
         {/* <%= f.label :image, "サムネイル"%>
         <%= f.file_field :image %> */}
 
-        <div className="text-center p-1 w-28 m-auto">
+        <ButtonParentDiv>
           <BaseButton>登録</BaseButton>
-        </div>
+        </ButtonParentDiv>
 
         <div className="text-center p-1">
           <Link to="/login">ログインはこちら</Link>
         </div>
 
-        <div className="text-center p-1">
-          <DangerButton>退会をする</DangerButton>
-        </div>
+        <ButtonParentDiv>
+        <DangerButton>退会</DangerButton>
+        </ButtonParentDiv>
       {/* <% end %>  */}
     </MainDiv>
   );
