@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-gray-100;
+}
 /* flash-message */
 .flash-message {
   @apply text-white;
