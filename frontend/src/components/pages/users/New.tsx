@@ -1,7 +1,8 @@
 import { memo, VFC } from "react";
+import { UserForm } from "../../templates/users/UserForm";
 
 export const New: VFC = memo(() => {
   return(
-   <h1>userのnewページです</h1>
+    <UserForm userFormTitle={"ユーザー新規登録"} />
   );
 });

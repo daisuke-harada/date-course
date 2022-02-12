@@ -82,20 +82,3 @@ a {
 .user-form {
   @apply max-w-md mx-auto mt-10 bg-white p-5 border-gray-900;
 }
-
-@keyframes moveDown {
-  from {
-    transform: @apply -translate-y-96;
-  }
-  to {
-    transform: @apply -translate-y-0;
-  }
-}
-
-.navbar-move {
-  animation-name: moveDown;
-  animation-duration: 1s;
-  animation-timing-function: ease-in;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-}
