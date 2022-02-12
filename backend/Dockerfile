@@ -1,4 +1,4 @@
-FROM ruby:3.0
+FROM ruby:3.1.0
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # WORKDIRは指定するディレクトリがもし存在しない場合は作成してくれる。そのためRUN mkdir /date-course-apiを省略
