@@ -1,4 +1,4 @@
-// import axios from "axios";
+// import { client } from "../lib/api/client"
 import { useCallback } from "react"
 export const useAuth = () => {
   const login = useCallback(() => {
