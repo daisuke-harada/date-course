@@ -36,10 +36,6 @@ gem 'geocoder'
 # 同一生成元ポリシー (Same-Origin Policy)」というポリシーによって設けられた制限を緩める(JavaScript で自由にやりとりできるところは、その JavaScript をとってきたところと同一の場所だけに制限する)
 gem 'rack-cors'
 
-
-gem 'devise'
-gem 'devise_token_auth'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
