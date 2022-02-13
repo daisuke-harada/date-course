@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2022_02_13_011802) do
     t.string "nickname"
     t.string "image"
     t.string "email"
+    t.integer "gender"
+    t.boolean "admin", default: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
