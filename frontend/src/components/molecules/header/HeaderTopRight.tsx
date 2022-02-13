@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
-import { GuestLoginButton } from "../../../atoms/button/GuestLoginButton";
-import { MenuIconButton } from "../../../atoms/button/MenuIconButton";
+import { GuestLoginButton } from "../../atoms/button/GuestLoginButton";
+import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import tw from "tailwind-styled-components";
 
 const MenuIconDivParent = tw.div`lg:hidden`;

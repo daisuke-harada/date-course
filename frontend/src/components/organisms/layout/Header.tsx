@@ -3,10 +3,10 @@ import {memo, useState, VFC } from "react";
 import { useNavigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
-import { HeaderTopLeft } from "../../molecules/layouts/header/HeaderTopLeft";
-import { HeaderTopRight } from "../../molecules/layouts/header/HeaderTopRight";
-import { HeaderBottom } from "../../molecules/layouts/header/HeaderBottom"
-import { NavBar } from "../../molecules/layouts/header/NavBar";
+import { HeaderTopLeft } from "../../molecules/header/HeaderTopLeft";
+import { HeaderTopRight } from "../../molecules/header/HeaderTopRight";
+import { HeaderBottom } from "../../molecules/header/HeaderBottom"
+import { NavBar } from "../../molecules/header/NavBar";
 
 const MainHeader = tw.header`lg:h-32 sm:h-24 bg-white w-full shadow-xl z-50 fixed`;
 const TopDiv = tw.div`lg:border-b-2 lg:flex-wrap w-full flex  justify-around font-bold`;
