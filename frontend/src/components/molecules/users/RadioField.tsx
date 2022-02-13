@@ -1,12 +1,12 @@
 import { memo, VFC } from "react";
 import tw from "tailwind-styled-components";
 
-const Label = tw.label`p-3 m-1 mx-3`;
-const Input = tw.input`p-2 mt-5`;
+const Label = tw.label`font-bold pt-3 mr-3`;
+const Input = tw.input`mr-3 p-2 mt-5`;
 
 type Props = {
   gender: string;
-  onChangeRadioButton: any;
+  onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export const RadioField: VFC<Props>= memo((props) => {

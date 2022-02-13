@@ -20,10 +20,10 @@ export const UserForm: VFC<Props> = memo((props) => {
   const { userFormTitle, buttonName } = props;
 
   const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>("");
-  const [gender, setGender] = useState<string>("男");
-  const [password, setPassword] = useState<string>("");
-  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [gender, setGender] = useState<string>('女');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
@@ -39,7 +39,6 @@ export const UserForm: VFC<Props> = memo((props) => {
       <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
       <Input placeholder="パスワード再入力" value={passwordConfirm} onChange={onChangePasswordConfirm} />
       <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
-      {console.log(gender)}
       <ButtonParentDiv>
         <BaseButton>{buttonName}</BaseButton>
       </ButtonParentDiv>
