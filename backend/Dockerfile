@@ -8,7 +8,6 @@ WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
-RUN gem install bundler
 RUN bundle install
 
 COPY . $APP_PATH
