@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useState, VFC } from "react";
+import { ChangeEvent, memo, useCallback, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
@@ -21,7 +21,7 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>("");
-  const [gender, setGender] = useState<boolean>(true);
+  const [gender, setGender] = useState<string>("男");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
@@ -29,6 +29,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
   const onChangePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => setPasswordConfirm(e.target.value);
+  const onChangeRadioButton = useCallback((e: ChangeEvent<HTMLInputElement>) => setGender(e.target.value), []);
 
   return(
     <MainDiv>
@@ -37,7 +38,7 @@ export const UserForm: VFC<Props> = memo((props) => {
       <Input placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
       <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
       <Input placeholder="パスワード再入力" value={passwordConfirm} onChange={onChangePasswordConfirm} />
-      <RadioField gender={gender} />
+      <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
       {console.log(gender)}
       <ButtonParentDiv>
         <BaseButton>{buttonName}</BaseButton>
