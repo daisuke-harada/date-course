@@ -2,6 +2,7 @@
 export type SignUpParams = {
   name: string
   email: string
+  gender: number
   password: string
   passwordConfirmation: string
 }
@@ -19,8 +20,10 @@ export type User = {
   provider: string
   email: string
   name: string
+  gender: number
   nickname?: string
   image?: string
+  admin: boolean
   allowPasswordChange: boolean
   created_at: Date
   updated_at: Date

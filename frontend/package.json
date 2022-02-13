@@ -15,6 +15,7 @@
     "autoprefixer": "^9",
     "axios": "^0.25.0",
     "axios-case-converter": "^0.9.0",
+    "js-cookie": "^3.0.1",
     "postcss": "^7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
