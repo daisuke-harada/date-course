@@ -3,7 +3,7 @@ class Api::V1::RegistrationsController < ApplicationController
     @user = User.new(registrations_params)
     if @user.save
       # ログインさせるヘルパーか?
-      login!
+      login
       render json: { status: :created, user: @user }
     else
       render json: { status: 500}
