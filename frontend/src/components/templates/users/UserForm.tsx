@@ -45,7 +45,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   const userRegitAction =(event: any) => {
     console.log("クリック");
     console.log(params);
-    client.post("signUp", params);
+    client.post("signup", params);
     event.preventDefault();
   };
 

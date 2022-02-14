@@ -1,5 +1,5 @@
 class Api::V1::RegistrationsController < ApplicationController
-  def sign_up
+  def signup
     @user = User.new(registrations_params)
     binding.pry
     if @user.save
