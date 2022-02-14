@@ -1,7 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
   def login
     @user = User.finfby(name: session_params[:name])
-    binding.pry
     if @user && @user.authenticate(session_params[:password])
       login
       render json: { logged_in: true, user: @user }
