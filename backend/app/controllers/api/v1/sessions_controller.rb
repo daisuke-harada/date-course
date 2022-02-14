@@ -1,8 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   def login
-    @user = User.finfby(name: session_params[:name])
+    @user = User.find_by(name: session_params[:name])
     if @user && @user.authenticate(session_params[:password])
-      login
+      login_action
+      binding.pry
       render json: { logged_in: true, user: @user }
     else
       render json: { status: 401, errors: ['認証に失敗しました。', '正しいメールアドレス・パスワードを入力し直すか、新規登録を行ってください。'] }
@@ -24,6 +25,6 @@ class Api::V1::SessionsController < ApplicationController
 
   private
     def session_params
-      params.require(:user).permit(:name, :password)
+      params.require(:sign_in_params).permit(:name, :password)
     end
 end

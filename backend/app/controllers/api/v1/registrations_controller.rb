@@ -2,7 +2,7 @@ class Api::V1::RegistrationsController < ApplicationController
   def signup
     @user = User.new(registrations_params)
     if @user.save
-      login
+      login_action
       render json: { status: :created, user: @user }
     else
       render json: { status: 500}

@@ -4,7 +4,7 @@ import tw from "tailwind-styled-components";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
-import { useCallback } from "react";
+//import { useCallback } from "react";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -13,23 +13,19 @@ const ButtonParentDiv = tw.div`text-center p-1 my-4 m-auto`;
 const Form = tw.form`p-5 m-2`
 
 export const Login: VFC = memo(() => {
-  const [userName, setUserName] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value);
-  const onChangeUserPassword = (e: React.ChangeEvent<HTMLInputElement>) => setUserPassword(e.target.value);
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-  const loginInput: SignInParams = {
-    name: userName,
-    password: userPassword
+  const signInParams: SignInParams = {
+    name: name,
+    password: password,
   }
 
-  const successfulLogin = useCallback((data: SignInParams) => {
-    console.log(data);
-  },[]);
-
   const userLoginAction: React.FormEventHandler<HTMLFormElement> =(e) => {
-    client.post("login", {loginInput}).then(response => {
-      successfulLogin(response.data)
+    client.post("login", {signInParams}).then(response => {
+      console.log("login response: ", response)
     }).catch(error => {
         console.log("registration error", error)
     });
@@ -41,15 +37,11 @@ export const Login: VFC = memo(() => {
     <MainDiv>
       <Title>ログイン</Title>
       <Form onSubmit={userLoginAction}>
-      <Input placeholder="名前を入力" value={userName} onChange={onChangeUserName} />
-      <Input placeholder="パスワードを入力" value={userPassword} onChange={onChangeUserPassword} />
-        {/* <%= f.label :remember_me, class: "-mt-1 mb-1" do%>
-          <%= f.check_box :remember_me %>
-          <span class="ml-5">次回から自動的にログインする</span>
-        <% end %><br/> */}
-      <ButtonParentDiv>
-        <BaseButton>ログイン</BaseButton>
-      </ButtonParentDiv>
+        <Input placeholder="名前を入力" value={name} onChange={onChangeName} />
+        <Input placeholder="パスワードを入力" value={password} onChange={onChangePassword} />
+        <ButtonParentDiv>
+          <BaseButton>ログイン</BaseButton>
+        </ButtonParentDiv>
       </Form>
       <div className="text-center">
         <Link to="/users/new">新規登録はこちら</Link>
