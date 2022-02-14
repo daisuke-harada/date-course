@@ -8,10 +8,16 @@ import { courseRoutes } from "./CourseRoutes";
 import { dateSpotReviewRoutes } from "./DateSpotReviewRoutes";
 import { dateSpotRoutes } from "./DateSpotRoutes";
 import { userRoutes } from "./UserRoutes";
-export const Router: VFC = memo(() => {
+
+type Props = {
+  loggedInStatus: boolean
+}
+
+export const Router: VFC<Props> = memo((props) => {
+  const { loggedInStatus } = props;
   return(
     <Routes>
-      <Route path="/" element={<Top/>}  />
+      <Route path="/" element={<Top loggedInStatus={loggedInStatus}/>}  />
       <Route path="/login" element={<Login />} />
       <Route path="users" >
         {userRoutes.map((route) => (
