@@ -2,7 +2,7 @@ import { memo, useCallback, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { client } from "../../../lib/api/client";
-import { SignUpParams } from "../../../types/session";
+import { SignUpParams } from "../../../types/api/session";
 
 import { BaseButton } from "../../atoms/button/BaseButton";
 import { DangerButton } from "../../atoms/button/DangerButton";
@@ -45,13 +45,9 @@ export const UserForm: VFC<Props> = memo((props) => {
   };
 
   const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
-    client.post("signup", {user})
-    .then(response => {
+    client.post("signup", {user}).then(response => {
       console.log("registration res", response);
-      // 追加
-      if (response.data.status === 'created') {
-        handleSuccessfulAuthentication(response.data)
-      }
+      handleSuccessfulAuthentication(response.data)
     }).catch(error => {
         console.log("registration error", error)
     });
