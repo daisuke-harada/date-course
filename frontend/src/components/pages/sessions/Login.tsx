@@ -1,10 +1,13 @@
 import { memo, useState, VFC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
-//import { useCallback } from "react";
+import { useSetRecoilState } from "recoil";
+import { currentUserState } from "store/currentUserState";
+import { loggendInStatusState } from "store/loggendInStatusState";
+import { UserResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -18,6 +21,17 @@ export const Login: VFC = memo(() => {
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
+  // login後のアクション
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(currentUserState);
+  const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
+  const afterLoginSuccess = (data: UserResponseData) => {
+    console.log(data);
+    setUser({current_user: data.user});
+    setLoggedInStatus({status: true});
+    navigate(`/users/${data.user.id}`);
+  };
+
   const signInParams: SignInParams = {
     name: name,
     password: password,
@@ -25,7 +39,8 @@ export const Login: VFC = memo(() => {
 
   const userLoginAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("login", {signInParams}).then(response => {
-      console.log("login response: ", response)
+      console.log(response.data.loggedIn);
+      response.data.loggedIn && afterLoginSuccess(response.data);
     }).catch(error => {
         console.log("registration error", error)
     });

@@ -11,7 +11,7 @@ export const New: VFC = memo(() => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(currentUserState);
   const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
-  const handleSuccessfulAuthentication = useCallback((data: UserResponseData) => {
+  const afterLoginSuccess = useCallback((data: UserResponseData) => {
     console.log(data);
     setUser({current_user: data.user});
     setLoggedInStatus({status: true});
@@ -19,6 +19,6 @@ export const New: VFC = memo(() => {
   },[setUser, navigate, setLoggedInStatus]);
 
   return(
-    <UserForm userFormTitle={"ユーザー新規登録"} buttonName={"登録"} handleSuccessfulAuthentication={handleSuccessfulAuthentication}/>
+    <UserForm userFormTitle={"ユーザー新規登録"} buttonName={"登録"} afterLoginSuccess={afterLoginSuccess}/>
   );
 });
