@@ -17,10 +17,11 @@ const Form = tw.form`p-5 m-2`
 type Props = {
   userFormTitle: string,
   buttonName: string,
+  handleSuccessfulAuthentication: any,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {
-  const { userFormTitle, buttonName } = props;
+  const { userFormTitle, buttonName, handleSuccessfulAuthentication } = props;
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -46,6 +47,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("signup", {user}).then(response => {
       console.log("registration res", response)
+      response.data.status === 'created' && handleSuccessfulAuthentication(response.data)
     }).catch(error => {
         console.log("registration error", error)
     });
