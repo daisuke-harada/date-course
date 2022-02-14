@@ -1,6 +1,7 @@
 class Api::V1::RegistrationsController < ApplicationController
   def sign_up
     @user = User.new(registrations_params)
+    binding.pry
     if @user.save
       # ログインさせるヘルパーか?
       login

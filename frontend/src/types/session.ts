@@ -2,29 +2,25 @@
 export type SignUpParams = {
   name: string
   email: string
-  gender: number
+  gender: string
   password: string
   passwordConfirmation: string
 }
 
 // サインイン
 export type SignInParams = {
-  email: string
+  name: string
   password: string
 }
 
 // ユーザー
 export type User = {
   id: number
-  uid: string
-  provider: string
-  email: string
   name: string
-  gender: number
-  nickname?: string
-  image?: string
+  gender: string
+  password: string
+  passwordConfirmation: string
   admin: boolean
-  allowPasswordChange: boolean
   created_at: Date
   updated_at: Date
 }
