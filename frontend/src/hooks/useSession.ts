@@ -8,5 +8,5 @@ export const useSessions = (data: any) => {
   const setUser = useSetRecoilState(currentUserState);
   const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
   setUser({current_user: data.user});
-  setLoggedInStatus({loggedIn: true});
+  setLoggedInStatus({status: true});
 }
