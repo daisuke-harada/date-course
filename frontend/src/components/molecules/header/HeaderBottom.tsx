@@ -2,7 +2,7 @@ import { memo, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
-import { headerBottomRoutes } from "../../../router/HeaderBottomRoutes";
+import { headerBottomRoutes } from "router/HeaderBottomRoutes";
 
 const BottomUl = tw.ul`lg:flex hidden flex-wrap text-base justify-center font-bold`;
 const BottomUlList = tw.li`my-3 mx-6`;

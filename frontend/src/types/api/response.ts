@@ -1,4 +1,4 @@
-import { User } from "./session";
+import { User } from "types/api/session";
 
 export type UserResponseData = {
   status: string,

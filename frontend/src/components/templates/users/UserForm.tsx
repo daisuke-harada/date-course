@@ -1,14 +1,13 @@
 import { memo, useCallback, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
-import { AxiosError } from "axios";
 
-import { client } from "../../../lib/api/client";
-import { SignUpParams, User } from "../../../types/api/session";
-import { BaseButton } from "../../atoms/button/BaseButton";
-import { DangerButton } from "../../atoms/button/DangerButton";
-import { RadioField } from "../../molecules/users/RadioField";
-import { UserResponseData } from "../../../types/api/response";
+import { client } from "lib/api/client";
+import { SignUpParams} from "types/api/session";
+import { BaseButton } from "components/atoms/button/BaseButton";
+import { DangerButton } from "components/atoms/button/DangerButton";
+import { RadioField } from "components/molecules/users/RadioField";
+import { UserResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;

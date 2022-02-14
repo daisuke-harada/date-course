@@ -2,10 +2,10 @@ import { memo, useCallback, VFC } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { useNavigate } from "react-router-dom";
-import { UserForm } from "../../templates/users/UserForm";
-import { currentUserState } from "../../../store/currentUserState";
-import { loggendInStatusState } from "../../../store/loggendInStatusState";
-import { UserResponseData } from "../../../types/api/response";
+import { UserForm } from "components/templates/users/UserForm";
+import { currentUserState } from "store/currentUserState";
+import { loggendInStatusState } from "store/loggendInStatusState";
+import { UserResponseData } from "types/api/response";
 
 export const New: VFC = memo(() => {
   const navigate = useNavigate();

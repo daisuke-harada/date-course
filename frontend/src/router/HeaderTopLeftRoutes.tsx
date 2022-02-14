@@ -1,5 +1,5 @@
-import { BaseButton } from "../components/atoms/button/BaseButton";
-import { SecondaryButton } from "../components/atoms/button/SecondaryButton";
+import { BaseButton } from "components/atoms/button/BaseButton";
+import { SecondaryButton } from "components/atoms/button/SecondaryButton";
 
 export const headerTopLeftRoutes = [
   {

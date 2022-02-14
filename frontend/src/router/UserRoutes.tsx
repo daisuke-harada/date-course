@@ -1,8 +1,8 @@
-import { Page404 } from "../components/pages/Page404";
-import { Edit } from "../components/pages/users/Edit";
-import { Index } from "../components/pages/users/Index";
-import { New } from "../components/pages/users/New";
-import { Show } from "../components/pages/users/Show";
+import { Page404 } from "components/pages/Page404";
+import { Edit } from "components/pages/users/Edit";
+import { Index } from "components/pages/users/Index";
+import { New } from "components/pages/users/New";
+import { Show } from "components/pages/users/Show";
 
 export const userRoutes = [
   {

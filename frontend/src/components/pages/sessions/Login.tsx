@@ -1,7 +1,7 @@
 import { memo, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
-import { BaseButton } from "../../atoms/button/BaseButton";
+import { BaseButton } from "components/atoms/button/BaseButton";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;

@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
-import { currentUserState } from "../../../store/currentUserState";
-import { loggendInStatusState } from "../../../store/loggendInStatusState";
+import { currentUserState } from "store/currentUserState";
+import { loggendInStatusState } from "store/loggendInStatusState";
 
 
 export const Show: VFC = memo(() => {

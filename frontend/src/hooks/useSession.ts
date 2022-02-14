@@ -1,8 +1,8 @@
 // ログインしたユーザーの情報とログイン状態をグローバルステートにセットする
 import { useSetRecoilState } from "recoil";
 
-import { currentUserState } from "../store/currentUserState";
-import { loggendInStatusState } from "../store/loggendInStatusState";
+import { currentUserState } from "store/currentUserState";
+import { loggendInStatusState } from "store/loggendInStatusState";
 
 export const useSessions = (data: any) => {
   const setUser = useSetRecoilState(currentUserState);

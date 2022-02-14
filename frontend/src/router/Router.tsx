@@ -1,13 +1,13 @@
 import { memo, VFC } from "react";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
-import { Top } from "../components/pages/homes/Top";
-import { Page404 } from "../components/pages/Page404";
-import { Login } from "../components/pages/sessions/Login";
-import { courseRoutes } from "./CourseRoutes";
-import { dateSpotReviewRoutes } from "./DateSpotReviewRoutes";
-import { dateSpotRoutes } from "./DateSpotRoutes";
-import { userRoutes } from "./UserRoutes";
+import { Top } from "components/pages/homes/Top";
+import { Page404 } from "components/pages/Page404";
+import { Login } from "components/pages/sessions/Login";
+import { courseRoutes } from "router/CourseRoutes";
+import { dateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
+import { dateSpotRoutes } from "router/DateSpotRoutes";
+import { userRoutes } from "router/UserRoutes";
 
 export const Router: VFC = memo((props) => {
   return(
