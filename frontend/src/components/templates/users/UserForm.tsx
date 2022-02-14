@@ -1,12 +1,14 @@
 import { memo, useCallback, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
-import { client } from "../../../lib/api/client";
-import { SignUpParams } from "../../../types/api/session";
+import { AxiosError } from "axios";
 
+import { client } from "../../../lib/api/client";
+import { SignUpParams, User } from "../../../types/api/session";
 import { BaseButton } from "../../atoms/button/BaseButton";
 import { DangerButton } from "../../atoms/button/DangerButton";
 import { RadioField } from "../../molecules/users/RadioField";
+import { UserResponseData } from "../../../types/api/response";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -17,7 +19,7 @@ const Form = tw.form`p-5 m-2`
 type Props = {
   userFormTitle: string,
   buttonName: string,
-  handleSuccessfulAuthentication: any,
+  handleSuccessfulAuthentication: (data: UserResponseData) => void,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {

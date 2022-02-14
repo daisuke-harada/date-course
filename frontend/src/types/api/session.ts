@@ -20,7 +20,7 @@ export type User = {
   gender: string
   password: string
   passwordConfirmation: string
-  admin: boolean
+  admin?: boolean
   created_at: Date
   updated_at: Date
 }
