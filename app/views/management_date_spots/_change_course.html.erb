@@ -1,9 +1,0 @@
-<% if names && date_spots.count >= 2 %>
-  <%= form_with url: url, local: true do |f| %>
-    <!-- デートコース作成画面ではcourse.idは不必要なため、if文で必要な場合のみ使用できるようにする -->
-    <%= f.hidden_field :course_id, :value => course.id if course %>
-    <%= f.hidden_field :original_id, :value => date_spot.id %>
-    <%= f.select :change_name, names %>
-    <%= f.submit 'と順番を入れ替える', class:"btn btn-salmon", id:"change_button_id_#{date_spot.id}" %>
-  <% end %>
-<% end %>
