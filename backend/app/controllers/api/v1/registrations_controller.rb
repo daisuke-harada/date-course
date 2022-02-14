@@ -1,9 +1,10 @@
 class Api::V1::RegistrationsController < ApplicationController
   def signup
-    binding.pry
     @user = User.new(registrations_params)
+    binding.pry
     if @user.save
       login
+      binding.pry
       render json: { status: :created, user: @user }
     else
       render json: { status: 500}

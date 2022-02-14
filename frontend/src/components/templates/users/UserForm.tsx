@@ -24,17 +24,18 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [gender, setGender] = useState<string>('女');
+  const [gender, setGender] = useState<string>('男');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
-  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
-  const onChangePasswordConfirmation = (e: ChangeEvent<HTMLInputElement>) => setPasswordConfirmation(e.target.value);
-  const onChangeRadioButton = useCallback((e: ChangeEvent<HTMLInputElement>) => setGender(e.target.value), []);
+  const onChangeName: React.ChangeEventHandler<HTMLInputElement> = (e) => setName(e.target.value);
+  const onChangeEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => setEmail(e.target.value);
+  const onChangePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => setPassword(e.target.value);
+  const onChangePasswordConfirmation: React.ChangeEventHandler<HTMLInputElement> = (e) => setPasswordConfirmation(e.target.value);
+  const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => setGender(e.target.value), []);
 
-  const params: SignUpParams = {
+  // ここのプロパティ名は渡したいparamの名前と同じにする
+  const user: SignUpParams = {
     name: name,
     email: email,
     gender: gender,
@@ -42,11 +43,14 @@ export const UserForm: VFC<Props> = memo((props) => {
     passwordConfirmation: passwordConfirmation
   };
 
-  const userRegitAction =(event: any) => {
-    console.log("クリック");
-    console.log(params);
-    client.post("signup", params);
-    event.preventDefault();
+  const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
+    client.post("signup", {user}).then(response => {
+      console.log("registration res", response)
+    }).catch(error => {
+        console.log("registration error", error)
+    });
+    // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます
+    e.preventDefault();
   };
 
   return(
