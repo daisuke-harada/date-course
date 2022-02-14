@@ -4,8 +4,8 @@ import { UserForm } from "../../templates/users/UserForm";
 
 export const New: VFC = memo(() => {
   const navigate = useNavigate();
-  const handleSuccessfulAuthentication: (e: any) => void = (data: any) => {
-    console.log(data);
+  const handleSuccessfulAuthentication: any = (data: any) => {
+    console.log(data.id);
     navigate("/");
   };
   return(

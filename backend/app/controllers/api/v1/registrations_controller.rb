@@ -3,10 +3,8 @@ class Api::V1::RegistrationsController < ApplicationController
     @user = User.new(registrations_params)
     if @user.save
       login
-      binding.pry
       render json: { status: :created, user: @user }
     else
-      binding.pry
       render json: { status: 500}
     end
   end

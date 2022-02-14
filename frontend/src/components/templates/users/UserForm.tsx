@@ -45,9 +45,13 @@ export const UserForm: VFC<Props> = memo((props) => {
   };
 
   const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
-    client.post("signup", {user}).then(response => {
-      console.log("registration res", response)
-      response.data.status === 'created' && handleSuccessfulAuthentication(response.data)
+    client.post("signup", {user})
+    .then(response => {
+      console.log("registration res", response);
+      // 追加
+      if (response.data.status === 'created') {
+        handleSuccessfulAuthentication(response.data)
+      }
     }).catch(error => {
         console.log("registration error", error)
     });
