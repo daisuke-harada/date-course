@@ -4,12 +4,12 @@ import { HeaderLayout } from "./components/templates/HeaderLayout";
 import { Router} from "./router/Router"
 
 export const App = () => {
-  const [loggedInStatus, setLoggedInStatus] = useState<boolean>(false);
+  // const [loggedInStatus, setLoggedInStatus] = useState<boolean>(false);
   // const [user, setUser] = useState({});
   return (
       <BrowserRouter>
         <HeaderLayout>
-          <Router loggedInStatus={loggedInStatus}/>
+          <Router />
         </HeaderLayout>
       </BrowserRouter>
   );
