@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useCallback, useState, VFC } from "react";
+import { memo, useCallback, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { client } from "../../../lib/api/client";

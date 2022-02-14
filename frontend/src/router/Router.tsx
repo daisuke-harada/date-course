@@ -11,7 +11,7 @@ import { userRoutes } from "./UserRoutes";
 export const Router: VFC = memo(() => {
   return(
     <Routes>
-      <Route path="/" element={<Top/>} />
+      <Route path="/" element={<Top/>}  />
       <Route path="/login" element={<Login />} />
       <Route path="users" >
         {userRoutes.map((route) => (
