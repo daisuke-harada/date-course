@@ -1,6 +1,9 @@
 import { memo, VFC } from "react";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
+
+// import { useEffect } from "react";
+
 import { Top } from "components/pages/homes/Top";
 import { Page404 } from "components/pages/Page404";
 import { Login } from "components/pages/sessions/Login";
@@ -9,7 +12,13 @@ import { dateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
 import { dateSpotRoutes } from "router/DateSpotRoutes";
 import { userRoutes } from "router/UserRoutes";
 
-export const Router: VFC = memo((props) => {
+export const Router: VFC = memo(() => {
+  // useEffect(()=> {
+  //   console.log(cookies.current_state);
+  //   setLoggedInStatus({status: current_status});
+  //   // console.log(getLoggedInStatus);
+  // });
+
   return(
     <Routes>
       <Route path="/" element={<Top />}  />
