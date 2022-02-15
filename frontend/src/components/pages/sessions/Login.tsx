@@ -5,7 +5,6 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
 import { useSetRecoilState } from "recoil";
-import { currentUserState } from "store/currentUserState";
 import { loggendInStatusState } from "store/loggendInStatusState";
 import { UserResponseData } from "types/api/response";
 
@@ -23,13 +22,10 @@ export const Login: VFC = memo(() => {
 
   // login後のアクション
   const navigate = useNavigate();
-  const setUser = useSetRecoilState(currentUserState);
   const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
   const afterLoginSuccess = (data: UserResponseData) => {
-    console.log(data);
-    setUser({current_user: data.user});
     setLoggedInStatus({status: true});
-    navigate(`/users/${data.user.id}`);
+    navigate(`/users/${data.userId}`);
   };
 
   const signInParams: SignInParams = {
@@ -39,7 +35,6 @@ export const Login: VFC = memo(() => {
 
   const userLoginAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("login", {signInParams}).then(response => {
-      console.log(response.data.loggedIn);
       response.data.loggedIn && afterLoginSuccess(response.data);
     }).catch(error => {
         console.log("registration error", error)
