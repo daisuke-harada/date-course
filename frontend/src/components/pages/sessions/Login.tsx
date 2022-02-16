@@ -26,7 +26,8 @@ export const Login: VFC = memo(() => {
   const setLoginStatus= useSetRecoilState(loginStatusState);
 
   const afterLoginSuccess = (data: UserResponseData) => {
-    setLoginStatus({status: true});
+    console.log(data);
+    setLoginStatus({status: data.loginStatus});
     navigate(`/users/${data.userId}`);
   };
 
