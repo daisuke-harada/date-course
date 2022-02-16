@@ -7,7 +7,6 @@ import { loginStatusState } from "store/session";
 const Button = tw.button`btn btn-red w-full`;
 
 export const LogOutButton: VFC = memo(() => {
-  //const [cookies] = useCookies(["loginStatus", "cuurentUserId"]);
   const setLoginStatus = useSetRecoilState(loginStatusState);
 
   const onClickLogOut = () => {
