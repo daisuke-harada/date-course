@@ -1,11 +1,12 @@
 import { memo, useState, VFC } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import tw from "tailwind-styled-components";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
 import { useSetRecoilState } from "recoil";
-import { loginStatusState } from "store/loginStatusState";
+import { loginStatusState } from "store/session";
 import { UserResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;

@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 
 import { useNavigate } from "react-router-dom";
 import { UserForm } from "components/templates/users/UserForm";
-import { loginStatusState } from "store/loginStatusState";
+import { loginStatusState } from "store/session";
 import { UserResponseData } from "types/api/response";
 
 export const New: VFC = memo(() => {
