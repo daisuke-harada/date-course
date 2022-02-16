@@ -8,11 +8,11 @@ import { UserResponseData } from "types/api/response";
 
 export const New: VFC = memo(() => {
   const navigate = useNavigate();
-  const setloginStatusStatus = useSetRecoilState(loginStatusState);
+  const setLoginStatus = useSetRecoilState(loginStatusState);
   const afterLoginSuccess = useCallback((data: UserResponseData) => {
-    setloginStatusStatus({status: true});
+    setLoginStatus({status: true});
     navigate(`/users/${data.userId}`);
-  },[navigate, setloginStatusStatus]);
+  },[navigate, setLoginStatus]);
 
   return(
     <UserForm userFormTitle={"ユーザー新規登録"} buttonName={"登録"} afterLoginSuccess={afterLoginSuccess}/>

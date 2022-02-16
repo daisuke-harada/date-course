@@ -3,11 +3,11 @@ import { useRecoilValue } from "recoil";
 import { loginStatusState } from "store/session";
 
 export const Show: VFC = memo(() => {
-  const loginStatus = useRecoilValue(loginStatusState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
   return(
     <>
       <h1>userのshowページです</h1>
-      {loginStatus.status && 'ログインしてるよー' }
+      {getLoginStatus.status && 'ログインしてるよー' }
     </>
   );
 });

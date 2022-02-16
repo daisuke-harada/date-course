@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { loginStatusState } from "store/loginStatusState";
+import { loginStatusState } from "store/session";
 import tw from "tailwind-styled-components";
 
 import { headerBottomRoutes } from "router/HeaderBottomRoutes";
@@ -21,13 +21,13 @@ const Span = tw.span`text-xs`;
 
 export const NavBar: VFC<Props> = memo((props) => {
   const { isOpen, onClickNavBarSwitch } = props;
-  const loginStatus = useRecoilValue(loginStatusState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
   return(
     <Ul className={`${isOpen? `-translate-y-0`: `-translate-y-full`} `}>
       {headerBottomRoutes.map((route) => <Link to={route.path} key={route.path} onClick={onClickNavBarSwitch} ><IndexList>{route.text}</IndexList></Link>)}
       {headerTopLeftRoutes.map((route) => <ButtonList onClick={onClickNavBarSwitch} key={route.path} ><Link to={route.path} >{route.element}</Link></ButtonList>)}
       <ButtonList onClick={onClickNavBarSwitch} >
-      { loginStatus.status?
+      { getLoginStatus.status?
         <LogOutButton />:
         <GuestLoginButton>ゲストログイン<Span>(簡単ログイン)</Span></GuestLoginButton>
       }

@@ -3,11 +3,11 @@ import { useRecoilValue } from "recoil";
 import { loginStatusState } from "store/session";
 
 export const Top: VFC = memo(() => {
-  const loginStatus = useRecoilValue(loginStatusState);
-  console.log(loginStatus.status);
+  const getLoginStatus = useRecoilValue(loginStatusState);
+  console.log(getLoginStatus.status);
   return(
     <>
-      {loginStatus.status && (<h1>ログイン状態です</h1>)}
+      {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
       <h1 className="text-indigo-900">
         トップページです
       </h1>

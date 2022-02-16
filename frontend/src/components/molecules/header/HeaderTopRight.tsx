@@ -20,7 +20,7 @@ type Props = {
 
 export const HeaderTopRight: VFC<Props> = memo((props) => {
   const {onClickNavBarSwitch, isOpen} = props;
-  const loginStatus = useRecoilValue(loginStatusState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
   return(
     <>
       <MenuIconDivParent>
@@ -29,7 +29,7 @@ export const HeaderTopRight: VFC<Props> = memo((props) => {
         </MenuIconDivChild>
       </MenuIconDivParent>
       <ButtonParentDiv>
-        { loginStatus.status?
+        { getLoginStatus.status?
          <LogOutButton />:
          <GuestLoginButton>ゲストログイン<Span>(簡単ログイン)</Span></GuestLoginButton>
           }

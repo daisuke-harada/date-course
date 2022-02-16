@@ -23,10 +23,10 @@ export const Login: VFC = memo(() => {
 
   // login後のアクション
   const navigate = useNavigate();
-  const setloginStatusStatus = useSetRecoilState(loginStatusState);
+  const setLoginStatus= useSetRecoilState(loginStatusState);
 
   const afterLoginSuccess = (data: UserResponseData) => {
-    setloginStatusStatus({status: true});
+    setLoginStatus({status: true});
     navigate(`/users/${data.userId}`);
   };
 

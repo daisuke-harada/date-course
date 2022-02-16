@@ -8,10 +8,10 @@ const Button = tw.button`btn btn-red w-full`;
 
 export const LogOutButton: VFC = memo(() => {
   //const [cookies] = useCookies(["loginStatus", "cuurentUserId"]);
-  const loginStatus = useSetRecoilState(loginStatusState);
+  const setLoginStatus = useSetRecoilState(loginStatusState);
 
   const onClickLogOut = () => {
-    loginStatus({status: false});
+    setLoginStatus({status: false});
   };
   return(
     <Button onClick={onClickLogOut}>ログアウト</Button>
