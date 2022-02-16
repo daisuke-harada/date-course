@@ -5,3 +5,9 @@ export const loginStatusState = atom({
   key: "loginStatusState",
   default: { status: false}
 });
+
+export const currentUserState = atom({
+  // ファイル名と揃える
+  key: "currentUserState",
+  default: { user: {}}
+});

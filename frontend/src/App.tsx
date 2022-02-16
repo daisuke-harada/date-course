@@ -4,11 +4,13 @@ import { Router} from "router/Router"
 
 import { HeaderLayout } from "components/templates/HeaderLayout";
 import { useRecoilValue } from "recoil";
-import { loginStatusState } from "store/session";
+import { currentUserState, loginStatusState } from "store/session";
 
 export const App = () => {
   const getLoginStatus = useRecoilValue(loginStatusState);
+  const getCurrentUserInfo = useRecoilValue(currentUserState);
   console.log(getLoginStatus.status);
+  console.log(getCurrentUserInfo.user);
 
   return (
     <BrowserRouter>

@@ -10,7 +10,7 @@ export const New: VFC = memo(() => {
   const navigate = useNavigate();
   const setLoginStatus = useSetRecoilState(loginStatusState);
   const afterLoginSuccess = useCallback((data: UserResponseData) => {
-    setLoginStatus({status: true});
+    setLoginStatus({status: data.loginStatus});
     navigate(`/users/${data.userId}`);
   },[navigate, setLoginStatus]);
 
