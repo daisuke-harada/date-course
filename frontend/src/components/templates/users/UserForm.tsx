@@ -7,7 +7,7 @@ import { SignUpParams} from "types/api/session";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { RadioField } from "components/molecules/users/RadioField";
-import { UserResponseData } from "types/api/response";
+import { UserLoginResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -18,7 +18,7 @@ const Form = tw.form`p-5 m-2`
 type Props = {
   userFormTitle: string,
   buttonName: string,
-  afterLoginSuccess: (data: UserResponseData) => void,
+  afterLoginSuccess: (data: UserLoginResponseData) => void,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {

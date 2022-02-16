@@ -3,16 +3,18 @@ import { useSetRecoilState } from "recoil";
 
 import { useNavigate } from "react-router-dom";
 import { UserForm } from "components/templates/users/UserForm";
-import { loginStatusState } from "store/session";
-import { UserResponseData } from "types/api/response";
+import { currentUserState, loginStatusState } from "store/session";
+import { UserLoginResponseData } from "types/api/response";
 
 export const New: VFC = memo(() => {
   const navigate = useNavigate();
   const setLoginStatus = useSetRecoilState(loginStatusState);
-  const afterLoginSuccess = useCallback((data: UserResponseData) => {
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  const afterLoginSuccess = useCallback((data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
-    navigate(`/users/${data.userId}`);
-  },[navigate, setLoginStatus]);
+    setCurrentUser({user: data.user});
+    navigate(`/users/${data.user.id}`);
+  },[navigate, setLoginStatus, setCurrentUser]);
 
   return(
     <UserForm userFormTitle={"ユーザー新規登録"} buttonName={"登録"} afterLoginSuccess={afterLoginSuccess}/>

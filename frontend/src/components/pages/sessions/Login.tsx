@@ -6,8 +6,8 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
 import { useSetRecoilState } from "recoil";
-import { loginStatusState } from "store/session";
-import { UserResponseData } from "types/api/response";
+import { currentUserState, loginStatusState } from "store/session";
+import { UserLoginResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -24,11 +24,12 @@ export const Login: VFC = memo(() => {
   // login後のアクション
   const navigate = useNavigate();
   const setLoginStatus= useSetRecoilState(loginStatusState);
+  const setCurrentUser = useSetRecoilState(currentUserState);
 
-  const afterLoginSuccess = (data: UserResponseData) => {
-    console.log(data);
+  const afterLoginSuccess = (data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
-    navigate(`/users/${data.userId}`);
+    setCurrentUser({user: data.user})
+    navigate(`/users/${data.user.id}`);
   };
 
   const signInParams: SignInParams = {
