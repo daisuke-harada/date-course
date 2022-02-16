@@ -1,14 +1,14 @@
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
-import { loggendInStatusState } from "store/loggendInStatusState";
+import { loginStatusState } from "store/loginStatusState";
 
 
 export const Show: VFC = memo(() => {
-  const loggedIn = useRecoilValue(loggendInStatusState);
+  const loginStatus = useRecoilValue(loginStatusState);
   return(
     <>
       <h1>userのshowページです</h1>
-      {loggedIn.status && 'ログインしてるよー' }
+      {loginStatus.status && 'ログインしてるよー' }
     </>
   );
 });

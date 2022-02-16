@@ -5,17 +5,17 @@ import { useCookies } from "react-cookie";
 import { useSetRecoilState } from "recoil";
 
 import { HeaderLayout } from "components/templates/HeaderLayout";
-import { loggendInStatusState } from "store/loggendInStatusState";
+import { loginStatusState } from "store/loginStatusState";
 import { useEffect } from "react";
 
 export const App = () => {
-  const [cookies] = useCookies(["current_state", "cuurentUserId"]);
-  const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
+  const [cookies] = useCookies(["loginStatus", "cuurentUserId"]);
+  const setloginStatusStatus = useSetRecoilState(loginStatusState);
 
   useEffect(()=>{
-    console.log(cookies.current_state);
-    cookies.current_state && setLoggedInStatus({status: cookies.current_state});
-  }, [cookies, setLoggedInStatus]);
+    console.log(cookies.loginStatus);
+    cookies.loginStatus && setloginStatusStatus({status: cookies.loginStatus});
+  }, [cookies, setloginStatusStatus]);
 
   return (
     <BrowserRouter>

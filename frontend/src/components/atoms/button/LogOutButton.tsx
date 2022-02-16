@@ -3,16 +3,16 @@ import tw from "tailwind-styled-components";
 import { useSetRecoilState } from "recoil";
 import { useCookies } from "react-cookie";
 
-import { loggendInStatusState } from "store/loggendInStatusState";
+import { loginStatusState } from "store/loginStatusState";
 
 const Button = tw.button`btn btn-red w-full`;
 
 export const LogOutButton: VFC = memo(() => {
-  //const [cookies] = useCookies(["current_state", "cuurentUserId"]);
-  const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
+  //const [cookies] = useCookies(["loginStatus", "cuurentUserId"]);
+  const setloginStatusStatus = useSetRecoilState(loginStatusState);
 
   const onClickLogOut = () => {
-    setLoggedInStatus({status: false});
+    setloginStatusStatus({status: false});
   };
   return(
     <Button onClick={onClickLogOut}>ログアウト</Button>

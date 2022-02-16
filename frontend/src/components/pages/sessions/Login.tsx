@@ -5,7 +5,7 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { client } from "lib/api/client";
 import { SignInParams } from "types/api/session";
 import { useSetRecoilState } from "recoil";
-import { loggendInStatusState } from "store/loggendInStatusState";
+import { loginStatusState } from "store/loginStatusState";
 import { UserResponseData } from "types/api/response";
 
 const MainDiv = tw.div`user-form`;
@@ -22,10 +22,10 @@ export const Login: VFC = memo(() => {
 
   // login後のアクション
   const navigate = useNavigate();
-  const setLoggedInStatus = useSetRecoilState(loggendInStatusState);
+  const setloginStatusStatus = useSetRecoilState(loginStatusState);
 
   const afterLoginSuccess = (data: UserResponseData) => {
-    setLoggedInStatus({status: true});
+    setloginStatusStatus({status: true});
     navigate(`/users/${data.userId}`);
   };
 
@@ -36,7 +36,7 @@ export const Login: VFC = memo(() => {
 
   const userLoginAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("login", {signInParams}).then(response => {
-      response.data.loggedIn && afterLoginSuccess(response.data);
+      response.data.loginStatus && afterLoginSuccess(response.data);
     }).catch(error => {
         console.log("registration error", error)
     });

@@ -14,9 +14,9 @@ import { userRoutes } from "router/UserRoutes";
 
 export const Router: VFC = memo(() => {
   // useEffect(()=> {
-  //   console.log(cookies.current_state);
-  //   setLoggedInStatus({status: current_status});
-  //   // console.log(getLoggedInStatus);
+  //   console.log(cookies.loginStatus);
+  //   setloginStatusStatus({status: loginStatus});
+  //   // console.log(getloginStatusStatus);
   // });
 
   return(

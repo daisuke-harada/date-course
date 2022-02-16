@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
-import { loggendInStatusState } from "store/loggendInStatusState";
+import { loginStatusState } from "store/loginStatusState";
 
 import { GuestLoginButton } from "components/atoms/button/GuestLoginButton";
 import { MenuIconButton } from "components/atoms/button/MenuIconButton";
@@ -20,7 +20,7 @@ type Props = {
 
 export const HeaderTopRight: VFC<Props> = memo((props) => {
   const {onClickNavBarSwitch, isOpen} = props;
-  const loggedIn = useRecoilValue(loggendInStatusState);
+  const loginStatus = useRecoilValue(loginStatusState);
   return(
     <>
       <MenuIconDivParent>
@@ -29,7 +29,7 @@ export const HeaderTopRight: VFC<Props> = memo((props) => {
         </MenuIconDivChild>
       </MenuIconDivParent>
       <ButtonParentDiv>
-        { loggedIn.status?
+        { loginStatus.status?
          <LogOutButton />:
          <GuestLoginButton>ゲストログイン<Span>(簡単ログイン)</Span></GuestLoginButton>
           }
