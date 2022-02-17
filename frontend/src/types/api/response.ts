@@ -3,7 +3,7 @@ export type UserResponseData = {
   name: string,
   gender: string,
   passwordDigeset: string,
-  admin?: boolean,
+  admin: boolean,
   created_at: Date,
   updated_at: Date,
 };
