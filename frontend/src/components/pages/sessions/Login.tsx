@@ -29,7 +29,7 @@ export const Login: VFC = memo(() => {
   const afterLoginSuccess = (data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user})
-    navigate(`/users/${data.user.id}`);
+    navigate(`/users/${data.user.id}`, {state: { messeage: 'ログインしました。', type: 'success'}});
   };
 
   const signInParams: SignInParams = {
