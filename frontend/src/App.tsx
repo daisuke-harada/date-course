@@ -9,7 +9,8 @@ import { currentUserState, loginStatusState } from "store/session";
 export const App = () => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   const getCurrentUserInfo = useRecoilValue(currentUserState);
-  console.log(getLoginStatus.status, getCurrentUserInfo.user);
+  console.log(getCurrentUserInfo.user);
+  console.log(getLoginStatus.status);
 
   return (
     <BrowserRouter>
