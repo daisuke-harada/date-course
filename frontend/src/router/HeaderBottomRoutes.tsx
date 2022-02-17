@@ -1,4 +1,4 @@
-export const headerBottomRoutes = [
+export const headerBottomRoutes =  [
   {
     text: "デートスポットを探す",
     path: "dateSpots/index"
