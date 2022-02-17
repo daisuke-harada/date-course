@@ -35,7 +35,7 @@ export const Login: VFC = memo(() => {
   const signInParams: SignInParams = {
     name: name,
     password: password,
-  }
+  };
 
   const userLoginAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("login", {signInParams}).then(response => {
