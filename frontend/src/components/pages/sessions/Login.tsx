@@ -23,7 +23,6 @@ export const Login: VFC = memo(() => {
   };
 
   const { loginAction, errorMessages } = useLoginAuthAction(signInParams);
-  console.log(errorMessages);
 
   return(
     <MainDiv>

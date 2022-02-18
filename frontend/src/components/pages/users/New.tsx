@@ -13,7 +13,7 @@ export const New: VFC = memo(() => {
   const afterLoginSuccess = useCallback((data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user});
-    navigate(`/users/${data.user.id}`);
+    navigate(`/users/${data.user.id}`, {state: {message: '新規登録に成功しました。', type: 'success-message', condition: true}});
   },[navigate, setLoginStatus, setCurrentUser]);
 
   return(

@@ -9,33 +9,38 @@ import { courseRoutes } from "router/CourseRoutes";
 import { dateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
 import { dateSpotRoutes } from "router/DateSpotRoutes";
 import { userRoutes } from "router/UserRoutes";
+import { FlashMessage } from "components/atoms/message/FlashMessage";
+
 
 export const Router: VFC = memo(() => {
   return(
-    <Routes>
-      <Route path="/" element={<Top />}  />
-      <Route path="/login" element={<Login />} />
-      <Route path="users" >
-        {userRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="courses" >
-        {courseRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="dateSpots" >
-        {dateSpotRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="dateSpotReviews" >
-        {dateSpotReviewRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path='*' element={<Page404 />} />
-    </Routes>
+    <>
+      <FlashMessage />
+      <Routes>
+        <Route path="/" element={<Top />}  />
+        <Route path="/login" element={<Login key={'Login認証のエラーの際に必要(のちに実装)'} />} />
+        <Route path="users" >
+          {userRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="courses" >
+          {courseRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="dateSpots" >
+          {dateSpotRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="dateSpotReviews" >
+          {dateSpotReviewRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path='*' element={<Page404 />} />
+      </Routes>
+    </>
   );
 });
