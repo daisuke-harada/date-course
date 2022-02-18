@@ -8,7 +8,7 @@ export const FlashMessage: VFC = memo(() => {
   const [condition, setCondition] = useState('translate-x-0');
   const location = useLocation();
   const state = location.state as { message: string, type: string, condition: boolean};
-
+  console.log(state);
   // メッセージのスライド
   const messageSwitch = ()=> {
     state !== null && setTimeout(() => setCondition('translate-x-96'),2000);
@@ -16,6 +16,7 @@ export const FlashMessage: VFC = memo(() => {
   };
 
   useEffect(
+    // 文字が表示されている状態に戻す
     messageSwitch,[messageSwitch]
   );
 

@@ -15,7 +15,7 @@ export const LogOutButton: VFC = memo(() => {
   const onClickLogOut = useCallback(() => {
     setLoginStatus({status: false});
     setCurrentUser({user: {}});
-    navigate("/");
+    navigate("/", {state: {message: 'ログアウトしました', type: 'success-message', condition: true}});
   }, [setLoginStatus, setCurrentUser, navigate]);
 
   return(
