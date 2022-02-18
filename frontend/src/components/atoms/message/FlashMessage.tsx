@@ -18,7 +18,6 @@ export const FlashMessage: VFC = memo(() => {
   useEffect(
     messageSwitch,[messageSwitch]
   );
-  console.log(condition);
 
   return (
     <>
