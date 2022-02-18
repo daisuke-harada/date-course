@@ -18,7 +18,6 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
 
   const loginAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     client.post("login", {signInParams}).then(response => {
-      console.log(response.data.loginStatus)
       response.data.loginStatus && afterLoginSuccess(response.data);
     }).catch(error => {
         console.log("registration error", error)
