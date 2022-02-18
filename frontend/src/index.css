@@ -85,3 +85,11 @@ a {
 .user-form {
   @apply mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl;
 }
+
+.success-message {
+  @apply bg-green-400 font-bold;
+}
+
+.error-message {
+  @apply bg-red-500 font-bold;
+}
