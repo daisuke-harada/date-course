@@ -1,5 +1,5 @@
 import { memo, useCallback, useState, VFC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
 import { client } from "lib/api/client";
@@ -24,6 +24,13 @@ type Props = {
 export const UserForm: VFC<Props> = memo((props) => {
   const { userFormTitle, buttonName, afterLoginSuccess } = props;
 
+  // エラーメッセージ用のステート
+  const [errorNameMessages, setErrorNameMessages] = useState([]);
+  const [errorEmailMessages, setErrorEmailMessages] = useState([]);
+  const [errorPasswordMessages, setErrorPasswordMessages] = useState([]);
+
+  const navigate = useNavigate();
+
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [gender, setGender] = useState<string>('男');
@@ -47,7 +54,16 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
     client.post("signup", {user}).then(response => {
+      // 新規登録成功
       response.data.status === 'created' && afterLoginSuccess(response.data)
+      // 新規登録失敗
+      if(response.data.status === 500){
+        // エラーメッセージをセットする。
+        setErrorNameMessages(response.data.errorMessages.name);
+        setErrorEmailMessages(response.data.errorMessages.email);
+        setErrorPasswordMessages(response.data.errorMessages.password);
+        navigate(`/users/new`, {state: {message: '新規登録に失敗しました。', type: 'error-message', condition: true}});
+      };
     }).catch(error => {
         console.log("registration error", error)
     });
@@ -57,6 +73,15 @@ export const UserForm: VFC<Props> = memo((props) => {
   return(
     <MainDiv>
       <Title>{userFormTitle}</Title>
+      <ul className="mt-5">
+        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className="text-red-500">名前は{message}</li>)}
+      </ul>
+      <ul>
+        {errorEmailMessages !== [] && errorEmailMessages.map((message)=><li className="text-red-500">メールは{message}</li>)}
+      </ul>
+      <ul>
+        {errorPasswordMessages !== [] && errorPasswordMessages.map((message)=><li className="text-red-500">パスワードは{message}</li>)}
+      </ul>
       <Form onSubmit={userRegitAction}>
         <Input placeholder="名前を入力" value={name} onChange={onChangeName} />
         <Input placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
