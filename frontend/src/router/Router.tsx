@@ -18,7 +18,7 @@ export const Router: VFC = memo(() => {
       <FlashMessage />
       <Routes>
         <Route path="/" element={<Top />}  />
-        <Route path="/login" element={<Login key={'Login認証のエラーの際に必要(のちに実装)'} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="users" >
           {userRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
