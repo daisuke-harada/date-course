@@ -62,7 +62,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         setErrorNameMessages(response.data.errorMessages.name);
         setErrorEmailMessages(response.data.errorMessages.email);
         setErrorPasswordMessages(response.data.errorMessages.password);
-        navigate(`/users/new`, {state: {message: '新規登録に失敗しました。', type: 'error-message', condition: true}});
+        navigate(`/users/new`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
       };
     }).catch(error => {
         console.log("registration error", error)
