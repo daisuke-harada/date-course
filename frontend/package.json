@@ -30,7 +30,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -52,6 +52,9 @@
     ]
   },
   "devDependencies": {
-    "tailwind-styled-components": "^2.1.4"
+    "@types/jest": "^27.4.0",
+    "jest": "^27.5.1",
+    "tailwind-styled-components": "^2.1.4",
+    "ts-jest": "^27.1.3"
   }
 }
