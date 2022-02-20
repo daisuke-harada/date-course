@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
     "tailwind-styled-components": "^2.1.4",
     "ts-jest": "^27.1.3"

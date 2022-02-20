@@ -1,7 +1,7 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  // preset: 'ts-jest',
+  // testEnvironment: 'node',
   transform: {
     '^.+\\.js$'  : './node_modules/babel-jest',
     '.*\\.(ts|tsx)$' : './node_modules/ts-jest',    // TypeScriptファイルをテストする場合
