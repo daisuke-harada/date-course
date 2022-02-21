@@ -16,13 +16,16 @@ const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 const Form = tw.form`p-5 m-2`
 
 type Props = {
+  userDefaultValue: string,
+  emailDefaultValue: string,
+  genderDefaultValue: string,
   userFormTitle: string,
   buttonName: string,
   afterLoginSuccess: (data: UserLoginResponseData) => void,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {
-  const { userFormTitle, buttonName, afterLoginSuccess } = props;
+  const {userDefaultValue, emailDefaultValue, genderDefaultValue, userFormTitle, buttonName, afterLoginSuccess } = props;
 
   // エラーメッセージ用のステート
   const [errorNameMessages, setErrorNameMessages] = useState([]);
@@ -31,9 +34,9 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const navigate = useNavigate();
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [gender, setGender] = useState<string>('男');
+  const [name, setName] = useState<string>(userDefaultValue);
+  const [email, setEmail] = useState<string>(emailDefaultValue);
+  const [gender, setGender] = useState<string>(genderDefaultValue);
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 

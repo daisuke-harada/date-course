@@ -17,6 +17,13 @@ export const New: VFC = memo(() => {
   },[navigate, setLoginStatus, setCurrentUser]);
 
   return(
-    <UserForm userFormTitle={"ユーザー新規登録"} buttonName={"登録"} afterLoginSuccess={afterLoginSuccess}/>
+    <UserForm
+      userDefaultValue={''}
+      emailDefaultValue={''}
+      genderDefaultValue={'男'}
+      userFormTitle={"ユーザー新規登録"}
+      buttonName={"登録"}
+      afterLoginSuccess={afterLoginSuccess}
+    />
   );
 });
