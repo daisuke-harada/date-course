@@ -30,7 +30,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -52,13 +52,6 @@
     ]
   },
   "devDependencies": {
-    "@types/enzyme": "^3.10.11",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^27.4.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "jest": "^27.5.1",
-    "tailwind-styled-components": "^2.1.4",
-    "ts-jest": "^27.1.3"
+    "tailwind-styled-components": "^2.1.4"
   }
 }
