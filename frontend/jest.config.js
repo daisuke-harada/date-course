@@ -1,8 +1,13 @@
 module.exports = {
-  "preset": 'ts-jest/presets/default-esm',
-  "testEnvironment": 'node',
-  "transform": {
-    "^.+\\.(js|jsx|mjs)$": "babel-jest",
+  'preset': 'ts-jest/presets/js-with-ts-esm',
+  'globals': {
+    'ts-jest': {
+      useESM: true,
+      tsconfig: 'tsconfig.test.json'
+    }
+  },
+  'testEnvironment': 'node',
+  'transform': {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
   "transformIgnorePatterns": [

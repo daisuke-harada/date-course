@@ -1,8 +1,4 @@
-import { sumSapport } from '__tests__/sumSapport.test';
-
-const sum = (a:number, b:number) => {
-  return sumSapport(a , b);
-};
+import { sum} from '../__testSupports/sum';
 
 test("Dummy unit test", () => {
 const actual = sum(1, 2);
