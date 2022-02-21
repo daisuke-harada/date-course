@@ -6,6 +6,7 @@ module.exports = {
       tsconfig: 'tsconfig.test.json'
     }
   },
+  'moduleDirectories': ['node_modules', 'src'], // importする際にsrcからの絶対パスでしていできるようにする。
   'testEnvironment': 'node',
   'transform': {
     "^.+\\.(ts|tsx)$": "ts-jest",

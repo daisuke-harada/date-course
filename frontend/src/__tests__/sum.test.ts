@@ -1,4 +1,4 @@
-import { sum} from '../__testSupports/sum';
+import { sum} from '__testSupports/sum';
 
 test("Dummy unit test", () => {
 const actual = sum(1, 2);
