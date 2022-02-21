@@ -1,4 +1,6 @@
 module.exports = {
+  "preset": 'ts-jest',
+  "testEnvironment": 'node',
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest",
