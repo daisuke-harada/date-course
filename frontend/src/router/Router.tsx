@@ -8,7 +8,7 @@ import { Login } from "components/pages/sessions/Login";
 import { courseRoutes } from "router/CourseRoutes";
 import { dateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
 import { dateSpotRoutes } from "router/DateSpotRoutes";
-import { userRoutes } from "router/UserRoutes";
+import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
 
 
@@ -20,7 +20,7 @@ export const Router: VFC = memo(() => {
         <Route path="/" element={<Top />}  />
         <Route path="/login" element={<Login />} />
         <Route path="users" >
-          {userRoutes.map((route) => (
+          {UserRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
