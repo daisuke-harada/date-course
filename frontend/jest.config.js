@@ -1,6 +1,5 @@
 module.exports = {
-
-  "preset": 'ts-jest',
+  "preset": 'ts-jest/presets/default-esm',
   "testEnvironment": 'node',
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "babel-jest",

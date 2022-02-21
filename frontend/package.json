@@ -30,7 +30,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
