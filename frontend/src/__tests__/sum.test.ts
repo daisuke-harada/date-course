@@ -1,6 +1,11 @@
-import { sum} from '__testSupports/sum';
+/**
+ * @jest-environment node
+ */
 
-test("Dummy unit test", () => {
-const actual = sum(1, 2);
-  expect(actual).toBe(3);
+import { sum } from '__testSupports/sum';
+
+describe('足し算', () => {
+  it('1+3は4です', () => {
+    expect(sum( 1, 3)).toBe(4);
+  });
 });

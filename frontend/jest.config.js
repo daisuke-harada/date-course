@@ -7,7 +7,7 @@ module.exports = {
     }
   },
   'moduleDirectories': ['node_modules', 'src'], // importする際にsrcからの絶対パスでしていできるようにする。
-  'testEnvironment': 'node',
+  'testEnvironment': 'jsdom',
   'transform': {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
