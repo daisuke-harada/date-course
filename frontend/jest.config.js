@@ -20,5 +20,4 @@ module.exports = {
     "@(components|helper|redux|config|modules|style)?/(.*)": "<rootDir>/src/$1/$2",
     "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
   },
-  "testURL": "https://example.koko.jp"
 }
