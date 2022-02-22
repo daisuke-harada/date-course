@@ -28,7 +28,7 @@ export const Show: VFC = memo(() => {
       <p>{userName}</p>
       <p>{userGender}</p>
       {getLoginStatus.status && 'ログインしてるよー' }
-      {(getCurrentUser.user.id === Number(id))
+      {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
         &&
         <BaseButton>
           <Link className="text-white" to={`edit`}>ユーザー編集ページ</Link>

@@ -5,11 +5,11 @@ import tw from "tailwind-styled-components";
 import { client } from "lib/api/client";
 import { SignUpParams} from "types/api/session";
 import { BaseButton } from "components/atoms/button/BaseButton";
-import { DangerButton } from "components/atoms/button/DangerButton";
 import { RadioField } from "components/molecules/users/RadioField";
 import { UserLoginResponseData } from "types/api/response";
-import { currentUserState, loginStatusState } from "store/session";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { currentUserState } from "store/session";
+import { useRecoilState } from "recoil";
+import { DeactivateAccoutButton } from "components/atoms/button/DeactivateAccoutButton";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -49,7 +49,6 @@ export const UserForm: VFC<Props> = memo((props) => {
   const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => setGender(e.target.value), []);
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
 
   // ここのプロパティ名は渡したいparamの名前と同じにする
   const user: SignUpParams = {
@@ -61,6 +60,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   };
 
   const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
+    // 新規登録機能の際の挙動
     if (afterLoginSuccess !== undefined){
       client.post('signup', {user}).then(response => {
         // 新規登録成功
@@ -76,6 +76,7 @@ export const UserForm: VFC<Props> = memo((props) => {
           navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
         };
       });
+    // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
       client.put(`users/${currentUser.user.id}`, {user}).then(response => {
         if (response.data.status === 'update'){
@@ -121,12 +122,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
-        { getLoginStatus.status === true
-          &&
-          <ButtonParentDiv>
-          <DangerButton>退会</DangerButton>
-        </ButtonParentDiv>
-        }
+        <DeactivateAccoutButton />
       </Form>
       <div className="text-center mb-5">
         <Link to="/login">ログインはこちら</Link>

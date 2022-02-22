@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { loginStatusState } from "store/session";
 import tw from "tailwind-styled-components";
 
-import { headerBottomRoutes } from "router/HeaderBottomRoutes";
+import { HeaderBottomRoutes } from "router/HeaderBottomRoutes";
 import { headerTopLeftRoutes } from "router/HeaderTopLeftRoutes";
 import { GuestLoginButton } from "components/atoms/button/GuestLoginButton";
 import { LogOutButton } from "components/atoms/button/LogOutButton";
@@ -23,7 +23,7 @@ export const NavBar: VFC<Props> = memo((props) => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   return(
     <Ul className={`${isOpen? `-translate-y-0`: `-translate-y-full`} `}>
-      {headerBottomRoutes.map((route) => <Link to={route.path} key={route.path} onClick={onClickNavBarSwitch} ><IndexList>{route.text}</IndexList></Link>)}
+      {HeaderBottomRoutes().map((route) => <Link to={route.path} key={route.path} onClick={onClickNavBarSwitch} ><IndexList>{route.text}</IndexList></Link>)}
       {headerTopLeftRoutes.map((route) => <ButtonList onClick={onClickNavBarSwitch} key={route.path} ><Link to={route.path} >{route.element}</Link></ButtonList>)}
       <ButtonList onClick={onClickNavBarSwitch} >
       { getLoginStatus.status?

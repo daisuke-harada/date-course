@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :user_find_param_id, only: [:show, :update]
+  before_action :user_find_param_id, only: [:show, :update, :destroy]
 
   def show
     render json: { user: @user }
@@ -11,6 +11,11 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { status: 500, error_messages: @user.errors.messages}
     end
+  end
+
+  def destroy
+    @user.destroy
+    render json: {status: :delete}
   end
 
   private

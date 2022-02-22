@@ -28,10 +28,10 @@ export const HeaderTopRight: VFC<Props> = memo((props) => {
         </MenuIconDivChild>
       </MenuIconDivParent>
       <ButtonParentDiv>
-        { getLoginStatus.status?
+        { getLoginStatus.status === true?
          <LogOutButton />:
          <GuestLoginButton />
-          }
+        }
       </ButtonParentDiv>
     </>
   );
