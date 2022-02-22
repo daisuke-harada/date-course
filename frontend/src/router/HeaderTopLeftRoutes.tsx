@@ -1,7 +1,7 @@
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { SecondaryButton } from "components/atoms/button/SecondaryButton";
 
-export const headerTopLeftRoutes = [
+export const HeaderTopLeftRoutes = [
   {
     element: <BaseButton>新規登録</BaseButton>,
     path: "users/new"

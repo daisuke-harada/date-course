@@ -4,7 +4,7 @@ import { Show } from "components/pages/courses/Show";
 import { Page404 } from "components/pages/Page404";
 
 
-export const courseRoutes = [
+export const CourseRoutes = [
   {
     path: "index",
     element: <Index />,

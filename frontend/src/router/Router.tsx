@@ -5,9 +5,9 @@ import { Routes } from "react-router-dom";
 import { Top } from "components/pages/homes/Top";
 import { Page404 } from "components/pages/Page404";
 import { Login } from "components/pages/sessions/Login";
-import { courseRoutes } from "router/CourseRoutes";
-import { dateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
-import { dateSpotRoutes } from "router/DateSpotRoutes";
+import { CourseRoutes } from "router/CourseRoutes";
+import { DateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
+import { DateSpotRoutes } from "router/DateSpotRoutes";
 import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
 
@@ -25,17 +25,17 @@ export const Router: VFC = memo(() => {
           ))}
         </Route>
         <Route path="courses" >
-          {courseRoutes.map((route) => (
+          {CourseRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
         <Route path="dateSpots" >
-          {dateSpotRoutes.map((route) => (
+          {DateSpotRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
         <Route path="dateSpotReviews" >
-          {dateSpotReviewRoutes.map((route) => (
+          {DateSpotReviewRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>

@@ -5,7 +5,7 @@ import { loginStatusState } from "store/session";
 import tw from "tailwind-styled-components";
 
 import { HeaderBottomRoutes } from "router/HeaderBottomRoutes";
-import { headerTopLeftRoutes } from "router/HeaderTopLeftRoutes";
+import { HeaderTopLeftRoutes } from "router/HeaderTopLeftRoutes";
 import { GuestLoginButton } from "components/atoms/button/GuestLoginButton";
 import { LogOutButton } from "components/atoms/button/LogOutButton";
 
@@ -24,7 +24,7 @@ export const NavBar: VFC<Props> = memo((props) => {
   return(
     <Ul className={`${isOpen? `-translate-y-0`: `-translate-y-full`} `}>
       {HeaderBottomRoutes().map((route) => <Link to={route.path} key={route.path} onClick={onClickNavBarSwitch} ><IndexList>{route.text}</IndexList></Link>)}
-      {headerTopLeftRoutes.map((route) => <ButtonList onClick={onClickNavBarSwitch} key={route.path} ><Link to={route.path} >{route.element}</Link></ButtonList>)}
+      {HeaderTopLeftRoutes.map((route) => <ButtonList onClick={onClickNavBarSwitch} key={route.path} ><Link to={route.path} >{route.element}</Link></ButtonList>)}
       <ButtonList onClick={onClickNavBarSwitch} >
       { getLoginStatus.status?
         <LogOutButton />:

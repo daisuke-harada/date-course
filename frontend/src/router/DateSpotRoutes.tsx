@@ -4,7 +4,7 @@ import { New } from "components/pages/dateSpots/New";
 import { Show } from "components/pages/dateSpots/Show";
 import { Page404 } from "components/pages/Page404";
 
-export const dateSpotRoutes = [
+export const DateSpotRoutes = [
   {
     path: ":id",
     element: <Show />
