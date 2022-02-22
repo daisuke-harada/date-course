@@ -7,8 +7,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      binding.pry
-      render json: { user: @user }
+      render json: {status: :update, user: @user }
     else
       render json: { status: 500, error_messages: @user.errors.messages}
     end

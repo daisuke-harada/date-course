@@ -8,8 +8,8 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { RadioField } from "components/molecules/users/RadioField";
 import { UserLoginResponseData } from "types/api/response";
-import { currentUserState } from "store/session";
-import { useRecoilState } from "recoil";
+import { currentUserState, loginStatusState } from "store/session";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -49,6 +49,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => setGender(e.target.value), []);
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
 
   // ここのプロパティ名は渡したいparamの名前と同じにする
   const user: SignUpParams = {
@@ -77,11 +78,12 @@ export const UserForm: VFC<Props> = memo((props) => {
       });
     } else if (afterLoginSuccess === undefined) {
       client.put(`users/${currentUser.user.id}`, {user}).then(response => {
-        // 編集成功したのでログイン情報も一緒に更新する。
-        setCurrentUser({user: response.data.user});
-
-        // 画面遷移
-        navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
+        if (response.data.status === 'update'){
+          // 編集に成功したのでログイン情報も一緒に更新する。
+          setCurrentUser({user: response.data.user});
+          // 画面遷移
+          navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});  
+        };
 
         // 新規登録失敗
         if(response.data.status === 500){
@@ -119,11 +121,14 @@ export const UserForm: VFC<Props> = memo((props) => {
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
-        <ButtonParentDiv>
+        { getLoginStatus.status === true
+          &&
+          <ButtonParentDiv>
           <DangerButton>退会</DangerButton>
         </ButtonParentDiv>
+        }
       </Form>
-      <div className="text-center p-1">
+      <div className="text-center mb-5">
         <Link to="/login">ログインはこちら</Link>
       </div>
     </MainDiv>
