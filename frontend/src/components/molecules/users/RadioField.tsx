@@ -1,8 +1,8 @@
 import { memo, VFC } from "react";
 import tw from "tailwind-styled-components";
 
-const Label = tw.label`font-bold pt-3 mr-3`;
-const Input = tw.input`mr-3 p-2 mt-5`;
+const Label = tw.label`font-bold mobile(L):pt-3 mobile(L):mr-3 mr-2`;
+const Input = tw.input`mobile(L):mr-3 mr-2 mobile(L):p-2 mobile(L):mt-5`;
 
 type Props = {
   gender: string;

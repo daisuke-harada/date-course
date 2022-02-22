@@ -1,15 +1,15 @@
-import { memo, VFC } from "react"
+import { memo, VFC } from "react";
+import { useRecoilValue } from "recoil";
+import { loginStatusState } from "store/session";
 
-type Props = {
-  loggedInStatus: boolean;
-}
-
-export const Top: VFC<Props> = memo((props) => {
-  const { loggedInStatus } = props;
+export const Top: VFC = memo(() => {
+  const getLoginStatus = useRecoilValue(loginStatusState);
   return(
     <>
-      {loggedInStatus && (<h1>ログイン状態です</h1>)}
-      <h1 className="text-indigo-900">トップページです</h1>
+      {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
+      <h1 className="text-indigo-900">
+        トップページです
+      </h1>
     </>
   );
 });

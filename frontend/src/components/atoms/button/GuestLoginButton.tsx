@@ -1,15 +1,21 @@
-import { memo, ReactNode, VFC } from "react";
+import { useLoginAuthAction } from "hooks/useLoginAuthAction";
+import { memo, VFC } from "react";
 import tw from "tailwind-styled-components";
-
-type Props = {
-  children: ReactNode;
-};
+import { SignInParams } from "types/api/session";
 
 const Button = tw.button`btn btn-yellow-green w-full`;
+const Span = tw.div`text-xs`;
 
-export const GuestLoginButton: VFC<Props> = memo((props) => {
-  const {children} = props;
+
+export const GuestLoginButton: VFC = memo(() => {
+  const signInParams: SignInParams = {
+    name: "guest",
+    password: "foobar",
+  };
+
+  const { loginAction } = useLoginAuthAction(signInParams);
+
   return(
-    <Button>{children}</Button>
+    <Button onClick={loginAction}>ゲストログイン<Span>(簡単ログイン)</Span></Button>
   );
 });

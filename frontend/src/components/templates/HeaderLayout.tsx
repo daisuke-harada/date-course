@@ -1,5 +1,5 @@
 import { memo, ReactNode, VFC } from "react";
-import { Header } from "../organisms/layout/Header";
+import { Header } from "components/organisms/layout/Header";
 import tw from "tailwind-styled-components";
 
 type Props = {

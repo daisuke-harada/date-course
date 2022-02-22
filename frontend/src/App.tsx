@@ -1,16 +1,19 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BrowserRouter} from "react-router-dom";
-import { HeaderLayout } from "./components/templates/HeaderLayout";
-import { Router} from "./router/Router"
+import { Router} from "router/Router"
+import { RecoilRoot } from "recoil";
+
+import { HeaderLayout } from "components/templates/HeaderLayout";
 
 export const App = () => {
-  const [loggedInStatus, setLoggedInStatus] = useState<boolean>(false);
-  // const [user, setUser] = useState({});
+
   return (
+    <RecoilRoot>
       <BrowserRouter>
         <HeaderLayout>
-          <Router loggedInStatus={loggedInStatus}/>
+          <Router />
         </HeaderLayout>
       </BrowserRouter>
+    </RecoilRoot>
   );
 }

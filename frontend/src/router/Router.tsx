@@ -1,45 +1,46 @@
 import { memo, VFC } from "react";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
-import { Top } from "../components/pages/homes/Top";
-import { Page404 } from "../components/pages/Page404";
-import { Login } from "../components/pages/sessions/Login";
-import { courseRoutes } from "./CourseRoutes";
-import { dateSpotReviewRoutes } from "./DateSpotReviewRoutes";
-import { dateSpotRoutes } from "./DateSpotRoutes";
-import { userRoutes } from "./UserRoutes";
 
-type Props = {
-  loggedInStatus: boolean
-}
+import { Top } from "components/pages/homes/Top";
+import { Page404 } from "components/pages/Page404";
+import { Login } from "components/pages/sessions/Login";
+import { CourseRoutes } from "router/CourseRoutes";
+import { DateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
+import { DateSpotRoutes } from "router/DateSpotRoutes";
+import { UserRoutes } from "router/UserRoutes";
+import { FlashMessage } from "components/atoms/message/FlashMessage";
 
-export const Router: VFC<Props> = memo((props) => {
-  const { loggedInStatus } = props;
+
+export const Router: VFC = memo(() => {
   return(
-    <Routes>
-      <Route path="/" element={<Top loggedInStatus={loggedInStatus}/>}  />
-      <Route path="/login" element={<Login />} />
-      <Route path="users" >
-        {userRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="courses" >
-        {courseRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="dateSpots" >
-        {dateSpotRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path="dateSpotReviews" >
-        {dateSpotReviewRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-      <Route path='*' element={<Page404 />} />
-    </Routes>
+    <>
+      <FlashMessage />
+      <Routes>
+        <Route path="/" element={<Top />}  />
+        <Route path="/login" element={<Login />} />
+        <Route path="users" >
+          {UserRoutes().map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="courses" >
+          {CourseRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="dateSpots" >
+          {DateSpotRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="dateSpotReviews" >
+          {DateSpotReviewRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path='*' element={<Page404 />} />
+      </Routes>
+    </>
   );
 });
