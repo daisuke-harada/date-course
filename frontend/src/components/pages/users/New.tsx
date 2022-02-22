@@ -10,6 +10,7 @@ export const New: VFC = memo(() => {
   const navigate = useNavigate();
   const setLoginStatus = useSetRecoilState(loginStatusState);
   const setCurrentUser = useSetRecoilState(currentUserState);
+
   const afterLoginSuccess = useCallback((data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user});
@@ -21,6 +22,7 @@ export const New: VFC = memo(() => {
       userDefaultValue={''}
       emailDefaultValue={''}
       genderDefaultValue={'男'}
+      apiUrl={'signup'}
       userFormTitle={"ユーザー新規登録"}
       buttonName={"登録"}
       afterLoginSuccess={afterLoginSuccess}

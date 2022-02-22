@@ -19,13 +19,14 @@ type Props = {
   userDefaultValue: string,
   emailDefaultValue: string,
   genderDefaultValue: string,
+  apiUrl: string,
   userFormTitle: string,
   buttonName: string,
   afterLoginSuccess: (data: UserLoginResponseData) => void,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {
-  const {userDefaultValue, emailDefaultValue, genderDefaultValue, userFormTitle, buttonName, afterLoginSuccess } = props;
+  const {userDefaultValue, emailDefaultValue, genderDefaultValue, apiUrl, userFormTitle, buttonName, afterLoginSuccess } = props;
 
   // エラーメッセージ用のステート
   const [errorNameMessages, setErrorNameMessages] = useState([]);
@@ -55,8 +56,8 @@ export const UserForm: VFC<Props> = memo((props) => {
     passwordConfirmation: passwordConfirmation
   };
 
-  const userRegitAction: React.FormEventHandler<HTMLFormElement> =(e) => {
-    client.post("signup", {user}).then(response => {
+  const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
+    client.post(apiUrl, {user}).then(response => {
       // 新規登録成功
       response.data.status === 'created' && afterLoginSuccess(response.data)
       // 新規登録失敗
@@ -65,7 +66,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         setErrorNameMessages(response.data.errorMessages.name);
         setErrorEmailMessages(response.data.errorMessages.email);
         setErrorPasswordMessages(response.data.errorMessages.password);
-        navigate(`/users/new`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
+        navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
       };
     }).catch(error => {
         console.log("registration error", error)
