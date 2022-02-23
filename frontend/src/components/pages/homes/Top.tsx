@@ -10,9 +10,6 @@ export const Top: VFC = memo(() => {
        {/* ここに案内ボタンを設置 */}
       </div>
       {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
-      <h1 className="text-indigo-900">
-        トップページです
-      </h1>
     </>
   );
 });
