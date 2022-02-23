@@ -3,7 +3,9 @@ export type SignUpParams = {
   name: string
   email: string
   gender: string
-  image?: File
+  image?: {
+    url: string
+  }
   password: string
   passwordConfirmation: string
 }
@@ -19,7 +21,9 @@ export type User = {
   id: number
   name: string
   gender: string
-  image?: File
+  image?: {
+    url: string
+  }
   password: string
   passwordConfirmation: string
   admin?: boolean

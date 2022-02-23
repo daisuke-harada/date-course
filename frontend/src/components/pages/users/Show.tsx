@@ -11,12 +11,15 @@ export const Show: VFC = memo(() => {
   const {id} = useParams();
   const [userName, setUserName] = useState<String>("");
   const [userGender, setUserGender] = useState<String>("");
+  const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
   const navigate = useNavigate();
 
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
+      console.log(response.data.user);
       setUserName(response.data.user.name);
       setUserGender(response.data.user.gender);
+      response.data.user.image.url && setUserImage(response.data.user.image.url);
     }).catch(error => {
       navigate("/*");
     });
@@ -25,6 +28,7 @@ export const Show: VFC = memo(() => {
   return(
     <>
       <h1>userのshowページです</h1>
+      <p><img className='w-64 h-64' src={userImage} alt="UserProfileImage"/></p>
       <p>{userName}</p>
       <p>{userGender}</p>
       {getLoginStatus.status && 'ログインしてるよー' }

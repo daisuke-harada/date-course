@@ -20,13 +20,14 @@ type Props = {
   nameDefaultValue: string,
   emailDefaultValue: string,
   genderDefaultValue: string,
+  imageDefaultValue?: File,
   userFormTitle: string,
   buttonName: string,
   afterLoginSuccess?: (data: UserLoginResponseData) => void,
 };
 
 export const UserForm: VFC<Props> = memo((props) => {
-  const {nameDefaultValue, emailDefaultValue, genderDefaultValue, userFormTitle, buttonName, afterLoginSuccess } = props;
+  const {nameDefaultValue, emailDefaultValue, genderDefaultValue,imageDefaultValue, userFormTitle, buttonName, afterLoginSuccess } = props;
 
   // エラーメッセージ用のステート
   const [errorNameMessages, setErrorNameMessages] = useState([]);
@@ -34,11 +35,10 @@ export const UserForm: VFC<Props> = memo((props) => {
   const [errorPasswordMessages, setErrorPasswordMessages] = useState([]);
 
   const navigate = useNavigate();
-
   const [name, setName] = useState<string>(nameDefaultValue);
   const [email, setEmail] = useState<string>(emailDefaultValue);
   const [gender, setGender] = useState<string>(genderDefaultValue);
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<File | undefined>(imageDefaultValue);
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
@@ -52,10 +52,11 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const selectImage = (e: any) => {
     const selectedImage = e.target.files[0];
+    console.log(selectedImage);
     setImage(selectedImage)
   }
 
-  // FormData形式でデータを作成
+  // 画像を投稿したり編集したりする可能性があるためFormData形式でデータを作成。
   const createFormData = (): FormData => {
     const formData = new FormData();
 
@@ -70,7 +71,6 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
     const user = createFormData();
-    console.log(user);
 
     // 新規登録機能の際の挙動
     if (afterLoginSuccess !== undefined){
@@ -90,12 +90,12 @@ export const UserForm: VFC<Props> = memo((props) => {
       });
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
-      formDataClient.put(`users/${currentUser.user.id}`, {user}).then(response => {
+      formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
         if (response.data.status === 'update'){
           // 編集に成功したのでログイン情報も一緒に更新する。
           setCurrentUser({user: response.data.user});
           // 画面遷移
-          navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});  
+          navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
         };
 
         // 新規登録失敗
@@ -131,7 +131,9 @@ export const UserForm: VFC<Props> = memo((props) => {
         <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
         <Input placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
         <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
-        <input type="file" onChange={(e)=> selectImage(e)} />
+        <div className='my-3'>
+          <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
+        </div>
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
