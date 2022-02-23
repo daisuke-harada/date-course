@@ -2,8 +2,7 @@ import { memo, useCallback, useState, VFC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
-import { client } from "lib/api/client";
-import { SignUpParams} from "types/api/session";
+import { formDataClient } from "lib/api/client";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { RadioField } from "components/molecules/users/RadioField";
 import { UserLoginResponseData } from "types/api/response";
@@ -39,6 +38,7 @@ export const UserForm: VFC<Props> = memo((props) => {
   const [name, setName] = useState<string>(nameDefaultValue);
   const [email, setEmail] = useState<string>(emailDefaultValue);
   const [gender, setGender] = useState<string>(genderDefaultValue);
+  const [image, setImage] = useState<File>();
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
@@ -50,19 +50,31 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
-  // ここのプロパティ名は渡したいparamの名前と同じにする
-  const user: SignUpParams = {
-    name: name,
-    email: email,
-    gender: gender,
-    password: password,
-    passwordConfirmation: passwordConfirmation
-  };
+  const selectImage = (e: any) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage)
+  }
+
+  // FormData形式でデータを作成
+  const createFormData = (): FormData => {
+    const formData = new FormData();
+
+    formData.append('name', name)
+    formData.append('email', email)
+    formData.append('gender', gender)
+    formData.append('password', password)
+    formData.append('passwordConfirmation', passwordConfirmation)
+    if (image) formData.append("image", image)
+    return formData;
+  }
 
   const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
+    const user = createFormData();
+    console.log(user);
+
     // 新規登録機能の際の挙動
     if (afterLoginSuccess !== undefined){
-      client.post('signup', {user}).then(response => {
+      formDataClient.post('signup', user).then(response => {
         // 新規登録成功
         afterLoginSuccess !== undefined && response.data.status === 'created' && afterLoginSuccess(response.data);
 
@@ -78,7 +90,7 @@ export const UserForm: VFC<Props> = memo((props) => {
       });
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
-      client.put(`users/${currentUser.user.id}`, {user}).then(response => {
+      formDataClient.put(`users/${currentUser.user.id}`, {user}).then(response => {
         if (response.data.status === 'update'){
           // 編集に成功したのでログイン情報も一緒に更新する。
           setCurrentUser({user: response.data.user});
@@ -119,6 +131,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
         <Input placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
         <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
+        <input type="file" onChange={(e)=> selectImage(e)} />
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
