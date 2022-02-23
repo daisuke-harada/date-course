@@ -1,5 +1,5 @@
-import applyCaseMiddleware from "axios-case-converter"
-import axios from "axios"
+import applyCaseMiddleware from 'axios-case-converter'
+import axios, { AxiosResponse } from 'axios'
 
 // applyCaseMiddleware:
 // axiosで受け取ったレスポンスの値をスネークケース→キャメルケースに変換
@@ -13,5 +13,22 @@ const options = {
 };
 
 export const client = applyCaseMiddleware(axios.create({
-  baseURL: "http://localhost:7777/api/v1"
-}), options)
+  baseURL: 'http://localhost:7777/api/v1',
+}), options);
+
+export const formDataClient = applyCaseMiddleware(axios.create({
+  baseURL: 'http://localhost:7777/api/v1',
+  headers: {
+    'content-type': 'multipart/form-data',
+  },
+}));
+
+formDataClient.interceptors.response.use(
+  (response: AxiosResponse): AxiosResponse => {
+    const data = response.data
+    return { ...response.data, data }
+  }
+)
+
+
+
