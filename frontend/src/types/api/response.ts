@@ -4,6 +4,9 @@ export type UserResponseData = {
   gender: string,
   passwordDigeset: string,
   admin: boolean,
+  image?: {
+    url: string
+  },
   created_at: Date,
   updated_at: Date,
 };
