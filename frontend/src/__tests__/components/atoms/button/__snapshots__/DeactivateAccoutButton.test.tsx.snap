@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DeactivateAcountButtonコンポーネントのテスト ボタンを押すとdeleteアクションでapiに接続する 1`] = `ShallowWrapper {}`;
+
 exports[`DeactivateAcountButtonコンポーネントのテスト ボタン名が表示される 1`] = `ShallowWrapper {}`;
+
+exports[`DeactivateAcountButtonコンポーネントのテスト ログインしていないときはボタン名が表示されない 1`] = `ShallowWrapper {}`;
+
+exports[`DeactivateAcountButtonコンポーネントのテスト ログインしているときはボタン名が表示される 1`] = `ShallowWrapper {}`;
