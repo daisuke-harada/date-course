@@ -8,7 +8,7 @@ import { RadioField } from "components/molecules/users/RadioField";
 import { UserLoginResponseData } from "types/api/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
-import { DeactivateAccoutButton } from "components/atoms/button/DeactivateAccoutButton";
+import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -137,7 +137,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
-        <DeactivateAccoutButton />
+        <DeactivateAcountButton />
       </Form>
       <div className="text-center mb-5">
         <Link to="/login">ログインはこちら</Link>

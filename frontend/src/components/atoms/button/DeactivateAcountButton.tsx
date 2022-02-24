@@ -10,7 +10,7 @@ import { DangerButton } from "./DangerButton";
 
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 
-export const DeactivateAccoutButton: VFC = memo(() => {
+export const DeactivateAcountButton: VFC = memo(() => {
   const [loginStatus, setLoginStatus] = useRecoilState(loginStatusState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const navigate = useNavigate();
