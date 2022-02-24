@@ -52,11 +52,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/enzyme": "^3.10.11",
     "@types/jest": "^27.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "jest": "^27.5.1",
+    "react-recoil-hooks-testing-library": "^0.1.0",
     "tailwind-styled-components": "^2.1.4",
     "ts-jest": "^27.1.3"
   }

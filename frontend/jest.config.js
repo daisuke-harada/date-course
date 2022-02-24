@@ -19,6 +19,5 @@ module.exports = {
     "@(components|helper|redux|config|modules|style)?/(.*)": "<rootDir>/src/$1/$2",
     "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
   },
-  //"setupFiles": ['<rootDir>/tools/jest/setup-react-adapter.js'],
   "testURL": "https://example.koko.jp"
 }

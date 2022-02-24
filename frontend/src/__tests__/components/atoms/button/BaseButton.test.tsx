@@ -10,6 +10,8 @@ describe('BaseButtonコンポーネントのテスト', () => {
         ボタン
       </BaseButton>
     );
+    /* eslint-disable */
+    console.log(wrapper.debug());
     expect(wrapper).toMatchSnapshot();
   });
 

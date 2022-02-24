@@ -1,10 +1,10 @@
 import { DeactivateAcountButton } from 'components/atoms/button/DeactivateAcountButton'
-import Enzyme, { shallow } from 'enzyme'
+import { shallow } from 'enzyme'
+import { RecoilRoot, useRecoilValue } from 'recoil';
+import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
-import { useEffect } from 'react';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session';
 Enzyme.configure({ adapter: new Adapter() });
+
 
 jest.mock('recoil');
 // jest.mock('store/session');
@@ -12,7 +12,7 @@ jest.mock('recoil');
 describe('DeactivateAcountButtonコンポーネントのテスト', () => {
   it('ログインしていないときはボタンが表示されない', () => {
     const wrapper = shallow(
-      <DeactivateAcountButton />
+        <DeactivateAcountButton />
     );
     /* eslint-disable */
     console.log(wrapper.debug());
