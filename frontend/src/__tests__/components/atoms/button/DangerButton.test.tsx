@@ -1,26 +1,29 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { DangerButton } from 'components/atoms/button/DangerButton'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('DangerButtonコンポーネントのテスト', () => {
-  it('ボタン名が表示される', () => {
-    const wrapper = shallow(
+  test('ボタン名が表示される', () => {
+    render(
       <DangerButton>
         ボタン
       </DangerButton>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByText('ボタン')).toBeInTheDocument();
   });
 
-  it('ボタンをクリックする', () => {
+  test('ボタンをクリックする', () => {
     const mockOnClick = jest.fn();
-    const wrapper = shallow(
+    render(
       <DangerButton onClickEvent={mockOnClick}>
         ボタン
       </DangerButton>
     );
-    wrapper.simulate('click');
-    expect(mockOnClick).toHaveBeenCalled();
+
+    // buttonをクリックする
+    fireEvent.click(screen.getByRole('button'));
+
+    // mock関数がクリックされて一度呼び出されたことを示す。
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });

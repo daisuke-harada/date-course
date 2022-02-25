@@ -1,10 +1,21 @@
-import { render } from "@testing-library/react";
-import { App } from 'App'
+import { screen, render } from "@testing-library/react";
+import { BrowserRouter} from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import '@testing-library/jest-dom';
+import { Top } from "components/pages/homes/Top";
 
 describe("rederテスト", () => {
-  it("レンダリングされるか試す", () => {
+  test("レンダリングされるか試す", () => {
     render(
-      <App />
+      <RecoilRoot>
+        <BrowserRouter>
+          <Top />
+        </BrowserRouter>
+      </RecoilRoot>
     );
+    // /* eslint-disable */
+    // screen.debug();
+    // /* eslint-disable */
+    expect(screen.getByText('Topページ')).toBeInTheDocument();
   });
 });

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`DeactivateAcountButtonコンポーネントのテスト ボタンを押すとdeleteアクションでapiに接続する 1`] = `ShallowWrapper {}`;

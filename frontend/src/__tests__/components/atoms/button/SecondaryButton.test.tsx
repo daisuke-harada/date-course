@@ -1,15 +1,15 @@
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
+
 
 describe('SecondaryButtonコンポーネントのテスト', () => {
-  it('ボタン名が表示される', () => {
-    const wrapper = shallow(
+  test('ボタン名が表示される', () => {
+    render(
       <SecondaryButton>
         ボタン
       </SecondaryButton>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByText('ボタン')).toBeInTheDocument();
   });
 });

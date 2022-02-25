@@ -12,7 +12,7 @@ import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
 
 
-export const Router: VFC = memo(() => {
+export const Routers: VFC = memo(() => {
   return(
     <>
       <FlashMessage />

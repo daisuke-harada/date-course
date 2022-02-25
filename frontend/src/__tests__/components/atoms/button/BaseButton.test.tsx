@@ -1,28 +1,30 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { BaseButton } from 'components/atoms/button/BaseButton'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('BaseButtonコンポーネントのテスト', () => {
-  it('ボタン名が表示される', () => {
-    const wrapper = shallow(
+  test('ボタン名が表示される', () => {
+    render(
       <BaseButton>
         ボタン
       </BaseButton>
     );
-    /* eslint-disable */
-    console.log(wrapper.debug());
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByText('ボタン')).toBeInTheDocument();
   });
 
-  it('ボタンをクリックする', () => {
+  test('ボタンをクリックする', () => {
     const mockOnClick = jest.fn();
-    const wrapper = shallow(
+    render(
       <BaseButton onClickEvent={mockOnClick}>
         ボタン
       </BaseButton>
     );
-    wrapper.simulate('click');
-    expect(mockOnClick).toHaveBeenCalled();
+
+    // buttonをクリックする
+    fireEvent.click(screen.getByRole('button'));
+
+    // mock関数がクリックされて一度呼び出されたことを示す。
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+
   });
 });
