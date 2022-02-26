@@ -107,3 +107,55 @@ describe('CourseのRouterをテストする', () => {
     expect(screen.getByText('Topページ')).toBeInTheDocument();
   });
 });
+
+describe('DateSpotのRouterをテストする', () => {
+  test('デートスポットの一覧ページにアクセスできる', () => {
+    routerDisplay('/dateSpots/index', defaultInitializeState);
+    expect(screen.getByText('デートスポットを探す')).toBeInTheDocument();
+  });
+
+  test('デートスポットの新規登録ページにアクセスできる', () => {
+    routerDisplay('/dateSpots/new', defaultInitializeState);
+    // ログインしていて、管理者ユーザーのみ
+    expect(screen.getByText('デートスポットの新規登録')).toBeInTheDocument();
+  });
+
+  test('デートスポットの詳細ページにアクセスできる', () => {
+    routerDisplay('/dateSpots/1', defaultInitializeState);
+    expect(screen.getByText('デートスポットの詳細')).toBeInTheDocument();
+  });
+
+  test('デートスポットの編集ページにアクセスできる', () => {
+    routerDisplay('/dateSpots/1/edit', defaultInitializeState);
+    // ログインしていて、管理者ユーザーのみ
+    expect(screen.getByText('デートスポットの情報編集')).toBeInTheDocument();
+  });
+});
+
+describe('DateSpotReviewsのRouterをテストする', () => {
+  test('ログインしていない場合はデートスポットの新規登録ページにアクセスできない', () => {
+    routerDisplay('/dateSpotReviews/new', defaultInitializeState);
+    // ログインしているユーザーのみ
+    expect(screen.getByText('アカウント所有者しかアクセスできません')).toBeInTheDocument();
+    expect(screen.getByText('Topページ')).toBeInTheDocument();
+  });
+
+  test('デートスポットのレビューの新規登録ページにアクセスできる', () => {
+    routerDisplay('/dateSpotReviews/new', loginInitializeState);
+    // ログインしているユーザーのみ
+    expect(screen.getByText('デートスポットレビューの新規登録')).toBeInTheDocument();
+  });
+
+  test('ログインしていない場合はデートスポットのレビューの編集ページにアクセスできない', () => {
+    routerDisplay('/dateSpotReviews/1/edit', defaultInitializeState);
+    // ログインしているユーザーのみ
+    expect(screen.getByText('アカウント所有者しかアクセスできません')).toBeInTheDocument();
+    expect(screen.getByText('Topページ')).toBeInTheDocument();
+  });
+
+  test('ログインしている場合デートスポットのレビューの編集ページにアクセスできる', () => {
+    routerDisplay('/dateSpotReviews/1/edit', loginInitializeState);
+    // ログインしているユーザーのみ
+    expect(screen.getByText('デートスポットレビューの情報編集')).toBeInTheDocument();
+  });
+});

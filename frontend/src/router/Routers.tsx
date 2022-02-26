@@ -35,7 +35,7 @@ export const Routers: VFC = memo(() => {
           ))}
         </Route>
         <Route path="dateSpotReviews" >
-          {DateSpotReviewRoutes.map((route) => (
+          {DateSpotReviewRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
