@@ -27,7 +27,7 @@ export const Show: VFC = memo(() => {
 
   return(
     <>
-      <h1>userのshowページです</h1>
+      <h1>ユーザーの詳細ページです</h1>
       <p><img className='w-64 h-64' src={userImage} alt="UserProfileImage"/></p>
       <p>{userName}</p>
       <p>{userGender}</p>
