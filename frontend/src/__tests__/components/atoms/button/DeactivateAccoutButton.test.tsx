@@ -61,25 +61,5 @@ describe('DeactivateAcountButtonコンポーネントのテスト', () => {
     // mock関数がクリックされて一度呼び出されたことを示す。
     expect(mockCLickDeactivateAccountAction).toHaveBeenCalledTimes(1);
   });
-
-  // 退会処理のテストは結合テストで行う。
-  test('退会ボタンを押したときに退会処理が行われる',() => {
-    const mockCLickDeactivateAccountAction = jest.fn();
-    render(
-      <RecoilRoot initializeState={initializeState}>
-        <BrowserRouter>
-          <div className='text-center p-1 mx-6 my-4'>
-            <DangerButton onClickEvent={mockCLickDeactivateAccountAction}>
-              退会
-            </DangerButton>
-          </div>
-        </BrowserRouter>
-      </RecoilRoot>
-    );
-    // buttonをクリックする
-    fireEvent.click(screen.getByRole('button'));
-
-    // mock関数がクリックされて一度呼び出されたことを示す。
-    expect(mockCLickDeactivateAccountAction).toHaveBeenCalledTimes(1);
-  });
+  // 退会処理の内容のテストを書く
 });
