@@ -7,6 +7,7 @@ type Props = {
 }
 
 const Button = tw.button`btn btn-pink w-full`
+
 export const SecondaryButton: VFC<Props> = memo((props) => {
   const {children, onClickEvent} = props;
   return(

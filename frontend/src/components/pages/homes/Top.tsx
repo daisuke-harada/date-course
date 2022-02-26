@@ -5,7 +5,6 @@ import { currentUserState, loginStatusState } from "store/session";
 export const Top: VFC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   const getCurrentUser = useRecoilValue(currentUserState);
-  console.log(getLoginStatus);
   console.log(getCurrentUser);
   return(
     <>

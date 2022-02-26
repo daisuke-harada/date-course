@@ -52,7 +52,6 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const selectImage = (e: any) => {
     const selectedImage = e.target.files[0];
-    console.log(selectedImage);
     setImage(selectedImage)
   }
 

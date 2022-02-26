@@ -24,9 +24,8 @@ export type User = {
   image?: {
     url: string
   }
-  password: string
-  passwordConfirmation: string
+  passwordDigeset: string
   admin?: boolean
-  created_at: Date
-  updated_at: Date
+  created_at?: Date
+  updated_at?: Date
 }

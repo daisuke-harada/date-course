@@ -33,8 +33,6 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
         // フラッシュメッセージにもエラーを表示させる。
         navigate(`/login`, {state: {message: 'ログインに失敗しました', type: 'error-message', condition: true}});
       }
-    }).catch(error => {
-        console.log("registration error", error)
     });
     // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます
     e.preventDefault();
