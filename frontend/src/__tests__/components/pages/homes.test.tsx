@@ -13,9 +13,7 @@ describe("rederテスト", () => {
         </BrowserRouter>
       </RecoilRoot>
     );
-    // /* eslint-disable */
-    // screen.debug();
-    // /* eslint-disable */
+
     expect(screen.getByText('Topページ')).toBeInTheDocument();
   });
 });

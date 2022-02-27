@@ -5,13 +5,13 @@ type Props = {
   children: ReactNode,
 }
 
-const MainDiv = tw.div`border border-black bg-white m-5 p-5`
+const MainDl = tw.dl`text-center rounded-xl shadow-xl bg-white m-10`
 
 export const Card: VFC<Props> = memo((props) => {
   const { children } = props;
   return(
-    <MainDiv>
+    <MainDl>
       {children}
-    </MainDiv>
+    </MainDl>
   );
 });

@@ -1,46 +1,58 @@
 import { Card } from "components/atoms/card/Card";
 import { memo, useEffect, useState, VFC } from "react";
+import tw from 'tailwind-styled-components';
+
 import { UserResponseData } from "types/api/response";
-//import { User } from "types/api/response";
 
 type Props = {
   user: UserResponseData
 };
 
+const Span = tw.span`m-2 font-bold`
+
 export const UserCard: VFC<Props> = memo((props) => {
   const { user } = props;
   const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
+  const [genderColor, setGenderColor] = useState('');
 
   useEffect(() => {
     user.image && user.image.url !== null && setUserImage(user.image.url);
-  }, [setUserImage, user]);
+    if(user.gender === '女'){
+      setGenderColor('border-red-400');
+    }else if(user.gender === '男'){
+      setGenderColor('border-blue-400');
+    };
+  }, [setUserImage, user, setGenderColor]);
   console.log(userImage);
 
   return(
     <Card>
-      <div className="m-5">
-        <img className='w-64 h-64' src={userImage} alt="UserProfileImage"/>
-      </div>
-      <div className="m-5 flex">
-        <span className="m-2 font-bold">
+      <dd className="m-5">
+        <img className={`${genderColor} w-64 h-64 rounded-xl border-4`} src={userImage} alt="UserProfileImage"/>
+      </dd>
+      <dd className="m-5">
+        <Span>
           {user.name}
-        </span>
-        <span className="m-2 font-bold">
+        </Span>
+        <Span>
           {user.gender}
-        </span>
+        </Span>
         {/* <%= render 'relationships/follow_button', user: user %> */}
         {/* フォローボタン */}
-      </div>
-      <p className="m-2">
-        <span id ="followings_count_user_id_<%= user.id %>" className="m-2" >
+        <button>フォローボタン</button>
+      </dd>
+      <dd className="m-2">
+        <Span>
           {/* <%= render 'relationships/following_count', user: user %> */}
           {/* フォローしている数 */}
-        </span>
-        <span id ="followers_count_user_id_<%= user.id %>" className="m-2" >
+          フォロー 3
+        </Span>
+        <Span>
           {/* <%= render 'relationships/followers_count', user: user %> */}
           {/* フォロワーの数 */}
-        </span>
-      </p>
+          フォロワー 3
+        </Span>
+      </dd>
     </Card>
   );
 });
