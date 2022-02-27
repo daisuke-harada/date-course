@@ -11,7 +11,7 @@ export const DeactivateAcountButton: VFC = memo(() => {
 
   return(
     <>
-      { loginStatus.status === true &&
+      {loginStatus.status === true &&
         <ButtonParentDiv>
           <DangerButton onClickEvent={onCLickDeactivateAccountAction}>退会</DangerButton>
         </ButtonParentDiv>
