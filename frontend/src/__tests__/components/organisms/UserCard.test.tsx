@@ -4,17 +4,10 @@ import '@testing-library/jest-dom';
 import { Card } from "components/atoms/card/Card";
 import { UserCard } from "components/organisms/users/UserCard";
 import { UserResponseData } from "types/api/response";
+import { userDatas } from "__tests__supports/userDatas";
 
 describe('UserCardコンポーネントのテスト', () => {
-  const user: UserResponseData = {
-    id: 1,
-    name: '大輔',
-    gender: '男',
-    passwordDigeset: 'peter4peter4',
-    admin: false,
-    createdAt: new Date( '2017/11/27 20:30' ),
-    updatedAt: new Date( '2017/11/27 20:30' ),
-  };
+  const user: UserResponseData = userDatas[0];
 
   test('ユーザー情報が表示される', () => {
     render(
