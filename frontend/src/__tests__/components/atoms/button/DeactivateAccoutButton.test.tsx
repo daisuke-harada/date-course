@@ -3,6 +3,7 @@ import { DangerButton } from 'components/atoms/button/DangerButton';
 import '@testing-library/jest-dom';
 import { fireEvent, screen, render } from '@testing-library/react';
 import { RecoilRoot} from 'recoil';
+
 import { BrowserRouter } from 'react-router-dom';
 import { loginStatusState, currentUserState } from 'store/session';
 
@@ -61,5 +62,4 @@ describe('DeactivateAcountButtonコンポーネントのテスト', () => {
     // mock関数がクリックされて一度呼び出されたことを示す。
     expect(mockCLickDeactivateAccountAction).toHaveBeenCalledTimes(1);
   });
-  // 退会処理の内容のテストを書く
 });

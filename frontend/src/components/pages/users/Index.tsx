@@ -7,7 +7,6 @@ export const Index: VFC = memo(() => {
   const [users, setUsers] = useState<Array<UserResponseData>>([]);
   useEffect(() => {
     client.get(`users`).then(response => {
-      console.log(response.data.users);
       setUsers(response.data.users);
     });
   }, []);
