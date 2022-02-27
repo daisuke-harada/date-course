@@ -1,8 +1,8 @@
-import { Card } from "components/atoms/card/Card";
 import { memo, useEffect, useState, VFC } from "react";
 import tw from 'tailwind-styled-components';
 
 import { UserResponseData } from "types/api/response";
+import { Card } from "components/atoms/card/Card";
 
 type Props = {
   user: UserResponseData
@@ -23,7 +23,6 @@ export const UserCard: VFC<Props> = memo((props) => {
       setGenderColor('border-blue-400');
     };
   }, [setUserImage, user, setGenderColor]);
-  console.log(userImage);
 
   return(
     <Card>
