@@ -1,23 +1,31 @@
-import { memo, useState, VFC } from "react";
-import { User } from "types/api/session";
+import { Card } from "components/atoms/card/Card";
+import { memo, useEffect, useState, VFC } from "react";
+import { UserResponseData } from "types/api/response";
 //import { User } from "types/api/response";
 
 type Props = {
-  user: User
+  user: UserResponseData
 };
 
 export const UserCard: VFC<Props> = memo((props) => {
   const { user } = props;
   const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
-  user.image && setUserImage(user.image.url);
+
+  useEffect(() => {
+    user.image && user.image.url !== null && setUserImage(user.image.url);
+  }, [setUserImage, user]);
+  console.log(userImage);
+
   return(
-    <>
+    <Card>
       <div className="m-5">
         <img className='w-64 h-64' src={userImage} alt="UserProfileImage"/>
       </div>
       <div className="m-5 flex">
-        <span className="mx-5 font-bold">
+        <span className="m-2 font-bold">
           {user.name}
+        </span>
+        <span className="m-2 font-bold">
           {user.gender}
         </span>
         {/* <%= render 'relationships/follow_button', user: user %> */}
@@ -33,6 +41,6 @@ export const UserCard: VFC<Props> = memo((props) => {
           {/* フォロワーの数 */}
         </span>
       </p>
-    </>
+    </Card>
   );
 });

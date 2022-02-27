@@ -26,6 +26,6 @@ export type User = {
   }
   passwordDigeset: string
   admin?: boolean
-  created_at?: Date
-  updated_at?: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
