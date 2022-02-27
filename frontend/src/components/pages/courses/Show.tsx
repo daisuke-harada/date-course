@@ -2,6 +2,6 @@ import { memo, VFC } from "react";
 
 export const Show: VFC = memo(() => {
   return(
-   <h1>coursesのshowページです</h1>
+   <h1>デートコースの詳細ページです</h1>
   );
 });

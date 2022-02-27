@@ -12,7 +12,7 @@ type Props = {
 export const RadioField: VFC<Props>= memo((props) => {
   const {gender, onChangeRadioButton} = props;
   return(
-    <div className="flex justify-start text-left w-2/3">
+    <div className="flex justify-start text-left w-2/3 mobile(M):ml-0 ml-8">
       <Label>男</Label>
       <Input type="radio" value='男' onChange={onChangeRadioButton} checked={gender === '男'} />
       <Label>女</Label>

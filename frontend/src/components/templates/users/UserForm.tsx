@@ -8,13 +8,13 @@ import { RadioField } from "components/molecules/users/RadioField";
 import { UserLoginResponseData } from "types/api/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
-import { DeactivateAccoutButton } from "components/atoms/button/DeactivateAccoutButton";
+import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
-const Input = tw.input`my-5 w-full border-b-2 outline-none`;
+const Input = tw.input`my-5 border-b-2 outline-none w-1/2 mobile(M):w-full mobile(M):ml-0 ml-8`;
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
-const Form = tw.form`p-5 m-2`
+const Form = tw.form`p-5 m-2 flex flex-col content-center mobile(M):ml-2`
 
 type Props = {
   nameDefaultValue: string,
@@ -52,7 +52,6 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const selectImage = (e: any) => {
     const selectedImage = e.target.files[0];
-    console.log(selectedImage);
     setImage(selectedImage)
   }
 
@@ -131,13 +130,13 @@ export const UserForm: VFC<Props> = memo((props) => {
         <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
         <Input placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
         <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
-        <div className='my-3'>
+        <div className='my-3 mobile(M):ml-0 ml-8'>
           <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
         </div>
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
-        <DeactivateAccoutButton />
+        <DeactivateAcountButton />
       </Form>
       <div className="text-center mb-5">
         <Link to="/login">ログインはこちら</Link>

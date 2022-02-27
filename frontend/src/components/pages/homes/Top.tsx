@@ -8,6 +8,7 @@ export const Top: VFC = memo(() => {
     <>
       <div className="bg-[url('http://localhost:7777/images/lp.jpg')] h-96 bg-no-repeat bg-cover bg-top">
        {/* ここに案内ボタンを設置 */}
+       <h1>Topページ</h1>
       </div>
       {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
     </>

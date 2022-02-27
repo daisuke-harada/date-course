@@ -8,8 +8,8 @@ import axios, { AxiosResponse } from 'axios'
 const options = {
   // ヘッダーに関してはケバブケースのままで良いので適用を無視するオプションを追加
   ignoreHeaders: true,
-  // axiosでバックエンドのAPI(Rails)と通信する際にデータにcookieを含めるかどうかを決める物で、trueにすることで含めることができる
-  withCredentials: true,
+  // // axiosでバックエンドのAPI(Rails)と通信する際にデータにcookieを含めるかどうかを決める物で、trueにすることで含めることができる
+  // withCredentials: true,
 };
 
 export const client = applyCaseMiddleware(axios.create({

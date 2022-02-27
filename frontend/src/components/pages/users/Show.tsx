@@ -16,7 +16,6 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
-      console.log(response.data.user);
       setUserName(response.data.user.name);
       setUserGender(response.data.user.gender);
       response.data.user.image.url && setUserImage(response.data.user.image.url);
@@ -27,7 +26,7 @@ export const Show: VFC = memo(() => {
 
   return(
     <>
-      <h1>userのshowページです</h1>
+      <h1>ユーザーの詳細ページです</h1>
       <p><img className='w-64 h-64' src={userImage} alt="UserProfileImage"/></p>
       <p>{userName}</p>
       <p>{userGender}</p>

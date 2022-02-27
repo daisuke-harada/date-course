@@ -1,6 +1,6 @@
 // import { useState } from "react";
-import { BrowserRouter} from "react-router-dom";
-import { Router} from "router/Router"
+import { BrowserRouter } from "react-router-dom";
+import { Routers } from "router/Routers"
 import { RecoilRoot } from "recoil";
 
 import { HeaderLayout } from "components/templates/HeaderLayout";
@@ -11,7 +11,7 @@ export const App = () => {
     <RecoilRoot>
       <BrowserRouter>
         <HeaderLayout>
-          <Router />
+          <Routers />
         </HeaderLayout>
       </BrowserRouter>
     </RecoilRoot>

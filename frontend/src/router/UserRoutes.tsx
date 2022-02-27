@@ -27,8 +27,8 @@ export const UserRoutes: () => Props[] = () => {
     {
       path: ":id/edit",
       element: getLoginStatus.status === true && Number(userId) === getCurrentUser.user.id?
-       <Edit /> :
-       <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />
+      <Edit /> :
+      <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />
     },
     {
       path: "index",
@@ -36,7 +36,9 @@ export const UserRoutes: () => Props[] = () => {
     },
     {
       path: "new",
-      element: <New />
+      element: getLoginStatus.status === false?
+      <New /> :
+      <Navigate to='/' state={{message: 'ログイン中はアクセスできません', type: 'error-message', condition: true}} />
     },
     {
       path: "*",

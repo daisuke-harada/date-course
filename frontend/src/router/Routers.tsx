@@ -12,7 +12,7 @@ import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
 
 
-export const Router: VFC = memo(() => {
+export const Routers: VFC = memo(() => {
   return(
     <>
       <FlashMessage />
@@ -25,7 +25,7 @@ export const Router: VFC = memo(() => {
           ))}
         </Route>
         <Route path="courses" >
-          {CourseRoutes.map((route) => (
+          {CourseRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
@@ -35,7 +35,7 @@ export const Router: VFC = memo(() => {
           ))}
         </Route>
         <Route path="dateSpotReviews" >
-          {DateSpotReviewRoutes.map((route) => (
+          {DateSpotReviewRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
