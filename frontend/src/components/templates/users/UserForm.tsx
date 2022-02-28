@@ -14,7 +14,7 @@ const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
 const Input = tw.input`my-5 border-b-2 outline-none w-1/2 mobile(M):w-full mobile(M):ml-0 ml-8`;
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
-const Form = tw.form`p-5 m-2 flex flex-col content-center mobile(M):ml-2`
+const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`
 
 type Props = {
   nameDefaultValue: string,
@@ -136,8 +136,8 @@ export const UserForm: VFC<Props> = memo((props) => {
         <ButtonParentDiv>
           <BaseButton>{buttonName}</BaseButton>
         </ButtonParentDiv>
-        <DeactivateAcountButton />
       </Form>
+      <DeactivateAcountButton />
       <div className="text-center mb-5">
         <Link to="/login">ログインはこちら</Link>
       </div>
