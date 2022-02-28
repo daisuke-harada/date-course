@@ -13,9 +13,7 @@ const routerDisplay = (path: string) => {
     render(
       <RecoilRoot>
         <MemoryRouter initialEntries={[path]}>
-          {/* <HeaderLayout> */}
-            <Routers />
-          {/* </HeaderLayout> */}
+          <Routers />
         </MemoryRouter>
       </RecoilRoot>
     )
@@ -40,13 +38,6 @@ describe('Userのシナリオテスト', () => {
   test('ログインする', async () => {
     routerDisplay('/login');
 
-    // mock useNavigate
-  //   const mockedUsedNavigate = jest.fn();
-
-  //   jest.mock('react-router-dom', () => ({
-  //     ...jest.requireActual('react-router-dom'),
-  //    useNavigate: () => mockedUsedNavigate, // Return an empty jest function to test whether it was called or not...I'm not depending on the results so no need to put in a return value
-  //  }));
     const nameInputElement = screen.getByTestId('name-input');
     const passwordInputElement = screen.getByTestId('password-input');
     const buttonElement = screen.getByTestId('login-button');
