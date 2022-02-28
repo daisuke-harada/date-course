@@ -1,6 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import MockAdapter from 'axios-mock-adapter';
@@ -14,7 +13,9 @@ const routerDisplay = (path: string) => {
     render(
       <RecoilRoot>
         <MemoryRouter initialEntries={[path]}>
-          <Routers />
+          {/* <HeaderLayout> */}
+            <Routers />
+          {/* </HeaderLayout> */}
         </MemoryRouter>
       </RecoilRoot>
     )
@@ -22,11 +23,43 @@ const routerDisplay = (path: string) => {
 };
 
 describe('Userのシナリオテスト', () => {
-  const mockAxios = new MockAdapter(client);
-  mockAxios.onPost('/login', (response: any) =>{ data: {login_status: true, user: {}}})
-  test('ログインする', () => {
+
+  const mockClients = new MockAdapter(client);
+  mockClients.onPost('login').reply(200, {
+    login_status: true,
+    user: {
+      id: 1,
+      name: "daisuke",
+      email: "daisuke@gmail.com",
+      gender: "男",
+      admin: false,
+      password_digest: "daisukedaisuke",
+    }
+  });
+
+  test('ログインする', async () => {
     routerDisplay('/login');
-    userEvent.type(screen.getByTestId('name-input'), 'daisuke');
-    userEvent.type(screen.getByTestId('password-input'), 'daisuke');
+
+    // mock useNavigate
+  //   const mockedUsedNavigate = jest.fn();
+
+  //   jest.mock('react-router-dom', () => ({
+  //     ...jest.requireActual('react-router-dom'),
+  //    useNavigate: () => mockedUsedNavigate, // Return an empty jest function to test whether it was called or not...I'm not depending on the results so no need to put in a return value
+  //  }));
+    const nameInputElement = screen.getByTestId('name-input');
+    const passwordInputElement = screen.getByTestId('password-input');
+    const buttonElement = screen.getByTestId('login-button');
+
+    fireEvent.change(nameInputElement, {target: {value: 'daisuke'}});
+    fireEvent.change(passwordInputElement, {target: {value: 'daisuke'}});
+
+    /* eslint-disable */
+    waitFor(() => {
+      screen.debug();
+    });
+    /* eslint-disable */
+
+    fireEvent.click(buttonElement);
   });
 });
