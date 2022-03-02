@@ -14,7 +14,7 @@ export const Edit: VFC = memo(() => {
     emailDefaultValue={getCurrentUser.user.email}
     genderDefaultValue={getCurrentUser.user.gender}
     imageDefaultValue={getCurrentUser.user.image.url}
-    userFormTitle={"ユーザー情報編集"}
+    userFormTitle={"アカウント情報編集"}
     buttonName={"更新"}
   />
   );

@@ -12,6 +12,6 @@ const Button = tw.button`btn btn-pink w-full`
 export const SecondaryButton: VFC<Props> = memo((props) => {
   const {children, dataE2e, onClickEvent} = props;
   return(
-    <Button date-e2e={dataE2e} onClick={onClickEvent}>{children}</Button>
+    <Button data-e2e={dataE2e} onClick={onClickEvent}>{children}</Button>
   );
 });
