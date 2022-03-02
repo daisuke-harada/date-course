@@ -125,16 +125,16 @@ export const UserForm: VFC<Props> = memo((props) => {
         {errorPasswordMessages !== [] && errorPasswordMessages.map((message)=><li className="text-red-500">パスワードは{message}</li>)}
       </ul>
       <Form onSubmit={userRegitAction}>
-        <Input placeholder="名前を入力" value={name} onChange={onChangeName} />
-        <Input placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
-        <Input placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
-        <Input placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
+        <Input data-e2e="user-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
+        <Input data-e2e="user-form-email-input" placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
+        <Input data-e2e="user-form-password-input" placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
+        <Input data-e2e="user-form-passwordConfirmation-input" placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
         <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
         <div className='my-3 mobile(M):ml-0 ml-8'>
           <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
         </div>
         <ButtonParentDiv>
-          <BaseButton>{buttonName}</BaseButton>
+          <BaseButton dataE2e="user-form-button">{buttonName}</BaseButton>
         </ButtonParentDiv>
       </Form>
       <DeactivateAcountButton />

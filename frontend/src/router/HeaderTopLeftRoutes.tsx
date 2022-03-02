@@ -7,7 +7,7 @@ export const HeaderTopLeftRoutes = [
     path: "users/new"
   },
   {
-    element: <SecondaryButton>ログイン</SecondaryButton>,
+    element: <SecondaryButton dataE2e='header-top-login-button'>ログイン</SecondaryButton>,
     path: "login"
   },
 ]

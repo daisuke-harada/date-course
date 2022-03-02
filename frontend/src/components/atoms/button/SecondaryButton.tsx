@@ -3,14 +3,15 @@ import tw from "tailwind-styled-components";
 
 type Props = {
   children: ReactNode,
+  dataE2e?: string,
   onClickEvent?: React.MouseEventHandler<HTMLButtonElement>,
 }
 
 const Button = tw.button`btn btn-pink w-full`
 
 export const SecondaryButton: VFC<Props> = memo((props) => {
-  const {children, onClickEvent} = props;
+  const {children, dataE2e, onClickEvent} = props;
   return(
-    <Button onClick={onClickEvent}>{children}</Button>
+    <Button date-e2e={dataE2e} onClick={onClickEvent}>{children}</Button>
   );
 });
