@@ -28,10 +28,10 @@ export const Login: VFC = memo(() => {
     <MainDiv>
       <Title>ログイン画面</Title>
         <ul>{errorMessages.map((message)=><ErrorDiv>{message}</ErrorDiv>)}</ul>
-        <Input placeholder="名前を入力" data-testid='name-input' value={name} onChange={onChangeName} />
-        <Input placeholder="パスワードを入力" data-testid='password-input' value={password} onChange={onChangePassword} />
+        <Input placeholder="名前を入力" data-e2e='name-input' value={name} onChange={onChangeName} />
+        <Input placeholder="パスワードを入力" data-e2e='password-input' value={password} onChange={onChangePassword} />
         <ButtonParentDiv>
-          <BaseButton dataTestId='login-button' onClickEvent={loginAction}>ログイン</BaseButton>
+          <BaseButton dataE2e='login-button' onClickEvent={loginAction}>ログイン</BaseButton>
         </ButtonParentDiv>
       <div className="text-center">
         <Link to="/users/new">新規登録はこちら</Link>
