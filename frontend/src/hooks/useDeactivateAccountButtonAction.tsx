@@ -14,9 +14,11 @@ export const useDeactivateAccountButtonAction = () => {
         response.data.status === 'delete' && navigate('/', {state: {message: '退会しました', type: 'success-message', condition: true}} );
         response.data.status === 'delete' && setLoginStatus({status: false}) && setCurrentUser({user:{}});
       });
-    } else {
-      window.alert('退会処理がキャンセルされました');
-    }
+    };
+    // } else {
+    //   console.log('キャンセル');
+    //   navigate('./');
+    // };
   };
 
   return { onCLickDeactivateAccountAction, loginStatus };

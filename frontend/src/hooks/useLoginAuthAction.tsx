@@ -35,7 +35,6 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
       }
     });
     // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます
-    e.preventDefault();
   };
 
   return { loginAction, errorMessages };
