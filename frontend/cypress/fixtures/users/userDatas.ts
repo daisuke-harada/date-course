@@ -1,6 +1,6 @@
-import { User } from "../../../src/types/api/session";
+import { UserResponseData } from "../../../src/types/users/response";
 
-export const userDatas: User[] =[
+export const userDatas: UserResponseData[] =[
   {
     id: 1,
     name: "daisuke",
@@ -12,18 +12,6 @@ export const userDatas: User[] =[
     passwordDigest: "daisukedaisuke",
     createdAt: new Date('2017/11/27 20:30'),
     updatedAt: new Date('2017/11/27 20:30')
-  },
-  {
-    id: 1,
-    name: "daisukeEdit",
-    email: "daisukeEdit@gmail.com",
-    gender: "男",
-    image: {
-      url: null
-    },
-    passwordDigest: "daisukeEditdaisukeEdit",
-    createdAt: new Date('2019/11/27 20:30'),
-    updatedAt: new Date('2019/11/27 20:30')
   },
   {
     id: 2,

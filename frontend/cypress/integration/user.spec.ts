@@ -4,9 +4,12 @@ import { apiLoginAccess } from "../support/backendAccessMock/sessions/apiLoginAc
 import { apiUserEditAccess } from "../support/backendAccessMock/users/apiUserEditAccess";
 import { apiUserShowAccess } from "../support/backendAccessMock/users/apiUserShowAccess";
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
-import { User } from "../../src/types/api/session";
+import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAccess";
+import { userEditDatas } from "../fixtures/users/userEditDatas";
 
-const userFormSignUpSuccess = (user: User) => {
+import { UserResponseData } from "../../src/types/users/response";
+
+const userFormSignUpSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
   dataE2eGet("user-form-name-input").type(user.name);
   dataE2eGet("user-form-email-input").clear();
@@ -22,7 +25,7 @@ const userFormSignUpSuccess = (user: User) => {
   cy.contains(user.gender);
 };
 
-const userFormEditSuccess = (user: User) => {
+const userFormEditSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
   dataE2eGet("user-form-name-input").type(user.name);
   dataE2eGet("user-form-email-input").clear();
@@ -37,7 +40,7 @@ const userFormEditSuccess = (user: User) => {
   cy.contains(user.gender);
 };
 
-const userSigninSuccessInput = (user: User) => {
+const userSigninSuccessInput = (user: UserResponseData) => {
   cy.contains('ログイン画面');
   cy.contains('新規登録はこちら');
   dataE2eGet("name-input").type(user.name);
@@ -68,7 +71,7 @@ describe('Users', () => {
     userSigninSuccessInput(userDatas[0]);
     cy.contains("アカウント情報編集").click();
     cy.contains("アカウント情報編集");
-    userFormEditSuccess(userDatas[1]);
+    userFormEditSuccess(userEditDatas[0]);
   });
 
   it('ログインしてない場合ユーザーの編集ページにアクセスできません', () => {
@@ -84,5 +87,15 @@ describe('Users', () => {
     apiUserShowAccess(userDatas[2]);
     cy.visit('/users/2/edit');
     cy.contains('アカウント所有者しかアクセスできません');
+  });
+
+  it('ユーザーを探すページが表示される', () => {
+    apiUsersAccess(userDatas);
+    cy.visit('/users');
+    cy.contains('ユーザーを探す');
+    // userDatas.forEach((user: UserResponseData) => {
+    //   cy.contains(user.name);
+    //   cy.contains(user.gender);
+    // });
   });
 });

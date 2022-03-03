@@ -3,8 +3,8 @@ export type UserResponseData = {
   name: string,
   email: string,
   gender: string,
-  passwordDigeset: string,
-  admin: boolean,
+  passwordDigest: string,
+  admin?: boolean,
   image?: {
     url: string | null
   },

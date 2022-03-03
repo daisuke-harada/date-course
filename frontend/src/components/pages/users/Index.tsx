@@ -10,6 +10,7 @@ export const Index: VFC = memo(() => {
       setUsers(response.data.users);
     });
   }, []);
+
   return(
     <>
       <h1 className='mt-6'>ユーザーを探すページ</h1>
