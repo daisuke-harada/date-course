@@ -1,4 +1,6 @@
-export const userDatas =[
+import { User } from "../../../src/types/api/session";
+
+export const userDatas: User[] =[
   {
     id: 1,
     name: "daisuke",
@@ -9,7 +11,7 @@ export const userDatas =[
     },
     passwordDigest: "daisukedaisuke",
     createdAt: new Date('2017/11/27 20:30'),
-    updatedAT: new Date('2017/11/27 20:30')
+    updatedAt: new Date('2017/11/27 20:30')
   },
   {
     id: 1,
@@ -21,7 +23,7 @@ export const userDatas =[
     },
     passwordDigest: "daisukeEditdaisukeEdit",
     createdAt: new Date('2019/11/27 20:30'),
-    updatedAT: new Date('2019/11/27 20:30')
+    updatedAt: new Date('2019/11/27 20:30')
   },
   {
     id: 2,
@@ -33,7 +35,7 @@ export const userDatas =[
     },
     passwordDigest: "kentakentakenta",
     createdAt: new Date('2017/11/27 20:30'),
-    updatedAT: new Date('2017/11/27 20:30')
+    updatedAt: new Date('2017/11/27 20:30')
   },
   {
     id: 3,
@@ -45,7 +47,7 @@ export const userDatas =[
     },
     passwordDigest: "marikamarikamarika",
     createdAt: new Date('2017/11/27 20:30'),
-    updatedAT: new Date('2017/11/27 20:30')
+    updatedAt: new Date('2017/11/27 20:30')
   },
 ];
 

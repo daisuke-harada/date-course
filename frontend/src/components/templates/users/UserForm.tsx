@@ -5,7 +5,7 @@ import tw from "tailwind-styled-components";
 import { formDataClient } from "lib/api/client";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { RadioField } from "components/molecules/users/RadioField";
-import { UserLoginResponseData } from "types/api/response";
+import { UserLoginResponseData } from "types/users/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
 import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";

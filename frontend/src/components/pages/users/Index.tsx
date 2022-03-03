@@ -1,7 +1,7 @@
 import { Users } from "components/templates/users/Users";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
-import { UserResponseData } from "types/api/response";
+import { UserResponseData } from "types/users/response";
 
 export const Index: VFC = memo(() => {
   const [users, setUsers] = useState<Array<UserResponseData>>([]);

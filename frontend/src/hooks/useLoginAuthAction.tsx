@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
 import { currentUserState, loginStatusState } from "store/session";
-import { UserLoginResponseData } from "types/api/response";
-import { SignInParams } from "types/api/session";
+import { UserLoginResponseData } from "types/users/response";
+import { SignInParams } from "types/users/session";
 
 export const useLoginAuthAction = (signInParams: SignInParams) => {
   const setLoginStatus = useSetRecoilState(loginStatusState);

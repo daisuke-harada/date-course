@@ -1,6 +1,7 @@
 export type UserResponseData = {
   id: number,
   name: string,
+  email: string,
   gender: string,
   passwordDigeset: string,
   admin: boolean,

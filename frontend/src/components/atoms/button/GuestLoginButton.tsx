@@ -1,7 +1,7 @@
 import { useLoginAuthAction } from "hooks/useLoginAuthAction";
 import { memo, VFC } from "react";
 import tw from "tailwind-styled-components";
-import { SignInParams } from "types/api/session";
+import { SignInParams } from "types/users/session";
 
 const Button = tw.button`btn btn-yellow-green w-full`;
 const Span = tw.div`text-xs`;

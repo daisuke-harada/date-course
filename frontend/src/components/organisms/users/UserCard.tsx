@@ -1,7 +1,7 @@
 import { memo, useEffect, useState, VFC } from "react";
 import tw from 'tailwind-styled-components';
 
-import { UserResponseData } from "types/api/response";
+import { UserResponseData } from "types/users/response";
 import { Card } from "components/atoms/card/Card";
 
 type Props = {
