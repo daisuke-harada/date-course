@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :test, only: %i[index]
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
-      resources :users do
+      resources :users, only:[:index, :show, :update, :destroy] do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'
       end

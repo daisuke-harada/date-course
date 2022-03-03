@@ -8,6 +8,7 @@ import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAcces
 import { userEditDatas } from "../fixtures/users/userEditDatas";
 
 import { UserResponseData } from "../../src/types/users/response";
+import { apiUserDestroyAccess } from "../support/backendAccessMock/users/apiUserDestroyAccess";
 
 const userFormSignUpSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
@@ -97,5 +98,15 @@ describe('Users', () => {
     //   cy.contains(user.name);
     //   cy.contains(user.gender);
     // });
+  });
+
+  it('ユーザーが退会する', () => {
+    cy.visit('/login');
+    userSigninSuccessInput(userDatas[0]);
+    cy.contains("アカウント情報編集").click();
+    cy.contains("アカウント情報編集");
+    apiUserDestroyAccess(userDatas[0]);
+    cy.contains("退会").click();
+    cy.contains("Topページ");
   });
 });

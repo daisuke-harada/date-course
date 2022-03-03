@@ -93,7 +93,7 @@ export const UserForm: VFC<Props> = memo((props) => {
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
       formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
-        if (response.data.status === 'update'){
+        if (response.data.status === 'updated'){
           // 編集に成功したのでログイン情報も一緒に更新する。
           setCurrentUser({user: response.data.user});
           // 画面遷移
