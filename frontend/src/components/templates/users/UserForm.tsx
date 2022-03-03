@@ -50,10 +50,13 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
-  const selectImage = (e: any) => {
-    const selectedImage = e.target.files[0];
-    setImage(selectedImage)
-  }
+  const selectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.currentTarget.files !== null){
+      setImage(e.currentTarget.files[0]);
+    }else{
+      setImage(undefined);
+    };
+  };
 
   // 画像を投稿したり編集したりする可能性があるためFormData形式でデータを作成。
   const createFormData = (): FormData => {

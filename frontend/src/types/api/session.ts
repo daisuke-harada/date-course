@@ -4,7 +4,7 @@ export type SignUpParams = {
   email: string
   gender: string
   image?: {
-    url: string
+    url: string | null
   }
   password: string
   passwordConfirmation: string
@@ -22,7 +22,7 @@ export type User = {
   name: string
   gender: string
   image?: {
-    url: string
+    url: string | null
   }
   passwordDigeset: string
   admin?: boolean

@@ -5,7 +5,7 @@ export type UserResponseData = {
   passwordDigeset: string,
   admin: boolean,
   image?: {
-    url: string
+    url: string | null
   },
   createdAt: Date,
   updatedAt: Date,
