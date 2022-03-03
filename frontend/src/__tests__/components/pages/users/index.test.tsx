@@ -1,7 +1,7 @@
 
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import { UserResponseData } from "types/api/response";
+import { UserResponseData } from "types/users/response";
 import { UserCard } from "components/organisms/users/UserCard";
 import { userDatas } from "__tests__supports/userDatas";
 

@@ -2,8 +2,9 @@ FactoryBot.define do
   factory :user do
     id { 1 }
     name { "田中健太郎" }
-    email { "kenta@gmail.com" }
+    email { "rspec1@gmail.com" }
     gender { '男' }
+    image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
   end
@@ -11,8 +12,9 @@ FactoryBot.define do
   factory :other_user, class: User do
     id { 2 }
     name { "原田大輔" }
-    email { "daisuke@gmail.com" }
+    email { "rspec2@gmail.com" }
     gender { '男' }
+    image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
   end
@@ -20,8 +22,9 @@ FactoryBot.define do
   factory :guest, class: User do
     id { 3 }
     name { "guest" }
-    email { "guest@gmail.com" }
+    email { "rspec3@gmail.com" }
     gender { '男' }
+    image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
   end
@@ -29,8 +32,9 @@ FactoryBot.define do
   factory :admin, class: User do
     id { 4 }
     name { "admin" }
-    email { "adminstrator@gmail.com" }
+    email { "rspec3@gmail.com" }
     gender { '男' }
+    image { nil }
     password { "adminlogin1099" }
     password_confirmation { "adminlogin1099" }
     admin { true }

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 
 import { Card } from "components/atoms/card/Card";
 import { UserCard } from "components/organisms/users/UserCard";
-import { UserResponseData } from "types/api/response";
+import { UserResponseData } from "types/users/response";
 import { userDatas } from "__tests__supports/userDatas";
 
 describe('UserCardコンポーネントのテスト', () => {

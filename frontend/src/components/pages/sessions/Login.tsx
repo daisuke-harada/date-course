@@ -2,7 +2,7 @@ import { memo, useState, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { BaseButton } from "components/atoms/button/BaseButton";
-import { SignInParams } from "types/api/session";
+import { SignInParams } from "types/users/session";
 import { useLoginAuthAction } from "hooks/useLoginAuthAction";
 
 const MainDiv = tw.div`user-form p-5`;

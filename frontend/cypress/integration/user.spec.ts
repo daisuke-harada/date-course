@@ -4,8 +4,13 @@ import { apiLoginAccess } from "../support/backendAccessMock/sessions/apiLoginAc
 import { apiUserEditAccess } from "../support/backendAccessMock/users/apiUserEditAccess";
 import { apiUserShowAccess } from "../support/backendAccessMock/users/apiUserShowAccess";
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
+import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAccess";
+import { userEditDatas } from "../fixtures/users/userEditDatas";
 
-const userFormSignUpSuccess = (user) => {
+import { UserResponseData } from "../../src/types/users/response";
+import { apiUserDestroyAccess } from "../support/backendAccessMock/users/apiUserDestroyAccess";
+
+const userFormSignUpSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
   dataE2eGet("user-form-name-input").type(user.name);
   dataE2eGet("user-form-email-input").clear();
@@ -21,7 +26,7 @@ const userFormSignUpSuccess = (user) => {
   cy.contains(user.gender);
 };
 
-const userFormEditSuccess = (user) => {
+const userFormEditSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
   dataE2eGet("user-form-name-input").type(user.name);
   dataE2eGet("user-form-email-input").clear();
@@ -36,17 +41,17 @@ const userFormEditSuccess = (user) => {
   cy.contains(user.gender);
 };
 
-const userSigninSuccessInput = (userData) => {
+const userSigninSuccessInput = (user: UserResponseData) => {
   cy.contains('ログイン画面');
   cy.contains('新規登録はこちら');
-  dataE2eGet("name-input").type(userData.name);
-  dataE2eGet("password-input").type(userData.name);
-  apiLoginAccess(true, userData);
-  apiUserShowAccess(userData);
+  dataE2eGet("name-input").type(user.name);
+  dataE2eGet("password-input").type(user.name);
+  apiLoginAccess(true, user);
+  apiUserShowAccess(user);
   dataE2eGet("login-button").click();
   cy.contains('ログインに成功しました');
-  cy.contains(userData.name);
-  cy.contains(userData.gender);
+  cy.contains(user.name);
+  cy.contains(user.gender);
 }
 
 describe('Users', () => {
@@ -67,7 +72,7 @@ describe('Users', () => {
     userSigninSuccessInput(userDatas[0]);
     cy.contains("アカウント情報編集").click();
     cy.contains("アカウント情報編集");
-    userFormEditSuccess(userDatas[1]);
+    userFormEditSuccess(userEditDatas[0]);
   });
 
   it('ログインしてない場合ユーザーの編集ページにアクセスできません', () => {
@@ -83,5 +88,25 @@ describe('Users', () => {
     apiUserShowAccess(userDatas[2]);
     cy.visit('/users/2/edit');
     cy.contains('アカウント所有者しかアクセスできません');
+  });
+
+  it('ユーザーを探すページが表示される', () => {
+    apiUsersAccess(userDatas);
+    cy.visit('/users');
+    cy.contains('ユーザーを探す');
+    // userDatas.forEach((user: UserResponseData) => {
+    //   cy.contains(user.name);
+    //   cy.contains(user.gender);
+    // });
+  });
+
+  it('ユーザーが退会する', () => {
+    cy.visit('/login');
+    userSigninSuccessInput(userDatas[0]);
+    cy.contains("アカウント情報編集").click();
+    cy.contains("アカウント情報編集");
+    apiUserDestroyAccess(userDatas[0]);
+    cy.contains("退会").click();
+    cy.contains("Topページ");
   });
 });

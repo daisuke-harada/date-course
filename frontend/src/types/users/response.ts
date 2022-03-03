@@ -1,11 +1,12 @@
 export type UserResponseData = {
   id: number,
   name: string,
+  email: string,
   gender: string,
-  passwordDigeset: string,
-  admin: boolean,
+  passwordDigest: string,
+  admin?: boolean,
   image?: {
-    url: string
+    url: string | null
   },
   createdAt: Date,
   updatedAt: Date,

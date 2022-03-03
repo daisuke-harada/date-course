@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      render json: {status: :update, user: @user }
+      render json: {status: :updated, user: @user }
     else
       render json: { status: 500, error_messages: @user.errors.messages}
     end

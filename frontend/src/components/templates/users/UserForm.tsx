@@ -5,7 +5,7 @@ import tw from "tailwind-styled-components";
 import { formDataClient } from "lib/api/client";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { RadioField } from "components/molecules/users/RadioField";
-import { UserLoginResponseData } from "types/api/response";
+import { UserLoginResponseData } from "types/users/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
 import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";
@@ -50,10 +50,13 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
-  const selectImage = (e: any) => {
-    const selectedImage = e.target.files[0];
-    setImage(selectedImage)
-  }
+  const selectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.currentTarget.files !== null){
+      setImage(e.currentTarget.files[0]);
+    }else{
+      setImage(undefined);
+    };
+  };
 
   // 画像を投稿したり編集したりする可能性があるためFormData形式でデータを作成。
   const createFormData = (): FormData => {
@@ -90,7 +93,7 @@ export const UserForm: VFC<Props> = memo((props) => {
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
       formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
-        if (response.data.status === 'update'){
+        if (response.data.status === 'updated'){
           // 編集に成功したのでログイン情報も一緒に更新する。
           setCurrentUser({user: response.data.user});
           // 画面遷移
