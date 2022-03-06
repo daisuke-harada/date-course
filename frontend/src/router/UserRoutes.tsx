@@ -45,4 +45,4 @@ export const UserRoutes: () => Props[] = () => {
       element: <Page404 />
     },
   ];
-}
+};
