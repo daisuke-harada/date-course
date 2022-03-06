@@ -2,7 +2,7 @@ import { memo, VFC } from "react";
 
 export const DateSpotForm: VFC = memo((props) => {
   return (
-    // エラーメッセージ 
+    // エラーメッセージ
     // <%= f.label :name, "デートスポット名" %>
     // <%= f.text_field :name, class: "mb-5 border-b-2 outline-none w-full" %>
 
