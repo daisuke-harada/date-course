@@ -9,7 +9,8 @@ describe('DateSpots', () => {
     dataE2eGet("slide-down-btn").click();
     dataE2eGet("header-dateSpot-new-link").last().click();
     cy.contains('デートスポットの新規登録');
-    dataE2eGet("dateSpot-form-name-input").clear();
-    dataE2eGet("dateSpot-form-name-input").type(dateSpot.name);
+    dataE2eGet("dateSpot-form-name-input");
+    dataE2eGet("dateSpot-form-cityName-input");
+    cy.contains("登録");
   });
 });
