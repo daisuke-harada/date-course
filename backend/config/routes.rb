@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
-      get '/prefectures', to: 'prefectures#index'
+      get '/date_spots/new', to: 'date_spots#new'
       resources :date_spots
       resources :users, only:[:index, :show, :update, :destroy] do
         get 'followings' => 'relationships#followings', as: 'followings'

@@ -1,6 +1,7 @@
-import { memo, useState, VFC } from "react";
+import { memo, useEffect, useState, VFC } from "react";
 import { BaseButton } from "components/atoms/button/BaseButton";
 import tw from "tailwind-styled-components";
+import { client } from "lib/api/client";
 
 const MainDiv = tw.div`max-w-xl mx-auto mt-10 bg-white p-5 border-gray-900`;
 const Title = tw.h1`text-center text-lg m-5`;
@@ -22,6 +23,12 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
 
   const onChangeName: React.ChangeEventHandler<HTMLInputElement> = (e) => setName(e.target.value);
   const onChangeCityName: React.ChangeEventHandler<HTMLInputElement> = (e) => setCityName(e.target.value);
+
+  useEffect(() => {
+    client.get(`areas`).then(response => {
+      console.log(response.data.areas);
+    });
+  }, []);
 
   return(
     <MainDiv>

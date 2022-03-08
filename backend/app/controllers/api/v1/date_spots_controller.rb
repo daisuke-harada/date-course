@@ -1,4 +1,7 @@
 class Api::V1::DateSpotsController < ApplicationController
+  def new
+  end
+
   def create
   end
 
