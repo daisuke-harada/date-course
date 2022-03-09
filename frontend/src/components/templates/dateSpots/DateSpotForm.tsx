@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from "react";
+import { memo, useCallback, useState, VFC } from "react";
 import tw from "tailwind-styled-components";
 
 import { PrefectureSelect } from "components/molecules/dateSpots/PrefectureSelect";
@@ -66,25 +66,27 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     const formData = new FormData();
 
     formData.append('name', name);
-    formData.append('prefectureId', prefectureValue);
-    formData.append('cityName', cityName);
     formData.append('genreId', genreValue);
     formData.append('openingTime', openingTime);
     formData.append('closingTime', closingTime);
-    if (image) formData.append("image", image);
+    image && formData.append("image", image);
+    formData.append('prefectureId', prefectureValue);
+    formData.append('cityName', cityName);
     return formData;
   };
 
   const DateSpotRegistAction = (e: React.FormEvent<HTMLFormElement>) => {
     const dateSpot = createFormData();
-    formDataClient.post('date_spots', dateSpot)
+    formDataClient.post('date_spots', dateSpot).then(response => {
+      console.log(response.data.dateSpot.id);
+    });
   };
 
   return(
     <MainDiv>
       <Title>{dateSpotFormTitle}</Title>
       {/* エラーメッセージ  */}
-      <Form>
+      <Form onSubmit={DateSpotRegistAction}>
         <Input data-e2e="dateSpot-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
         <PrefectureSelect defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
         <Input data-e2e="dateSpot-form-cityName-input" placeholder="市町村名、番地" value={cityName} onChange={onChangeCityName} />
@@ -95,7 +97,6 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
           onChangeOpeningTimeValue={onChangeOpeningTime}
           onChangeClosingTimeValue={onChangeClosingTime}
         />
-        {/* サムネイル */}
         <ImageForm selectImage={selectImage} />
         <BaseButton>{formButtonName}</BaseButton>
       </Form>

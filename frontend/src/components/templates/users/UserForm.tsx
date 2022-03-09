@@ -68,7 +68,7 @@ export const UserForm: VFC<Props> = memo((props) => {
     formData.append('gender', gender);
     formData.append('password', password);
     formData.append('passwordConfirmation', passwordConfirmation);
-    if (image) formData.append("image", image);
+    image && formData.append("image", image);
     return formData;
   };
 
