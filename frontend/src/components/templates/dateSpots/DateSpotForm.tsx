@@ -81,6 +81,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     formDataClient.post('date_spots', dateSpot).then(response => {
       console.log(response.data.dateSpot.id);
     });
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -102,9 +103,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
           onChangeOpeningTimeValue={onChangeOpeningTime}
           onChangeClosingTimeValue={onChangeClosingTime}
         />
-        <div className='my-3 mobile(M):ml-0 ml-8'>
-          <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
-        </div>
+        <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
           <BaseButton>{formButtonName}</BaseButton>
         </ButtonParentDiv>
