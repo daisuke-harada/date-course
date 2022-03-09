@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from "react";
+import { memo, useCallback, useEffect, useState, VFC } from "react";
 import tw from "tailwind-styled-components";
 
 import { PrefectureSelect } from "components/molecules/dateSpots/PrefectureSelect";
@@ -12,6 +12,7 @@ const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile
 const Title = tw.h1`text-center text-lg m-5`;
 const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
 const Input = tw.input`mb-5 border-b-2 outline-none w-full`;
+const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 
 type Props = {
   dateSpotFormTitle: string,
@@ -82,6 +83,10 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     });
   };
 
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
+
   return(
     <MainDiv>
       <Title>{dateSpotFormTitle}</Title>
@@ -97,8 +102,12 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
           onChangeOpeningTimeValue={onChangeOpeningTime}
           onChangeClosingTimeValue={onChangeClosingTime}
         />
-        <ImageForm selectImage={selectImage} />
-        <BaseButton>{formButtonName}</BaseButton>
+        <div className='my-3 mobile(M):ml-0 ml-8'>
+          <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
+        </div>
+        <ButtonParentDiv>
+          <BaseButton>{formButtonName}</BaseButton>
+        </ButtonParentDiv>
       </Form>
     </MainDiv>
   );
