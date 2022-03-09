@@ -7,7 +7,11 @@ export const New: VFC = memo(() => {
      dateSpotFormTitle="デートスポットの新規登録"
      formButtonName="登録"
      nameDefaultValue=""
+     prefectureDefaultValue="0"
      cityNameDefaultValue=""
+     genreDefaultValue="0"
+     openingTimeDefaultValue=""
+     closingTimeDefaultValue=""
     />
   );
 });

@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_080638) do
   create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "genre_id"
     t.string "name"
+    t.string "image"
     t.datetime "opening_time"
     t.datetime "closing_time"
     t.datetime "created_at", precision: 6, null: false

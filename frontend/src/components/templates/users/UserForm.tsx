@@ -9,6 +9,7 @@ import { UserLoginResponseData } from "types/users/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
 import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";
+import { ImageForm } from "components/atoms/form/ImageForm";
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
@@ -50,26 +51,26 @@ export const UserForm: VFC<Props> = memo((props) => {
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
-  const selectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const selectImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.currentTarget.files !== null){
       setImage(e.currentTarget.files[0]);
     }else{
       setImage(undefined);
     };
-  };
+  }, []);
 
   // 画像を投稿したり編集したりする可能性があるためFormData形式でデータを作成。
   const createFormData = (): FormData => {
     const formData = new FormData();
 
-    formData.append('name', name)
-    formData.append('email', email)
-    formData.append('gender', gender)
-    formData.append('password', password)
-    formData.append('passwordConfirmation', passwordConfirmation)
-    if (image) formData.append("image", image)
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('gender', gender);
+    formData.append('password', password);
+    formData.append('passwordConfirmation', passwordConfirmation);
+    if (image) formData.append("image", image);
     return formData;
-  }
+  };
 
   const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
     const user = createFormData();
@@ -133,9 +134,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         <Input data-e2e="user-form-password-input" placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
         <Input data-e2e="user-form-passwordConfirmation-input" placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
         <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
-        <div className='my-3 mobile(M):ml-0 ml-8'>
-          <input className='my-3' type="file" onChange={(e)=> selectImage(e)} />
-        </div>
+        <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
           <BaseButton dataE2e="user-form-button">{buttonName}</BaseButton>
         </ButtonParentDiv>
