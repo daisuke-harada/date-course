@@ -8,3 +8,12 @@ export type DateSpotInput = {
   openingTime: string,
   closingTime: string,
 };
+
+export type AddressInput = {
+  id: number,
+  prefecture_id: number,
+  date_spot_id: number,
+  city_name: string,
+  latitude: number,
+  longitude: number,
+};

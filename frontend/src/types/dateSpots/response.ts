@@ -1,5 +1,5 @@
 export type DateSpotResponseData = {
-  id: number
+  id: number,
   name: string,
   genreId: number,
   image?: {
@@ -7,6 +7,17 @@ export type DateSpotResponseData = {
   },
   openingTime: Date,
   closingTime: Date,
+  createdAt: Date,
+  updatedAt: Date,
+};
+
+export type AddressResponseData = {
+  id: number,
+  cityName: string,
+  prefectureId: number,
+  dateSpotId: number,
+  latitude: number,
+  longitude: number,
   createdAt: Date,
   updatedAt: Date,
 };

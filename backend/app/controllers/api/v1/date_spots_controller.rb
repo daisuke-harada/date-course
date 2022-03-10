@@ -10,7 +10,7 @@ class Api::V1::DateSpotsController < ApplicationController
       image: params[:image],
       address_attributes: {
         prefecture_id: params[:prefecture_id],
-        city_name: params[:city_name]
+        city_name: Prefecture.find(params[:prefecture_id]).name + params[:city_name]
       }
     )
     if @date_spot.save
@@ -27,6 +27,8 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def show
+    @address = Address.find_by(date_spot_id: @date_spot.id)
+    render json: { date_spot: @date_spot, address: @address}
   end
 
   def index

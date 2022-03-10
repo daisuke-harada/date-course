@@ -8,9 +8,9 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 export const Show: VFC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   const getCurrentUser = useRecoilValue(currentUserState);
-  const {id} = useParams();
-  const [userName, setUserName] = useState<String>("");
-  const [userGender, setUserGender] = useState<String>("");
+  const { id } = useParams();
+  const [userName, setUserName] = useState<string>("");
+  const [userGender, setUserGender] = useState<string>("");
   const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
   const navigate = useNavigate();
 
