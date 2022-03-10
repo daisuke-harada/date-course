@@ -1,4 +1,4 @@
-import { DateSpotInput } from "../../../src/types/dateSpots/inputType"
+import { DateSpotInput } from "../../support/types/dateSpots/testType";
 
 export const dateSpotDatas: DateSpotInput[] =[
   {

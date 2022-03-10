@@ -48,7 +48,6 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const [errorGenreIdMessages, setErrorGenreIdMessages] = useState([]);
   const [errorAddressCityName, setErrorAddressCityName] = useState([]);
   const [errorAddressPrefectureId, setErrorAddressPrefectureId] = useState([]);
-
   const [name, setName] = useState<string>(nameDefaultValue);
   const [prefectureValue, setPrefectureValue] = useState<string>(prefectureDefaultValue);
   const [cityName, setCityName] = useState<string>(cityNameDefaultValue);

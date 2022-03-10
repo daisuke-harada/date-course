@@ -1,4 +1,4 @@
-import { AddressInput } from "../../../src/types/dateSpots/inputType";
+import { AddressInput } from "../../support/types/dateSpots/testType";
 
 export const addressDatas: AddressInput[] =[
   {

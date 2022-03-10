@@ -8,6 +8,7 @@ import { client } from "lib/api/client";
 import { BusinessHour } from "components/atoms/text/dateSpots/BusinessHour";
 import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
+import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -16,30 +17,27 @@ const ImageParentDiv = tw.div`md:h-96 xl:m-20 2xl:m-40 m-0`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
-  const [name, setName] = useState<string>("");
+  const [dateSpot, setDateSpot] = useState<DateSpotResponseData>();
+  const [address, setAddress] = useState<AddressResponseData>();
   const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
-  const [openingTime, setOpeningTime] = useState();
-  const [closingTime, setClosingTime] = useState();
-  const [cityName, setCityName] = useState('');
 
   const getCurrentUser = useRecoilValue(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
 
-
   useEffect(() => {
     client.get(`date_spots/${id}`).then(response => {
-      setName(response.data.dateSpot.name);
-      setOpeningTime(response.data.dateSpot.openingTime);
-      setClosingTime(response.data.dateSpot.closingTime);
-      response.data.dateSpot.image.url && setDateSpotImage(response.data.dateSpot.image.url);
-      setCityName(response.data.address.cityName);
+      setDateSpot(response.data.dateSpot);
+      response.data.dateSpot.image.url !== null && setDateSpotImage(response.data.dateSpot.image.url);
+      setAddress(response.data.address);
     });
   }, [id]);
+
+  console.log(dateSpot);
 
   return(
     <>
       <MainDiv>
-        <DateSpotNameTitle>{name}</DateSpotNameTitle>
+        <DateSpotNameTitle>{dateSpot?.name}</DateSpotNameTitle>
         <SubDiv>
           <ImageParentDiv>
             <img className='object-fill max-h-96 w-full rounded-2xl' src={dateSpotImage} alt='DateSpotProfileImage' />
@@ -61,9 +59,9 @@ export const Show: VFC = memo(() => {
         {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
           <%= render 'date_spot_business_hour', date_spot: @date_spot %>
         </div> */}
-        <BusinessHour openingTime={openingTime} closingTime={closingTime} />
+        <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
         <div className="m-5 text-sm font-bold md:text-xl">
-          {cityName}
+          {address?.cityName}
         </div>
 
         {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
@@ -84,7 +82,13 @@ export const Show: VFC = memo(() => {
             && getCurrentUser.user.admin === true
             && (
               <BaseButton dataE2e="render-dateSpot-edit">
-                <Link className="text-white" to={`edit`}>デートスポット情報編集</Link>
+                <Link
+                  className="text-white"
+                  to={`edit`}
+                  state={{address: address, dateSpot: dateSpot}}
+                 >
+                   デートスポット情報編集
+                </Link>
               </BaseButton>
             )
           }

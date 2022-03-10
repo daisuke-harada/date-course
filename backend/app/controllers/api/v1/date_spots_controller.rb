@@ -21,6 +21,22 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def update
+
+    if @date_spot.update(
+      name: params[:name],
+      genre_id: params[:genre_id],
+      opening_time: params[:opening_time],
+      closing_time: params[:closing_time],
+      image: params[:image],
+      address_attributes: {
+        prefecture_id: params[:prefecture_id],
+        city_name: Prefecture.find(params[:prefecture_id]).name + params[:city_name]
+      }
+    )
+      render json: {status: :updated, date_spot: @date_spot }
+    else
+      render json: { status: 500, error_messages: @date_spot.errors.messages}
+    end
   end
 
   def destroy
