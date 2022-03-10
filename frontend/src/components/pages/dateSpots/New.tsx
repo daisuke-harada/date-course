@@ -7,9 +7,9 @@ export const New: VFC = memo(() => {
      dateSpotFormTitle="デートスポットの新規登録"
      formButtonName="登録"
      nameDefaultValue=""
-     prefectureDefaultValue="0"
+     prefectureDefaultValue=""
      cityNameDefaultValue=""
-     genreDefaultValue="0"
+     genreDefaultValue=""
      openingTimeDefaultValue=""
      closingTimeDefaultValue=""
     />

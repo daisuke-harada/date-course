@@ -5,4 +5,5 @@ class Address < ApplicationRecord
   geocoded_by :city_name
   after_validation :geocode, :if => :city_name_changed?
   validates :city_name, presence: true
+  validates :prefecture_id, presence: true
 end

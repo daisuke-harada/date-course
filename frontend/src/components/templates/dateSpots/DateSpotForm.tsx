@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from "react";
+import { memo, useCallback, useState, VFC } from "react";
 import tw from "tailwind-styled-components";
 
 import { PrefectureSelect } from "components/molecules/dateSpots/PrefectureSelect";
@@ -7,6 +7,7 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { BusinessTimeSelectArea } from "components/molecules/dateSpots/BusinessTimeSelectArea";
 import { ImageForm } from "components/atoms/form/ImageForm";
 import { formDataClient } from "lib/api/client";
+import { useNavigate } from "react-router-dom";
 
 const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl`;
 const Title = tw.h1`text-center text-lg m-5`;
@@ -39,6 +40,14 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     closingTimeDefaultValue,
     imageDefaultValue,
   } = props;
+
+  const navigate = useNavigate();
+
+  // エラーメッセージ用のステート
+  const [errorNameMessages, setErrorNameMessages] = useState([]);
+  const [errorGenreIdMessages, setErrorGenreIdMessages] = useState([]);
+  const [errorAddressCityName, setErrorAddressCityName] = useState([]);
+  const [errorAddressPrefectureId, setErrorAddressPrefectureId] = useState([]);
 
   const [name, setName] = useState<string>(nameDefaultValue);
   const [prefectureValue, setPrefectureValue] = useState<string>(prefectureDefaultValue);
@@ -79,29 +88,47 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const DateSpotRegistAction = (e: React.FormEvent<HTMLFormElement>) => {
     const dateSpot = createFormData();
     formDataClient.post('date_spots', dateSpot).then(response => {
-      console.log(response.data.dateSpot.id);
+      response.data.status === 'created' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '新規登録に成功しました。', type: 'success-message', condition: true}});
+      if(response.data.status === 500) {
+        const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
+        name !== undefined && setErrorNameMessages(name);
+        genreId !== undefined && setErrorGenreIdMessages(genreId);
+        addressCityName !== undefined && setErrorAddressCityName(addressCityName);
+        addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
+      };
     });
     e.preventDefault();
   };
-
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
 
   return(
     <MainDiv>
       <Title>{dateSpotFormTitle}</Title>
       {/* エラーメッセージ  */}
+      <ul className="mt-5">
+        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className="text-red-500">名前は{message}</li>)}
+      </ul>
+      <ul>
+        {errorGenreIdMessages !== [] && errorGenreIdMessages.map((message)=><li className="text-red-500">ジャンルは{message}</li>)}
+      </ul>
+      <ul>
+        {errorAddressPrefectureId !== [] && errorAddressPrefectureId.map((message)=><li className="text-red-500">県名は{message}</li>)}
+      </ul>
+      <ul>
+        {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className="text-red-500">市町村名、番地は{message}</li>)}
+      </ul>
+
       <Form onSubmit={DateSpotRegistAction}>
         <Input data-e2e="dateSpot-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
-        <PrefectureSelect defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+        <PrefectureSelect dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
         <Input data-e2e="dateSpot-form-cityName-input" placeholder="市町村名、番地" value={cityName} onChange={onChangeCityName} />
-        <GenreSelect defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
+        <GenreSelect dataE2e="dateSpot-genre-select" defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
         <BusinessTimeSelectArea
           defaultOpeningTimeValue={openingTime}
           defaultClosingTimeValue={closingTime}
           onChangeOpeningTimeValue={onChangeOpeningTime}
           onChangeClosingTimeValue={onChangeClosingTime}
+          openingDataE2e="dateSpot-opningTime-select"
+          closingDataE2e="dateSpot-closingTime-select"
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>

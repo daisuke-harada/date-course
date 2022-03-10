@@ -6,6 +6,8 @@ type Props = {
   defaultOpeningTimeValue: string,
   onChangeClosingTimeValue: React.ChangeEventHandler<HTMLSelectElement>,
   defaultClosingTimeValue: string,
+  openingDataE2e?: string,
+  closingDataE2e?: string,
 };
 
 export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
@@ -14,6 +16,8 @@ export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
     defaultOpeningTimeValue,
     onChangeClosingTimeValue,
     defaultClosingTimeValue,
+    openingDataE2e,
+    closingDataE2e,
   } = props
 
   return(
@@ -21,12 +25,12 @@ export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
       <p>営業時間</p>
       <p className="mb-5 border-b-2 outline-none">
         <label>始業時間</label>
-        <select defaultValue={defaultOpeningTimeValue} onChange={onChangeOpeningTimeValue}>
+        <select data-e2e={openingDataE2e} defaultValue={defaultOpeningTimeValue} onChange={onChangeOpeningTimeValue}>
           {businessTimeDatas.map((businessTime) => (<option key={businessTime.value_time} value={businessTime.value_time}>{businessTime.time}</option>))}
         </select>
             ~
         <label>終業時間</label>
-        <select defaultValue={defaultClosingTimeValue} onChange={onChangeClosingTimeValue}>
+        <select data-e2e={closingDataE2e} defaultValue={defaultClosingTimeValue} onChange={onChangeClosingTimeValue}>
           {businessTimeDatas.map((businessTime) => (<option key={businessTime.value_time} value={businessTime.value_time}>{businessTime.time}</option>))}
         </select>
       </p>

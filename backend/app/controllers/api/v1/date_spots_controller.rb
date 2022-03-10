@@ -13,7 +13,6 @@ class Api::V1::DateSpotsController < ApplicationController
         city_name: params[:city_name]
       }
     )
-    binding.pry
     if @date_spot.save
       render json: { status: :created, date_spot: @date_spot }
     else
@@ -34,18 +33,6 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   private
-
-  # def date_spot_params
-  #   params.permit(
-  #     :name,
-  #     :genre_id,
-  #     :opening_time,
-  #     :closing_time,
-  #     :image,
-  #     :prefecture_id,
-  #     :city_name
-  #   )
-  # end
 
   def date_spot_find_param_id
     @date_spot = DateSpot.find(params[:id])
