@@ -1,9 +1,13 @@
 import { memo, useEffect, useState, VFC } from "react";
 import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { currentUserState, loginStatusState } from "store/session"
 import tw from "tailwind-styled-components";
 
 import { client } from "lib/api/client";
 import { BusinessHour } from "components/atoms/text/dateSpots/BusinessHour";
+import { BaseButton } from "components/atoms/button/BaseButton"
+import { Link } from "react-router-dom";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -17,6 +21,9 @@ export const Show: VFC = memo(() => {
   const [openingTime, setOpeningTime] = useState();
   const [closingTime, setClosingTime] = useState();
   const [cityName, setCityName] = useState('');
+
+  const getCurrentUser = useRecoilValue(currentUserState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
 
 
   useEffect(() => {
@@ -71,6 +78,17 @@ export const Show: VFC = memo(() => {
           <%= render 'management_date_spots/add_course', date_spot: @date_spot %>
           <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), className:"btn btn-salmon m-5" if admin_logged_in? %>
         </div> */}
+        <div className="text-center">
+          {
+            getLoginStatus.status === true
+            && getCurrentUser.user.admin === true
+            && (
+              <BaseButton dataE2e="render-dateSpot-edit">
+                <Link className="text-white" to={`edit`}>デートスポット情報編集</Link>
+              </BaseButton>
+            )
+          }
+        </div>
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">
