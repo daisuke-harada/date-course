@@ -11,9 +11,9 @@ export type DateSpotInput = {
 
 export type AddressInput = {
   id: number,
-  prefecture_id: number,
-  date_spot_id: number,
-  city_name: string,
+  prefectureId: number,
+  dateSpotId: number,
+  cityName: string,
   latitude: number,
   longitude: number,
 };

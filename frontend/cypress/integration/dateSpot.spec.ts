@@ -22,6 +22,8 @@ describe('DateSpots', () => {
     apiDateSpotCreateAccess(dateSpotDatas[0]);
     apiDateSpotShow(dateSpotDatas[0], addressDatas[0]);
     dataE2eGet("dateSpot-regist-button").click();
-    cy.contains("デートスポットの詳細");
+    cy.contains('新規登録に成功しました。');
+    cy.contains(dateSpotDatas[0].name);
+    cy.contains(addressDatas[0].cityName);
   });
 });
