@@ -132,7 +132,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
-          <BaseButton>{formButtonName}</BaseButton>
+          <BaseButton dataE2e="dateSpot-regist-button">{formButtonName}</BaseButton>
         </ButtonParentDiv>
       </Form>
     </MainDiv>

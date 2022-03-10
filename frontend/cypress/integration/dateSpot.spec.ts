@@ -1,5 +1,6 @@
 import { dateSpotDatas } from "../fixtures/dateSpots/dateSpotDatas";
 import { adminData } from "../fixtures/users/adminData";
+import { apiDateSpotCreateAccess } from "../support/backendAccessMock/date_spots/apiDateSpotCreateAccess";
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
 import { userSigninSuccessInput } from "../support/hooks/session";
 
@@ -14,8 +15,10 @@ describe('DateSpots', () => {
     dataE2eGet("dateSpot-prefecture-select").select(40);
     dataE2eGet("dateSpot-form-cityName-input").type('福岡市');
     dataE2eGet("dateSpot-genre-select").select(1);
-    dataE2eGet("dateSpot-opningTime-select").select(dateSpotDatas[0].opening_time);
-    dataE2eGet("dateSpot-closingTime-select").select(dateSpotDatas[0].closing_time);
-    cy.contains("登録").click();
+    dataE2eGet("dateSpot-opningTime-select").select(dateSpotDatas[0].openingTime);
+    dataE2eGet("dateSpot-closingTime-select").select(dateSpotDatas[0].closingTime);
+    apiDateSpotCreateAccess(dateSpotDatas[0]);
+    dataE2eGet("dateSpot-regist-button").click();
+    cy.contains("デートスポットの詳細");
   });
 });
