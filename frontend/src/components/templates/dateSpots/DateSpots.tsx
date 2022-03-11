@@ -1,18 +1,16 @@
+import { DateSpotCard } from "components/organisms/dateSpots/DateSpotCard";
 import { memo, VFC } from "react";
-import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
-
-import { UserResponseData } from "types/users/response";
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 type Props = {
-  dateSpots: Array<DateSpotResponseData>
-  addresses: Array<AddressResponseData>
+  addressAndDateSpots: Array<AddressAndDateSpotJoinData>
 };
 
 export const DateSpots: VFC<Props> = memo((props) => {
-  const { dateSpots, addresses } = props;
+  const { addressAndDateSpots } = props;
   return(
     <div className='flex flex-wrap justify-center'>
-      {/* {users.map((user: UserResponseData) => (<UserCard key={user.id} user={user} />))} */}
+      {addressAndDateSpots.map((dateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={dateSpot.id} addressAndDateSpot={dateSpot} />))}
     </div>
   );
 });

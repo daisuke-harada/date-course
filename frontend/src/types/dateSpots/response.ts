@@ -32,4 +32,4 @@ export type AddressAndDateSpotJoinData = {
   longitude: number,
   createdAt: Date,
   updatedAt: Date,
-}
+};
