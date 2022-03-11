@@ -105,12 +105,12 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       other_address = FactoryBot.create(:other_address)
       other_spot = other_address.date_spot
       get "/api/v1/date_spots"
-      expect(JSON.parse(response.body)["date_spots"][0]["name"]).to eq(date_spot.name)
-      expect(JSON.parse(response.body)["addresses"][0]["prefecture_id"]).to eq(address.prefecture_id)
-      expect(JSON.parse(response.body)["addresses"][0]["city_name"]).to eq(address.city_name)
-      expect(JSON.parse(response.body)["date_spots"][1]["name"]).to eq(other_spot.name)
-      expect(JSON.parse(response.body)["addresses"][1]["prefecture_id"]).to eq(other_address.prefecture_id)
-      expect(JSON.parse(response.body)["addresses"][1]["city_name"]).to eq(other_address.city_name)
+      expect(JSON.parse(response.body)[0]["date_spot"]["name"]).to eq(date_spot.name)
+      expect(JSON.parse(response.body)[0]["prefecture_id"]).to eq(address.prefecture_id)
+      expect(JSON.parse(response.body)[0]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)[1]["date_spot"]["name"]).to eq(other_spot.name)
+      expect(JSON.parse(response.body)[1]["prefecture_id"]).to eq(other_address.prefecture_id)
+      expect(JSON.parse(response.body)[1]["city_name"]).to eq(other_address.city_name)
     end
   end
 end

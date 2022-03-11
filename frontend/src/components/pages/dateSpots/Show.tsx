@@ -32,8 +32,6 @@ export const Show: VFC = memo(() => {
     });
   }, [id]);
 
-  console.log(dateSpot);
-
   return(
     <>
       <MainDiv>
