@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_13_103859) do
+ActiveRecord::Schema.define(version: 2022_03_07_080638) do
+
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "prefecture_id"
+    t.integer "date_spot_id"
+    t.string "city_name"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["date_spot_id", "created_at"], name: "index_addresses_on_date_spot_id_and_created_at"
+    t.index ["prefecture_id", "created_at"], name: "index_addresses_on_prefecture_id_and_created_at"
+  end
+
+  create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.string "image"
+    t.datetime "opening_time"
+    t.datetime "closing_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id", "created_at"], name: "index_date_spots_on_genre_id_and_created_at"
+  end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"

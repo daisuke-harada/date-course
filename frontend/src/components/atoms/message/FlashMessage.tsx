@@ -4,10 +4,16 @@ import tw  from "tailwind-styled-components";
 
 const MessageDiv = tw.div`fixed duration-1000 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2`
 
+type FlashMessageData = {
+  message: string,
+  type: string,
+  condition: boolean
+};
+
 export const FlashMessage: VFC = memo(() => {
   const [condition, setCondition] = useState('translate-x-96');
   const location = useLocation();
-  const state = location.state as { message: string, type: string, condition: boolean};
+  const state = location.state as FlashMessageData;
   // メッセージのスライド
   const messageSwitch = useCallback(()=> {
     state !== null && setCondition('translate-x-0');

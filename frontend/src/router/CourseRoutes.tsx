@@ -31,4 +31,4 @@ export const CourseRoutes = () => {
       element: <Page404 />,
     },
   ];
-}
+};

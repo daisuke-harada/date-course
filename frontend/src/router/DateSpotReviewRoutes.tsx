@@ -28,4 +28,4 @@ export const DateSpotReviewRoutes = () => {
       element: <Page404 />
     },
   ];
-}
+};

@@ -4,7 +4,11 @@ RSpec.describe "Api::V1::Registrations", type: :request do
   describe "POST /signup" do
     it "入力された値が正しい場合はuserを登録することができる" do
       user = FactoryBot.build(:user)
-      post "/api/v1/signup", params: {"name" => user.name, "email" =>  user.email, "gender" => user.gender, "password" => user.password, "password_confirmation" => user.password_confirmation}
+      post "/api/v1/signup", params: {
+        "name" => user.name, "email" =>  user.email,
+        "gender" => user.gender, "password" => user.password,
+        "password_confirmation" => user.password_confirmation
+      }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq("created")
       expect(JSON.parse(response.body)["login_status"]).to eq(true)

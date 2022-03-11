@@ -4,8 +4,6 @@ import { currentUserState, loginStatusState } from "store/session";
 
 export const Top: VFC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
-  const currentUser = useRecoilValue(currentUserState);
-  console.log(currentUser);
   return(
     <>
       <div className="bg-[url('http://localhost:7777/images/lp.jpg')] h-96 bg-no-repeat bg-cover bg-top">

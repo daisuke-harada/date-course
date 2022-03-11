@@ -3,12 +3,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
+      resources :date_spots
       resources :users, only:[:index, :show, :update, :destroy] do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'
       end
-      # delete '/logout', to: 'sessions#logout'
-      # get '/logged_in', to: 'sessions#logged_in?'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

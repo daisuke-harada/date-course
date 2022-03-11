@@ -88,6 +88,7 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.5)
+    geocoder (1.7.3)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.9.1)
@@ -208,6 +209,7 @@ DEPENDENCIES
   byebug
   carrierwave
   factory_bot_rails
+  geocoder
   listen (~> 3.3)
   mysql2 (~> 0.5)
   pry-rails
