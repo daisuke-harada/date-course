@@ -44,12 +44,15 @@ class Api::V1::DateSpotsController < ApplicationController
     render json: {status: :delete}
   end
 
+  def index
+    @date_spots = DateSpot.all
+    @addresses = Address.all
+    render json: { date_spots: @date_spots, addresses: @addresses }
+  end
+
   def show
     @address = Address.find_by(date_spot_id: @date_spot.id)
     render json: { date_spot: @date_spot, address: @address}
-  end
-
-  def index
   end
 
   private
