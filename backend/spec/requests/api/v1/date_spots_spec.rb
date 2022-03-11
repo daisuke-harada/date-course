@@ -113,5 +113,4 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       expect(JSON.parse(response.body)["addresses"][1]["city_name"]).to eq(other_address.city_name)
     end
   end
-
 end
