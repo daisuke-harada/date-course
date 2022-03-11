@@ -21,3 +21,15 @@ export type AddressResponseData = {
   createdAt: Date,
   updatedAt: Date,
 };
+
+export type AddressAndDateSpotJoinData = {
+  id: number,
+  cityName: string,
+  prefectureId: number,
+  dateSpot: DateSpotResponseData,
+  dateSpotId: number,
+  latitude: number,
+  longitude: number,
+  createdAt: Date,
+  updatedAt: Date,
+}
