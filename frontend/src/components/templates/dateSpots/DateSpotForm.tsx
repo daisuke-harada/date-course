@@ -12,7 +12,7 @@ import { DangerButton } from "components/atoms/button/DangerButton";
 
 const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl`;
 const Title = tw.h1`text-center text-lg m-5`;
-const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
+const SubDiv = tw.div`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
 const Input = tw.input`mb-5 border-b-2 outline-none w-full`;
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 
@@ -68,16 +68,6 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const onChangeOpeningTime: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setOpeningTime(e.target.value), []);
   const onChangeClosingTime: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setClosingTime(e.target.value), []);
 
-  // デートスポット削除用
-  const onCLickDeleteDateSpotAction = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if(window.confirm('本当に削除しますか？')){
-      client.delete(`date_spots/${dateSpotId}`).then(response => {
-        response.data.status === 'delete' && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
-      });
-    };
-  };
-
-
   const selectImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.currentTarget.files !== null){
       setImage(e.currentTarget.files[0]);
@@ -125,7 +115,8 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     });
   };
 
-  const DateSpotFormAction = (e: React.FormEvent<HTMLFormElement>) => {
+  // デートスポット登録用、更新用
+  const DateSpotRegistAndUpdateAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const dateSpot = createFormData();
 
     // dateSpotの新規登録の挙動
@@ -136,6 +127,15 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     };
 
     e.preventDefault();
+  };
+
+  // デートスポット削除用
+  const onCLickDeleteDateSpotAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if(window.confirm('本当に削除しますか？')){
+      client.delete(`date_spots/${dateSpotId}`).then(response => {
+        response.data.status === 'delete' && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
+      });
+    };
   };
 
   return(
@@ -155,7 +155,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className="text-red-500">市町村名、番地は{message}</li>)}
       </ul>
 
-      <Form onSubmit={DateSpotFormAction}>
+      <SubDiv>
         <Input data-e2e="dateSpot-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
         <PrefectureSelect dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
         <Input data-e2e="dateSpot-form-cityName-input" placeholder="市町村名、番地" value={cityName} onChange={onChangeCityName} />
@@ -170,18 +170,18 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
-          <BaseButton dataE2e={baseBtnDataE2e}>{formButtonName}</BaseButton>
+          <BaseButton dataE2e={baseBtnDataE2e} onClickEvent={DateSpotRegistAndUpdateAction}>{formButtonName}</BaseButton>
         </ButtonParentDiv>
-      </Form>
-      {
-        dateSpotId
-        &&
-        (
-          <ButtonParentDiv>
-            <DangerButton onClickEvent={onCLickDeleteDateSpotAction}>削除</DangerButton>
-          </ButtonParentDiv>
-        )
-      }
+        {
+          dateSpotId
+          &&
+          (
+            <ButtonParentDiv>
+              <DangerButton onClickEvent={onCLickDeleteDateSpotAction}>削除</DangerButton>
+            </ButtonParentDiv>
+          )
+        }
+      </SubDiv>
     </MainDiv>
   );
 });
