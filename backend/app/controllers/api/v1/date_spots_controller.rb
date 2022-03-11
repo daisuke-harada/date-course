@@ -45,9 +45,8 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def index
-    @date_spots = DateSpot.all
-    @addresses = Address.all
-    render json: { date_spots: @date_spots, addresses: @addresses }
+    # date_spotとaddressを結合してJSON形式で返す
+    render json:  Address.all.to_json(include: :date_spot)
   end
 
   def show
