@@ -15,7 +15,6 @@ const Title = tw.h1`text-center text-lg m-5`;
 const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
 const Input = tw.input`mb-5 border-b-2 outline-none w-full`;
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
-const DangerButtonParentDiv = tw.div`text-center my-4`;
 
 type Props = {
   dateSpotFormTitle: string,
@@ -175,14 +174,14 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         </ButtonParentDiv>
       </Form>
       {
-          dateSpotId
-          &&
-          (
-            <DangerButtonParentDiv>
-              <DangerButton onClickEvent={onCLickDeleteDateSpotAction}>削除</DangerButton>
-            </DangerButtonParentDiv>
-          )
-        }
+        dateSpotId
+        &&
+        (
+          <ButtonParentDiv>
+            <DangerButton onClickEvent={onCLickDeleteDateSpotAction}>削除</DangerButton>
+          </ButtonParentDiv>
+        )
+      }
     </MainDiv>
   );
 });
