@@ -18,6 +18,7 @@ const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 type Props = {
   dateSpotFormTitle: string,
   formButtonName: string,
+  baseBtnDataE2e: string,
   nameDefaultValue: string,
   prefectureDefaultValue: string,
   cityNameDefaultValue: string,
@@ -25,6 +26,7 @@ type Props = {
   openingTimeDefaultValue: string,
   closingTimeDefaultValue: string,
   imageDefaultValue?: File,
+  dateSpotId?: number
 };
 
 
@@ -32,6 +34,8 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const {
     dateSpotFormTitle,
     formButtonName,
+    baseBtnDataE2e,
+    dateSpotId,
     nameDefaultValue,
     prefectureDefaultValue,
     cityNameDefaultValue,
@@ -84,8 +88,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     return formData;
   };
 
-  const DateSpotRegistAction = (e: React.FormEvent<HTMLFormElement>) => {
-    const dateSpot = createFormData();
+  const apiDateSpotCreateAccess = (dateSpot: FormData) => {
     formDataClient.post('date_spots', dateSpot).then(response => {
       response.data.status === 'created' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '新規登録に成功しました。', type: 'success-message', condition: true}});
       if(response.data.status === 500) {
@@ -96,6 +99,31 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
       };
     });
+  };
+
+  const apiDateSpotUpdateAccess = (dateSpot: FormData, dateSpotId: number) => {
+    formDataClient.put(`date_spots/${dateSpotId}`, dateSpot).then(response => {
+      response.data.status === 'updated' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '情報の更新に成功しました。', type: 'success-message', condition: true}});
+      if(response.data.status === 500) {
+        const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
+        name !== undefined && setErrorNameMessages(name);
+        genreId !== undefined && setErrorGenreIdMessages(genreId);
+        addressCityName !== undefined && setErrorAddressCityName(addressCityName);
+        addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
+      };
+    });
+  };
+
+  const DateSpotFormAction = (e: React.FormEvent<HTMLFormElement>) => {
+    const dateSpot = createFormData();
+
+    // dateSpotの新規登録の挙動
+    if (formButtonName === '登録'){
+      apiDateSpotCreateAccess(dateSpot);
+    } else if(formButtonName === '更新' && dateSpotId){
+      apiDateSpotUpdateAccess(dateSpot, dateSpotId);
+    };
+
     e.preventDefault();
   };
 
@@ -116,7 +144,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className="text-red-500">市町村名、番地は{message}</li>)}
       </ul>
 
-      <Form onSubmit={DateSpotRegistAction}>
+      <Form onSubmit={DateSpotFormAction}>
         <Input data-e2e="dateSpot-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
         <PrefectureSelect dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
         <Input data-e2e="dateSpot-form-cityName-input" placeholder="市町村名、番地" value={cityName} onChange={onChangeCityName} />
@@ -131,7 +159,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
-          <BaseButton dataE2e="dateSpot-regist-button">{formButtonName}</BaseButton>
+          <BaseButton dataE2e={baseBtnDataE2e}>{formButtonName}</BaseButton>
         </ButtonParentDiv>
       </Form>
     </MainDiv>
