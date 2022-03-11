@@ -79,7 +79,10 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
   end
 
   describe "GET /destroy" do
-    it "returns http success" do
+    it "date_spot情報の削除に成功する" do
+      date_spot = FactoryBot.create(:date_spot)
+      delete "/api/v1/date_spots/#{date_spot.id}"
+      expect(JSON.parse(response.body)["status"]).to eq("delete")
     end
   end
 

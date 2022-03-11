@@ -62,4 +62,14 @@ describe('DateSpots', () => {
     dateSpotFormUpdateSuccess(dateSpotEditDatas[0], addressEditDatas[0]);
   });
 
+  it('デートスポット編集ページに遷移し、デートスポット情報を削除する', () => {
+    cy.visit('/login');
+    userSigninSuccessInput(adminData);
+    dataE2eGet("slide-down-btn").click();
+    dataE2eGet("header-dateSpot-new-link").last().click();
+    dateSpotFormCreateSuccess(dateSpotDatas[0], addressDatas[0]);
+    cy.contains('デートスポット情報編集').click();
+    cy.contains('削除').click();
+  });
+
 });
