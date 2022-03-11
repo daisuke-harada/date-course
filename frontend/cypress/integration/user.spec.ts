@@ -26,7 +26,7 @@ const userFormSignUpSuccess = (user: UserResponseData) => {
   cy.contains(user.gender);
 };
 
-const userFormEditSuccess = (user: UserResponseData) => {
+const userFormUpdateSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
   dataE2eGet("user-form-name-input").type(user.name);
   dataE2eGet("user-form-email-input").clear();
@@ -60,7 +60,7 @@ describe('Users', () => {
     userSigninSuccessInput(userDatas[0]);
     cy.contains("アカウント情報編集").click();
     cy.contains("アカウント情報編集");
-    userFormEditSuccess(userEditDatas[0]);
+    userFormUpdateSuccess(userEditDatas[0]);
   });
 
   it('ログインしてない場合ユーザーの編集ページにアクセスできません', () => {

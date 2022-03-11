@@ -1,18 +1,30 @@
-import { DateSpotInput } from "../../support/types/dateSpots/testType";
+import { DateSpotTestDataType } from '../../support/types/DateSpotTestDataType';
 
-export const dateSpotDatas: DateSpotInput[] =[
+export const dateSpotDatas: DateSpotTestDataType[] =[
   {
     id: 1,
     genreId: 1,
     name: "test",
-    openingTime: "2000-01-01 06:00:00 UTC",
-    closingTime: "2000-01-01 20:00:00 UTC",
+    image: {
+      url: null
+    },
+    openingTime: "2000-01-01T11:00:00.000Z",
+    closingTime: "2000-01-01T20:00:00.000Z",
+    createdAt: new Date('2017/11/27 20:30'),
+    updatedAt: new Date('2017/11/27 20:30')
+
   },
   {
     id: 2,
     genreId: 2,
     name: "test2",
-    openingTime: "2000-01-01 06:00:00 UTC",
-    closingTime: "2000-01-01 20:00:00 UTC",
+    image: {
+      url: null
+    },
+    openingTime: "2000-01-01T11:00:00.000Z",
+    closingTime: "2000-01-01T20:00:00.000Z",
+    createdAt: new Date('2017/11/27 20:30'),
+    updatedAt: new Date('2017/11/27 20:30')
+
   }
 ];

@@ -90,7 +90,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
 
   const apiDateSpotCreateAccess = (dateSpot: FormData) => {
     formDataClient.post('date_spots', dateSpot).then(response => {
-      response.data.status === 'created' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '新規登録に成功しました。', type: 'success-message', condition: true}});
+      response.data.status === 'created' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '新規登録に成功しました', type: 'success-message', condition: true}});
       if(response.data.status === 500) {
         const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
         name !== undefined && setErrorNameMessages(name);
@@ -103,7 +103,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
 
   const apiDateSpotUpdateAccess = (dateSpot: FormData, dateSpotId: number) => {
     formDataClient.put(`date_spots/${dateSpotId}`, dateSpot).then(response => {
-      response.data.status === 'updated' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '情報の更新に成功しました。', type: 'success-message', condition: true}});
+      response.data.status === 'updated' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
       if(response.data.status === 500) {
         const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
         name !== undefined && setErrorNameMessages(name);
