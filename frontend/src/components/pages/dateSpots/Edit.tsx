@@ -1,7 +1,6 @@
 import { DateSpotForm } from "components/templates/dateSpots/DateSpotForm";
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { memo, VFC } from "react";
+import { useLocation } from "react-router-dom";
 import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
 
 export const Edit: VFC = memo(() => {
@@ -9,6 +8,8 @@ export const Edit: VFC = memo(() => {
   const state = location.state as {address: AddressResponseData, dateSpot: DateSpotResponseData};
   const address = state.address;
   const dateSpot = state.dateSpot
+  console.log(dateSpot.openingTime);
+
   return(
     <DateSpotForm
       dateSpotFormTitle="デートスポット情報の編集"
