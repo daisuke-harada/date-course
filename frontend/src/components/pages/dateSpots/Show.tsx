@@ -9,6 +9,7 @@ import { BusinessHour } from "components/atoms/text/dateSpots/BusinessHour";
 import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
 import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
+import { Map } from "components/molecules/maps/Map";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -33,8 +34,6 @@ export const Show: VFC = memo(() => {
       setAddress(response.data.address);
     });
   }, [id]);
-
-  console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
 
   return(
     <>
@@ -79,8 +78,11 @@ export const Show: VFC = memo(() => {
             </div>
           </SubArea>
           <SubArea>
-            {/* <div className="h-96 m-auto" id="map" >
-            </div> */}
+            {
+              address
+              &&
+              <Map latitude={address.latitude} longitude={address.longitude}/>
+            }
           </SubArea>
         </SubDiv>
 
