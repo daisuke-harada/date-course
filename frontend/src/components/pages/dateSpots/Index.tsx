@@ -4,9 +4,7 @@ import { memo, useEffect, useState, VFC } from "react";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 export const Index: VFC = memo(() => {
-  // const [dateSpots, setDateSpots] = useState<DateSpotResponseData[]>();
-  // const [addresses, setAddresses] = useState<AddressResponseData[]>();
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>();
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
 
   useEffect(() => {
     client.get('date_spots').then(response => {
@@ -17,10 +15,7 @@ export const Index: VFC = memo(() => {
   return(
     <>
       <h1>デートスポットを探す</h1>
-      {
-        addressAndDateSpots &&
-        <DateSpots addressAndDateSpots={addressAndDateSpots} />
-      }
+      <DateSpots addressAndDateSpots={addressAndDateSpots} />
     </>
   );
 });

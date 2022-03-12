@@ -18,6 +18,7 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
   const dateSpot: DateSpotResponseData = addressAndDateSpot.dateSpot
   const [image, setImage] = useState('http://localhost:7777/images/no_image.jpg');
   const genre = genreDatas.find(genreData => genreData.id === dateSpot.genreId);
+
   useEffect(() => {
     dateSpot.image && dateSpot.image.url && setImage(dateSpot.image.url);
   }, [dateSpot]);
