@@ -34,6 +34,8 @@ export const Show: VFC = memo(() => {
     });
   }, [id]);
 
+  console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+
   return(
     <>
       <MainDiv>
@@ -74,9 +76,6 @@ export const Show: VFC = memo(() => {
                   </BaseButton>
                 )
               }
-            </div>
-            <div>
-            {process.env.GoogleMapApiKey}
             </div>
           </SubArea>
           <SubArea>
