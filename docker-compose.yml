@@ -12,9 +12,12 @@ services:
   frontend:
     build:
       context: ./frontend
+    environment:
+      GoogleMapApiKey: ${GoogleMapApiKey}
+    command: sh -c "yarn start && yarn install" #E2Eテストのためにcypress installが必要
     volumes:
       - ./frontend:/usr/src/datecourses
-    command: sh -c "yarn start && yarn install" #E2Eテストのためにcypress installが必要
+
     ports:
       - "3000:3000"
   backend:
