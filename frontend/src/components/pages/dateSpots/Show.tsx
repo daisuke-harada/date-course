@@ -75,6 +75,9 @@ export const Show: VFC = memo(() => {
                 )
               }
             </div>
+            <div>
+            {process.env.GoogleMapApiKey}
+            </div>
           </SubArea>
           <SubArea>
             {/* <div className="h-96 m-auto" id="map" >
