@@ -12,8 +12,10 @@ import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/respo
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
-const SubDiv = tw.div`w-full`;
-const ImageParentDiv = tw.div`md:h-96 xl:m-20 2xl:m-40 m-0`;
+const SubDiv = tw.div`w-full flex`;
+const ImageParentDiv = tw.div`h-96 relative pt-20`;
+const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-2xl`;
+const SubArea = tw.div`w-1/2`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
@@ -35,12 +37,34 @@ export const Show: VFC = memo(() => {
   return(
     <>
       <MainDiv>
-        <DateSpotNameTitle>{dateSpot?.name}</DateSpotNameTitle>
         <SubDiv>
-          <ImageParentDiv>
-            <img className='object-fill max-h-96 w-full rounded-2xl' src={dateSpotImage} alt='DateSpotProfileImage' />
-          </ImageParentDiv>
-
+          <SubArea>
+            <ImageParentDiv>
+              <Image src={dateSpotImage} alt='DateSpotProfileImage' />
+            </ImageParentDiv>
+            <DateSpotNameTitle>{dateSpot?.name}</DateSpotNameTitle>
+            <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
+            <div className="m-5 text-sm font-bold md:text-xl">
+              {address?.cityName}
+            </div>
+            <div className="text-center">
+              {
+                getLoginStatus.status === true
+                && getCurrentUser.user.admin === true
+                && (
+                  <BaseButton dataE2e="render-dateSpot-edit">
+                    <Link
+                      className="text-white"
+                      to={`edit`}
+                      state={{address: address, dateSpot: dateSpot}}
+                    >
+                      デートスポット情報編集
+                    </Link>
+                  </BaseButton>
+                )
+              }
+            </div>
+          </SubArea>
           {/* <div className="w-full flex m-5" id = "date_spot_reviews_rate_average" >
             <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-1" className ="w-14 h-14">
             <img src ="<%= asset_url('date_spot_review_images/star-off.png') %>" id ="star-average-2" className ="w-14 h-14">
@@ -57,11 +81,6 @@ export const Show: VFC = memo(() => {
         {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
           <%= render 'date_spot_business_hour', date_spot: @date_spot %>
         </div> */}
-        <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
-        <div className="m-5 text-sm font-bold md:text-xl">
-          {address?.cityName}
-        </div>
-
         {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
           <span className="font-bold">ジャンル:</span>
           <%= link_to @date_spot.genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{@date_spot.genre.id}"}}, as: :date_spot_search, className:"font-bold" %>
@@ -74,23 +93,6 @@ export const Show: VFC = memo(() => {
           <%= render 'management_date_spots/add_course', date_spot: @date_spot %>
           <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), className:"btn btn-salmon m-5" if admin_logged_in? %>
         </div> */}
-        <div className="text-center">
-          {
-            getLoginStatus.status === true
-            && getCurrentUser.user.admin === true
-            && (
-              <BaseButton dataE2e="render-dateSpot-edit">
-                <Link
-                  className="text-white"
-                  to={`edit`}
-                  state={{address: address, dateSpot: dateSpot}}
-                 >
-                   デートスポット情報編集
-                </Link>
-              </BaseButton>
-            )
-          }
-        </div>
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">
