@@ -1,15 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :user_find_param_id, only: [:show, :update, :destroy]
 
-  def index
-    @users = User.where(admin: false)
-    render json: { users: @users}
-  end
-
-  def show
-    render json: { user: @user }
-  end
-
   def update
     if @user.update(user_params)
       render json: {status: :updated, user: @user }
@@ -21,6 +12,15 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     @user.destroy
     render json: {status: :delete}
+  end
+
+  def index
+    @users = User.where(admin: false)
+    render json: { users: @users}
+  end
+
+  def show
+    render json: { user: @user }
   end
 
   private

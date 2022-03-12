@@ -99,8 +99,18 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
   end
 
   describe "GET /index" do
-    it "returns http success" do
+    it "date_spot一覧ページを表示する" do
+      address = FactoryBot.create(:address)
+      date_spot = address.date_spot
+      other_address = FactoryBot.create(:other_address)
+      other_spot = other_address.date_spot
+      get "/api/v1/date_spots"
+      expect(JSON.parse(response.body)[0]["date_spot"]["name"]).to eq(date_spot.name)
+      expect(JSON.parse(response.body)[0]["prefecture_id"]).to eq(address.prefecture_id)
+      expect(JSON.parse(response.body)[0]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)[1]["date_spot"]["name"]).to eq(other_spot.name)
+      expect(JSON.parse(response.body)[1]["prefecture_id"]).to eq(other_address.prefecture_id)
+      expect(JSON.parse(response.body)[1]["city_name"]).to eq(other_address.city_name)
     end
   end
-
 end

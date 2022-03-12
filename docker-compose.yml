@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:8.0.23
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: password
     command: --default-authentication-plugin=mysql_native_password # 認証プラグインがmysql8からcaching_sha2_passwordになっているので変更する。
     volumes:
       - mysql-data:/var/lib/mysql
@@ -12,9 +12,9 @@ services:
   frontend:
     build:
       context: ./frontend
+    command: sh -c "yarn start && yarn install" #E2Eテストのためにcypress installが必要
     volumes:
       - ./frontend:/usr/src/datecourses
-    command: sh -c "yarn start && yarn install" #E2Eテストのためにcypress installが必要
     ports:
       - "3000:3000"
   backend:

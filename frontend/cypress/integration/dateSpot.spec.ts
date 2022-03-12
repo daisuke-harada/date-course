@@ -1,5 +1,7 @@
+import { apiDateSpotsAccess } from './../support/backendAccessMock/date_spots/apiDateSpotsAccess';
+import { apiDateSpotDestroyAccess } from './../support/backendAccessMock/date_spots/apiDateSpotDestroyAccess';
 import { apiDateSpotUpdateAccess } from './../support/backendAccessMock/date_spots/apiDateSpotUpdateAccess';
-import { addressDatas } from "../fixtures/addresses/addressDatas";
+import { addressDatas } from "../fixtures/dateSpots/addressDatas";
 import { dateSpotDatas } from "../fixtures/dateSpots/dateSpotDatas";
 import { adminData } from "../fixtures/users/adminData";
 import { apiDateSpotCreateAccess } from "../support/backendAccessMock/date_spots/apiDateSpotCreateAccess";
@@ -7,7 +9,7 @@ import { apiDateSpotShow } from "../support/backendAccessMock/date_spots/apiDate
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
 import { userSigninSuccessInput } from "../support/hooks/session";
 import { dateSpotEditDatas } from '../fixtures/dateSpots/dateSpotEditDatas';
-import { addressEditDatas } from '../fixtures/addresses/addressEditDatas';
+import { addressEditDatas } from '../fixtures/dateSpots/addressEditDatas';
 import { DateSpotTestDataType } from '../support/types/DateSpotTestDataType';
 import { AddressTestDataType } from '../support/types/AddressTestDataType';
 
@@ -69,7 +71,15 @@ describe('DateSpots', () => {
     dataE2eGet("header-dateSpot-new-link").last().click();
     dateSpotFormCreateSuccess(dateSpotDatas[0], addressDatas[0]);
     cy.contains('デートスポット情報編集').click();
+    apiDateSpotDestroyAccess(dateSpotDatas[0]);
     cy.contains('削除').click();
+    cy.contains('削除しました');
+  });
+
+  it('デートスポットを探すページを表示する', () => {
+    apiDateSpotsAccess();
+    cy.visit('/dateSpots');
+    // apiDateSpotの名前を表示する
   });
 
 });
