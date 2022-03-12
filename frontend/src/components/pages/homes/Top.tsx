@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
-import { currentUserState, loginStatusState } from "store/session";
+import { loginStatusState } from "store/session";
 
 export const Top: VFC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
