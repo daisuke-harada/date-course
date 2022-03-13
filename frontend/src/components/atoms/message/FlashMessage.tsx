@@ -2,7 +2,7 @@ import { memo, useCallback, useEffect, useState, VFC } from "react";
 import { useLocation } from "react-router-dom";
 import tw  from "tailwind-styled-components";
 
-const MessageDiv = tw.div`fixed duration-1000 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2`
+const MessageDiv = tw.div`fixed duration-1000 z-50 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2`
 
 type FlashMessageData = {
   message: string,

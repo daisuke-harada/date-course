@@ -7,7 +7,8 @@ class Api::V1::DateSpotReviewsController < ApplicationController
     if @date_spot_review.save
       render json: { status: :created }
     else
-      render json: { status: 500 }
+      binding.pry
+      render json: { status: 500, error_messages: @date_spot_review.errors.messages }
     end
   end
 
