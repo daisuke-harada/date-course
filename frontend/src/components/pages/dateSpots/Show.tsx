@@ -79,9 +79,9 @@ export const Show: VFC = memo(() => {
           </SubArea>
           <SubArea>
             {
-              address
+              (address && dateSpot)
               &&
-              <Map latitude={address.latitude} longitude={address.longitude}/>
+              <Map address={address} dateSpotName={dateSpot.name}/>
             }
           </SubArea>
         </SubDiv>
