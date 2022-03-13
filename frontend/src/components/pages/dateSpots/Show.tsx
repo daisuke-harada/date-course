@@ -13,10 +13,10 @@ import { Map } from "components/molecules/maps/Map";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
-const SubDiv = tw.div`w-full flex`;
+const SubDiv = tw.div`md:flex-row flex-col w-full flex`;
 const ImageParentDiv = tw.div`h-96 relative pt-20`;
 const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-2xl`;
-const SubArea = tw.div`w-1/2`;
+const SubArea = tw.div`md:w-1/2 w-full`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();

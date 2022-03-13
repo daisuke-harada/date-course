@@ -32,7 +32,7 @@ export const Map: VFC<Props> = memo((props) => {
   return(
     <div className="h-full w-full px-5 m-auto" >
       <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} onLoad={() => createOffsetSize()} >
-        <GoogleMap mapContainerClassName='w-full h-full rounded-2xl' center={center} zoom={17}>
+        <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' center={center} zoom={17}>
           <Marker position={center} />
           <InfoWindow position={center} options={InfoWindowOptions}>
             <div className='bg-white text-size'>
