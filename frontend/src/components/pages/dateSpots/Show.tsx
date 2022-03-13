@@ -10,6 +10,7 @@ import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
 import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
 import { Map } from "components/molecules/maps/Map";
+import { genreDatas } from "datas/genreDatas";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -33,7 +34,9 @@ export const Show: VFC = memo(() => {
       response.data.dateSpot.image.url !== null && setDateSpotImage(response.data.dateSpot.image.url);
       setAddress(response.data.address);
     });
-  }, [id]);
+  }, [id, dateSpot]);
+
+  const genre = dateSpot && genreDatas.find(genreData => genreData.id === dateSpot.genreId);
 
   return(
     <>
@@ -58,6 +61,9 @@ export const Show: VFC = memo(() => {
             <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
             <div className="m-5 text-sm font-bold md:text-xl">
               {address?.cityName}
+            </div>
+            <div className="m-5 text-sm font-bold md:text-xl">
+              {genre?.name}
             </div>
             <div className="text-center">
               {
@@ -85,19 +91,6 @@ export const Show: VFC = memo(() => {
             }
           </SubArea>
         </SubDiv>
-
-        {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
-          <%= render 'date_spot_business_hour', date_spot: @date_spot %>
-        </div> */}
-        {/* <div className="mx-5 my-10 text-sm font-bold md:text-xl">
-          <span className="font-bold">ジャンル:</span>
-          <%= link_to @date_spot.genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{@date_spot.genre.id}"}}, as: :date_spot_search, className:"font-bold" %>
-        </div> */}
-
-        {/* <div className="text-center">
-          <%= render 'management_date_spots/add_course', date_spot: @date_spot %>
-          <%= link_to "デートスポットを編集する", edit_date_spot_path(@date_spot), className:"btn btn-salmon m-5" if admin_logged_in? %>
-        </div> */}
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">
