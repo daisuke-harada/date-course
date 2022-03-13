@@ -51,7 +51,8 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def show
     @address = Address.find_by(date_spot_id: @date_spot.id)
-    render json: { date_spot: @date_spot, address: @address}
+    @genre_name = @date_spot.genre.name
+    render json: { date_spot: @date_spot, address: @address, genre_name: @genre_name}
   end
 
   private

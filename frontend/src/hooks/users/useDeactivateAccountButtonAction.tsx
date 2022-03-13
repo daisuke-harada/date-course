@@ -15,10 +15,6 @@ export const useDeactivateAccountButtonAction = () => {
         response.data.status === 'delete' && setLoginStatus({status: false}) && setCurrentUser({user:{}});
       });
     };
-    // } else {
-    //   console.log('キャンセル');
-    //   navigate('./');
-    // };
   };
 
   return { onCLickDeactivateAccountAction, loginStatus };

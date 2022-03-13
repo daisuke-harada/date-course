@@ -95,6 +95,7 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       expect(JSON.parse(response.body)["date_spot"]["genre_id"]).to eq(date_spot.genre_id)
       expect(JSON.parse(response.body)["address"]["prefecture_id"]).to eq(address.prefecture_id)
       expect(JSON.parse(response.body)["address"]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)["genre_name"]).to eq(Genre.find_by(id: date_spot.genre_id).name)
     end
   end
 

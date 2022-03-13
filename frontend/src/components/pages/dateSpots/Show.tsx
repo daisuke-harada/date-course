@@ -10,7 +10,7 @@ import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
 import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
 import { Map } from "components/molecules/maps/Map";
-import { genreDatas } from "datas/genreDatas";
+import { DateSpotReviewArea } from "components/molecules/dateSpotReviews/DateSpotReviewArea";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -23,6 +23,7 @@ export const Show: VFC = memo(() => {
   const { id } = useParams();
   const [dateSpot, setDateSpot] = useState<DateSpotResponseData>();
   const [address, setAddress] = useState<AddressResponseData>();
+  const [genreName, setGenreName] = useState<string>('');
   const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
 
   const getCurrentUser = useRecoilValue(currentUserState);
@@ -33,10 +34,9 @@ export const Show: VFC = memo(() => {
       setDateSpot(response.data.dateSpot);
       response.data.dateSpot.image.url !== null && setDateSpotImage(response.data.dateSpot.image.url);
       setAddress(response.data.address);
+      setGenreName(response.data.genreName);
     });
-  }, [id, dateSpot]);
-
-  const genre = dateSpot && genreDatas.find(genreData => genreData.id === dateSpot.genreId);
+  }, [id]);
 
   return(
     <>
@@ -63,7 +63,7 @@ export const Show: VFC = memo(() => {
               {address?.cityName}
             </div>
             <div className="m-5 text-sm font-bold md:text-xl">
-              {genre?.name}
+              {genreName}
             </div>
             <div className="text-center">
               {
@@ -91,6 +91,15 @@ export const Show: VFC = memo(() => {
             }
           </SubArea>
         </SubDiv>
+      </MainDiv>
+      <MainDiv>
+        {
+          dateSpot
+          &&
+          getLoginStatus.status === true
+          &&
+          <DateSpotReviewArea dateSpotId={dateSpot.id} />
+        }
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">
