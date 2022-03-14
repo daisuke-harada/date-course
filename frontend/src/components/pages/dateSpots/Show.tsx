@@ -23,6 +23,7 @@ export const Show: VFC = memo(() => {
   const { id } = useParams();
   const [dateSpot, setDateSpot] = useState<DateSpotResponseData>();
   const [address, setAddress] = useState<AddressResponseData>();
+  const [dateSpotReviews, setDateSpotReviews] = useState([]);
   const [genreName, setGenreName] = useState<string>('');
   const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
 
@@ -35,9 +36,11 @@ export const Show: VFC = memo(() => {
       response.data.dateSpot.image.url !== null && setDateSpotImage(response.data.dateSpot.image.url);
       setAddress(response.data.address);
       setGenreName(response.data.genreName);
+      setDateSpotReviews(response.data.dateSpotReviews);
     });
   }, [id]);
 
+  console.log(dateSpotReviews);
   return(
     <>
       <MainDiv>
@@ -100,6 +103,10 @@ export const Show: VFC = memo(() => {
           &&
           <DateSpotReviewArea dateSpotId={dateSpot.id} />
         }
+        {
+          dateSpotReviews !== []
+          &&
+          dateSpotReviews.map((dateSpotReview: DateSpotResponseData) => (<p key={dateSpotReview.id}>{dateSpotReview.id}</p>))}
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">

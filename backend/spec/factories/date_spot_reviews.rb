@@ -3,15 +3,15 @@ FactoryBot.define do
     id { 1 }
     rate { 1 }
     content { "MyText" }
-    association :date_spot
-    association :user
+    user_id { 1 }
+    date_spot_id { 1 }
   end
 
   factory :other_date_spot_review, class: DateSpotReview do
     id { 2 }
     rate { 1 }
     content { "MyText2" }
-    association :date_spot, factory: :other_spot
-    association :user, factory: :other_user
+    user_id { 1 }
+    date_spot_id { 1 }
   end
 end
