@@ -39,7 +39,6 @@ export const Show: VFC = memo(() => {
       setDateSpotReviews(response.data.dateSpotReviews);
     });
   }, [id]);
-
   console.log(dateSpotReviews);
   return(
     <>

@@ -50,7 +50,7 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def show
-    @address = Address.find_by(date_spot_id: @date_spot.id)
+    @address = @date_spot.address
     @genre_name = @date_spot.genre.name
     @date_spot_reviews = @date_spot.date_spot_reviews
     render json: { date_spot: @date_spot, address: @address, genre_name: @genre_name, date_spot_reviews: @date_spot_reviews }
