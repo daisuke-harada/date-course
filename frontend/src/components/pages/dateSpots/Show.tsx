@@ -38,8 +38,9 @@ export const Show: VFC = memo(() => {
       setGenreName(response.data.genreName);
       setDateSpotReviews(response.data.dateSpotReviews);
     });
+    console.log(1);
   }, [id]);
-  console.log(dateSpotReviews);
+
   return(
     <>
       <MainDiv>
@@ -100,12 +101,8 @@ export const Show: VFC = memo(() => {
           &&
           getLoginStatus.status === true
           &&
-          <DateSpotReviewArea dateSpotId={dateSpot.id} />
+          <DateSpotReviewArea dateSpotId={dateSpot.id} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />
         }
-        {
-          dateSpotReviews !== []
-          &&
-          dateSpotReviews.map((dateSpotReview: DateSpotResponseData) => (<p key={dateSpotReview.id}>{dateSpotReview.id}</p>))}
       </MainDiv>
 
       {/* // <div className="border border-black mt-10 m-20">
