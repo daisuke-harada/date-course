@@ -28,9 +28,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   return(
     <Card>
       <DD>
-        <Link to={`/users/${user.id}`}>
-          <UserImage addClassName="w-64 h-64" user={user} />
-        </Link>
+        <UserImage addClassName="w-64 h-64" userId={user.id} image={user.image} gender={user.gender} />
       </DD>
       <DD>
         <Link to={`/users/${user.id}`}>

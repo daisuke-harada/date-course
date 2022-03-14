@@ -7,10 +7,10 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/UserImage";
 import { client } from "lib/api/client";
 import { currentUserState } from "store/session";
-import { DateSpotResponseData } from "types/dateSpots/response";
+import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 
 const Div = tw.div`w-full flex`
-const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
+const TextArea = tw.textarea`border-2 p-1 w-full h-full`
 const UserInfoDiv = tw.div`w-2/3 h-52 pt-5 px-2 flex flex-col`
 
 type Props = {
@@ -34,6 +34,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
   const [errorUserIdMessages, setErrorUserIdMessages] = useState([]);
   const [errorContentMessages, setErrorContentMessages] = useState([]);
   const navigate = useNavigate();
+
   const dateSpotReview: DateSpotRreviewParam = {
     rate: 0, // まだ実装しない
     content: content,
@@ -56,12 +57,10 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
     });
   };
 
-  console.log(dateSpotReviews);
-
   return(
     <>
       <Div>
-        <UserImage user={getCurrentUser.user} addClassName='h-52 w-52' />
+        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='h-40 w-40' />
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
@@ -80,16 +79,41 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
           </ul>
 
           <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
-          <div className='mr-auto pt-2'>
+          <div className='ml-auto pt-2'>
             <BaseButton onClickEvent={onClickDateSpotCreateAction}>投稿</BaseButton>
           </div>
         </UserInfoDiv>
       </Div>
+      <ul className='w-full my-2'>
       {
         dateSpotReviews !== []
         &&
-        dateSpotReviews.map((dateSpotReview: DateSpotResponseData) => (<p key={dateSpotReview.id}>{dateSpotReview.id}</p>))
+        dateSpotReviews.map((dateSpotReview: DateSpotReviewAndUserResponseData) => {
+          if(dateSpotReview.userId !== getCurrentUser.user.id){
+            return (
+              <li className='my-5 p-2 flex' key={dateSpotReview.id}>
+                <UserImage image={dateSpotReview.image} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
+                <div className='p-5'>
+                  <div>{dateSpotReview.userName}</div>
+                  <div className='flex my-1'>
+                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
+                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
+                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
+                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
+                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
+                  </div>
+                  <div>
+                    {dateSpotReview.content}
+                  </div>
+                </div>
+              </li>
+            );
+          }else {
+            return(<></>);
+          };
+        })
       }
+      </ul>
     </>
   );
 });

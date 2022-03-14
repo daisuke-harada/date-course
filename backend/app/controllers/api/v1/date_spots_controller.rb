@@ -46,13 +46,24 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def index
     # date_spotとaddressを結合してJSON形式で返す
-    render json:  Address.all.to_json(include: :date_spot)
+    render json: Address.all.to_json(include: :date_spot)
   end
 
   def show
     @address = @date_spot.address
     @genre_name = @date_spot.genre.name
-    @date_spot_reviews = @date_spot.date_spot_reviews
+    @date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
+      {
+        id: date_spot_review.id,
+        rate: date_spot_review.rate,
+        content: date_spot_review.content,
+        user_name: date_spot_review.user.name,
+        user_gender: date_spot_review.user.gender,
+        user_image: date_spot_review.user.image,
+        user_id: date_spot_review.user_id,
+        date_spot_id: date_spot_review.date_spot_id,
+      }
+    end
     render json: { date_spot: @date_spot, address: @address, genre_name: @genre_name, date_spot_reviews: @date_spot_reviews }
   end
 
