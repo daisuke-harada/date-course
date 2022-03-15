@@ -9,7 +9,7 @@ type Props = {
 export const StarRateText: VFC<Props> = memo((props) => {
   const { rate, size } = props;
   return(
-    <div className='my-2'>
+    <div className='my-2 flex'>
       <ReactStars
         count={5}
         value={rate}

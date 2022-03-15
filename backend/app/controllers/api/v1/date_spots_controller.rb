@@ -63,7 +63,18 @@ class Api::V1::DateSpotsController < ApplicationController
         date_spot_id: date_spot_review.date_spot_id,
       }
     end
-    render json: { date_spot: @date_spot, address: @address, genre_name: @genre_name, date_spot_reviews: @date_spot_reviews }
+
+    # 評価の平均値を計算する
+    review_rate_total = 0
+    @date_spot.date_spot_reviews.each{ |review| review_rate_total+=review.rate}
+    review_average_rate = review_rate_total / @date_spot.date_spot_reviews.length
+    render json: {
+      date_spot: @date_spot,
+      address: @address,
+      genre_name: @genre_name,
+      review_average_rate: review_average_rate,
+      date_spot_reviews: @date_spot_reviews
+    }
   end
 
   private

@@ -28,7 +28,7 @@ export const Show: VFC = memo(() => {
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
   const [genreName, setGenreName] = useState<string>('');
   const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
-  // const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
+  const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
   const getCurrentUser = useRecoilValue(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
@@ -40,6 +40,7 @@ export const Show: VFC = memo(() => {
       setAddress(response.data.address);
       setGenreName(response.data.genreName);
       setDateSpotReviews(response.data.dateSpotReviews);
+      setDateSpotAverageRate(response.data.reviewAverageRate);
     });
   }, [id]);
 
@@ -52,8 +53,9 @@ export const Show: VFC = memo(() => {
               <Image src={dateSpotImage} alt='DateSpotProfileImage' />
             </ImageParentDiv>
             <DateSpotNameTitle>{dateSpot?.name}</DateSpotNameTitle>
-            <div className='ml-2'>
-              <StarRateText rate={0} size={60} />
+            <div className='flex'>
+              <StarRateText rate={dateSpotAverageRate} size={60} />
+              <div className='ml-2 font-bold pt-14'>評価{dateSpotAverageRate}</div>
             </div>
             <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
             <div className="m-5 text-sm font-bold md:text-xl">
