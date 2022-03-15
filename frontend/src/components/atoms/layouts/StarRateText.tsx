@@ -4,13 +4,10 @@ import ReactStars from 'react-stars'
 type Props = {
   rate: number,
   size: number,
-  onChangeRate?: (new_rating: number) => void,
-  edit?: boolean,
 };
 
-export const StarRateForm: VFC<Props> = memo((props) => {
-  const { rate, onChangeRate, edit, size } = props;
-  console.log(rate);
+export const StarRateText: VFC<Props> = memo((props) => {
+  const { rate, size } = props;
   return(
     <div className='my-2'>
       <ReactStars
@@ -18,8 +15,7 @@ export const StarRateForm: VFC<Props> = memo((props) => {
         value={rate}
         size={size}
         half={true}
-        edit={edit}
-        onChange={onChangeRate}
+        edit={false}
         color1={'#e5e7eb'}
         color2={'#F472B6'}
       />

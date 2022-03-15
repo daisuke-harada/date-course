@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import { UserResponseData } from "types/users/response";
 import { Card } from "components/atoms/card/Card";
 import { Link } from "react-router-dom";
-import { UserImage } from "components/atoms/layouts/UserImage";
+import { UserImage } from "components/atoms/layouts/users/UserImage";
 
 type Props = {
   user: UserResponseData

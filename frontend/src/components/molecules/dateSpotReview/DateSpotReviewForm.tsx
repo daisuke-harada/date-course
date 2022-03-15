@@ -6,11 +6,12 @@ import tw from "tailwind-styled-components";
 import { client } from "lib/api/client";
 import { currentUserState } from "store/session";
 import { BaseButton } from "components/atoms/button/BaseButton";
-import { UserImage } from "components/atoms/layouts/UserImage";
+import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { SecondaryButton } from "components/atoms/button/SecondaryButton";
 import { StarRateForm } from "components/atoms/form/StarRateForm";
+import { StarRateText } from "components/atoms/layouts/StarRateText";
 
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
@@ -149,7 +150,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                 </>
               ):(
                 <>
-                  <StarRateForm rate={currentDateSpotReview.rate} size={30} />
+                  <StarRateText size={30} rate={currentDateSpotReview.rate} />
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>

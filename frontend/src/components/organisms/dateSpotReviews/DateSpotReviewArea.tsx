@@ -2,9 +2,10 @@ import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
 
 import { currentUserState, loginStatusState } from "store/session";
-import { UserImage } from "components/atoms/layouts/UserImage";
+import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 import { DateSpotReviewForm } from "components/molecules/dateSpotReview/DateSpotReviewForm";
+import { StarRateText } from "components/atoms/layouts/StarRateText";
 
 type Props = {
   dateSpotId: number,
@@ -32,13 +33,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
                 <UserImage image={dateSpotReview.image} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
                 <div className='p-5'>
                   <div>{dateSpotReview.userName}</div>
-                  <div className='flex my-1'>
-                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-                    <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-                  </div>
+                  <StarRateText rate={dateSpotReview.rate} size={30} />
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{dateSpotReview.content}</div>
                 </div>
               </li>
