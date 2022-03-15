@@ -39,9 +39,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
                     <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
                     <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
                   </div>
-                  <div>
-                    {dateSpotReview.content}
-                  </div>
+                  <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{dateSpotReview.content}</div>
                 </div>
               </li>
             );

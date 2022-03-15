@@ -15,6 +15,7 @@ const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
 const UserInfoDiv = tw.div`w-2/3 h-52 pt-5 px-2 flex flex-col`
 const ButtonParentDiv = tw.div`mx-2`
+const ButtonArea = tw.div`ml-auto pt-2 flex`
 
 type DateSpotRreviewParam = {
   rate: number,
@@ -115,7 +116,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
               (
                 <>
                   <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
-                  <div className='ml-auto pt-2 flex'>
+                  <ButtonArea>
                     <ButtonParentDiv>
                       <BaseButton onClickEvent={onChangeOpen}>編集を解除</BaseButton>
                     </ButtonParentDiv>
@@ -125,11 +126,11 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                     <ButtonParentDiv>
                       <DangerButton onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
                     </ButtonParentDiv>
-                  </div>
+                  </ButtonArea>
                 </>
               ):(
                 <>
-                  <div className=' p-1 w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
+                  <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>
                       <BaseButton onClickEvent={onChangeOpen}>編集</BaseButton>
