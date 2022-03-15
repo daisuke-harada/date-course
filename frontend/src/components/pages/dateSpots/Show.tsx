@@ -98,8 +98,6 @@ export const Show: VFC = memo(() => {
         {
           dateSpot
           &&
-          getLoginStatus.status === true
-          &&
           <DateSpotReviewArea dateSpotId={dateSpot.id} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />
         }
       </MainDiv>

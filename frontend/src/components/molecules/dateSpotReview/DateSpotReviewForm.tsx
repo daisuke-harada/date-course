@@ -129,7 +129,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                 </>
               ):(
                 <>
-                  <div className=' p-1 w-full h-full'>{currentDateSpotReview.content}</div>
+                  <div className=' p-1 w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>
                       <BaseButton onClickEvent={onChangeOpen}>編集</BaseButton>

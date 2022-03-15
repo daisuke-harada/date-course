@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
 
-import { currentUserState } from "store/session";
+import { currentUserState, loginStatusState } from "store/session";
 import { UserImage } from "components/atoms/layouts/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 import { DateSpotReviewForm } from "components/molecules/dateSpotReview/DateSpotReviewForm";
@@ -15,14 +15,16 @@ type Props = {
 export const DateSpotReviewArea: VFC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
 
   return(
     <>
-      <DateSpotReviewForm dateSpotId={dateSpotId} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />
+      {getLoginStatus.status === true && <DateSpotReviewForm dateSpotId={dateSpotId} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />}
       <ul className='w-full my-2'>
       {
-        dateSpotReviews !== []
-        &&
+        dateSpotReviews.length === 0?
+        <h1 className='text-red-400 my-5 text-3xl'>このデートスポットにはレビューが投稿されていません</h1>
+        :
         dateSpotReviews.map((dateSpotReview: DateSpotReviewAndUserResponseData) => {
           if(dateSpotReview.userId !== getCurrentUser.user.id){
             return (
