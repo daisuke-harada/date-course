@@ -10,6 +10,7 @@ import { UserImage } from "components/atoms/layouts/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { SecondaryButton } from "components/atoms/button/SecondaryButton";
+import { StarRateForm } from "components/atoms/form/StarRateForm";
 
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
@@ -34,14 +35,17 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [content, setContent] = useState<string>('');
+  const [rate, setRate] = useState<number>(0);
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [errorUserIdMessages, setErrorUserIdMessages] = useState([]);
   const [errorContentMessages, setErrorContentMessages] = useState([]);
   const [currentDateSpotReview, setCurrentDateSpotReview] = useState<DateSpotReviewAndUserResponseData | undefined>();
   const onChangeContent: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback((e) => setContent(e.target.value), []);
+  const onChangeRate: (new_rating: number) => void = useCallback((new_rating) => setRate(new_rating), []);
   const onChangeOpen: React.MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
     setEditOpen(!editOpen);
     currentDateSpotReview && setContent(currentDateSpotReview.content);
+    currentDateSpotReview && setRate(currentDateSpotReview.rate);
   }, [editOpen, currentDateSpotReview]);
   const navigate = useNavigate();
 
@@ -49,6 +53,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
     client.post('date_spot_reviews', dateSpotReview).then(response => {
       response.data.status === 'created' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'created' && setContent('');
+      response.data.status === 'created' && setRate(0);
       response.data.status === 'created' &&setErrorUserIdMessages([]);
       response.data.status === 'created' &&setErrorContentMessages([]);
       response.data.status === 'created' && navigate(`./`, {state: {message: 'コメントを投稿しました', type: 'success-message', condition: true}});
@@ -68,6 +73,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
     client.put(`date_spot_reviews/${currentDateSpotReview.id}`, dateSpotReview).then(response => {
       response.data.status === 'updated' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'updated' && setContent('');
+      response.data.status === 'updated' && setRate(0);
       response.data.status === 'updated' &&setErrorUserIdMessages([]);
       response.data.status === 'updated' &&setErrorContentMessages([]);
       response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
@@ -89,6 +95,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'deleted' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'deleted' && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
       response.data.status === 'deleted' && setContent('');
+      response.data.status === 'deleted' && setRate(0);
       response.data.status === 'deleted' &&setErrorUserIdMessages([]);
       response.data.status === 'deleted' &&setErrorContentMessages([]);
       response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);
@@ -97,7 +104,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   };
 
   const dateSpotReview: DateSpotRreviewParam = {
-    rate: 0, // まだ実装しない
+    rate: rate,
     content: content,
     userId: getCurrentUser.user.id,
     dateSpotId: dateSpotId,
@@ -116,17 +123,11 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
-          <div className='flex my-2'>
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-          </div>
             {
               editOpen?
               (
                 <>
+                  <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
                   <ul className="mt-1">
                     {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className="text-red-500">{message}</li>)}
                   </ul>
@@ -148,6 +149,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                 </>
               ):(
                 <>
+                  <StarRateForm rate={currentDateSpotReview.rate} size={30} />
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>
@@ -167,13 +169,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
-          <div className='flex my-2'>
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-            <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
-          </div>
+          <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
           <ul className="mt-1">
             {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className="text-red-500">{message}</li>)}
           </ul>
