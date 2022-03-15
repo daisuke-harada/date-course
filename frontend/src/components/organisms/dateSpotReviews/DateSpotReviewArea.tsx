@@ -31,9 +31,9 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
             return (
               <li className='my-5 p-2 flex' key={dateSpotReview.id}>
                 <UserImage image={dateSpotReview.image} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
-                <div className='p-5'>
+                <div className='px-5'>
                   <div>{dateSpotReview.userName}</div>
-                  <StarRateText rate={dateSpotReview.rate} size={30} />
+                  <StarRateText rate={dateSpotReview.rate} size={20} />
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{dateSpotReview.content}</div>
                 </div>
               </li>
