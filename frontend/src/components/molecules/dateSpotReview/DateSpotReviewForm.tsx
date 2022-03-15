@@ -9,10 +9,12 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 import { DangerButton } from "components/atoms/button/DangerButton";
+import { SecondaryButton } from "components/atoms/button/SecondaryButton";
 
 const Div = tw.div`w-full flex`
-const TextArea = tw.textarea`border-2 p-1 w-full h-full`
+const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
 const UserInfoDiv = tw.div`w-2/3 h-52 pt-5 px-2 flex flex-col`
+const ButtonParentDiv = tw.div`mx-2`
 
 type DateSpotRreviewParam = {
   rate: number,
@@ -31,11 +33,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [content, setContent] = useState<string>('');
-  const [currentDateSpotReview, setCurrentDateSpotReview] = useState<DateSpotReviewAndUserResponseData | undefined>();
-  const onChangeContent: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback((e) => setContent(e.target.value), []);
-  const navigate = useNavigate();
+  const [editOpen, setEditOpen] = useState<boolean>(false);
   const [errorUserIdMessages, setErrorUserIdMessages] = useState([]);
   const [errorContentMessages, setErrorContentMessages] = useState([]);
+  const [currentDateSpotReview, setCurrentDateSpotReview] = useState<DateSpotReviewAndUserResponseData | undefined>();
+  const onChangeContent: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback((e) => setContent(e.target.value), []);
+  const onChangeOpen: React.MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
+    setEditOpen(!editOpen);
+    currentDateSpotReview && setContent(currentDateSpotReview.content);
+  }, [editOpen, currentDateSpotReview]);
+  const navigate = useNavigate();
 
   const onClickDateSpotReviewCreateAction: React.MouseEventHandler<HTMLButtonElement>  = () => {
     client.post('date_spot_reviews', dateSpotReview).then(response => {
@@ -52,13 +59,27 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
     });
   };
 
+  const onClickDateSpotReviewUpdateAction: React.MouseEventHandler<HTMLButtonElement>  = () => {
+    currentDateSpotReview
+    &&
+    client.put(`date_spot_reviews/${currentDateSpotReview.id}`, dateSpotReview).then(response => {
+      response.data.status === 'updated' && setDateSpotReviews(response.data.dateSpotReviews);
+      response.data.status === 'updated' && setContent('');
+      response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
+      response.data.status === 'updated' && setEditOpen(false);
+    });
+  };
+
+
   const onClickDateSpotReviewDeleteAction: React.MouseEventHandler<HTMLButtonElement> = () => {
     currentDateSpotReview
     &&
     client.delete(`date_spot_reviews/${currentDateSpotReview.id}`).then(response => {
       response.data.status === 'deleted' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'deleted' && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
+      response.data.status === 'deleted' && setContent('');
       response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);
+      response.data.status === 'deleted' && setEditOpen(false);
     });
   };
 
@@ -89,16 +110,34 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
             <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
             <img src={`${process.env.PUBLIC_URL}/dateSpotReviewImages/star-on.png`} alt='star' />
           </div>
-          {/* <div className=' p-1 w-full h-full'>{currentDateSpotReview.content}</div> */}
-          <TextArea placeholder='コメントを入力' value={currentDateSpotReview.content} onChange={onChangeContent} />
-          <div className='ml-auto pt-2 flex'>
-            <div className="mx-2">
-              <BaseButton onClickEvent={onClickDateSpotReviewCreateAction}>更新</BaseButton>
-            </div>
-            <div className="mx-2">
-              <DangerButton onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
-            </div>
-          </div>
+            {
+              editOpen?
+              (
+                <>
+                  <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
+                  <div className='ml-auto pt-2 flex'>
+                    <ButtonParentDiv>
+                      <BaseButton onClickEvent={onChangeOpen}>編集を解除</BaseButton>
+                    </ButtonParentDiv>
+                    <ButtonParentDiv>
+                      <SecondaryButton onClickEvent={onClickDateSpotReviewUpdateAction}>更新</SecondaryButton>
+                    </ButtonParentDiv>
+                    <ButtonParentDiv>
+                      <DangerButton onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
+                    </ButtonParentDiv>
+                  </div>
+                </>
+              ):(
+                <>
+                  <div className=' p-1 w-full h-full'>{currentDateSpotReview.content}</div>
+                  <div className='ml-auto pt-2 flex'>
+                    <ButtonParentDiv>
+                      <BaseButton onClickEvent={onChangeOpen}>編集</BaseButton>
+                    </ButtonParentDiv>
+                  </div>
+                </>
+              )
+            }
         </UserInfoDiv>
       </Div>
     );
