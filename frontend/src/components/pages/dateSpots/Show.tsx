@@ -95,7 +95,12 @@ export const Show: VFC = memo(() => {
         {
           dateSpot
           &&
-          <DateSpotReviewArea dateSpotId={dateSpot.id} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />
+          <DateSpotReviewArea
+            dateSpotId={dateSpot.id}
+            dateSpotReviews={dateSpotReviews}
+            setDateSpotReviews={setDateSpotReviews}
+            setDateSpotAverageRate={setDateSpotAverageRate}
+          />
         }
       </MainDiv>
     </>

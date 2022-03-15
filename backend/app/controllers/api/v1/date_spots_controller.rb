@@ -68,6 +68,7 @@ class Api::V1::DateSpotsController < ApplicationController
     review_rate_total = 0
     @date_spot.date_spot_reviews.each{ |review| review_rate_total+=review.rate}
     review_average_rate = review_rate_total / @date_spot.date_spot_reviews.length
+
     render json: {
       date_spot: @date_spot,
       address: @address,

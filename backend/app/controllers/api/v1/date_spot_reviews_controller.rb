@@ -16,7 +16,13 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id,
         }
       end
-      render json: { status: :created, date_spot_reviews: @date_spot_reviews }
+
+      # デートスポットの評価の平均値を設定する
+      review_rate_total = 0
+      DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).each{ |review| review_rate_total+=review.rate}
+      review_average_rate = review_rate_total / DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).length
+
+      render json: { status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
     else
       render json: { status: 500, error_messages: @date_spot_review.errors.messages }
     end
@@ -43,7 +49,12 @@ class Api::V1::DateSpotReviewsController < ApplicationController
       }
     end
 
-    render json: { status: :deleted, date_spot_reviews: @date_spot_reviews }
+    # デートスポットの評価の平均値を設定する
+    review_rate_total = 0
+    DateSpotReview.where(date_spot_id: date_spot_id).each{ |review| review_rate_total+=review.rate}
+    review_average_rate = review_rate_total / DateSpotReview.where(date_spot_id: date_spot_id).length
+
+    render json: { status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
   end
 
   def update
@@ -60,7 +71,12 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id,
         }
       end
-      render json: {status: :updated, date_spot_reviews: @date_spot_reviews }
+
+      # デートスポットの評価の平均値を設定する
+      review_rate_total = 0
+      DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).each{ |review| review_rate_total+=review.rate}
+      review_average_rate = review_rate_total / DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).length
+      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
     else
       render json: { status: 500, error_messages: @date_spot_review.errors.messages }
     end

@@ -29,11 +29,12 @@ type DateSpotRreviewParam = {
 type Props= {
   dateSpotId: number,
   dateSpotReviews: Array<DateSpotReviewAndUserResponseData>,
-  setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>
+  setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>,
+  setDateSpotAverageRate: React.Dispatch<React.SetStateAction<number>>
 };
 
 export const DateSpotReviewForm: VFC<Props> = memo((props) => {
-  const { dateSpotId, dateSpotReviews, setDateSpotReviews } = props;
+  const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [content, setContent] = useState<string>('');
   const [rate, setRate] = useState<number>(0);
@@ -55,8 +56,9 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'created' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'created' && setContent('');
       response.data.status === 'created' && setRate(0);
-      response.data.status === 'created' &&setErrorUserIdMessages([]);
-      response.data.status === 'created' &&setErrorContentMessages([]);
+      response.data.status === 'created' && setDateSpotAverageRate(response.data.reviewAverageRate);
+      response.data.status === 'created' && setErrorUserIdMessages([]);
+      response.data.status === 'created' && setErrorContentMessages([]);
       response.data.status === 'created' && navigate(`./`, {state: {message: 'コメントを投稿しました', type: 'success-message', condition: true}});
 
       if(response.data.status === 500){
@@ -75,6 +77,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'updated' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'updated' && setContent('');
       response.data.status === 'updated' && setRate(0);
+      response.data.status === 'updated' && setDateSpotAverageRate(response.data.reviewAverageRate);
       response.data.status === 'updated' &&setErrorUserIdMessages([]);
       response.data.status === 'updated' &&setErrorContentMessages([]);
       response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
@@ -97,6 +100,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'deleted' && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
       response.data.status === 'deleted' && setContent('');
       response.data.status === 'deleted' && setRate(0);
+      response.data.status === 'deleted' && setDateSpotAverageRate(response.data.reviewAverageRate);
       response.data.status === 'deleted' &&setErrorUserIdMessages([]);
       response.data.status === 'deleted' &&setErrorContentMessages([]);
       response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);

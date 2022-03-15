@@ -10,17 +10,26 @@ import { StarRateText } from "components/atoms/layouts/StarRateText";
 type Props = {
   dateSpotId: number,
   dateSpotReviews: Array<DateSpotReviewAndUserResponseData>,
-  setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>
+  setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>,
+  setDateSpotAverageRate: React.Dispatch<React.SetStateAction<number>>
 };
 
 export const DateSpotReviewArea: VFC<Props> = memo((props) => {
-  const { dateSpotId, dateSpotReviews, setDateSpotReviews } = props;
+  const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
 
   return(
     <>
-      {getLoginStatus.status === true && <DateSpotReviewForm dateSpotId={dateSpotId} dateSpotReviews={dateSpotReviews} setDateSpotReviews={setDateSpotReviews} />}
+      {
+        getLoginStatus.status === true
+        &&
+        <DateSpotReviewForm
+          dateSpotId={dateSpotId}
+          dateSpotReviews={dateSpotReviews}
+          setDateSpotReviews={setDateSpotReviews}
+          setDateSpotAverageRate={setDateSpotAverageRate}
+        />}
       <ul className='w-full my-2'>
       {
         dateSpotReviews.length === 0?
