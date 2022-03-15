@@ -21,7 +21,6 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def update
-
     if @date_spot.update(
       name: params[:name],
       genre_id: params[:genre_id],

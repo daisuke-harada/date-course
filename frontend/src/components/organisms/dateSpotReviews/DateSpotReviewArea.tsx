@@ -8,7 +8,7 @@ import { DateSpotReviewForm } from "components/molecules/dateSpotReview/DateSpot
 
 type Props = {
   dateSpotId: number,
-  dateSpotReviews: never[],
+  dateSpotReviews: Array<DateSpotReviewAndUserResponseData>,
   setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>
 };
 
