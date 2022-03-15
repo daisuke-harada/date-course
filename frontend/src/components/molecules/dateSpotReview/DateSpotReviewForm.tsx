@@ -49,6 +49,8 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
     client.post('date_spot_reviews', dateSpotReview).then(response => {
       response.data.status === 'created' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'created' && setContent('');
+      response.data.status === 'created' &&setErrorUserIdMessages([]);
+      response.data.status === 'created' &&setErrorContentMessages([]);
       response.data.status === 'created' && navigate(`./`, {state: {message: 'コメントを投稿しました', type: 'success-message', condition: true}});
 
       if(response.data.status === 500){
@@ -66,8 +68,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
     client.put(`date_spot_reviews/${currentDateSpotReview.id}`, dateSpotReview).then(response => {
       response.data.status === 'updated' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'updated' && setContent('');
+      response.data.status === 'updated' &&setErrorUserIdMessages([]);
+      response.data.status === 'updated' &&setErrorContentMessages([]);
       response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
       response.data.status === 'updated' && setEditOpen(false);
+      if(response.data.status === 500){
+        const {userId, content} = response.data.errorMessages;
+        userId !== undefined && setErrorUserIdMessages(userId);
+        content !== undefined && setErrorContentMessages(content);
+        navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
+      };
     });
   };
 
@@ -79,6 +89,8 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'deleted' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'deleted' && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
       response.data.status === 'deleted' && setContent('');
+      response.data.status === 'deleted' &&setErrorUserIdMessages([]);
+      response.data.status === 'deleted' &&setErrorContentMessages([]);
       response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);
       response.data.status === 'deleted' && setEditOpen(false);
     });
@@ -115,6 +127,12 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
               editOpen?
               (
                 <>
+                  <ul className="mt-1">
+                    {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className="text-red-500">{message}</li>)}
+                  </ul>
+                  <ul>
+                    {errorContentMessages !== [] && errorContentMessages.map((message)=><li className="text-red-500">コメントは{message}</li>)}
+                  </ul>
                   <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
                   <ButtonArea>
                     <ButtonParentDiv>
@@ -162,7 +180,6 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
           <ul>
             {errorContentMessages !== [] && errorContentMessages.map((message)=><li className="text-red-500">コメントは{message}</li>)}
           </ul>
-
           <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
           <div className='ml-auto pt-2'>
             <BaseButton onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>
