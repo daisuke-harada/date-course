@@ -43,6 +43,44 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
     end
   end
 
+  describe "PUT /update" do
+    it "入力された値が正しい場合はdate_spot_reviewsを更新することができる" do
+      FactoryBot.create(:date_spot)
+      user = FactoryBot.create(:user)
+      date_spot_review = FactoryBot.create(:date_spot_review)
+      put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
+        date_spot_review: {
+          rate: 5.0,
+          content: '編集しました',
+          user_id: date_spot_review.user_id,
+          date_spot_id: date_spot_review.date_spot_id
+        }
+      }
+      expect(response.status).to eq(200)
+      expect(JSON.parse(response.body)["status"]).to eq("updated")
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(5.0)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq("編集しました")
+      expect(JSON.parse(response.body)["review_average_rate"]).to eq(5.0)
+    end
+
+    it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
+      FactoryBot.create(:date_spot)
+      user = FactoryBot.create(:user)
+      date_spot_review = FactoryBot.create(:date_spot_review)
+      put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
+        date_spot_review: {
+          rate: 5.0,
+          content: 'a'*101,
+          user_id: date_spot_review.user_id,
+          date_spot_id: date_spot_review.date_spot_id
+        }
+      }
+      expect(response.status).to eq(200)
+      expect(JSON.parse(response.body)["status"]).to eq(500)
+      expect(JSON.parse(response.body)["error_messages"]["content"]).to eq(["is too long (maximum is 100 characters)"])
+    end
+  end
+
   describe "DELETE /destroy" do
     it "date_spot情報の削除に成功する" do
       FactoryBot.create(:date_spot)
@@ -58,6 +96,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_gender"]).to eq(other_user.gender)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_id"]).to eq(other_date_spot_review.user_id)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["date_spot_id"]).to eq(other_date_spot_review.date_spot_id)
+      expect(JSON.parse(response.body)["review_average_rate"]).to eq(1.0)
     end
   end
 end
