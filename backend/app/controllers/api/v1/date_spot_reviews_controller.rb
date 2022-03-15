@@ -43,7 +43,6 @@ class Api::V1::DateSpotReviewsController < ApplicationController
       }
     end
 
-    binding.pry
     render json: { status: :deleted, date_spot_reviews: @date_spot_reviews }
   end
 

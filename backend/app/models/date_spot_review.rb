@@ -5,4 +5,5 @@ class DateSpotReview < ApplicationRecord
   validates :content, length: { maximum: 100 }
   # user_idとdate_spot_idの二つの組み合わせに対して一意制約のバリデーションをかける
   validates :user_id, presence: true, uniqueness: { scope: :date_spot_id }
+  validates :date_spot_id, presence: true
 end
