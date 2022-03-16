@@ -5,7 +5,7 @@ import { UserResponseData } from "types/users/response";
 
 type Props = {
   users: Array<UserResponseData>,
-  setUsers: React.Dispatch<React.SetStateAction<UserResponseData[]>>
+  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
 export const Users: VFC<Props> = memo((props) => {

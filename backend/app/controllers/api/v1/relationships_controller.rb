@@ -36,10 +36,20 @@ class Api::V1::RelationshipsController < ApplicationController
   end
 
   def followings
+    user = User.find(params[:user_id])
+    users = user.followings
+    @users = users.map do |user|
+      user_and_userFollowingsAndFollowers(user)
+    end
+    render json: { user_name: user.name, users: @users}
   end
 
   def followers
+    user = User.find(params[:user_id])
+    users = user.followers
+    @users = users.map do |user|
+      user_and_userFollowingsAndFollowers(user)
+    end
+    render json: { user_name: user.name, users: @users}
   end
-
-  private
 end

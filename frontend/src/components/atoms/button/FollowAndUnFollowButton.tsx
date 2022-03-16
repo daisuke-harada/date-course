@@ -35,7 +35,6 @@ export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
       response.data.status === 'created' && setCurrentUser({user: response.data.currentUser});
     });
   };
-  console.log(currentUser.user);
 
   const onClickUnfollowAction = () => {
     client.delete(`relationships/${currentUserId}/${userId}`).then(response => {

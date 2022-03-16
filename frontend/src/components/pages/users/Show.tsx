@@ -61,8 +61,16 @@ export const Show: VFC = memo(() => {
         <Span><FollowAndUnFollowButton userId={user.id} /></Span>
       </P>
       <P>
-        <Span>フォロー {user.followingIds.length}</Span>
-        <Span>フォロワー {user.followerIds.length}</Span>
+        <Span>
+          <Link to={`/users/${user.id}/followings`}>
+            フォロー {user.followingIds.length}
+          </Link>
+        </Span>
+        <Span>
+          <Link to={`/users/${user.id}/followers`}>
+              フォロワー {user.followerIds.length}
+          </Link>
+        </Span>
       </P>
       {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
         &&

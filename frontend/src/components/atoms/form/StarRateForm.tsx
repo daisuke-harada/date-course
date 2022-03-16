@@ -10,7 +10,6 @@ type Props = {
 
 export const StarRateForm: VFC<Props> = memo((props) => {
   const { rate, onChangeRate, edit, size } = props;
-  console.log(rate);
   return(
     <div className='my-2'>
       <ReactStars

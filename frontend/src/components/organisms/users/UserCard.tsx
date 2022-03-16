@@ -9,7 +9,7 @@ import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFoll
 
 type Props = {
   user: UserResponseData,
-  setUsers: React.Dispatch<React.SetStateAction<UserResponseData[]>>
+  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
 const Span = tw.span`m-2 font-bold`;
@@ -45,10 +45,14 @@ export const UserCard: VFC<Props> = memo((props) => {
       </DD>
       <DD>
         <Span>
-          フォロー {user.followingIds.length}
+          <Link to={`/users/${user.id}/followings`}>
+            フォロー {user.followingIds.length}
+          </Link>
         </Span>
         <Span>
-          フォロワー {user.followerIds.length}
+          <Link to={`/users/${user.id}/followers`}>
+            フォロワー {user.followerIds.length}
+          </Link>
         </Span>
       </DD>
     </Card>

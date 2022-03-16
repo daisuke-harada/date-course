@@ -1,20 +1,35 @@
 import { Users } from "components/templates/users/Users";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
+import { useParams } from "react-router-dom";
 import { UserResponseData } from "types/users/response";
 
 export const Followers: VFC = memo(() => {
+  const { id } = useParams();
   const [users, setUsers] = useState<Array<UserResponseData>>([]);
+  const [userName, setUserName] = useState<string>('');
+
   useEffect(() => {
-    client.get(`users`).then(response => {
+    client.get(`users/${id}/followers`).then(response => {
       setUsers(response.data.users);
+      setUserName(response.data.userName);
     });
-  }, []);
+  }, [id]);
 
   return(
     <>
-      <h1 className='mt-6'>ユーザーを探すページ</h1>
-      <Users users={users} setUsers={setUsers} />
+      <h1 className='m-10 text-2xl'>{userName}のフォロワー</h1>
+      {
+        users.length !== 0?
+        <Users users={users} />
+        :
+        <div className='flext justify-center'>
+          <h1 className='m-10 text-4xl text-red-500'>
+            {userName}は誰にもフォローされていません。
+          </h1>
+        </div>
+      }
     </>
   );
+
 });
