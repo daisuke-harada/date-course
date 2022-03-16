@@ -20,6 +20,6 @@ describe('ユーザー一覧ページのコンポーネントのテスト', () =
       )
     );
     expect(screen.getAllByText('男性')).toHaveLength(2);
-    expect(screen.getAllByText('女')).toHaveLength(1);
+    expect(screen.getAllByText('女性')).toHaveLength(1);
   });
 });

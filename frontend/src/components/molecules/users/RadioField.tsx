@@ -15,8 +15,8 @@ export const RadioField: VFC<Props>= memo((props) => {
     <div className="flex justify-start text-left w-2/3 mobile(M):ml-0 ml-8">
       <Label>男性</Label>
       <Input type="radio" value='男性' onChange={onChangeRadioButton} checked={gender === '男性'} />
-      <Label>女</Label>
-      <Input type="radio" value='女' onChange={onChangeRadioButton} checked={gender === '女'} />
+      <Label>女性</Label>
+      <Input type="radio" value='女性' onChange={onChangeRadioButton} checked={gender === '女性'} />
     </div>
   );
 });

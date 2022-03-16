@@ -29,14 +29,14 @@ RSpec.describe "Api::V1::Users", type: :request do
       put "/api/v1/users/#{user.id}", params: {
         "name" => "edit",
         "email" =>  "edit@gmail.com",
-        "gender" => "女",
+        "gender" => "女性",
         "password" => "edit_password",
         "password_confirmation" => "edit_password"
       }
       expect(JSON.parse(response.body)["status"]).to eq("updated")
       expect(JSON.parse(response.body)["user"]["name"]).to eq("edit")
       expect(JSON.parse(response.body)["user"]["email"]).to eq("edit@gmail.com")
-      expect(JSON.parse(response.body)["user"]["gender"]).to eq("女")
+      expect(JSON.parse(response.body)["user"]["gender"]).to eq("女性")
     end
 
     it "user情報の編集に失敗する" do

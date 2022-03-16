@@ -29,7 +29,7 @@ export const userEditDatas: UserResponseData[] = [
     id: 3,
     name: "marikaEdit",
     email: "marikaEdit@gmail.com",
-    gender: "女",
+    gender: "女性",
     passwordDigest: "daisukeEditdaisukeEdit",
     image: {
       url: null

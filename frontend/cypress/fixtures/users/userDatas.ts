@@ -29,7 +29,7 @@ export const userDatas: UserResponseData[] =[
     id: 3,
     name: "marika",
     email: "marika@gmail.com",
-    gender: "女",
+    gender: "女性",
     image: {
       url: null
     },

@@ -22,7 +22,7 @@ export const UserImage: VFC<Props> = memo((props) => {
 
   useEffect(() => {
     image && image.url !== null && setUserImage(image.url);
-    if(gender === '女'){
+    if(gender === '女性'){
       setGenderBorderColor('border-red-400 hover:border-red-500');
     }else if(gender === '男性'){
       setGenderBorderColor('border-blue-400 hover:border-blue-500');

@@ -1,7 +1,7 @@
 User.create(name: 'guest', email: 'guest@gmail.com', gender: '男性', password: 'foobar', password_confirmation: 'foobar')
 User.create(name: 'daisuke', email: 'daisuke@gmail.com', gender: '男性', password: 'daisuke', password_confirmation: 'daisuke')
 User.create(name: 'kenta', email: 'kenta@gmail.com', gender: '男性', password: 'kentakenta', password_confirmation: 'kentakenta')
-User.create(name: 'marika', email: 'marika@gmail.com', gender: '女', password: 'marika', password_confirmation: 'marika')
+User.create(name: 'marika', email: 'marika@gmail.com', gender: '女性', password: 'marika', password_confirmation: 'marika')
 User.create(name: 'admin', email: 'adminstrator@gmail.com', gender: '男性', password: 'adminadmin', password_confirmation: 'adminadmin', admin: true)
 
 DateSpot.create(id: 1, name: 'キャナルシティ博多', genre_id: 1, image: File.open('./public/images/date_spot_images/canal.jpeg'), opening_time: '2000-01-01 08:00', closing_time: '2000-01-01 23:00')

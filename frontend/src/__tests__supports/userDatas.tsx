@@ -11,7 +11,7 @@ export const userDatas = [
   {
     id: 2,
     name: 'マリカ',
-    gender: '女',
+    gender: '女性',
     passwordDigeset: 'marikamarika',
     admin: false,
     createdAt: new Date( '2017/11/27 20:30' ),
