@@ -45,14 +45,10 @@ export const UserCard: VFC<Props> = memo((props) => {
       </DD>
       <DD>
         <Span>
-          {/* <%= render 'relationships/following_count', user: user %> */}
-          {/* フォローしている数 */}
-          フォロー 3
+          フォロー {user.followingIds.length}
         </Span>
         <Span>
-          {/* <%= render 'relationships/followers_count', user: user %> */}
-          {/* フォロワーの数 */}
-          フォロワー 3
+          フォロワー {user.followerIds.length}
         </Span>
       </DD>
     </Card>

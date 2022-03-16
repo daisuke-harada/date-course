@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
       admin: user.admin,
       password_digest: user.password_digest,
       following_ids: user.followings.ids,
-      followers_ids: user.followers.ids,
+      follower_ids: user.followers.ids,
     }
   end
 end

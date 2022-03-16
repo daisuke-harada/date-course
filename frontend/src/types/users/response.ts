@@ -9,7 +9,7 @@ export type UserResponseData = {
     url: string | null
   },
   followingIds: Array<number>,
-  followers_ids: Array<number>,
+  followerIds: Array<number>,
 };
 
 export type UserLoginResponseData = {
