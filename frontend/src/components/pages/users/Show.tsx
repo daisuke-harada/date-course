@@ -19,7 +19,6 @@ export const Show: VFC = memo(() => {
       setUserName(response.data.user.name);
       setUserGender(response.data.user.gender);
       response.data.user.image.url && setUserImage(response.data.user.image.url);
-      console.log(response.data.user);
     }).catch(error => {
       navigate("/*");
     });

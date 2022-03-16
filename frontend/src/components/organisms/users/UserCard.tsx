@@ -8,14 +8,15 @@ import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
 
 type Props = {
-  user: UserResponseData
+  user: UserResponseData,
+  setUsers: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
 const Span = tw.span`m-2 font-bold`;
 const DD = tw.dd`m-5`;
 
 export const UserCard: VFC<Props> = memo((props) => {
-  const { user } = props;
+  const { user, setUsers } = props;
   const [genderTextColor, setGenderTextColor] = useState('');
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const UserCard: VFC<Props> = memo((props) => {
             {user.gender}
           </Span>
         </Link>
-        <FollowAndUnFollowButton userId={user.id} />
+        <FollowAndUnFollowButton userId={user.id} setUsers={setUsers} />
       </DD>
       <DD>
         <Span>
