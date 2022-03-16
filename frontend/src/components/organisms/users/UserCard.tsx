@@ -5,6 +5,7 @@ import { UserResponseData } from "types/users/response";
 import { Card } from "components/atoms/card/Card";
 import { Link } from "react-router-dom";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
+import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
 
 type Props = {
   user: UserResponseData
@@ -39,9 +40,7 @@ export const UserCard: VFC<Props> = memo((props) => {
             {user.gender}
           </Span>
         </Link>
-        {/* <%= render 'relationships/follow_button', user: user %> */}
-        {/* フォローボタン */}
-        <button>フォローボタン</button>
+        <FollowAndUnFollowButton />
       </DD>
       <DD>
         <Span>
