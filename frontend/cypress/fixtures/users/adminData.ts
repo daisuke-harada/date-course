@@ -4,7 +4,7 @@ export const adminData: UserResponseData = {
   id: 5,
   name: "admin",
   email: "adminstrator@gmail.com",
-  gender: "男",
+  gender: "男性",
   image: {
     url: null
   },

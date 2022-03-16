@@ -2,7 +2,7 @@ export const userDatas = [
   {
     id: 1,
     name: '大輔',
-    gender: '男',
+    gender: '男性',
     passwordDigeset: 'daisukedaisuke',
     admin: false,
     createdAt: new Date( '2017/11/27 20:30' ),
@@ -20,7 +20,7 @@ export const userDatas = [
   {
     id: 3,
     name: 'ピーター4',
-    gender: '男',
+    gender: '男性',
     passwordDigeset: 'peter4peter4',
     admin: false,
     createdAt: new Date( '2017/11/27 20:30' ),

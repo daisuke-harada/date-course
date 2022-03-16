@@ -21,7 +21,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   useEffect(() => {
     if(user.gender === '女'){
       setGenderTextColor('text-red-400 hover:text-yellow-500');
-    }else if(user.gender === '男'){
+    }else if(user.gender === '男性'){
       setGenderTextColor('text-blue-400 hover:text-yellow-500');
     };
   }, [user]);

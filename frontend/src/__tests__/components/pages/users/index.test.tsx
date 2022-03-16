@@ -19,7 +19,7 @@ describe('ユーザー一覧ページのコンポーネントのテスト', () =
         expect(screen.getByText(user.name))
       )
     );
-    expect(screen.getAllByText('男')).toHaveLength(2);
+    expect(screen.getAllByText('男性')).toHaveLength(2);
     expect(screen.getAllByText('女')).toHaveLength(1);
   });
 });

@@ -5,7 +5,7 @@ export const userEditDatas: UserResponseData[] = [
     id: 1,
     name: "daisukeEdit",
     email: "daisukeEdit@gmail.com",
-    gender: "男",
+    gender: "男性",
     passwordDigest: "daisukeEditdaisukeEdit",
     image: {
       url: null
@@ -17,7 +17,7 @@ export const userEditDatas: UserResponseData[] = [
     id: 2,
     name: "kentaEdit",
     email: "kentaEdit@gmail.com",
-    gender: "男",
+    gender: "男性",
     passwordDigest: "daisukeEditdaisukeEdit",
     image: {
       url: null
