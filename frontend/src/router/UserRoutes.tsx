@@ -1,11 +1,13 @@
-import { Page404 } from "components/pages/Page404";
-import { Edit } from "components/pages/users/Edit";
-import { Index } from "components/pages/users/Index";
-import { New } from "components/pages/users/New";
-import { Show } from "components/pages/users/Show";
-import { Navigate, useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { currentUserState, loginStatusState } from "store/session";
+import { Page404 } from 'components/pages/Page404';
+import { Edit } from 'components/pages/users/Edit';
+import { Followers } from 'components/pages/users/Followers';
+import { Followings } from 'components/pages/users/Followings';
+import { Index } from 'components/pages/users/Index';
+import { New } from 'components/pages/users/New';
+import { Show } from 'components/pages/users/Show';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { currentUserState, loginStatusState } from 'store/session';
 
 type Props = {
   path: string,
@@ -21,27 +23,35 @@ export const UserRoutes: () => Props[] = () => {
 
   return [
     {
-      path: ":id",
+      path: ':id',
       element: <Show />
     },
     {
-      path: ":id/edit",
+      path: ':id/edit',
       element: getLoginStatus.status === true && Number(userId) === getCurrentUser.user.id?
       <Edit /> :
       <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />
     },
     {
-      path: "index",
+      path: ':id/followings',
+      element: <Followings />
+    },
+    {
+      path: ':id/followers',
+      element: <Followers />
+    },
+    {
+      path: 'index',
       element: <Index />
     },
     {
-      path: "new",
+      path: 'new',
       element: getLoginStatus.status === false?
       <New /> :
       <Navigate to='/' state={{message: 'ログイン中はアクセスできません', type: 'error-message', condition: true}} />
     },
     {
-      path: "*",
+      path: '*',
       element: <Page404 />
     },
   ];
