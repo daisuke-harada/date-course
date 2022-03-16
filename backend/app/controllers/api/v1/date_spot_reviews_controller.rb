@@ -16,13 +16,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id,
         }
       end
-
-      # デートスポットの評価の平均値を設定する
-      review_rate_total = 0
-      DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).each{ |review| review_rate_total+=review.rate}
-      review_average_rate = review_rate_total == 0? 0: review_rate_total / DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).length
-
-      render json: { status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
+      render json: { status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id)) }
     else
       render json: { status: 500, error_messages: @date_spot_review.errors.messages }
     end
@@ -49,12 +43,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
       }
     end
 
-    # デートスポットの評価の平均値を設定する
-    review_rate_total = 0
-    DateSpotReview.where(date_spot_id: date_spot_id).each{ |review| review_rate_total+=review.rate}
-    review_average_rate = review_rate_total == 0? 0: review_rate_total / DateSpotReview.where(date_spot_id: date_spot_id).length
-
-    render json: { status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
+    render json: { status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: date_spot_id)) }
   end
 
   def update
@@ -71,13 +60,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id,
         }
       end
-
-      # デートスポットの評価の平均値を設定する
-      review_rate_total = 0
-      DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).each{ |review| review_rate_total+=review.rate}
-      review_average_rate = review_rate_total == 0? 0: review_rate_total / DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).length
-
-      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: review_average_rate }
+      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id)) }
     else
       render json: { status: 500, error_messages: @date_spot_review.errors.messages }
     end
@@ -92,6 +75,13 @@ class Api::V1::DateSpotReviewsController < ApplicationController
 
   def date_spot_review_find_param_id
     @date_spot_review = DateSpotReview.find(params[:id])
+  end
+
+  # 評価の平均値を計算する
+  def average_rate_calculation(reviews)
+    review_rate_total = 0
+    reviews.each{ |review| review_rate_total+=review.rate}
+    review_average_rate = review_rate_total == 0? 0: review_rate_total / reviews.length
   end
 
 end

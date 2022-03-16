@@ -5,22 +5,24 @@ import { UserResponseData } from "types/users/response";
 import { Card } from "components/atoms/card/Card";
 import { Link } from "react-router-dom";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
+import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
 
 type Props = {
-  user: UserResponseData
+  user: UserResponseData,
+  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
 const Span = tw.span`m-2 font-bold`;
 const DD = tw.dd`m-5`;
 
 export const UserCard: VFC<Props> = memo((props) => {
-  const { user } = props;
+  const { user, setUsers } = props;
   const [genderTextColor, setGenderTextColor] = useState('');
 
   useEffect(() => {
-    if(user.gender === '女'){
+    if(user.gender === '女性'){
       setGenderTextColor('text-red-400 hover:text-yellow-500');
-    }else if(user.gender === '男'){
+    }else if(user.gender === '男性'){
       setGenderTextColor('text-blue-400 hover:text-yellow-500');
     };
   }, [user]);
@@ -39,20 +41,18 @@ export const UserCard: VFC<Props> = memo((props) => {
             {user.gender}
           </Span>
         </Link>
-        {/* <%= render 'relationships/follow_button', user: user %> */}
-        {/* フォローボタン */}
-        <button>フォローボタン</button>
+        <FollowAndUnFollowButton userId={user.id} setUsers={setUsers} />
       </DD>
       <DD>
         <Span>
-          {/* <%= render 'relationships/following_count', user: user %> */}
-          {/* フォローしている数 */}
-          フォロー 3
+          <Link to={`/users/${user.id}/followings`}>
+            フォロー {user.followingIds.length}
+          </Link>
         </Span>
         <Span>
-          {/* <%= render 'relationships/followers_count', user: user %> */}
-          {/* フォロワーの数 */}
-          フォロワー 3
+          <Link to={`/users/${user.id}/followers`}>
+            フォロワー {user.followerIds.length}
+          </Link>
         </Span>
       </DD>
     </Card>

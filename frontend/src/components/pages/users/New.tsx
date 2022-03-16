@@ -21,7 +21,7 @@ export const New: VFC = memo(() => {
     <UserForm
       nameDefaultValue={''}
       emailDefaultValue={''}
-      genderDefaultValue={'男'}
+      genderDefaultValue={'男性'}
       userFormTitle={"ユーザー新規登録"}
       buttonName={"登録"}
       afterLoginSuccess={afterLoginSuccess}

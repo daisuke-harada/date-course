@@ -15,7 +15,7 @@ const loginInitializeState = ({ set }: any) => {
     id: 1,
     name: 'daisuke',
     email: "daisuke@gmail.com",
-    gender: '男',
+    gender: '男性',
     image: {url: null},
     passwordDigest: 'peter4peter4'
   }});

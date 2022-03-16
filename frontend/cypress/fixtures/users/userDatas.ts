@@ -5,7 +5,7 @@ export const userDatas: UserResponseData[] =[
     id: 1,
     name: "daisuke",
     email: "daisuke@gmail.com",
-    gender: "男",
+    gender: "男性",
     image: {
       url: null
     },
@@ -17,7 +17,7 @@ export const userDatas: UserResponseData[] =[
     id: 2,
     name: "kenta",
     email: "kenta@gmail.com",
-    gender: "男",
+    gender: "男性",
     image: {
       url: null
     },
@@ -29,7 +29,7 @@ export const userDatas: UserResponseData[] =[
     id: 3,
     name: "marika",
     email: "marika@gmail.com",
-    gender: "女",
+    gender: "女性",
     image: {
       url: null
     },
