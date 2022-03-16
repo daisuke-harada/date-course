@@ -38,7 +38,9 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
         <StarRateText rate={addressAndDateSpot.averageRate} size={24} />
       </div>
       <DD>
-        コメント3件
+        <Link to={`/dateSpots/${dateSpot.id}`}>
+          レビュー{addressAndDateSpot.reviewNumber}件
+        </Link>
       </DD>
       <DD>{addressAndDateSpot.cityName}</DD>
       <DD>{genre?.name}</DD>

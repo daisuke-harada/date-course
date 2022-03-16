@@ -53,6 +53,7 @@ class Api::V1::DateSpotsController < ApplicationController
         date_spot: address.date_spot,
         latitude: address.latitude,
         longitude: address.longitude,
+        review_number: address.date_spot.date_spot_reviews.length,
         average_rate: average_rate_calculation(address.date_spot.date_spot_reviews)
       }
     end
