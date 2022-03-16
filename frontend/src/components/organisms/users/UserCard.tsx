@@ -40,7 +40,7 @@ export const UserCard: VFC<Props> = memo((props) => {
             {user.gender}
           </Span>
         </Link>
-        <FollowAndUnFollowButton />
+        <FollowAndUnFollowButton userId={user.id} />
       </DD>
       <DD>
         <Span>

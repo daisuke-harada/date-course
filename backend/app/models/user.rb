@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   # ユーザーが他のユーザーをフォローしている状態で退会した場合にrelationshipのデータが一緒に消えるようにdependent: :destroyを追加。
   has_many :relationships, dependent: :destroy
-  # 架空のfollowingクラスを作成し、中間テーブルをrelationshipsに設定し、follow_idを参考にしてアクセスする。sourceは出口。
+  # # 架空のfollowingクラスを作成し、中間テーブルをrelationshipsに設定し、follow_idを参考にしてアクセスする。sourceは出口。
   has_many :followings, through: :relationships, source: :follow
 
   # relationshipにアクセスする時、follow_idを入り口として使用する。foreign_keyは入り口となる。
