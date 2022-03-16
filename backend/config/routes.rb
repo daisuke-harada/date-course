@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
       resources :date_spots
+      resources :date_spot_reviews, only:[:create, :destroy, :update]
       resources :users, only:[:index, :show, :update, :destroy] do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'

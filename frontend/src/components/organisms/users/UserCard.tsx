@@ -4,28 +4,23 @@ import tw from 'tailwind-styled-components';
 import { UserResponseData } from "types/users/response";
 import { Card } from "components/atoms/card/Card";
 import { Link } from "react-router-dom";
+import { UserImage } from "components/atoms/layouts/users/UserImage";
 
 type Props = {
   user: UserResponseData
 };
 
 const Span = tw.span`m-2 font-bold`;
-const Image = tw.img`w-64 h-64 rounded-xl border-4`;
 const DD = tw.dd`m-5`;
 
 export const UserCard: VFC<Props> = memo((props) => {
   const { user } = props;
-  const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
-  const [genderBorderColor, setGenderBorderColor] = useState('');
   const [genderTextColor, setGenderTextColor] = useState('');
 
   useEffect(() => {
-    user.image && user.image.url !== null && setUserImage(user.image.url);
     if(user.gender === '女'){
-      setGenderBorderColor('border-red-400 hover:border-red-500');
       setGenderTextColor('text-red-400 hover:text-yellow-500');
     }else if(user.gender === '男'){
-      setGenderBorderColor('border-blue-400 hover:border-blue-500');
       setGenderTextColor('text-blue-400 hover:text-yellow-500');
     };
   }, [user]);
@@ -33,9 +28,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   return(
     <Card>
       <DD>
-        <Link to={`/users/${user.id}`}>
-          <Image className={genderBorderColor} src={userImage} alt="UserProfileImage"/>
-        </Link>
+        <UserImage addClassName="w-64 h-64" userId={user.id} image={user.image} gender={user.gender} />
       </DD>
       <DD>
         <Link to={`/users/${user.id}`}>

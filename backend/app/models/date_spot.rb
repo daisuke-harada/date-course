@@ -4,6 +4,7 @@ class DateSpot < ApplicationRecord
   belongs_to :genre
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address
+  has_many :date_spot_reviews, dependent: :destroy
   validates :name, presence: true
   validates :genre_id, presence: true
 end

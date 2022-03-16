@@ -1,6 +1,6 @@
 import { client } from "lib/api/client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
 import { currentUserState, loginStatusState } from "store/session";
@@ -31,7 +31,8 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
         // ログイン失敗のメッセージをrailsから受け取りstateにセットする。
         setErrorMessages(response.data.errors);
         // フラッシュメッセージにもエラーを表示させる。
-        navigate(`/login`, {state: {message: 'ログインに失敗しました', type: 'error-message', condition: true}});
+        <Navigate to='./' state={{message: 'ログインに失敗しました', type: 'error-message', condition: true}} />
+        // navigate(`/login`, {state: {message: 'ログインに失敗しました', type: 'error-message', condition: true}});
       }
     });
     // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます

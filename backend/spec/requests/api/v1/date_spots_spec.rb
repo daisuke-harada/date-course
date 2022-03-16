@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::DateSpots", type: :request do
-  describe "GET /create" do
+  describe "POST /create" do
     it "入力された値が正しい場合はdate_spotを登録することができる" do
       address = FactoryBot.build(:address)
       date_spot = address.date_spot
@@ -37,7 +37,7 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
     end
   end
 
-  describe "GET /update" do
+  describe "PUT /update" do
     it "入力された値が正しい場合はdate_spotを更新することができる" do
       address = FactoryBot.create(:address)
       date_spot = address.date_spot
@@ -75,10 +75,9 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["can't be blank"])
       expect(JSON.parse(response.body)["error_messages"]["genre_id"]).to eq(["can't be blank"])
     end
-
   end
 
-  describe "GET /destroy" do
+  describe "DELETE /destroy" do
     it "date_spot情報の削除に成功する" do
       date_spot = FactoryBot.create(:date_spot)
       delete "/api/v1/date_spots/#{date_spot.id}"
@@ -88,13 +87,18 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
 
   describe "GET /show" do
     it "date_spot詳細ページを表示する" do
+      FactoryBot.create(:user)
       address = FactoryBot.create(:address)
+      date_spot_review = FactoryBot.create(:date_spot_review)
       date_spot = address.date_spot
       get "/api/v1/date_spots/#{date_spot.id}"
       expect(JSON.parse(response.body)["date_spot"]["name"]).to eq(date_spot.name)
       expect(JSON.parse(response.body)["date_spot"]["genre_id"]).to eq(date_spot.genre_id)
       expect(JSON.parse(response.body)["address"]["prefecture_id"]).to eq(address.prefecture_id)
       expect(JSON.parse(response.body)["address"]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)["genre_name"]).to eq(Genre.find_by(id: date_spot.genre_id).name)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(date_spot_review.content)
+      expect(JSON.parse(response.body)["review_average_rate"]).to eq(1)
     end
   end
 

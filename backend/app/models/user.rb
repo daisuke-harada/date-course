@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_secure_password
+  has_many :date_spot_reviews, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true

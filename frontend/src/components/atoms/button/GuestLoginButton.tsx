@@ -1,4 +1,4 @@
-import { useLoginAuthAction } from "hooks/useLoginAuthAction";
+import { useLoginAuthAction } from "hooks/users/useLoginAuthAction";
 import { memo, VFC } from "react";
 import tw from "tailwind-styled-components";
 import { SignInParams } from "types/users/session";

@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import tw from 'tailwind-styled-components';
 
-import { useDeactivateAccountButtonAction } from "hooks/useDeactivateAccountButtonAction";
+import { useDeactivateAccountButtonAction } from "hooks/users/useDeactivateAccountButtonAction";
 
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 
