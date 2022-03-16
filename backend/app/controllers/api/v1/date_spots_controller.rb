@@ -67,7 +67,7 @@ class Api::V1::DateSpotsController < ApplicationController
     # 評価の平均値を計算する
     review_rate_total = 0
     @date_spot.date_spot_reviews.each{ |review| review_rate_total+=review.rate}
-    review_average_rate = review_rate_total / @date_spot.date_spot_reviews.length
+    review_average_rate = review_rate_total == 0? 0: review_rate_total / @date_spot.date_spot_reviews.length
 
     render json: {
       date_spot: @date_spot,
