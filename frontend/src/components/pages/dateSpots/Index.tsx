@@ -8,7 +8,7 @@ export const Index: VFC = memo(() => {
 
   useEffect(() => {
     client.get('date_spots').then(response => {
-      setAddressAndDateSpots(response.data);
+      setAddressAndDateSpots(response.data.addressAndDateSpots);
     })
   }, []);
 

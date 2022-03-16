@@ -4,6 +4,7 @@ import { Card } from "components/atoms/card/Card";
 import { AddressAndDateSpotJoinData, DateSpotResponseData } from "types/dateSpots/response";
 import { genreDatas } from "datas/genreDatas";
 import { Link } from "react-router-dom";
+import { StarRateText } from "components/atoms/layouts/StarRateText";
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
@@ -33,9 +34,13 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
       <Title>
         <Link to={`/dateSpots/${dateSpot.id}`}>{dateSpot.name}</Link>
       </Title>
+      <div className="flex justify-center">
+        <StarRateText rate={addressAndDateSpot.averageRate} size={24} />
+      </div>
       <DD>
-        {/* 口コミ */}
-        コメント3件
+        <Link to={`/dateSpots/${dateSpot.id}`}>
+          レビュー{addressAndDateSpot.reviewNumber}件
+        </Link>
       </DD>
       <DD>{addressAndDateSpot.cityName}</DD>
       <DD>{genre?.name}</DD>
