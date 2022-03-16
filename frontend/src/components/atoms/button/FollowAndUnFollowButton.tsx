@@ -30,7 +30,7 @@ export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
       response.data.status === 'created' && setUnFollowToggle(!unFollowToggle);
     });
   };
-  console.log(unFollowToggle);
+  console.log(getCurrentUser.user);
 
   return(
     <>

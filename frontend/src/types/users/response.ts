@@ -8,8 +8,8 @@ export type UserResponseData = {
   image?: {
     url: string | null
   },
-  createdAt: Date,
-  updatedAt: Date,
+  followingIds: Array<number>,
+  followers_ids: Array<number>,
 };
 
 export type UserLoginResponseData = {
