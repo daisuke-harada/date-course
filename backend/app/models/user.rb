@@ -19,4 +19,14 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 250 }
   validates :email, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+  # フォロー機能のメソッド
+  def follow(other_user)
+    relationships.find_or_create_by(follow_id: other_user.id) unless self == other_user
+  end
+
+  def unfollow(other_user)
+    relationship = relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
 end
