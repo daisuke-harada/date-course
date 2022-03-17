@@ -9,6 +9,7 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
 import { UserResponseData } from "types/users/response";
+import { FollowingsAndFollowersLinkArea } from "components/molecules/users/Link/FollowingsAndFollowersLinkArea";
 
 const Span = tw.span`m-2 font-bold`;
 const Div = tw.div`m-5`;
@@ -61,16 +62,11 @@ export const Show: VFC = memo(() => {
         <Span><FollowAndUnFollowButton userId={user.id} /></Span>
       </P>
       <P>
-        <Span>
-          <Link to={`/users/${user.id}/followings`}>
-            フォロー {user.followingIds.length}
-          </Link>
-        </Span>
-        <Span>
-          <Link to={`/users/${user.id}/followers`}>
-              フォロワー {user.followerIds.length}
-          </Link>
-        </Span>
+        <FollowingsAndFollowersLinkArea
+          userId={user.id}
+          followingIdsCount={user.followingIds.length}
+          followerIdsCount={user.followerIds.length}
+        />
       </P>
       {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
         &&

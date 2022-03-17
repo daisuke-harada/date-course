@@ -6,6 +6,7 @@ import { Card } from "components/atoms/card/Card";
 import { Link } from "react-router-dom";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
+import { FollowingsAndFollowersLinkArea } from "components/molecules/users/Link/FollowingsAndFollowersLinkArea";
 
 type Props = {
   user: UserResponseData,
@@ -44,16 +45,11 @@ export const UserCard: VFC<Props> = memo((props) => {
         <FollowAndUnFollowButton userId={user.id} setUsers={setUsers} />
       </DD>
       <DD>
-        <Span>
-          <Link to={`/users/${user.id}/followings`}>
-            フォロー {user.followingIds.length}
-          </Link>
-        </Span>
-        <Span>
-          <Link to={`/users/${user.id}/followers`}>
-            フォロワー {user.followerIds.length}
-          </Link>
-        </Span>
+        <FollowingsAndFollowersLinkArea
+          userId={user.id}
+          followerIdsCount={user.followerIds.length}
+          followingIdsCount={user.followingIds.length}
+        />
       </DD>
     </Card>
   );
