@@ -8,6 +8,7 @@ export const Followings: VFC = memo(() => {
   const { id } = useParams();
   const [users, setUsers] = useState<Array<UserResponseData>>([]);
   const [userName, setUserName] = useState<string>('');
+
   useEffect(() => {
     client.get(`users/${id}/followings`).then(response => {
       setUsers(response.data.users);
