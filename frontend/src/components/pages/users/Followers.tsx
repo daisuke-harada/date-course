@@ -19,16 +19,7 @@ export const Followers: VFC = memo(() => {
   return(
     <>
       <h1 className='m-10 text-2xl'>{userName}のフォロワー</h1>
-      {
-        users.length !== 0?
-        <Users users={users} />
-        :
-        <div className='flext justify-center'>
-          <h1 className='m-10 text-4xl text-red-500'>
-            {userName}は誰にもフォローされていません。
-          </h1>
-        </div>
-      }
+      <Users users={users} />
     </>
   );
 

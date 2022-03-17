@@ -18,16 +18,7 @@ export const Followings: VFC = memo(() => {
   return(
     <>
       <h1 className='m-10 text-2xl'>{userName}がフォローしているユーザー</h1>
-      {
-        users.length !== 0?
-        <Users users={users} />
-        :
-        <div className='flext justify-center'>
-          <h1 className='m-10 text-4xl text-red-500'>
-            {userName}がフォローしているユーザーはいません。
-          </h1>
-        </div>
-      }
+      <Users users={users} />
     </>
   );
 });
