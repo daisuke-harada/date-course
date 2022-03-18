@@ -5,13 +5,13 @@ export const adminData: UserResponseData = {
   name: "admin",
   email: "adminstrator@gmail.com",
   gender: "男性",
+  passwordDigest: "adminadminadmin",
+  admin: true,
   image: {
     url: null
   },
-  admin: true,
-  passwordDigest: "adminadminadmin",
-  createdAt: new Date('2017/11/27 20:30'),
-  updatedAt: new Date('2017/11/27 20:30')
+  followingIds: [],
+  followerIds: [],
 };
 
 
