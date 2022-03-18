@@ -39,7 +39,7 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
       </div>
       <DD>
         <Link to={`/dateSpots/${dateSpot.id}`}>
-          レビュー{addressAndDateSpot.reviewNumber}件
+          レビュー{addressAndDateSpot.reviewTotalNumber}件
         </Link>
       </DD>
       <DD>{addressAndDateSpot.cityName}</DD>

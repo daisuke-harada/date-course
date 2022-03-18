@@ -29,6 +29,6 @@ export type AddressAndDateSpotJoinData = {
   dateSpot: DateSpotResponseData,
   latitude: number,
   longitude: number,
-  reviewNumber: number,
+  reviewTotalNumber: number,
   averageRate: number,
 };
