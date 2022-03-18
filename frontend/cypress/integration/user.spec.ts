@@ -109,5 +109,6 @@ describe('Users', () => {
     });
     cy.contains('フォロー').click();
     cy.contains('フォロー解除');
+    cy.contains('フォロワー 1');
   });
 });

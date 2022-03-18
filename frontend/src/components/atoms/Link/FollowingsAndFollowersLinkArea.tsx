@@ -24,7 +24,7 @@ export const FollowingsAndFollowersLinkArea: VFC<Props> = memo((props) => {
             </Link>
           )
           :
-          (<>フォロー{followingIdsCount}</>)
+          (<>フォロー {followingIdsCount}</>)
         }
       </Span>
       <Span data-e2e="followers-count">
@@ -36,7 +36,7 @@ export const FollowingsAndFollowersLinkArea: VFC<Props> = memo((props) => {
             </Link>
           )
           :
-          (<>フォロワー{followerIdsCount}</>)
+          (<>フォロワー {followerIdsCount}</>)
         }
       </Span>
     </>
