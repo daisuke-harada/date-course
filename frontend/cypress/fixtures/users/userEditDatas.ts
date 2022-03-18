@@ -1,4 +1,5 @@
-import { UserResponseData } from "../../../src/types/users/response";
+import { UserResponseData } from "../../support/types/UserResponse";
+
 
 export const userEditDatas: UserResponseData[] = [
   {
@@ -10,8 +11,8 @@ export const userEditDatas: UserResponseData[] = [
     image: {
       url: null
     },
-    createdAt: new Date('2019/11/27 20:30'),
-    updatedAt: new Date('2019/11/27 20:30')
+    followingIds: [],
+    followerIds: [],
   },
   {
     id: 2,
@@ -22,8 +23,8 @@ export const userEditDatas: UserResponseData[] = [
     image: {
       url: null
     },
-    createdAt: new Date('2019/11/27 20:30'),
-    updatedAt: new Date('2019/11/27 20:30'),
+    followingIds: [],
+    followerIds: []
   },
   {
     id: 3,
@@ -34,7 +35,7 @@ export const userEditDatas: UserResponseData[] = [
     image: {
       url: null
     },
-    createdAt: new Date('2019/11/27 20:30'),
-    updatedAt: new Date('2019/11/27 20:30'),
+    followingIds: [],
+    followerIds: []
   },
 ]

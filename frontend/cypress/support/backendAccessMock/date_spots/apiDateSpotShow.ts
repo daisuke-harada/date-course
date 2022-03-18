@@ -1,9 +1,7 @@
-import { AddressTestDataType } from '../../types/AddressTestDataType';
-import { DateSpotTestDataType } from '../../types/DateSpotTestDataType';
+import { AddressAndDateSpotJoinInputData } from './../../types/AddressAndDateSpotJoinDataType';
 
-
-export const apiDateSpotShow = (dateSpotData: DateSpotTestDataType, addressData: AddressTestDataType) => {
-  cy.intercept('GET', `api/v1/date_spots/${dateSpotData.id}`,  (req) => {
-    req.reply({dateSpot: dateSpotData, address: addressData});
+export const apiDateSpotShow = (addressAndDateSpotData: AddressAndDateSpotJoinInputData) => {
+  cy.intercept('GET', `api/v1/date_spots/${addressAndDateSpotData.dateSpot.id}`,  (req) => {
+    req.reply({addressAndDateSpot: addressAndDateSpotData, reviewAverageRate: 0, dateSpotReviews: []});
   });
 };

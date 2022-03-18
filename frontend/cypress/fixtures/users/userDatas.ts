@@ -1,4 +1,5 @@
-import { UserResponseData } from "../../../src/types/users/response";
+import { UserResponseData } from "../../support/types/UserResponse";
+
 
 export const userDatas: UserResponseData[] =[
   {
@@ -10,8 +11,8 @@ export const userDatas: UserResponseData[] =[
       url: null
     },
     passwordDigest: "daisukedaisuke",
-    createdAt: new Date('2017/11/27 20:30'),
-    updatedAt: new Date('2017/11/27 20:30')
+    followingIds: [],
+    followerIds: [],
   },
   {
     id: 2,
@@ -22,8 +23,8 @@ export const userDatas: UserResponseData[] =[
       url: null
     },
     passwordDigest: "kentakentakenta",
-    createdAt: new Date('2017/11/27 20:30'),
-    updatedAt: new Date('2017/11/27 20:30')
+    followingIds: [],
+    followerIds: []
   },
   {
     id: 3,
@@ -34,8 +35,8 @@ export const userDatas: UserResponseData[] =[
       url: null
     },
     passwordDigest: "marikamarikamarika",
-    createdAt: new Date('2017/11/27 20:30'),
-    updatedAt: new Date('2017/11/27 20:30')
+    followingIds: [],
+    followerIds: []
   },
 ];
 

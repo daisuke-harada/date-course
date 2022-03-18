@@ -1,7 +1,7 @@
 import { AddressAndDateSpotJoinInputData } from './../../support/types/AddressAndDateSpotJoinDataType';
 
 
-export const addressAndDateSpotDatas: Array<AddressAndDateSpotJoinInputData> =[
+export const addressAndDateSpotEditDatas: Array<AddressAndDateSpotJoinInputData> =[
   {
     id: 1,
     prefectureId: 40,
@@ -9,7 +9,7 @@ export const addressAndDateSpotDatas: Array<AddressAndDateSpotJoinInputData> =[
     dateSpot: {
       id: 1,
       genreId: 1,
-      name: "test",
+      name: "testEdit",
       image: {
         url: null
       },
@@ -31,7 +31,7 @@ export const addressAndDateSpotDatas: Array<AddressAndDateSpotJoinInputData> =[
     dateSpot: {
       id: 2,
       genreId: 2,
-      name: "test2",
+      name: "test2Edit",
       image: {
         url: null
       },

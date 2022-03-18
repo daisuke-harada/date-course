@@ -40,17 +40,17 @@ export const Show: VFC = memo(() => {
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
       setUser(response.data.user);
+
+      if(response.data.user.gender === '女性'){
+        setGenderTextColor('text-red-400');
+      }else if(response.data.user.gender === '男性'){
+        setGenderTextColor('text-blue-400');
+      };
+
     }).catch(error => {
       navigate("/*");
     });
-
-    if(user.gender === '女性'){
-      setGenderTextColor('text-red-400');
-    }else if(user.gender === '男性'){
-      setGenderTextColor('text-blue-400');
-    };
-
-  }, [id, user, navigate]);
+  }, [id, navigate]);
 
   return(
     <Div>

@@ -82,10 +82,10 @@ describe('Users', () => {
     apiUsersAccess(userDatas);
     cy.visit('/users');
     cy.contains('ユーザーを探す');
-    // userDatas.forEach((user: UserResponseData) => {
-    //   cy.contains(user.name);
-    //   cy.contains(user.gender);
-    // });
+    userDatas.forEach((user: UserResponseData) => {
+      cy.contains(user.name);
+      cy.contains(user.gender);
+    });
   });
 
   it('ユーザーが退会する', () => {

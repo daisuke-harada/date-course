@@ -2,6 +2,6 @@ import { addressAndDateSpotDatas } from './../../../fixtures/dateSpots/addressAn
 
 export const apiDateSpotsAccess = () => {
   cy.intercept('GET', 'api/v1/date_spots', (req) => {
-    req.reply({addressAndDateSpotDatas});
+    req.reply({addressAndDateSpots: addressAndDateSpotDatas});
   });
 };
