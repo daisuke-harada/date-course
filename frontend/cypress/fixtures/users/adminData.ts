@@ -1,4 +1,5 @@
-import { UserResponseData } from "../../../src/types/users/response";
+import { UserResponseData } from "../../support/types/UserResponse";
+
 
 export const adminData: UserResponseData = {
   id: 5,
