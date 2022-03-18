@@ -8,14 +8,15 @@ import { UserResponseData } from "types/users/response";
 type Props = {
   dataE2e?: string,
   userId: number,
-  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
+  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>,
+  setUser?: React.Dispatch<React.SetStateAction<UserResponseData>>
 };
 
 const FollowButton = tw.button`btn btn-yellow-green text-sm`
 const UnfollowButton = tw.button`btn btn-unfollow text-sm`;
 
 export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
-  const {dataE2e, userId, setUsers} = props;
+  const {dataE2e, userId, setUsers, setUser} = props;
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
   const [currentUserId, setCurrentUserId] = useState<number>(0);
@@ -33,12 +34,14 @@ export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
     }).then(response => {
       response.data.status === 'created' && setUsers && setUsers(response.data.users);
       response.data.status === 'created' && setCurrentUser({user: response.data.currentUser});
+      response.data.status === 'created' && setUser && setUser(response.data.followedUser);
     });
   };
 
   const onClickUnfollowAction = () => {
     client.delete(`relationships/${currentUserId}/${userId}`).then(response => {
       response.data.status === 'deleted' && setUsers && setUsers(response.data.users);
+      response.data.status === 'deleted' && setUser && setUser(response.data.unfollowedUser);
       response.data.status === 'deleted' && setCurrentUser({user: response.data.currentUser});
     });
   };

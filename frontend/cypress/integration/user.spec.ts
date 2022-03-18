@@ -1,3 +1,4 @@
+import { followUserDatas } from './../fixtures/users/followUserDatas';
 import { userDatas } from "../fixtures/users/userDatas";
 import { apiSignUpAccess } from "../support/backendAccessMock/registrations/apiSignUpAccess";
 import { apiUserEditAccess } from "../support/backendAccessMock/users/apiUserEditAccess";
@@ -101,21 +102,12 @@ describe('Users', () => {
     cy.intercept('POST', 'api/v1/relationships', (req) => {
       req.reply({
         status: 'created',
-        current_user: {
-          id: 1,
-          name: "daisuke",
-          email: "daisuke@gmail.com",
-          gender: "男性",
-          image: {
-            url: null
-          },
-          passwordDigest: "daisukedaisuke",
-          followingIds: [1],
-          followerIds: [],
-        }
+        users: followUserDatas,
+        current_user: followUserDatas[0],
+        followed_user: followUserDatas[1]
       });
     });
-    cy.contains('フォロー').click().as('click');
-    cy.wait('@click').contains('フォロー解除');
+    cy.contains('フォロー').click();
+    cy.contains('フォロー解除');
   });
 });

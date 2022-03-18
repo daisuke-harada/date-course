@@ -14,7 +14,8 @@ class Api::V1::RelationshipsController < ApplicationController
     render json: {
       status: :created,
       users: @users,
-      current_user: user_and_userFollowingsAndFollowers(User.find(params[:current_user_id]))
+      current_user: user_and_userFollowingsAndFollowers(User.find(params[:current_user_id])),
+      followed_user: user_and_userFollowingsAndFollowers(User.find(params[:followed_user_id]))
     }
   end
 
@@ -31,7 +32,8 @@ class Api::V1::RelationshipsController < ApplicationController
     render json: {
       status: :deleted,
       users: @users,
-      current_user: user_and_userFollowingsAndFollowers(User.find(params[:current_user_id]))
+      current_user: user_and_userFollowingsAndFollowers(User.find(params[:current_user_id])),
+      unfollowed_user: user_and_userFollowingsAndFollowers(User.find(params[:other_user_id]))
     }
   end
 

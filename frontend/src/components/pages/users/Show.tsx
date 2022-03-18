@@ -59,9 +59,10 @@ export const Show: VFC = memo(() => {
       <P>
         <Span className={genderTextColor}>{user.name}</Span>
         <Span className={genderTextColor}>{user.gender}</Span>
-        <Span><FollowAndUnFollowButton userId={user.id} /></Span>
+        <Span><FollowAndUnFollowButton userId={user.id} setUser={setUser} /></Span>
       </P>
       <P>
+
         <FollowingsAndFollowersLinkArea
           userId={user.id}
           followingIdsCount={user.followingIds.length}

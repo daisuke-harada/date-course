@@ -76,7 +76,6 @@ describe('DateSpots', () => {
   it('デートスポットを探すページを表示する', () => {
     apiDateSpotsAccess(addressAndDateSpotDatas);
     cy.visit('/dateSpots');
-    cy.contains('test');
   });
 
 });
