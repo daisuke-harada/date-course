@@ -8,7 +8,7 @@ import { client } from "lib/api/client";
 import { BusinessHour } from "components/atoms/text/dateSpots/BusinessHour";
 import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
-import { AddressResponseData, DateSpotResponseData } from "types/dateSpots/response";
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { Map } from "components/molecules/maps/Map";
 import { DateSpotReviewArea } from "components/organisms/dateSpotReviews/DateSpotReviewArea";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
@@ -23,10 +23,8 @@ const SubArea = tw.div`md:w-1/2 w-full`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
-  const [dateSpot, setDateSpot] = useState<DateSpotResponseData>();
-  const [address, setAddress] = useState<AddressResponseData>();
+  const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
-  const [genreName, setGenreName] = useState<string>('');
   const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
   const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
@@ -35,10 +33,9 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`date_spots/${id}`).then(response => {
-      setDateSpot(response.data.dateSpot);
-      response.data.dateSpot.image.url !== null && setDateSpotImage(response.data.dateSpot.image.url);
-      setAddress(response.data.address);
-      setGenreName(response.data.genreName);
+      setAddressAndDateSpot(response.data.addressAndDateSpot);
+      console.log(response.data.addressAndDateSpot.dateSpot)
+      response.data.addressAndDateSpot.dateSpot.image.url !== null && setDateSpotImage(response.data.addressAndDateSpot.dateSpot.image.url);
       setDateSpotReviews(response.data.dateSpotReviews);
       setDateSpotAverageRate(response.data.reviewAverageRate);
     });
@@ -52,17 +49,17 @@ export const Show: VFC = memo(() => {
             <ImageParentDiv>
               <Image src={dateSpotImage} alt='DateSpotProfileImage' />
             </ImageParentDiv>
-            <DateSpotNameTitle>{dateSpot?.name}</DateSpotNameTitle>
+            <DateSpotNameTitle>{addressAndDateSpot?.dateSpot.name}</DateSpotNameTitle>
             <div className='flex'>
               <StarRateText rate={dateSpotAverageRate} size={60} />
               <div className='ml-2 font-bold pt-14'>評価{dateSpotAverageRate}</div>
             </div>
-            <BusinessHour openingTime={dateSpot?.openingTime} closingTime={dateSpot?.closingTime} />
+            <BusinessHour openingTime={addressAndDateSpot?.dateSpot.openingTime} closingTime={addressAndDateSpot?.dateSpot.closingTime} />
             <div className="m-5 text-sm font-bold md:text-xl">
-              {address?.cityName}
+              {addressAndDateSpot?.cityName}
             </div>
             <div className="m-5 text-sm font-bold md:text-xl">
-              {genreName}
+              {addressAndDateSpot?.genreName}
             </div>
             <div className="text-center">
               {
@@ -73,7 +70,7 @@ export const Show: VFC = memo(() => {
                     <Link
                       className="text-white"
                       to={`edit`}
-                      state={{address: address, dateSpot: dateSpot}}
+                      state={{addressAndDateSpot: addressAndDateSpot}}
                     >
                       デートスポット情報編集
                     </Link>
@@ -84,19 +81,19 @@ export const Show: VFC = memo(() => {
           </SubArea>
           <SubArea>
             {
-              (address && dateSpot)
+              addressAndDateSpot
               &&
-              <Map address={address} dateSpotName={dateSpot.name}/>
+              <Map addressAndDateSpot={addressAndDateSpot} />
             }
           </SubArea>
         </SubDiv>
       </MainDiv>
       <MainDiv>
         {
-          dateSpot
+          addressAndDateSpot
           &&
           <DateSpotReviewArea
-            dateSpotId={dateSpot.id}
+            dateSpotId={addressAndDateSpot.dateSpot.id}
             dateSpotReviews={dateSpotReviews}
             setDateSpotReviews={setDateSpotReviews}
             setDateSpotAverageRate={setDateSpotAverageRate}

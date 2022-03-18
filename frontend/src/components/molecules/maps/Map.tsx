@@ -1,10 +1,9 @@
 import { memo, useState, VFC } from "react";
 import { GoogleMap, LoadScript, InfoWindow, Marker} from "@react-google-maps/api";
-import { AddressResponseData } from "types/dateSpots/response";
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 type Props = {
-  address: AddressResponseData
-  dateSpotName: string,
+  addressAndDateSpot: AddressAndDateSpotJoinData
 };
 
 type Center = {
@@ -13,12 +12,12 @@ type Center = {
 }
 
 export const Map: VFC<Props> = memo((props) => {
-  const {address, dateSpotName} = props;
+  const { addressAndDateSpot } = props;
   const [size, setSize] = useState<undefined | google.maps.Size>(undefined);
 
   const center: Center = {
-    lat: address.latitude,
-    lng: address.longitude,
+    lat: addressAndDateSpot.latitude,
+    lng: addressAndDateSpot.longitude,
   };
 
   const InfoWindowOptions = {
@@ -36,9 +35,9 @@ export const Map: VFC<Props> = memo((props) => {
           <Marker position={center} />
           <InfoWindow position={center} options={InfoWindowOptions}>
             <div className='bg-white text-size'>
-              <h1>{dateSpotName}</h1>
-              <p>{address.cityName}</p>
-              <a href={`https://maps.google.co.jp/maps?q=${address.cityName}&iwloc=J`} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>
+              <h1>{addressAndDateSpot.dateSpot.name}</h1>
+              <p>{addressAndDateSpot.cityName}</p>
+              <a href={`https://maps.google.co.jp/maps?q=${addressAndDateSpot.cityName}&iwloc=J`} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>
             </div>
           </InfoWindow>
         </GoogleMap>

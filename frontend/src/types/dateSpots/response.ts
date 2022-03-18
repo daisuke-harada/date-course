@@ -27,6 +27,7 @@ export type AddressAndDateSpotJoinData = {
   cityName: string,
   prefectureId: number,
   dateSpot: DateSpotResponseData,
+  genreName: string,
   latitude: number,
   longitude: number,
   reviewTotalNumber: number,
