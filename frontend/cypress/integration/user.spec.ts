@@ -3,6 +3,7 @@ import { apiSignUpAccess } from "../support/backendAccessMock/registrations/apiS
 import { apiUserEditAccess } from "../support/backendAccessMock/users/apiUserEditAccess";
 import { apiUserShowAccess } from "../support/backendAccessMock/users/apiUserShowAccess";
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
+import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAccess";
 import { userEditDatas } from "../fixtures/users/userEditDatas";
 import { userSigninSuccessInput } from "../support/hooks/session";
 
@@ -77,6 +78,11 @@ describe('Users', () => {
     cy.contains('アカウント所有者しかアクセスできません');
   });
 
+  it('ユーザーを探すページが表示される', () => {
+    apiUsersAccess(userDatas);
+    cy.visit('/users');
+  });
+
   it('ユーザーが退会する', () => {
     cy.visit('/login');
     userSigninSuccessInput(userDatas[0]);
@@ -85,5 +91,31 @@ describe('Users', () => {
     apiUserDestroyAccess(userDatas[0]);
     cy.contains("退会").click();
     cy.contains("Topページ");
+  });
+
+  it('ログインしてフォローする', () => {
+    cy.visit('/login');
+    userSigninSuccessInput(userDatas[0]);
+    apiUserShowAccess(userDatas[1]);
+    cy.visit('/users/2');
+    cy.intercept('POST', 'api/v1/relationships', (req) => {
+      req.reply({
+        status: 'created',
+        current_user: {
+          id: 1,
+          name: "daisuke",
+          email: "daisuke@gmail.com",
+          gender: "男性",
+          image: {
+            url: null
+          },
+          passwordDigest: "daisukedaisuke",
+          followingIds: [1],
+          followerIds: [],
+        }
+      });
+    });
+    cy.contains('フォロー').click().as('click');
+    cy.wait('@click').contains('フォロー解除');
   });
 });

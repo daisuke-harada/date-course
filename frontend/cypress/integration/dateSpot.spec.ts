@@ -1,6 +1,7 @@
 import { AddressAndDateSpotJoinInputData } from './../support/types/AddressAndDateSpotJoinDataType';
 import { addressAndDateSpotDatas } from './../fixtures/dateSpots/addressAndDateSpotDatas';
 import { addressAndDateSpotEditDatas } from './../fixtures/dateSpots/addressAndDateSpotEditDatas'
+import { apiDateSpotsAccess } from './../support/backendAccessMock/date_spots/apiDateSpotsAccess';
 import { apiDateSpotDestroyAccess } from './../support/backendAccessMock/date_spots/apiDateSpotDestroyAccess';
 import { apiDateSpotUpdateAccess } from './../support/backendAccessMock/date_spots/apiDateSpotUpdateAccess';
 import { adminData } from "../fixtures/users/adminData";
@@ -71,4 +72,11 @@ describe('DateSpots', () => {
     cy.contains('削除').click();
     cy.contains('削除しました');
   });
+
+  it('デートスポットを探すページを表示する', () => {
+    apiDateSpotsAccess(addressAndDateSpotDatas);
+    cy.visit('/dateSpots');
+    cy.contains('test');
+  });
+
 });
