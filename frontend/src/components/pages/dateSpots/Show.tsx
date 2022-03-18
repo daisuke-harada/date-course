@@ -34,7 +34,6 @@ export const Show: VFC = memo(() => {
   useEffect(() => {
     client.get(`date_spots/${id}`).then(response => {
       setAddressAndDateSpot(response.data.addressAndDateSpot);
-      console.log(response.data.addressAndDateSpot.dateSpot)
       response.data.addressAndDateSpot.dateSpot.image.url !== null && setDateSpotImage(response.data.addressAndDateSpot.dateSpot.image.url);
       setDateSpotReviews(response.data.dateSpotReviews);
       setDateSpotAverageRate(response.data.reviewAverageRate);
