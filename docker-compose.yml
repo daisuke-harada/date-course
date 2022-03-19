@@ -30,12 +30,17 @@ services:
     tty: true # binding.pryをdockerの環境でするために必要
     stdin_open: true # binding.pryをdockerの環境でするために必要
   e2e:
-    build:
-      context: ./e2e
-    command: bash -c "yarn run cypress:install && yarn run cypress:open"
+    image: cypress
+    build: ./e2e
+    container_name: cypress
     depends_on:
       - frontend
+    environment:
+      - CYPRESS_baseUrl=http://frontend
+    # command: npx cypress run
+    command: yarn run cypress run
     volumes:
-      - ./e2e:/e2e/e2e-app
+      - ./e2e/cypress:/e2eApp/cypress
+      - ./e2e/cypress.json:/e2eApp/cypress.json
 volumes:
   mysql-data:
