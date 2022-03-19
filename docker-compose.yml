@@ -36,7 +36,7 @@ services:
     depends_on:
       - frontend
     environment:
-      - CYPRESS_baseUrl=http://frontend
+      - CYPRESS_baseUrl=http://frontend:3000
     # command: npx cypress run
     command: yarn run cypress run
     volumes:
