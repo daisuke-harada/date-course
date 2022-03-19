@@ -37,10 +37,9 @@ services:
       - frontend
     environment:
       - CYPRESS_baseUrl=http://frontend:3000
-    # command: npx cypress run
-    command: yarn run cypress run
+    # command: npx cypress open
     volumes:
-      - ./e2e/cypress:/e2eApp/cypress
-      - ./e2e/cypress.json:/e2eApp/cypress.json
+      - ./e2e/cypress:/app/cypress
+      - ./e2e/cypress.json:/app/cypress.json
 volumes:
   mysql-data:
