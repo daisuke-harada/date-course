@@ -35,9 +35,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
-    "cy:run:chrome": "cypress run --browser chrome",
-    "cy:run:firefox": "cypress run --browser firefox"
+    "cy:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -59,11 +57,9 @@
     ]
   },
   "devDependencies": {
-    "@cypress/xvfb": "^1.2.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/googlemaps": "^3.43.3",
     "@types/jest": "^27.4.1",
-    "cypress": "^9.5.1",
     "eslint-plugin-cypress": "^2.12.1",
     "jest": "^27.5.1",
     "tailwind-styled-components": "^2.1.4",

@@ -1,4 +1,5 @@
 import { userDatas } from "../fixtures/users/userDatas";
+import { followUserDatas } from './../fixtures/users/followUserDatas';
 import { apiSignUpAccess } from "../support/backendAccessMock/registrations/apiSignUpAccess";
 import { apiUserEditAccess } from "../support/backendAccessMock/users/apiUserEditAccess";
 import { apiUserShowAccess } from "../support/backendAccessMock/users/apiUserShowAccess";
@@ -6,9 +7,8 @@ import { dataE2eGet } from "../support/hooks/dataE2eGet";
 import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAccess";
 import { userEditDatas } from "../fixtures/users/userEditDatas";
 import { userSigninSuccessInput } from "../support/hooks/session";
-
-import { UserResponseData } from "../../src/types/users/response";
 import { apiUserDestroyAccess } from "../support/backendAccessMock/users/apiUserDestroyAccess";
+import { UserResponseData } from "../support/types/UserResponse";
 
 const userFormSignUpSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
@@ -96,5 +96,23 @@ describe('Users', () => {
     apiUserDestroyAccess(userDatas[0]);
     cy.contains("退会").click();
     cy.contains("Topページ");
+  });
+
+  it('ログインしてフォローする', () => {
+    cy.visit('/login');
+    userSigninSuccessInput(userDatas[0]);
+    apiUserShowAccess(userDatas[1]);
+    cy.visit('/users/2');
+    cy.intercept('POST', 'api/v1/relationships', (req) => {
+      req.reply({
+        status: 'created',
+        users: followUserDatas,
+        current_user: followUserDatas[0],
+        followed_user: followUserDatas[1]
+      });
+    });
+    cy.contains('フォロー').click();
+    cy.contains('フォロー解除');
+    cy.contains('フォロワー 1');
   });
 });

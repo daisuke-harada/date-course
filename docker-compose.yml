@@ -12,7 +12,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    command: sh -c "yarn start && yarn install" #E2Eテストのためにcypress installが必要
+    command: sh -c "yarn start"
     volumes:
       - ./frontend:/usr/src/datecourses
     ports:
@@ -29,5 +29,17 @@ services:
       - db
     tty: true # binding.pryをdockerの環境でするために必要
     stdin_open: true # binding.pryをdockerの環境でするために必要
+  e2e:
+    image: cypress
+    build: ./e2e
+    container_name: cypress
+    depends_on:
+      - frontend
+    environment:
+      - CYPRESS_baseUrl=http://frontend:3000
+    # command: npx cypress open
+    volumes:
+      - ./e2e/cypress:/app/cypress
+      - ./e2e/cypress.json:/app/cypress.json
 volumes:
   mysql-data:
