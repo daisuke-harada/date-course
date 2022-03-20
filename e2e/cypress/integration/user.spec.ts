@@ -78,16 +78,6 @@ describe('Users', () => {
     cy.contains('アカウント所有者しかアクセスできません');
   });
 
-  it('ユーザーを探すページが表示される', () => {
-    apiUsersAccess(userDatas);
-    cy.visit('/users');
-    cy.contains('ユーザーを探す');
-    userDatas.forEach((user: UserResponseData) => {
-      cy.contains(user.name);
-      cy.contains(user.gender);
-    });
-  });
-
   it('ユーザーが退会する', () => {
     cy.visit('/login');
     userSigninSuccessInput(userDatas[0]);
@@ -114,5 +104,17 @@ describe('Users', () => {
     cy.contains('フォロー').click();
     cy.contains('フォロー解除');
     cy.contains('フォロワー 1');
+  });
+
+  it('ユーザーを探すページが表示される', () => {
+    cy.visit('/');
+    dataE2eGet("slide-down-btn").click();
+    // cy.visit('/users');
+    apiUsersAccess(userDatas);
+    dataE2eGet("user-index").last().click();
+    userDatas.forEach((user: UserResponseData) => {
+      cy.contains(user.name);
+      cy.contains(user.gender);
+    });
   });
 });
