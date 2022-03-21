@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile.develop
     command: sh -c "yarn start"
     volumes:
-      - ./frontend:/datecourses
+      - ./frontend:/usr/src/datecourses
     ports:
       - "3000:3000"
   backend:

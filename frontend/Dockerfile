@@ -1,6 +1,6 @@
 FROM node:17.4.0 as builder
 
-ENV APP_PATH /datecourses
+ENV APP_PATH /usr/src/datecourses
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
