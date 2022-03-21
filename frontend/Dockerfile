@@ -1,6 +1,4 @@
-FROM node:17.4.0 as builder
-
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+FROM node:17.4.0-alpine as builder
 
 ENV APP_PATH /datecourses
 
