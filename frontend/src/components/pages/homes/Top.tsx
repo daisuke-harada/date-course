@@ -10,6 +10,9 @@ export const Top: VFC = memo(() => {
        {/* ここに案内ボタンを設置 */}
        <h1>Topページ</h1>
       </div>
+      <div>
+        {process.env.NODE_ENV}
+      </div>
       {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
     </>
   );
