@@ -1,6 +1,7 @@
 FROM node:17.4.0 as builder
 
 ENV APP_PATH /usr/src/datecourses
+ENV REACT_APP_PRODUCTION='production'
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
@@ -13,9 +14,9 @@ RUN yarn install
 
 COPY . $APP_PATH
 
-RUN yarn prodBuild
+RUN yarn build
 
 EXPOSE 3000
 
-CMD ["yarn", "prod"]
+CMD ["yarn", "start"]
 

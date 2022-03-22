@@ -13,7 +13,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.develop
-    command: sh -c "yarn dev"
+    command: sh -c "yarn start"
     volumes:
       - ./frontend:/usr/src/datecourses
     ports:
