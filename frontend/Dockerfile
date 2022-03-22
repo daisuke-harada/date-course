@@ -13,9 +13,9 @@ RUN yarn install
 
 COPY . $APP_PATH
 
-RUN yarn build
+RUN yarn prodBuild
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "prod"]
 
