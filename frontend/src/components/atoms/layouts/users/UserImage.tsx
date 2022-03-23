@@ -17,9 +17,10 @@ const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-xl border
 
 export const UserImage: VFC<Props> = memo((props) => {
   const { addClassName, image, userId, gender } = props;
-  const developNoImage: string = "http://localhost:7777/images/no_image.jpg";
-  const productionNoImage: string = "https://backend.datecourses.com/images/no_image.jpg";
-  const noImageUrl: string = process.env.REACT_APP_ENVIRONMENT === 'production'? productionNoImage : developNoImage;
+  // const developNoImage: string = "http://localhost:7777/images/no_image.jpg";
+  // const productionNoImage: string = "https://backend.datecourses.com/images/no_image.jpg";
+  // const noImageUrl: string = process.env.REACT_APP_ENVIRONMENT === 'production'? productionNoImage : developNoImage;
+  const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [userImage, setUserImage] = useState(noImageUrl);
   const [genderBorderColor, setGenderBorderColor] = useState('');
 
