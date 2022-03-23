@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  if Rails.env.development?
+  if Rails.env.production?
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = Rails.application.credentials[:FOG_DIRECTORY]
