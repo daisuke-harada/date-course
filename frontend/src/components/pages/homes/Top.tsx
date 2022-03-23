@@ -21,7 +21,7 @@ export const Top: VFC = memo(() => {
       {/* <img src={`${process.env.PUBLIC_URL}/lp.jpg`} /> */}
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/lp.jpg`} />
-        <h1 className='text-3xl font-bold z-10 bottom-10 absolute'>Topページ</h1>
+        <h1 className='p-5 dtext-3xl font-bold z-10 bottom-10 absolute'>Topページ</h1>
       </ImageParentDiv>
       {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
     </>

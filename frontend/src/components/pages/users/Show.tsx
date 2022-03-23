@@ -40,7 +40,6 @@ export const Show: VFC = memo(() => {
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
       setUser(response.data.user);
-
       if(response.data.user.gender === '女性'){
         setGenderTextColor('text-red-400');
       }else if(response.data.user.gender === '男性'){
@@ -55,7 +54,7 @@ export const Show: VFC = memo(() => {
   return(
     <Div>
       <h1>ユーザーの詳細ページです</h1>
-      <P><UserImage addClassName='w-64 h-64' userId={user.id} gender={user.gender}/></P>
+      <P><UserImage addClassName='w-64 h-64' image={user.image} userId={user.id} gender={user.gender}/></P>
       <P>
         <Span className={genderTextColor}>{user.name}</Span>
         <Span className={genderTextColor}>{user.gender}</Span>
