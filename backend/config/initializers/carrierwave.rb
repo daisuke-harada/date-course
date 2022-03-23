@@ -1,5 +1,5 @@
-unless Rails.env.development? || Rails.env.test?
-  CarrierWave.configure do |config|
+CarrierWave.configure do |config|
+  if Rails.env.production?
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: Rails.application.credentials[:AWS_ACCESS_KEY_ID],
@@ -9,11 +9,9 @@ unless Rails.env.development? || Rails.env.test?
 
     config.fog_directory  = Rails.application.credentials[:FOG_DIRECTORY]
     config.cache_storage = :fog
+  else
+    config.asset_host = "http://localhost:7777"
+    config.storage = :file
+    config.cache_storage = :file
   end
 end
-
-# CarrierWave.configure do |config|
-#   config.asset_host = "http://localhost:7777"
-#   config.storage = :file
-#   config.cache_storage = :file
-# end
