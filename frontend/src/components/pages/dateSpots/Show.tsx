@@ -25,7 +25,10 @@ export const Show: VFC = memo(() => {
   const { id } = useParams();
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
-  const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
+  const developNoImage: string = "http://localhost:7777/images/no_image.jpg";
+  const productionNoImage: string = "https://backend.datecourses.com/images/no_image.jpg";
+  const noImageUrl: string = process.env.REACT_APP_ENVIRONMENT === 'production'? productionNoImage : developNoImage;
+  const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
   const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
   const getCurrentUser = useRecoilValue(currentUserState);

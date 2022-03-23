@@ -17,7 +17,10 @@ const Image = tw.img`w-64 h-64 rounded-xl border-4 border-pink-400 hover:border-
 export const DateSpotCard: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const dateSpot: DateSpotResponseData = addressAndDateSpot.dateSpot
-  const [image, setImage] = useState('http://localhost:7777/images/no_image.jpg');
+  const developNoImage: string = "http://localhost:7777/images/no_image.jpg";
+  const productionNoImage: string = "https://backend.datecourses.com/images/no_image.jpg";
+  const noImageUrl: string = process.env.REACT_APP_ENVIRONMENT === 'production'? productionNoImage : developNoImage;
+  const [image, setImage] = useState(noImageUrl);
   const genre = genreDatas.find(genreData => genreData.id === dateSpot.genreId);
 
   useEffect(() => {
