@@ -10,7 +10,7 @@ const BottomUlList = tw.li`my-3 mx-6`;
 export const HeaderBottom: VFC = memo(() => {
   return(
     <BottomUl>
-      {HeaderBottomRoutes().map((route) => <BottomUlList key={route.path}><Link className="text-black" to={route.path}>{route.text}</Link></BottomUlList>)}
+      {HeaderBottomRoutes().map((route) => <BottomUlList key={route.path} data-e2e={route.dataE2e}> <Link className="text-black" to={route.path}>{route.text}</Link></BottomUlList>)}
     </BottomUl>
   );
 });

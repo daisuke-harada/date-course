@@ -74,8 +74,14 @@ describe('DateSpots', () => {
   });
 
   it('デートスポットを探すページを表示する', () => {
-    apiDateSpotsAccess();
-    cy.visit('/dateSpots');
+    apiDateSpotsAccess(addressAndDateSpotDatas);
+    cy.visit('/dateSpots/index');
+    addressAndDateSpotDatas.forEach((address: AddressAndDateSpotJoinInputData) => {
+      cy.contains(address.dateSpot.name);
+      cy.contains(address.genreName);
+      cy.contains(address.cityName);
+    });
+    cy.screenshot();
   });
 
 });

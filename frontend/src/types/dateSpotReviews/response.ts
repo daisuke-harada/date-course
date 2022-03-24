@@ -5,7 +5,7 @@ export type DateSpotReviewAndUserResponseData = {
   userName: number,
   userGender: string,
   userId:number,
-  image: {
+  userImage: {
     url: string | null
   },
   dateSpotId: number,

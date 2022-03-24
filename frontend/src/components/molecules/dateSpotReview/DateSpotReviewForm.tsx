@@ -78,8 +78,8 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'updated' && setContent('');
       response.data.status === 'updated' && setRate(0);
       response.data.status === 'updated' && setDateSpotAverageRate(response.data.reviewAverageRate);
-      response.data.status === 'updated' &&setErrorUserIdMessages([]);
-      response.data.status === 'updated' &&setErrorContentMessages([]);
+      response.data.status === 'updated' && setErrorUserIdMessages([]);
+      response.data.status === 'updated' && setErrorContentMessages([]);
       response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
       response.data.status === 'updated' && setEditOpen(false);
       if(response.data.status === 500){
@@ -101,8 +101,8 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
       response.data.status === 'deleted' && setContent('');
       response.data.status === 'deleted' && setRate(0);
       response.data.status === 'deleted' && setDateSpotAverageRate(response.data.reviewAverageRate);
-      response.data.status === 'deleted' &&setErrorUserIdMessages([]);
-      response.data.status === 'deleted' &&setErrorContentMessages([]);
+      response.data.status === 'deleted' && setErrorUserIdMessages([]);
+      response.data.status === 'deleted' && setErrorContentMessages([]);
       response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);
       response.data.status === 'deleted' && setEditOpen(false);
     });

@@ -51,5 +51,6 @@ test:
 production:
   <<: *default
   database: date_course_api_production
-  username: date_course_api
-  password: <%= ENV['DATE_COURSE_API_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_USER] %>
+  password: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_PASSWORD] %>
+  host: <%= Rails.application.credentials[:DATE_COURSE_DATABASE_HOST] %>

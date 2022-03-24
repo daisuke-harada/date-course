@@ -13,11 +13,11 @@ const options = {
 };
 
 export const client = applyCaseMiddleware(axios.create({
-  baseURL: 'http://localhost:7777/api/v1',
+  baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
 }), options);
 
 export const formDataClient = applyCaseMiddleware(axios.create({
-  baseURL: 'http://localhost:7777/api/v1',
+  baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
   headers: {
     'content-type': 'multipart/form-data',
   },

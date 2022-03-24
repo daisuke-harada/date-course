@@ -12,7 +12,6 @@ import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { Map } from "components/molecules/maps/Map";
 import { DateSpotReviewArea } from "components/organisms/dateSpotReviews/DateSpotReviewArea";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
-//import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -25,7 +24,8 @@ export const Show: VFC = memo(() => {
   const { id } = useParams();
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
-  const [dateSpotImage, setDateSpotImage] = useState('http://localhost:7777/images/no_image.jpg');
+  const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
+  const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
   const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
   const getCurrentUser = useRecoilValue(currentUserState);

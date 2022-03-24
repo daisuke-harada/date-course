@@ -27,6 +27,9 @@ gem 'bcrypt'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+# for image uploader with AWS S3
+gem 'fog-aws'
+
 # 住所やカテゴリのmodelデータに使用する。変更される可能性が低いものをハッシュとして管理できる
 gem 'active_hash'
 

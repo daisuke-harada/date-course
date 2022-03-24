@@ -39,7 +39,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
           if(dateSpotReview.userId !== getCurrentUser.user.id){
             return (
               <li className='my-5 p-2 flex' key={dateSpotReview.id}>
-                <UserImage image={dateSpotReview.image} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
+                <UserImage image={dateSpotReview.userImage} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
                 <div className='px-5'>
                   <div>{dateSpotReview.userName}</div>
                   <StarRateText rate={dateSpotReview.rate} size={20} />

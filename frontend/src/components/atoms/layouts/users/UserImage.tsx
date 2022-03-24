@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 type Props = {
   addClassName: string,
-  image?: {
+  image: {
     url: string | null
   },
   userId: number,
@@ -17,7 +17,8 @@ const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-xl border
 
 export const UserImage: VFC<Props> = memo((props) => {
   const { addClassName, image, userId, gender } = props;
-  const [userImage, setUserImage] = useState('http://localhost:7777/images/no_image.jpg');
+  const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
+  const [userImage, setUserImage] = useState(noImageUrl);
   const [genderBorderColor, setGenderBorderColor] = useState('');
 
   useEffect(() => {
