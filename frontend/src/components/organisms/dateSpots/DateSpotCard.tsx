@@ -5,6 +5,7 @@ import { AddressAndDateSpotJoinData, DateSpotResponseData } from "types/dateSpot
 import { genreDatas } from "datas/genreDatas";
 import { Link } from "react-router-dom";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
+import { AddCourseButton } from "components/atoms/button/AddCourseButton";
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
@@ -47,6 +48,7 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
       </DD>
       <DD>{addressAndDateSpot.cityName}</DD>
       <DD>{genre?.name}</DD>
+      <DD><AddCourseButton dateSpot={addressAndDateSpot} /></DD>
     </Card>
   );
 });

@@ -14,7 +14,7 @@ export const Index: VFC = memo(() => {
 
   return(
     <>
-      <h1>デートスポットを探す</h1>
+      <h1 className='m-4'>デートスポットを探す</h1>
       <DateSpots addressAndDateSpots={addressAndDateSpots} />
     </>
   );
