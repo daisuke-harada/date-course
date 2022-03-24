@@ -1,7 +1,7 @@
-import { UserResponseData } from "../../../src/types/users/response";
 import { dataE2eGet } from "./dataE2eGet";
 import { apiLoginAccess } from "../backendAccessMock/sessions/apiLoginAccess";
 import { apiUserShowAccess } from "../backendAccessMock/users/apiUserShowAccess";
+import { UserResponseData } from "../types/UserResponse";
 
 export const userSigninSuccessInput = (user: UserResponseData) => {
   cy.contains('ログイン画面');
