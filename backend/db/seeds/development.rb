@@ -1,4 +1,4 @@
-User.create(name: 'guest', email: 'guest@gmail.com', gender: '男性', password: 'foobar', password_confirmation: 'foobar')
+User.create(name: 'guest', email: 'guest@gmail.com', gender: '男性', image: File.open('./public/images/user_images/spiderman.png'), password: 'foobar', password_confirmation: 'foobar')
 User.create(name: 'daisuke', email: 'daisuke@gmail.com', gender: '男性', password: 'daisuke', password_confirmation: 'daisuke')
 User.create(name: 'peter', email: 'kenta@gmail.com', gender: '男性', image: File.open('./public/images/user_images/spiderman.png'), password: 'foobar', password_confirmation: 'foobar')
 User.create(name: 'marika', email: 'marika@gmail.com', gender: '女性', password: 'marika', password_confirmation: 'marika')

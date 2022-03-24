@@ -23,7 +23,7 @@ export const HeaderTopLeftRoutes = () => {
     if(getLoginsStatus.status === true && getCurrentUser.user.admin === false) {
       setHeaderRoutes([{
         element: <BaseButton dataE2e="header-dateCourse-new-link" >デートコース作成</BaseButton>,
-        path: "myCourses/createCourse",
+        path: "managementCourses/createCourse",
       }]);
     }else if(getLoginsStatus.status === true && getCurrentUser.user.admin === true) {
       setHeaderRoutes([{

@@ -10,6 +10,7 @@ import { DateSpotReviewRoutes } from "router/DateSpotReviewRoutes";
 import { DateSpotRoutes } from "router/DateSpotRoutes";
 import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
+import { ManagementCourseRoutes } from "./ManagementCourseRoutes";
 
 
 export const Routers: VFC = memo(() => {
@@ -36,6 +37,11 @@ export const Routers: VFC = memo(() => {
         </Route>
         <Route path="dateSpotReviews" >
           {DateSpotReviewRoutes().map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="managementCourses" >
+          {ManagementCourseRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>

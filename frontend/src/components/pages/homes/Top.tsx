@@ -1,3 +1,4 @@
+import { BaseButton } from "components/atoms/button/BaseButton";
 import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import { loginStatusState } from "store/session";
@@ -14,14 +15,11 @@ export const Top: VFC = memo(() => {
 
   return(
     <>
-      {/* <div className={backendLpUrlClass}> */}
-       {/* ここに案内ボタンを設置 */}
-       {/* <h1>Topページ</h1> */}
-      {/* </div> */}
-      {/* <img src={`${process.env.PUBLIC_URL}/lp.jpg`} /> */}
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/lp.jpg`} />
-        <h1 className='p-5 dtext-3xl font-bold z-10 bottom-10 absolute'>Topページ</h1>
+        <h1 className='m-5 dtext-3xl font-bold z-10 bottom-0 absolute'>
+          <BaseButton>デートコースを作成する</BaseButton>
+        </h1>
       </ImageParentDiv>
       {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
     </>
