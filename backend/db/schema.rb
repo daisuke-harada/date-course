@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_014338) do
+ActiveRecord::Schema.define(version: 2022_03_24_112552) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "prefecture_id"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 2022_03_16_014338) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date_spot_id", "created_at"], name: "index_addresses_on_date_spot_id_and_created_at"
     t.index ["prefecture_id", "created_at"], name: "index_addresses_on_prefecture_id_and_created_at"
+  end
+
+  create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "date_spot_reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,6 +63,14 @@ ActiveRecord::Schema.define(version: 2022_03_16_014338) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "spot_in_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "date_spot_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["date_spot_id", "created_at"], name: "index_spot_in_courses_on_date_spot_id_and_created_at", unique: true
+    t.index ["date_spot_id"], name: "index_spot_in_courses_on_date_spot_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -75,4 +88,5 @@ ActiveRecord::Schema.define(version: 2022_03_16_014338) do
   add_foreign_key "date_spot_reviews", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "spot_in_courses", "date_spots"
 end
