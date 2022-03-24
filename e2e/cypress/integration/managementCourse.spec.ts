@@ -8,7 +8,7 @@ describe('managementCourse', () => {
   });
 
   it('デートコース作成画面が表示される', () => {
-    cy.visit('managementCourses/createCourse')
+    cy.visit('managementCourses/createCourse');
     cy.contains('デートコース作成ページです');
   });
 });

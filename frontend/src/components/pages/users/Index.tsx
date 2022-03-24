@@ -13,7 +13,7 @@ export const Index: VFC = memo(() => {
 
   return(
     <>
-      <h1 className='mt-6'>ユーザーを探すページ</h1>
+      <h1 className='m-2'>ユーザーを探すページ</h1>
       <Users users={users} setUsers={setUsers} />
     </>
   );
