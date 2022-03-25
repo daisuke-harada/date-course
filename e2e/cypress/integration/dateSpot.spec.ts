@@ -81,7 +81,5 @@ describe('DateSpots', () => {
       cy.contains(address.genreName);
       cy.contains(address.cityName);
     });
-    cy.screenshot();
   });
-
 });
