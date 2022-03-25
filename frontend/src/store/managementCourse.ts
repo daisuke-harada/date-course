@@ -1,13 +1,13 @@
 import { atom} from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { ManagementCourse } from '../types/managementCourses/management'
+//import { ManagementCourse } from '../types/managementCourses/management'
 
 const { persistAtom } = recoilPersist();
 
-export const managementCourseState = atom<Array<ManagementCourse>>(
+export const managementCourseState = atom(
   {
     key: "managementCourseState",
-    default: [],
+    default: {state: [{userId: 0, courseDuringSpots: []}]},
     effects_UNSTABLE: [persistAtom]
   }
 );
