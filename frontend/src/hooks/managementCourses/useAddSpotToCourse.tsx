@@ -1,6 +1,7 @@
 export const useAddSpotToCourse = () => {
-  const currentUserCourse = () => {
+
+  const addUserCourse = (userId: number) => {
     console.log('aaaaaa');
   };
-  return { currentUserCourse };
+  return { addUserCourse };
 };

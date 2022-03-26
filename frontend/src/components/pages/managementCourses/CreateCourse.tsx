@@ -1,6 +1,12 @@
 import { memo, VFC } from "react";
+import { useRecoilValue } from "recoil";
+import { managementCourseState } from "store/managementCourse";
+import { currentUserState } from "store/session";
 
 export const CreateCourse: VFC = memo(() => {
+  const getCurrentUser = useRecoilValue(currentUserState);
+  const getMangementCourse = useRecoilValue(managementCourseState({userId: getCurrentUser.user.id}));
+  console.log(getMangementCourse);
   return(
     <>
       <h1 className="m-5 font-bold text-3xl pb-5">デートコース作成</h1>
