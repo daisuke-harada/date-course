@@ -1,4 +1,3 @@
-import { useSearchManagementCourse } from "hooks/managementCourses/useSearchManagementCourse";
 import { client } from "lib/api/client";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { SignInParams } from "types/users/session";
 export const useLoginAuthAction = (signInParams: SignInParams) => {
   const setLoginStatus = useSetRecoilState(loginStatusState);
   const setCurrentUser = useSetRecoilState(currentUserState);
-  const { searchManagementCourse } = useSearchManagementCourse();
   const navigate = useNavigate();
 
   // エラーメッセージ用のステート
@@ -20,9 +18,6 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
   const afterLoginSuccess = (data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user});
-
-    // デートコース作成用の初期値をセッテイングする。
-    searchManagementCourse(data.user.id);
 
     navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}});
   };
@@ -37,7 +32,6 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
         setErrorMessages(response.data.errors);
         // フラッシュメッセージにもエラーを表示させる。
         <Navigate to='./' state={{message: 'ログインに失敗しました', type: 'error-message', condition: true}} />
-        // navigate(`/login`, {state: {message: 'ログインに失敗しました', type: 'error-message', condition: true}});
       }
     });
     // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます
