@@ -56,10 +56,14 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         </DD>
         <DD>{addressAndDateSpot?.cityName}</DD>
         <DD>{addressAndDateSpot?.genreName}</DD>
-        <DD><ChangeSelect
+        <DD>
+          {
+            addressAndDateSpot &&
+            <ChangeSelect
               courseDuringSpotIdAndNames={courseDuringSpotIdAndNames}
-              currentDateSpotId={addressAndDateSpot?.dateSpot.id}
+              currentDateSpotId={addressAndDateSpot.dateSpot.id}
             />
+          }
         </DD>
       </MainDl>
       {
