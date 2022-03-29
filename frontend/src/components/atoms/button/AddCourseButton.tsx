@@ -20,11 +20,11 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const onClickAddCourseAction = () => {
     if(managementCourses.userId === 0){
-      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpotIdAndNames: [{dateSpotId: addressAndDateSpot.dateSpot.id, dateSpotName: addressAndDateSpot.dateSpot.name}]});
+      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: [addressAndDateSpot]});
     } else {
-      const dateCourseIdAndNames = managementCourses.courseDuringSpotIdAndNames.slice();
-      dateCourseIdAndNames.push({dateSpotId: addressAndDateSpot.dateSpot.id, dateSpotName: addressAndDateSpot.dateSpot.name});
-      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpotIdAndNames: dateCourseIdAndNames});
+      const dateCourseIdAndNames = managementCourses.courseDuringSpots.slice();
+      dateCourseIdAndNames.push(addressAndDateSpot);
+      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: dateCourseIdAndNames});
     };
     navigate('/managementCourses/createCourse');
   };

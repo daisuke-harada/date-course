@@ -2,6 +2,7 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { memo, useCallback, useState, VFC } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
 import { currentUserState } from "store/session";
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { ManagementCourse } from "types/managementCourses/management";
 
 type Props = {
@@ -17,10 +18,31 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
   const onChangeCourseIdValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setChangeCourseId(Number(e.target.value)), []);
 
   const onClickCourseChange = useCallback(() => {
-    const dateSpotIdAndName = (dateSpotId: number) => (managementCourses.courseDuringSpotIdAndNames.find(courseDuringSpotIdAndName => courseDuringSpotIdAndName.dateSpotId === dateSpotId));
-    const dateSpotIndex = (dateSpot: {dateSpotId: number, dateSpotName: string}) => (managementCourses.courseDuringSpotIdAndNames.indexOf(dateSpot));
-    const copyManagementCourses = managementCourses.courseDuringSpotIdAndNames.slice();
-    const currentDateSpot = dateSpotIdAndName(currentDateSpotId) || {dateSpotId: 0, dateSpotName: ''};
+    const dateSpotIdAndName = (dateSpotId: number) => (managementCourses.courseDuringSpots.find(courseDuringSpot => courseDuringSpot.dateSpot.id === dateSpotId));
+    const dateSpotIndex = (addressAndDateSpot: AddressAndDateSpotJoinData) => (managementCourses.courseDuringSpots.indexOf(addressAndDateSpot));
+    const copyManagementCourses = managementCourses.courseDuringSpots.slice();
+    const currentDateSpot = dateSpotIdAndName(currentDateSpotId) || {
+      id: 0,
+      cityName: '',
+      prefectureId: 0,
+      dateSpot: {
+        id: 0,
+        name: '',
+        genreId: 0,
+        image: {
+          url: null
+        },
+        openingTime: new Date('2022/11/02'),
+        closingTime: new Date('2022/11/02'),
+        createdAt: new Date('2022/11/02'),
+        updatedAt: new Date('2022/11/02'),
+      },
+      genreName: '',
+      latitude: 0,
+      longitude: 0,
+      reviewTotalNumber: 0,
+      averageRate: 0,
+    };
 
     // セレクトボックスで何もデートスポットが選択されていない場合はcurrentDateSpotを代入する。
     const changeDateSpot = dateSpotIdAndName(changeCourseId) || currentDateSpot;
@@ -39,11 +61,11 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
       currentDateSpot
     );
     // 入れ替え完了した配列をセットする。
-    setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpotIdAndNames: copyManagementCourses});
+    setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: copyManagementCourses});
   }, [
       getCurrentUser.user.id,
       changeCourseId, currentDateSpotId,
-      managementCourses.courseDuringSpotIdAndNames,
+      managementCourses.courseDuringSpots,
       setManagementCourses
   ]);
 
@@ -51,12 +73,12 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
       <>
         <select className="mb-2 border-2 rounded-md font-bold" onChange={onChangeCourseIdValue}>
           <option value="0">入れ替え対象を選択</option>
-          {managementCourses.courseDuringSpotIdAndNames
-            .filter(courseDuringSpotIdAndName => courseDuringSpotIdAndName.dateSpotId !== currentDateSpotId)
-            .map((courseDuringSpotIdAndName) => {
+          {managementCourses.courseDuringSpots
+            .filter(courseDuringSpot => courseDuringSpot.dateSpot.id !== currentDateSpotId)
+            .map((courseDuringSpot) => {
             return(
-              <option key={courseDuringSpotIdAndName.dateSpotId} value={courseDuringSpotIdAndName.dateSpotId.toString()} >
-                {courseDuringSpotIdAndName.dateSpotName}
+              <option key={courseDuringSpot.dateSpot.id} value={courseDuringSpot.dateSpot.id.toString()} >
+                {courseDuringSpot.dateSpot.name}
               </option>
             )
           })}

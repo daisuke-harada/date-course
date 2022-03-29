@@ -11,13 +11,13 @@ const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 export const CreateCourse: VFC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
-  console.log(managementCourses.courseDuringSpotIdAndNames);
+  console.log(managementCourses.courseDuringSpots);
   return(
     <MainDiv>
       <h1 className="m-5 font-bold text-3xl pb-5">デートコース作成</h1>
       <div className="w-full mt-5 flex">
         {
-          managementCourses.courseDuringSpotIdAndNames.length === 0?
+          managementCourses.courseDuringSpots.length === 0?
           <p className="text-blue-600 text-center m-10 text-3xl">
             目的地は登録されていません。デートスポットをデートコースに追加してみましょう。
           </p>
@@ -25,10 +25,10 @@ export const CreateCourse: VFC = memo(() => {
           <>
             <div className="w-1/3">
               {
-                managementCourses.courseDuringSpotIdAndNames.map((courseDuringSpotIdAndName ,index) => (
+                managementCourses.courseDuringSpots.map((courseDuringSpot ,index) => (
                   <CourseDuringSpotCard
-                    key={courseDuringSpotIdAndName.dateSpotId}
-                    addressAndDateSpotId={courseDuringSpotIdAndName.dateSpotId}
+                    key={courseDuringSpot.dateSpot.id}
+                    courseDuringSpot={courseDuringSpot}
                     managementCourses={managementCourses}
                     setManagementCourses={setManagementCourses}
                     courseNumber={index}

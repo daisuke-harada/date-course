@@ -1,4 +1,6 @@
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
+
 export type ManagementCourse = {
   userId: number,
-  courseDuringSpotIdAndNames: Array<{dateSpotId: number, dateSpotName: string}>
+  courseDuringSpots: Array<AddressAndDateSpotJoinData>
 };
