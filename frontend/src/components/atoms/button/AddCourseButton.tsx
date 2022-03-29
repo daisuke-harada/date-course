@@ -26,7 +26,6 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
       dateCourseIdAndNames.push({dateSpotId: addressAndDateSpot.dateSpot.id, dateSpotName: addressAndDateSpot.dateSpot.name});
       setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpotIdAndNames: dateCourseIdAndNames});
     };
-    console.log(managementCourses);
     navigate('/managementCourses/createCourse');
   };
   return(
