@@ -12,7 +12,11 @@ type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
   managementCourses: ManagementCourse,
   setManagementCourses: SetterOrUpdater<ManagementCourse>,
-  courseNumber: number
+  courseNumber: number,
+  leg?: {
+    duration: string | undefined;
+    distance: string | undefined;
+  }
 };
 
 const DD = tw.dd`m-2 text-xs font-bold`;
@@ -21,7 +25,7 @@ const Image = tw.img`w-64 h-64 mx-auto mt-10 rounded-xl border-4 border-pink-400
 const MainDl = tw.dl`text-center rounded-xl shadow-xl bg-white py-1 max-w-md`
 
 export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
-  const { courseDuringSpot, managementCourses, setManagementCourses, courseNumber } = props;
+  const { courseDuringSpot, managementCourses, setManagementCourses, courseNumber, leg} = props;
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
@@ -75,7 +79,7 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
           <div className="border-r-4 border-indigo-500 w-1/2">
           </div>
           <div className="p-5 w-1/2 text-sm">
-            自転車
+            交通手段 <span className='p-1'>{leg?.distance}</span><span className='p-1'>{leg?.duration}</span>
           </div>
         </div>
       }

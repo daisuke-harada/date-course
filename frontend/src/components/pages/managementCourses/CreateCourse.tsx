@@ -1,5 +1,5 @@
 import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
-import { memo, VFC } from "react";
+import { memo, useState, VFC } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import tw from "tailwind-styled-components";
 
@@ -13,7 +13,9 @@ const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 
 export const CreateCourse: VFC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
-  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}))
+  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
+  // デートコースの距離、時間を管理するステートを設定
+  const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
 
   return(
       <MainDiv>
@@ -35,6 +37,7 @@ export const CreateCourse: VFC = memo(() => {
                       managementCourses={managementCourses}
                       setManagementCourses={setManagementCourses}
                       courseNumber={index}
+                      leg={legs[index]}
                     />
                   ))
                 }
@@ -45,7 +48,7 @@ export const CreateCourse: VFC = memo(() => {
                   <Map  addressAndDateSpot={managementCourses.courseDuringSpots[0]} />
                   :
                   <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                     <Directions managementCourses={managementCourses} />
+                     <Directions managementCourses={managementCourses} setLegs={setLegs} />
                   </LoadScript>
                 }
               </div>

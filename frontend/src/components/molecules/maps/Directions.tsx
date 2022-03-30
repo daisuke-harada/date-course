@@ -4,11 +4,15 @@ import { ManagementCourse } from "types/managementCourses/management";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 type Props = {
-  managementCourses: ManagementCourse
+  managementCourses: ManagementCourse,
+  setLegs: React.Dispatch<React.SetStateAction<{
+      duration: string;
+      distance: string;
+  }[]>>
 };
 
 export const Directions: VFC<Props> = memo((props) => {
-  const { managementCourses } = props;
+  const { managementCourses, setLegs } = props;
 
   // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
   const [copyDuringSpots, setCopyDuringSpots] = useState<AddressAndDateSpotJoinData[]>([]);
@@ -40,7 +44,9 @@ export const Directions: VFC<Props> = memo((props) => {
         }
       }
     }
-  }, [currentDirection, managementCourses.courseDuringSpots, copyDuringSpots]);
+    const legTexts = googleResponse.routes[0].legs.map((leg: google.maps.DirectionsLeg) => ({distance: leg.distance?.text, duration: leg.duration?.text}));
+    setLegs(legTexts);
+  }, [currentDirection, managementCourses.courseDuringSpots, copyDuringSpots, setLegs]);
 
 
   useEffect(() => {
