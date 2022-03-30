@@ -87,6 +87,11 @@ export const Directions: VFC<Props> = memo((props) => {
         <DirectionsRenderer
           options={{
             directions: currentDirection,
+            polylineOptions: {
+              strokeColor: "#F87171",
+              strokeOpacity: 1,
+              strokeWeight: 6
+            }
           }}
         />
       )}

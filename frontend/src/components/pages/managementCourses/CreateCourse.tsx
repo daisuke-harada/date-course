@@ -22,7 +22,7 @@ export const CreateCourse: VFC = memo(() => {
 
   return(
     <MainDiv>
-      <h1 className="m-5 font-bold text-3xl pb-5">デートコース作成</h1>
+      <h1 className="text-center mt-5 font-bold text-4xl pb-5">デートコース作成</h1>
       {
         managementCourses.courseDuringSpots.length === 0?
         <div className="w-full mt-5 flex">

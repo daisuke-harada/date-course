@@ -14,8 +14,8 @@ type Props = {
   setManagementCourses: SetterOrUpdater<ManagementCourse>,
   courseNumber: number,
   leg?: {
-    duration: string | undefined;
-    distance: string | undefined;
+    duration: string;
+    distance: string;
   }
 };
 
