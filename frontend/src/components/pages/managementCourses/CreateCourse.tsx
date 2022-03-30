@@ -3,19 +3,19 @@ import { memo, useState, VFC } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import tw from "tailwind-styled-components";
 
-import { managementCourseState, travelModeState } from "store/managementCourse";
+import { managementCourseState, courseInfoState } from "store/managementCourse";
 import { currentUserState } from "store/session";
 import { Directions } from "components/molecules/maps/Directions";
 import { LoadScript } from "@react-google-maps/api";
 import { Map } from "components/molecules/maps/Map";
-import { TravelModeSelect } from "components/molecules/managementCourses/TravelModeSelect";
+import { CourseInfoSelect } from "components/molecules/managementCourses/CourseInfoSelect";
 
 const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 
 export const CreateCourse: VFC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
-  const [getTravelMode, setTravelMode] = useRecoilState(travelModeState({userId: getCurrentUser.user.id}));
+  const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
 
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
@@ -36,7 +36,7 @@ export const CreateCourse: VFC = memo(() => {
             managementCourses.courseDuringSpots.length > 1
             &&
             <div className="w-full mt-5">
-              <TravelModeSelect setTravelMode={setTravelMode} defaultValue={getTravelMode} />
+              <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} />
             </div>
           }
           <div className="w-full flex">
@@ -60,7 +60,7 @@ export const CreateCourse: VFC = memo(() => {
                 <Map  addressAndDateSpot={managementCourses.courseDuringSpots[0]} />
                 :
                 <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                  <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={getTravelMode.travelMode} />
+                  <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={getCourseInfo.travelMode} />
                 </LoadScript>
               }
             </div>

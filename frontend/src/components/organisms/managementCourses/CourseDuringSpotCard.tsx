@@ -78,8 +78,9 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         <div className="h-16 w-full flex max-w-md justify-center">
           <div className="border-r-4 border-indigo-500 w-1/2">
           </div>
-          <div className="p-5 w-1/2 text-sm">
-            交通手段 <span className='p-1'>{leg?.distance}</span><span className='p-1'>{leg?.duration}</span>
+          <div className="w-1/2 p-2 text-sm font-bold flex flex-col">
+            <span className='p-1'>距離{leg?.distance}</span>
+            <span className='p-1'>所要時間{leg?.duration}</span>
           </div>
         </div>
       }

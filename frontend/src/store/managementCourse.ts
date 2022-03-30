@@ -12,10 +12,10 @@ export const managementCourseState = atomFamily<ManagementCourse, { userId: numb
   }
 );
 
-export const travelModeState = atomFamily<{travelMode: string}, { userId: number }>(
+export const courseInfoState = atomFamily<{travelMode: string, public: string}, { userId: number }>(
   {
-    key: "travelModeState",
-    default: {travelMode: 'DRIVING'},
+    key: "courseInfoState",
+    default: {travelMode: 'DRIVING', public: '公開'},
     // effects_UNSTABLE: [persistAtom]
   }
 );
