@@ -11,3 +11,11 @@ export const managementCourseState = atomFamily<ManagementCourse, { userId: numb
     // effects_UNSTABLE: [persistAtom]
   }
 );
+
+export const travelModeState = atomFamily<{travelMode: string}, { userId: number }>(
+  {
+    key: "travelModeState",
+    default: {travelMode: 'DRIVING'},
+    // effects_UNSTABLE: [persistAtom]
+  }
+);

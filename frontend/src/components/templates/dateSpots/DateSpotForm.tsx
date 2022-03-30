@@ -78,7 +78,6 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
 
   const createFormData = (): FormData => {
     const formData = new FormData();
-
     formData.append('name', name);
     formData.append('genreId', genreValue);
     formData.append('openingTime', openingTime);

@@ -8,11 +8,12 @@ type Props = {
   setLegs: React.Dispatch<React.SetStateAction<{
       duration: string;
       distance: string;
-  }[]>>
+  }[]>>,
+  travelMode: string;
 };
 
 export const Directions: VFC<Props> = memo((props) => {
-  const { managementCourses, setLegs } = props;
+  const { managementCourses, setLegs, travelMode } = props;
 
   // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
   const [copyDuringSpots, setCopyDuringSpots] = useState<AddressAndDateSpotJoinData[]>([]);
@@ -20,6 +21,18 @@ export const Directions: VFC<Props> = memo((props) => {
   const destination = { lat: managementCourses.courseDuringSpots[managementCourses.courseDuringSpots.length -1].latitude, lng: managementCourses.courseDuringSpots[managementCourses.courseDuringSpots.length -1].longitude};
   const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
   const [currentDirection, setCurrentDirection] = useState<google.maps.DirectionsResult | null>(null);
+
+  const googleMapsTravelMode = (travelMode: string) => {
+    if(travelMode === 'DRIVING'){
+      return google.maps.TravelMode.DRIVING;
+    }else if(travelMode === 'BICYCLING'){
+      return google.maps.TravelMode.BICYCLING
+    }else if(travelMode === 'WALKING'){
+      return google.maps.TravelMode.WALKING;
+    }else{
+      return google.maps.TravelMode.DRIVING;
+    };
+  };
 
   const directionsCallback = useCallback((googleResponse) => {
     if (googleResponse) {
@@ -65,7 +78,7 @@ export const Directions: VFC<Props> = memo((props) => {
         options={{
           origin: origin,
           destination: destination,
-          travelMode: google.maps.TravelMode.DRIVING,
+          travelMode: googleMapsTravelMode(travelMode),
           waypoints: transitPoints,
         }}
         callback={directionsCallback}
