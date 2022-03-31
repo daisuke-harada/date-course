@@ -17,6 +17,7 @@ export const Directions: VFC<Props> = memo((props) => {
 
   // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
   const [copyDuringSpots, setCopyDuringSpots] = useState<AddressAndDateSpotJoinData[]>([]);
+  const [copyTravelMode, setCopyTravelMode] = useState<string>('');
   const origin = { lat: managementCourses.courseDuringSpots[0].latitude, lng: managementCourses.courseDuringSpots[0].longitude};
   const destination = { lat: managementCourses.courseDuringSpots[managementCourses.courseDuringSpots.length -1].latitude, lng: managementCourses.courseDuringSpots[managementCourses.courseDuringSpots.length -1].longitude};
   const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
@@ -43,23 +44,26 @@ export const Directions: VFC<Props> = memo((props) => {
         ) {
           // ルートが変更されたのでstateを更新する
           setCurrentDirection(googleResponse);
-        } else if(copyDuringSpots !== managementCourses.courseDuringSpots){
+        } else if(copyDuringSpots !== managementCourses.courseDuringSpots || copyTravelMode !== travelMode){
           // デートスポットの順番が入れ替えられたためstateを更新する
           setCurrentDirection(googleResponse);
+          setCopyTravelMode(travelMode);
           setCopyDuringSpots(managementCourses.courseDuringSpots);
         }
       } else {
         if (googleResponse.status === "OK") {
           // 現在設定されているデートスポットのコピーを作成する。そうすることでデートスポットの順番が入れ替わった際にもステートを更新できるようにする。
           setCopyDuringSpots(managementCourses.courseDuringSpots);
+          setCopyTravelMode(travelMode);
           // 初めてルートが設定されたのでステートを更新する。
           setCurrentDirection(googleResponse);
         }
       }
     }
     const legTexts = googleResponse.routes[0].legs.map((leg: google.maps.DirectionsLeg) => ({distance: leg.distance?.text, duration: leg.duration?.text}));
+    console.log(legTexts);
     setLegs(legTexts);
-  }, [currentDirection, managementCourses.courseDuringSpots, copyDuringSpots, setLegs]);
+  }, [currentDirection, managementCourses.courseDuringSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
 
 
   useEffect(() => {
