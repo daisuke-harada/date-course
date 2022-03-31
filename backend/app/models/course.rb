@@ -3,4 +3,6 @@ class Course < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true
+  validates :authority, presence: true
+  validates :traffic_mode, presence: true
 end

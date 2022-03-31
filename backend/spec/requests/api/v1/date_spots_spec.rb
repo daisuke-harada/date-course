@@ -92,11 +92,11 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       date_spot_review = FactoryBot.create(:date_spot_review)
       date_spot = address.date_spot
       get "/api/v1/date_spots/#{date_spot.id}"
-      expect(JSON.parse(response.body)["date_spot"]["name"]).to eq(date_spot.name)
-      expect(JSON.parse(response.body)["date_spot"]["genre_id"]).to eq(date_spot.genre_id)
-      expect(JSON.parse(response.body)["address"]["prefecture_id"]).to eq(address.prefecture_id)
-      expect(JSON.parse(response.body)["address"]["city_name"]).to eq(address.city_name)
-      expect(JSON.parse(response.body)["genre_name"]).to eq(Genre.find_by(id: date_spot.genre_id).name)
+      expect(JSON.parse(response.body)["address_and_date_spot"]["date_spot"]["name"]).to eq(date_spot.name)
+      expect(JSON.parse(response.body)["address_and_date_spot"]["date_spot"]["genre_id"]).to eq(date_spot.genre_id)
+      expect(JSON.parse(response.body)["address_and_date_spot"]["prefecture_id"]).to eq(address.prefecture_id)
+      expect(JSON.parse(response.body)["address_and_date_spot"]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)["address_and_date_spot"]["genre_name"]).to eq(Genre.find_by(id: date_spot.genre_id).name)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(date_spot_review.content)
       expect(JSON.parse(response.body)["review_average_rate"]).to eq(1)
     end
@@ -109,12 +109,12 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       other_address = FactoryBot.create(:other_address)
       other_spot = other_address.date_spot
       get "/api/v1/date_spots"
-      expect(JSON.parse(response.body)[0]["date_spot"]["name"]).to eq(date_spot.name)
-      expect(JSON.parse(response.body)[0]["prefecture_id"]).to eq(address.prefecture_id)
-      expect(JSON.parse(response.body)[0]["city_name"]).to eq(address.city_name)
-      expect(JSON.parse(response.body)[1]["date_spot"]["name"]).to eq(other_spot.name)
-      expect(JSON.parse(response.body)[1]["prefecture_id"]).to eq(other_address.prefecture_id)
-      expect(JSON.parse(response.body)[1]["city_name"]).to eq(other_address.city_name)
+      expect(JSON.parse(response.body)["address_and_date_spots"][0]["date_spot"]["name"]).to eq(date_spot.name)
+      expect(JSON.parse(response.body)["address_and_date_spots"][0]["prefecture_id"]).to eq(address.prefecture_id)
+      expect(JSON.parse(response.body)["address_and_date_spots"][0]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)["address_and_date_spots"][1]["date_spot"]["name"]).to eq(other_spot.name)
+      expect(JSON.parse(response.body)["address_and_date_spots"][1]["prefecture_id"]).to eq(other_address.prefecture_id)
+      expect(JSON.parse(response.body)["address_and_date_spots"][1]["city_name"]).to eq(other_address.city_name)
     end
   end
 end
