@@ -18,6 +18,7 @@ const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
 
 export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   const { managementCourses, getCourseInfo } = props;
+
   const [ resetManagementCourses, resetCourseInfo ] = useCourseReset();
 
   const onClickAllDelete = useCallback(() => {

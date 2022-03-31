@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_112552) do
+ActiveRecord::Schema.define(version: 2022_03_31_082535) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "prefecture_id"
@@ -25,8 +25,12 @@ ActiveRecord::Schema.define(version: 2022_03_24_112552) do
   end
 
   create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "traffic_mode", null: false
+    t.string "authority", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "date_spot_reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -36,9 +40,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_112552) do
     t.bigint "date_spot_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date_spot_id", "created_at"], name: "index_date_spot_reviews_on_date_spot_id_and_created_at"
     t.index ["date_spot_id"], name: "index_date_spot_reviews_on_date_spot_id"
-    t.index ["user_id", "created_at"], name: "index_date_spot_reviews_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_date_spot_reviews_on_user_id"
   end
 
@@ -53,13 +55,21 @@ ActiveRecord::Schema.define(version: 2022_03_24_112552) do
     t.index ["genre_id", "created_at"], name: "index_date_spots_on_genre_id_and_created_at"
   end
 
+  create_table "during_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "date_spot_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_during_spots_on_course_id"
+    t.index ["date_spot_id"], name: "index_during_spots_on_date_spot_id"
+  end
+
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "follow_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
@@ -76,8 +86,11 @@ ActiveRecord::Schema.define(version: 2022_03_24_112552) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "courses", "users"
   add_foreign_key "date_spot_reviews", "date_spots"
   add_foreign_key "date_spot_reviews", "users"
+  add_foreign_key "during_spots", "courses"
+  add_foreign_key "during_spots", "date_spots"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
 end
