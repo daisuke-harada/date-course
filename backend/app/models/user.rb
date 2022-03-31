@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # ユーザーが他のユーザーにフォローされている状態で退会した場合にrelationshipのデータが一緒に消えるようにdependent: :destroyを追加。
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
