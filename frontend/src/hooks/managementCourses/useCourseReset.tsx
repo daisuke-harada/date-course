@@ -8,4 +8,4 @@ export const useCourseReset = () => {
   const resetCourseInfo = useResetRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
 
   return [ resetManagementCourses, resetCourseInfo ];
-}
+};
