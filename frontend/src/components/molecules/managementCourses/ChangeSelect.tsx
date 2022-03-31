@@ -67,7 +67,8 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
       changeCourseId, currentDateSpotId,
       managementCourses.courseDuringSpots,
       setManagementCourses
-  ]);
+    ]
+  );
 
   return(
       <>

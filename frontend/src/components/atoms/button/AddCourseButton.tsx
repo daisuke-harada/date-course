@@ -21,12 +21,15 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
   const onClickAddCourseAction = () => {
     if(managementCourses.userId === 0){
       setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: [addressAndDateSpot]});
+      navigate('/managementCourses/createCourse');
+    } else if(managementCourses.courseDuringSpots.some(spot => spot.dateSpot.id === addressAndDateSpot.dateSpot.id)){
+      navigate('./', {state: {message: 'このスポットはすでに選択されています', type: 'error-message', condition: true}});
     } else {
       const dateCourseIdAndNames = managementCourses.courseDuringSpots.slice();
       dateCourseIdAndNames.push(addressAndDateSpot);
       setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: dateCourseIdAndNames});
+      navigate('/managementCourses/createCourse');
     };
-    navigate('/managementCourses/createCourse');
   };
   return(
     <ButtonParentDiv>

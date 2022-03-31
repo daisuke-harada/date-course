@@ -7,6 +7,7 @@ import { client } from "lib/api/client";
 import { ChangeSelect } from "components/molecules/managementCourses/ChangeSelect";
 import { ManagementCourse } from "types/managementCourses/management";
 import { SetterOrUpdater } from "recoil";
+import { DeleteCourseButton } from "components/atoms/button/DeleteCourseButton";
 
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
@@ -70,6 +71,9 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
               setManagementCourses={setManagementCourses}
             />
           }
+        </DD>
+        <DD>
+          <DeleteCourseButton  addressAndDateSpot={courseDuringSpot} />
         </DD>
       </MainDl>
       {

@@ -61,7 +61,6 @@ export const Directions: VFC<Props> = memo((props) => {
       }
     }
     const legTexts = googleResponse.routes[0].legs.map((leg: google.maps.DirectionsLeg) => ({distance: leg.distance?.text, duration: leg.duration?.text}));
-    console.log(legTexts);
     setLegs(legTexts);
   }, [currentDirection, managementCourses.courseDuringSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
 
