@@ -9,6 +9,7 @@ import { Directions } from "components/molecules/maps/Directions";
 import { LoadScript } from "@react-google-maps/api";
 import { Map } from "components/molecules/maps/Map";
 import { CourseInfoSelect } from "components/molecules/managementCourses/CourseInfoSelect";
+import { ManagementCourseButtonArea } from "components/molecules/managementCourses/ManagementCourseButtonArea";
 
 const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 
@@ -25,10 +26,9 @@ export const CreateCourse: VFC = memo(() => {
       <h1 className="text-center mt-5 font-bold text-4xl pb-5">デートコース作成</h1>
       {
         managementCourses.courseDuringSpots.length === 0?
-        <div className="w-full mt-5 flex">
-          <p className="text-blue-600 text-center m-10 text-3xl">
-            目的地は登録されていません。デートスポットをデートコースに追加してみましょう。
-          </p>
+        <div className="w-full mt-5 flex text-blue-600 text-3xl">
+            目的地は登録されていません。<br/>
+            デートスポットをデートコースに追加してみましょう。
         </div>
         :
         <>
@@ -67,9 +67,10 @@ export const CreateCourse: VFC = memo(() => {
           </div>
         </>
       }
-      <div className="text-center">
-        {/* ボタンエリア */}
-      </div>
+      <ManagementCourseButtonArea
+        managementCourses={managementCourses}
+        getCourseInfo={getCourseInfo}
+      />
     </MainDiv>
   );
 });
