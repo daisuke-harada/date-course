@@ -1,5 +1,7 @@
 import { memo, useCallback, VFC } from "react";
 import tw from "tailwind-styled-components";
+import { useNavigate } from "react-router-dom";
+
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { CourseInfo, ManagementCourse } from "types/managementCourses/management";
@@ -16,6 +18,8 @@ const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
 
 export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   const { managementCourses, getCourseInfo } = props;
+
+  const navigate = useNavigate();
 
   const [ resetManagementCourses, resetCourseInfo ] = useCourseReset();
 
@@ -34,15 +38,16 @@ export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
     }
 
     client.post('courses', course).then(response => {
+      response.data.status === 'created' && navigate(`/courses/${response.data.courseId}`);
       response.data.status === 'created' && resetManagementCourses();
       response.data.status === 'created' && resetCourseInfo();
     });
-  }, [ managementCourses, getCourseInfo, resetCourseInfo, resetManagementCourses ]);
+  }, [ managementCourses, getCourseInfo, resetCourseInfo, resetManagementCourses, navigate ]);
 
   return(
     <>
       {
-        managementCourses.courseDuringSpots.length > 1
+        managementCourses.courseDuringSpots && managementCourses.courseDuringSpots.length > 1
         &&
         (
           <ButtonArea>
