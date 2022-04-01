@@ -9,6 +9,7 @@ import { ImageForm } from "components/atoms/form/ImageForm";
 import { client, formDataClient } from "lib/api/client";
 import { useNavigate } from "react-router-dom";
 import { DangerButton } from "components/atoms/button/DangerButton";
+import { prefectureDatas } from "datas/prefectureDatas";
 
 const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl`;
 const Title = tw.h1`text-center text-lg m-5`;
@@ -54,7 +55,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const [errorAddressCityName, setErrorAddressCityName] = useState([]);
   const [errorAddressPrefectureId, setErrorAddressPrefectureId] = useState([]);
   const [name, setName] = useState<string>(nameDefaultValue);
-  const [prefectureValue, setPrefectureValue] = useState<string>(prefectureDefaultValue);
+  const [prefectureValue, setPrefectureValue] = useState<string >(prefectureDatas.find((data) => (data.name === prefectureDefaultValue))?.id.toString() || '');
   const [cityName, setCityName] = useState<string>(cityNameDefaultValue);
   const [genreValue, setGenreValue] = useState<string>(genreDefaultValue);
   const [openingTime, setOpeningTime] = useState<string>(openingTimeDefaultValue);

@@ -84,19 +84,4 @@ class Api::V1::DateSpotsController < ApplicationController
     reviews.sum(:rate)
     review_average_rate = reviews.sum(:rate) == 0? 0: reviews.sum(:rate) / reviews.count
   end
-
-  # addressとDateSpotとgenre名を結合したデータを作成する
-  def address_and_date_spot_and_genre_name(address)
-    {
-      id: address.id,
-      city_name: address.city_name,
-      prefecture_id: address.prefecture_id,
-      date_spot: address.date_spot,
-      genre_name: address.date_spot.genre.name,
-      latitude: address.latitude,
-      longitude: address.longitude,
-      review_total_number: address.date_spot.date_spot_reviews.count,
-      average_rate: average_rate_calculation(address.date_spot.date_spot_reviews)
-    }
-  end
 end

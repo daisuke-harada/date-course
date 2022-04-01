@@ -25,7 +25,7 @@ export type AddressResponseData = {
 export type AddressAndDateSpotJoinData = {
   id: number,
   cityName: string,
-  prefectureId: number,
+  prefectureName: string,
   dateSpot: DateSpotResponseData,
   genreName: string,
   latitude: number,

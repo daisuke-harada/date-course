@@ -24,7 +24,7 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
     const currentDateSpot = dateSpotIdAndName(currentDateSpotId) || {
       id: 0,
       cityName: '',
-      prefectureId: 0,
+      prefectureName: '',
       dateSpot: {
         id: 0,
         name: '',
