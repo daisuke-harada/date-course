@@ -9,6 +9,10 @@ class Api::V1::CoursesController < ApplicationController
     end
   end
 
+  def show
+    @course = Course.find(params[:id])
+  end
+
   private
 
   def course_params

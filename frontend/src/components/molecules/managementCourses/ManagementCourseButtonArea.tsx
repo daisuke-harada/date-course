@@ -34,9 +34,10 @@ export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
     }
 
     client.post('courses', course).then(response => {
-      response.data.status === 'created' && console.log(response.data.course);
+      response.data.status === 'created' && resetManagementCourses();
+      response.data.status === 'created' && resetCourseInfo();
     });
-  }, [managementCourses, getCourseInfo]);
+  }, [ managementCourses, getCourseInfo, resetCourseInfo, resetManagementCourses ]);
 
   return(
     <>

@@ -26,7 +26,7 @@ export const CreateCourse: VFC = memo(() => {
       <h1 className="text-center mt-5 font-bold text-4xl pb-5">デートコース作成</h1>
       {
         managementCourses.courseDuringSpots.length === 0?
-        <div className="w-full mt-5 flex text-blue-600 text-3xl">
+        <div className="w-full mt-5 mb-16 flex text-blue-600 text-3xl">
             目的地は登録されていません。<br/>
             デートスポットをデートコースに追加してみましょう。
         </div>
