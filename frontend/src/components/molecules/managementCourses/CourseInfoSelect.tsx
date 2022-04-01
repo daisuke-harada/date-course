@@ -5,12 +5,12 @@ import tw from "tailwind-styled-components";
 type Props = {
   setCourseInfo: SetterOrUpdater<{
     travelMode: string;
-    public: string;
+    authority: string;
   }>,
   dataE2e?: string,
   getCourseInfo: {
     travelMode: string;
-    public: string;
+    authority: string;
   }
 };
 
@@ -21,8 +21,8 @@ const MainDiv= tw.div`m-5 font-bold flex`;
 export const CourseInfoSelect: VFC<Props> = memo((props) => {
   const { setCourseInfo, dataE2e, getCourseInfo } = props;
 
-  const onChangeTravelMode: React.ChangeEventHandler<HTMLSelectElement> = (e) => setCourseInfo({travelMode: e.target.value, public: getCourseInfo.public});
-  const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = (e) => setCourseInfo({travelMode: getCourseInfo.travelMode, public: e.target.value});
+  const onChangeTravelMode: React.ChangeEventHandler<HTMLSelectElement> = (e) => setCourseInfo({travelMode: e.target.value, authority: getCourseInfo.authority});
+  const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = (e) => setCourseInfo({travelMode: getCourseInfo.travelMode, authority: e.target.value});
 
   return(
     <>
@@ -38,9 +38,9 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
     </MainDiv>
     <MainDiv>
       <Label>公開</Label>
-      <Input type="radio" value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.public === '公開'} />
+      <Input type="radio" value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '公開'} />
       <Label>非公開</Label>
-      <Input type="radio" value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.public === '非公開'} />
+      <Input type="radio" value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '非公開'} />
     </MainDiv>
     </>
   );

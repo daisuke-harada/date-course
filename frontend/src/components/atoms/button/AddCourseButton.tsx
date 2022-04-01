@@ -2,7 +2,7 @@ import { memo, VFC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { managementCourseState } from "store/managementCourse";
-import { currentUserState } from "store/session";
+import { currentUserState, loginStatusState } from "store/session";
 import tw from "tailwind-styled-components";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { BaseButton } from "./BaseButton";
@@ -17,6 +17,7 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const navigate = useNavigate();
   const getCurrentUser = useRecoilValue(currentUserState);
+  const getLoginStatus = useRecoilValue(loginStatusState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const onClickAddCourseAction = () => {
     if(managementCourses.userId === 0){
@@ -32,8 +33,15 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
     };
   };
   return(
-    <ButtonParentDiv>
-       <BaseButton dataE2e={`courseAddButtonId-${addressAndDateSpot.dateSpot.id}`} onClickEvent={onClickAddCourseAction}>コースに追加</BaseButton>
-    </ButtonParentDiv>
+    <>
+      {
+        getLoginStatus.status &&
+        (
+        <ButtonParentDiv>
+          <BaseButton dataE2e={`courseAddButtonId-${addressAndDateSpot.dateSpot.id}`} onClickEvent={onClickAddCourseAction}>コースに追加</BaseButton>
+        </ButtonParentDiv>
+        )
+      }
+    </>
   );
 });

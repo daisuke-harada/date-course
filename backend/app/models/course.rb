@@ -4,5 +4,5 @@ class Course < ApplicationRecord
 
   validates :user_id, presence: true
   validates :authority, presence: true
-  validates :traffic_mode, presence: true
+  validates :travel_mode, presence: true
 end

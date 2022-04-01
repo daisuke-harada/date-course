@@ -11,9 +11,9 @@ RSpec.describe Course, type: :model do
 
     context "courseを保存できない場合" do
       it "交通手段が入力されていない場合、保存できないこと" do
-        course.traffic_mode = nil
+        course.travel_mode = nil
         course.valid?
-        expect(course.errors[:traffic_mode]).to include("can't be blank")
+        expect(course.errors[:travel_mode]).to include("can't be blank")
       end
 
       it "公開ステータスが入力されていない場合は、保存できないこと" do

@@ -4,3 +4,8 @@ export type ManagementCourse = {
   userId: number,
   courseDuringSpots: Array<AddressAndDateSpotJoinData>
 };
+
+export type CourseInfo = {
+  travelMode: string,
+  authority: string
+};

@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
 
   create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "traffic_mode", null: false
+    t.string "travel_mode", null: false
     t.string "authority", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

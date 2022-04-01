@@ -87,9 +87,8 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
 
   describe "GET /show" do
     it "date_spot詳細ページを表示する" do
-      FactoryBot.create(:user)
       address = FactoryBot.create(:address)
-      date_spot_review = FactoryBot.create(:date_spot_review)
+      date_spot_review = FactoryBot.create(:other_date_spot_review)
       date_spot = address.date_spot
       get "/api/v1/date_spots/#{date_spot.id}"
       expect(JSON.parse(response.body)["address_and_date_spot"]["date_spot"]["name"]).to eq(date_spot.name)
