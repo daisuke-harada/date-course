@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
 import { client } from "lib/api/client";
 import { ChangeSelect } from "components/molecules/managementCourses/ChangeSelect";
-import { ManagementCourse } from "types/managementCourses/management";
+import { ManagementCourseData } from "types/managementCourses/management";
 import { SetterOrUpdater } from "recoil";
 import { DeleteCourseButton } from "components/atoms/button/DeleteCourseButton";
 
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
-  managementCourses: ManagementCourse,
-  setManagementCourses: SetterOrUpdater<ManagementCourse>,
+  managementCourses: ManagementCourseData,
+  setManagementCourses: SetterOrUpdater<ManagementCourseData>,
   courseNumber: number,
   leg?: {
     duration: string;

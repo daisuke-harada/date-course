@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { DangerButton } from "components/atoms/button/DangerButton";
-import { CourseInfo, ManagementCourse } from "types/managementCourses/management";
+import { CourseInfoData, ManagementCourseData } from "types/managementCourses/management";
 import { useCourseReset } from "hooks/managementCourses/useCourseReset";
 import { client } from "lib/api/client";
 
 type Props = {
-  managementCourses: ManagementCourse,
-  getCourseInfo: CourseInfo,
+  managementCourses: ManagementCourseData,
+  getCourseInfo: CourseInfoData,
 }
 
 const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;

@@ -1,11 +1,11 @@
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
-export type ManagementCourse = {
+export type ManagementCourseData = {
   userId: number,
   courseDuringSpots: Array<AddressAndDateSpotJoinData>
 };
 
-export type CourseInfo = {
+export type CourseInfoData = {
   travelMode: string,
   authority: string
 };

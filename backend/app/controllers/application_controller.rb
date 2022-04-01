@@ -29,4 +29,11 @@ class ApplicationController < ActionController::API
       average_rate: average_rate_calculation(address.date_spot.date_spot_reviews)
     }
   end
+
+  # 評価の平均値を計算する
+  def average_rate_calculation(reviews)
+    review_rate_total = 0
+    reviews.each{ |review| review_rate_total+=review.rate}
+    review_average_rate = review_rate_total == 0? 0: review_rate_total / reviews.length
+  end
 end

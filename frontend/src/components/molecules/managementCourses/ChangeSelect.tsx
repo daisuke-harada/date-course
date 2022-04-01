@@ -3,12 +3,12 @@ import { memo, useCallback, useState, VFC } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
 import { currentUserState } from "store/session";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { ManagementCourse } from "types/managementCourses/management";
+import { ManagementCourseData } from "types/managementCourses/management";
 
 type Props = {
   currentDateSpotId: number,
-  managementCourses: ManagementCourse,
-  setManagementCourses: SetterOrUpdater<ManagementCourse>,
+  managementCourses: ManagementCourseData,
+  setManagementCourses: SetterOrUpdater<ManagementCourseData>,
 }
 
 export const ChangeSelect: VFC<Props> = memo((props) => {

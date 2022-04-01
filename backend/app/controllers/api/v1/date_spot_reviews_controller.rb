@@ -76,12 +76,4 @@ class Api::V1::DateSpotReviewsController < ApplicationController
   def date_spot_review_find_param_id
     @date_spot_review = DateSpotReview.find(params[:id])
   end
-
-  # 評価の平均値を計算する
-  def average_rate_calculation(reviews)
-    review_rate_total = 0
-    reviews.each{ |review| review_rate_total+=review.rate}
-    review_average_rate = review_rate_total == 0? 0: review_rate_total / reviews.length
-  end
-
 end

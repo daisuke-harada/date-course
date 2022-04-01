@@ -11,7 +11,6 @@ class Api::V1::CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-
     render json: { course: course_info(@course) }
   end
 
@@ -21,9 +20,9 @@ class Api::V1::CoursesController < ApplicationController
     params.require(:course).permit(:user_id, :travel_mode, :authority)
   end
 
-  def during_date_spots(course)
+  def during_address_and_date_spots(course)
     return course.during_spots.map do |during_spot|
-      DateSpot.find(during_spot.date_spot_id)
+      address_and_date_spot_and_genre_name(Address.find_by(date_spot_id: during_spot.date_spot_id))
     end
   end
 
@@ -32,7 +31,7 @@ class Api::V1::CoursesController < ApplicationController
       user: User.find(course.user_id),
       travel_mode: course.travel_mode,
       authority: course.authority,
-      during_spot: during_date_spots(course)
+      during_spot: during_address_and_date_spots(course)
     }
   end
 
