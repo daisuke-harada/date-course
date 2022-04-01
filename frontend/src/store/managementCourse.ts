@@ -9,7 +9,7 @@ export const managementCourseState = atomFamily<ManagementCourse, { userId: numb
   {
     key: "managementCourseState",
     default: {userId: 0, courseDuringSpots: []},
-    // effects_UNSTABLE: [persistAtom]
+    effects_UNSTABLE: [persistAtom]
   }
 );
 
@@ -17,6 +17,6 @@ export const courseInfoState = atomFamily<CourseInfo, { userId: number }>(
   {
     key: "courseInfoState",
     default: {travelMode: 'DRIVING', authority: '公開'},
-    // effects_UNSTABLE: [persistAtom]
+    effects_UNSTABLE: [persistAtom]
   }
 );
