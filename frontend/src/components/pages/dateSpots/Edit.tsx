@@ -14,7 +14,7 @@ export const Edit: VFC = memo(() => {
       formButtonName='更新'
       baseBtnDataE2e='dateSpot-update-button'
       nameDefaultValue={addressAndDateSpot.dateSpot.name}
-      prefectureDefaultValue={addressAndDateSpot.prefectureId.toString()}
+      prefectureDefaultValue={addressAndDateSpot.prefectureName}
       cityNameDefaultValue={addressAndDateSpot.cityName}
       genreDefaultValue={addressAndDateSpot.dateSpot.genreId.toString()}
       openingTimeDefaultValue={addressAndDateSpot.dateSpot.openingTime.toString()}

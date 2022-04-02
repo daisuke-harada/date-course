@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DateSpotReview, type: :model do
   describe "#create" do
-    let(:user) {FactoryBot.create(:user)}
-    let(:date_spot) {FactoryBot.create(:date_spot)}
+    # let(:user) {FactoryBot.create(:user)}
+    # let(:date_spot) {FactoryBot.create(:date_spot)}
     let(:date_spot_review) { FactoryBot.build(:date_spot_review) }
     context "date_spot_reviewを保存できる場合" do
       it "正常値の場合、保存できること" do

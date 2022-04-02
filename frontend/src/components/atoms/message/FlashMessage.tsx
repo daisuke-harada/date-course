@@ -27,7 +27,7 @@ export const FlashMessage: VFC = memo(() => {
 
   return (
     <>
-      {(state !== null && condition) && <MessageDiv className={ state.type + ' ' + condition }>{ state.message }</MessageDiv>}
+      {(state !== null && condition) && <MessageDiv  className={ state.type + ' ' + condition }>{ state.message }</MessageDiv>}
     </>
   );
 });

@@ -85,7 +85,7 @@ describe('Users', () => {
     cy.contains("アカウント情報編集");
     apiUserDestroyAccess(userDatas[0]);
     cy.contains("退会").click();
-    cy.contains("Topページ");
+    cy.contains("デートコースを作成する");
   });
 
   it('ログインしてフォローする', () => {

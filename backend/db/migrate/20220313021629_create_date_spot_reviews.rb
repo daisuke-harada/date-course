@@ -8,7 +8,5 @@ class CreateDateSpotReviews < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :date_spot_reviews, [:user_id, :created_at]
-    add_index :date_spot_reviews, [:date_spot_id, :created_at]
   end
 end
