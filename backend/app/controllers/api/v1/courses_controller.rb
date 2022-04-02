@@ -20,6 +20,10 @@ class Api::V1::CoursesController < ApplicationController
     render json: { course: course_info(@course) }
   end
 
+  def index
+    @courses = Course.all
+  end
+
   private
 
   def course_params
