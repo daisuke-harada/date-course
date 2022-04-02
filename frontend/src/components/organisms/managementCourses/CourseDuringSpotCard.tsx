@@ -12,7 +12,7 @@ import { DeleteCourseButton } from "components/atoms/button/DeleteCourseButton";
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
   managementCourses: ManagementCourseData,
-  setManagementCourses: SetterOrUpdater<ManagementCourseData>,
+  setManagementCourses?: SetterOrUpdater<ManagementCourseData>,
   courseNumber: number,
   leg?: {
     duration: string;
@@ -64,7 +64,9 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         <DD>{addressAndDateSpot?.genreName}</DD>
         <DD>
           {
-            addressAndDateSpot &&
+            addressAndDateSpot
+            && setManagementCourses
+            &&
             <ChangeSelect
               currentDateSpotId={addressAndDateSpot.dateSpot.id}
               managementCourses={managementCourses}
@@ -73,10 +75,16 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
           }
         </DD>
         <DD>
-          <DeleteCourseButton  addressAndDateSpot={courseDuringSpot} />
+          {
+            setManagementCourses
+            &&
+            <DeleteCourseButton  addressAndDateSpot={courseDuringSpot} />
+          }
         </DD>
       </MainDl>
       {
+        managementCourses
+        &&
         managementCourses.courseDuringSpots.length !== courseNumber + 1
         &&
         <div className="h-16 w-full flex max-w-md justify-center">

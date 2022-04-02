@@ -28,10 +28,10 @@ class Api::V1::CoursesController < ApplicationController
 
   def course_info(course)
     return {
-      user: User.find(course.user_id),
+      user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
       travel_mode: course.travel_mode,
       authority: course.authority,
-      during_spot: during_address_and_date_spots(course)
+      course_during_spots: during_address_and_date_spots(course)
     }
   end
 

@@ -21,6 +21,7 @@ export const CreateCourse: VFC = memo(() => {
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
 
+  console.log(managementCourses);
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
 
