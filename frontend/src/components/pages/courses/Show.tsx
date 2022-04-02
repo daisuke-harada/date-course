@@ -1,15 +1,20 @@
 import { LoadScript } from "@react-google-maps/api";
+import { DangerButton } from "components/atoms/button/DangerButton";
 import { Directions } from "components/molecules/maps/Directions";
 import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
 import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { useParams } from "react-router-dom";
+import { memo, useCallback, useEffect, useState, VFC } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { currentUserState } from "store/session";
 import tw from "tailwind-styled-components";
 import { ManagementCourseData } from "types/managementCourses/management";
 
 const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 const TitleH1 = tw.h1`text-center mt-5 font-bold text-4xl pb-5`;
 const CourseAreaDiv = tw.div`w-full flex`;
+const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;
+const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
@@ -25,12 +30,18 @@ export const Show: VFC = memo(() => {
 
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
-
+  const navigate = useNavigate();
   const [travelModeText, setTravelModeText] = useState('');
+  const getCurrentUser = useRecoilValue(currentUserState);
+
+  const onClickDeleteCourse = useCallback(()=>{
+    client.delete(`courses/${id}`).then(response => {
+      response.data.status === 'deleted' && navigate(`/users/${getCurrentUser.user.id}`, {state: {message: 'デートコースを削除しました', type: 'success-message', condition: true}});
+    });
+  },[id, getCurrentUser.user.id, navigate]);
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      console.log(response.data.course);
       setManagementCourses({userId: response.data.course.user.id, courseDuringSpots: response.data.course.courseDuringSpots});
       setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority});
       if(response.data.course.travelMode === 'DRIVING'){
@@ -42,9 +53,6 @@ export const Show: VFC = memo(() => {
       }
     });
   }, [id]);
-
-  console.log(managementCourses);
-  console.log(travelModeText);
 
   return(
     <MainDiv>
@@ -77,6 +85,19 @@ export const Show: VFC = memo(() => {
           }
         </div>
       </CourseAreaDiv>
+      <ButtonArea>
+        {
+          getCurrentUser.user.id === managementCourses.userId
+          &&
+          (
+            <ButtonParentDiv>
+              <DangerButton onClickEvent={onClickDeleteCourse}>
+                デートコースを削除
+              </DangerButton>
+            </ButtonParentDiv>
+          )
+        }
+      </ButtonArea>
     </MainDiv>
   );
 });

@@ -1,4 +1,6 @@
 class Api::V1::CoursesController < ApplicationController
+  before_action :course_find_param_id, only: [:show, :update, :destroy]
+
   def create
     @course = Course.new(course_params)
     if @course.save
@@ -9,8 +11,12 @@ class Api::V1::CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    @course.destroy
+    render json: { status: :deleted }
+  end
+
   def show
-    @course = Course.find(params[:id])
     render json: { course: course_info(@course) }
   end
 
@@ -18,6 +24,10 @@ class Api::V1::CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:user_id, :travel_mode, :authority)
+  end
+
+  def course_find_param_id
+    @course = Course.find(params[:id])
   end
 
   def during_address_and_date_spots(course)
@@ -34,5 +44,4 @@ class Api::V1::CoursesController < ApplicationController
       course_during_spots: during_address_and_date_spots(course)
     }
   end
-
 end
