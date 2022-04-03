@@ -58,7 +58,8 @@ export const Show: VFC = memo(() => {
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
       <div className="w-full mt-5 text-xl font-bold">
-        {travelModeText}で移動
+        {travelModeText}で移動<br/>
+        他のユーザーに{courseInfo.authority}
       </div>
       <CourseAreaDiv>
         <div className="w-1/3">
