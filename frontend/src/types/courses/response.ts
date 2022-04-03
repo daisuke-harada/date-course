@@ -5,5 +5,5 @@ export type CourseResponseData = {
   user: UserResponseData,
   travelMode: string,
   authority: string,
-  duringSpots: AddressAndDateSpotJoinData[]
+  courseDuringSpots: AddressAndDateSpotJoinData[]
 };

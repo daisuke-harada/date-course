@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :date_spot_reviews, only:[:create, :destroy, :update]
       resources :relationships, only: [:create]
       delete '/relationships/:current_user_id/:other_user_id', to: 'relationships#destroy'
-      resources :courses, only:[:create, :destroy, :show]
+      resources :courses, only:[:create, :destroy, :show, :index]
       resources :users, only:[:index, :show, :update, :destroy] do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'

@@ -21,7 +21,11 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def index
-    @courses = Course.all
+    @courses = Course.where(authority: '公開').map do |course|
+      course_info(course)
+    end
+
+    render json: { courses: @courses }
   end
 
   private
