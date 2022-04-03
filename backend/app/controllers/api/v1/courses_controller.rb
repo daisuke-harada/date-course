@@ -46,6 +46,7 @@ class Api::V1::CoursesController < ApplicationController
 
   def course_info(course)
     return {
+      id: course.id,
       user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
       travel_mode: course.travel_mode,
       authority: course.authority,

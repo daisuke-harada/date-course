@@ -7,7 +7,8 @@ type Props ={
   duringSpot: AddressAndDateSpotJoinData
 };
 
-const Image = tw.img`w-48 h-48 rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const Image = tw.img`w-32 h-32 m-auto rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const MainDiv= tw.div`bg-white rounded-xl shadow-xl p-2 m-2 w-36`;
 
 export const DuringSpotCard: VFC<Props> = memo((props) => {
   const { duringSpot } = props;
@@ -19,16 +20,15 @@ export const DuringSpotCard: VFC<Props> = memo((props) => {
   }, [duringSpot]);
 
   return(
-    <div className="bg-white rounded-xl shadow-xl p-2 my-2">
+    <MainDiv>
       <Link to={`/dateSpots/${duringSpot.dateSpot.id}`}>
         <Image src={duringSpotImage} alt='DateSpotProfileImage' />
       </Link>
-      <div className="text-xs text-center">
+      <div className="text-center text-xs">
         <Link to={`/dateSpots/${duringSpot.dateSpot.id}`}>
-          <div className="my-2">{duringSpot.dateSpot.name}</div>
+          <div className="my-2 font-bold">{duringSpot.dateSpot.name}</div>
         </Link>
-        <div className="my-2">{duringSpot.cityName}</div>
       </div>
-    </div>
+    </MainDiv>
   );
 });

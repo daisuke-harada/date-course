@@ -13,15 +13,8 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <>
-      <h1 className='m-4'>デートコースを探すページです</h1>
-      <div className='flex flex-col'>
-        {courses.map((course, index) => (
-          <div key={index}>
-            <CourseCard course={course} />
-          </div>
-        ))}
-      </div>
-   </>
+    <div className='flex flex-wrap justify-center'>
+      {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
+    </div>
   );
 });
