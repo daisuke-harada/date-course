@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#hello'
   namespace :api do
     namespace :v1 do
+      get '/top', to: 'homes#top'
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
       resources :date_spots
