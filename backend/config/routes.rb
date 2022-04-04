@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post '/login', to: 'sessions#login'
       resources :date_spots
       resources :date_spot_reviews, only:[:create, :destroy, :update]
+      resources :prefectures, only:[:show]
       resources :relationships, only: [:create]
       delete '/relationships/:current_user_id/:other_user_id', to: 'relationships#destroy'
       resources :courses, only:[:create, :destroy, :show, :index]

@@ -1,4 +1,5 @@
 import { VFC, memo } from "react";
+import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { PrefectureData } from "types/homes/data";
 
@@ -22,7 +23,9 @@ export const MainPrefecture: VFC<Props> = memo((props) => {
       </ImageParentDiv>
       <div className="md:text-left text-center w-6/12">
         <div className="md:text-xl sm:p-1 text-xs text-black font-bold" >
-          {prefecture.attributes.name}
+          <Link to={`prefectures/${prefecture.attributes.id}`}>
+            {prefecture.attributes.name}
+          </Link>
         </div>
       </div>
     </MainDiv>

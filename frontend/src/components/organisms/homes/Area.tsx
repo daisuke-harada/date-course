@@ -1,5 +1,6 @@
 import { prefectureDatas } from "datas/prefectureDatas";
 import { VFC, memo } from "react";
+import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { AreaData } from "types/homes/data";
 
@@ -21,7 +22,9 @@ export const Area: VFC<Props> = memo((props) => {
           prefectureData.areaId === area.attributes.id
           &&
           <div key={prefectureData.id} className="inline-block m-1">
-            {prefectureData.name}
+            <Link to={`/prefectures/${prefectureData.id}`}>
+              {prefectureData.name}
+            </Link>
           </div>
         ))
       }
