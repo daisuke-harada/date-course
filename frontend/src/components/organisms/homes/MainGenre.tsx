@@ -9,12 +9,12 @@ type Props = {
 const ImageParentDiv = tw.div`relative w-6/12`;
 const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-xl`;
 
-export const Genre: VFC<Props> = memo((props) => {
+export const MainGenre: VFC<Props> = memo((props) => {
 
   const { genre } = props;
 
   return(
-    <div className="md:w-3/12 md:h-60 shadow-lg m-3 h-20 border w-1/3 flex" >
+    <div className="md:w-3/12 md:h-60 rounded-xl shadow-lg m-3 h-20 border w-1/3 flex" >
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/genreImages/${genre.attributes.name}.jpg`} />
       </ImageParentDiv>

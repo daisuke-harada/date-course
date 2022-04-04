@@ -1,6 +1,7 @@
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { Area } from "components/organisms/homes/Area";
-import { Genre } from "components/organisms/homes/Genre";
+import { Genres } from "components/organisms/homes/Genres";
+import { MainGenre } from "components/organisms/homes/MainGenre";
 import { MainPrefecture } from "components/organisms/homes/MainPrefecture";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
@@ -13,11 +14,14 @@ const Image = tw.img`object-cover object-top absolute w-full h-full`;
 export const Top: VFC = memo(() => {
   const [ areas, setAreas ] = useState<AreaData[]>([]);
   const [ mainGenres, setMainGenres ] = useState<GenreData[]>([]);
+  const [ genres, setGenres ] = useState<GenreData[]>([]);
   const [ mainPrefectures, setMainPrefectures ] = useState<PrefectureData[]>([]);
 
   useEffect(() => {
     client.get('top').then((response) => {
+      console.log(response.data);
       setAreas(response.data.areas);
+      setGenres(response.data.genres);
       setMainGenres(response.data.mainGenres);
       setMainPrefectures(response.data.mainPrefectures);
     });
@@ -32,7 +36,7 @@ export const Top: VFC = memo(() => {
         </h1>
       </ImageParentDiv>
       <div className="bg-white mb-1">
-        <p className="md:text-3xl text-xl pt-10 text-center">デートスポットをエリアから探す</p>
+        <p className="md:text-3xl font-bold text-xl pt-10 text-center">デートスポットをエリアから探す</p>
         <div className="flex justify-center flex-wrap w-full p-5">
           {
             mainPrefectures.map((mainPrefecture) => (
@@ -47,17 +51,15 @@ export const Top: VFC = memo(() => {
         </div>
       </div>
       <div className="bg-white">
-        <p className="md:text-3xl text-xl pt-10 text-center">デートスポットをジャンルで探す</p>
+        <p className="md:text-3xl font-bold text-xl pt-10 text-center">デートスポットをジャンルで探す</p>
         <div className="flex">
           <div className="flex justify-center flex-wrap w-full p-5">
-            {/* <% @main_genres.each do |genre| %>
-              <%= render "genres/genre", genre: genre %>
-            <% end %> */}
             {
               mainGenres.map((genre) => (
-                <Genre key={genre.attributes.id} genre={genre} />
+                <MainGenre key={genre.attributes.id} genre={genre} />
               ))
             }
+            <Genres genres={genres} />
           </div>
         </div>
       </div>
