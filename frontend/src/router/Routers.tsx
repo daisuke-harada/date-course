@@ -11,6 +11,7 @@ import { UserRoutes } from "router/UserRoutes";
 import { FlashMessage } from "components/atoms/message/FlashMessage";
 import { ManagementCourseRoutes } from "router/ManagementCourseRoutes";
 import { PrefectureRoutes } from "router/PrefectureRoutes";
+import { GenreRoutes } from "./GenreRoutes";
 
 
 export const Routers: VFC = memo(() => {
@@ -42,6 +43,11 @@ export const Routers: VFC = memo(() => {
         </Route>
         <Route path="prefectures" >
           {PrefectureRoutes().map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="genres" >
+          {GenreRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>

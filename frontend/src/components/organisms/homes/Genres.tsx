@@ -1,4 +1,5 @@
 import { memo, VFC } from 'react';
+import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import { GenreData } from 'types/homes/data';
 
@@ -15,9 +16,13 @@ export const Genres: VFC<Props> = memo((props) => {
   return(
     <MainDiv>
       {
-       genres.map((genre) => (
-         <div className='font-bold my-2'>{genre.attributes.name}</div>
-       ))
+        genres.map((genre) => (
+          <div key={genre.attributes.id} className='font-bold my-2'>
+            <Link to={`/genres/${genre.attributes.id}`}>
+              {genre.attributes.name}
+            </Link>
+          </div>
+        ))
       }
     </MainDiv>
   );

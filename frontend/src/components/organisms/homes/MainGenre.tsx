@@ -1,4 +1,5 @@
 import { VFC, memo } from "react";
+import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { GenreData } from "types/homes/data";
 
@@ -21,7 +22,9 @@ export const MainGenre: VFC<Props> = memo((props) => {
       <div className="md:text-left text-center w-6/12">
         {/* <%= link_to genre.name, {:controller=>"date_spots",:action=>"index",:date_spot_search=>{:genre_id_eq=>"#{genre.id}"}}, as: :date_spot_search, className:"md:text-xl sm:p-1 text-xs text-black font-bold" %> */}
         <div className="md:text-xl sm:p-1 text-xs text-black font-bold">
-          {genre.attributes.name}
+          <Link to={`/genres/${genre.attributes.id}`}>
+            {genre.attributes.name}
+          </Link>
         </div>
       </div>
     </div>
