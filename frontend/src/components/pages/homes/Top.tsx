@@ -19,7 +19,6 @@ export const Top: VFC = memo(() => {
 
   useEffect(() => {
     client.get('top').then((response) => {
-      console.log(response.data);
       setAreas(response.data.areas);
       setGenres(response.data.genres);
       setMainGenres(response.data.mainGenres);

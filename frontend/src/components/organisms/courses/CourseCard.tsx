@@ -18,7 +18,6 @@ type Props ={
 
 export const CourseCard: VFC<Props> = memo((props) =>{
   const { course } = props;
-  console.log(course);
 
   return(
     <MainDiv>

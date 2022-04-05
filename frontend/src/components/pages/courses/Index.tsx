@@ -7,7 +7,6 @@ export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([]);
   useEffect(() => {
     client.get('courses').then((response) => {
-      console.log(response.data.courses);
       setCourses(response.data.courses);
     })
   }, []);
