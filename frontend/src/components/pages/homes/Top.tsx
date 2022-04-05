@@ -3,6 +3,7 @@ import { Area } from "components/organisms/homes/Area";
 import { Genres } from "components/organisms/homes/Genres";
 import { MainGenre } from "components/organisms/homes/MainGenre";
 import { MainPrefecture } from "components/organisms/homes/MainPrefecture";
+import { UserAndDateSpotSearchBar } from "components/organisms/searchs/UserAndDateSpotSearchBar";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
 import tw from "tailwind-styled-components";
@@ -34,6 +35,7 @@ export const Top: VFC = memo(() => {
           <BaseButton>デートコースを作成する</BaseButton>
         </h1>
       </ImageParentDiv>
+      <UserAndDateSpotSearchBar />
       <div className="bg-white mb-1">
         <p className="md:text-3xl font-bold text-xl pt-10 text-center">デートスポットをエリアから探す</p>
         <div className="flex justify-center flex-wrap w-full p-5">
