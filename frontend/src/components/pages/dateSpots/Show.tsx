@@ -58,7 +58,9 @@ export const Show: VFC = memo(() => {
               {addressAndDateSpot?.cityName}
             </div>
             <div className="m-5 text-sm font-bold md:text-xl">
-              {addressAndDateSpot?.genreName}
+              <Link to={`/genres/${addressAndDateSpot?.dateSpot.genreId}`}>
+                {addressAndDateSpot?.genreName}
+              </Link>
             </div>
             <div className="text-center">
               {

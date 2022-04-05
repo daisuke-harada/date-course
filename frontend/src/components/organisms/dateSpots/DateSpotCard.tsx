@@ -45,7 +45,11 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
         </Link>
       </DD>
       <DD>{addressAndDateSpot.cityName}</DD>
-      <DD>{genre?.name}</DD>
+      <DD>
+        <Link to={`/genres/${genre?.id}`}>
+          {genre?.name}
+        </Link>
+      </DD>
       <DD><AddCourseButton addressAndDateSpot={addressAndDateSpot} /></DD>
     </Card>
   );
