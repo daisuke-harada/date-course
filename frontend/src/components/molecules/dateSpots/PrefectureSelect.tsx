@@ -7,14 +7,15 @@ type Props = {
   onChangeValue: React.ChangeEventHandler<HTMLSelectElement>,
   defaultValue: string,
   dataE2e?: string,
+  addClassName?: string
 };
 
 
 export const PrefectureSelect: VFC<Props> = memo((props) => {
-  const {onChangeValue, defaultValue, dataE2e} = props
+  const {onChangeValue, defaultValue, dataE2e, addClassName} = props
   return(
-      <select data-e2e={dataE2e} className="mb-2 border-2 rounded-md" defaultValue={defaultValue} onChange={onChangeValue}>
-        <option value="0">都道府県を選択してください</option>
+      <select data-e2e={dataE2e} className={`mb-2 border-2 rounded-md ${addClassName}`} defaultValue={defaultValue} onChange={onChangeValue}>
+        <option value="0">都道府県を選択</option>
         {areaDatas.map((area) => (
           <optgroup key={area.id} label={area.name}>
             {prefectureDatas
