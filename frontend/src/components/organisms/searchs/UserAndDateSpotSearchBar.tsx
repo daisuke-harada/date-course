@@ -13,8 +13,8 @@ export const UserAndDateSpotSearchBar: VFC = memo(() => {
   const onChangeSearchTarget: React.ChangeEventHandler<HTMLInputElement> = (e) => setSearchTarget(e.target.value);
 
   return(
-    <div className='px-3 w-full shadow bg-gray-300 flex border-1 border-gray-300' >
-      <input type='text' className='w-1/2 my-3 p-1 rounded-xl' placeholder='スポット名・ユーザー名を検索' />
+    <div className='px-3 flex justify-center m-auto w-full bg-red-100' >
+      <input type='text' className='my-3 w-1/3 p-2 rounded-xl' placeholder=' スポット名・ユーザー名を検索' />
       <div className='flex'>
         {/* デートスポット */}
         <RadioButtonDiv>
