@@ -3,7 +3,7 @@ import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
 import { UserResponseData } from "types/users/response";
 
-export const NameSearch: VFC = memo(() => {
+export const Search: VFC = memo(() => {
 
 
   return(

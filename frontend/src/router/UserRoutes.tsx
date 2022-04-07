@@ -3,7 +3,7 @@ import { Edit } from 'components/pages/users/Edit';
 import { Followers } from 'components/pages/users/Followers';
 import { Followings } from 'components/pages/users/Followings';
 import { Index } from 'components/pages/users/Index';
-import { NameSearch } from 'components/pages/users/NameSearch';
+import { Search } from 'components/pages/users/Search';
 import { New } from 'components/pages/users/New';
 import { Show } from 'components/pages/users/Show';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -52,8 +52,8 @@ export const UserRoutes: () => Props[] = () => {
       <Navigate to='/' state={{message: 'ログイン中はアクセスできません', type: 'error-message', condition: true}} />
     },
     {
-      path: 'nameSearch',
-      element: <NameSearch />
+      path: 'Search',
+      element: <Search />
     },
     {
       path: '*',
