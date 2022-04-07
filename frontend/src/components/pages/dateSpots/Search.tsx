@@ -7,7 +7,12 @@ export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
 
   const location = useLocation();
-  const state = location.state as { addressAndDateSpots: Array<AddressAndDateSpotJoinData> };
+  const state = location.state as {
+    addressAndDateSpots: Array<AddressAndDateSpotJoinData>
+    prefectureId?: string,
+    genreId?: string,
+    comeTime?: string
+  };
 
   useEffect(() => {
     setAddressAndDateSpots(state.addressAndDateSpots);

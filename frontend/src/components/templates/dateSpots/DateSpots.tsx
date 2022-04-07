@@ -1,4 +1,5 @@
 import { DateSpotCard } from "components/organisms/dateSpots/DateSpotCard";
+import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { memo, VFC } from "react";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
@@ -9,8 +10,11 @@ type Props = {
 export const DateSpots: VFC<Props> = memo((props) => {
   const { addressAndDateSpots } = props;
   return(
-    <div className='flex flex-wrap justify-center'>
-      {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
-    </div>
+    <>
+      <DateSpotSortSearchBar />
+      <div className='flex flex-wrap justify-center'>
+        {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
+      </div>
+    </>
   );
 });

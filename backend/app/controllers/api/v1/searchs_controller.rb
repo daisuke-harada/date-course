@@ -12,7 +12,7 @@ class Api::V1::SearchsController < ApplicationController
       address_and_date_spot_and_genre_name(Address.find_by(date_spot_id: date_spot.id))
     end
 
-    render json: {status: 'success', address_and_date_spots: @address_and_date_spots }
+    render json: {status: 'success', address_and_date_spots: @address_and_date_spots, prefecture_id: params[:prefecture_id], genre_id: params[:genre_id], come_time: params[:come_time] }
   end
 
   def name_search

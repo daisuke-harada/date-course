@@ -6,6 +6,7 @@ import { GenreSelect } from 'components/molecules/dateSpots/GenreSelect';
 import { PrefectureSelect } from 'components/molecules/dateSpots/PrefectureSelect';
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
+import { useNavigate } from 'react-router-dom';
 
 const SelectParentDiv = tw.div`mt-3 mx-3 w-32`;
 
@@ -15,6 +16,7 @@ export const DateSpotSortSearchBar: VFC = memo(() => {
   const [genreValue, setGenreValue] = useState<string>('');
   const [businessTimeValue, setBusinessTimeValue] = useState('');
 
+  const navigate = useNavigate();
   const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureValue(e.target.value), []);
   const onChangeGenreValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setGenreValue(e.target.value), []);
   const onChangeBusinessTimeValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setBusinessTimeValue(e.target.value), []);
@@ -25,7 +27,7 @@ export const DateSpotSortSearchBar: VFC = memo(() => {
   }
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spots/sort', search).then(response => {
-      
+      response.data.status === 'success' && navigate('/dateSpots/Search', {state: {addressAndDateSpots: response.data.addressAndDateSpots}})
     })
   };
 
