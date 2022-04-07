@@ -24,8 +24,9 @@ export const UserAndDateSpotSearchBar: VFC = memo(() => {
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('name_search', search).then(response => {
-      response.data.target === 'User' && navigate('/users/nameSearch', {state: {users: response.data.users}})
-    })
+      response.data.target === 'User' && navigate('/users/Search', {state: {users: response.data.users}});
+      response.data.target === 'DateSpot' && navigate('/dateSpots/Search', {state: {addressAndDateSpots: response.data.addressAndDateSpots}})
+    });
   };
 
 

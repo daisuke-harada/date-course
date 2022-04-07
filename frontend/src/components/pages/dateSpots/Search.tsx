@@ -1,14 +1,22 @@
-import { Users } from "components/templates/users/Users";
-import { client } from "lib/api/client";
+import { DateSpots } from "components/templates/dateSpots/DateSpots";
 import { memo, useEffect, useState, VFC } from "react";
-import { UserResponseData } from "types/users/response";
+import { useLocation } from "react-router-dom";
+import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 export const Search: VFC = memo(() => {
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
 
+  const location = useLocation();
+  const state = location.state as { addressAndDateSpots: Array<AddressAndDateSpotJoinData> };
+
+  useEffect(() => {
+    setAddressAndDateSpots(state.addressAndDateSpots);
+  }, [state.addressAndDateSpots]);
 
   return(
     <>
-      <h1 className='m-4'>ユーザーを探すページ</h1>
+      <h1 className='m-4'>デートスポットを探す</h1>
+      <DateSpots addressAndDateSpots={addressAndDateSpots} />
     </>
   );
 });
