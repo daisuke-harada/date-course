@@ -27,7 +27,16 @@ export const DateSpotSortSearchBar: VFC = memo(() => {
   }
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spots/sort', search).then(response => {
-      response.data.status === 'success' && navigate('/dateSpots/Search', {state: {addressAndDateSpots: response.data.addressAndDateSpots}})
+      response.data.status === 'success' && navigate('/dateSpots/Search',
+        {
+          state: {
+            addressAndDateSpots: response.data.addressAndDateSpots,
+            prefectureId: response.data.prefectureId,
+            genreId: response.data.genreId,
+            comeTime: response.data.comeTime
+          }
+        }
+      )
     })
   };
 
