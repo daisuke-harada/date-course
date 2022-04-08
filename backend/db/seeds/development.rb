@@ -25,7 +25,7 @@ User.create(name: "admin", email: "adminstrator@gmail.com", gender: "男性", pa
 # 福岡
 SpotAndAddressCreate("キャナルシティ博多", 1, normal_time("08:00"), normal_time("23:00"), 40, "福岡市博多区住吉1丁目2")
 SpotAndAddressCreate("つなぐダイニング ZINO 天神店", 8, normal_time("20:00"), midnight__time("05:00"), 40, "福岡市中央区大名1-11-22-1")
-SpotAndAddressCreate("大濠公園", 11, "", "", 40, "福岡市中央区大濠公園")
+SpotAndAddressCreate("大濠公園", 12, "", "", 40, "福岡市中央区大濠公園")
 
 # 東京
 SpotAndAddressCreate("東京ディズニーランド", 5, normal_time("10:00"), normal_time("19:00"), 12, "墨田区押上1-1-2")
