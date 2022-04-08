@@ -5,15 +5,23 @@ import { memo, VFC } from "react";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
 type Props = {
-  addressAndDateSpots: Array<AddressAndDateSpotJoinData>
+  addressAndDateSpots: Array<AddressAndDateSpotJoinData>,
+  defaultPrefectureValue: string,
+  defaultGenreValue: string,
+  defaultBusinessTimeValue: string
 };
 
 export const DateSpots: VFC<Props> = memo((props) => {
-  const { addressAndDateSpots } = props;
+  const { addressAndDateSpots, defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue } = props;
+
   return(
     <>
       <DateSpotRanking />
-      <DateSpotSortSearchBar />
+      <DateSpotSortSearchBar
+        defaultPrefectureValue={defaultPrefectureValue}
+        defaultGenreValue={defaultGenreValue}
+        defaultBusinessTimeValue={defaultBusinessTimeValue}
+      />
       <div className='flex flex-wrap justify-center'>
         {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
       </div>

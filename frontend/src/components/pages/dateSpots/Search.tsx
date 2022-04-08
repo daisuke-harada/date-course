@@ -21,7 +21,12 @@ export const Search: VFC = memo(() => {
   return(
     <>
       <h1 className='m-4'>デートスポットを探す</h1>
-      <DateSpots addressAndDateSpots={addressAndDateSpots} />
+      <DateSpots
+        addressAndDateSpots={addressAndDateSpots}
+        defaultPrefectureValue={state.prefectureId || ''}
+        defaultGenreValue={state.genreId || ''}
+        defaultBusinessTimeValue={state.comeTime || ''}
+      />
     </>
   );
 });

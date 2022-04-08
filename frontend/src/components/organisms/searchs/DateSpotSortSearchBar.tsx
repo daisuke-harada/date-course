@@ -10,21 +10,30 @@ import { useNavigate } from 'react-router-dom';
 
 const SelectParentDiv = tw.div`mt-3 mx-3 w-32`;
 
+type Props = {
+  defaultPrefectureValue: string,
+  defaultGenreValue: string,
+  defaultBusinessTimeValue: string
+}
 
-export const DateSpotSortSearchBar: VFC = memo(() => {
-  const [prefectureValue, setPrefectureValue] = useState<string >('');
-  const [genreValue, setGenreValue] = useState<string>('');
-  const [businessTimeValue, setBusinessTimeValue] = useState('');
+
+export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
+  const {defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue} = props;
+  const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureValue);
+  const [genreValue, setGenreValue] = useState<string>(defaultGenreValue);
+  const [businessTimeValue, setBusinessTimeValue] = useState(defaultBusinessTimeValue);
 
   const navigate = useNavigate();
   const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureValue(e.target.value), []);
   const onChangeGenreValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setGenreValue(e.target.value), []);
   const onChangeBusinessTimeValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setBusinessTimeValue(e.target.value), []);
+
   const search = {
     prefectureId: prefectureValue,
     genreId: genreValue,
     comeTime: businessTimeValue,
-  }
+  };
+
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spots/sort', search).then(response => {
       response.data.status === 'success' && navigate('/dateSpots/Search',
