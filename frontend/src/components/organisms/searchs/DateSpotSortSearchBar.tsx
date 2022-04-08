@@ -41,7 +41,7 @@ export const DateSpotSortSearchBar: VFC = memo(() => {
   };
 
   return(
-    <div className='w-3/4 m-auto mt-6 bg-white border-2 rounded-3xl border-gray-200 justify-center flex py-1' >
+    <div className='w-11/12 m-auto mt-6 bg-white border-2 rounded-3xl border-gray-200 justify-center flex py-1' >
       <SelectParentDiv>
         <PrefectureSelect addClassName='border-red-100' dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
