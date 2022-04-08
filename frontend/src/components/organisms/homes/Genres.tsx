@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import { GenreData } from 'types/homes/data';
 
-const MainDiv = tw.div`m-3 p-3 bg-white w-9/12`;
+const MainDiv = tw.div`m-3 p-3 w-9/12`;
 
 type Props ={
   genres: GenreData[]
