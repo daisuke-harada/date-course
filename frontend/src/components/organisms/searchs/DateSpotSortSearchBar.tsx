@@ -8,7 +8,7 @@ import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
-const SelectParentDiv = tw.div`mt-3 m-auto`;
+const SelectParentDiv = tw.div`mt-3 w-full`;
 
 type Props = {
   defaultPrefectureValue: string,
