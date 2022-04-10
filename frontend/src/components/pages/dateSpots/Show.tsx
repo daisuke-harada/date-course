@@ -10,7 +10,7 @@ import { BaseButton } from "components/atoms/button/BaseButton"
 import { Link } from "react-router-dom";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { Map } from "components/molecules/maps/Map";
-import { DateSpotReviewArea } from "components/organisms/dateSpotReviews/DateSpotReviewArea";
+import { DateSpotReviewArea } from "components/organisms/area/dateSpotReviews/DateSpotReviewArea";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
 
 const MainDiv = tw.div`border border-black bg-white mt-10 m-20 p-5 rounded-2xl`;

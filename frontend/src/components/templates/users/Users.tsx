@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 
-import { UserCard } from "components/organisms/users/UserCard";
+import { UserCard } from "components/organisms/card/users/UserCard";
 import { UserResponseData } from "types/users/response";
 
 type Props = {

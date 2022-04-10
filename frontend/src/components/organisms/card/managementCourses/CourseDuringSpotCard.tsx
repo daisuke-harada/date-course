@@ -4,7 +4,7 @@ import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { Link } from "react-router-dom";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
 import { client } from "lib/api/client";
-import { ChangeSelect } from "components/molecules/managementCourses/ChangeSelect";
+import { ChangeSelect } from "components/molecules/select/managementCourses/ChangeSelect";
 import { ManagementCourseData } from "types/managementCourses/management";
 import { SetterOrUpdater } from "recoil";
 import { DeleteCourseButton } from "components/atoms/button/DeleteCourseButton";

@@ -9,7 +9,7 @@ import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
 import { UserResponseData } from "types/users/response";
-import { FollowingsAndFollowersLinkArea } from "components/molecules/users/Link/FollowingsAndFollowersLinkArea";
+import { FollowingsAndFollowersLinkArea } from "components/molecules/Link/users/FollowingsAndFollowersLinkArea";
 
 const Span = tw.span`m-2 font-bold`;
 const Div = tw.div`m-5`;

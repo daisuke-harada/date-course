@@ -4,7 +4,7 @@ import tw from "tailwind-styled-components";
 
 import { formDataClient } from "lib/api/client";
 import { BaseButton } from "components/atoms/button/BaseButton";
-import { RadioField } from "components/molecules/users/RadioField";
+import { RadioArea } from "components/organisms/area/RadioArea";
 import { UserLoginResponseData } from "types/users/response";
 import { currentUserState } from "store/session";
 import { useRecoilState } from "recoil";
@@ -133,7 +133,7 @@ export const UserForm: VFC<Props> = memo((props) => {
         <Input data-e2e="user-form-email-input" placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
         <Input data-e2e="user-form-password-input" placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
         <Input data-e2e="user-form-passwordConfirmation-input" placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
-        <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
+        <RadioArea gender={gender} onChangeRadioButton={onChangeRadioButton} />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
           <BaseButton dataE2e="user-form-button">{buttonName}</BaseButton>

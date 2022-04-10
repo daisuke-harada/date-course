@@ -2,8 +2,8 @@ import { memo, useCallback, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { GenreSelect } from 'components/molecules/dateSpots/GenreSelect';
-import { PrefectureSelect } from 'components/molecules/dateSpots/PrefectureSelect';
+import { GenreSelect } from 'components/molecules/select/dateSpots/GenreSelect';
+import { PrefectureSelect } from 'components/molecules/select/dateSpots/PrefectureSelect';
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';

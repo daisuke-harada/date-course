@@ -1,7 +1,7 @@
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { FollowingsAndFollowersLinkArea } from "components/atoms/Link/FollowingsAndFollowersLinkArea";
-import { DuringSpotCard } from "components/molecules/courses/DuringSpotCard";
+import { DuringSpotCard } from "components/organisms/card/courses/DuringSpotCard";
 import { memo, VFC } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";

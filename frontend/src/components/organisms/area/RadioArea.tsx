@@ -9,7 +9,7 @@ type Props = {
   onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-export const RadioField: VFC<Props>= memo((props) => {
+export const RadioArea: VFC<Props>= memo((props) => {
   const {gender, onChangeRadioButton} = props;
   return(
     <div className="flex justify-start text-left w-2/3 mobile(M):ml-0 ml-8">

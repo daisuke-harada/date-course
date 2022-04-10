@@ -1,4 +1,4 @@
-import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
+import { CourseDuringSpotCard } from "components/organisms/card/managementCourses/CourseDuringSpotCard";
 import { memo, useState, VFC } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import tw from "tailwind-styled-components";
@@ -8,8 +8,8 @@ import { currentUserState } from "store/session";
 import { Directions } from "components/molecules/maps/Directions";
 import { LoadScript } from "@react-google-maps/api";
 import { Map } from "components/molecules/maps/Map";
-import { CourseInfoSelect } from "components/molecules/managementCourses/CourseInfoSelect";
-import { ManagementCourseButtonArea } from "components/molecules/managementCourses/ManagementCourseButtonArea";
+import { CourseInfoSelect } from "components/molecules/select/managementCourses/CourseInfoSelect";
+import { ManagementCourseButtonArea } from "components/organisms/area/ManagementCourseButtonArea";
 
 const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 const CourseNotExistDiv = tw.div`w-full mt-5 mb-16 flex text-blue-600 text-3xl`;

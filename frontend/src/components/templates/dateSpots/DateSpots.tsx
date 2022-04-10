@@ -1,4 +1,4 @@
-import { DateSpotCard } from "components/organisms/dateSpots/DateSpotCard";
+import { DateSpotCard } from "components/organisms/card/dateSpots/DateSpotCard";
 import { DateSpotRanking } from "components/organisms/rankings/DateSpotRanking";
 import { memo, VFC } from "react";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";

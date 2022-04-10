@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { currentUserState, loginStatusState } from "store/session";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
 import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
-import { DateSpotReviewForm } from "components/molecules/dateSpotReview/DateSpotReviewForm";
+import { DateSpotReviewForm } from "components/molecules/form/dateSpotReview/DateSpotReviewForm";
 import { StarRateText } from "components/atoms/layouts/StarRateText";
 
 type Props = {

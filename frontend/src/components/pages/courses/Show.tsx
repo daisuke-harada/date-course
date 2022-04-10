@@ -1,7 +1,7 @@
 import { LoadScript } from "@react-google-maps/api";
 import { DangerButton } from "components/atoms/button/DangerButton";
 import { Directions } from "components/molecules/maps/Directions";
-import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
+import { CourseDuringSpotCard } from "components/organisms/card/managementCourses/CourseDuringSpotCard";
 import { client } from "lib/api/client";
 import { memo, useCallback, useEffect, useState, VFC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
