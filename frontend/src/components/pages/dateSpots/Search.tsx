@@ -1,3 +1,4 @@
+import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { DateSpots } from "components/templates/dateSpots/DateSpots";
 import { memo, useEffect, useState, VFC } from "react";
 import { useLocation } from "react-router-dom";
@@ -20,14 +21,16 @@ export const Search: VFC = memo(() => {
 
   return(
     <div className='w-full flex'>
-      <div className='w-2/12 m-2 bg-black'>
-      </div>
-      <div className='w-9/12 m-2'>
-        <DateSpots
-          addressAndDateSpots={addressAndDateSpots}
+      <div className='w-3/12 p-5'>
+        <DateSpotSortSearchBar
           defaultPrefectureValue={state.prefectureId || ''}
           defaultGenreValue={state.genreId || ''}
           defaultBusinessTimeValue={state.comeTime || ''}
+        />
+      </div>
+      <div className='w-9/12 p-5'>
+        <DateSpots
+          addressAndDateSpots={addressAndDateSpots}
         />
       </div>
     </div>

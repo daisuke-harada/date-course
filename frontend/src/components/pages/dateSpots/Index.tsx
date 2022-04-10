@@ -1,3 +1,4 @@
+import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { DateSpots } from "components/templates/dateSpots/DateSpots";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
@@ -14,10 +15,15 @@ export const Index: VFC = memo(() => {
 
   return(
     <div className='w-full flex'>
-      <div className='w-2/12 m-2 bg-black'>
+      <div className='w-3/12 p-5'>
+        <DateSpotSortSearchBar
+          defaultPrefectureValue=''
+          defaultGenreValue=''
+          defaultBusinessTimeValue=''
+        />
       </div>
-      <div className='w-9/12 m-2'>
-        <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue='' defaultBusinessTimeValue='' />
+      <div className='w-9/12 p-5'>
+        <DateSpots addressAndDateSpots={addressAndDateSpots} />
       </div>
     </div>
   );

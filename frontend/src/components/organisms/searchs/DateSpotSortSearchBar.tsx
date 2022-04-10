@@ -8,7 +8,7 @@ import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
-const SelectParentDiv = tw.div`mt-3 mx-3 w-32`;
+const SelectParentDiv = tw.div`mt-3 mx-3`;
 
 type Props = {
   defaultPrefectureValue: string,
@@ -50,20 +50,23 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='w-11/12 m-auto mt-6 bg-white border-2 rounded-3xl border-gray-200 justify-center flex py-1' >
+    <div className='m-auto bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
+      <div className='m-auto my-5 font-bold text-center'>
+        デートスポット条件検索
+      </div>
       <SelectParentDiv>
         <PrefectureSelect addClassName='border-red-100' dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
-      <SelectParentDiv className='mr-6'>
+      <SelectParentDiv>
         <GenreSelect addClassName='border-red-100' dataE2e="dateSpot-genre-select" defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
       </SelectParentDiv>
-      <label className='mt-3 ml-6 pl-6 mr-0'>
-        来店希望時間
-      </label>
-      <SelectParentDiv className='mx-0.5'>
+      <SelectParentDiv className='flex'>
+        <div className='font-bold text-xs m-2'>
+          来店希望時間
+        </div>
         <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
       </SelectParentDiv>
-      <div className='m-2 ml-0 w-36'>
+      <div className='m-auto my-5 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>
