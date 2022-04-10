@@ -12,9 +12,6 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <>
-      <h1 className='m-4'>ユーザーを探すページ</h1>
-      <Users users={users} setUsers={setUsers} />
-    </>
+    <Users users={users} setUsers={setUsers} />
   );
 });

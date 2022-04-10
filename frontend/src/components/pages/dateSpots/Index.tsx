@@ -13,9 +13,6 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <>
-      <h1 className='m-4'>デートスポットを探す</h1>
-      <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue='' defaultBusinessTimeValue='' />
-    </>
+    <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue='' defaultBusinessTimeValue='' />
   );
 });

@@ -13,9 +13,6 @@ export const Search: VFC = memo(() => {
   }, [state.users]);
 
   return(
-    <>
-      <h1 className='m-4'>ユーザーを探すページ</h1>
-      <Users users={users} setUsers={setUsers} />
-    </>
+    <Users users={users} setUsers={setUsers} />
   );
 });
