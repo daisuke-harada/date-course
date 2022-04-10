@@ -1,3 +1,4 @@
+import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { DateSpots } from "components/templates/dateSpots/DateSpots";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
@@ -15,9 +16,17 @@ export const Show: VFC = memo(() => {
   }, [id]);
 
   return(
-    <>
-      <h1 className='m-4'>デートスポットを探す</h1>
-      <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue={`${id}`} defaultBusinessTimeValue='' />
-    </>
+    <div className='w-full flex'>
+      <div className='w-3/12 p-5'>
+        <DateSpotSortSearchBar
+          defaultPrefectureValue=''
+          defaultGenreValue={`${id}`}
+          defaultBusinessTimeValue=''
+        />
+      </div>
+      <div className='w-9/12 p-5'>
+        <DateSpots addressAndDateSpots={addressAndDateSpots} />
+      </div>
+    </div>
   );
 });
