@@ -13,6 +13,12 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue='' defaultBusinessTimeValue='' />
+    <div className='w-full flex'>
+      <div className='w-2/12 m-2 bg-black'>
+      </div>
+      <div className='w-9/12 m-2'>
+        <DateSpots addressAndDateSpots={addressAndDateSpots} defaultPrefectureValue='' defaultGenreValue='' defaultBusinessTimeValue='' />
+      </div>
+    </div>
   );
 });

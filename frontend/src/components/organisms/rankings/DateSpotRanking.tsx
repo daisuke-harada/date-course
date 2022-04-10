@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import tw from 'tailwind-styled-components';
 
-const MaindDiv = tw.div`w-11/12 m-auto mt-6 bg-white border-2 rounded-3xl border-gray-200`;
+const MaindDiv = tw.div`w-11/12 m-auto bg-white border-2 rounded-3xl border-gray-200`;
 
 
 export const DateSpotRanking: VFC = memo((props) => {
