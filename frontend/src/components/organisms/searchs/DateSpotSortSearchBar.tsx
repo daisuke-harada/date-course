@@ -51,7 +51,7 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
 
   return(
     <div className='m-auto bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
-      <div className='m-auto my-5 font-bold text-center'>
+      <div className='text-xs m-auto my-5 font-bold text-center'>
         デートスポット条件検索
       </div>
       <SelectParentDiv>
@@ -66,7 +66,7 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
         </div>
         <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
       </SelectParentDiv>
-      <div className='m-auto my-5 w-1/2'>
+      <div className='m-auto my-5 w-3/4'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>

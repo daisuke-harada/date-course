@@ -14,7 +14,7 @@ type Props = {
 export const PrefectureSelect: VFC<Props> = memo((props) => {
   const {onChangeValue, defaultValue, dataE2e, addClassName} = props
   return(
-      <select data-e2e={dataE2e} className={`mb-2 border-2 rounded-md ${addClassName}`} defaultValue={defaultValue} onChange={onChangeValue}>
+      <select data-e2e={dataE2e} className={`mb-2 text-xs border-2 rounded-md ${addClassName}`} defaultValue={defaultValue} onChange={onChangeValue}>
         <option value="">都道府県を選択</option>
         {areaDatas.map((area) => (
           <optgroup key={area.id} label={area.name}>
