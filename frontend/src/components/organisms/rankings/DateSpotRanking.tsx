@@ -23,7 +23,7 @@ export const DateSpotRanking: VFC<Props> = memo((props) => {
         {
           top5.map((addressAndDateSpot: AddressAndDateSpotJoinData, index) => (
             <div key={addressAndDateSpot.id} className='flex flex-col'>
-              <span className='text-xl text-center font-bold'>
+              <span className='text-xl text-center'>
                 {
                   index + 1 === 1 || index + 1 === 2 || index + 1 === 3 ?
                   <Img src={`${process.env.PUBLIC_URL}/no${index + 1}.jpg`} alt={`no${index + 1}Image`} />
