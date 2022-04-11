@@ -11,7 +11,7 @@ type Props = {
 export const Users: VFC<Props> = memo((props) => {
   const { users, setUsers } = props;
   return(
-    <div className='flex flex-wrap justify-center'>
+    <div className='flex flex-wrap'>
       {users.map((user: UserResponseData) => (<UserCard key={user.id} user={user} setUsers={setUsers} />))}
     </div>
   );
