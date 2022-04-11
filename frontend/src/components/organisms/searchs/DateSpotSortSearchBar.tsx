@@ -61,8 +61,8 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
         <GenreSelect addClassName='w-full border-red-100' dataE2e="dateSpot-genre-select" defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
       </SelectParentDiv>
       <SelectParentDiv className='flex'>
-        <div className='font-bold text-xs m-2'>
-          来店希望時間
+        <div className='font-bold text-xs m-1'>
+          希望時間
         </div>
         <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
       </SelectParentDiv>
