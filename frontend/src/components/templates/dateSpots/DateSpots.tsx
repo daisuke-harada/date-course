@@ -9,13 +9,25 @@ type Props = {
 
 export const DateSpots: VFC<Props> = memo((props) => {
   const { addressAndDateSpots } = props;
+  console.log(addressAndDateSpots);
 
   return(
     <>
-      <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
-      <div className='sm:justify-start justify-center flex flex-wrap'>
-        {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
-      </div>
+      {
+        addressAndDateSpots.length !== 0?
+        (
+          <>
+            <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
+            <div className='sm:justify-start justify-center flex flex-wrap'>
+              {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
+            </div>
+          </>
+        )
+        :
+        <div className='mt-2 text-center text-red-400 text-4xl'>
+          デートスポットは存在しません
+        </div>
+      }
     </>
   );
 });
