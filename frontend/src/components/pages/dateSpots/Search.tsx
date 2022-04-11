@@ -22,6 +22,8 @@ export const Search: VFC = memo(() => {
     setAddressAndDateSpots(state.addressAndDateSpots);
   }, [state.addressAndDateSpots]);
 
+  console.log(state.dateSpotSearchName);
+
   return(
     <div className='w-full flex'>
       <div className='w-3/12 p-5'>
@@ -30,12 +32,8 @@ export const Search: VFC = memo(() => {
           defaultGenreValue={state.genreId || ''}
           defaultBusinessTimeValue={state.comeTime || ''}
         />
-        <DateSpotNameSearchBar
-          defaultDateSpotName={state.dateSpotSearchName || ''}
-        />
-        <UserNameSearchBar
-          defaultUserName=""
-        />
+        <DateSpotNameSearchBar />
+        <UserNameSearchBar />
       </div>
       <div className='w-9/12 p-5'>
         <DateSpots

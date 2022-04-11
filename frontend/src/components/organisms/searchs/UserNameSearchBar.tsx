@@ -7,14 +7,8 @@ import { client } from 'lib/api/client';
 
 const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
 
-type Props = {
-  defaultUserName: string
-}
-
-
-export const UserNameSearchBar: VFC<Props> = memo((props) => {
-  const { defaultUserName } = props;
-  const [ userName, setUserName ] = useState(defaultUserName);
+export const UserNameSearchBar: VFC = memo(() => {
+  const [ userName, setUserName ] = useState('');
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setUserName(e.target.value);
 

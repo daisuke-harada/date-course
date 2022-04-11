@@ -23,12 +23,8 @@ export const Index: VFC = memo(() => {
           defaultGenreValue=''
           defaultBusinessTimeValue=''
         />
-        <DateSpotNameSearchBar
-          defaultDateSpotName=""
-        />
-        <UserNameSearchBar
-          defaultUserName=""
-        />
+        <DateSpotNameSearchBar />
+        <UserNameSearchBar />
       </div>
       <div className='w-9/12 p-5'>
         <DateSpots addressAndDateSpots={addressAndDateSpots} />

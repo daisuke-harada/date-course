@@ -7,14 +7,8 @@ import { client } from 'lib/api/client';
 
 const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
 
-type Props = {
-  defaultDateSpotName: string
-}
-
-
-export const DateSpotNameSearchBar: VFC<Props> = memo((props) => {
-  const { defaultDateSpotName } = props;
-  const [ dateSpotName, setDateSpotName ] = useState(defaultDateSpotName);
+export const DateSpotNameSearchBar: VFC = memo(() => {
+  const [ dateSpotName, setDateSpotName ] = useState('');
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setDateSpotName(e.target.value);
 
