@@ -24,7 +24,7 @@ export const DateSpotNameSearchBar: VFC<Props> = memo((props) => {
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spot_name_search', search).then(response => {
-      navigate('/dateSpots/Search', {state: {addressAndDateSpots: response.data.addressAndDateSpots}})
+      navigate('/dateSpots/search', {state: {addressAndDateSpots: response.data.addressAndDateSpots, dateSpotSearchName: dateSpotName}})
     });
   };
 

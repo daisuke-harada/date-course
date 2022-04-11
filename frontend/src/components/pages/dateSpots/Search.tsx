@@ -4,6 +4,7 @@ import { DateSpots } from "components/templates/dateSpots/DateSpots";
 import { memo, useEffect, useState, VFC } from "react";
 import { useLocation } from "react-router-dom";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
+import { UserNameSearchBar } from "components/organisms/searchs/UserNameSearchBar";
 
 export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
@@ -13,7 +14,8 @@ export const Search: VFC = memo(() => {
     addressAndDateSpots: Array<AddressAndDateSpotJoinData>
     prefectureId?: string,
     genreId?: string,
-    comeTime?: string
+    comeTime?: string,
+    dateSpotSearchName?: string
   };
 
   useEffect(() => {
@@ -29,7 +31,10 @@ export const Search: VFC = memo(() => {
           defaultBusinessTimeValue={state.comeTime || ''}
         />
         <DateSpotNameSearchBar
-          defaultDateSpotName=""
+          defaultDateSpotName={state.dateSpotSearchName || ''}
+        />
+        <UserNameSearchBar
+          defaultUserName=""
         />
       </div>
       <div className='w-9/12 p-5'>

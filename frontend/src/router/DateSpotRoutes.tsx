@@ -34,7 +34,7 @@ export const DateSpotRoutes = () =>{
       <Navigate to='/' state={{message: '管理者しかアクセスできません', type: 'error-message', condition: true}} />
     },
     {
-      path: 'Search',
+      path: 'search',
       element: <Search />
     },
 

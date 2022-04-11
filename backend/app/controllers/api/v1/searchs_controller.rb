@@ -30,4 +30,21 @@ class Api::V1::SearchsController < ApplicationController
       render json: { target: params[:search_target], address_and_date_spots: @date_spots }
     end
   end
+
+  def user_name_search
+    users = User.ransack(name_cont: params[:user_name]).result
+    @users = users.map do |user|
+      user_and_userFollowingsAndFollowers(user)
+    end
+    render json: { users: @users }
+  end
+
+  def date_spot_name_search
+    date_spots = DateSpot.ransack(name_cont: params[:date_spot_name]).result
+    @date_spots = date_spots.map do |date_spot|
+      address_and_date_spot_and_genre_name(Address.find_by(date_spot_id: date_spot.id))
+    end
+    render json: { address_and_date_spots: @date_spots }
+  end
+
 end

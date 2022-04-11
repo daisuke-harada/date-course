@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       post '/signup', to: 'registrations#signup'
       post '/login', to: 'sessions#login'
       post '/name_search', to: 'searchs#name_search'
+      post '/user_name_search', to: 'searchs#user_name_search'
+      post '/date_spot_name_search', to: 'searchs#date_spot_name_search'
       post '/date_spots/sort', to: 'searchs#date_spot_sort_search'
       resources :date_spots
       resources :date_spot_reviews, only: [:create, :destroy, :update]
