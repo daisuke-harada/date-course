@@ -20,11 +20,9 @@ export const Users: VFC<Props> = memo((props) => {
           </div>
         )
         :
-        (
-          <div className='mt-2 text-center text-red-400 text-4xl'>
-            ユーザーは存在しません
-          </div>
-        )
+        <div className='mt-2 text-center text-red-400 text-4xl'>
+          ユーザーは存在しません
+        </div>
       }
     </>
   );
