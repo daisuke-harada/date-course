@@ -1,3 +1,5 @@
+rates = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
+
 def spot_image(id)
   return "#{Genre.find(id).name}.jpg"
 end
@@ -14,6 +16,10 @@ end
 def SpotAndAddressCreate(name, genre_id, opening_time, closing_time, prefecture_id, city_name)
   date_spot = DateSpot.create(name: name, genre_id: genre_id, image: File.open("./public/images/date_spot_images/#{spot_image(genre_id)}"), opening_time: opening_time, closing_time: closing_time)
   Address.create(prefecture_id: prefecture_id, date_spot_id: date_spot.id, city_name: Prefecture.find(prefecture_id).name + city_name)
+end
+
+def date_spot_review_create(rate, content, user_id, date_spot_id)
+  DateSpotReview.create(rate: rate, content: content, user_id: user_id, date_spot_id: date_spot_id)
 end
 
 User.create(name: "guest", email: "guest@gmail.com", gender: "男性", image: File.open("./public/images/user_images/spiderman.png"), password: "foobar", password_confirmation: "foobar")
@@ -34,3 +40,20 @@ SpotAndAddressCreate("恵比寿ガーデンプレイス", 1, normal_time("07:00"
 
 # 熊本
 SpotAndAddressCreate("あか牛丼いわさき", 2, normal_time("11:00"), midnight__time("00:00"), 43, "阿蘇市乙姫2006-2")
+
+#guestにすべてのデートスポットをレビューさせる
+Address.all.each do |address|
+  date_spot_review_create(rates.sample, "testtesttesttest", 1, address.date_spot_id)
+end
+
+Address.all.each do |address|
+  date_spot_review_create(rates.sample, "testtesttesttest", 2, address.date_spot_id)
+end
+
+Address.all.each do |address|
+  date_spot_review_create(rates.sample, "testtesttesttest", 3, address.date_spot_id)
+end
+
+Address.all.each do |address|
+  date_spot_review_create(rates.sample, "testtesttesttest", 4, address.date_spot_id)
+end
