@@ -13,7 +13,7 @@ export const DateSpots: VFC<Props> = memo((props) => {
   return(
     <>
       <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
-      <div className='flex flex-wrap'>
+      <div className='sm:justify-start justify-center flex flex-wrap'>
         {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}
       </div>
     </>

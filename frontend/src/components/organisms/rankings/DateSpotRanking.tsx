@@ -11,7 +11,6 @@ type Props = {
 
 export const DateSpotRanking: VFC<Props> = memo((props) => {
   const { addressAndDateSpots } = props;
-  console.log(addressAndDateSpots);
   const top5 = addressAndDateSpots.sort((a, b) => (a.averageRate > b.averageRate ? -1 : 1)).slice(0, 5);
 
   return(
@@ -19,7 +18,12 @@ export const DateSpotRanking: VFC<Props> = memo((props) => {
       <div className='w-full m-2 text-center font-bold'>全国の人気ランキング</div>
       <div className='m-auto flex overflow-x-scroll whitespace-nowrap'>
         {
-          top5.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))
+          top5.map((addressAndDateSpot: AddressAndDateSpotJoinData, index) => (
+            <div className='flex flex-col'>
+              <span className='text-xl text-center font-bold'>{index + 1}</span>
+              <DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />
+            </div>
+          ))
         }
       </div>
     </MaindDiv>
