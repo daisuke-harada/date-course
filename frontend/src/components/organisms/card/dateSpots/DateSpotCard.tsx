@@ -11,9 +11,9 @@ type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
 };
 
-const DD = tw.dd`m-2 text-xs font-bold`;
+const DD = tw.dd`w-56 m-2 text-xs font-bold`;
 const Title = tw.dd`m-2 font-bold`;
-const Image = tw.img`w-64 h-64 rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const Image = tw.img`w-52 h-52 m-auto rounded-xl border-4 border-pink-400 hover:border-pink-600`;
 
 export const DateSpotCard: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
@@ -44,7 +44,11 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
           レビュー{addressAndDateSpot.reviewTotalNumber}件
         </Link>
       </DD>
-      <DD>{addressAndDateSpot.cityName}</DD>
+      <DD>
+        <div className='pb-2 overflow-x-scroll whitespace-nowrap'>
+          {addressAndDateSpot.cityName}
+        </div>
+      </DD>
       <DD>
         <Link to={`/genres/${genre?.id}`}>
           {genre?.name}
