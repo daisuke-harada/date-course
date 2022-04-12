@@ -2,6 +2,7 @@ import { DateSpotNameSearchBar } from "components/organisms/searchs/DateSpotName
 import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { UserNameSearchBar } from "components/organisms/searchs/UserNameSearchBar";
 import { DateSpots } from "components/templates/dateSpots/DateSpots";
+import { IndexLayout } from "components/templates/IndexLyouts";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
@@ -16,19 +17,19 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <div className='w-full flex'>
-      <div className='md:block hidden w-3/12 p-5'>
-        <DateSpotSortSearchBar
-          defaultPrefectureValue=''
-          defaultGenreValue=''
-          defaultBusinessTimeValue=''
-        />
-        <DateSpotNameSearchBar />
-        <UserNameSearchBar />
-      </div>
-      <div className='md:w-9/12 w-full p-5'>
-        <DateSpots addressAndDateSpots={addressAndDateSpots} />
-      </div>
-    </div>
+    <IndexLayout
+      sideArea={
+        <>
+          <DateSpotSortSearchBar
+            defaultPrefectureValue=''
+            defaultGenreValue=''
+            defaultBusinessTimeValue=''
+          />
+          <DateSpotNameSearchBar />
+          <UserNameSearchBar />
+        </>
+      }
+      centerArea={<DateSpots addressAndDateSpots={addressAndDateSpots} />}
+    />
   );
 });

@@ -5,6 +5,7 @@ import { memo, useEffect, useState, VFC } from "react";
 import { useLocation } from "react-router-dom";
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 import { UserNameSearchBar } from "components/organisms/searchs/UserNameSearchBar";
+import { IndexLayout } from "components/templates/IndexLyouts";
 
 export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
@@ -23,17 +24,19 @@ export const Search: VFC = memo(() => {
   }, [state.addressAndDateSpots]);
 
   return(
-    <div className='w-full flex'>
-      <div className='md:block hidden w-3/12 p-5'>
-        <DateSpotSortSearchBar
-          defaultPrefectureValue={state.prefectureId || ''}
-          defaultGenreValue={state.genreId || ''}
-          defaultBusinessTimeValue={state.comeTime || ''}
-        />
-        <DateSpotNameSearchBar />
-        <UserNameSearchBar />
-      </div>
-      <div className='md:w-9/12 w-full p-5'>
+    <IndexLayout
+      sideArea={
+        <>
+          <DateSpotSortSearchBar
+            defaultPrefectureValue={state.prefectureId || ''}
+            defaultGenreValue={state.genreId || ''}
+            defaultBusinessTimeValue={state.comeTime || ''}
+          />
+          <DateSpotNameSearchBar />
+          <UserNameSearchBar />
+        </>
+      }
+      centerArea={
         <DateSpots
           addressAndDateSpots={addressAndDateSpots}
           prefectureId={state.prefectureId}
@@ -41,7 +44,7 @@ export const Search: VFC = memo(() => {
           comeTime={state.comeTime}
           dateSpotSearchName={state.dateSpotSearchName}
         />
-      </div>
-    </div>
+      }
+    />
   );
 });

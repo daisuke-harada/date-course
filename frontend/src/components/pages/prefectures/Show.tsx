@@ -2,6 +2,7 @@ import { DateSpotNameSearchBar } from "components/organisms/searchs/DateSpotName
 import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { UserNameSearchBar } from "components/organisms/searchs/UserNameSearchBar";
 import { DateSpots } from "components/templates/dateSpots/DateSpots";
+import { IndexLayout } from "components/templates/IndexLyouts";
 import { client } from "lib/api/client";
 import { memo, useEffect, useState, VFC } from "react";
 import { useParams } from "react-router-dom";
@@ -18,19 +19,19 @@ export const Show: VFC = memo(() => {
   }, [id]);
 
   return(
-    <div className='w-full flex'>
-      <div className='md:block hidden w-3/12 p-5'>
-        <DateSpotSortSearchBar
-          defaultPrefectureValue={`${id}`}
-          defaultGenreValue=''
-          defaultBusinessTimeValue=''
-        />
-        <DateSpotNameSearchBar />
-        <UserNameSearchBar />
-      </div>
-      <div className='md:w-9/12 w-full p-5'>
-        <DateSpots addressAndDateSpots={addressAndDateSpots} prefectureId={`${id}`} />
-      </div>
-    </div>
+    <IndexLayout
+      sideArea={
+        <>
+          <DateSpotSortSearchBar
+            defaultPrefectureValue={`${id}`}
+            defaultGenreValue=''
+            defaultBusinessTimeValue=''
+          />
+          <DateSpotNameSearchBar />
+          <UserNameSearchBar />
+        </>
+      }
+      centerArea={<DateSpots addressAndDateSpots={addressAndDateSpots} prefectureId={`${id}`} />}
+    />
   );
 });

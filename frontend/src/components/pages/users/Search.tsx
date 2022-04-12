@@ -1,6 +1,7 @@
 import { DateSpotNameSearchBar } from "components/organisms/searchs/DateSpotNameSearchBar";
 import { DateSpotSortSearchBar } from "components/organisms/searchs/DateSpotSortSearchBar";
 import { UserNameSearchBar } from "components/organisms/searchs/UserNameSearchBar";
+import { IndexLayout } from "components/templates/IndexLyouts";
 import { Users } from "components/templates/users/Users";
 import { memo, useEffect, useState, VFC } from "react";
 import { useLocation } from "react-router-dom";
@@ -16,19 +17,19 @@ export const Search: VFC = memo(() => {
   }, [state.users]);
 
   return(
-    <div className='w-full flex'>
-      <div className='md:block hidden w-3/12 p-5'>
-        <DateSpotSortSearchBar
-          defaultPrefectureValue=''
-          defaultGenreValue=''
-          defaultBusinessTimeValue=''
-        />
-        <DateSpotNameSearchBar />
-        <UserNameSearchBar />
-      </div>
-      <div className='md:w-9/12 w-full p-5'>
-        <Users users={users} setUsers={setUsers} userSearchName={state.userSearchName} />
-      </div>
-    </div>
+    <IndexLayout
+      sideArea={
+        <>
+          <DateSpotSortSearchBar
+            defaultPrefectureValue=''
+            defaultGenreValue=''
+            defaultBusinessTimeValue=''
+          />
+          <DateSpotNameSearchBar />
+          <UserNameSearchBar />
+        </>
+      }
+      centerArea={<Users users={users} setUsers={setUsers} userSearchName={state.userSearchName} />}
+    />
   );
 });
