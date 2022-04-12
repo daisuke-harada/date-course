@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { CourseResponseData } from "types/courses/response";
 
-const MainDiv = tw.div`border bg-white rounded-xl m-5`;
+const MainDiv = tw.div`border bg-white rounded-3xl m-5 shadow-xl`;
 const DuringSpotsDiv = tw.div`flex justify-evenly`;
 const MainDl = tw.dl`text-left my-5`
 const DD = tw.dd`m-2 font-bold text-base`;
@@ -21,6 +21,26 @@ export const CourseCard: VFC<Props> = memo((props) =>{
 
   return(
     <MainDiv>
+      <div className="ml-12 my-6 flex">
+        <UserImage
+          addClassName="w-24 h-24"
+          image={course.user.image}
+          userId={course.user.id}
+          gender={course.user.gender}
+        />
+        <MainDl>
+          <DD className='pl-2'>
+            {course.user.name}さんの投稿
+          </DD>
+          <DD>
+            <FollowingsAndFollowersLinkArea
+              userId={course.user.id}
+              followerIdsCount={course.user.followerIds.length}
+              followingIdsCount={course.user.followingIds.length}
+            />
+          </DD>
+        </MainDl>
+      </div>
       <DuringSpotsDiv>
         {
           course.courseDuringSpots.map(
@@ -48,26 +68,6 @@ export const CourseCard: VFC<Props> = memo((props) =>{
           </div>
         }
       </DuringSpotsDiv>
-      <div className="ml-12 my-6 flex">
-        <UserImage
-          addClassName="w-24 h-24"
-          image={course.user.image}
-          userId={course.user.id}
-          gender={course.user.gender}
-        />
-        <MainDl>
-          <DD className='pl-2'>
-            {course.user.name}さんの投稿
-          </DD>
-          <DD>
-            <FollowingsAndFollowersLinkArea
-              userId={course.user.id}
-              followerIdsCount={course.user.followerIds.length}
-              followingIdsCount={course.user.followingIds.length}
-            />
-          </DD>
-        </MainDl>
-      </div>
       <div className="text-center my-5 font-bold m-auto w-1/2">
         <Link to={`/courses/${course.id}`}>
           <BaseButton>

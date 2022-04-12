@@ -57,3 +57,15 @@ end
 Address.all.each do |address|
   date_spot_review_create(rates.sample, "testtesttesttest", 4, address.date_spot_id)
 end
+
+#デートコース作成
+Course.create(id: 1, user_id: 1, travel_mode: "DRIVING", authority: "公開")
+DuringSpot.create(course_id: 1, date_spot_id: 1)
+DuringSpot.create(course_id: 1, date_spot_id: 2)
+DuringSpot.create(course_id: 1, date_spot_id: 3)
+
+Course.create(id: 2, user_id: 2, travel_mode: "DRIVING", authority: "公開")
+DuringSpot.create(course_id: 2, date_spot_id: 1)
+DuringSpot.create(course_id: 2, date_spot_id: 2)
+DuringSpot.create(course_id: 2, date_spot_id: 7)
+DuringSpot.create(course_id: 2, date_spot_id: 3)
