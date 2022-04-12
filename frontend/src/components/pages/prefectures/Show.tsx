@@ -19,7 +19,7 @@ export const Show: VFC = memo(() => {
 
   return(
     <div className='w-full flex'>
-      <div className='w-3/12 p-5'>
+      <div className='md:block hidden w-3/12 p-5'>
         <DateSpotSortSearchBar
           defaultPrefectureValue={`${id}`}
           defaultGenreValue=''
@@ -28,7 +28,7 @@ export const Show: VFC = memo(() => {
         <DateSpotNameSearchBar />
         <UserNameSearchBar />
       </div>
-      <div className='w-9/12 p-5'>
+      <div className='md:w-9/12 w-full p-5'>
         <DateSpots addressAndDateSpots={addressAndDateSpots} prefectureId={`${id}`} />
       </div>
     </div>
