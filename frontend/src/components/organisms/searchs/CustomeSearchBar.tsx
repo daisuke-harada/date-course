@@ -42,9 +42,6 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
     setUserCondition('bg-red-400');
   };
 
-
-
-
   return(
     <div className='m-auto mt-2 mb-6 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
       <div className='w-full flex rounded-t-3xl border-gray-400 border-b'>
