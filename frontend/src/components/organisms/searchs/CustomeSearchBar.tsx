@@ -62,9 +62,9 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
   return(
     <div className='md:hidden m-auto mt-2 mb-6 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
       <div className='w-full flex rounded-t-3xl border-gray-400 border-b'>
-        <DateSpotChoiceDiv className={dateSpotCondition} onClick={onClickDateSpotCondition}>デートスポット</DateSpotChoiceDiv>
-        <CourseChoiceDiv className={courseCondition} onClick={onClickCourseCondition}>デートコース</CourseChoiceDiv>
-        <UserChoiceDiv className={userCondition} onClick={onClickUserCondition}>ユーザー</UserChoiceDiv>
+        <DateSpotChoiceDiv className={`${dateSpotCondition} hover:bg-red-400`} onClick={onClickDateSpotCondition}>デートスポット</DateSpotChoiceDiv>
+        <CourseChoiceDiv className={`${courseCondition} hover:bg-red-400`} onClick={onClickCourseCondition}>デートコース</CourseChoiceDiv>
+        <UserChoiceDiv className={`${userCondition} hover:bg-red-400`} onClick={onClickUserCondition}>ユーザー</UserChoiceDiv>
       </div>
       {
         searchSwitch === 'DateSpot'?
