@@ -30,7 +30,10 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
           setDateSpotReviews={setDateSpotReviews}
           setDateSpotAverageRate={setDateSpotAverageRate}
         />}
-      <ul className='w-full my-2'>
+      <div className='text-center font-bold'>
+        コメント一覧
+      </div>
+      <ul className='w-full my-2 overflow-y-scroll h-96 border-2 border-red-300 rounded-3xl p-1'>
       {
         dateSpotReviews.length === 0?
         <h1 className='text-red-400 my-5 text-3xl'>このデートスポットにはレビューが投稿されていません</h1>
