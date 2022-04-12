@@ -6,13 +6,20 @@ const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r rou
 const CourseChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white text-center border-gray-400 cursor-pointer`;
 const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l rounded-tr-3xl text-center border-gray-400 cursor-pointer`;
 
-export const CustomeSearchBar: VFC = memo(() => {
-  const [ name, setName ] = useState('');
-  const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setName(e.target.value);
-  const [ dateSpotCondition, setDateSpotCondition ] = useState('bg-gray-300');
-  const [ courseCondition, setCourseCondition ] = useState('bg-gray-300');
-  const [ userCondition, setUserCondition ] = useState('bg-gray-300');
-  const [ searchSwitch, setSearchSwitch] = useState('DateSpot');
+type Props = {
+  defaultDateSpotCondition: string,
+  defaultCourseCondition: string,
+  defaultUserCondition: string,
+  defaultSearchSwitch: string
+}
+
+export const CustomeSearchBar: VFC<Props> = memo((props) => {
+  const { defaultDateSpotCondition, defaultCourseCondition, defaultUserCondition, defaultSearchSwitch } = props;
+
+  const [ dateSpotCondition, setDateSpotCondition ] = useState(defaultDateSpotCondition);
+  const [ courseCondition, setCourseCondition ] = useState(defaultCourseCondition);
+  const [ userCondition, setUserCondition ] = useState(defaultUserCondition);
+  const [ searchSwitch, setSearchSwitch] = useState(defaultSearchSwitch);
 
   const onClickDateSpotCondition = () => {
     setSearchSwitch('DateSpot');
