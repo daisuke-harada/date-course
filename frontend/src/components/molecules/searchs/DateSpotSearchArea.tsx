@@ -109,7 +109,7 @@ export const DateSpotSearchArea: VFC<Props> = memo((props) => {
                 <BusinessTimeSelect addClassName='border-2 mb-1 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
               </SelectParentDiv>
             </div>
-            <div className='m-auto my-5 w-1/4'>
+            <div className='m-auto my-5 w-1/3'>
               <BaseButton onClickEvent={onClickConditionSearch}>検索</BaseButton>
             </div>
           </>
