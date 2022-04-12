@@ -1,4 +1,5 @@
-import { BaseButton } from 'components/atoms/button/BaseButton';
+import { DateSpotSearchArea } from 'components/molecules/searchs/DateSpotSearchArea';
+import { UserSearchArea } from 'components/molecules/searchs/UserSearchArea';
 import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
@@ -10,11 +11,13 @@ type Props = {
   defaultDateSpotCondition: string,
   defaultCourseCondition: string,
   defaultUserCondition: string,
-  defaultSearchSwitch: string
+  defaultSearchSwitch: string,
+  dateSpotSearchName?: string,
+  userSearchName?: string
 }
 
 export const CustomeSearchBar: VFC<Props> = memo((props) => {
-  const { defaultDateSpotCondition, defaultCourseCondition, defaultUserCondition, defaultSearchSwitch } = props;
+  const { defaultDateSpotCondition, defaultCourseCondition, defaultUserCondition, defaultSearchSwitch, dateSpotSearchName, userSearchName } = props;
 
   const [ dateSpotCondition, setDateSpotCondition ] = useState(defaultDateSpotCondition);
   const [ courseCondition, setCourseCondition ] = useState(defaultCourseCondition);
@@ -51,16 +54,13 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
       </div>
       {
         searchSwitch === 'DateSpot'?
-        <div>DateSpot</div>
+          <DateSpotSearchArea dateSpotSearchName={dateSpotSearchName} />
         :
         searchSwitch === 'Course'?
-        <div>Course</div>
+          <div>Course</div>
         :
-        <div>User</div>
+        <UserSearchArea userSearchName={userSearchName} />
       }
-      <div className='m-auto my-5 w-1/4'>
-        <BaseButton>検索</BaseButton>
-      </div>
     </div>
   );
 });

@@ -33,6 +33,7 @@ export const DateSpots: VFC<Props> = memo((props) => {
               defaultCourseCondition='bg-gray-300'
               defaultUserCondition='bg-gray-300'
               defaultSearchSwitch='DateSpot'
+              dateSpotSearchName={dateSpotSearchName}
             />
             <div className='sm:justify-start justify-center flex flex-wrap'>
               {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}

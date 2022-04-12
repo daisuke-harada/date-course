@@ -9,7 +9,7 @@ import { UserResponseData } from "types/users/response";
 export const Search: VFC = memo(() => {
   const [users, setUsers] = useState<Array<UserResponseData>>([]);
   const location = useLocation();
-  const state = location.state as { users: Array<UserResponseData> };
+  const state = location.state as { users: Array<UserResponseData>, userSearchName: string };
 
   useEffect(() => {
     setUsers(state.users);
@@ -27,7 +27,7 @@ export const Search: VFC = memo(() => {
         <UserNameSearchBar />
       </div>
       <div className='md:w-9/12 w-full p-5'>
-        <Users users={users} setUsers={setUsers} />
+        <Users users={users} setUsers={setUsers} userSearchName={state.userSearchName} />
       </div>
     </div>
   );

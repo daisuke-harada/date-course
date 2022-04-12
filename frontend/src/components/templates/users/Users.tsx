@@ -6,11 +6,12 @@ import { CustomeSearchBar } from "components/organisms/searchs/CustomeSearchBar"
 
 type Props = {
   users: Array<UserResponseData>,
-  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
+  setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>,
+  userSearchName?: string
 };
 
 export const Users: VFC<Props> = memo((props) => {
-  const { users, setUsers } = props;
+  const { users, setUsers, userSearchName } = props;
   return(
     <>
       {
@@ -22,8 +23,9 @@ export const Users: VFC<Props> = memo((props) => {
               defaultCourseCondition='bg-gray-300'
               defaultUserCondition='bg-red-400'
               defaultSearchSwitch='User'
+              userSearchName={userSearchName}
             />
-            <div className='flex flex-wrap'>
+            <div className='sm:justify-start justify-center flex flex-wrap'>
               {users.map((user: UserResponseData) => (<UserCard key={user.id} user={user} setUsers={setUsers} />))}
             </div>
           </>
