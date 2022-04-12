@@ -1,6 +1,5 @@
 import { BaseButton } from "components/atoms/button/BaseButton";
 import { UserImage } from "components/atoms/layouts/users/UserImage";
-import { FollowingsAndFollowersLinkArea } from "components/atoms/Link/FollowingsAndFollowersLinkArea";
 import { DuringSpotCard } from "components/organisms/card/courses/DuringSpotCard";
 import { memo, VFC } from "react";
 import { Link } from "react-router-dom";
@@ -19,6 +18,9 @@ type Props ={
 export const CourseCard: VFC<Props> = memo((props) =>{
   const { course } = props;
 
+  // このコースに登録されている県名を重複を排除して配列にするする。
+  const prefectureNames = Array.from(new Set(course.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName))));
+
   return(
     <MainDiv>
       <div className="ml-12 my-6 flex">
@@ -32,12 +34,12 @@ export const CourseCard: VFC<Props> = memo((props) =>{
           <DD className='pl-2'>
             {course.user.name}さんの投稿
           </DD>
-          <DD>
-            <FollowingsAndFollowersLinkArea
-              userId={course.user.id}
-              followerIdsCount={course.user.followerIds.length}
-              followingIdsCount={course.user.followingIds.length}
-            />
+          <DD className='pl-2 flex'>
+            {
+              prefectureNames.map((prefectureName) => (
+                <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+              ))
+            }
           </DD>
         </MainDl>
       </div>

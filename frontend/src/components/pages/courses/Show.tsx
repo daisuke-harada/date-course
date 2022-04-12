@@ -54,12 +54,21 @@ export const Show: VFC = memo(() => {
     });
   }, [id]);
 
+  const prefectureNames = Array.from(new Set(managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName))));
+
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
       <div className="w-full mt-5 text-xl font-bold">
         {travelModeText}で移動<br/>
         他のユーザーに{courseInfo.authority}
+        <div className='my-2 flex'>
+          {
+            prefectureNames.map((prefectureName) => (
+              <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+            ))
+          }
+        </div>
       </div>
       <CourseAreaDiv>
         <div className="w-1/3">
