@@ -9,7 +9,7 @@ type Props = {
   prefectureId?: string,
   genreId?: string,
   comeTime?: string,
-  dateSpotSearchName?: string
+  dateSpotSearchName?: string,
 };
 
 export const DateSpots: VFC<Props> = memo((props) => {
@@ -34,6 +34,9 @@ export const DateSpots: VFC<Props> = memo((props) => {
               defaultUserCondition='bg-gray-300'
               defaultSearchSwitch='DateSpot'
               dateSpotSearchName={dateSpotSearchName}
+              defaultPrefectureValue={prefectureId}
+              defaultGenreValue={genreId}
+              defaultBusinessTimeValue={comeTime}
             />
             <div className='sm:justify-start justify-center flex flex-wrap'>
               {addressAndDateSpots.map((addressAndDateSpot: AddressAndDateSpotJoinData) => (<DateSpotCard key={addressAndDateSpot.dateSpot.id} addressAndDateSpot={addressAndDateSpot} />))}

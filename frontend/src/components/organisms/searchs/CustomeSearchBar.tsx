@@ -13,11 +13,25 @@ type Props = {
   defaultUserCondition: string,
   defaultSearchSwitch: string,
   dateSpotSearchName?: string,
-  userSearchName?: string
+  userSearchName?: string,
+  defaultPrefectureValue?: string,
+  defaultGenreValue?: string,
+  defaultBusinessTimeValue?: string
+
 }
 
 export const CustomeSearchBar: VFC<Props> = memo((props) => {
-  const { defaultDateSpotCondition, defaultCourseCondition, defaultUserCondition, defaultSearchSwitch, dateSpotSearchName, userSearchName } = props;
+  const {
+    defaultDateSpotCondition,
+    defaultCourseCondition,
+    defaultUserCondition,
+    defaultSearchSwitch,
+    dateSpotSearchName,
+    userSearchName,
+    defaultPrefectureValue,
+    defaultGenreValue,
+    defaultBusinessTimeValue
+  } = props;
 
   const [ dateSpotCondition, setDateSpotCondition ] = useState(defaultDateSpotCondition);
   const [ courseCondition, setCourseCondition ] = useState(defaultCourseCondition);
@@ -46,7 +60,7 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='m-auto mt-2 mb-6 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
+    <div className='md:hidden m-auto mt-2 mb-6 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
       <div className='w-full flex rounded-t-3xl border-gray-400 border-b'>
         <DateSpotChoiceDiv className={dateSpotCondition} onClick={onClickDateSpotCondition}>デートスポット</DateSpotChoiceDiv>
         <CourseChoiceDiv className={courseCondition} onClick={onClickCourseCondition}>デートコース</CourseChoiceDiv>
@@ -54,7 +68,12 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
       </div>
       {
         searchSwitch === 'DateSpot'?
-          <DateSpotSearchArea dateSpotSearchName={dateSpotSearchName} />
+          <DateSpotSearchArea
+            dateSpotSearchName={dateSpotSearchName}
+            defaultPrefectureValue={defaultPrefectureValue}
+            defaultGenreValue={defaultGenreValue}
+            defaultBusinessTimeValue={defaultBusinessTimeValue}
+          />
         :
         searchSwitch === 'Course'?
           <div>Course</div>
