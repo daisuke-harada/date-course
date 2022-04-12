@@ -23,7 +23,7 @@ export const CourseCard: VFC<Props> = memo((props) =>{
 
   return(
     <MainDiv>
-      <div className="ml-12 my-6 flex">
+      <div className="ml-2 mt-6 flex">
         <UserImage
           addClassName="w-24 h-24"
           image={course.user.image}
