@@ -31,9 +31,20 @@ export const Users: VFC<Props> = memo((props) => {
           </>
         )
         :
-        <div className='mt-2 text-center text-red-400 text-4xl'>
-          ユーザーは存在しません
-        </div>
+        (
+          <>
+            <CustomeSearchBar
+              defaultDateSpotCondition='bg-gray-300'
+              defaultCourseCondition='bg-gray-300'
+              defaultUserCondition='bg-red-400'
+              defaultSearchSwitch='User'
+              userSearchName={userSearchName}
+            />
+            <div className='mt-2 text-center text-red-400 text-4xl'>
+              ユーザーは存在しません
+            </div>
+          </>
+        )
       }
     </>
   );

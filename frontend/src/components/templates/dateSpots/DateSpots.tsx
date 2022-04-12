@@ -44,9 +44,23 @@ export const DateSpots: VFC<Props> = memo((props) => {
           </>
         )
         :
-        <div className='mt-2 text-center text-red-400 text-4xl'>
-          デートスポットは存在しません
-        </div>
+        (
+          <>
+            <CustomeSearchBar
+              defaultDateSpotCondition='bg-red-400'
+              defaultCourseCondition='bg-gray-300'
+              defaultUserCondition='bg-gray-300'
+              defaultSearchSwitch='DateSpot'
+              dateSpotSearchName={dateSpotSearchName}
+              defaultPrefectureValue={prefectureId}
+              defaultGenreValue={genreId}
+              defaultBusinessTimeValue={comeTime}
+            />
+            <div className='mt-2 text-center text-red-400 text-4xl'>
+              デートスポットは存在しません
+            </div>
+          </>
+        )
       }
     </>
   );
