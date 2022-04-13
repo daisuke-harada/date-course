@@ -23,6 +23,7 @@ export const CreateCourse: VFC = memo(() => {
 
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
+  console.log(managementCourses.courseDuringSpots.length);
 
   return(
     <>
