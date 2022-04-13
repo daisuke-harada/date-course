@@ -1,11 +1,11 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
-import { Card } from "components/atoms/card/Card";
-import { AddressAndDateSpotJoinData, DateSpotResponseData } from "types/dateSpots/response";
-import { genreDatas } from "datas/genreDatas";
-import { Link } from "react-router-dom";
-import { StarRateText } from "components/atoms/layouts/StarRateText";
-import { AddCourseButton } from "components/atoms/button/AddCourseButton";
+import { Card } from 'components/atoms/card/Card';
+import { AddressAndDateSpotJoinData, DateSpotResponseData } from 'types/dateSpots/response';
+import { genreDatas } from 'datas/genreDatas';
+import { Link } from 'react-router-dom';
+import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { AddCourseButton } from 'components/atoms/button/AddCourseButton';
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
@@ -36,7 +36,7 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
       <Title>
         <Link to={`/dateSpots/${dateSpot.id}`}>{dateSpot.name}</Link>
       </Title>
-      <div className="flex justify-center">
+      <div className='flex justify-center'>
         <StarRateText rate={addressAndDateSpot.averageRate} size={24} />
       </div>
       <DD>

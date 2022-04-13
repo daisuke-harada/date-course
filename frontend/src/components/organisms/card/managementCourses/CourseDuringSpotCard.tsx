@@ -1,13 +1,13 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { Link } from "react-router-dom";
-import { StarRateText } from "components/atoms/layouts/StarRateText";
-import { client } from "lib/api/client";
-import { ChangeSelect } from "components/molecules/select/managementCourses/ChangeSelect";
-import { ManagementCourseData } from "types/managementCourses/management";
-import { SetterOrUpdater } from "recoil";
-import { DeleteCourseButton } from "components/atoms/button/DeleteCourseButton";
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { Link } from 'react-router-dom';
+import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { client } from 'lib/api/client';
+import { ChangeSelect } from 'components/molecules/select/managementCourses/ChangeSelect';
+import { ManagementCourseData } from 'types/managementCourses/management';
+import { SetterOrUpdater } from 'recoil';
+import { DeleteCourseButton } from 'components/atoms/button/DeleteCourseButton';
 
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
@@ -51,7 +51,7 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         </Title>
         {
           addressAndDateSpot &&
-          <div className="flex justify-center">
+          <div className='flex justify-center'>
             <StarRateText rate={addressAndDateSpot.averageRate} size={24} />
           </div>
         }
@@ -87,10 +87,10 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         &&
         managementCourses.courseDuringSpots.length !== courseNumber + 1
         &&
-        <div className="h-16 w-full flex max-w-md justify-center">
-          <div className="border-r-4 border-indigo-500 w-1/2">
+        <div className='h-16 w-full flex max-w-md justify-center'>
+          <div className='border-r-4 border-indigo-500 w-1/2'>
           </div>
-          <div className="w-1/2 p-2 text-sm font-bold flex flex-col">
+          <div className='w-1/2 p-2 text-sm font-bold flex flex-col'>
             <span className='p-1'>距離{leg?.distance}</span>
             <span className='p-1'>所要時間{leg?.duration}</span>
           </div>

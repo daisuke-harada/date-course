@@ -1,7 +1,7 @@
-import { memo, useCallback, useEffect, useState, VFC } from "react";
-import { GoogleMap, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
-import { ManagementCourseData } from "types/managementCourses/management";
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
+import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { ManagementCourseData } from 'types/managementCourses/management';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {
   managementCourses: ManagementCourseData,
@@ -39,7 +39,7 @@ export const Directions: VFC<Props> = memo((props) => {
     if (googleResponse) {
       if (currentDirection) {
         if (
-          googleResponse === "OK" &&
+          googleResponse === 'OK' &&
           currentDirection.geocoded_waypoints && googleResponse.geocoded_waypoints.length !== currentDirection.geocoded_waypoints.length
         ) {
           // ルートが変更されたのでstateを更新する
@@ -51,7 +51,7 @@ export const Directions: VFC<Props> = memo((props) => {
           setCopyDuringSpots(managementCourses.courseDuringSpots);
         }
       } else {
-        if (googleResponse.status === "OK") {
+        if (googleResponse.status === 'OK') {
           // 現在設定されているデートスポットのコピーを作成する。そうすることでデートスポットの順番が入れ替わった際にもステートを更新できるようにする。
           setCopyDuringSpots(managementCourses.courseDuringSpots);
           setCopyTravelMode(travelMode);
@@ -91,7 +91,7 @@ export const Directions: VFC<Props> = memo((props) => {
           options={{
             directions: currentDirection,
             polylineOptions: {
-              strokeColor: "#F87171",
+              strokeColor: '#F87171',
               strokeOpacity: 1,
               strokeWeight: 6
             }

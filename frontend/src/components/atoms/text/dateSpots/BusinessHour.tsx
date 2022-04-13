@@ -1,5 +1,5 @@
-import { memo, VFC } from "react";
-import tw from "tailwind-styled-components";
+import { memo, VFC } from 'react';
+import tw from 'tailwind-styled-components';
 
 type Props = {
   openingTime?: Date,
@@ -17,22 +17,22 @@ export const BusinessHour: VFC<Props> = memo((props) => {
   if(openingTime && closingTime) {
     return(
       <MainDiv>
-        <p className="font-bold">営業時間</p>
-        <p className="font-bold">{fetchTime(openingTime)} ~ {fetchTime(closingTime)}</p>
+        <p className='font-bold'>営業時間</p>
+        <p className='font-bold'>{fetchTime(openingTime)} ~ {fetchTime(closingTime)}</p>
       </MainDiv>
     );
   }else if(openingTime && closingTime === undefined){
     return(
       <MainDiv>
-        <p className="font-bold">営業時間</p>
-        <p className="font-bold">{fetchTime(openingTime)}から</p>
+        <p className='font-bold'>営業時間</p>
+        <p className='font-bold'>{fetchTime(openingTime)}から</p>
       </MainDiv>
     );
   }else if(openingTime === undefined && closingTime){
     return(
       <MainDiv>
-        <p className="font-bold">営業時間</p>
-        <p className="font-bold">{fetchTime(closingTime)}まで</p>
+        <p className='font-bold'>営業時間</p>
+        <p className='font-bold'>{fetchTime(closingTime)}まで</p>
       </MainDiv>
     );
   }else{

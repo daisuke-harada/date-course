@@ -1,12 +1,12 @@
 import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
-import { atomFamily } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { atomFamily } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
 export const managementCourseState = atomFamily<ManagementCourseData, { userId: number }>(
   {
-    key: "managementCourseState",
+    key: 'managementCourseState',
     default: {userId: 0, courseDuringSpots: []},
     effects_UNSTABLE: [persistAtom]
   }
@@ -14,7 +14,7 @@ export const managementCourseState = atomFamily<ManagementCourseData, { userId: 
 
 export const courseInfoState = atomFamily<CourseInfoData, { userId: number }>(
   {
-    key: "courseInfoState",
+    key: 'courseInfoState',
     default: {travelMode: 'DRIVING', authority: '公開'},
     effects_UNSTABLE: [persistAtom]
   }

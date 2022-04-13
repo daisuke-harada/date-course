@@ -1,14 +1,14 @@
-import { LoadScript } from "@react-google-maps/api";
-import { DangerButton } from "components/atoms/button/DangerButton";
-import { Directions } from "components/molecules/maps/Directions";
-import { CourseDuringSpotCard } from "components/organisms/card/managementCourses/CourseDuringSpotCard";
-import { client } from "lib/api/client";
-import { memo, useCallback, useEffect, useState, VFC } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { currentUserState } from "store/session";
-import tw from "tailwind-styled-components";
-import { ManagementCourseData } from "types/managementCourses/management";
+import { LoadScript } from '@react-google-maps/api';
+import { DangerButton } from 'components/atoms/button/DangerButton';
+import { Directions } from 'components/molecules/maps/Directions';
+import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
+import { client } from 'lib/api/client';
+import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { currentUserState } from 'store/session';
+import tw from 'tailwind-styled-components';
+import { ManagementCourseData } from 'types/managementCourses/management';
 
 const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
 const TitleH1 = tw.h1`text-center mt-5 font-bold text-4xl pb-5`;
@@ -59,7 +59,7 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-      <div className="w-full mt-5 text-xl font-bold">
+      <div className='w-full mt-5 text-xl font-bold'>
         {travelModeText}で移動<br/>
         他のユーザーに{courseInfo.authority}
         <div className='my-2 flex'>
@@ -71,7 +71,7 @@ export const Show: VFC = memo(() => {
         </div>
       </div>
       <CourseAreaDiv>
-        <div className="w-1/3">
+        <div className='w-1/3'>
           {
             managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
               <CourseDuringSpotCard
@@ -84,7 +84,7 @@ export const Show: VFC = memo(() => {
             ))
           }
         </div>
-        <div className="w-2/3 mx-3 rounded-xl">
+        <div className='w-2/3 mx-3 rounded-xl'>
           {
             // userIdが初期値である0の場合に読み込まないようにする
             managementCourses.userId !== 0

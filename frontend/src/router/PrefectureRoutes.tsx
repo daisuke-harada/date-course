@@ -1,16 +1,16 @@
-import { Page404 } from "components/pages/Page404";
-import { Show } from "components/pages/prefectures/Show";
+import { Page404 } from 'components/pages/Page404';
+import { Show } from 'components/pages/prefectures/Show';
 
 export const PrefectureRoutes = () => {
 
   return [
     {
       // TODO:そのデートコースを登録したユーザーのみがアクセスできるように改修する必要あり
-      path: ":id",
+      path: ':id',
       element: <Show />,
     },
     {
-      path: "*",
+      path: '*',
       element: <Page404 />,
     },
   ];

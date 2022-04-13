@@ -1,7 +1,7 @@
-import { VFC, memo } from "react";
-import { Link } from "react-router-dom";
-import tw from "tailwind-styled-components";
-import { PrefectureData } from "types/homes/data";
+import { VFC, memo } from 'react';
+import { Link } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
+import { PrefectureData } from 'types/homes/data';
 
 type Props = {
   prefecture: PrefectureData
@@ -21,8 +21,8 @@ export const MainPrefecture: VFC<Props> = memo((props) => {
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/prefectureImages/${prefecture.attributes.name}.jpg`} />
       </ImageParentDiv>
-      <div className="md:text-left text-center w-6/12">
-        <div className="md:text-xl sm:p-1 text-xs text-black font-bold" >
+      <div className='md:text-left text-center w-6/12'>
+        <div className='md:text-xl sm:p-1 text-xs text-black font-bold' >
           <Link to={`prefectures/${prefecture.attributes.id}`}>
             {prefecture.attributes.name}
           </Link>

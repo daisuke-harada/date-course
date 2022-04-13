@@ -1,17 +1,17 @@
-import { memo, useEffect, useState, VFC } from "react";
-import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { currentUserState, loginStatusState } from "store/session"
-import tw from "tailwind-styled-components";
+import { memo, useEffect, useState, VFC } from 'react';
+import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { currentUserState, loginStatusState } from 'store/session'
+import tw from 'tailwind-styled-components';
 
-import { client } from "lib/api/client";
-import { BusinessHour } from "components/atoms/text/dateSpots/BusinessHour";
-import { BaseButton } from "components/atoms/button/BaseButton"
-import { Link } from "react-router-dom";
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { Map } from "components/molecules/maps/Map";
-import { DateSpotReviewArea } from "components/organisms/area/dateSpotReviews/DateSpotReviewArea";
-import { StarRateText } from "components/atoms/layouts/StarRateText";
+import { client } from 'lib/api/client';
+import { BusinessHour } from 'components/atoms/text/dateSpots/BusinessHour';
+import { BaseButton } from 'components/atoms/button/BaseButton'
+import { Link } from 'react-router-dom';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { Map } from 'components/molecules/maps/Map';
+import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/DateSpotReviewArea';
+import { StarRateText } from 'components/atoms/layouts/StarRateText';
 
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 m-20 p-5 rounded-2xl`;
 const DateSpotNameTitle = tw.h1`w-full m-5 text-sm font-bold md:text-3xl`;
@@ -54,22 +54,22 @@ export const Show: VFC = memo(() => {
               <div className='ml-2 font-bold pt-14'>評価{dateSpotAverageRate}</div>
             </div>
             <BusinessHour openingTime={addressAndDateSpot?.dateSpot.openingTime} closingTime={addressAndDateSpot?.dateSpot.closingTime} />
-            <div className="m-5 text-sm font-bold md:text-xl">
+            <div className='m-5 text-sm font-bold md:text-xl'>
               {addressAndDateSpot?.cityName}
             </div>
-            <div className="m-5 text-sm font-bold md:text-xl">
+            <div className='m-5 text-sm font-bold md:text-xl'>
               <Link to={`/genres/${addressAndDateSpot?.dateSpot.genreId}`}>
                 {addressAndDateSpot?.genreName}
               </Link>
             </div>
-            <div className="text-center">
+            <div className='text-center'>
               {
                 getLoginStatus.status === true
                 && getCurrentUser.user.admin === true
                 && (
-                  <BaseButton dataE2e="render-dateSpot-edit">
+                  <BaseButton dataE2e='render-dateSpot-edit'>
                     <Link
-                      className="text-white"
+                      className='text-white'
                       to={`edit`}
                       state={{addressAndDateSpot: addressAndDateSpot}}
                     >

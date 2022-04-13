@@ -1,5 +1,5 @@
-import { businessTimeDatas } from "datas/businessTimeDatas";
-import { memo, VFC } from "react";
+import { businessTimeDatas } from 'datas/businessTimeDatas';
+import { memo, VFC } from 'react';
 
 type Props = {
   onChangeTimeValue: React.ChangeEventHandler<HTMLSelectElement>,

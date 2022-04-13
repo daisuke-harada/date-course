@@ -1,9 +1,9 @@
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { memo, useCallback, useState, VFC } from "react";
-import { SetterOrUpdater, useRecoilValue } from "recoil";
-import { currentUserState } from "store/session";
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { ManagementCourseData } from "types/managementCourses/management";
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { memo, useCallback, useState, VFC } from 'react';
+import { SetterOrUpdater, useRecoilValue } from 'recoil';
+import { currentUserState } from 'store/session';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { ManagementCourseData } from 'types/managementCourses/management';
 
 type Props = {
   currentDateSpotId: number,
@@ -72,8 +72,8 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
 
   return(
       <>
-        <select className="mb-2 border-2 rounded-md font-bold" onChange={onChangeCourseIdValue}>
-          <option value="0">入れ替え対象を選択</option>
+        <select className='mb-2 border-2 rounded-md font-bold' onChange={onChangeCourseIdValue}>
+          <option value='0'>入れ替え対象を選択</option>
           {managementCourses.courseDuringSpots
             .filter(courseDuringSpot => courseDuringSpot.dateSpot.id !== currentDateSpotId)
             .map((courseDuringSpot) => {

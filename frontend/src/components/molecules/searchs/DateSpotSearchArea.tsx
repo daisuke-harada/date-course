@@ -97,10 +97,10 @@ export const DateSpotSearchArea: VFC<Props> = memo((props) => {
           <>
             <div className='flex w-full justify-center overflow-x-scroll whitespace-nowrap'>
               <SelectParentDiv>
-                <PrefectureSelect addClassName='w-20 border-red-100' dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+                <PrefectureSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
               </SelectParentDiv>
               <SelectParentDiv>
-                <GenreSelect addClassName='w-20 border-red-100' dataE2e="dateSpot-genre-select" defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
+                <GenreSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-genre-select' defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
               </SelectParentDiv>
               <SelectParentDiv className='flex'>
                 <div className='font-bold text-sm mx-1 mt-1'>

@@ -1,12 +1,12 @@
-import { memo, useCallback, VFC } from "react";
-import tw from "tailwind-styled-components";
-import { useNavigate } from "react-router-dom";
+import { memo, useCallback, VFC } from 'react';
+import tw from 'tailwind-styled-components';
+import { useNavigate } from 'react-router-dom';
 
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { DangerButton } from "components/atoms/button/DangerButton";
-import { CourseInfoData, ManagementCourseData } from "types/managementCourses/management";
-import { useCourseReset } from "hooks/managementCourses/useCourseReset";
-import { client } from "lib/api/client";
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { DangerButton } from 'components/atoms/button/DangerButton';
+import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
+import { useCourseReset } from 'hooks/managementCourses/useCourseReset';
+import { client } from 'lib/api/client';
 
 type Props = {
   managementCourses: ManagementCourseData,

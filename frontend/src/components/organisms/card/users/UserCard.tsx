@@ -1,12 +1,12 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { UserResponseData } from "types/users/response";
-import { Card } from "components/atoms/card/Card";
-import { Link } from "react-router-dom";
-import { UserImage } from "components/atoms/layouts/users/UserImage";
-import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
-import { FollowingsAndFollowersLinkArea } from "components/molecules/Link/users/FollowingsAndFollowersLinkArea";
+import { UserResponseData } from 'types/users/response';
+import { Card } from 'components/atoms/card/Card';
+import { Link } from 'react-router-dom';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFollowButton';
+import { FollowingsAndFollowersLinkArea } from 'components/molecules/Link/users/FollowingsAndFollowersLinkArea';
 
 type Props = {
   user: UserResponseData,
@@ -31,7 +31,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   return(
     <Card>
       <DD>
-        <UserImage addClassName="w-64 h-64" userId={user.id} image={user.image} gender={user.gender} />
+        <UserImage addClassName='w-64 h-64' userId={user.id} image={user.image} gender={user.gender} />
       </DD>
       <DD>
         <Link to={`/users/${user.id}`}>

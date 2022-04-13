@@ -1,6 +1,6 @@
-import { memo, VFC } from "react";
-import { SetterOrUpdater } from "recoil";
-import tw from "tailwind-styled-components";
+import { memo, VFC } from 'react';
+import { SetterOrUpdater } from 'recoil';
+import tw from 'tailwind-styled-components';
 
 type Props = {
   setCourseInfo: SetterOrUpdater<{
@@ -27,20 +27,20 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
   return(
     <>
     <MainDiv>
-      <div className="m-2">
+      <div className='m-2'>
         交通手段を選択
       </div>
-      <select data-e2e={dataE2e} className="mx-2 border-2 border-gray-400 rounded-md" defaultValue={getCourseInfo.travelMode} onChange={onChangeTravelMode}>
-        <option value="DRIVING">車</option>
-        <option value="WALKING">歩く</option>
-        <option value="BICYCLING">自転車</option>
+      <select data-e2e={dataE2e} className='mx-2 border-2 border-gray-400 rounded-md' defaultValue={getCourseInfo.travelMode} onChange={onChangeTravelMode}>
+        <option value='DRIVING'>車</option>
+        <option value='WALKING'>歩く</option>
+        <option value='BICYCLING'>自転車</option>
       </select>
     </MainDiv>
     <MainDiv>
       <Label>公開</Label>
-      <Input type="radio" value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '公開'} />
+      <Input type='radio' value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '公開'} />
       <Label>非公開</Label>
-      <Input type="radio" value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '非公開'} />
+      <Input type='radio' value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '非公開'} />
     </MainDiv>
     </>
   );

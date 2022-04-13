@@ -1,8 +1,8 @@
-import { DateSpotCard } from "components/organisms/card/dateSpots/DateSpotCard";
-import { DateSpotRanking } from "components/organisms/rankings/DateSpotRanking";
-import { CustomeSearchBar } from "components/organisms/searchs/CustomeSearchBar";
-import { memo, VFC } from "react";
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
+import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
+import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
+import { CustomeSearchBar } from 'components/organisms/searchs/CustomeSearchBar';
+import { memo, VFC } from 'react';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {
   addressAndDateSpots: Array<AddressAndDateSpotJoinData>,

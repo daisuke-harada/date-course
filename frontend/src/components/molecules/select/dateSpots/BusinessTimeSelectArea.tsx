@@ -1,5 +1,5 @@
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
-import { memo, VFC } from "react";
+import { memo, VFC } from 'react';
 
 type Props = {
   onChangeOpeningTimeValue: React.ChangeEventHandler<HTMLSelectElement>,
@@ -23,7 +23,7 @@ export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
   return(
     <>
       <p>営業時間</p>
-      <p className="mb-5 border-b-2 outline-none">
+      <p className='mb-5 border-b-2 outline-none'>
         <label>始業時間</label>
         <BusinessTimeSelect dataE2e={openingDataE2e} timeValue={defaultOpeningTimeValue} onChangeTimeValue={onChangeOpeningTimeValue} />
             ~

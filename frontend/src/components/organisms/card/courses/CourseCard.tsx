@@ -1,10 +1,10 @@
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { UserImage } from "components/atoms/layouts/users/UserImage";
-import { DuringSpotCard } from "components/organisms/card/courses/DuringSpotCard";
-import { memo, VFC } from "react";
-import { Link } from "react-router-dom";
-import tw from "tailwind-styled-components";
-import { CourseResponseData } from "types/courses/response";
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
+import { memo, VFC } from 'react';
+import { Link } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
+import { CourseResponseData } from 'types/courses/response';
 
 const MainDiv = tw.div`border bg-white rounded-3xl m-5 shadow-xl`;
 const DuringSpotsDiv = tw.div`flex justify-evenly`;
@@ -20,9 +20,9 @@ export const CourseCard: VFC<Props> = memo((props) =>{
 
   return(
     <MainDiv>
-      <div className="ml-2 mt-6 flex">
+      <div className='ml-2 mt-6 flex'>
         <UserImage
-          addClassName="w-24 h-24"
+          addClassName='w-24 h-24'
           image={course.user.image}
           userId={course.user.id}
           gender={course.user.gender}
@@ -53,21 +53,21 @@ export const CourseCard: VFC<Props> = memo((props) =>{
         {
           course.courseDuringSpots.length < 3
           &&
-          <div className="bg-white rounded-xl shadow-xl p-2 m-2 w-36">
-            <div className="bg-gray-400 w-32 h-32 rounded-xl border-4 border-pink-400 hover:border-pink-600">
-              <div className="text-xs text-center font-bold pt-16">
+          <div className='bg-white rounded-xl shadow-xl p-2 m-2 w-36'>
+            <div className='bg-gray-400 w-32 h-32 rounded-xl border-4 border-pink-400 hover:border-pink-600'>
+              <div className='text-xs text-center font-bold pt-16'>
                 登録されていません
               </div>
             </div>
-            <div className="text-xs text-center">
-              <p className="my-2">
+            <div className='text-xs text-center'>
+              <p className='my-2'>
                 デートスポット名
               </p>
             </div>
           </div>
         }
       </DuringSpotsDiv>
-      <div className="text-center my-5 font-bold m-auto w-1/2">
+      <div className='text-center my-5 font-bold m-auto w-1/2'>
         <Link to={`/courses/${course.id}`}>
           <BaseButton>
             コースの詳細ページへ行く

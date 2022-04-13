@@ -1,4 +1,4 @@
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 export type ManagementCourseData = {
   userId: number,

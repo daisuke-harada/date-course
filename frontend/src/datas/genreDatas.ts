@@ -1,4 +1,4 @@
-import { Genre } from "types/datas/activeHash";
+import { Genre } from 'types/datas/activeHash';
 
 export const genreDatas: Genre[] = [
   { id: 1, name: 'ショッピングモール' }, { id: 2, name: '飲食店' }, { id: 3, name: 'カフェ' },

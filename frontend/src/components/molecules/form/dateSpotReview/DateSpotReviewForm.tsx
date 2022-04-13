@@ -1,17 +1,17 @@
-import { memo, VFC, useState, useCallback, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
-import tw from "tailwind-styled-components";
+import { memo, VFC, useState, useCallback, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
 
-import { client } from "lib/api/client";
-import { currentUserState } from "store/session";
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { UserImage } from "components/atoms/layouts/users/UserImage";
-import { DateSpotReviewAndUserResponseData } from "types/dateSpotReviews/response";
-import { DangerButton } from "components/atoms/button/DangerButton";
-import { SecondaryButton } from "components/atoms/button/SecondaryButton";
-import { StarRateForm } from "components/atoms/form/StarRateForm";
-import { StarRateText } from "components/atoms/layouts/StarRateText";
+import { client } from 'lib/api/client';
+import { currentUserState } from 'store/session';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
+import { DangerButton } from 'components/atoms/button/DangerButton';
+import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
+import { StarRateForm } from 'components/atoms/form/StarRateForm';
+import { StarRateText } from 'components/atoms/layouts/StarRateText';
 
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
@@ -133,11 +133,11 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
               (
                 <>
                   <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
-                  <ul className="mt-1">
-                    {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className="text-red-500">{message}</li>)}
+                  <ul className='mt-1'>
+                    {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
                   </ul>
                   <ul>
-                    {errorContentMessages !== [] && errorContentMessages.map((message)=><li className="text-red-500">コメントは{message}</li>)}
+                    {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
                   </ul>
                   <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
                   <ButtonArea>
@@ -175,11 +175,11 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
           <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
-          <ul className="mt-1">
-            {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className="text-red-500">{message}</li>)}
+          <ul className='mt-1'>
+            {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
           </ul>
           <ul>
-            {errorContentMessages !== [] && errorContentMessages.map((message)=><li className="text-red-500">コメントは{message}</li>)}
+            {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
           </ul>
           <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
           <div className='ml-auto pt-2'>

@@ -1,4 +1,4 @@
-import { memo, VFC } from "react";
+import { memo, VFC } from 'react';
 
 export const Edit: VFC = memo(() => {
   return(

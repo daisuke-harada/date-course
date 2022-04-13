@@ -1,15 +1,15 @@
-import { memo, useEffect, useState, VFC } from "react";
-import { useRecoilValue } from "recoil";
-import { currentUserState, loginStatusState } from "store/session";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { memo, useEffect, useState, VFC } from 'react';
+import { useRecoilValue } from 'recoil';
+import { currentUserState, loginStatusState } from 'store/session';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import { client } from "lib/api/client";
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { UserImage } from "components/atoms/layouts/users/UserImage";
-import { FollowAndUnFollowButton } from "components/atoms/button/FollowAndUnFollowButton";
-import { UserResponseData } from "types/users/response";
-import { FollowingsAndFollowersLinkArea } from "components/molecules/Link/users/FollowingsAndFollowersLinkArea";
+import { client } from 'lib/api/client';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFollowButton';
+import { UserResponseData } from 'types/users/response';
+import { FollowingsAndFollowersLinkArea } from 'components/molecules/Link/users/FollowingsAndFollowersLinkArea';
 
 const Span = tw.span`m-2 font-bold`;
 const Div = tw.div`m-5`;
@@ -47,7 +47,7 @@ export const Show: VFC = memo(() => {
       };
 
     }).catch(error => {
-      navigate("/*");
+      navigate('/*');
     });
   }, [id, navigate]);
 
@@ -71,7 +71,7 @@ export const Show: VFC = memo(() => {
       {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
         &&
         <BaseButton>
-          <Link className="text-white" to={`edit`}>アカウント情報編集</Link>
+          <Link className='text-white' to={`edit`}>アカウント情報編集</Link>
         </BaseButton>
       }
     </Div>

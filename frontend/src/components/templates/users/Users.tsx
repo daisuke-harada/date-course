@@ -1,8 +1,8 @@
-import { memo, VFC } from "react";
+import { memo, VFC } from 'react';
 
-import { UserCard } from "components/organisms/card/users/UserCard";
-import { UserResponseData } from "types/users/response";
-import { CustomeSearchBar } from "components/organisms/searchs/CustomeSearchBar";
+import { UserCard } from 'components/organisms/card/users/UserCard';
+import { UserResponseData } from 'types/users/response';
+import { CustomeSearchBar } from 'components/organisms/searchs/CustomeSearchBar';
 
 type Props = {
   users: Array<UserResponseData>,

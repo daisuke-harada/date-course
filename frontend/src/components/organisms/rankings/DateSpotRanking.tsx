@@ -1,10 +1,10 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { DateSpotCard } from "components/organisms/card/dateSpots/DateSpotCard";
-import { prefectureDatas } from "datas/prefectureDatas";
-import { genreDatas } from "datas/genreDatas";
-import { businessTimeDatas } from "datas/businessTimeDatas";
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
+import { prefectureDatas } from 'datas/prefectureDatas';
+import { genreDatas } from 'datas/genreDatas';
+import { businessTimeDatas } from 'datas/businessTimeDatas';
 
 const MaindDiv = tw.div`p-5 mb-5 shadow-xl bg-white border-2 rounded-3xl border-gray-200`;
 const Img = tw.img`w-20 h-20 m-auto`;
@@ -37,7 +37,7 @@ export const DateSpotRanking: VFC<Props> = memo((props) => {
           dateSpotSearchName?
           // 名前で検索した場合のランキング
           <div className='w-full m-2 text-center font-bold'>
-            検索結果: "{dateSpotSearchName}"の人気ランキング
+            検索結果: '{dateSpotSearchName}'の人気ランキング
           </div>
           :
           (

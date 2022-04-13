@@ -1,9 +1,9 @@
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { currentUserState, loginStatusState } from "store/session";
-import tw from "tailwind-styled-components";
-import { UserResponseData } from "types/users/response";
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { currentUserState, loginStatusState } from 'store/session';
+import tw from 'tailwind-styled-components';
+import { UserResponseData } from 'types/users/response';
 
 type Props = {
   dataE2e?: string,

@@ -1,12 +1,12 @@
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { Area } from "components/organisms/homes/Area";
-import { Genres } from "components/organisms/homes/Genres";
-import { MainGenre } from "components/organisms/homes/MainGenre";
-import { MainPrefecture } from "components/organisms/homes/MainPrefecture";
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import tw from "tailwind-styled-components";
-import { AreaData, GenreData, PrefectureData } from "types/homes/data";
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { Area } from 'components/organisms/homes/Area';
+import { Genres } from 'components/organisms/homes/Genres';
+import { MainGenre } from 'components/organisms/homes/MainGenre';
+import { MainPrefecture } from 'components/organisms/homes/MainPrefecture';
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import tw from 'tailwind-styled-components';
+import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
 
 const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;
@@ -34,9 +34,9 @@ export const Top: VFC = memo(() => {
           <BaseButton>デートコースを作成する</BaseButton>
         </h1>
       </ImageParentDiv>
-      <div className="mb-1">
-        <p className="md:text-3xl font-bold text-xl pt-10 text-center">デートスポットをエリアから探す</p>
-        <div className="flex justify-center flex-wrap w-full p-5">
+      <div className='mb-1'>
+        <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをエリアから探す</p>
+        <div className='flex justify-center flex-wrap w-full p-5'>
           {
             mainPrefectures.map((mainPrefecture) => (
               <MainPrefecture key={mainPrefecture.attributes.id} prefecture={mainPrefecture} />
@@ -49,10 +49,10 @@ export const Top: VFC = memo(() => {
           }
         </div>
       </div>
-      <div className="mb-1">
-        <p className="md:text-3xl font-bold text-xl pt-10 text-center">デートスポットをジャンルで探す</p>
-        <div className="flex">
-          <div className="flex justify-center flex-wrap w-full p-5">
+      <div className='mb-1'>
+        <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをジャンルで探す</p>
+        <div className='flex'>
+          <div className='flex justify-center flex-wrap w-full p-5'>
             {
               mainGenres.map((genre) => (
                 <MainGenre key={genre.attributes.id} genre={genre} />

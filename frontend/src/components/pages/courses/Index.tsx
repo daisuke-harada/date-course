@@ -1,7 +1,7 @@
-import { CourseCard } from "components/organisms/card/courses/CourseCard";
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { CourseResponseData } from "types/courses/response";
+import { CourseCard } from 'components/organisms/card/courses/CourseCard';
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import { CourseResponseData } from 'types/courses/response';
 
 export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([]);

@@ -1,15 +1,15 @@
-import { memo, useCallback, useState, VFC } from "react";
-import tw from "tailwind-styled-components";
+import { memo, useCallback, useState, VFC } from 'react';
+import tw from 'tailwind-styled-components';
 
-import { PrefectureSelect } from "components/molecules/select/dateSpots/PrefectureSelect";
-import { GenreSelect } from "components/molecules/select/dateSpots/GenreSelect";
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { BusinessTimeSelectArea } from "components/molecules/select/dateSpots/BusinessTimeSelectArea";
-import { ImageForm } from "components/atoms/form/ImageForm";
-import { client, formDataClient } from "lib/api/client";
-import { useNavigate } from "react-router-dom";
-import { DangerButton } from "components/atoms/button/DangerButton";
-import { prefectureDatas } from "datas/prefectureDatas";
+import { PrefectureSelect } from 'components/molecules/select/dateSpots/PrefectureSelect';
+import { GenreSelect } from 'components/molecules/select/dateSpots/GenreSelect';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { BusinessTimeSelectArea } from 'components/molecules/select/dateSpots/BusinessTimeSelectArea';
+import { ImageForm } from 'components/atoms/form/ImageForm';
+import { client, formDataClient } from 'lib/api/client';
+import { useNavigate } from 'react-router-dom';
+import { DangerButton } from 'components/atoms/button/DangerButton';
+import { prefectureDatas } from 'datas/prefectureDatas';
 
 const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl`;
 const Title = tw.h1`text-center text-lg m-5`;
@@ -83,7 +83,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     formData.append('genreId', genreValue);
     formData.append('openingTime', openingTime);
     formData.append('closingTime', closingTime);
-    image && formData.append("image", image);
+    image && formData.append('image', image);
     formData.append('prefectureId', prefectureValue);
     formData.append('cityName', cityName);
     return formData;
@@ -142,31 +142,31 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
     <MainDiv>
       <Title>{dateSpotFormTitle}</Title>
       {/* エラーメッセージ  */}
-      <ul className="mt-5">
-        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className="text-red-500">名前は{message}</li>)}
+      <ul className='mt-5'>
+        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
       </ul>
       <ul>
-        {errorGenreIdMessages !== [] && errorGenreIdMessages.map((message)=><li className="text-red-500">ジャンルは{message}</li>)}
+        {errorGenreIdMessages !== [] && errorGenreIdMessages.map((message)=><li className='text-red-500'>ジャンルは{message}</li>)}
       </ul>
       <ul>
-        {errorAddressPrefectureId !== [] && errorAddressPrefectureId.map((message)=><li className="text-red-500">県名は{message}</li>)}
+        {errorAddressPrefectureId !== [] && errorAddressPrefectureId.map((message)=><li className='text-red-500'>県名は{message}</li>)}
       </ul>
       <ul>
-        {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className="text-red-500">市町村名、番地は{message}</li>)}
+        {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className='text-red-500'>市町村名、番地は{message}</li>)}
       </ul>
 
       <SubDiv>
-        <Input data-e2e="dateSpot-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
-        <PrefectureSelect dataE2e="dateSpot-prefecture-select" defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
-        <Input data-e2e="dateSpot-form-cityName-input" placeholder="市町村名、番地" value={cityName} onChange={onChangeCityName} />
-        <GenreSelect dataE2e="dateSpot-genre-select" defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
+        <Input data-e2e='dateSpot-form-name-input' placeholder='名前を入力' value={name} onChange={onChangeName} />
+        <PrefectureSelect dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+        <Input data-e2e='dateSpot-form-cityName-input' placeholder='市町村名、番地' value={cityName} onChange={onChangeCityName} />
+        <GenreSelect dataE2e='dateSpot-genre-select' defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
         <BusinessTimeSelectArea
           defaultOpeningTimeValue={openingTime}
           defaultClosingTimeValue={closingTime}
           onChangeOpeningTimeValue={onChangeOpeningTime}
           onChangeClosingTimeValue={onChangeClosingTime}
-          openingDataE2e="dateSpot-opningTime-select"
-          closingDataE2e="dateSpot-closingTime-select"
+          openingDataE2e='dateSpot-opningTime-select'
+          closingDataE2e='dateSpot-closingTime-select'
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>

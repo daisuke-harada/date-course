@@ -1,8 +1,8 @@
-import { Users } from "components/templates/users/Users";
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { useParams } from "react-router-dom";
-import { UserResponseData } from "types/users/response";
+import { Users } from 'components/templates/users/Users';
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import { useParams } from 'react-router-dom';
+import { UserResponseData } from 'types/users/response';
 
 export const Followers: VFC = memo(() => {
   const { id } = useParams();
