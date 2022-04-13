@@ -24,7 +24,6 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
 
   const onChangeTravelMode: React.ChangeEventHandler<HTMLSelectElement> = (e) => setCourseInfo({travelMode: e.target.value, authority: getCourseInfo.authority});
   const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = (e) => setCourseInfo({travelMode: getCourseInfo.travelMode, authority: e.target.value});
-  console.log(getCourseInfo);
 
   // travelModeのBICYCLING(交通手段が自転車)は同じ県内のルートでしか使用できない。そのため、複数の県内を跨ぐルートの場合は強制的に交通手段がDRIVINGに変更されるようにする。
   useEffect(() =>{

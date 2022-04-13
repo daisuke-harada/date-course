@@ -45,7 +45,6 @@ export const Show: VFC = memo(() => {
     client.get(`courses/${id}`).then(response => {
       setManagementCourses({userId: response.data.course.user.id, courseDuringSpots: response.data.course.courseDuringSpots});
       setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
-      console.log(response.data.course);
       if(response.data.course.travelMode === 'DRIVING'){
         setTravelModeText('車');
       }else if(response.data.course.travelMode === 'CYCLING'){
