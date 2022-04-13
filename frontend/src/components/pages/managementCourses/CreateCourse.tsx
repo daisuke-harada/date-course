@@ -1,5 +1,5 @@
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
-import { memo, useState, VFC } from 'react';
+import { memo, useEffect, useState, VFC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
 
@@ -20,10 +20,15 @@ export const CreateCourse: VFC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
+  const [noDuplicatePrefectureNames, setNoDuplicatePrefectureNames] = useState<string[]>([]);
 
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
-  console.log(managementCourses.courseDuringSpots.length);
+
+  useEffect(() => {
+    const prefectureNames = managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName));
+    setNoDuplicatePrefectureNames(Array.from(new Set(prefectureNames)));
+  }, [managementCourses.courseDuringSpots]);
 
   return(
     <>
@@ -43,7 +48,7 @@ export const CreateCourse: VFC = memo(() => {
                 managementCourses.courseDuringSpots.length > 1
                 &&
                 <div className='w-full mt-5'>
-                  <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} />
+                  <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} noDuplicatePrefectureNames={noDuplicatePrefectureNames} />
                 </div>
               }
               <CourseAreaDiv>
