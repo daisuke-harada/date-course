@@ -6,5 +6,7 @@ export type CourseResponseData = {
   user: UserResponseData,
   travelMode: string,
   authority: string,
-  courseDuringSpots: AddressAndDateSpotJoinData[]
+  courseDuringSpots: AddressAndDateSpotJoinData[],
+  noDuplicatePrefectureNames: string[]
+
 };

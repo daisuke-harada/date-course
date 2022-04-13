@@ -60,7 +60,7 @@ class Api::V1::CoursesController < ApplicationController
       travel_mode: course.travel_mode,
       authority: course.authority,
       course_during_spots: during_address_and_date_spots(course),
-      no_duplicate_prefecture_name: course_prefecture_names_no_duplicate(course)
+      no_duplicate_prefecture_names: course_prefecture_names_no_duplicate(course)
     }
   end
 end

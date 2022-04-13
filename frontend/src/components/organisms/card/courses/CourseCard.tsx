@@ -18,9 +18,6 @@ type Props ={
 export const CourseCard: VFC<Props> = memo((props) =>{
   const { course } = props;
 
-  // このコースに登録されている県名を重複を排除して配列にするする。
-  const prefectureNames = Array.from(new Set(course.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName))));
-
   return(
     <MainDiv>
       <div className="ml-2 mt-6 flex">
@@ -36,7 +33,7 @@ export const CourseCard: VFC<Props> = memo((props) =>{
           </DD>
           <DD className='pl-2 flex'>
             {
-              prefectureNames.map((prefectureName) => (
+              course.noDuplicatePrefectureNames.map((prefectureName) => (
                 <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
               ))
             }

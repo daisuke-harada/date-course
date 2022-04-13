@@ -23,9 +23,10 @@ export const Show: VFC = memo(() => {
     courseDuringSpots: []
   });
 
-  const [courseInfo, setCourseInfo] = useState<{travelMode: string, authority: string}>({
+  const [courseInfo, setCourseInfo] = useState<{travelMode: string, authority: string, noDuplicatePrefectureNames: string[]}>({
     travelMode: 'DRIVING',
-    authority: '公開'
+    authority: '公開',
+    noDuplicatePrefectureNames: []
   });
 
   // デートコースの距離、時間を管理するステートを設定
@@ -43,7 +44,8 @@ export const Show: VFC = memo(() => {
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
       setManagementCourses({userId: response.data.course.user.id, courseDuringSpots: response.data.course.courseDuringSpots});
-      setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority});
+      setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
+      console.log(response.data.course);
       if(response.data.course.travelMode === 'DRIVING'){
         setTravelModeText('車');
       }else if(response.data.course.travelMode === 'CYCLING'){
@@ -54,8 +56,6 @@ export const Show: VFC = memo(() => {
     });
   }, [id]);
 
-  const prefectureNames = Array.from(new Set(managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName))));
-
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
@@ -64,7 +64,7 @@ export const Show: VFC = memo(() => {
         他のユーザーに{courseInfo.authority}
         <div className='my-2 flex'>
           {
-            prefectureNames.map((prefectureName) => (
+            courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
               <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
             ))
           }
