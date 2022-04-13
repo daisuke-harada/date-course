@@ -37,30 +37,4 @@ class Api::V1::CoursesController < ApplicationController
   def course_find_param_id
     @course = Course.find(params[:id])
   end
-
-  def during_address_and_date_spots(course)
-    return course.during_spots.map do |during_spot|
-      address_and_date_spot_and_genre_name(Address.find_by(date_spot_id: during_spot.date_spot_id))
-    end
-  end
-
-  def course_prefecture_names_no_duplicate(course)
-    prefecture_name = course.during_spots.map do |during_spot|
-      # during_spotから件名を取り出す
-      Prefecture.find(Address.find_by(date_spot_id: during_spot.date_spot_id).prefecture_id).name
-    end
-
-    no_duplicate_prefecture_name = prefecture_name.uniq
-  end
-
-  def course_info(course)
-    return {
-      id: course.id,
-      user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
-      travel_mode: course.travel_mode,
-      authority: course.authority,
-      course_during_spots: during_address_and_date_spots(course),
-      no_duplicate_prefecture_names: course_prefecture_names_no_duplicate(course)
-    }
-  end
 end

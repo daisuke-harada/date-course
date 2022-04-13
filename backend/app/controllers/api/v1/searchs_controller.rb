@@ -16,6 +16,17 @@ class Api::V1::SearchsController < ApplicationController
   end
 
   def course_sort_search
+    during_spots = DuringSpot.includes(date_spot: :address).ransack(:date_spot_address_prefecture_id_eq => params[:prefecture_id]).result
+
+    course_ids= during_spots.map do |during_spot|
+      during_spot.course_id
+    end
+
+    @result = course_ids.uniq.map do |course_id|
+      course_info(Course.find(course_id))
+    end
+
+    render json: {status: 'success', courses: @result, prefecture_id: params[:prefecture_id] }
     binding.pry
   end
 

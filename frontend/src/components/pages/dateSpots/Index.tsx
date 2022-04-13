@@ -2,7 +2,7 @@ import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotName
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
-import { IndexLayout } from 'components/templates/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';

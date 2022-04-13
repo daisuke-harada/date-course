@@ -1,7 +1,12 @@
-import { CourseCard } from 'components/organisms/card/courses/CourseCard';
+import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
+import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
+import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { CourseResponseData } from 'types/courses/response';
+import { Courses } from 'components/templates/courses/Courses';
+import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 
 export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([]);
@@ -12,8 +17,21 @@ export const Index: VFC = memo(() => {
   }, []);
 
   return(
-    <div className='flex flex-wrap justify-center'>
-      {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
-    </div>
+    <IndexLayout
+      sideArea={
+        <>
+          <DateSpotSortSearchBar
+            defaultPrefectureValue=''
+            defaultGenreValue=''
+            defaultBusinessTimeValue=''
+          />
+          <CourseSortSearchBar defaultPrefectureValue='' />
+          <DateSpotNameSearchBar />
+          <UserNameSearchBar />
+        </>
+      }
+
+      centerArea={<Courses courses={courses} />}
+    />
   );
 });

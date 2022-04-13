@@ -5,7 +5,7 @@ import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
-import { IndexLayout } from 'components/templates/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 
 export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
