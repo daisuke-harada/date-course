@@ -37,7 +37,7 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
     <>
     <MainDiv>
       <div className='m-2'>
-        交通手段を選択
+        交通手段を選択<span className='text-xs text-red-400'>(県を跨ぐ場合は自転車は選択できない)</span>
       </div>
       <select data-e2e={dataE2e} className='mx-2 border-2 border-gray-400 rounded-md' value={getCourseInfo.travelMode} onChange={onChangeTravelMode}>
         <option value='DRIVING'>車</option>
