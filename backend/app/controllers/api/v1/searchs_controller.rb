@@ -15,6 +15,10 @@ class Api::V1::SearchsController < ApplicationController
     render json: {status: 'success', address_and_date_spots: @address_and_date_spots, prefecture_id: params[:prefecture_id], genre_id: params[:genre_id], come_time: params[:come_time] }
   end
 
+  def course_sort_search
+    binding.pry
+  end
+
   def name_search
     if params[:search_target] === 'User'
       users = User.ransack(name_cont: params[:name]).result
