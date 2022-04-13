@@ -28,7 +28,7 @@ export const CourseSortSearchBar: VFC<Props> = memo((props) => {
       response.data.status === 'success' && navigate('/courses/search',
         {
           state: {
-            addressAndDateSpots: response.data.addressAndDateSpots,
+            courses: response.data.courses,
             prefectureId: response.data.prefectureId,
           }
         }

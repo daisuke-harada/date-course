@@ -27,7 +27,6 @@ class Api::V1::SearchsController < ApplicationController
     end
 
     render json: {status: 'success', courses: @result, prefecture_id: params[:prefecture_id] }
-    binding.pry
   end
 
   def name_search

@@ -1,5 +1,6 @@
 import { Edit } from 'components/pages/courses/Edit';
 import { Index } from 'components/pages/courses/Index';
+import { Search } from 'components/pages/courses/Search';
 import { Show } from 'components/pages/courses/Show';
 import { Page404 } from 'components/pages/Page404';
 import { Navigate } from 'react-router-dom';
@@ -25,6 +26,10 @@ export const CourseRoutes = () => {
       element: getLoginStatus.status === true?
       <Edit /> :
       <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />,
+    },
+    {
+      path: 'search',
+      element: <Search />
     },
     {
       path: '*',
