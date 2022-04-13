@@ -44,13 +44,23 @@ class Api::V1::CoursesController < ApplicationController
     end
   end
 
+  def course_prefecture_names_no_duplicate(course)
+    prefecture_name = course.during_spots.map do |during_spot|
+      # during_spotから件名を取り出す
+      Prefecture.find(Address.find_by(date_spot_id: during_spot.date_spot_id).prefecture_id).name
+    end
+
+    no_duplicate_prefecture_name = prefecture_name.uniq
+  end
+
   def course_info(course)
     return {
       id: course.id,
       user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
       travel_mode: course.travel_mode,
       authority: course.authority,
-      course_during_spots: during_address_and_date_spots(course)
+      course_during_spots: during_address_and_date_spots(course),
+      no_duplicate_prefecture_name: course_prefecture_names_no_duplicate(course)
     }
   end
 end
