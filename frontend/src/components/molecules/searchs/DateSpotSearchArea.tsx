@@ -12,7 +12,7 @@ const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
 const RadioInput = tw.input`mx-1 mt-0.5`
 const RadioButtonDiv = tw.div`mx-2 mt-3 flex`;
 const Label = tw.label`font-bold mx-1 text-xs`;
-const SelectParentDiv = tw.div`w-1/3 p-3`;
+const SelectParentDiv = tw.div`mx-3 mt-3`;
 
 type Props = {
   dateSpotSearchName?: string,
