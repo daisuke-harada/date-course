@@ -38,6 +38,7 @@ export const Search: VFC = memo(() => {
       centerArea={
         <Courses
           courses={courses}
+          prefectureId={state.prefectureId}
         />
       }
     />

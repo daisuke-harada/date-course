@@ -6,23 +6,24 @@ import { CourseCard } from 'components/organisms/card/courses/CourseCard';
 
 type Props = {
   courses: Array<CourseResponseData>,
+  prefectureId?: string,
 };
 
 export const Courses: VFC<Props> = memo((props) => {
-  const { courses } = props;
+  const { courses, prefectureId } = props;
   return(
     <>
       {
         courses.length !== 0?
         (
           <>
-            {/* <CustomeSearchBar
+            <CustomeSearchBar
               defaultDateSpotCondition='bg-gray-300'
-              defaultCourseCondition='bg-gray-300'
-              defaultUserCondition='bg-red-400'
-              defaultSearchSwitch='User'
-              userSearchName={userSearchName}
-            /> */}
+              defaultCourseCondition='bg-red-400'
+              defaultUserCondition='bg-gray-300'
+              defaultSearchSwitch='Course'
+              defaultPrefectureValue={prefectureId}
+            />
             <div className='sm:justify-start justify-center flex flex-wrap'>
               {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
             </div>
@@ -31,13 +32,13 @@ export const Courses: VFC<Props> = memo((props) => {
         :
         (
           <>
-            {/* <CustomeSearchBar
+            <CustomeSearchBar
               defaultDateSpotCondition='bg-gray-300'
-              defaultCourseCondition='bg-gray-300'
-              defaultUserCondition='bg-red-400'
-              defaultSearchSwitch='User'
-              userSearchName={userSearchName}
-            /> */}
+              defaultCourseCondition='bg-red-400'
+              defaultUserCondition='bg-gray-300'
+              defaultSearchSwitch='Course'
+              defaultPrefectureValue={prefectureId}
+            />
             <div className='mt-2 text-center text-red-400 text-4xl'>
               デートコースは存在しません
             </div>

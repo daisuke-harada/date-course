@@ -1,3 +1,4 @@
+import { CourseSearchArea } from 'components/molecules/searchs/CourseSearchArea';
 import { DateSpotSearchArea } from 'components/molecules/searchs/DateSpotSearchArea';
 import { UserSearchArea } from 'components/molecules/searchs/UserSearchArea';
 import { memo, useState, VFC } from 'react';
@@ -76,7 +77,9 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
           />
         :
         searchSwitch === 'Course'?
-          <div>Course</div>
+          <CourseSearchArea
+            defaultPrefectureValue={defaultPrefectureValue}
+          />
         :
         <UserSearchArea userSearchName={userSearchName} />
       }
