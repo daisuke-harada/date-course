@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 
 export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
@@ -32,6 +33,7 @@ export const Search: VFC = memo(() => {
             defaultGenreValue={state.genreId || ''}
             defaultBusinessTimeValue={state.comeTime || ''}
           />
+          <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
           <UserNameSearchBar />
         </>

@@ -1,3 +1,4 @@
+import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
@@ -24,6 +25,7 @@ export const Index: VFC = memo(() => {
             defaultGenreValue=''
             defaultBusinessTimeValue=''
           />
+          <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
           <UserNameSearchBar />
         </>
