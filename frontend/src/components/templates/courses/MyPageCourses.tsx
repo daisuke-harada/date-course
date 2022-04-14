@@ -38,7 +38,7 @@ export const MyPageCourses: VFC<Props> = memo((props) => {
         )
         :
         (
-          <div className='mt-2 text-center text-red-400 text-4xl'>
+          <div className='my-5 text-center text-red-400 text-xl'>
             デートコースは存在しません
           </div>
         )

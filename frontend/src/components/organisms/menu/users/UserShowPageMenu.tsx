@@ -4,8 +4,9 @@ import tw from 'tailwind-styled-components';
 import { CourseResponseData } from 'types/courses/response';
 
 const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-full`;
-const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full rounded-2xl shadow-xl`
-const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center text-white hover:bg-red-400`
+const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full`;
+const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
+const MenuTitleDiv = tw.div`text-center text-2xl font-bold mb-5`;
 
 type Props = {
   courses: CourseResponseData[],
@@ -50,11 +51,13 @@ export const UserShowPageMenu: VFC<Props> = memo((props) => {
         {
           switchTarget === 'Course'?
           <>
-            <div className='text-center text-2xl font-bold mb-2'>デートコース</div>
+            <MenuTitleDiv>デートコース</MenuTitleDiv>
             <MyPageCourses courses={courses} userId={userId} />
           </>
           :
-          <div className='text-center font-bold'>レビュー</div>
+          <>
+            <MenuTitleDiv>レビュー</MenuTitleDiv>
+          </>
         }
       </ChildrenMenuDiv>
     </MenuDiv>
