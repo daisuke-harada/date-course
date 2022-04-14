@@ -18,7 +18,6 @@ type Props = {
   defaultPrefectureValue?: string,
   defaultGenreValue?: string,
   defaultBusinessTimeValue?: string
-
 }
 
 export const CustomeSearchBar: VFC<Props> = memo((props) => {

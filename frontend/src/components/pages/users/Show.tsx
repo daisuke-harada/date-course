@@ -10,11 +10,10 @@ import { UserImage } from 'components/atoms/layouts/users/UserImage';
 import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFollowButton';
 import { UserResponseData } from 'types/users/response';
 import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';
+import { UserShowPageMenu } from 'components/organisms/menu/users/UserShowPageMenu';
 
 const Span = tw.span`my-1 font-bold`;
 const ProfileDiv = tw.div`sm:my-8 my-4 mx-2 flex w-full`;
-const MenuDiv = tw.div`rounded-xl mx-auto p-1 flex flex-col w-full`;
-const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full bg-white h-10 rounded-2xl shadow-xl border-2`
 
 export const Show: VFC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
@@ -89,12 +88,7 @@ export const Show: VFC = memo(() => {
           followerIdsCount={user.followerIds.length}
         />
       </div>
-      <MenuDiv>
-        <ChildrenMenuDiv>
-        </ChildrenMenuDiv>
-        <ChildrenMenuDiv>
-        </ChildrenMenuDiv>
-      </MenuDiv>
+      <UserShowPageMenu />
     </div>
   );
 });

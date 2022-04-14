@@ -35,11 +35,11 @@ export const CourseSearchArea: VFC<Props> = memo((props) => {
 
   return(
     <>
-      <div className='pt-5 mt-5 mb-2 px-2 mx-auto text-center flex flex-col'>
+      <div className='pt-5 px-2 mx-auto text-center flex flex-col'>
         <div className='mb-2'>条件検索</div>
         <PrefectureSelect addClassName='border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
       </div>
-      <div className='m-auto my-5 w-1/3'>
+      <div className='m-auto mb-5 mt-1 w-1/3'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </>
