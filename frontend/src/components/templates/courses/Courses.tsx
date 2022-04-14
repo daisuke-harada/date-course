@@ -14,7 +14,7 @@ export const Courses: VFC<Props> = memo((props) => {
       {
         courses.length !== 0?
         (
-          <div className='sm:justify-start justify-center flex flex-wrap'>
+          <div className='sm:justify-start justify-center flex flex-wrap px-2'>
             {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
           </div>
         )

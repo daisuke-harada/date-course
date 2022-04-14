@@ -91,7 +91,7 @@ export const Show: VFC = memo(() => {
           followerIdsCount={user.followerIds.length}
         />
       </div>
-      <UserShowPageMenu courses={courses} />
+      <UserShowPageMenu courses={courses} userId={Number(id)} />
     </div>
   );
 });
