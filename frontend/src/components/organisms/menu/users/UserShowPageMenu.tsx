@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
 const MenuDiv = tw.div`rounded-xl mx-auto p-1 flex flex-col w-full`;
@@ -40,6 +40,12 @@ export const UserShowPageMenu: VFC = memo(() => {
         </MenuBarDiv>
       </ChildrenMenuDiv>
       <ChildrenMenuDiv>
+        {
+          switchTarget === 'Course'?
+          <div className='text-center font-bold'>デートコース</div>
+          :
+          <div className='text-center font-bold'>レビュー</div>
+        }
       </ChildrenMenuDiv>
     </MenuDiv>
   );
