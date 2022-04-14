@@ -1,7 +1,9 @@
 import { MyPageCourses } from 'components/templates/courses/MyPageCourses';
+import { MyPageReviews } from 'components/templates/reviews/MyPageReviews';
 import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 import { CourseResponseData } from 'types/courses/response';
+import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
 
 const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-full`;
 const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full`;
@@ -10,11 +12,12 @@ const MenuTitleDiv = tw.div`text-center text-2xl font-bold mb-5`;
 
 type Props = {
   courses: CourseResponseData[],
+  dateSpotReviews: DateSpotReviewAndDateSpotResponseData[],
   userId: number
 }
 
 export const UserShowPageMenu: VFC<Props> = memo((props) => {
-  const { courses, userId } = props
+  const { courses, userId, dateSpotReviews } = props
   const [switchTarget, setSwitchTarget] = useState('Course');
   const [courseColor, setCourseColor] = useState('bg-red-400');
   const [reviewColor, setReviewColor] = useState('bg-gray-300');
@@ -57,6 +60,7 @@ export const UserShowPageMenu: VFC<Props> = memo((props) => {
           :
           <>
             <MenuTitleDiv>レビュー</MenuTitleDiv>
+            <MyPageReviews reviews={dateSpotReviews} />
           </>
         }
       </ChildrenMenuDiv>

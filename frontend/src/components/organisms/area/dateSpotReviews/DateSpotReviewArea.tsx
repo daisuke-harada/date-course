@@ -5,6 +5,7 @@ import { currentUserState, loginStatusState } from 'store/session';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DateSpotReviewForm } from 'components/molecules/form/dateSpotReview/DateSpotReviewForm';
 import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
 
 type Props = {
   dateSpotId: number,
@@ -40,7 +41,22 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
         :
         dateSpotReviews.map((dateSpotReview: DateSpotReviewAndUserResponseData) => {
           if(dateSpotReview.userId !== getCurrentUser.user.id){
-            return (<ReviewCard key={dateSpotReview.id} dateSpotReview={dateSpotReview} />);
+            return (
+              <ReviewCard
+                key={dateSpotReview.id}
+                ImageDiv={
+                  <UserImage
+                    image={dateSpotReview.userImage}
+                    userId={dateSpotReview.userId}
+                    gender={dateSpotReview.userGender}
+                    addClassName='h-32 w-32'
+                  />
+                }
+                name={dateSpotReview.userName}
+                rate={dateSpotReview.rate}
+                content={dateSpotReview.content}
+              />
+            );
           }else {
             return(<div key={dateSpotReview.id}></div>);
           };

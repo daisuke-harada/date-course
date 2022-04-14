@@ -1,22 +1,25 @@
 import { StarRateText } from 'components/atoms/layouts/StarRateText';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
-import { memo, VFC } from 'react';
-import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
+import { memo, ReactNode, VFC } from 'react';
 
 type Props = {
-  dateSpotReview: DateSpotReviewAndUserResponseData
+  ImageDiv: ReactNode,
+  name: string,
+  rate: number,
+  content: string
 };
 
 export const ReviewCard: VFC<Props> = memo((props) => {
-  const { dateSpotReview } = props;
+  const {ImageDiv, name, rate, content } = props;
 
   return(
-    <div className='my-5 p-2 flex border-b-2' key={dateSpotReview.id}>
-      <UserImage image={dateSpotReview.userImage} userId={dateSpotReview.userId} gender={dateSpotReview.userGender} addClassName='h-32 w-32' />
+    <div className='my-5 p-2 flex border-b-2'>
+      {ImageDiv}
       <div className='px-5'>
-        <div>{dateSpotReview.userName}</div>
-        <StarRateText rate={dateSpotReview.rate} size={20} />
-        <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{dateSpotReview.content}</div>
+        <div>{name}</div>
+        <StarRateText rate={rate} size={20} />
+        <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>
+          {content}
+        </div>
       </div>
     </div>
 
