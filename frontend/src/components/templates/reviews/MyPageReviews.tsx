@@ -3,6 +3,7 @@ import tw from 'tailwind-styled-components';
 
 import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
 import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
+import { Link } from 'react-router-dom';
 
 const ImageParentDiv = tw.div`sm:w-32 sm:h-32 w-20 h-20 relative pt-20`;
 const Image = tw.img`lg:bg-top object-fill absolute top-0 w-full h-full rounded-xl border-4 border-pink-400 hover:border-pink-600`;
@@ -31,7 +32,13 @@ export const MyPageReviews: VFC<Props> = memo((props) => {
                 rate={review.rate}
                 content={review.content}
                 name={review.dateSpot.name}
-                ImageDiv={<ImageParentDiv><Image src={(review.dateSpot.image && review.dateSpot.image.url) || noImageUrl} /></ImageParentDiv>}
+                ImageDiv={
+                  <ImageParentDiv>
+                    <Link to={`/dateSpots/${review.dateSpot.id}`}>
+                      <Image src={(review.dateSpot.image && review.dateSpot.image.url) || noImageUrl} />
+                    </Link>
+                  </ImageParentDiv>
+                }
               />
             ))}
           </div>
