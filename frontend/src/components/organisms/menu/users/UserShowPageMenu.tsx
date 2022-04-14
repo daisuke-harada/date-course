@@ -50,7 +50,7 @@ export const UserShowPageMenu: VFC<Props> = memo((props) => {
         {
           switchTarget === 'Course'?
           <>
-            <div className='text-center text-2xl font-bold mb-10'>デートコース</div>
+            <div className='text-center text-2xl font-bold mb-2'>デートコース</div>
             <MyPageCourses courses={courses} userId={userId} />
           </>
           :
