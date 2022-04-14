@@ -2,7 +2,8 @@ import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-const Span = tw.span`m-2 font-bold`;
+const Span = tw.span`m-2 font-bold mobile(L):text-sm sm:text-2xl md:text-3xl`;
+
 
 type Props = {
   userId: number,
