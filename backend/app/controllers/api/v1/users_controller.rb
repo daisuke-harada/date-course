@@ -23,7 +23,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: { user: user_and_userFollowingsAndFollowers(@user) }
+    @courses = @user.courses.map do |course|
+      course_info(course)
+    end
+
+    render json: { user: user_and_userFollowingsAndFollowers(@user), courses: @courses }
   end
 
   private

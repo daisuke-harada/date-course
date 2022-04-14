@@ -11,6 +11,7 @@ import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFoll
 import { UserResponseData } from 'types/users/response';
 import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';
 import { UserShowPageMenu } from 'components/organisms/menu/users/UserShowPageMenu';
+import { CourseResponseData } from 'types/courses/response';
 
 const Span = tw.span`my-1 font-bold`;
 const ProfileDiv = tw.div`sm:my-8 my-4 mx-2 flex w-full`;
@@ -34,12 +35,14 @@ export const Show: VFC = memo(() => {
       followerIds: [],
     }
   );
+  const [courses, setCourses] = useState<CourseResponseData[]>([]);
   const navigate = useNavigate();
   const [genderTextColor, setGenderTextColor] = useState('');
 
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
       setUser(response.data.user);
+      setCourses(response.data.courses);
       if(response.data.user.gender === '女性'){
         setGenderTextColor('text-red-400');
       }else if(response.data.user.gender === '男性'){
@@ -88,7 +91,7 @@ export const Show: VFC = memo(() => {
           followerIdsCount={user.followerIds.length}
         />
       </div>
-      <UserShowPageMenu />
+      <UserShowPageMenu courses={courses} />
     </div>
   );
 });

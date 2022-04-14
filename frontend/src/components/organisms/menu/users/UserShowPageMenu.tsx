@@ -1,11 +1,18 @@
+import { Courses } from 'components/templates/courses/Courses';
 import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
+import { CourseResponseData } from 'types/courses/response';
 
-const MenuDiv = tw.div`rounded-xl mx-auto p-1 flex flex-col w-full`;
-const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full h-10 sm:h-20 rounded-2xl shadow-xl`
-const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs sm:pt-6 w-1/2 h-full font-bold text-center pt-3 text-white hover:bg-red-400`
+const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-full`;
+const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full rounded-2xl shadow-xl`
+const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center text-white hover:bg-red-400`
 
-export const UserShowPageMenu: VFC = memo(() => {
+type Props = {
+  courses: CourseResponseData[]
+}
+
+export const UserShowPageMenu: VFC<Props> = memo((props) => {
+  const { courses } = props
   const [switchTarget, setSwitchTarget] = useState('Course');
   const [courseColor, setCourseColor] = useState('bg-red-400');
   const [reviewColor, setReviewColor] = useState('bg-gray-300');
@@ -41,7 +48,10 @@ export const UserShowPageMenu: VFC = memo(() => {
       <ChildrenMenuDiv>
         {
           switchTarget === 'Course'?
-          <div className='text-center font-bold'>デートコース</div>
+          <>
+            <div className='text-center font-bold mb-10'>デートコース</div>
+            <Courses courses={courses} />
+          </>
           :
           <div className='text-center font-bold'>レビュー</div>
         }

@@ -1,4 +1,5 @@
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
+import { CustomeSearchBar } from 'components/organisms/searchs/CustomeSearchBar';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
@@ -31,7 +32,18 @@ export const Search: VFC = memo(() => {
           <UserNameSearchBar />
         </>
       }
-      centerArea={<Users users={users} setUsers={setUsers} userSearchName={state.userSearchName} />}
+      centerArea={
+        <>
+          <CustomeSearchBar
+            defaultDateSpotCondition='bg-gray-300'
+            defaultCourseCondition='bg-gray-300'
+            defaultUserCondition='bg-red-400'
+            defaultSearchSwitch='User'
+            userSearchName={state.userSearchName}
+          />
+          <Users users={users} setUsers={setUsers} />
+        </>
+      }
     />
   );
 });
