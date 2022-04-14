@@ -6,7 +6,6 @@ const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full h-10 sm:h-20 rounded-2xl shad
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs sm:pt-6 w-1/2 h-full font-bold text-center pt-3 text-white hover:bg-red-400`
 
 export const UserShowPageMenu: VFC = memo(() => {
-
   const [switchTarget, setSwitchTarget] = useState('Course');
   const [courseColor, setCourseColor] = useState('bg-red-400');
   const [reviewColor, setReviewColor] = useState('bg-gray-300');
