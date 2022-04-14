@@ -53,7 +53,7 @@ export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
         getLoginStatus.status === true &&
         currentUserId !== userId &&
         (currentUser.user.followingIds && currentUser.user.followingIds.includes(userId)?
-        <UnfollowButton data-e2e={dataE2e} onClick={onClickUnfollowAction}>フォロー解除</UnfollowButton>
+        <UnfollowButton data-e2e={dataE2e} onClick={onClickUnfollowAction}>フォロー中</UnfollowButton>
         :
         <FollowButton data-e2e={dataE2e} onClick={onClickFollowAction}>フォロー</FollowButton>
         )

@@ -6,7 +6,7 @@ import { Card } from 'components/atoms/card/Card';
 import { Link } from 'react-router-dom';
 import { UserImage } from 'components/atoms/layouts/users/UserImage';
 import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFollowButton';
-import { FollowingsAndFollowersLinkArea } from 'components/molecules/Link/users/FollowingsAndFollowersLinkArea';
+import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';
 
 type Props = {
   user: UserResponseData,

@@ -20,11 +20,11 @@ export const FollowingsAndFollowersLinkArea: VFC<Props> = memo((props) => {
           followingIdsCount !== 0?
           (
             <Link to={`/users/${userId}/followings`}>
-              フォロー {followingIdsCount}
+              フォロー中 {followingIdsCount}
             </Link>
           )
           :
-          (<>フォロー{followingIdsCount}</>)
+          (<>フォロー中{followingIdsCount}</>)
         }
       </Span>
       <Span>
