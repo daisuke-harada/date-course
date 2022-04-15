@@ -22,8 +22,9 @@ type Props = {
 
 const DD = tw.dd`m-2 text-xs font-bold`;
 const Title = tw.dd`m-2 font-bold`;
-const Image = tw.img`w-64 h-64 mx-auto mt-10 rounded-xl border-4 border-pink-400 hover:border-pink-600`;
-const MainDl = tw.dl`text-center rounded-xl shadow-xl bg-white py-1 max-w-md`
+const Image = tw.img`xl:w-60 lg:w-56 lg:h-56 md:w-40 md:h-40 w-32 h-32 mx-auto rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const MainDl = tw.dl`xl:w-64 lg:w-60 w-44 text-center rounded-xl shadow-xl bg-white py-1 border m-auto`
+const RoadDiv = tw.div`xl:w-64 lg:w-60 md:w-44 md:h-32 m-auto flex justify-center`;
 
 export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
   const { courseDuringSpot, managementCourses, setManagementCourses, courseNumber, leg} = props;
@@ -88,14 +89,24 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         &&
         managementCourses.courseDuringSpots.length !== courseNumber + 1
         &&
-        <div className='h-16 w-full flex max-w-md justify-center'>
+        <RoadDiv>
           <div className='border-r-4 border-indigo-500 w-1/2'>
           </div>
-          <div className='w-1/2 p-2 text-sm font-bold flex flex-col'>
-            <span className='p-1'>距離{leg?.distance}</span>
-            <span className='p-1'>所要時間{leg?.duration}</span>
+          <div className='w-1/2 p-2 text-xs font-bold flex flex-col'>
+            <span className='px-1'>
+              距離
+            </span>
+            <span className='p-1 pb-1 mb-2'>
+              {leg?.distance}
+            </span>
+            <span className='px-1'>
+              所要時間
+            </span>
+            <span className='px-1 pb-1'>
+              {leg?.duration}
+            </span>
           </div>
-        </div>
+        </RoadDiv>
       }
     </>
   );

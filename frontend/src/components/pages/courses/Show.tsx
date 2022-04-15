@@ -10,11 +10,11 @@ import { currentUserState } from 'store/session';
 import tw from 'tailwind-styled-components';
 import { ManagementCourseData } from 'types/managementCourses/management';
 
-const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
-const TitleH1 = tw.h1`text-center mt-5 font-bold text-4xl pb-5`;
-const CourseAreaDiv = tw.div`w-full flex`;
+const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
+const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;
+const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;
-const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
+const ButtonParentDiv = tw.div`lg:text-4xl sm:w-1/2 sm:text-2xl text-center m-5 w-3/4`
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
@@ -58,7 +58,7 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-      <div className='w-full mt-5 text-xl font-bold'>
+      <div className='w-full p-5 mt-5 text-xl font-bold'>
         {travelModeText}で移動<br/>
         他のユーザーに{courseInfo.authority}
         <div className='my-2 flex'>
@@ -70,7 +70,7 @@ export const Show: VFC = memo(() => {
         </div>
       </div>
       <CourseAreaDiv>
-        <div className='w-1/3'>
+        <div className='md:w-1/3 w-full'>
           {
             managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
               <CourseDuringSpotCard
@@ -83,7 +83,7 @@ export const Show: VFC = memo(() => {
             ))
           }
         </div>
-        <div className='w-2/3 mx-3 rounded-xl'>
+        <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
           {
             // userIdが初期値である0の場合に読み込まないようにする
             managementCourses.userId !== 0
