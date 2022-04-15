@@ -49,7 +49,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
                     image={dateSpotReview.userImage}
                     userId={dateSpotReview.userId}
                     gender={dateSpotReview.userGender}
-                    addClassName='h-32 w-32'
+                    addClassName='lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20'
                   />
                 }
                 name={dateSpotReview.userName}
