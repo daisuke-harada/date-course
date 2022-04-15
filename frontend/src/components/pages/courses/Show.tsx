@@ -60,17 +60,17 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-        <div className='xl:mx-16 lg:mx-4 md:my-10 md:mx-2 md:text-4xl mobile(L):text-xl py-2 mx-20 text-sm font-bold'>
-          {travelModeText}で移動<br/>
-          他のユーザーに{courseInfo.authority}
-          <div className='my-2 flex m-auto'>
-            {
-              courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
-                <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
-              ))
-            }
-          </div>
+      <div className='lg:ml-6 sm:ml-2 py-3 md:text-4xl mobile(L):text-xl text-sm font-bold'>
+        {travelModeText}で移動<br/>
+        他のユーザーに{courseInfo.authority}
+        <div className='my-2 flex m-auto'>
+          {
+            courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
+              <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+            ))
+          }
         </div>
+      </div>
       <CourseAreaDiv>
         <div className='md:w-1/3 w-full'>
           {

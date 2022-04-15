@@ -37,7 +37,7 @@ export const CourseSortSearchBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='m-auto mt-3 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
+    <div className='m-auto mt-10 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
       <div className='lg:text-lg text-xs m-auto my-5 font-bold text-center'>
         デートコース条件検索
       </div>

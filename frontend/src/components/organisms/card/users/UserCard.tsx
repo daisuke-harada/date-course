@@ -13,7 +13,7 @@ type Props = {
   setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
-const Span = tw.span`m-2 font-bold`;
+const Span = tw.span`m-2 font-bold mobile(L):text-sm sm:text-xl md:text-2xl`;
 const DD = tw.dd`m-5`;
 
 export const UserCard: VFC<Props> = memo((props) => {
@@ -31,7 +31,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   return(
     <Card>
       <DD>
-        <UserImage addClassName='w-64 h-64' userId={user.id} image={user.image} gender={user.gender} />
+        <UserImage addClassName='w-64 h-64 m-auto' userId={user.id} image={user.image} gender={user.gender} />
       </DD>
       <DD>
         <Link to={`/users/${user.id}`}>

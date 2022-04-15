@@ -23,7 +23,7 @@ export const DateSpotNameSearchBar: VFC = memo(() => {
   };
 
   return(
-    <div className='m-auto mt-3 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
+    <div className='m-auto mt-10 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
       <div className='lg:text-lg text-xs m-auto my-5 font-bold text-center'>
         デートスポット名検索
       </div>
