@@ -1,9 +1,12 @@
 import { LoadScript } from '@react-google-maps/api';
 import { DangerButton } from 'components/atoms/button/DangerButton';
+import { UserImage } from 'components/atoms/layouts/users/UserImage';
 import { Directions } from 'components/molecules/maps/Directions';
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
+import { UserCard } from 'components/organisms/card/users/UserCard';
 import { client } from 'lib/api/client';
 import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { currentUserState } from 'store/session';
@@ -43,7 +46,7 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      setManagementCourses({userId: response.data.course.user.id, courseDuringSpots: response.data.course.courseDuringSpots});
+      setManagementCourses({userId: response.data.course.user.id, user: response.data.course.user, courseDuringSpots: response.data.course.courseDuringSpots});
       setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
       if(response.data.course.travelMode === 'DRIVING'){
         setTravelModeText('車');
@@ -58,17 +61,17 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-      <div className='w-full p-5 mt-5 text-xl font-bold'>
-        {travelModeText}で移動<br/>
-        他のユーザーに{courseInfo.authority}
-        <div className='my-2 flex'>
-          {
-            courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
-              <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
-            ))
-          }
+        <div className='md:my-10 md:mx-20 md:text-4xl mobile(L):text-xl py-2 mx-30 text-sm font-bold'>
+          {travelModeText}で移動<br/>
+          他のユーザーに{courseInfo.authority}
+          <div className='my-2 flex m-auto'>
+            {
+              courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
+                <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+              ))
+            }
+          </div>
         </div>
-      </div>
       <CourseAreaDiv>
         <div className='md:w-1/3 w-full'>
           {
@@ -106,6 +109,33 @@ export const Show: VFC = memo(() => {
             </ButtonParentDiv>
           )
         }
+        {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
+        <ButtonParentDiv>
+          <Link to={`users/${managementCourses.userId}`}>
+            <div className='m-auto font-bold border p-2 flex rounded-xl bg-gray-200'>
+              <div>
+                {
+                  managementCourses.user
+                  &&
+                  <>
+                    <UserImage
+                      userId={managementCourses.user.id}
+                      gender={managementCourses.user.gender}
+                      image={managementCourses.user.image}
+                      addClassName={'w-28 h-28'}
+                    />
+                    <div className='px-2 text-xs'>
+                      {managementCourses.user.name}
+                    </div>
+                  </>
+                }
+              </div>
+              <div className='p-5'>
+                  投稿者のページへ
+              </div>
+            </div>
+          </Link>
+        </ButtonParentDiv>
       </ButtonArea>
     </MainDiv>
   );
