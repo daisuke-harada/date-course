@@ -15,7 +15,7 @@ export const MainGenre: VFC<Props> = memo((props) => {
   const { genre } = props;
 
   return(
-    <div className='md:w-3/12 md:h-60 rounded-xl shadow-lg m-3 h-20 border w-1/3 flex' >
+    <div className='md:w-3/12 md:h-60 bg-white rounded-xl shadow-lg m-3 h-20 border w-1/3 flex' >
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/genreImages/${genre.attributes.name}.jpg`} />
       </ImageParentDiv>

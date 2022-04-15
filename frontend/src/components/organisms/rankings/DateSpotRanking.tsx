@@ -6,8 +6,8 @@ import { prefectureDatas } from 'datas/prefectureDatas';
 import { genreDatas } from 'datas/genreDatas';
 import { businessTimeDatas } from 'datas/businessTimeDatas';
 
-const MaindDiv = tw.div`p-5 mb-5 shadow-xl bg-white border-2 rounded-3xl border-gray-200`;
-const Img = tw.img`w-20 h-20 m-auto`;
+const MaindDiv = tw.div`p-5 mb-5 shadow-xl bg-white border-2 rounded-3xl`;
+const Img = tw.img`w-20 h-20 m-auto bg-gray-100`;
 const NumberDiv = tw.div`w-20 h-20 pt-6 text-3xl text-center m-auto`;
 
 type Props = {
@@ -53,7 +53,7 @@ export const DateSpotRanking: VFC<Props> = memo((props) => {
             </div>
           )
         }
-      <div className='m-auto flex overflow-x-scroll whitespace-nowrap'>
+      <div className='m-auto flex overflow-x-scroll border rounded-md whitespace-nowrap'>
         {
           top5.map((addressAndDateSpot: AddressAndDateSpotJoinData, index) => (
             <div key={addressAndDateSpot.id} className='flex flex-col'>
