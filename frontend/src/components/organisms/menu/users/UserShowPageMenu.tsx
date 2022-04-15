@@ -9,7 +9,7 @@ const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-ful
 const ParentMenuDiv = tw.div`sm:my-4 my-2 w-full p-2 flex`;
 const ChildrenMenuDiv = tw.div`border shadow-xl bg-white mt-5 p-1 rounded-2xl m-2`;
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
-const MenuTitleDiv = tw.div`text-center text-2xl font-bold mb-5`;
+const MenuTitleDiv = tw.div`sm:text-2xl lg:text-4xl text-center font-bold my-5`;
 
 type Props = {
   courses: CourseResponseData[],

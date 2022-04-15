@@ -31,8 +31,8 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
           setDateSpotAverageRate={setDateSpotAverageRate}
         />
       }
-      <div className='text-center font-bold'>
-        コメント一覧
+      <div className='sm:text-2xl lg:text-4xl text-center font-bold my-5'>
+        レビュー
       </div>
       <div className='w-full my-2 overflow-y-scroll h-96 border-2 border-red-300 rounded-xl p-1'>
       {
