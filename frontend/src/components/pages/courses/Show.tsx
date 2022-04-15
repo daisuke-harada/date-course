@@ -1,9 +1,8 @@
 import { LoadScript } from '@react-google-maps/api';
+import { BaseButton } from 'components/atoms/button/BaseButton';
 import { DangerButton } from 'components/atoms/button/DangerButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
 import { Directions } from 'components/molecules/maps/Directions';
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
-import { UserCard } from 'components/organisms/card/users/UserCard';
 import { client } from 'lib/api/client';
 import { memo, useCallback, useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
@@ -61,7 +60,7 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-        <div className='md:my-10 md:mx-20 md:text-4xl mobile(L):text-xl py-2 mx-30 text-sm font-bold'>
+        <div className='xl:mx-16 lg:mx-4 md:my-10 md:mx-2 md:text-4xl mobile(L):text-xl py-2 mx-20 text-sm font-bold'>
           {travelModeText}で移動<br/>
           他のユーザーに{courseInfo.authority}
           <div className='my-2 flex m-auto'>
@@ -111,29 +110,10 @@ export const Show: VFC = memo(() => {
         }
         {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
         <ButtonParentDiv>
-          <Link to={`users/${managementCourses.userId}`}>
-            <div className='m-auto font-bold border p-2 flex rounded-xl bg-gray-200'>
-              <div>
-                {
-                  managementCourses.user
-                  &&
-                  <>
-                    <UserImage
-                      userId={managementCourses.user.id}
-                      gender={managementCourses.user.gender}
-                      image={managementCourses.user.image}
-                      addClassName={'w-28 h-28'}
-                    />
-                    <div className='px-2 text-xs'>
-                      {managementCourses.user.name}
-                    </div>
-                  </>
-                }
-              </div>
-              <div className='p-5'>
-                  投稿者のページへ
-              </div>
-            </div>
+        <Link to={`/users/${managementCourses.userId}`}>
+          <BaseButton>
+              投稿者のページへ
+          </BaseButton>
           </Link>
         </ButtonParentDiv>
       </ButtonArea>
