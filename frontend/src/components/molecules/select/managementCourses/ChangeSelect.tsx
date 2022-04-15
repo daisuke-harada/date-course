@@ -84,7 +84,7 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
             )
           })}
         </select>
-        <div className='my-5 mx-12'>
+        <div className='my-5 m-auto text-sm'>
           <BaseButton onClickEvent={onClickCourseChange}>順番を入れ替える</BaseButton>
         </div>
       </>

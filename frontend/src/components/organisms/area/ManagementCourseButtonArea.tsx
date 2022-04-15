@@ -13,8 +13,8 @@ type Props = {
   getCourseInfo: CourseInfoData,
 }
 
-const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;
-const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
+const ButtonArea = tw.div`flex flex-col items-center mx-auto my-10`;
+const ButtonParentDiv = tw.div`mobile(L):text-xl sm:text-2xl lg:text-4xl text-center m-5 w-1/2`
 
 export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   const { managementCourses, getCourseInfo } = props;
@@ -52,7 +52,7 @@ export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
         (
           <ButtonArea>
             <ButtonParentDiv>
-              <BaseButton onClickEvent={onClickCreateCourse}>デートコースを登録する</BaseButton>
+              <BaseButton onClickEvent={onClickCreateCourse}>登録</BaseButton>
             </ButtonParentDiv>
             <ButtonParentDiv>
               <DangerButton onClickEvent={onClickAllDelete}>全て削除</DangerButton>

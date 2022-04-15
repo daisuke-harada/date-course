@@ -10,7 +10,7 @@ type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
 }
 
-const ButtonParentDiv = tw.div`my-5 mx-12`;
+const ButtonParentDiv = tw.div`my-5 m-auto text-sm`;
 
 export const DeleteCourseButton: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
