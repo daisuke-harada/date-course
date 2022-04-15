@@ -16,8 +16,8 @@ export const ReviewCard: VFC<Props> = memo((props) => {
       {ImageDiv}
       <div className='px-5'>
         <div className='text-xs font-bold'>{name}</div>
-        <StarRateText rate={rate} size={15} />
-        <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>
+        <StarRateText rate={rate} size={20} />
+        <div className='sm:w-96 w-40 p-1 max-h-20  h-full overflow-y-scroll whitespace-pre-line break-words'>
           {content}
         </div>
       </div>

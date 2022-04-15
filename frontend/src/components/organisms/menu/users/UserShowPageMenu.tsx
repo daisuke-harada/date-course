@@ -6,7 +6,7 @@ import { CourseResponseData } from 'types/courses/response';
 import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
 
 const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-full`;
-const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full`;
+const ChildrenMenuDiv = tw.div`sm:my-4 my-2 w-full p-2`;
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
 const MenuTitleDiv = tw.div`text-center text-2xl font-bold mb-5`;
 

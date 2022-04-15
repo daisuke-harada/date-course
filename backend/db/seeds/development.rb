@@ -47,7 +47,7 @@ spotAndAddressCreate("あか牛丼いわさき", 2, normal_time("11:00"), midnig
 #すべてのユーザーにすべてのデートスポットをレビューさせる
 User.where(admin: false).each do |user|
   Address.all.each do |address|
-    date_spot_review_create(rates.sample, "testtesttesttest", user.id, address.date_spot_id)
+    date_spot_review_create(rates.sample, "test"*18, user.id, address.date_spot_id)
   end
 end
 
