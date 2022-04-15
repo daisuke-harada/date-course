@@ -6,7 +6,7 @@ type Props = {
   closingTime?: Date
 }
 
-const MainDiv = tw.div`mx-5 my-10 text-sm font-bold md:text-xl`;
+const MainDiv = tw.div`mx-2 my-10 text-sm font-bold md:text-xl`;
 
 
 export const BusinessHour: VFC<Props> = memo((props) => {
