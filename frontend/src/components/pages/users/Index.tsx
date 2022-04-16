@@ -11,6 +11,7 @@ import { UserResponseData } from 'types/users/response';
 
 export const Index: VFC = memo(() => {
   const [users, setUsers] = useState<Array<UserResponseData>>([]);
+
   useEffect(() => {
     client.get(`users`).then(response => {
       setUsers(response.data.users);
