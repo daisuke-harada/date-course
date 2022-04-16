@@ -1,8 +1,9 @@
-import { Users } from "components/templates/users/Users";
-import { client } from "lib/api/client";
-import { memo, useEffect, useState, VFC } from "react";
-import { useParams } from "react-router-dom";
-import { UserResponseData } from "types/users/response";
+import { Users } from 'components/templates/users/Users';
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { UserResponseData } from 'types/users/response';
 
 export const Followers: VFC = memo(() => {
   const { id } = useParams();
@@ -18,7 +19,14 @@ export const Followers: VFC = memo(() => {
 
   return(
     <>
-      <h1 className='m-10 text-2xl'>{userName}のフォロワー</h1>
+      <h1 className='m-10 lg:text-2xl mobile(L):text-xl mobile(M):text-lg text-xs'>
+        <span className='font-bold mr-1'>
+          <Link to={`/users/${id}`}>
+            {userName}
+          </Link>
+        </span>
+        のフォロワー
+      </h1>
       <Users users={users} />
     </>
   );

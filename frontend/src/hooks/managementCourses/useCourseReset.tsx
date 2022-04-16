@@ -1,6 +1,6 @@
-import { useRecoilValue, useResetRecoilState } from "recoil";
-import { courseInfoState, managementCourseState } from "store/managementCourse";
-import { currentUserState } from "store/session";
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { courseInfoState, managementCourseState } from 'store/managementCourse';
+import { currentUserState } from 'store/session';
 
 export const useCourseReset = () => {
   const getCurrentUser = useRecoilValue(currentUserState);

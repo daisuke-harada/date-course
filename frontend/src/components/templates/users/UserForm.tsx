@@ -1,20 +1,20 @@
-import { memo, useCallback, useState, VFC } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import tw from "tailwind-styled-components";
+import { memo, useCallback, useState, VFC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
 
-import { formDataClient } from "lib/api/client";
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { RadioField } from "components/molecules/users/RadioField";
-import { UserLoginResponseData } from "types/users/response";
-import { currentUserState } from "store/session";
-import { useRecoilState } from "recoil";
-import { DeactivateAcountButton } from "components/atoms/button/DeactivateAcountButton";
-import { ImageForm } from "components/atoms/form/ImageForm";
+import { formDataClient } from 'lib/api/client';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { RadioArea } from 'components/organisms/area/RadioArea';
+import { UserLoginResponseData } from 'types/users/response';
+import { currentUserState } from 'store/session';
+import { useRecoilState } from 'recoil';
+import { DeactivateAcountButton } from 'components/atoms/button/DeactivateAcountButton';
+import { ImageForm } from 'components/atoms/form/ImageForm';
 
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
 const Input = tw.input`my-5 border-b-2 outline-none w-1/2 mobile(M):w-full mobile(M):ml-0 ml-8`;
-const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
+const ButtonParentDiv = tw.div`w-1/2 p-1 m-auto my-4`;
 const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`
 
 type Props = {
@@ -68,7 +68,7 @@ export const UserForm: VFC<Props> = memo((props) => {
     formData.append('gender', gender);
     formData.append('password', password);
     formData.append('passwordConfirmation', passwordConfirmation);
-    image && formData.append("image", image);
+    image && formData.append('image', image);
     return formData;
   };
 
@@ -119,29 +119,29 @@ export const UserForm: VFC<Props> = memo((props) => {
   return(
     <MainDiv>
       <Title>{userFormTitle}</Title>
-      <ul className="mt-5">
-        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className="text-red-500">名前は{message}</li>)}
+      <ul className='mt-5'>
+        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
       </ul>
       <ul>
-        {errorEmailMessages !== [] && errorEmailMessages.map((message)=><li className="text-red-500">メールは{message}</li>)}
+        {errorEmailMessages !== [] && errorEmailMessages.map((message)=><li className='text-red-500'>メールは{message}</li>)}
       </ul>
       <ul>
-        {errorPasswordMessages !== [] && errorPasswordMessages.map((message)=><li className="text-red-500">パスワードは{message}</li>)}
+        {errorPasswordMessages !== [] && errorPasswordMessages.map((message)=><li className='text-red-500'>パスワードは{message}</li>)}
       </ul>
       <Form onSubmit={userRegitAction}>
-        <Input data-e2e="user-form-name-input" placeholder="名前を入力" value={name} onChange={onChangeName} />
-        <Input data-e2e="user-form-email-input" placeholder="メールアドレス入力" value={email} onChange={onChangeEmail}/>
-        <Input data-e2e="user-form-password-input" placeholder="パスワード入力" value={password} onChange={onChangePassword}/>
-        <Input data-e2e="user-form-passwordConfirmation-input" placeholder="パスワード再入力" value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
-        <RadioField gender={gender} onChangeRadioButton={onChangeRadioButton} />
+        <Input data-e2e='user-form-name-input' placeholder='名前を入力' value={name} onChange={onChangeName} />
+        <Input data-e2e='user-form-email-input' placeholder='メールアドレス入力' value={email} onChange={onChangeEmail}/>
+        <Input data-e2e='user-form-password-input' placeholder='パスワード入力' value={password} onChange={onChangePassword}/>
+        <Input data-e2e='user-form-passwordConfirmation-input' placeholder='パスワード再入力' value={passwordConfirmation} onChange={onChangePasswordConfirmation} />
+        <RadioArea gender={gender} onChangeRadioButton={onChangeRadioButton} />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
-          <BaseButton dataE2e="user-form-button">{buttonName}</BaseButton>
+          <BaseButton dataE2e='user-form-button'>{buttonName}</BaseButton>
         </ButtonParentDiv>
       </Form>
       <DeactivateAcountButton />
-      <div className="text-center mb-5">
-        <Link to="/login">ログインはこちら</Link>
+      <div className='text-center mb-5'>
+        <Link to='/login'>ログインはこちら</Link>
       </div>
     </MainDiv>
   );

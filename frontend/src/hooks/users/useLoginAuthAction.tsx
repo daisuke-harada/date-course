@@ -1,11 +1,11 @@
-import { client } from "lib/api/client";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { client } from 'lib/api/client';
+import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
-import { currentUserState, loginStatusState } from "store/session";
-import { UserLoginResponseData } from "types/users/response";
-import { SignInParams } from "types/users/session";
+import { currentUserState, loginStatusState } from 'store/session';
+import { UserLoginResponseData } from 'types/users/response';
+import { SignInParams } from 'types/users/session';
 
 export const useLoginAuthAction = (signInParams: SignInParams) => {
   const setLoginStatus = useSetRecoilState(loginStatusState);
@@ -23,7 +23,7 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
   };
 
   const loginAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    client.post("login", {signInParams}).then(response => {
+    client.post('login', {signInParams}).then(response => {
       if(response.data.loginStatus){
         // ログイン成功
         afterLoginSuccess(response.data);

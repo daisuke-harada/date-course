@@ -12,8 +12,7 @@ type Props = {
 };
 
 const ImageParentDiv = tw.div`relative pt-20`;
-const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-xl border-4`;
-
+const Image = tw.img`lg:bg-top object-fill absolute top-0 w-full h-full rounded-xl border-4`;
 
 export const UserImage: VFC<Props> = memo((props) => {
   const { addClassName, image, userId, gender } = props;

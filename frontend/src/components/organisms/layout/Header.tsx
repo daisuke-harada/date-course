@@ -1,12 +1,12 @@
-import { useCallback } from "react";
-import {memo, useState, VFC } from "react";
-import { useNavigate } from "react-router-dom";
-import tw from "tailwind-styled-components";
+import { useCallback } from 'react';
+import {memo, useState, VFC } from 'react';
+import { useNavigate } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
 
-import { HeaderTopLeft } from "components/molecules/header/HeaderTopLeft";
-import { HeaderTopRight } from "components/molecules/header/HeaderTopRight";
-import { HeaderBottom } from "components/molecules/header/HeaderBottom"
-import { NavBar } from "components/molecules/header/NavBar";
+import { HeaderTopLeft } from 'components/molecules/header/HeaderTopLeft';
+import { HeaderTopRight } from 'components/molecules/header/HeaderTopRight';
+import { HeaderBottom } from 'components/molecules/header/HeaderBottom'
+import { NavBar } from 'components/molecules/header/NavBar';
 
 const MainHeader = tw.header`lg:h-32 sm:h-24 bg-white w-full shadow-xl z-50 fixed`;
 const TopDiv = tw.div`lg:border-b-2 lg:flex-wrap w-full flex  justify-around font-bold`;
@@ -17,7 +17,7 @@ export const Header: VFC = memo(() => {
   const onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
   const navigate = useNavigate();
-  const onClickHome = useCallback(() => navigate("/"), [navigate]);
+  const onClickHome = useCallback(() => navigate('/'), [navigate]);
 
 
   return(

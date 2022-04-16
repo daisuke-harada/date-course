@@ -1,4 +1,4 @@
-import { Prefecture } from "types/datas/activeHash"
+import { Prefecture } from 'types/datas/activeHash'
 
 
 export const prefectureDatas: Prefecture[] = [

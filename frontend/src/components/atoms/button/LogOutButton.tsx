@@ -1,6 +1,6 @@
-import { useLogoutAction } from "hooks/users/useLogoutAction";
-import { VFC, memo } from "react";
-import tw from "tailwind-styled-components";
+import { useLogoutAction } from 'hooks/users/useLogoutAction';
+import { VFC, memo } from 'react';
+import tw from 'tailwind-styled-components';
 
 const Button = tw.button`btn btn-red w-full`;
 

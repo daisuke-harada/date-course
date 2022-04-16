@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { screen, render } from "@testing-library/react";
+import { screen, render } from '@testing-library/react';
 import { Routers } from 'router/Routers';
 import { MemoryRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil';
@@ -14,7 +14,7 @@ const loginInitializeState = ({ set }: any) => {
   set(currentUserState, {user: {
     id: 1,
     name: 'daisuke',
-    email: "daisuke@gmail.com",
+    email: 'daisuke@gmail.com',
     gender: '男性',
     image: {url: null},
     passwordDigest: 'peter4peter4'

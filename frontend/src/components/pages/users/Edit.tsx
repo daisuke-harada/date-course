@@ -1,8 +1,8 @@
-import { memo, VFC } from "react";
-import { useRecoilValue } from "recoil";
+import { memo, VFC } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { UserForm } from "components/templates/users/UserForm";
-import { currentUserState } from "store/session";
+import { UserForm } from 'components/templates/users/UserForm';
+import { currentUserState } from 'store/session';
 
 
 export const Edit: VFC = memo(() => {
@@ -14,8 +14,8 @@ export const Edit: VFC = memo(() => {
     emailDefaultValue={getCurrentUser.user.email}
     genderDefaultValue={getCurrentUser.user.gender}
     imageDefaultValue={getCurrentUser.user.image.url}
-    userFormTitle={"アカウント情報編集"}
-    buttonName={"更新"}
+    userFormTitle={'アカウント情報編集'}
+    buttonName={'更新'}
   />
   );
 });

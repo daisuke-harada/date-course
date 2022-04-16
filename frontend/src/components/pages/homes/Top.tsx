@@ -1,17 +1,30 @@
-import { BaseButton } from "components/atoms/button/BaseButton";
-import { memo, VFC } from "react";
-import { useRecoilValue } from "recoil";
-import { loginStatusState } from "store/session";
-import tw from "tailwind-styled-components";
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { Area } from 'components/organisms/card/homes/Area';
+import { Genres } from 'components/organisms/card/homes/Genres';
+import { MainGenre } from 'components/organisms/card/homes/MainGenre';
+import { MainPrefecture } from 'components/organisms/card/homes/MainPrefecture';
+import { client } from 'lib/api/client';
+import { memo, useEffect, useState, VFC } from 'react';
+import tw from 'tailwind-styled-components';
+import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
 
 const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;
 
 export const Top: VFC = memo(() => {
-  const getLoginStatus = useRecoilValue(loginStatusState);
-  // const developBackendUrlClass = `bg-[${process.env.PUBLIC_URL}/lp.jpg] h-96 bg-no-repeat bg-cover bg-top`;
-  // const productionBackendUrlClass = "bg-[url(https://backend.datecourses.com/images/lp.jpg)] h-96 bg-no-repeat bg-cover bg-top";
-  // const backendLpUrlClass = process.env.REACT_APP_ENVIRONMENT === 'production'? productionBackendUrlClass : developBackendUrlClass;
+  const [ areas, setAreas ] = useState<AreaData[]>([]);
+  const [ mainGenres, setMainGenres ] = useState<GenreData[]>([]);
+  const [ genres, setGenres ] = useState<GenreData[]>([]);
+  const [ mainPrefectures, setMainPrefectures ] = useState<PrefectureData[]>([]);
+
+  useEffect(() => {
+    client.get('top').then((response) => {
+      setAreas(response.data.areas);
+      setGenres(response.data.genres);
+      setMainGenres(response.data.mainGenres);
+      setMainPrefectures(response.data.mainPrefectures);
+    });
+  }, []);
 
   return(
     <>
@@ -21,7 +34,34 @@ export const Top: VFC = memo(() => {
           <BaseButton>デートコースを作成する</BaseButton>
         </h1>
       </ImageParentDiv>
-      {getLoginStatus.status && (<h1>ログイン状態です</h1>)}
+      <div className='mb-1'>
+        <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをエリアから探す</p>
+        <div className='flex justify-center flex-wrap w-full p-5'>
+          {
+            mainPrefectures.map((mainPrefecture) => (
+              <MainPrefecture key={mainPrefecture.attributes.id} prefecture={mainPrefecture} />
+            ))
+          }
+          {
+            areas.map((area) => (
+              <Area key={area.attributes.id} area={area} />
+            ))
+          }
+        </div>
+      </div>
+      <div className='mb-1'>
+        <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをジャンルで探す</p>
+        <div className='flex'>
+          <div className='flex justify-center flex-wrap w-full p-5'>
+            {
+              mainGenres.map((genre) => (
+                <MainGenre key={genre.attributes.id} genre={genre} />
+              ))
+            }
+            <Genres genres={genres} />
+          </div>
+        </div>
+      </div>
     </>
   );
 });

@@ -1,4 +1,4 @@
-import { BusinessTime } from "types/datas/activeHash";
+import { BusinessTime } from 'types/datas/activeHash';
 
 const valueTimeFirstDay = (time: string) => `2000-01-01T${time}:00.000Z`;
 const valueTimeSecondDay = (time: string) => `2000-01-02T${time}:00.000Z`;

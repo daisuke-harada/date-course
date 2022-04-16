@@ -1,29 +1,34 @@
-import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
-import { memo, useState, VFC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import tw from "tailwind-styled-components";
+import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
+import { memo, useEffect, useState, VFC } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import tw from 'tailwind-styled-components';
 
-import { managementCourseState, courseInfoState } from "store/managementCourse";
-import { currentUserState } from "store/session";
-import { Directions } from "components/molecules/maps/Directions";
-import { LoadScript } from "@react-google-maps/api";
-import { Map } from "components/molecules/maps/Map";
-import { CourseInfoSelect } from "components/molecules/managementCourses/CourseInfoSelect";
-import { ManagementCourseButtonArea } from "components/molecules/managementCourses/ManagementCourseButtonArea";
+import { managementCourseState, courseInfoState } from 'store/managementCourse';
+import { currentUserState } from 'store/session';
+import { Directions } from 'components/molecules/maps/Directions';
+import { LoadScript } from '@react-google-maps/api';
+import { Map } from 'components/molecules/maps/Map';
+import { CourseInfoSelect } from 'components/molecules/select/managementCourses/CourseInfoSelect';
+import { ManagementCourseButtonArea } from 'components/organisms/area/ManagementCourseButtonArea';
 
-const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
+const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const CourseNotExistDiv = tw.div`w-full mt-5 mb-16 flex text-blue-600 text-3xl`;
-const TitleH1 = tw.h1`text-center mt-5 font-bold text-4xl pb-5`;
-const CourseAreaDiv = tw.div`w-full flex`;
+const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;
+const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 
 export const CreateCourse: VFC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
+  const [noDuplicatePrefectureNames, setNoDuplicatePrefectureNames] = useState<string[]>([]);
 
-  console.log(managementCourses);
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
+
+  useEffect(() => {
+    const prefectureNames = managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName));
+    setNoDuplicatePrefectureNames(Array.from(new Set(prefectureNames)));
+  }, [managementCourses.courseDuringSpots]);
 
   return(
     <>
@@ -42,12 +47,12 @@ export const CreateCourse: VFC = memo(() => {
               {
                 managementCourses.courseDuringSpots.length > 1
                 &&
-                <div className="w-full mt-5">
-                  <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} />
+                <div className='w-full mt-5'>
+                  <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} noDuplicatePrefectureNames={noDuplicatePrefectureNames} />
                 </div>
               }
               <CourseAreaDiv>
-                <div className="w-1/3">
+                <div className='md:w-1/3 w-full'>
                   {
                     managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
                       <CourseDuringSpotCard
@@ -61,7 +66,7 @@ export const CreateCourse: VFC = memo(() => {
                     ))
                   }
                 </div>
-                <div className="w-2/3 mx-3 rounded-xl">
+                <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
                   {
                     managementCourses.courseDuringSpots.length === 1?
                     <Map  addressAndDateSpot={managementCourses.courseDuringSpots[0]} />

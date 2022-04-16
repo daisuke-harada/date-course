@@ -1,5 +1,5 @@
-import { memo, VFC } from "react";
-import tw from "tailwind-styled-components";
+import { memo, VFC } from 'react';
+import tw from 'tailwind-styled-components';
 
 type Props = {
   onClickNavBarSwitch: React.MouseEventHandler<HTMLElement>;
@@ -18,10 +18,10 @@ export const MenuIconButton: VFC<Props> = memo((props) => {
     <>
       {isOpen?
         (
-          <SlideUpBtn data-e2e="slide-up-btn" onClick={onClickNavBarSwitch}>×</SlideUpBtn>
+          <SlideUpBtn data-e2e='slide-up-btn' onClick={onClickNavBarSwitch}>×</SlideUpBtn>
         ):
         (
-          <SlideDownBtn data-e2e="slide-down-btn" onClick={onClickNavBarSwitch} >
+          <SlideDownBtn data-e2e='slide-down-btn' onClick={onClickNavBarSwitch} >
             <TopBorder />
             <CenterBorder />
             <BottomBorder />

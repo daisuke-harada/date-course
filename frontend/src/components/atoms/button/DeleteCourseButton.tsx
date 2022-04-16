@@ -1,16 +1,16 @@
-import { memo, useCallback, VFC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { managementCourseState } from "store/managementCourse";
-import { currentUserState } from "store/session";
-import tw from "tailwind-styled-components";
-import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
-import { DangerButton } from "./DangerButton";
+import { memo, useCallback, VFC } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { managementCourseState } from 'store/managementCourse';
+import { currentUserState } from 'store/session';
+import tw from 'tailwind-styled-components';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { DangerButton } from './DangerButton';
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
 }
 
-const ButtonParentDiv = tw.div`my-5 mx-12`;
+const ButtonParentDiv = tw.div`my-5 m-auto text-sm`;
 
 export const DeleteCourseButton: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;

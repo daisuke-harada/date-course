@@ -1,4 +1,4 @@
-import { Area } from "types/datas/activeHash"
+import { Area } from 'types/datas/activeHash'
 
 export const areaDatas: Area[] = [
   {id: 1, name: '北海道・東北' }, {id: 2, name: '関東' }, {id: 3, name: '中部' },

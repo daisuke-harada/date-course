@@ -1,4 +1,4 @@
-import { memo, VFC } from "react";
+import { memo, VFC } from 'react';
 import ReactStars from 'react-stars'
 
 type Props = {

@@ -1,10 +1,10 @@
-import { memo, useCallback, VFC } from "react";
-import { useSetRecoilState } from "recoil";
+import { memo, useCallback, VFC } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import { useNavigate } from "react-router-dom";
-import { UserForm } from "components/templates/users/UserForm";
-import { currentUserState, loginStatusState } from "store/session";
-import { UserLoginResponseData } from "types/users/response";
+import { useNavigate } from 'react-router-dom';
+import { UserForm } from 'components/templates/users/UserForm';
+import { currentUserState, loginStatusState } from 'store/session';
+import { UserLoginResponseData } from 'types/users/response';
 
 export const New: VFC = memo(() => {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ export const New: VFC = memo(() => {
       nameDefaultValue={''}
       emailDefaultValue={''}
       genderDefaultValue={'男性'}
-      userFormTitle={"ユーザー新規登録"}
-      buttonName={"登録"}
+      userFormTitle={'ユーザー新規登録'}
+      buttonName={'登録'}
       afterLoginSuccess={afterLoginSuccess}
     />
   );

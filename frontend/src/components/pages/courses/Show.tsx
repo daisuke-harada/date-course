@@ -1,20 +1,22 @@
-import { LoadScript } from "@react-google-maps/api";
-import { DangerButton } from "components/atoms/button/DangerButton";
-import { Directions } from "components/molecules/maps/Directions";
-import { CourseDuringSpotCard } from "components/organisms/managementCourses/CourseDuringSpotCard";
-import { client } from "lib/api/client";
-import { memo, useCallback, useEffect, useState, VFC } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { currentUserState } from "store/session";
-import tw from "tailwind-styled-components";
-import { ManagementCourseData } from "types/managementCourses/management";
+import { LoadScript } from '@react-google-maps/api';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { DangerButton } from 'components/atoms/button/DangerButton';
+import { Directions } from 'components/molecules/maps/Directions';
+import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
+import { client } from 'lib/api/client';
+import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { currentUserState } from 'store/session';
+import tw from 'tailwind-styled-components';
+import { ManagementCourseData } from 'types/managementCourses/management';
 
-const MainDiv = tw.div`bg-white mt-10 m-20 py-5 px-10 shadow-xl rounded-2xl`;
-const TitleH1 = tw.h1`text-center mt-5 font-bold text-4xl pb-5`;
-const CourseAreaDiv = tw.div`w-full flex`;
+const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
+const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;
+const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;
-const ButtonParentDiv = tw.div`text-center m-5 text-4xl w-1/2`
+const ButtonParentDiv = tw.div`lg:text-4xl sm:w-1/2 sm:text-2xl text-center m-5 w-3/4`
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
@@ -23,9 +25,10 @@ export const Show: VFC = memo(() => {
     courseDuringSpots: []
   });
 
-  const [courseInfo, setCourseInfo] = useState<{travelMode: string, authority: string}>({
+  const [courseInfo, setCourseInfo] = useState<{travelMode: string, authority: string, noDuplicatePrefectureNames: string[]}>({
     travelMode: 'DRIVING',
-    authority: '公開'
+    authority: '公開',
+    noDuplicatePrefectureNames: []
   });
 
   // デートコースの距離、時間を管理するステートを設定
@@ -42,8 +45,8 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      setManagementCourses({userId: response.data.course.user.id, courseDuringSpots: response.data.course.courseDuringSpots});
-      setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority});
+      setManagementCourses({userId: response.data.course.user.id, user: response.data.course.user, courseDuringSpots: response.data.course.courseDuringSpots});
+      setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
       if(response.data.course.travelMode === 'DRIVING'){
         setTravelModeText('車');
       }else if(response.data.course.travelMode === 'CYCLING'){
@@ -57,11 +60,19 @@ export const Show: VFC = memo(() => {
   return(
     <MainDiv>
       <TitleH1>デートコース詳細ページ</TitleH1>
-      <div className="w-full mt-5 text-xl font-bold">
-        {travelModeText}で移動
+      <div className='lg:ml-6 sm:ml-2 py-3 md:text-4xl mobile(L):text-xl text-sm font-bold'>
+        {travelModeText}で移動<br/>
+        他のユーザーに{courseInfo.authority}
+        <div className='my-2 flex m-auto'>
+          {
+            courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
+              <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+            ))
+          }
+        </div>
       </div>
       <CourseAreaDiv>
-        <div className="w-1/3">
+        <div className='md:w-1/3 w-full'>
           {
             managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
               <CourseDuringSpotCard
@@ -74,7 +85,7 @@ export const Show: VFC = memo(() => {
             ))
           }
         </div>
-        <div className="w-2/3 mx-3 rounded-xl">
+        <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
           {
             // userIdが初期値である0の場合に読み込まないようにする
             managementCourses.userId !== 0
@@ -97,6 +108,14 @@ export const Show: VFC = memo(() => {
             </ButtonParentDiv>
           )
         }
+        {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
+        <ButtonParentDiv>
+        <Link to={`/users/${managementCourses.userId}`}>
+          <BaseButton>
+              投稿者のページへ
+          </BaseButton>
+          </Link>
+        </ButtonParentDiv>
       </ButtonArea>
     </MainDiv>
   );
