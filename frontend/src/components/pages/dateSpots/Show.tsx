@@ -16,7 +16,7 @@ import { StarRateText } from 'components/atoms/layouts/StarRateText';
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 p-3 rounded-2xl m-2`;
 const DateSpotNameTitle = tw.h1`w-full my-5 text-sm font-bold md:text-3xl`;
 const SubDiv = tw.div`md:flex-row flex-col w-full flex`;
-const ImageParentDiv = tw.div`md:h-96 h-64 relative`;
+const ImageParentDiv = tw.div`lg:mx-0 mx-auto lg:h-96 lg:w-96 mobile(M):h-80 mobile(M):w-80 h-64 w-64 relative`;
 const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-2xl`;
 const SubArea = tw.div`md:w-1/2 w-full`;
 

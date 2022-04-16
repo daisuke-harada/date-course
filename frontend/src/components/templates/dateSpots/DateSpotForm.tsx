@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router-dom';
 import { DangerButton } from 'components/atoms/button/DangerButton';
 import { prefectureDatas } from 'datas/prefectureDatas';
 
-const MainDiv = tw.div`mobile(L):mt-10 mobile(L):px-5 mobile(L):text-base mobile(L):mx-auto mobile(M):text-sm text-xs pt-5 px-2 m-10 flex flex-col items-center max-w-md bg-white shadow-lg border-gray-900 rounded-2xl`;
-const Title = tw.h1`text-center text-lg m-5`;
-const SubDiv = tw.div`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
+const MainDiv = tw.div`xl:w-1/3 lg:w-1/2 mobile(L):mt-10 mobile(M):w-5/6 mobile(M):mx-auto w-full mx-1 mt-10  mobile(L):text-base mobile(M):text-sm text-xs mobile(L):px-5 px-1 pt-2  flex flex-col items-center bg-white shadow-lg border-gray-900 rounded-3xl`;
+const Title = tw.h1`sm:text-3xl text-center font-bold text-xl m-5`;
+const SubDiv = tw.div`p-5 mt-2 content-center mobile(M):ml-2`;
 const Input = tw.input`mb-5 border-b-2 outline-none w-full`;
-const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
+const ButtonParentDiv = tw.div`text-center p-1 my-4 m-auto w-1/3`;
 
 type Props = {
   dateSpotFormTitle: string,

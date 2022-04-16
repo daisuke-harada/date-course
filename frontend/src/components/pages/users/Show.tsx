@@ -80,9 +80,11 @@ export const Show: VFC = memo(() => {
           <Span className='mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
             {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
               &&
-              <BaseButton>
-                <Link className='text-white' to={`edit`}>設定</Link>
-              </BaseButton>
+              <Link className='text-white' to={`edit`}>
+                <BaseButton>
+                  設定
+                </BaseButton>
+              </Link>
             }
           </Span>
         </div>

@@ -14,7 +14,7 @@ import { ImageForm } from 'components/atoms/form/ImageForm';
 const MainDiv = tw.div`user-form`;
 const Title = tw.h1`text-center font-bold`;
 const Input = tw.input`my-5 border-b-2 outline-none w-1/2 mobile(M):w-full mobile(M):ml-0 ml-8`;
-const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
+const ButtonParentDiv = tw.div`w-1/2 p-1 m-auto my-4`;
 const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`
 
 type Props = {

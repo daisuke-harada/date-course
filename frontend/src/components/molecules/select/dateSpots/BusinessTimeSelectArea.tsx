@@ -22,14 +22,14 @@ export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
 
   return(
     <>
-      <p>営業時間</p>
-      <p className='mb-5 border-b-2 outline-none'>
+      <div>営業時間</div>
+      <div className='mb-5 border-b-2 outline-none'>
         <label>始業時間</label>
         <BusinessTimeSelect dataE2e={openingDataE2e} timeValue={defaultOpeningTimeValue} onChangeTimeValue={onChangeOpeningTimeValue} />
             ~
         <label>終業時間</label>
         <BusinessTimeSelect dataE2e={closingDataE2e} timeValue={defaultClosingTimeValue} onChangeTimeValue={onChangeClosingTimeValue} />
-      </p>
+      </div>
     </>
   );
 });
