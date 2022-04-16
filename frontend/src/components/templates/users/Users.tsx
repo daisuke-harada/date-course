@@ -6,18 +6,27 @@ import { UserResponseData } from 'types/users/response';
 type Props = {
   users: Array<UserResponseData>,
   setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>,
+  userSearchName?: string
 };
 
 export const Users: VFC<Props> = memo((props) => {
-  const { users, setUsers } = props;
+  const { users, setUsers, userSearchName } = props;
   return(
     <>
       {
         users.length !== 0?
         (
-          <div className='sm:justify-start justify-center flex flex-wrap'>
-            {users.map((user: UserResponseData) => (<UserCard key={user.id} user={user} setUsers={setUsers} />))}
-          </div>
+          <>
+            {
+              userSearchName &&
+              <div className='text-xl px-2 mb-10 font-bold text-left'>
+                検索結果: "{userSearchName}"を含むユーザー
+              </div>
+            }
+            <div className='sm:justify-start justify-center flex flex-wrap'>
+              {users.map((user: UserResponseData) => (<UserCard key={user.id} user={user} setUsers={setUsers} />))}
+            </div>
+          </>
         )
         :
         (

@@ -42,7 +42,8 @@ export const Search: VFC = memo(() => {
           userSearchName={state.userSearchName}
         />
       }
-      mainArea={<Users users={users} setUsers={setUsers} />}
+
+      mainArea={<Users users={users} setUsers={setUsers} userSearchName={state.userSearchName} />}
     />
   );
 });

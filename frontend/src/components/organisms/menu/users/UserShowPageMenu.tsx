@@ -5,9 +5,9 @@ import tw from 'tailwind-styled-components';
 import { CourseResponseData } from 'types/courses/response';
 import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
 
-const MenuDiv = tw.div`rounded-xl mx-auto justify-center p-1 flex flex-col w-full`;
-const ParentMenuDiv = tw.div`sm:my-4 my-2 w-full p-2 flex`;
-const ChildrenMenuDiv = tw.div`border shadow-xl bg-white mt-5 p-1 rounded-2xl m-2`;
+const MenuDiv = tw.div`justify-center flex flex-col w-full`;
+const ParentMenuDiv = tw.div`sm:mt-4 mt-2 w-full flex`;
+const ChildrenMenuDiv = tw.div`border shadow-xl bg-white p-1`;
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
 const MenuTitleDiv = tw.div`sm:text-2xl lg:text-4xl text-center font-bold my-5`;
 
@@ -39,13 +39,13 @@ export const UserShowPageMenu: VFC<Props> = memo((props) => {
     <MenuDiv>
       <ParentMenuDiv>
         <MenuBarDiv
-          className={`${courseColor} rounded-l-2xl`}
+          className={`${courseColor}`}
           onClick={onClickCourseMenu}
         >
           デートコース
         </MenuBarDiv>
         <MenuBarDiv
-          className={`${reviewColor} rounded-r-2xl`}
+          className={`${reviewColor}`}
           onClick={onClickReviewMenu}
         >
           レビュー
