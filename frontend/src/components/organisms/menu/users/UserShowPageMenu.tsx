@@ -7,7 +7,7 @@ import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/res
 
 const MenuDiv = tw.div`justify-center flex flex-col w-full`;
 const ParentMenuDiv = tw.div`sm:mt-4 mt-2 w-full flex`;
-const ChildrenMenuDiv = tw.div`border shadow-xl bg-white p-1`;
+const ChildrenMenuDiv = tw.div`p-1`;
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
 const MenuTitleDiv = tw.div`sm:text-2xl lg:text-4xl text-center font-bold my-5`;
 
