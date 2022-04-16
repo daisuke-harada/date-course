@@ -7,7 +7,7 @@ import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { CourseResponseData } from 'types/courses/response';
 import { Courses } from 'components/templates/courses/Courses';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
-import { CustomeSearchBar } from 'components/organisms/searchs/CustomeSearchBar';
+import { MultiBar } from 'components/organisms/searchs/MultiBar';
 
 export const Search: VFC = memo(() => {
   const [courses, setCourses] = useState<Array<CourseResponseData>>([]);
@@ -36,18 +36,16 @@ export const Search: VFC = memo(() => {
           <UserNameSearchBar />
         </>
       }
-      centerArea={
-        <>
-          <CustomeSearchBar
-            defaultDateSpotCondition='bg-gray-300'
-            defaultCourseCondition='bg-red-400'
-            defaultUserCondition='bg-gray-300'
-            defaultSearchSwitch='Course'
-            defaultPrefectureValue={state.prefectureId}
-          />
-          <Courses courses={courses} />
-        </>
+      topArea ={
+        <MultiBar
+          defaultDateSpotCondition='bg-gray-300'
+          defaultCourseCondition='bg-red-400'
+          defaultUserCondition='bg-gray-300'
+          defaultSearchSwitch='Course'
+          defaultPrefectureValue={state.prefectureId}
+        />
       }
+      mainArea={<Courses courses={courses} />}
     />
   );
 });

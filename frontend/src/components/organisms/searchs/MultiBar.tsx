@@ -4,9 +4,9 @@ import { UserSearchArea } from 'components/molecules/searchs/UserSearchArea';
 import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
-const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r rounded-tl-3xl text-center border-gray-400 cursor-pointer`;
+const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r text-center border-gray-400 cursor-pointer`;
 const CourseChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white text-center border-gray-400 cursor-pointer`;
-const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l rounded-tr-3xl text-center border-gray-400 cursor-pointer`;
+const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l text-center border-gray-400 cursor-pointer`;
 
 type Props = {
   defaultDateSpotCondition: string,
@@ -20,7 +20,7 @@ type Props = {
   defaultBusinessTimeValue?: string
 }
 
-export const CustomeSearchBar: VFC<Props> = memo((props) => {
+export const MultiBar: VFC<Props> = memo((props) => {
   const {
     defaultDateSpotCondition,
     defaultCourseCondition,
@@ -60,8 +60,8 @@ export const CustomeSearchBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='md:hidden m-auto mt-2 mb-6 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
-      <div className='w-full flex rounded-t-3xl border-gray-400 border-b'>
+    <div className='md:hidden mt-2 mb-6 shadow-xl bg-white border-b-2 flex flex-col' >
+      <div className='w-full flex border-gray-400 border-b'>
         <DateSpotChoiceDiv className={`${dateSpotCondition} hover:bg-red-400`} onClick={onClickDateSpotCondition}>デートスポット</DateSpotChoiceDiv>
         <CourseChoiceDiv className={`${courseCondition} hover:bg-red-400`} onClick={onClickCourseCondition}>デートコース</CourseChoiceDiv>
         <UserChoiceDiv className={`${userCondition} hover:bg-red-400`} onClick={onClickUserCondition}>ユーザー</UserChoiceDiv>

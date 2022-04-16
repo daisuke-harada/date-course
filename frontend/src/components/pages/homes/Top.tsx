@@ -1,8 +1,8 @@
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { Area } from 'components/organisms/homes/Area';
-import { Genres } from 'components/organisms/homes/Genres';
-import { MainGenre } from 'components/organisms/homes/MainGenre';
-import { MainPrefecture } from 'components/organisms/homes/MainPrefecture';
+import { Area } from 'components/organisms/card/homes/Area';
+import { Genres } from 'components/organisms/card/homes/Genres';
+import { MainGenre } from 'components/organisms/card/homes/MainGenre';
+import { MainPrefecture } from 'components/organisms/card/homes/MainPrefecture';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';

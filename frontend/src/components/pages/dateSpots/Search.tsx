@@ -7,6 +7,7 @@ import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
+import { MultiBar } from 'components/organisms/searchs/MultiBar';
 
 export const Search: VFC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
@@ -38,7 +39,21 @@ export const Search: VFC = memo(() => {
           <UserNameSearchBar />
         </>
       }
-      centerArea={
+
+      topArea={
+        <MultiBar
+          defaultDateSpotCondition='bg-red-400'
+          defaultCourseCondition='bg-gray-300'
+          defaultUserCondition='bg-gray-300'
+          defaultSearchSwitch='DateSpot'
+          defaultPrefectureValue={state.prefectureId}
+          defaultGenreValue={state.genreId}
+          defaultBusinessTimeValue={state.comeTime}
+          dateSpotSearchName={state.dateSpotSearchName}
+        />
+
+      }
+      mainArea={
         <DateSpots
           addressAndDateSpots={addressAndDateSpots}
           prefectureId={state.prefectureId}

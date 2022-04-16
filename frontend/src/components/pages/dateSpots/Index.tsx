@@ -1,6 +1,7 @@
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
+import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
@@ -31,7 +32,19 @@ export const Index: VFC = memo(() => {
           <UserNameSearchBar />
         </>
       }
-      centerArea={<DateSpots addressAndDateSpots={addressAndDateSpots} />}
+      topArea={
+        <MultiBar
+          defaultDateSpotCondition='bg-red-400'
+          defaultCourseCondition='bg-gray-300'
+          defaultUserCondition='bg-gray-300'
+          defaultSearchSwitch='DateSpot'
+          dateSpotSearchName={''}
+          defaultPrefectureValue={''}
+          defaultGenreValue={''}
+          defaultBusinessTimeValue={''}
+        />
+      }
+      mainArea={<DateSpots addressAndDateSpots={addressAndDateSpots} />}
     />
   );
 });
