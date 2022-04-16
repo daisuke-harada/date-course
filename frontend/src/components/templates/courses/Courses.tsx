@@ -2,21 +2,33 @@ import { memo, VFC } from 'react';
 
 import { CourseResponseData } from 'types/courses/response';
 import { CourseCard } from 'components/organisms/card/courses/CourseCard';
+import { prefectureDatas } from 'datas/prefectureDatas';
 
 type Props = {
   courses: Array<CourseResponseData>,
+  searchPrefectureId?: number
 };
 
 export const Courses: VFC<Props> = memo((props) => {
-  const { courses } = props;
+  const { courses, searchPrefectureId } = props;
   return(
     <>
       {
         courses.length !== 0?
         (
-          <div className='sm:justify-start justify-center flex flex-wrap px-2'>
-            {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
-          </div>
+          <>
+            {
+              searchPrefectureId &&
+              <div className='text-xl px-2 mb-10 font-bold text-center'>
+                {
+                  `${prefectureDatas.find((prefecture) => prefecture.id === searchPrefectureId)?.name}を含むデートコース`
+                }
+              </div>
+            }
+            <div className='sm:justify-start justify-center flex flex-wrap px-2'>
+              {courses.map((course, index) => (<CourseCard key={index} course={course} />))}
+            </div>
+          </>
         )
         :
         (

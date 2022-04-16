@@ -45,7 +45,7 @@ export const Search: VFC = memo(() => {
           defaultPrefectureValue={state.prefectureId}
         />
       }
-      mainArea={<Courses courses={courses} />}
+      mainArea={<Courses courses={courses} searchPrefectureId={Number(state.prefectureId)} />}
     />
   );
 });
