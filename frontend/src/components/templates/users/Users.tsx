@@ -2,6 +2,7 @@ import { memo, VFC } from 'react';
 
 import { UserCard } from 'components/organisms/card/users/UserCard';
 import { UserResponseData } from 'types/users/response';
+import { Loading } from 'components/pages/Loading';
 
 type Props = {
   users: Array<UserResponseData>,
@@ -12,7 +13,7 @@ type Props = {
 export const Users: VFC<Props> = memo((props) => {
   const { users, setUsers, userSearchName } = props;
   return(
-    <>
+    <Loading loadingSwitch={users.length !== 0 && users[0].id === 0 && true} >
       {
         users.length !== 0?
         (
@@ -35,6 +36,6 @@ export const Users: VFC<Props> = memo((props) => {
           </div>
         )
       }
-    </>
+    </Loading>
   );
 });

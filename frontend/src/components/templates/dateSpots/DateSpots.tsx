@@ -16,7 +16,7 @@ export const DateSpots: VFC<Props> = memo((props) => {
   const { addressAndDateSpots, prefectureId, genreId, comeTime, dateSpotSearchName } = props;
 
   return(
-    <Loading loadingSwitch={addressAndDateSpots.length !== 0 && addressAndDateSpots[0].id === 0 && true}>
+    <Loading loadingSwitch={addressAndDateSpots.length !== 0 && addressAndDateSpots[0].id === 0 && true} >
       {
         addressAndDateSpots.length !== 0?
         (
