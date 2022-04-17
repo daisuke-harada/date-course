@@ -1,5 +1,6 @@
 import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
 import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
+import { Loading } from 'components/pages/Loading';
 import { memo, VFC } from 'react';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
@@ -15,7 +16,7 @@ export const DateSpots: VFC<Props> = memo((props) => {
   const { addressAndDateSpots, prefectureId, genreId, comeTime, dateSpotSearchName } = props;
 
   return(
-    <>
+    <Loading loadingSwitch={addressAndDateSpots.length !== 0 && addressAndDateSpots[0].id === 0 && true}>
       {
         addressAndDateSpots.length !== 0?
         (
@@ -39,6 +40,6 @@ export const DateSpots: VFC<Props> = memo((props) => {
           </div>
         )
       }
-    </>
+    </Loading>
   );
 });

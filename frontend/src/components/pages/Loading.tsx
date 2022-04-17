@@ -8,18 +8,13 @@ type Props ={
 
 export const Loading: VFC<Props> = memo((props) => {
   const { children, loadingSwitch } = props;
-  const [ isLoading, setIsLoading ] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(loadingSwitch);
-  }, [loadingSwitch]);
-
-  if (isLoading){
+  if (loadingSwitch){
     return(
       <div className='flex justify-center items-center h-screen'>
         <ReactLoading
           type='spin'
-          color="#ebc634"
+          color="#F87171"
           height="100px"
           width="100px"
           className="mx-auto"
