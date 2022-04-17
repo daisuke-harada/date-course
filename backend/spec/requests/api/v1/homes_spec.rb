@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Homes", type: :request do
-  describe "GET /index" do
+  describe "GET /top" do
     pending "add some examples (or delete) #{__FILE__}"
   end
 end
