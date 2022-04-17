@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import { GenreData } from 'types/homes/data';
 
-const MainDiv = tw.div`m-3 p-3 w-9/12`;
+const MainDiv = tw.div`m-3 p-3 w-9/12 flex flex-wrap lg:justify-start justify-center`;
 
 type Props ={
   genres: GenreData[]
@@ -17,7 +17,7 @@ export const Genres: VFC<Props> = memo((props) => {
     <MainDiv>
       {
         genres.map((genre) => (
-          <div key={genre.attributes.id} className='font-bold my-2'>
+          <div key={genre.attributes.id} className='font-bold w-36 m-2'>
             <Link to={`/genres/${genre.attributes.id}`}>
               {genre.attributes.name}
             </Link>
