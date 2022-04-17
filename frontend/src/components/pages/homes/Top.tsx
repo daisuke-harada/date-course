@@ -3,9 +3,12 @@ import { Area } from 'components/organisms/card/homes/Area';
 import { Genres } from 'components/organisms/card/homes/Genres';
 import { MainGenre } from 'components/organisms/card/homes/MainGenre';
 import { MainPrefecture } from 'components/organisms/card/homes/MainPrefecture';
+import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
+import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
 
 const ImageParentDiv = tw.div`relative h-96`;
@@ -16,6 +19,8 @@ export const Top: VFC = memo(() => {
   const [ mainGenres, setMainGenres ] = useState<GenreData[]>([]);
   const [ genres, setGenres ] = useState<GenreData[]>([]);
   const [ mainPrefectures, setMainPrefectures ] = useState<PrefectureData[]>([]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
+
 
   useEffect(() => {
     client.get('top').then((response) => {
@@ -23,6 +28,7 @@ export const Top: VFC = memo(() => {
       setGenres(response.data.genres);
       setMainGenres(response.data.mainGenres);
       setMainPrefectures(response.data.mainPrefectures);
+      setAddressAndDateSpots(response.data.addressAndDateSpots);
     });
   }, []);
 
@@ -61,6 +67,9 @@ export const Top: VFC = memo(() => {
             <Genres genres={genres} />
           </div>
         </div>
+      </div>
+      <div className='w-10/12 m-auto'>
+        <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
       </div>
     </>
   );
