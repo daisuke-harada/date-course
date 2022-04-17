@@ -10,6 +10,7 @@ import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
+import { Loading } from 'components/pages/Loading';
 
 const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;
@@ -33,7 +34,7 @@ export const Top: VFC = memo(() => {
   }, []);
 
   return(
-    <>
+    <Loading loadingSwitch={addressAndDateSpots.length !== 0 && addressAndDateSpots[0].id === 0 && true}>
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/lp.jpg`} />
         <h1 className='m-5 dtext-3xl font-bold z-10 bottom-0 absolute'>
@@ -71,6 +72,6 @@ export const Top: VFC = memo(() => {
       <div className='w-10/12 m-auto'>
         <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
       </div>
-    </>
+    </Loading>
   );
 });
