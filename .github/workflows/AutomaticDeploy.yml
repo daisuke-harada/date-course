@@ -10,8 +10,8 @@ env:
     ECS_BACKEND_SERVICE: datecourses-backend
     WEBAPP_CONTAINER_NAME: datecourses-frontend
     BACKEND_CONTAINER_NAME: datecourses-backend
-    WEBAPP_TAG: 1.0.1
-    BACKEND_TAG: 1.0.1
+    WEBAPP_TAG: 1.0.0
+    BACKEND_TAG: 1.0.0
 jobs:
   deploy: # ここからdeploy
     name: deploy
