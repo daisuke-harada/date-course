@@ -30,7 +30,6 @@ User.create(name: "nanase", email: "nanase@gmail.com", gender: "女性", passwor
 User.create(name: "kanakana", email: "kanakana@gmail.com", gender: "女性", password: "kanakana", password_confirmation: "kanakana")
 User.create(name: "admin", email: "adminstrator@gmail.com", gender: "男性", password: "adminadmin", password_confirmation: "adminadmin", admin: true)
 
-# デートスポットを作成する
 # 福岡
 spotAndAddressCreate("キャナルシティ博多", 1, normal_time("08:00"), normal_time("23:00"), 40, "福岡市博多区住吉1丁目2")
 spotAndAddressCreate("つなぐダイニング ZINO 天神店", 8, normal_time("20:00"), midnight__time("05:00"), 40, "福岡市中央区大名1-11-22-1")
