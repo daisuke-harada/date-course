@@ -69,6 +69,7 @@ export const Top: VFC = memo(() => {
           </div>
         </div>
       </div>
+
       <div className='w-10/12 m-auto'>
         <DateSpotRanking addressAndDateSpots={addressAndDateSpots} />
       </div>
