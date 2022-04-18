@@ -8,9 +8,10 @@ import { Users } from 'components/templates/users/Users';
 import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { UserResponseData } from 'types/users/response';
+import { defaultUserResponseData } from 'datas/defaultUserData';
 
 export const Search: VFC = memo(() => {
-  const [users, setUsers] = useState<Array<UserResponseData>>([]);
+  const [users, setUsers] = useState<Array<UserResponseData>>([defaultUserResponseData]);
   const location = useLocation();
   const state = location.state as { users: Array<UserResponseData>, userSearchName: string };
 

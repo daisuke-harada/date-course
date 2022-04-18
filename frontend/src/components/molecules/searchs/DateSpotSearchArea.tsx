@@ -95,7 +95,7 @@ export const DateSpotSearchArea: VFC<Props> = memo((props) => {
         :
         (
           <>
-            <div className='flex overflow-x-scroll pb-2 whitespace-nowrap'>
+            <div className='mobile(L):justify-center justify-start flex overflow-x-scroll pb-2 whitespace-nowrap'>
               <SelectParentDiv>
                 <PrefectureSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
               </SelectParentDiv>

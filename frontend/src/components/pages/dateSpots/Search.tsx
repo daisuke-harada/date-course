@@ -8,9 +8,10 @@ import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBa
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
+import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 
 export const Search: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([defaultAddfressAndDateSpotJoinData]);
 
   const location = useLocation();
   const state = location.state as {

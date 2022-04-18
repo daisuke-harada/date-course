@@ -12,6 +12,8 @@ import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Map } from 'components/molecules/maps/Map';
 import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/DateSpotReviewArea';
 import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { Loading } from '../Loading';
 
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 p-3 rounded-2xl m-2`;
 const DateSpotNameTitle = tw.h1`w-full my-5 text-sm font-bold md:text-3xl`;
@@ -22,7 +24,7 @@ const SubArea = tw.div`md:w-1/2 w-full`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
-  const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
+  const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>(defaultAddfressAndDateSpotJoinData);
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
@@ -41,7 +43,7 @@ export const Show: VFC = memo(() => {
   }, [id]);
 
   return(
-    <>
+    <Loading loadingSwitch={addressAndDateSpot.id === 0 && true}>
       <MainDiv>
         <SubDiv>
           <SubArea>
@@ -102,6 +104,6 @@ export const Show: VFC = memo(() => {
           />
         }
       </MainDiv>
-    </>
+    </Loading>
   );
 });

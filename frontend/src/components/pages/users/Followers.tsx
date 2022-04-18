@@ -1,4 +1,5 @@
 import { Users } from 'components/templates/users/Users';
+import { defaultUserResponseData } from 'datas/defaultUserData';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,7 @@ import { UserResponseData } from 'types/users/response';
 
 export const Followers: VFC = memo(() => {
   const { id } = useParams();
-  const [users, setUsers] = useState<Array<UserResponseData>>([]);
+  const [users, setUsers] = useState<Array<UserResponseData>>([defaultUserResponseData]);
   const [userName, setUserName] = useState<string>('');
 
   useEffect(() => {

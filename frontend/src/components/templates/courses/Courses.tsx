@@ -3,6 +3,7 @@ import { memo, VFC } from 'react';
 import { CourseResponseData } from 'types/courses/response';
 import { CourseCard } from 'components/organisms/card/courses/CourseCard';
 import { prefectureDatas } from 'datas/prefectureDatas';
+import { Loading } from 'components/pages/Loading';
 
 type Props = {
   courses: Array<CourseResponseData>,
@@ -11,8 +12,11 @@ type Props = {
 
 export const Courses: VFC<Props> = memo((props) => {
   const { courses, searchPrefectureId } = props;
+
   return(
-    <>
+    // coursesの初期値のidを0にしているため、初期値が読み込まれている間はLoading画面を表示させる。
+    // そうすることで画面のちらつきを解消する
+    <Loading loadingSwitch={courses.length !== 0 && courses[0].id === 0 && true}>
       {
         courses.length !== 0?
         (
@@ -37,6 +41,6 @@ export const Courses: VFC<Props> = memo((props) => {
           </div>
         )
       }
-    </>
+    </Loading>
   );
 });

@@ -8,5 +8,4 @@ export type CourseResponseData = {
   authority: string,
   courseDuringSpots: AddressAndDateSpotJoinData[],
   noDuplicatePrefectureNames: string[]
-
 };

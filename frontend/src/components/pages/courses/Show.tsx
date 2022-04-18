@@ -11,6 +11,7 @@ import { useRecoilValue } from 'recoil';
 import { currentUserState } from 'store/session';
 import tw from 'tailwind-styled-components';
 import { ManagementCourseData } from 'types/managementCourses/management';
+import { Loading } from '../Loading';
 
 const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;
@@ -58,65 +59,67 @@ export const Show: VFC = memo(() => {
   }, [id]);
 
   return(
-    <MainDiv>
-      <TitleH1>デートコース詳細ページ</TitleH1>
-      <div className='lg:ml-6 sm:ml-2 py-3 md:text-4xl mobile(L):text-xl text-sm font-bold'>
-        {travelModeText}で移動<br/>
-        他のユーザーに{courseInfo.authority}
-        <div className='my-2 flex m-auto'>
-          {
-            courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
-              <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
-            ))
-          }
+    <Loading loadingSwitch={managementCourses.userId === 0 && true}>
+      <MainDiv>
+        <TitleH1>デートコース詳細ページ</TitleH1>
+        <div className='lg:ml-6 sm:ml-2 py-3 md:text-4xl mobile(L):text-xl text-sm font-bold'>
+          {travelModeText}で移動<br/>
+          他のユーザーに{courseInfo.authority}
+          <div className='my-2 flex m-auto'>
+            {
+              courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
+                <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
+              ))
+            }
+          </div>
         </div>
-      </div>
-      <CourseAreaDiv>
-        <div className='md:w-1/3 w-full'>
+        <CourseAreaDiv>
+          <div className='md:w-1/3 w-full'>
+            {
+              managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
+                <CourseDuringSpotCard
+                  key={courseDuringSpot.id}
+                  courseDuringSpot={courseDuringSpot}
+                  managementCourses={managementCourses}
+                  courseNumber={index}
+                  leg={legs[index]}
+                />
+              ))
+            }
+          </div>
+          <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
+            {
+              // userIdが初期値である0の場合に読み込まないようにする
+              managementCourses.userId !== 0
+              &&
+              <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
+                <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={courseInfo.travelMode} />
+              </LoadScript>
+            }
+          </div>
+        </CourseAreaDiv>
+        <ButtonArea>
           {
-            managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
-              <CourseDuringSpotCard
-                key={courseDuringSpot.id}
-                courseDuringSpot={courseDuringSpot}
-                managementCourses={managementCourses}
-                courseNumber={index}
-                leg={legs[index]}
-              />
-            ))
-          }
-        </div>
-        <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
-          {
-            // userIdが初期値である0の場合に読み込まないようにする
-            managementCourses.userId !== 0
+            getCurrentUser.user.id === managementCourses.userId
             &&
-            <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-              <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={courseInfo.travelMode} />
-            </LoadScript>
+            (
+              <ButtonParentDiv>
+                <DangerButton onClickEvent={onClickDeleteCourse}>
+                  デートコースを削除
+                </DangerButton>
+              </ButtonParentDiv>
+            )
           }
-        </div>
-      </CourseAreaDiv>
-      <ButtonArea>
-        {
-          getCurrentUser.user.id === managementCourses.userId
-          &&
-          (
-            <ButtonParentDiv>
-              <DangerButton onClickEvent={onClickDeleteCourse}>
-                デートコースを削除
-              </DangerButton>
-            </ButtonParentDiv>
-          )
-        }
-        {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
-        <ButtonParentDiv>
-        <Link to={`/users/${managementCourses.userId}`}>
-          <BaseButton>
-              投稿者のページへ
-          </BaseButton>
-          </Link>
-        </ButtonParentDiv>
-      </ButtonArea>
-    </MainDiv>
+          {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
+          <ButtonParentDiv>
+          <Link to={`/users/${managementCourses.userId}`}>
+            <BaseButton>
+                投稿者のページへ
+            </BaseButton>
+            </Link>
+          </ButtonParentDiv>
+        </ButtonArea>
+      </MainDiv>
+    </Loading>
   );
 });

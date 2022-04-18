@@ -25,7 +25,7 @@ export const MyPageReviews: VFC<Props> = memo((props) => {
         reviews.length !== 0?
         (
           // <div className='sm:justify-start justify-center flex flex-wrap px-2'>
-          <div className='my-2 overflow-y-scroll h-96 border-2 border-red-300 rounded-xl p-1'>
+          <div className='m-2 overflow-y-scroll h-96 border-2 border-red-300 rounded-xl p-1'>
             {reviews.map((review, index) => (
               <ReviewCard
                 key={index}
