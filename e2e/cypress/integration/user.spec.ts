@@ -8,7 +8,8 @@ import { apiUsersAccess } from "../support/backendAccessMock/users/apiUsersAcces
 import { userEditDatas } from "../fixtures/users/userEditDatas";
 import { userSigninSuccessInput } from "../support/hooks/session";
 import { apiUserDestroyAccess } from "../support/backendAccessMock/users/apiUserDestroyAccess";
-import { UserResponseData } from "../support/types/UserResponse";
+import { UserResponseData } from "../support/types/users/response";
+
 
 const userFormSignUpSuccess = (user: UserResponseData) => {
   dataE2eGet("user-form-name-input").clear();
@@ -102,14 +103,13 @@ describe('Users', () => {
       });
     });
     cy.contains('フォロー').click();
-    cy.contains('フォロー解除');
+    cy.contains('フォロー中');
     cy.contains('フォロワー 1');
   });
 
   it('ユーザーを探すページが表示される', () => {
     cy.visit('/');
     dataE2eGet("slide-down-btn").click();
-    // cy.visit('/users');
     apiUsersAccess(userDatas);
     dataE2eGet("user-index").last().click();
     userDatas.forEach((user: UserResponseData) => {

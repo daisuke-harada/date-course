@@ -1,6 +1,6 @@
-import { DateSpotTestDataType } from '../../support/types/DateSpotTestDataType';
+import { DateSpotInputData } from '../../support/types/dateSpots/input';
 
-export const dateSpotEditDatas: DateSpotTestDataType[] =[
+export const dateSpotEditDatas: DateSpotInputData[] =[
   {
     id: 1,
     genreId: 2,

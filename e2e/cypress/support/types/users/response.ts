@@ -5,7 +5,7 @@ export type UserResponseData = {
   gender: string,
   passwordDigest: string,
   admin?: boolean,
-  image?: {
+  image: {
     url: string | null
   },
   followingIds: Array<number>,

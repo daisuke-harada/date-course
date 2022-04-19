@@ -1,10 +1,11 @@
-import { AddressAndDateSpotJoinInputData } from './../../support/types/AddressAndDateSpotJoinDataType';
+import { AddressAndDateSpotInputData } from './../../support/types/dateSpots/input';
 
 
-export const addressAndDateSpotDatas: Array<AddressAndDateSpotJoinInputData> =[
+
+export const addressAndDateSpotDatas: AddressAndDateSpotInputData[] =[
   {
     id: 1,
-    prefectureId: 40,
+    prefectureName: '福岡',
     genreName: 'ショッピングモール',
     dateSpot: {
       id: 1,
@@ -26,7 +27,7 @@ export const addressAndDateSpotDatas: Array<AddressAndDateSpotJoinInputData> =[
   },
   {
     id: 2,
-    prefectureId: 40,
+    prefectureName: '福岡',
     genreName: 'ショッピングモール',
     dateSpot: {
       id: 2,

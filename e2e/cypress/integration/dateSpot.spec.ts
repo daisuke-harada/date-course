@@ -1,4 +1,4 @@
-import { AddressAndDateSpotJoinInputData } from './../support/types/AddressAndDateSpotJoinDataType';
+
 import { addressAndDateSpotDatas } from './../fixtures/dateSpots/addressAndDateSpotDatas';
 import { addressAndDateSpotEditDatas } from './../fixtures/dateSpots/addressAndDateSpotEditDatas'
 import { apiDateSpotsAccess } from './../support/backendAccessMock/date_spots/apiDateSpotsAccess';
@@ -9,11 +9,13 @@ import { apiDateSpotCreateAccess } from "../support/backendAccessMock/date_spots
 import { apiDateSpotShow } from "../support/backendAccessMock/date_spots/apiDateSpotShow";
 import { dataE2eGet } from "../support/hooks/dataE2eGet";
 import { userSigninSuccessInput } from "../support/hooks/session";
+import { AddressAndDateSpotInputData } from '../support/types/dateSpots/input';
+import { prefectureDatas } from '../fixtures/datas/prefectureDatas';
 
-const dateSpotFormCreateSuccess = (addressAndDateSpotData: AddressAndDateSpotJoinInputData) => {
+const dateSpotFormCreateSuccess = (addressAndDateSpotData: AddressAndDateSpotInputData) => {
   cy.contains('デートスポットの新規登録');
   dataE2eGet("dateSpot-form-name-input").type(addressAndDateSpotData.dateSpot.name);
-  dataE2eGet("dateSpot-prefecture-select").select(addressAndDateSpotData.prefectureId);
+  dataE2eGet("dateSpot-prefecture-select").select(40);
   dataE2eGet("dateSpot-form-cityName-input").type(addressAndDateSpotData.cityName);
   dataE2eGet("dateSpot-genre-select").select(addressAndDateSpotData.dateSpot.genreId);
   dataE2eGet("dateSpot-opningTime-select").select(addressAndDateSpotData.dateSpot.openingTime);
@@ -25,11 +27,11 @@ const dateSpotFormCreateSuccess = (addressAndDateSpotData: AddressAndDateSpotJoi
   cy.contains(addressAndDateSpotData.dateSpot.name);
 };
 
-const dateSpotFormUpdateSuccess = (addressAndDateSpotData: AddressAndDateSpotJoinInputData) => {
+const dateSpotFormUpdateSuccess = (addressAndDateSpotData: AddressAndDateSpotInputData) => {
   cy.contains('デートスポット情報の編集');
   dataE2eGet("dateSpot-form-name-input").clear();
   dataE2eGet("dateSpot-form-name-input").type(addressAndDateSpotData.dateSpot.name);
-  dataE2eGet("dateSpot-prefecture-select").select(addressAndDateSpotData.prefectureId);
+  dataE2eGet("dateSpot-prefecture-select").select(40);
   dataE2eGet("dateSpot-form-cityName-input").clear();
   dataE2eGet("dateSpot-form-cityName-input").type(addressAndDateSpotData.cityName);
   dataE2eGet("dateSpot-genre-select").select(addressAndDateSpotData.dateSpot.genreId);
@@ -76,7 +78,7 @@ describe('DateSpots', () => {
   it('デートスポットを探すページを表示する', () => {
     apiDateSpotsAccess(addressAndDateSpotDatas);
     cy.visit('/dateSpots/index');
-    addressAndDateSpotDatas.forEach((address: AddressAndDateSpotJoinInputData) => {
+    addressAndDateSpotDatas.forEach((address: AddressAndDateSpotInputData) => {
       cy.contains(address.dateSpot.name);
       cy.contains(address.genreName);
       cy.contains(address.cityName);

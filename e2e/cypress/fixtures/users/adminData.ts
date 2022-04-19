@@ -1,4 +1,5 @@
-import { UserResponseData } from "../../support/types/UserResponse";
+import { UserResponseData } from "../../support/types/users/response";
+
 
 
 export const adminData: UserResponseData = {
@@ -12,7 +13,7 @@ export const adminData: UserResponseData = {
     url: null
   },
   followingIds: [],
-  followerIds: [],
+  followerIds: []
 };
 
 

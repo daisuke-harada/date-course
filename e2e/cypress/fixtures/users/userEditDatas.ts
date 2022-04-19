@@ -1,5 +1,4 @@
-import { UserResponseData } from "../../support/types/UserResponse";
-
+import { UserResponseData } from "../../support/types/users/response";
 
 export const userEditDatas: UserResponseData[] = [
   {
