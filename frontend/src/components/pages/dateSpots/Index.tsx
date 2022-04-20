@@ -19,6 +19,8 @@ export const Index: VFC = memo(() => {
     })
   }, []);
 
+  console.log(addressAndDateSpots);
+
   return(
     <IndexLayout
       sideArea={

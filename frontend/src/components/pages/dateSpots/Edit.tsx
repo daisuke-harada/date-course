@@ -17,8 +17,16 @@ export const Edit: VFC = memo(() => {
       prefectureDefaultValue={addressAndDateSpot.prefectureName}
       cityNameDefaultValue={addressAndDateSpot.cityName}
       genreDefaultValue={addressAndDateSpot.dateSpot.genreId.toString()}
-      openingTimeDefaultValue={addressAndDateSpot.dateSpot.openingTime.toString()}
-      closingTimeDefaultValue={addressAndDateSpot.dateSpot.closingTime.toString()}
+      openingTimeDefaultValue={
+        (addressAndDateSpot.dateSpot.openingTime
+        && addressAndDateSpot.dateSpot.openingTime.toString())
+        || ''
+      }
+      closingTimeDefaultValue={
+        (addressAndDateSpot.dateSpot.closingTime
+        && addressAndDateSpot.dateSpot.closingTime.toString())
+        || ''
+      }
       dateSpotId={addressAndDateSpot.dateSpot.id}
    />
   );
