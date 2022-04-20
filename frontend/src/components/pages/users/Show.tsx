@@ -52,9 +52,6 @@ export const Show: VFC = memo(() => {
       }else if(response.data.user.gender === '男性'){
         setGenderTextColor('text-blue-400');
       };
-
-    }).catch(error => {
-      navigate('/*');
     });
   }, [id, navigate]);
 
@@ -76,7 +73,14 @@ export const Show: VFC = memo(() => {
                 `${genderTextColor} mobile(M):mt-10 mobile(L):mt-14 mobile(L):text-sm sm:text-2xl sm:mt-24 md:text-3xl md:mt-32 lg:text-5xl lg:mb-4 mt-7`
               }
             >
-              {user.name}({user.gender})
+              {user.name}
+            </Span>
+            <Span
+              className={
+                `${genderTextColor} text-xs sm:text-xl md:text-2xl lg:text-4xl lg:mb-4`
+              }
+            >
+              {user.gender}
             </Span>
             <Span><FollowAndUnFollowButton addClassName='mobile(L):text-sm mofile(M):w-1/3 sm:text-2xl text-xs mt-0' userId={user.id} setUser={setUser} /></Span>
             <Span className='mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
