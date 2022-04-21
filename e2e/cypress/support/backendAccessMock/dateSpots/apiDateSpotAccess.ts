@@ -22,6 +22,6 @@ export const apiDateSpotShowAccess = (addressAndDateSpotTestData: AddressAndDate
 
 export const apiDateSpotIndexAccess = (addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[]) => {
   cy.intercept('GET', 'api/v1/date_spots', (req) => {
-    req.reply({ address_and_date_spots:addressAndDateSpotTestDatas });
+    req.reply({ address_and_date_spots: addressAndDateSpotTestDatas });
   })
 }

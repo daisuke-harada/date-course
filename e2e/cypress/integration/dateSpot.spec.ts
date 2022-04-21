@@ -46,5 +46,6 @@ describe('dateSpots', () => {
       cy.contains(data.cityName);
       cy.contains(data.genreName);
     });
+    cy.screenshot();
   });
 });
