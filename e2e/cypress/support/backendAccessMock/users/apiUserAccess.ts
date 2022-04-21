@@ -1,9 +1,10 @@
+import { courseTestDatas } from "../../../fixtures/courses/courseTestDatas";
 import { spotReviewAndDateSpotResponseDatas } from "../../../fixtures/dateSpotReviews/spotReviewTestDatas";
 import { UserResponseData } from "../../types/users/response";
 
 export const apiUserShowAccess = (userParam: UserResponseData) => {
   cy.intercept('GET', `api/v1/users/${userParam.id}`, (req) => {
-    req.reply({user: userParam, courses:[], dateSpotReviews: spotReviewAndDateSpotResponseDatas });
+    req.reply({user: userParam, courses: courseTestDatas.filter((courseTestData) => courseTestData.user.id === userParam.id), dateSpotReviews: spotReviewAndDateSpotResponseDatas });
   });
 };
 
@@ -14,6 +15,12 @@ export const apiSignUpAccess = (condition: boolean, loginStatusData: boolean, us
     });
   }
 };
+
+export const apiUserIndexAccess = (users: UserResponseData[]) => {
+  cy.intercept('GET', 'api/v1/users', (req) => {
+    req.reply({users: users})
+  })
+}
 
 export const apiLoginAccess = (loginStatusData: boolean, userParam: UserResponseData) => {
   cy.intercept('POST', 'api/v1/login',  (req) => {

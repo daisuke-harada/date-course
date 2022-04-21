@@ -1,9 +1,13 @@
+import { guestUser, anotherTestUser } from './../fixtures/users/response';
+import { apiUserIndexAccess } from './../support/backendAccessMock/users/apiUserAccess';
 import { apiUserShowAccess, apiSignUpAccess } from '../support/backendAccessMock/users/apiUserAccess';
 import { testUserInput } from '../fixtures/users/session';
-import { dataE2eGet } from './../support/hooks/dataE2eGet';
+import { dataE2eGet } from '../support/hooks/dataE2eGet';
 import { testUser } from '../fixtures/users/response';
 import { userSigninSuccess } from '../support/hooks/session';
 import { spotReviewAndDateSpotResponseDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
+
+const users = [guestUser, testUser, anotherTestUser];
 
 describe('Users', () => {
   it('新規登録画面で新規登録を行う', () => {
@@ -39,6 +43,8 @@ describe('Users', () => {
     userSigninSuccess(testUser);
   });
 
+  it('ゲストログインボタンを押して、ログインする', () =>{});
+
   it('ログイン画面して、そのユーザーのレビュー一覧を表示する', () => {
     userSigninSuccess(testUser);
     cy.contains('レビュー').click();
@@ -46,6 +52,7 @@ describe('Users', () => {
   });
 
   it('ユーザー情報の編集に成功する', () => {
+    
   });
 
   it('ログインしてない場合ユーザーの編集ページにアクセスできません', () => {
@@ -60,6 +67,17 @@ describe('Users', () => {
   it('ログインしてフォローする', () => {
   });
 
+  it('ログインしてフォローを解除する');
+
   it('ユーザーを探すページが表示される', () => {
+    apiUserIndexAccess(users);
+    cy.visit('/users/index');
+    users.map((user) => {
+      cy.contains(user.name);
+    });
+    cy.screenshot();
   });
+
+  it('ログインしてユーザー一覧ページからフォローする');
+  it('ログインしてユーザー一覧ページからフォローを解除する');
 });

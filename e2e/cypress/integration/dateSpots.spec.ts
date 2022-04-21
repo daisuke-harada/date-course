@@ -1,4 +1,4 @@
-import { apiDateSpotIndexAccess } from './../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { userSigninSuccess } from '../support/hooks/session';
 import { adminUser, testUser } from '../fixtures/users/response';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
