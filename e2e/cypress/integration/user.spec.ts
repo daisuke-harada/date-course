@@ -1,7 +1,8 @@
-import { apiUserShowAccess, apiSignUpAccess } from '../support/backendAccessMock/courses/users/apiUserAccess';
+import { apiUserShowAccess, apiSignUpAccess } from '../support/backendAccessMock/users/apiUserAccess';
 import { testUserInput } from '../fixtures/users/session';
 import { dataE2eGet } from './../support/hooks/dataE2eGet';
 import { testUser } from '../fixtures/users/response';
+import { userSigninSuccess } from '../support/hooks/session';
 
 describe('Users', () => {
   it('新規登録画面で新規登録を行う', () => {
@@ -16,12 +17,12 @@ describe('Users', () => {
     cy.contains('新規登録に成功しました');
     cy.contains(testUser.name);
     cy.contains(testUser.gender);
-    cy.screenshot();
+
   });
 
   it('ログイン画面から新規登録画面に遷移し、新規登録する', () => {
-    
-    
+    userSigninSuccess(testUser);
+    cy.screenshot();
   });
 
   it('ユーザー情報の編集に成功する', () => {

@@ -42,6 +42,8 @@ export const Show: VFC = memo(() => {
     });
   }, [id]);
 
+  console.log(dateSpotReviews);
+
   return(
     <Loading loadingSwitch={addressAndDateSpot.id === 0 && true}>
       <MainDiv>

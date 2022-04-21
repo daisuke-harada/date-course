@@ -26,13 +26,13 @@ export const testUser: UserResponseData = {
 
 export const anotherTestUser: UserResponseData = {
   admin: false,
-  email: 'kenta@gmail.com',
+  email: 'marika@gmail.com',
   followerIds: [],
   followingIds: [],
-  gender: '男性',
+  gender: '女性',
   id: 3,
   image: {url: null},
-  name: 'peter',
+  name: 'marika',
   passwordDigest: '$2a$12$VWVmYK2Lbw.Rp3qWMEUKPu5qTxdXyBB1547MRYRpXFo5Jlbhaor'
 }
 

@@ -11,7 +11,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     latitude: 33.5873,
     longitude: 130.395,
     prefectureName: "福岡県",
-    reviewTotalNumber: 6
+    reviewTotalNumber: 3
   },
   {
     averageRate: 3.1,
@@ -22,7 +22,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     latitude: 33.5898,
     longitude: 130.375,
     prefectureName: "福岡県",
-    reviewTotalNumber: 6
+    reviewTotalNumber: 3
   },
   {
     averageRate: 2.7,
@@ -33,7 +33,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     latitude: 33.5894,
     longitude: 130.411,
     prefectureName: "福岡県",
-    reviewTotalNumber: 6
+    reviewTotalNumber: 3
   },
   {
     averageRate: 2.7,
@@ -44,6 +44,6 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     latitude: 35.7103,
     longitude: 139.811,
     prefectureName: "千葉県",
-    reviewTotalNumber: 6
+    reviewTotalNumber: 3
   }
 ]
