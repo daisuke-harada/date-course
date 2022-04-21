@@ -1,6 +1,6 @@
 import { apiDateSpotShowAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { testUser } from '../fixtures/users/response';
-import { userSigninSuccess } from "../support/hooks/session";
+import { userSigninSuccess } from '../support/hooks/session';
 import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
