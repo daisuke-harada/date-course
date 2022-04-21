@@ -7,7 +7,6 @@ type Props = {
     travelMode: string;
     authority: string;
   }>,
-  dataE2e?: string,
   getCourseInfo: {
     travelMode: string;
     authority: string;
@@ -20,7 +19,7 @@ const Input = tw.input`mt-4 mx-2`;
 const MainDiv= tw.div`m-5 font-bold flex`;
 
 export const CourseInfoSelect: VFC<Props> = memo((props) => {
-  const { setCourseInfo, dataE2e, getCourseInfo, noDuplicatePrefectureNames } = props;
+  const { setCourseInfo, getCourseInfo, noDuplicatePrefectureNames } = props;
 
   const onChangeTravelMode: React.ChangeEventHandler<HTMLSelectElement> = (e) => setCourseInfo({travelMode: e.target.value, authority: getCourseInfo.authority});
   const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = (e) => setCourseInfo({travelMode: getCourseInfo.travelMode, authority: e.target.value});
@@ -39,7 +38,7 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
         交通手段を選択
         <span className='text-xs text-red-400'>(県内のみ自転車選択可)</span>
       </div>
-      <select data-e2e={dataE2e} className='mx-2 border-2 border-gray-400 rounded-md' value={getCourseInfo.travelMode} onChange={onChangeTravelMode}>
+      <select data-e2e='travelMode-select' className='mx-2 border-2 border-gray-400 rounded-md' value={getCourseInfo.travelMode} onChange={onChangeTravelMode}>
         <option value='DRIVING'>車</option>
         <option value='WALKING'>歩く</option>
         {
@@ -52,9 +51,9 @@ export const CourseInfoSelect: VFC<Props> = memo((props) => {
     </MainDiv>
     <MainDiv>
       <Label>公開</Label>
-      <Input type='radio' value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '公開'} />
+      <Input data-e2e='course-open-radio' type='radio' value='公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '公開'} />
       <Label>非公開</Label>
-      <Input type='radio' value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '非公開'} />
+      <Input data-e2e='course-not-open-radio' type='radio' value='非公開' onChange={onChangeRadioButton} checked={getCourseInfo.authority === '非公開'} />
     </MainDiv>
     </>
   );

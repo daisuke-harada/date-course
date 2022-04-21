@@ -72,7 +72,7 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
 
   return(
       <>
-        <select className='mb-2 border-2 rounded-md font-bold' onChange={onChangeCourseIdValue}>
+        <select data-e2e={`spot-change-select-${currentDateSpotId}`} className='mb-2 border-2 rounded-md font-bold' onChange={onChangeCourseIdValue}>
           <option value='0'>入れ替え対象を選択</option>
           {managementCourses.courseDuringSpots
             .filter(courseDuringSpot => courseDuringSpot.dateSpot.id !== currentDateSpotId)
@@ -84,7 +84,7 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
             )
           })}
         </select>
-        <div className='my-5 m-auto text-sm'>
+        <div data-e2e={`spot-change-button-${currentDateSpotId}`} className='my-5 m-auto text-sm'>
           <BaseButton onClickEvent={onClickCourseChange}>順番を入れ替える</BaseButton>
         </div>
       </>
