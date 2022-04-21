@@ -1,6 +1,35 @@
-import { DateSpotReviewAndUserResponseData } from "../../support/types/dateSpotReviews/response";
 
-const spotReviewAndUserTestDatas: DateSpotReviewAndUserResponseData[] = [
+import { DateSpotReviewAndDateSpotResponseData, DateSpotReviewAndUserResponseData } from "../../support/types/dateSpotReviews/response";
+import { dateSpotTestDatas } from "../dateSpots/DateSpotTestDatas";
+
+export const spotReviewAndDateSpotResponseDatas: DateSpotReviewAndDateSpotResponseData[] = [
+  {
+    id: 1,
+    rate: 2,
+    content: 'testtest',
+    dateSpot: dateSpotTestDatas.find((dateSpot) => (dateSpot.id === 1))
+  },
+  {
+    id: 2,
+    rate: 2,
+    content: 'testtest',
+    dateSpot: dateSpotTestDatas.find((dateSpot) => (dateSpot.id === 2))
+  },
+  {
+    id: 3,
+    rate: 2,
+    content: 'testtest',
+    dateSpot: dateSpotTestDatas.find((dateSpot) => (dateSpot.id === 3))
+  },
+  {
+    id: 4,
+    rate: 2,
+    content: 'testtest',
+    dateSpot: dateSpotTestDatas.find((dateSpot) => (dateSpot.id === 4))
+  }
+];
+
+export const spotReviewAndUserTestDatas: DateSpotReviewAndUserResponseData[] = [
   {
     id: 1,
     dateSpotId: 1,

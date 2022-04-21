@@ -1,9 +1,9 @@
+import { spotReviewAndDateSpotResponseDatas } from "../../../fixtures/dateSpotReviews/spotReviewTestDatas";
 import { UserResponseData } from "../../types/users/response";
-import { spotReviewAndUserTestDatas } from "../../../fixtures/dateSpotReviews/spotReviewTestDatas"
 
 export const apiUserShowAccess = (userParam: UserResponseData) => {
   cy.intercept('GET', `api/v1/users/${userParam.id}`, (req) => {
-    req.reply({user: userParam, courses:[], dateSpotReviews: spotReviewAndUserTestDatas });
+    req.reply({user: userParam, courses:[], dateSpotReviews: spotReviewAndDateSpotResponseDatas });
   });
 };
 
