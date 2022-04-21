@@ -3,6 +3,7 @@ import { AddressAndDateSpotJoinData } from "../../support/types/dateSpots/respon
 import { dateSpotTestDatas } from "./DateSpotTestDatas";
 
 export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
+  
   {
     averageRate: 2.7,
     cityName: "福岡県福岡市博多区住吉1丁目2",

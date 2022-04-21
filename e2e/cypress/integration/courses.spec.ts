@@ -4,9 +4,10 @@ import { userSigninSuccess } from "../support/hooks/session";
 import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
-import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
+import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
 import { UserResponseData } from '../support/types/users/response';
 import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
+import { courseTestDatas } from '../fixtures/courses/courseTestDatas';
 
 const firstDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 1);
 const secondDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 2);
@@ -56,23 +57,22 @@ const createCourse = (testUser: UserResponseData, travelMode: string, authority:
 };
 
 describe('courses', () => {
-  beforeEach(() => {
-    userSigninSuccess(testUser);
-  });
-
   it('デートコースの交通手段を"車"に選択し、公開ステータスで登録する', () => {
+    userSigninSuccess(testUser);
     createCourse(testUser, 'DRIVING', '公開');
     cy.contains('車で移動');
     cy.contains('他のユーザーに公開');
   });
 
   it('デートコースの交通手段を"歩く"に選択肢し、公開ステータスで登録する', () => {
+    userSigninSuccess(testUser);
     createCourse(testUser, 'WALKING', '公開');
     cy.contains('歩きで移動');
     cy.contains('他のユーザーに公開');
   });
 
   it('デートコースの交通手段を"自転車"に選択肢し、公開ステータスで登録する', () => {
+    userSigninSuccess(testUser);
     createCourse(testUser, 'BICYCLING', '公開');
     cy.contains('自転車で移動');
     cy.contains('他のユーザーに公開');
@@ -103,6 +103,7 @@ describe('courses', () => {
   });
 
   it('デートコースを削除する', () => {
+    userSigninSuccess(testUser);
     const courseData = {
       id:1,
       user: testUser,
@@ -121,23 +122,27 @@ describe('courses', () => {
   });
 
   it('デートコースを、非公開ステータスで登録する', () => {
+    userSigninSuccess(testUser);
     createCourse(testUser, 'DRIVING', '非公開');
     cy.contains('車で移動');
     cy.contains('他のユーザーに非公開');
   });
 
   it('デートコース作成ページでデートスポットを1つ削除する', () => {
+    userSigninSuccess(testUser);
     inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
     dataE2eGet(`courseDeleteButtonId-${firstDateSpot.dateSpot.id}`).click();
   });
 
   it('デートコース作成ページでデートスポットを2つ削除する', () => {
+    userSigninSuccess(testUser);
     inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
     dataE2eGet(`courseDeleteButtonId-${firstDateSpot.dateSpot.id}`).click();
     dataE2eGet(`courseDeleteButtonId-${secondDateSpot.dateSpot.id}`).click();
   });
 
   it('デートコース作成ページでデートスポットを全て削除する', () => {
+    userSigninSuccess(testUser);
     inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
     cy.contains('全て削除').click();
     cy.contains('目的地は登録されていません。');
@@ -145,9 +150,51 @@ describe('courses', () => {
   });
 
   it('デートコース作成ページでデートスポットの順番を入れ替える', () => {
+    userSigninSuccess(testUser);
     inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
     dataE2eGet(`spot-change-select-${firstDateSpot.id}`).select(secondDateSpot.id);
     dataE2eGet(`spot-change-button-${firstDateSpot.id}`).click();
   });
 
+  it('デートコース作成ページからデートスポット詳細ページに遷移する', () => {
+    userSigninSuccess(testUser);
+    inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
+    apiDateSpotShowAccess(firstDateSpot);
+    cy.contains(firstDateSpot.dateSpot.name).click();
+    cy.contains(firstDateSpot.dateSpot.name);
+    cy.contains(firstDateSpot.averageRate);
+    cy.contains(firstDateSpot.cityName);
+    cy.contains(firstDateSpot.genreName);
+  })
+
+  it('デートコース一覧ページを表示する', () => {
+    apiCourseIndexAccess(courseTestDatas);
+    cy.visit('/courses/index');
+    courseTestDatas.map((data) => {
+      cy.contains(`${data.user.name}さんの投稿`);
+      data.noDuplicatePrefectureNames.map((name) => cy.contains(name));
+    });
+  });
+
+  it('デートコース一覧ページからデートコース詳細ページに遷移する', () => {
+    apiCourseIndexAccess(courseTestDatas);
+    cy.visit('/courses/index');
+    courseTestDatas.map((data) => {
+      cy.contains(`${data.user.name}さんの投稿`);
+      data.noDuplicatePrefectureNames.map((name) => cy.contains(name));
+    });
+
+    apiCourseShowAccess(courseTestDatas[0]);
+
+    // デートコース内のデートスポット情報を表示させるために必要。
+    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
+
+    cy.contains('詳細を見る').first().click();
+
+    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+      cy.contains(addressAndDateSpot.dateSpot.name);
+      cy.contains(addressAndDateSpot.cityName);
+      cy.contains(addressAndDateSpot.genreName);
+    });
+  })
 });
