@@ -66,18 +66,18 @@ export const Show: VFC = memo(() => {
                 {addressAndDateSpot?.genreName}
               </Link>
             </div>
-            <div className='text-center'>
+            <div className='w-1/3 text-center mb-5'>
               {
                 getLoginStatus.status === true
                 && getCurrentUser.user.admin === true
                 && (
-                  <BaseButton dataE2e='render-dateSpot-edit'>
+                  <BaseButton dataE2e='dateSpot-edit-button'>
                     <Link
                       className='text-white'
                       to={`edit`}
                       state={{addressAndDateSpot: addressAndDateSpot}}
                     >
-                      デートスポット情報編集
+                      設定
                     </Link>
                   </BaseButton>
                 )

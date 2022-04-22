@@ -4,7 +4,7 @@ import { dateSpotTestDatas } from "../dateSpots/dateSpotTestDatas";
 
 export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
   {
-    averageRate: 2.7,
+    averageRate: 2,
     cityName: "福岡県福岡市博多区住吉1丁目2",
     dateSpot: dateSpotTestDatas[0],
     genreName: "ショッピングモール",
@@ -15,7 +15,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 3.3,
+    averageRate: 2,
     cityName: "福岡県福岡市中央区大名1-11-22-1",
     dateSpot: dateSpotTestDatas[1],
     genreName: "居酒屋",
@@ -26,7 +26,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 3.1,
+    averageRate: 2,
     cityName: "福岡県福岡市中央区大濠公園",
     dateSpot: dateSpotTestDatas[2],
     genreName: "公園",
@@ -37,7 +37,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 2.7,
+    averageRate: 2,
     cityName: "千葉県墨田区押上1-1-2",
     dateSpot: dateSpotTestDatas[3],
     genreName: "遊園地",
@@ -48,7 +48,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 2.7,
+    averageRate: 2,
     cityName: "東京都墨田区押上１丁目１−２",
     dateSpot: dateSpotTestDatas[4],
     genreName: "ランドマーク",
@@ -59,7 +59,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 2.7,
+    averageRate: 2,
     cityName: "東京都渋谷区恵比寿4丁目20 ガーデンプレイス",
     dateSpot: dateSpotTestDatas[5],
     genreName: "ショッピングモール",
@@ -70,7 +70,7 @@ export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
     reviewTotalNumber: 3
   },
   {
-    averageRate: 2.7,
+    averageRate: 2,
     cityName: "熊本県阿蘇市乙姫2006-2",
     dateSpot: dateSpotTestDatas[6],
     genreName: "飲食店",

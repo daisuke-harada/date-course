@@ -9,6 +9,18 @@ export const apiDateSpotCreateAccess = (dateSpotData: DateSpotResponseData) => {
   });
 };
 
+export const apiDateSpotUpdateAccess = (dateSpotData: DateSpotResponseData) => {
+  cy.intercept('PUT', `api/v1/date_spots/${dateSpotData.id}`, (req) => {
+    req.reply({status: 'updated', dateSpot: dateSpotData})
+  });
+};
+
+export const apiDateSpotDeleteAccess = (addressAndDateSpotTestData: AddressAndDateSpotJoinData) => {
+  cy.intercept('DELETE', `api/v1/date_spots/${addressAndDateSpotTestData.dateSpot.id}`, (req) => {
+    req.reply({status: 'deleted'});
+  });
+}
+
 export const apiDateSpotShowAccess = (addressAndDateSpotTestData: AddressAndDateSpotJoinData) => {
   cy.intercept('GET', `api/v1/date_spots/${addressAndDateSpotTestData.dateSpot.id}`, (req) => {
     const dateSpotReviews = spotReviewAndUserTestDatas.filter((review) => review.dateSpotId === addressAndDateSpotTestData.dateSpot.id);

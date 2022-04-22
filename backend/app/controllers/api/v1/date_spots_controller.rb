@@ -40,7 +40,7 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def destroy
     @date_spot.destroy
-    render json: {status: :delete}
+    render json: {status: :deleted}
   end
 
   def index
