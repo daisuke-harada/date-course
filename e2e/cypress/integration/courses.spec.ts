@@ -64,14 +64,14 @@ describe('courses', () => {
     cy.contains('他のユーザーに公開');
   });
 
-  it('デートコースの交通手段を"歩く"に選択肢し、公開ステータスで登録する', () => {
+  it('デートコースの交通手段を"歩く"に選択し、公開ステータスで登録する', () => {
     userSigninSuccess(testUser);
     createCourse(testUser, 'WALKING', '公開');
     cy.contains('歩きで移動');
     cy.contains('他のユーザーに公開');
   });
 
-  it('デートコースの交通手段を"自転車"に選択肢し、公開ステータスで登録する', () => {
+  it('デートコースの交通手段を"自転車"に選択し、公開ステータスで登録する', () => {
     userSigninSuccess(testUser);
     createCourse(testUser, 'BICYCLING', '公開');
     cy.contains('自転車で移動');
