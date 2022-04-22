@@ -1,13 +1,13 @@
-import { apiDateSpotShowAccess } from 'cypress/support/backendAccessMock/dateSpots/apiDateSpotAccess';
-import { testUser } from 'cypress/fixtures/users/response';
-import { userSigninSuccess } from 'cypress/support/hooks/session';
-import { apiDateSpotIndexAccess } from 'cypress/support/backendAccessMock/dateSpots/apiDateSpotAccess';
-import { addressAndDateSpotTestDatas } from 'cypress/fixtures/dateSpots/addressAndDateSpotTestDatas';
-import { dataE2eGet } from 'cypress/support/hooks/dataE2eGet';
-import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from 'cypress/support/backendAccessMock/courses/apiCourseAccess';
-import { UserResponseData } from 'cypress/support/types/users/response';
-import { AddressAndDateSpotJoinData } from 'cypress/support/types/dateSpots/response';
-import { courseTestDatas } from 'cypress/fixtures/courses/courseTestDatas';
+import { apiDateSpotShowAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { testUser } from '../fixtures/users/response';
+import { userSigninSuccess } from '../support/hooks/session';
+import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
+import { dataE2eGet } from '../support/hooks/dataE2eGet';
+import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
+import { UserResponseData } from '../support/types/users/response';
+import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
+import { courseTestDatas } from '../fixtures/courses/courseTestDatas';
 
 const firstDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 1);
 const secondDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 2);

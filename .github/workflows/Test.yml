@@ -44,20 +44,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: setup Frontend App
         run: |
+          cd ..
           cd frontend
           yarn
           yarn build
           yarn start &
-      - uses: cypress-io/github-action@v2
-        with:
-          # Next.js (http://localhost:3000) の起動を待つ
-          wait-on: "http://localhost:3000"
-          # Cypress を ./e2e/ に配置しているため、working-directoryを指定する
-          # デフォルトはルートディレクトリ
-          working-directory: e2e
-      # - name: run cypress
-      #   run: |
-      #     cd e2e
-      #     yarn install --frozen-lockfile
-      #     yarn run cypress verify
-      #     yarn run cypress run
+      - name: run cypress
+        run: |
+          cd ..
+          cd e2e
+          yarn install --frozen-lockfile
+          yarn run cypress verify
+          yarn run cypress run
