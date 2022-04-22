@@ -35,5 +35,5 @@ jobs:
           rails db:migrate
           rails db:seed
       - name: run rubocop
-        run: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
+        run: rubocop --fail-level W --display-only-fail-level-offenses
 
