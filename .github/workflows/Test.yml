@@ -46,8 +46,8 @@ jobs:
         run: |
           cd frontend
           yarn install
-          craco build
-          craco start
+          yarn build
+          yarn start
 
 
 
