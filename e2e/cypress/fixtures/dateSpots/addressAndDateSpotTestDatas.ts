@@ -1,6 +1,6 @@
 
 import { AddressAndDateSpotJoinData } from "../../support/types/dateSpots/response";
-import { dateSpotTestDatas } from "../dateSpots/DateSpotTestDatas";
+import { dateSpotTestDatas } from "../dateSpots/dateSpotTestDatas";
 
 export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
   {
