@@ -4,7 +4,7 @@ import { userSigninSuccess } from '../support/hooks/session';
 import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
-import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
+import { apiCourseCreateAccess, apiCourseDestroyAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
 import { UserResponseData } from '../support/types/users/response';
 import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
 import { courseTestDatas } from '../fixtures/courses/courseTestDatas';
@@ -114,7 +114,7 @@ describe('courses', () => {
     };
     apiCourseShowAccess(courseData);
     cy.visit(`/courses/${courseData.id}`);
-    apiCourseDeleteAccess(courseData.id);
+    apiCourseDestroyAccess(courseData.id);
     cy.contains('デートコースを削除').click();
     cy.contains('デートコースを削除しました');
     cy.contains(testUser.name);

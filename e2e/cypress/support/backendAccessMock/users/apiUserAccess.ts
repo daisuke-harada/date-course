@@ -22,7 +22,7 @@ export const apiUserUpdateAccess = (userParam: UserResponseData) => {
   });
 };
 
-export const apiUserDeleteAccess = (userId: number) => {
+export const apiUserDestroyAccess = (userId: number) => {
   cy.intercept('DELETE', `api/v1/users/${userId}`, (req) => {
     req.reply({status: 'deleted'});
   })
