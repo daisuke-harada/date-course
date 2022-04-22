@@ -1,13 +1,13 @@
-import { apiDateSpotShowAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
-import { testUser } from '../fixtures/users/response';
-import { userSigninSuccess } from '../support/hooks/session';
-import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
-import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
-import { dataE2eGet } from '../support/hooks/dataE2eGet';
-import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
-import { UserResponseData } from '../support/types/users/response';
-import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
-import { courseTestDatas } from '../fixtures/courses/courseTestDatas';
+import { apiDateSpotShowAccess } from 'support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { testUser } from 'fixtures/users/response';
+import { userSigninSuccess } from 'support/hooks/session';
+import { apiDateSpotIndexAccess } from 'support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { addressAndDateSpotTestDatas } from 'fixtures/dateSpots/addressAndDateSpotTestDatas';
+import { dataE2eGet } from 'support/hooks/dataE2eGet';
+import { apiCourseCreateAccess, apiCourseDeleteAccess, apiCourseIndexAccess, apiCourseShowAccess } from 'support/backendAccessMock/courses/apiCourseAccess';
+import { UserResponseData } from 'support/types/users/response';
+import { AddressAndDateSpotJoinData } from 'support/types/dateSpots/response';
+import { courseTestDatas } from 'fixtures/courses/courseTestDatas';
 
 const firstDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 1);
 const secondDateSpot = addressAndDateSpotTestDatas.find((data) => data.id === 2);
