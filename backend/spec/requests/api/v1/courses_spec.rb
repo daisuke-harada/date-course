@@ -23,7 +23,7 @@ RSpec.describe "Api::V1::Courses", type: :request do
   describe "DELETE /destroy" do
     it "course情報の削除に成功する" do
       during_spot = FactoryBot.create(:during_spot)
-      other_during_spot = FactoryBot.create(:other_during_spot)
+      FactoryBot.create(:other_during_spot)
       delete "/api/v1/courses/#{during_spot.course_id}"
       expect(JSON.parse(response.body)["status"]).to eq("deleted")
     end

@@ -26,7 +26,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
       FactoryBot.create(:date_spot)
-      user = FactoryBot.create(:user)
+      FactoryBot.create(:user)
       date_spot_review = FactoryBot.build(:date_spot_review)
       post "/api/v1/date_spot_reviews", params: {
         date_spot_review: {
