@@ -5,16 +5,54 @@ import { dataE2eGet } from '../support/hooks/dataE2eGet';
 import { userSigninSuccess } from '../support/hooks/session';
 import { spotReviewAndDateSpotResponseDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
 import { apiHomeTopAccess } from '../support/backendAccessMock/homes/apiHomeAccess';
+import { apiRelationShipCreateAccess, apiRelationShipDeleteAccess, apiFollowers, apiFollowings } from '../support/backendAccessMock/relationships/apiRelationShipAccess';
+import { UserResponseData } from '../support/types/users/response';
 
 const users = [guestUser, testUser, anotherTestUser];
+
+const currentFollowActionUser = (currentUser: UserResponseData, targetUser: UserResponseData) => {
+  return {
+    id: testUser.id,
+    name: testUser.name,
+    admin: false,
+    email: testUser.email,
+    followerIds: [],
+    followingIds: [targetUser.id],
+    gender: testUser.gender,
+    image: {url: null},
+    passwordDigest: 'daisukedaisukedaisuke'
+  }
+}
+
+const followedUser = (followedUser: UserResponseData, currentfollowActionUser: UserResponseData) => {
+  return {
+    id: followedUser.id,
+    name: followedUser.name,
+    admin: false,
+    email: followedUser.email,
+    followerIds: [currentfollowActionUser.id],
+    followingIds: [],
+    gender: followedUser.gender,
+    image: {url: null},
+    passwordDigest: 'marikamarika'
+  }
+}
+
+const userFormInput = (name: string, email: string, password: string) => {
+  dataE2eGet('user-form-name-input').clear();
+  dataE2eGet('user-form-name-input').type(name);
+  dataE2eGet('user-form-email-input').clear();
+  dataE2eGet('user-form-email-input').type(email);
+  dataE2eGet('user-form-password-input').clear();
+  dataE2eGet('user-form-password-input').type(password);
+  dataE2eGet('user-form-passwordConfirmation-input').clear();
+  dataE2eGet('user-form-passwordConfirmation-input').type(password);
+}
 
 describe('Users', () => {
   it('新規登録画面で新規登録を行う', () => {
     cy.visit('/users/new');
-    dataE2eGet('user-form-name-input').type(testUserInput.name);
-    dataE2eGet('user-form-email-input').type(testUserInput.email);
-    dataE2eGet('user-form-password-input').type(testUserInput.password);
-    dataE2eGet('user-form-passwordConfirmation-input').type(testUserInput.password);
+    userFormInput(testUserInput.name, testUserInput.email, testUserInput.password);
     apiSignUpAccess(true, true, testUser);
     apiUserShowAccess(testUser);
     dataE2eGet('user-form-button').click();
@@ -26,10 +64,7 @@ describe('Users', () => {
   it('ログイン画面から新規登録に遷移して、新規登録する', () => {
     cy.visit('/login');
     cy.contains('新規登録はこちら').click();
-    dataE2eGet('user-form-name-input').type(testUserInput.name);
-    dataE2eGet('user-form-email-input').type(testUserInput.email);
-    dataE2eGet('user-form-password-input').type(testUserInput.password);
-    dataE2eGet('user-form-passwordConfirmation-input').type(testUserInput.password);
+    userFormInput(testUserInput.name, testUserInput.email, testUserInput.password);
     apiSignUpAccess(true, true, testUser);
     apiUserShowAccess(testUser);
     dataE2eGet('user-form-button').click();
@@ -72,14 +107,7 @@ describe('Users', () => {
     };
     userSigninSuccess(testUser);
     cy.contains('設定').click();
-    dataE2eGet('user-form-name-input').clear();
-    dataE2eGet('user-form-name-input').type(editUser.name);
-    dataE2eGet('user-form-email-input').clear();
-    dataE2eGet('user-form-email-input').type(editUser.email);
-    dataE2eGet('user-form-password-input').clear();
-    dataE2eGet('user-form-password-input').type('editPassword');
-    dataE2eGet('user-form-passwordConfirmation-input').clear();
-    dataE2eGet('user-form-passwordConfirmation-input').type('editPassword');
+    userFormInput(editUser.name, editUser.email, 'editPassword');
     apiUserUpdateAccess(editUser);
     apiUserShowAccess(editUser);
     dataE2eGet('user-form-button').click();
@@ -118,10 +146,68 @@ describe('Users', () => {
   });
 
   it('ログインしてフォローする', () => {
+    userSigninSuccess(testUser);
+    apiUserIndexAccess(users);
+    cy.visit('/users/index');
+    apiUserShowAccess(anotherTestUser);
+    cy.contains(anotherTestUser.name).click();
+    apiRelationShipCreateAccess(testUser, anotherTestUser, users);
+    dataE2eGet(`follow-button-${anotherTestUser.id}`).click();
+    cy.contains('フォロー中');
   });
 
-  it('ログインしてフォローを解除する');
+  it('フォロワー一覧ページへ画面遷移する', () => {
+    userSigninSuccess(testUser);
+    apiUserIndexAccess(users);
+    cy.visit('/users/index');
+    apiUserShowAccess(anotherTestUser);
+    cy.contains(anotherTestUser.name).click();
+    apiRelationShipCreateAccess(testUser, anotherTestUser, users);
+    dataE2eGet(`follow-button-${anotherTestUser.id}`).click();
+    cy.contains('フォロー中');
+    apiFollowers(followedUser(anotherTestUser, testUser), [currentFollowActionUser(testUser, anotherTestUser)]);
+    cy.contains('フォロワー 1').click();
+    cy.contains(`${followedUser(anotherTestUser, testUser).name}のフォロワー`);
+    cy.contains(currentFollowActionUser(testUser, anotherTestUser).name);
+    cy.contains(currentFollowActionUser(testUser, anotherTestUser).gender);
+  });
+  it('フォロー中一覧ページへ画面遷移する', () => {
+    userSigninSuccess(currentFollowActionUser(testUser, anotherTestUser));
+    apiFollowings(currentFollowActionUser(testUser, anotherTestUser), [followedUser(anotherTestUser, testUser)]);
+    cy.contains('フォロー中 1').click();
+    cy.contains(`${currentFollowActionUser(testUser, anotherTestUser).name}がフォローしているユーザー`);
+    cy.contains(followedUser(anotherTestUser, testUser).name);
+    cy.contains(followedUser(anotherTestUser, testUser).gender);
+  });
 
-  it('ログインしてユーザー一覧ページからフォローする');
-  it('ログインしてユーザー一覧ページからフォローを解除する');
+  it('ログインしてフォローを解除する', () => {
+    userSigninSuccess(currentFollowActionUser(testUser, anotherTestUser));
+    apiUserShowAccess(followedUser(anotherTestUser, testUser));
+    cy.visit(`/users/${followedUser(anotherTestUser, testUser).id}`);
+    apiRelationShipDeleteAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
+    dataE2eGet(`unfollow-button-${anotherTestUser.id}`).click();
+    cy.contains('フォロー');
+  });
+
+  it('ログインしてユーザー一覧ページからフォローする', () => {
+    userSigninSuccess(testUser);
+    apiUserIndexAccess(users);
+    cy.visit('/users/index');
+    apiRelationShipCreateAccess(testUser, anotherTestUser, users);
+    dataE2eGet(`follow-button-${anotherTestUser.id}`).click();
+    cy.contains('フォロワー 1');
+    cy.contains('フォロー中 1');
+  });
+
+  it('ログインしてユーザー一覧ページからフォローを解除する', () => {
+    userSigninSuccess(testUser);
+    apiUserIndexAccess(users);
+    cy.visit('/users/index');
+    apiRelationShipCreateAccess(testUser, anotherTestUser, users);
+    dataE2eGet(`follow-button-${anotherTestUser.id}`).click();
+    cy.contains('フォロワー 1');
+    cy.contains('フォロー中 1');
+    apiRelationShipDeleteAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
+    dataE2eGet(`unfollow-button-${anotherTestUser.id}`).click();
+  });
 });
