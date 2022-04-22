@@ -45,9 +45,9 @@ jobs:
       - name: Start Frontend App
         run: |
           cd frontend
-          yarn
-          yarn build
-          yarn start
+          yarn install
+          craco build
+          craco start
 
 
 
