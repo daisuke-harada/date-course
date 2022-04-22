@@ -38,4 +38,16 @@ jobs:
         run: rubocop --fail-level W --display-only-fail-level-offenses
       - name: run rspec
         run: rspec spec
+  e2e_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start Frontend App
+        run: |
+          cd frontend
+          yarn
+          yarn build
+          yarn start
+
+
 
