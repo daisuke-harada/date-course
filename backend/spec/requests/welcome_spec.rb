@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Welcomes", type: :request do
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    it "welcomeメッセージを表示する" do
+      get "/"
+      expect(JSON.parse(response.body)["message"]).to eq("hello")
+    end
   end
 end

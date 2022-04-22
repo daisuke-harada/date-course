@@ -26,7 +26,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
       FactoryBot.create(:date_spot)
-      user = FactoryBot.create(:user)
+      FactoryBot.create(:user)
       date_spot_review = FactoryBot.build(:date_spot_review)
       post "/api/v1/date_spot_reviews", params: {
         date_spot_review: {
@@ -73,7 +73,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq(500)
-      expect(JSON.parse(response.body)["error_messages"]["content"]).to eq(["is too long (maximum is 100 characters)"])
+      expect(JSON.parse(response.body)["error_messages"]["content"]).to eq(["is too long (maximum is 75 characters)"])
     end
   end
 

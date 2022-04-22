@@ -1,0 +1,34 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+env:
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+jobs:
+  rubocop_rspec:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0.23
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options:
+          -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
+    container:
+      image: ruby:3.0.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup
+        run: |
+          apt-get update -qq
+          apt-get install -y build-essential libpq-dev nodejs
+          bundle install
+      - name: setup migrate
+        run: |
+          rails db:create
+          rails db:migrate
+          rails db:seed

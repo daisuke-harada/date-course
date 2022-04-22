@@ -74,7 +74,7 @@ export const CourseCard: VFC<Props> = memo((props) =>{
       <div className='text-center sm:text-lg text-xs my-5 font-bold m-auto w-2/3'>
         <Link to={`/courses/${course.id}`}>
           <BaseButton>
-            詳細ページへ行く
+            詳細を見る
           </BaseButton>
         </Link>
       </div>

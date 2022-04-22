@@ -50,7 +50,7 @@ export const Show: VFC = memo(() => {
       setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
       if(response.data.course.travelMode === 'DRIVING'){
         setTravelModeText('車');
-      }else if(response.data.course.travelMode === 'CYCLING'){
+      }else if(response.data.course.travelMode === 'BICYCLING'){
         setTravelModeText('自転車');
       }else{
         setTravelModeText('歩き');

@@ -34,7 +34,7 @@ class ApplicationController < ActionController::API
   def average_rate_calculation(reviews)
     review_rate_total = 0
     reviews.each{ |review| review_rate_total+=review.rate}
-    review_average_rate = review_rate_total == 0? 0: review_rate_total / reviews.length
+    review_rate_total == 0? 0: review_rate_total / reviews.length
   end
 
   # デートコース関連
@@ -52,7 +52,7 @@ class ApplicationController < ActionController::API
       Prefecture.find(Address.find_by(date_spot_id: during_spot.date_spot_id).prefecture_id).name
     end
 
-    no_duplicate_prefecture_name = prefecture_name.uniq
+    prefecture_name.uniq
   end
 
   # コース情報を返す

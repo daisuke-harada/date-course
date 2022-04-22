@@ -35,9 +35,11 @@ spotAndAddressCreate("キャナルシティ博多", 1, normal_time("08:00"), nor
 spotAndAddressCreate("つなぐダイニング ZINO 天神店", 8, normal_time("20:00"), midnight__time("05:00"), 40, "福岡市中央区大名1-11-22-1")
 spotAndAddressCreate("大濠公園", 12, "", "", 40, "福岡市中央区大濠公園")
 
+#千葉
+spotAndAddressCreate("東京ディズニーランド", 5, normal_time("10:00"), normal_time("19:00"), 12, "浦安市舞浜１−１")
+
 # 東京
-spotAndAddressCreate("東京ディズニーランド", 5, normal_time("10:00"), normal_time("19:00"), 12, "墨田区押上1-1-2")
-spotAndAddressCreate("東京スカイツリー", 11, normal_time("10:00"), normal_time("21:00"), 13, "渋谷区恵比寿4丁目20 ガーデンプレイス")
+spotAndAddressCreate("東京スカイツリー", 11, normal_time("10:00"), normal_time("21:00"), 13, "墨田区押上１丁目１−２")
 spotAndAddressCreate("恵比寿ガーデンプレイス", 1, normal_time("07:00"), midnight__time("00:00"), 13, "渋谷区恵比寿4丁目20 ガーデンプレイス")
 
 # 熊本

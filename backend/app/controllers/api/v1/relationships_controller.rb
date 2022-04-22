@@ -1,6 +1,5 @@
 class Api::V1::RelationshipsController < ApplicationController
   def create
-    # フォローするユーザー
     current_user = User.find(params[:current_user_id])
     followed_user = User.find(params[:followed_user_id])
     following = current_user.follow(followed_user)
@@ -28,7 +27,6 @@ class Api::V1::RelationshipsController < ApplicationController
     @users = users.map do |user|
       user_and_userFollowingsAndFollowers(user)
     end
-
     render json: {
       status: :deleted,
       users: @users,
@@ -38,8 +36,7 @@ class Api::V1::RelationshipsController < ApplicationController
   end
 
   def followings
-    user = User.find(params[:user_id])
-    users = user.followings
+    users = User.find(params[:user_id]).followings
     @users = users.map do |user|
       user_and_userFollowingsAndFollowers(user)
     end
@@ -47,8 +44,7 @@ class Api::V1::RelationshipsController < ApplicationController
   end
 
   def followers
-    user = User.find(params[:user_id])
-    users = user.followers
+    users = User.find(params[:user_id]).followers
     @users = users.map do |user|
       user_and_userFollowingsAndFollowers(user)
     end

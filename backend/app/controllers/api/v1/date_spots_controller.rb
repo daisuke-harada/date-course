@@ -81,6 +81,6 @@ class Api::V1::DateSpotsController < ApplicationController
 
   # 評価の平均値を計算する
   def average_rate_calculation(reviews)
-    review_average_rate = reviews.sum(:rate) == 0? 0: (reviews.sum(:rate) / reviews.count).floor(1).to_f
+    reviews.sum(:rate) == 0? 0: (reviews.sum(:rate) / reviews.count).floor(1).to_f
   end
 end
