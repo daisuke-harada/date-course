@@ -40,7 +40,7 @@ class Api::V1::RelationshipsController < ApplicationController
     @users = users.map do |user|
       user_and_userFollowingsAndFollowers(user)
     end
-    render json: { user_name: user.name, users: @users}
+    render json: { user_name: User.find(params[:user_id]).name, users: @users}
   end
 
   def followers
@@ -48,6 +48,6 @@ class Api::V1::RelationshipsController < ApplicationController
     @users = users.map do |user|
       user_and_userFollowingsAndFollowers(user)
     end
-    render json: { user_name: user.name, users: @users}
+    render json: { user_name: User.find(params[:user_id]).name, users: @users}
   end
 end
