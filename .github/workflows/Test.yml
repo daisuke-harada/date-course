@@ -26,6 +26,7 @@ jobs:
         run: |
           apt-get update -qq
           apt-get install -y build-essential libpq-dev nodejs
+          cd backend
           gem install bundler
           bundle install
       - name: setup migrate
