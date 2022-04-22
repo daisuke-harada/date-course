@@ -1,8 +1,7 @@
-import { guestUser, anotherTestUser } from './../fixtures/users/response';
+import { guestUser, anotherTestUser, testUser } from '../fixtures/users/response';
 import { apiLoginAccess, apiUserIndexAccess, apiUserUpdateAccess, apiUserShowAccess, apiSignUpAccess, apiUserDeleteAccess } from '../support/backendAccessMock/users/apiUserAccess';
 import { testUserInput } from '../fixtures/users/session';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
-import { testUser } from '../fixtures/users/response';
 import { userSigninSuccess } from '../support/hooks/session';
 import { spotReviewAndDateSpotResponseDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
 import { apiHomeTopAccess } from '../support/backendAccessMock/homes/apiHomeAccess';

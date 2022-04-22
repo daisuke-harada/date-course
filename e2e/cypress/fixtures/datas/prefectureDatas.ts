@@ -1,6 +1,5 @@
 import { Prefecture } from '../../support/types/datas/activeHash';
 
-
 export const prefectureDatas: Prefecture[] = [
   { id: 1, name: '北海道', areaId: 1 }, { id: 2, name: '青森県', areaId: 1 }, { id: 3, name: '岩手県', areaId: 1 },
   { id: 4, name: '宮城県', areaId: 1 }, { id: 5, name: '秋田県', areaId: 1 }, { id: 6, name: '山形県', areaId: 1 },

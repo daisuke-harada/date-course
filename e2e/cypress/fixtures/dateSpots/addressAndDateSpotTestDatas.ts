@@ -1,9 +1,8 @@
-import { genreDatas } from './../../../../frontend/src/datas/genreDatas';
+
 import { AddressAndDateSpotJoinData } from "../../support/types/dateSpots/response";
-import { dateSpotTestDatas } from "./DateSpotTestDatas";
+import { dateSpotTestDatas } from "../dateSpots/DateSpotTestDatas";
 
 export const addressAndDateSpotTestDatas: AddressAndDateSpotJoinData[] = [
-  
   {
     averageRate: 2.7,
     cityName: "福岡県福岡市博多区住吉1丁目2",
