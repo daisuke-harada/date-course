@@ -48,6 +48,10 @@ jobs:
           yarn install
           yarn build
           yarn start
+      - uses: cypress-io/github-action@v2
+        with:
+          wait-on: "http://localhost:3000"
+          working-directory: ../e2e
 
 
 
