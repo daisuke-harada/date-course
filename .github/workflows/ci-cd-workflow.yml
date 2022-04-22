@@ -1,4 +1,4 @@
-name: Test
+name: ci-cd-workflow
 on:
   pull_request:
     branches:
@@ -40,6 +40,7 @@ jobs:
           cd backend
           rspec
   e2e_test:
+    needs: backend_test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
