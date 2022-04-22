@@ -4,8 +4,6 @@ on:
     branches:
       - master
     types: [closed]
-env:
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
   backend_test:
     runs-on: ubuntu-latest
@@ -21,6 +19,8 @@ jobs:
     container:
       image: ruby:3.0.3
     steps:
+      - env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       - uses: actions/checkout@v2
       - name: setup
         run: |
