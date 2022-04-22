@@ -16,6 +16,6 @@ export const GuestLoginButton: VFC = memo(() => {
   const { loginAction } = useLoginAuthAction(signInParams);
 
   return(
-    <Button onClick={loginAction}>ゲストログイン<Span>(簡単ログイン)</Span></Button>
+    <Button data-e2e='guest-login-button' onClick={loginAction}>ゲストログイン<Span>(簡単ログイン)</Span></Button>
   );
 });

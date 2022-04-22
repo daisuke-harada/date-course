@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    render json: {status: :delete}
+    render json: {status: :deleted}
   end
 
   def index

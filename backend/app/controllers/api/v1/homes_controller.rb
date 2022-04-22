@@ -8,7 +8,6 @@ class Api::V1::HomesController < ApplicationController
     @address_and_date_spots = addresses.map do |address|
       address_and_date_spot_and_genre_name(address)
     end
-
     render json: { areas: @areas, main_prefectures: @main_prefectures, main_genres: @main_genres, genres: @genres, address_and_date_spots: @address_and_date_spots }
   end
 end

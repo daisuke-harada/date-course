@@ -16,6 +16,18 @@ export const apiSignUpAccess = (condition: boolean, loginStatusData: boolean, us
   }
 };
 
+export const apiUserUpdateAccess = (userParam: UserResponseData) => {
+  cy.intercept('PUT', `api/v1/users/${userParam.id}`, (req) => {
+    req.reply({status: 'updated', user: userParam });
+  });
+};
+
+export const apiUserDeleteAccess = (userId: number) => {
+  cy.intercept('DELETE', `api/v1/users/${userId}`, (req) => {
+    req.reply({status: 'deleted'});
+  })
+}
+
 export const apiUserIndexAccess = (users: UserResponseData[]) => {
   cy.intercept('GET', 'api/v1/users', (req) => {
     req.reply({users: users})
