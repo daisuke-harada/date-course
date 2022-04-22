@@ -33,7 +33,7 @@ export const anotherTestUser: UserResponseData = {
   id: 3,
   image: {url: null},
   name: 'marika',
-  passwordDigest: '$2a$12$VWVmYK2Lbw.Rp3qWMEUKPu5qTxdXyBB1547MRYRpXFo5Jlbhaor'
+  passwordDigest: 'marikamarika'
 }
 
 export const adminUser: UserResponseData = {

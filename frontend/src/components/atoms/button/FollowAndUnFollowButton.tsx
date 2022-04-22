@@ -6,7 +6,6 @@ import tw from 'tailwind-styled-components';
 import { UserResponseData } from 'types/users/response';
 
 type Props = {
-  dataE2e?: string,
   userId: number,
   addClassName?: string,
   setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>,
@@ -17,7 +16,7 @@ const FollowButton = tw.button`btn btn-yellow-green text-sm`
 const UnfollowButton = tw.button`btn btn-unfollow`;
 
 export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
-  const {dataE2e, userId, setUsers, setUser, addClassName} = props;
+  const {userId, setUsers, setUser, addClassName} = props;
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
@@ -54,9 +53,9 @@ export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
         getLoginStatus.status === true &&
         currentUserId !== userId &&
         (currentUser.user.followingIds && currentUser.user.followingIds.includes(userId)?
-        <UnfollowButton data-e2e={dataE2e} className={addClassName} onClick={onClickUnfollowAction}>フォロー中</UnfollowButton>
+        <UnfollowButton data-e2e={`unfollow-button-${userId}`} className={addClassName} onClick={onClickUnfollowAction}>フォロー中</UnfollowButton>
         :
-        <FollowButton data-e2e={dataE2e} className={addClassName} onClick={onClickFollowAction}>フォロー</FollowButton>
+        <FollowButton data-e2e={`follow-button-${userId}`} className={addClassName} onClick={onClickFollowAction}>フォロー</FollowButton>
         )
       }
     </>
