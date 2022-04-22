@@ -1,6 +1,6 @@
 
 import { DateSpotReviewAndDateSpotResponseData, DateSpotReviewAndUserResponseData } from "../../support/types/dateSpotReviews/response";
-import { dateSpotTestDatas } from "../dateSpots/DateSpotTestDatas";
+import { dateSpotTestDatas } from "../dateSpots/dateSpotTestDatas";
 
 export const spotReviewAndDateSpotResponseDatas: DateSpotReviewAndDateSpotResponseData[] = [
   {
