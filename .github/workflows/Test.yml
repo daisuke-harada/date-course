@@ -7,7 +7,7 @@ on:
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
-  backend_setup:
+  backend_test:
     runs-on: ubuntu-latest
     services:
       db:
@@ -34,11 +34,6 @@ jobs:
           rails db:create
           rails db:migrate
           rails db:seed
-  rubocop:
-    runs-on: ubuntu-latest
-    needs: backend_setup
-    steps:
-    - uses: actions/checkout@v2
-    - name: run rubocop
-      run: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
+      - name: run rubocop
+        run: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
 
