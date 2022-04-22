@@ -54,7 +54,7 @@ jobs:
           wait-on: "http://localhost:3000"
           # Cypress を ./e2e/ に配置しているため、working-directoryを指定する
           # デフォルトはルートディレクトリ
-          working-directory: e2e/cypress
+          working-directory: e2e
       # - name: run cypress
       #   run: |
       #     cd e2e
