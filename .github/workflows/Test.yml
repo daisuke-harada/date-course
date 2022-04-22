@@ -47,7 +47,7 @@ jobs:
           apt-get update -qq
           apt-get install -y build-essential libpq-dev nodejs
           cd frontend
-          yarn install
+          yarn
           yarn build
           yarn start
       - uses: cypress-io/github-action@v2
