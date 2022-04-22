@@ -36,4 +36,6 @@ jobs:
           rails db:seed
       - name: run rubocop
         run: rubocop --fail-level W --display-only-fail-level-offenses
+      - name: run rspec
+        run: rspec spec
 

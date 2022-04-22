@@ -61,7 +61,7 @@ RSpec.describe "Api::V1::Users", type: :request do
     it "user情報の削除に成功する" do
       user = FactoryBot.create(:user)
       delete "/api/v1/users/#{user.id}"
-      expect(JSON.parse(response.body)["status"]).to eq("delete")
+      expect(JSON.parse(response.body)["status"]).to eq("deleted")
     end
   end
 end
