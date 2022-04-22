@@ -47,6 +47,7 @@ jobs:
           cd frontend
           yarn
           yarn build
+          yarn start &
       - name: start cypress
         run: |
           cd e2e
