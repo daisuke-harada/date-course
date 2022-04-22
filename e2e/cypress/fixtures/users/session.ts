@@ -1,4 +1,4 @@
-import { testUser } from "./response";
+import { testUser } from "./response"
 
 export const testUserInput = {
   name: testUser.name,

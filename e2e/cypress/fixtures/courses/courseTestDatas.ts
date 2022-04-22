@@ -1,4 +1,4 @@
-import { anotherTestUser, guestUser } from './../users/response';
+import { anotherTestUser, guestUser } from '../users/response';
 import { CourseResponseData } from "../../support/types/courses/response";
 import { addressAndDateSpotTestDatas } from "../dateSpots/addressAndDateSpotTestDatas";
 import { testUser } from "../users/response";

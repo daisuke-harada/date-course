@@ -42,18 +42,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Start Frontend App
+      - name: setup Frontend App
         run: |
           cd frontend
           yarn
           yarn build
           yarn start &
-      - name: start cypress
+      - name: run cypress
         run: |
           cd e2e
           yarn install --frozen-lockfile
           yarn run cypress verify
           yarn run cypress run
-
-
-
