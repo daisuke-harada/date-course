@@ -4,6 +4,8 @@ on:
     branches:
       - master
     types: [closed]
+env:
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
   backend_test:
     runs-on: ubuntu-latest
@@ -26,9 +28,7 @@ jobs:
           gem install bundler
           bundle install
       - name: setup migrate
-        env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      - run: |
+        run: |
           cd backend
           rails db:create
           rails db:migrate
