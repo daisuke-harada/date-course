@@ -51,12 +51,14 @@ jobs:
           yarn build
           yarn start
       - uses: cypress-io/github-action@v2
-        run: |
-          apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-          cd e2e
-          yarn install --frozen-lockfile
-          yarn run cypress verify
-          yarn run cypress run
+        with:
+          wait-on: "http://localhost:3000"
+          working-directory: ../e2e
+        # run: |
+        #   apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+        #   yarn install --frozen-lockfile
+        #   yarn run cypress verify
+        #   yarn run cypress run
 
 
 
