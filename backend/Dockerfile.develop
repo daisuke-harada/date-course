@@ -8,9 +8,6 @@ WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
-RUN apt-get update -qq && \
-    apt-get install -y build-essential && \
-    gem install bundler
 
 RUN bundle install
 
