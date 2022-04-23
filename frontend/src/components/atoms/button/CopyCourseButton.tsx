@@ -23,5 +23,5 @@ export const CopyCourseButton: VFC<Props> = memo((props) => {
       setGlobalCourseInfo({travelMode: courseInfo.travelMode, authority: courseInfo.authority, noDuplicatePrefectureNames: courseInfo.noDuplicatePrefectureNames });
       navigate('/managementCourses/createCourse');
   };
-  return <SecondaryButton dataE2e="copy-course-button" onClickEvent={onClickAddCourseAction}>デートコースを作成する</SecondaryButton>;
+  return <SecondaryButton dataE2e="copy-course-button" onClickEvent={onClickAddCourseAction}>デートコースをコピー</SecondaryButton>;
 });

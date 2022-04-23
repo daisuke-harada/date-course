@@ -11,7 +11,7 @@ type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
 }
 
-const ButtonParentDiv = tw.div`m-5`;
+const ButtonParentDiv = tw.div`m-5 tex-sm`;
 
 export const AddCourseButton: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
@@ -38,7 +38,7 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
         getLoginStatus.status &&
         (
         <ButtonParentDiv>
-          <BaseButton dataE2e={`courseAddButtonId-${addressAndDateSpot.dateSpot.id}`} onClickEvent={onClickAddCourseAction}>コースに追加</BaseButton>
+          <BaseButton dataE2e={`courseAddButtonId-${addressAndDateSpot.dateSpot.id}`} onClickEvent={onClickAddCourseAction}>デートコースに追加</BaseButton>
         </ButtonParentDiv>
         )
       }
