@@ -139,16 +139,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                   <ul>
                     {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
                   </ul>
-                  <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
+                  <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
                   <ButtonArea>
                     <ButtonParentDiv>
-                      <BaseButton onClickEvent={onChangeOpen}>編集を解除</BaseButton>
+                      <BaseButton dataE2e='dateSpotReview-edit-cancel-button' onClickEvent={onChangeOpen}>編集を解除</BaseButton>
                     </ButtonParentDiv>
                     <ButtonParentDiv>
-                      <SecondaryButton onClickEvent={onClickDateSpotReviewUpdateAction}>更新</SecondaryButton>
+                      <SecondaryButton dataE2e='dateSpotReview-update-button' onClickEvent={onClickDateSpotReviewUpdateAction}>更新</SecondaryButton>
                     </ButtonParentDiv>
                     <ButtonParentDiv>
-                      <DangerButton onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
+                      <DangerButton dataE2e='dateSpotReview-delete-button' onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
                     </ButtonParentDiv>
                   </ButtonArea>
                 </>
@@ -158,7 +158,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>
-                      <BaseButton onClickEvent={onChangeOpen}>編集</BaseButton>
+                      <BaseButton dataE2e='dateSpotReview-edit-button' onClickEvent={onChangeOpen}>編集</BaseButton>
                     </ButtonParentDiv>
                   </div>
                 </>
@@ -181,9 +181,9 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
           <ul>
             {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
           </ul>
-          <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
+          <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
           <div className='ml-auto pt-2'>
-            <BaseButton onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>
+            <BaseButton dataE2e='dateSpotReview-create-button' onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>
           </div>
         </UserInfoDiv>
       </Div>
