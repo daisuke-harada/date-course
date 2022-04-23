@@ -83,7 +83,7 @@ export const Show: VFC = memo(() => {
               {user.gender}
             </Span>
             <Span><FollowAndUnFollowButton addClassName='mobile(L):text-sm mofile(M):w-1/3 sm:text-2xl text-xs mt-0' userId={user.id} setUser={setUser} /></Span>
-            <Span className='mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
+            <Span className='mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/6'>
               {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
                 &&
                 <Link className='text-white' to={`edit`}>
