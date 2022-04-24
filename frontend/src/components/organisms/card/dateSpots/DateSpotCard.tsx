@@ -13,7 +13,7 @@ type Props = {
 
 const DD = tw.dd`w-56 m-2 text-xs font-bold`;
 const Title = tw.dd`m-2 font-bold`;
-const Image = tw.img`w-52 h-52 m-auto rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const Image = tw.img`w-52 h-52 m-auto rounded-xl border-4 border-pink-400 hover:border-pink-600 hover:scale-105 duration-75`;
 
 export const DateSpotCard: VFC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;

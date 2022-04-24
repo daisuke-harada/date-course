@@ -11,7 +11,7 @@ type Props = {
   gender: string,
 };
 
-const ImageParentDiv = tw.div`relative pt-20 hover:scale-105`;
+const ImageParentDiv = tw.div`relative pt-20 hover:scale-105 duration-75`;
 const Image = tw.img`lg:bg-top object-fill absolute top-0 w-full h-full rounded-xl border-4`;
 
 export const UserImage: VFC<Props> = memo((props) => {

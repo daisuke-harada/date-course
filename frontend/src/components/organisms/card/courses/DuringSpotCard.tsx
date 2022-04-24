@@ -8,7 +8,6 @@ type Props ={
 };
 
 const Image = tw.img`mobile(M):w-24 mobile(M):h-24 w-20 h-20 rounded-t-xl`;
-const MainDiv= tw.div`bg-white rounded-xl shadow-xl m-1 mobile(M):w-24 w-20`;
 
 export const DuringSpotCard: VFC<Props> = memo((props) => {
   const { duringSpot } = props;
@@ -20,15 +19,11 @@ export const DuringSpotCard: VFC<Props> = memo((props) => {
   }, [duringSpot]);
 
   return(
-    <MainDiv>
-      <Link to={`/dateSpots/${duringSpot.dateSpot.id}`}>
+      <Link className='bg-white rounded-xl shadow-xl m-1 mobile(M):w-24 w-20 hover:scale-105 duration-75' to={`/dateSpots/${duringSpot.dateSpot.id}`}>
         <Image src={duringSpotImage} alt='DateSpotProfileImage' />
+        <div className='sm:block text-center text-xs font-bold overflow-x-scroll whitespace-nowrap pb-3 mobile(M):w-24 w-20'>
+            <div className='my-2'>{duringSpot.dateSpot.name}</div>
+        </div>
       </Link>
-      <div className='sm:block text-center text-xs font-bold overflow-x-scroll whitespace-nowrap pb-3 mobile(M):w-24 w-20'>
-        <Link to={`/dateSpots/${duringSpot.dateSpot.id}`}>
-          <div className='my-2'>{duringSpot.dateSpot.name}</div>
-        </Link>
-      </div>
-    </MainDiv>
   );
 });
