@@ -19,10 +19,29 @@ https://www.datecourses.com/
 - フロントエンド
   - Reactを用いてSPA(SinglePagaApplication)を実装している点。
   - TypeScriptで開発を行なっている点。
-  - UIフレームワークにtailwindcssを利用している点。
+  - CSSフレームワークにtailwindcssを利用している点。
 
 - テスト
   - バックエンドのテストとしてrspecを利用してrequestsテストとmodelテストを実装している点。
   - e2eテストとしてCypressを利用している点。
+
+# 使用した技術
+
+- フロントエンド
+  - HTML/CSS
+  - TypeScript
+  - React.js
+  - tailwindcss(CSSフレームワーク)
+- バックエンド
+  - Ruby 3.0.3
+  - Ruby on Rails 6.1.4 (APIモード)
+  - Rubocop（コード解析ツール）
+  - RSpec（テスト）
+- インフラ・開発環境
+  - Docker/docker-compose
+  - AWS (ECR,ECS,VPC,S3,Route53,ALB,RDS,ACM, SSM）
+  - GitHubActions(CI/CD)
+- e2eテスト
+  - cypress
 
 
