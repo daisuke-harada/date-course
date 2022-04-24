@@ -16,7 +16,7 @@ import { StarRateText } from 'components/atoms/text/StarRateText';
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
 const UserInfoDiv = tw.div`w-2/3 h-52 pt-5 px-2 flex flex-col`
-const ButtonParentDiv = tw.div`mx-2`
+const ButtonParentDiv = tw.div`mx-2 my-1 text-xs`
 const ButtonArea = tw.div`ml-auto pt-2 flex`
 
 type DateSpotRreviewParam = {
@@ -124,7 +124,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   if(currentDateSpotReview){
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='h-40 w-40' />
+        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20' />
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
@@ -170,7 +170,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   }else{
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='h-40 w-40' />
+        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20' />
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>

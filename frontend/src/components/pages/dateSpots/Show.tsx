@@ -14,6 +14,7 @@ import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/Da
 import { StarRateText } from 'components/atoms/text/StarRateText';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { Loading } from '../Loading';
+import { AddCourseButton } from 'components/atoms/button/courses/AddCourseButton';
 
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 p-3 rounded-2xl m-2`;
 const DateSpotNameTitle = tw.h1`w-full my-5 text-sm font-bold md:text-3xl`;
@@ -65,6 +66,9 @@ export const Show: VFC = memo(() => {
               <Link to={`/genres/${addressAndDateSpot?.dateSpot.genreId}`}>
                 {addressAndDateSpot?.genreName}
               </Link>
+            </div>
+            <div className='lg:text-base md:mx-0 mobile(L):w-1/2 m-auto text-xs text-center mb-5'>
+              <AddCourseButton addressAndDateSpot={addressAndDateSpot}/>
             </div>
             <div className='w-1/3 text-center mb-5'>
               {

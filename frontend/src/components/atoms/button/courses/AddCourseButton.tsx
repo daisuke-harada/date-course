@@ -35,7 +35,9 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
   return(
     <>
       {
-        getLoginStatus.status &&
+        getLoginStatus.status
+        && getCurrentUser.user.admin === false
+        &&
         (
         <ButtonParentDiv>
           <BaseButton dataE2e={`courseAddButtonId-${addressAndDateSpot.dateSpot.id}`} onClickEvent={onClickAddCourseAction}>デートコースに追加</BaseButton>

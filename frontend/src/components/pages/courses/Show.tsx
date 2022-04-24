@@ -8,7 +8,7 @@ import { memo, useCallback, useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session';
+import { currentUserState } from 'store/session';
 import tw from 'tailwind-styled-components';
 import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
 import { Loading } from 'components/pages/Loading';
@@ -38,7 +38,6 @@ export const Show: VFC = memo(() => {
   const navigate = useNavigate();
   const [travelModeText, setTravelModeText] = useState('');
   const getCurrentUser = useRecoilValue(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
 
   const onClickDeleteCourse = useCallback(()=>{
     client.delete(`courses/${id}`).then(response => {
@@ -108,13 +107,9 @@ export const Show: VFC = memo(() => {
               </BaseButton>
             </Link>
           </ButtonParentDiv>
-          {
-            getLoginStatus.status
-            &&
-            <ButtonParentDiv>
-              <CopyCourseButton managementCourses={managementCourses} courseInfo={courseInfo} />
-            </ButtonParentDiv>
-          }
+          <ButtonParentDiv>
+            <CopyCourseButton managementCourses={managementCourses} courseInfo={courseInfo} />
+          </ButtonParentDiv>
           {
             getCurrentUser.user.id === managementCourses.userId
             &&
@@ -128,7 +123,6 @@ export const Show: VFC = memo(() => {
               </>
             )
           }
-          {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
         </ButtonArea>
       </MainDiv>
     </Loading>

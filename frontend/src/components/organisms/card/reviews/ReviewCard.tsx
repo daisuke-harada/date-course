@@ -22,6 +22,5 @@ export const ReviewCard: VFC<Props> = memo((props) => {
         </div>
       </div>
     </div>
-
   );
 });
