@@ -66,7 +66,7 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
         </div>
         <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
       </SelectParentDiv>
-      <div className='m-auto my-5 w-3/4'>
+      <div className='m-auto my-5 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>

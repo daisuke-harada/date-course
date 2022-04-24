@@ -44,7 +44,7 @@ export const CourseSortSearchBar: VFC<Props> = memo((props) => {
       <SelectParentDiv>
         <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
-      <div className='m-auto my-5 w-3/4'>
+      <div className='m-auto my-5 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>

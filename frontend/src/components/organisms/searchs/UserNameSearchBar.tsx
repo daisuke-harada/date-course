@@ -30,7 +30,7 @@ export const UserNameSearchBar: VFC = memo(() => {
       <div className='p-3'>
         <Input onChange={onChangeSearchName} type='text' value={userName} placeholder='名前を入力' />
       </div>
-      <div className='m-auto my-5 w-3/4'>
+      <div className='m-auto my-5 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>

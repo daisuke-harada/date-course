@@ -33,7 +33,7 @@ export const UserSearchArea: VFC<Props> = memo((props) => {
       <div className='pt-5 mt-5 mb-2 px-2'>
         <Input onChange={onChangeSearchName} type='text' value={userName} placeholder='名前を検索' />
       </div>
-      <div className='m-auto my-5 w-1/3'>
+      <div className='m-auto my-5 w-1/4'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </>
