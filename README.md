@@ -1,24 +1,28 @@
 # DateCourses
 
-IPアドレス
+リンク
 https://www.datecourses.com/
 
-Things you may want to cover:
+トップページ
 
-* Ruby version
+# 特にみていただきたい点
 
-* System dependencies
+- インフラ
+  - Dockerを用いて、ECS(Fargate)で本番環境をサーバーレスで運用している点。
+  - ALBを通すことで、常時SSL通信を行っている点。
+  - S3で本番環境の画像の管理を行なっている点。
+  - GitHubActionsを用いてCI/CDを行なっている点。
 
-* Configuration
+- バックエンド
+  - RubyonRailsのAPIモードを利用し、APIサーバーとしてフロントエンドのリクエストに対してJSON形式でデータを返している点。
 
-* Database creation
+- フロントエンド
+  - Reactを用いてSPA(SinglePagaApplication)を実装している点。
+  - TypeScriptで開発を行なっている点。
+  - UIフレームワークにtailwindcssを利用している点。
 
-* Database initialization
+- テスト
+  - バックエンドのテストとしてrspecを利用してrequestsテストとmodelテストを実装している点。
+  - e2eテストとしてCypressを利用している点。
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
