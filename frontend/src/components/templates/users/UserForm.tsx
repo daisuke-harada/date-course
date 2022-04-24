@@ -93,24 +93,29 @@ export const UserForm: VFC<Props> = memo((props) => {
       });
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
-      formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
-        if (response.data.status === 'updated'){
-          // 編集に成功したのでログイン情報も一緒に更新する。
-          setCurrentUser({user: response.data.user});
-          // 画面遷移
-          navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
-        };
+      // guestユーザーは退会できなくする。
+      if(currentUser.user.id === 1) {
+        navigate(`./`, {state: {message: 'guestユーザーは情報を更新できません', type: 'error-message', condition: true}});
+      }else{
+        formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
+          if (response.data.status === 'updated'){
+            // 編集に成功したのでログイン情報も一緒に更新する。
+            setCurrentUser({user: response.data.user});
+            // 画面遷移
+            navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
+          };
 
-        // 新規登録失敗
-        if(response.data.status === 500){
-          const {password, name, email} = response.data.errorMessages
-          // エラーメッセージをセットする。
-          name !== undefined && setErrorNameMessages(name);
-          email !== undefined && setErrorEmailMessages(email);
-          password !== undefined && setErrorPasswordMessages(password);
-          navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
-        };
-      });
+          // 新規登録失敗
+          if(response.data.status === 500){
+            const {password, name, email} = response.data.errorMessages
+            // エラーメッセージをセットする。
+            name !== undefined && setErrorNameMessages(name);
+            email !== undefined && setErrorEmailMessages(email);
+            password !== undefined && setErrorPasswordMessages(password);
+            navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
+          };
+        });
+      };
     };
     // イベントが明示的に処理されない場合にその既定のアクションを通常どおりに行うべきではないことを伝えます
     e.preventDefault();

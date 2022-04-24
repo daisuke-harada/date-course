@@ -5,8 +5,8 @@ import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
 import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
 import { Link } from 'react-router-dom';
 
-const ImageParentDiv = tw.div`lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20 relative pt-20 hover:scale-105 duration-75`;
-const Image = tw.img`lg:bg-top object-fill absolute top-0 w-full h-full rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const ImageParentDiv = tw.div`lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20 relative hover:scale-105 duration-75`;
+const Image = tw.img`lg:bg-top object-cover absolute top-0 w-full h-full rounded-xl border-4 border-pink-400 hover:border-pink-600`;
 
 
 
