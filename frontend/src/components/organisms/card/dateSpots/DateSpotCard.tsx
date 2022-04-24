@@ -4,7 +4,7 @@ import { Card } from 'components/atoms/card/Card';
 import { AddressAndDateSpotJoinData, DateSpotResponseData } from 'types/dateSpots/response';
 import { genreDatas } from 'datas/genreDatas';
 import { Link } from 'react-router-dom';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { AddCourseButton } from 'components/atoms/button/courses/AddCourseButton';
 
 type Props = {
@@ -34,7 +34,11 @@ export const DateSpotCard: VFC<Props> = memo((props) => {
         </Link>
       </DD>
       <Title>
-        <Link to={`/dateSpots/${dateSpot.id}`}>{dateSpot.name}</Link>
+        <Link to={`/dateSpots/${dateSpot.id}`}>
+          <div className='w-52 overflow-x-scroll whitespace-nowrap pb-2'>
+            {dateSpot.name}
+          </div>
+        </Link>
       </Title>
       <div className='flex justify-center'>
         <StarRateText rate={addressAndDateSpot.averageRate} size={24} />

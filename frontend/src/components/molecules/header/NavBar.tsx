@@ -15,7 +15,7 @@ type Props = {
 }
 
 const Ul = tw.ul`lg:hidden duration-500 fixed top-20 text-center border-b-2 border-red-100 rounded-b-lg bg-red-100 z-40 shadow-xl w-2/3 right-0`;
-const IndexList = tw.li`px-2 py-4 text-black font-bold hover:bg-red-300 hover:text-black`;
+const IndexList = tw.li`px-4 py-4 text-black font-bold hover:bg-red-300 hover:text-black`;
 const ButtonList = tw.li`p-2 mt-3`;
 
 export const NavBar: VFC<Props> = memo((props) => {

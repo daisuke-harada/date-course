@@ -12,7 +12,7 @@ type Props = {
   setUser?: React.Dispatch<React.SetStateAction<UserResponseData>>
 };
 
-const FollowButton = tw.button`btn btn-yellow-green text-sm`
+const FollowButton = tw.button`btn btn-yellow-green `
 const UnfollowButton = tw.button`btn btn-unfollow`;
 
 export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {

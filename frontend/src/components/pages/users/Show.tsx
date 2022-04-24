@@ -6,7 +6,7 @@ import tw from 'tailwind-styled-components';
 
 import { client } from 'lib/api/client';
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { FollowAndUnFollowButton } from 'components/atoms/button/users/FollowAndUnFollowButton';
 import { UserResponseData } from 'types/users/response';
 import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Map } from 'components/molecules/maps/Map';
 import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/DateSpotReviewArea';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { Loading } from '../Loading';
 

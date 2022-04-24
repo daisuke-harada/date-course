@@ -1,4 +1,4 @@
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { memo, ReactNode, VFC } from 'react';
 
 type Props = {

@@ -2,7 +2,7 @@ import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Link } from 'react-router-dom';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { client } from 'lib/api/client';
 import { ChangeSelect } from 'components/molecules/select/managementCourses/ChangeSelect';
 import { ManagementCourseData } from 'types/managementCourses/management';

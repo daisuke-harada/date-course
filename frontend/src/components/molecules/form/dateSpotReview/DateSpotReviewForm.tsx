@@ -6,12 +6,12 @@ import tw from 'tailwind-styled-components';
 import { client } from 'lib/api/client';
 import { currentUserState } from 'store/session';
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DangerButton } from 'components/atoms/button/DangerButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import { StarRateForm } from 'components/atoms/form/StarRateForm';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`

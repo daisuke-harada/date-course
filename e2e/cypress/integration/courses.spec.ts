@@ -1,5 +1,5 @@
 import { apiDateSpotShowAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
-import { testUser } from '../fixtures/users/response';
+import { anotherTestUser, testUser } from '../fixtures/users/response';
 import { userSigninSuccess } from '../support/hooks/session';
 import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
@@ -145,8 +145,8 @@ describe('courses', () => {
     userSigninSuccess(testUser);
     inputMangementCourse('DRIVING', '公開', addressAndDateSpots);
     cy.contains('全て削除').click();
-    cy.contains('目的地は登録されていません。');
-    cy.contains('デートスポットをデートコースに追加してみましょう。');
+    cy.contains('現在登録されていません。');
+    cy.contains('デートコースを作成してみましょう。');
   });
 
   it('デートコース作成ページでデートスポットの順番を入れ替える', () => {
@@ -188,9 +188,33 @@ describe('courses', () => {
 
     // デートコース内のデートスポット情報を表示させるために必要。
     courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
-
     cy.contains('詳細を見る').first().click();
 
+    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+      cy.contains(addressAndDateSpot.dateSpot.name);
+      cy.contains(addressAndDateSpot.cityName);
+      cy.contains(addressAndDateSpot.genreName);
+    });
+  });
+
+  it('ログインしてない状態で、デートコース作成機能に画面遷移できない', () => {
+    cy.visit(`/managementCourses/createCourse`);
+    cy.contains('アカウント所有者しかアクセスできません');
+  })
+
+  it('デートコース詳細ページからデートコースをコピーして、新たなデートコースを作成する', () => {
+    userSigninSuccess(anotherTestUser);
+    apiCourseShowAccess(courseTestDatas[0]);
+    // デートコース内のデートスポット情報を表示させるために必要。
+    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
+    cy.visit(`/courses/${courseTestDatas[0].id}`);
+    dataE2eGet('copy-course-button').click();
+    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+      cy.contains(addressAndDateSpot.dateSpot.name);
+      cy.contains(addressAndDateSpot.cityName);
+      cy.contains(addressAndDateSpot.genreName);
+    });
+    cy.contains('登録').click();
     courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
       cy.contains(addressAndDateSpot.dateSpot.name);
       cy.contains(addressAndDateSpot.cityName);

@@ -5,7 +5,7 @@ import { currentUserState, loginStatusState } from 'store/session';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DateSpotReviewForm } from 'components/molecules/form/dateSpotReview/DateSpotReviewForm';
 import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 
 type Props = {
   dateSpotId: number,

@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import { UserResponseData } from 'types/users/response';
 import { Card } from 'components/atoms/card/Card';
 import { Link } from 'react-router-dom';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { FollowAndUnFollowButton } from 'components/atoms/button/users/FollowAndUnFollowButton';
 import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';
 
@@ -13,7 +13,7 @@ type Props = {
   setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>
 };
 
-const Span = tw.span`m-2 font-bold mobile(L):text-sm sm:text-xl md:text-2xl`;
+const Div = tw.div`m-2 font-bold mobile(L):text-sm sm:text-xl md:text-2xl`;
 const DD = tw.dd`m-5`;
 
 export const UserCard: VFC<Props> = memo((props) => {
@@ -33,16 +33,20 @@ export const UserCard: VFC<Props> = memo((props) => {
       <DD>
         <UserImage addClassName='w-64 h-64 m-auto' userId={user.id} image={user.image} gender={user.gender} />
       </DD>
-      <DD>
+      <DD className='flex'>
         <Link to={`/users/${user.id}`}>
-          <Span className={genderTextColor}>
+          <Div className={`${genderTextColor} w-24 pb-2 overflow-x-scroll whitespace-nowrap`}>
             {user.name}
-          </Span>
-          <Span className={genderTextColor} >
-            {user.gender}
-          </Span>
+          </Div>
         </Link>
-        <FollowAndUnFollowButton userId={user.id} setUsers={setUsers} />
+        <Link to={`/users/${user.id}`}>
+          <Div className={`${genderTextColor}`}>
+            {user.gender}
+          </Div>
+        </Link>
+        <div className='pt-1'>
+          <FollowAndUnFollowButton userId={user.id} setUsers={setUsers} />
+        </div>
       </DD>
       <DD>
         <FollowingsAndFollowersLinkArea
