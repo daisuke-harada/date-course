@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { courseInfoState, managementCourseState } from "store/managementCourse";
 import { currentUserState } from "store/session";
 import { CourseInfoData, ManagementCourseData } from "types/managementCourses/management";
-import { SecondaryButton } from "./SecondaryButton";
+import { SecondaryButton } from "../SecondaryButton";
 
 type Props = {
   managementCourses: ManagementCourseData,

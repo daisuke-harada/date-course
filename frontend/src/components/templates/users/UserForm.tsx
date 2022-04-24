@@ -8,7 +8,7 @@ import { RadioArea } from 'components/organisms/area/RadioArea';
 import { UserLoginResponseData } from 'types/users/response';
 import { currentUserState } from 'store/session';
 import { useRecoilState } from 'recoil';
-import { DeactivateAcountButton } from 'components/atoms/button/DeactivateAcountButton';
+import { DeactivateAcountButton } from 'components/atoms/button/users/DeactivateAcountButton';
 import { ImageForm } from 'components/atoms/form/ImageForm';
 
 const MainDiv = tw.div`user-form`;

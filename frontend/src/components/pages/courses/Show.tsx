@@ -12,7 +12,7 @@ import { currentUserState, loginStatusState } from 'store/session';
 import tw from 'tailwind-styled-components';
 import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
 import { Loading } from 'components/pages/Loading';
-import { CopyCourseButton } from 'components/atoms/button/CopyCourseButton';
+import { CopyCourseButton } from 'components/atoms/button/courses/CopyCourseButton';
 
 const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;

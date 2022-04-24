@@ -6,8 +6,8 @@ import tw from 'tailwind-styled-components';
 
 import { HeaderBottomRoutes } from 'router/HeaderBottomRoutes';
 import { HeaderTopLeftRoutes } from 'router/HeaderTopLeftRoutes';
-import { GuestLoginButton } from 'components/atoms/button/GuestLoginButton';
-import { LogOutButton } from 'components/atoms/button/LogOutButton';
+import { GuestLoginButton } from 'components/atoms/button/users/GuestLoginButton';
+import { LogOutButton } from 'components/atoms/button/users/LogOutButton';
 
 type Props = {
   isOpen: boolean;

@@ -5,7 +5,7 @@ import { managementCourseState } from 'store/managementCourse';
 import { currentUserState, loginStatusState } from 'store/session';
 import tw from 'tailwind-styled-components';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-import { BaseButton } from './BaseButton';
+import { BaseButton } from '../BaseButton';
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
