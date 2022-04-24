@@ -5,7 +5,7 @@ import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
 import { DateSpotReviewAndDateSpotResponseData } from 'types/dateSpotReviews/response';
 import { Link } from 'react-router-dom';
 
-const ImageParentDiv = tw.div`lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20 relative pt-20`;
+const ImageParentDiv = tw.div`lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20 relative pt-20 hover:scale-105 duration-75`;
 const Image = tw.img`lg:bg-top object-fill absolute top-0 w-full h-full rounded-xl border-4 border-pink-400 hover:border-pink-600`;
 
 
@@ -31,7 +31,7 @@ export const MyPageReviews: VFC<Props> = memo((props) => {
                 key={index}
                 rate={review.rate}
                 content={review.content}
-                name={review.dateSpot.name}
+                name={<Link to={`/dateSpots/${review.dateSpot.id}`}>{review.dateSpot.name}</Link>}
                 ImageDiv={
                   <ImageParentDiv>
                     <Link to={`/dateSpots/${review.dateSpot.id}`}>
@@ -46,7 +46,7 @@ export const MyPageReviews: VFC<Props> = memo((props) => {
         :
         (
           <div className='my-5 text-center text-red-400 text-xl'>
-            レビューは存在しません
+            このユーザーはレビューを投稿していません
           </div>
         )
       }

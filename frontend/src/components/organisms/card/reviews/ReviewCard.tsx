@@ -3,7 +3,7 @@ import { memo, ReactNode, VFC } from 'react';
 
 type Props = {
   ImageDiv: ReactNode,
-  name: string,
+  name: ReactNode,
   rate: number,
   content: string
 };
