@@ -1,7 +1,4 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# DateCourses
 
 IPアドレス
 https://www.datecourses.com/

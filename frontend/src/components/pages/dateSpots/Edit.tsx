@@ -12,7 +12,6 @@ export const Edit: VFC = memo(() => {
     <DateSpotForm
       dateSpotFormTitle='デートスポット情報の編集'
       formButtonName='更新'
-      baseBtnDataE2e='dateSpot-update-button'
       nameDefaultValue={addressAndDateSpot.dateSpot.name}
       prefectureDefaultValue={addressAndDateSpot.prefectureName}
       cityNameDefaultValue={addressAndDateSpot.cityName}

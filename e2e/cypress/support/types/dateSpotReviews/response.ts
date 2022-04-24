@@ -9,7 +9,7 @@ export type DateSpotReviewAndUserResponseData = {
   userImage: {
     url: string | null
   },
-  dateSpotId: number,
+  dateSpotId: number
 };
 
 export type DateSpotReviewAndDateSpotResponseData = {

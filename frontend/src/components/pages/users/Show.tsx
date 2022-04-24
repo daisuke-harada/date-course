@@ -6,8 +6,8 @@ import tw from 'tailwind-styled-components';
 
 import { client } from 'lib/api/client';
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
-import { FollowAndUnFollowButton } from 'components/atoms/button/FollowAndUnFollowButton';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
+import { FollowAndUnFollowButton } from 'components/atoms/button/users/FollowAndUnFollowButton';
 import { UserResponseData } from 'types/users/response';
 import { FollowingsAndFollowersLinkArea } from 'components/organisms/area/users/FollowingsAndFollowersLinkArea';
 import { UserShowPageMenu } from 'components/organisms/menu/users/UserShowPageMenu';
@@ -83,7 +83,7 @@ export const Show: VFC = memo(() => {
               {user.gender}
             </Span>
             <Span><FollowAndUnFollowButton addClassName='mobile(L):text-sm mofile(M):w-1/3 sm:text-2xl text-xs mt-0' userId={user.id} setUser={setUser} /></Span>
-            <Span className='mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
+            <Span className='md:w-1/6 sm:w-1/4 mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
               {(getLoginStatus.status && getCurrentUser.user.id === Number(id))
                 &&
                 <Link className='text-white' to={`edit`}>

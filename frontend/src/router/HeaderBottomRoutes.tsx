@@ -5,7 +5,7 @@ import { currentUserState, loginStatusState } from 'store/session';
 
 export const HeaderBottomRoutes =  () => {
   const getLoginStatus = useRecoilValue(loginStatusState);
-  const getCurrentUserInfo = useRecoilValue(currentUserState);
+  const getCurrentUser = useRecoilValue(currentUserState);
 
   const headers = [
     {
@@ -25,7 +25,7 @@ export const HeaderBottomRoutes =  () => {
     },
   ];
 
-  getLoginStatus.status && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${getCurrentUserInfo.user.id}` });
+  getLoginStatus.status && getCurrentUser.user.admin === false && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${getCurrentUser.user.id}` });
 
   return headers;
 }

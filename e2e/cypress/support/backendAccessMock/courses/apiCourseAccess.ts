@@ -18,7 +18,7 @@ export const apiCourseIndexAccess = (courseDatas: CourseResponseData[]) => {
   });
 };
 
-export const apiCourseDeleteAccess = (courseId: number) => {
+export const apiCourseDestroyAccess = (courseId: number) => {
   cy.intercept('DELETE', `api/v1/courses/${courseId}`, (req) => {
     req.reply({status: 'deleted'});
   });

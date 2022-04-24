@@ -10,8 +10,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { currentUserState } from 'store/session';
 import tw from 'tailwind-styled-components';
-import { ManagementCourseData } from 'types/managementCourses/management';
+import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
 import { Loading } from 'components/pages/Loading';
+import { CopyCourseButton } from 'components/atoms/button/courses/CopyCourseButton';
 
 const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-5 font-bold pb-5`;
@@ -26,7 +27,7 @@ export const Show: VFC = memo(() => {
     courseDuringSpots: []
   });
 
-  const [courseInfo, setCourseInfo] = useState<{travelMode: string, authority: string, noDuplicatePrefectureNames: string[]}>({
+  const [courseInfo, setCourseInfo] = useState<CourseInfoData>({
     travelMode: 'DRIVING',
     authority: '公開',
     noDuplicatePrefectureNames: []
@@ -67,7 +68,7 @@ export const Show: VFC = memo(() => {
           他のユーザーに{courseInfo.authority}
           <div className='my-2 flex m-auto'>
             {
-              courseInfo.noDuplicatePrefectureNames.map((prefectureName) => (
+              courseInfo.noDuplicatePrefectureNames?.map((prefectureName) => (
                 <div key={prefectureName} className='border-2 bg-red-300 border-red-300 text-white rounded-xl p-1 mr-2'>{prefectureName}</div>
               ))
             }
@@ -99,25 +100,29 @@ export const Show: VFC = memo(() => {
           </div>
         </CourseAreaDiv>
         <ButtonArea>
+          <ButtonParentDiv>
+            <Link to={`/users/${managementCourses.userId}`}>
+              <BaseButton>
+                  投稿者のページへ
+              </BaseButton>
+            </Link>
+          </ButtonParentDiv>
+          <ButtonParentDiv>
+            <CopyCourseButton managementCourses={managementCourses} courseInfo={courseInfo} />
+          </ButtonParentDiv>
           {
             getCurrentUser.user.id === managementCourses.userId
             &&
             (
-              <ButtonParentDiv>
-                <DangerButton onClickEvent={onClickDeleteCourse}>
-                  デートコースを削除
-                </DangerButton>
-              </ButtonParentDiv>
+              <>
+                <ButtonParentDiv>
+                  <DangerButton onClickEvent={onClickDeleteCourse}>
+                    デートコースを削除
+                  </DangerButton>
+                </ButtonParentDiv>
+              </>
             )
           }
-          {/* <div className='m-auto text-xl font-bold border p-2 flex rounded-xl w-1/2 bg-gray-200'> */}
-          <ButtonParentDiv>
-          <Link to={`/users/${managementCourses.userId}`}>
-            <BaseButton>
-                投稿者のページへ
-            </BaseButton>
-            </Link>
-          </ButtonParentDiv>
         </ButtonArea>
       </MainDiv>
     </Loading>

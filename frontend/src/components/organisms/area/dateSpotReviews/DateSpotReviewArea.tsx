@@ -5,7 +5,8 @@ import { currentUserState, loginStatusState } from 'store/session';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DateSpotReviewForm } from 'components/molecules/form/dateSpotReview/DateSpotReviewForm';
 import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
+import { Link } from 'react-router-dom';
 
 type Props = {
   dateSpotId: number,
@@ -52,7 +53,7 @@ export const DateSpotReviewArea: VFC<Props> = memo((props) => {
                     addClassName='lg:w-48 lg:h-48 sm:w-32 sm:h-32 w-20 h-20'
                   />
                 }
-                name={dateSpotReview.userName}
+                name={<Link to={`/users/${dateSpotReview.userId}`}>{dateSpotReview.userName}</Link>}
                 rate={dateSpotReview.rate}
                 content={dateSpotReview.content}
               />

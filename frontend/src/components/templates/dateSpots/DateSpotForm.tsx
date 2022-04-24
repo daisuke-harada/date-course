@@ -20,7 +20,6 @@ const ButtonParentDiv = tw.div`text-center p-1 my-4 m-auto w-1/3`;
 type Props = {
   dateSpotFormTitle: string,
   formButtonName: string,
-  baseBtnDataE2e: string,
   nameDefaultValue: string,
   prefectureDefaultValue: string,
   cityNameDefaultValue: string,
@@ -36,7 +35,6 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const {
     dateSpotFormTitle,
     formButtonName,
-    baseBtnDataE2e,
     dateSpotId,
     nameDefaultValue,
     prefectureDefaultValue,
@@ -133,7 +131,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
   const onCLickDeleteDateSpotAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if(window.confirm('本当に削除しますか？')){
       client.delete(`date_spots/${dateSpotId}`).then(response => {
-        response.data.status === 'delete' && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
+        response.data.status === 'deleted' && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
       });
     };
   };
@@ -170,7 +168,7 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
         />
         <ImageForm selectImage={selectImage} />
         <ButtonParentDiv>
-          <BaseButton dataE2e={baseBtnDataE2e} onClickEvent={DateSpotRegistAndUpdateAction}>{formButtonName}</BaseButton>
+          <BaseButton dataE2e='dateSpot-form-button' onClickEvent={DateSpotRegistAndUpdateAction}>{formButtonName}</BaseButton>
         </ButtonParentDiv>
         {
           dateSpotId

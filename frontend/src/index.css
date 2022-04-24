@@ -38,7 +38,7 @@ a {
 
 /* btn */
 .btn {
-  @apply font-bold py-2 px-4 inline-block rounded-xl;
+  @apply font-bold py-2 px-4 inline-block rounded-xl hover:scale-110 duration-75;
 }
 
 .btn-yellow-green {

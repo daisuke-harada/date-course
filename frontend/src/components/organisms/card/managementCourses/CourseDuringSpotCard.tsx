@@ -2,12 +2,12 @@ import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Link } from 'react-router-dom';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { client } from 'lib/api/client';
 import { ChangeSelect } from 'components/molecules/select/managementCourses/ChangeSelect';
 import { ManagementCourseData } from 'types/managementCourses/management';
 import { SetterOrUpdater } from 'recoil';
-import { DeleteCourseButton } from 'components/atoms/button/DeleteCourseButton';
+import { DeleteCourseButton } from 'components/atoms/button/courses/DeleteCourseButton';
 
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
@@ -22,7 +22,7 @@ type Props = {
 
 const DD = tw.dd`m-2 text-xs font-bold`;
 const Title = tw.dd`m-2 font-bold`;
-const Image = tw.img`xl:w-60 lg:w-56 lg:h-56 md:w-40 md:h-40 w-32 h-32 mx-auto rounded-xl border-4 border-pink-400 hover:border-pink-600`;
+const Image = tw.img`xl:w-60 lg:w-56 lg:h-56 md:w-40 md:h-40 w-32 h-32 mx-auto rounded-xl border-4 border-pink-400 hover:border-pink-600 hover:scale-105 duration-75`;
 const MainDl = tw.dl`xl:w-64 lg:w-60 w-44 text-center rounded-xl shadow-xl bg-white py-1 border m-auto`
 const RoadDiv = tw.div`xl:w-64 lg:w-60 md:w-44 md:h-32 m-auto flex justify-center`;
 

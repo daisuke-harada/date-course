@@ -11,9 +11,10 @@ import { Link } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Map } from 'components/molecules/maps/Map';
 import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/DateSpotReviewArea';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { Loading } from '../Loading';
+import { AddCourseButton } from 'components/atoms/button/courses/AddCourseButton';
 
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 p-3 rounded-2xl m-2`;
 const DateSpotNameTitle = tw.h1`w-full my-5 text-sm font-bold md:text-3xl`;
@@ -66,18 +67,21 @@ export const Show: VFC = memo(() => {
                 {addressAndDateSpot?.genreName}
               </Link>
             </div>
-            <div className='text-center'>
+            <div className='lg:text-base md:mx-0 mobile(L):w-1/2 m-auto text-xs text-center mb-5'>
+              <AddCourseButton addressAndDateSpot={addressAndDateSpot}/>
+            </div>
+            <div className='w-1/3 text-center mb-5'>
               {
                 getLoginStatus.status === true
                 && getCurrentUser.user.admin === true
                 && (
-                  <BaseButton dataE2e='render-dateSpot-edit'>
+                  <BaseButton dataE2e='dateSpot-edit-button'>
                     <Link
                       className='text-white'
                       to={`edit`}
                       state={{addressAndDateSpot: addressAndDateSpot}}
                     >
-                      デートスポット情報編集
+                      設定
                     </Link>
                   </BaseButton>
                 )

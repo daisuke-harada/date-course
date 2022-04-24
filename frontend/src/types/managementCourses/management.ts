@@ -9,5 +9,6 @@ export type ManagementCourseData = {
 
 export type CourseInfoData = {
   travelMode: string,
-  authority: string
+  authority: string,
+  noDuplicatePrefectureNames?: string[]
 };

@@ -6,17 +6,17 @@ import tw from 'tailwind-styled-components';
 import { client } from 'lib/api/client';
 import { currentUserState } from 'store/session';
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DangerButton } from 'components/atoms/button/DangerButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import { StarRateForm } from 'components/atoms/form/StarRateForm';
-import { StarRateText } from 'components/atoms/layouts/StarRateText';
+import { StarRateText } from 'components/atoms/text/StarRateText';
 
 const Div = tw.div`w-full flex`
 const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
-const UserInfoDiv = tw.div`w-2/3 h-52 pt-5 px-2 flex flex-col`
-const ButtonParentDiv = tw.div`mx-2`
+const UserInfoDiv = tw.div`mobile(M):w-2/3 w-3/4 h-60 pt-5 px-2 flex flex-col`
+const ButtonParentDiv = tw.div`sm:text-base text-xs mx-1 my-1`
 const ButtonArea = tw.div`ml-auto pt-2 flex`
 
 type DateSpotRreviewParam = {
@@ -124,7 +124,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   if(currentDateSpotReview){
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='h-40 w-40' />
+        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
@@ -139,16 +139,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                   <ul>
                     {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
                   </ul>
-                  <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
+                  <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
                   <ButtonArea>
                     <ButtonParentDiv>
-                      <BaseButton onClickEvent={onChangeOpen}>編集を解除</BaseButton>
+                      <BaseButton dataE2e='dateSpotReview-edit-cancel-button' onClickEvent={onChangeOpen}>解除</BaseButton>
                     </ButtonParentDiv>
                     <ButtonParentDiv>
-                      <SecondaryButton onClickEvent={onClickDateSpotReviewUpdateAction}>更新</SecondaryButton>
+                      <SecondaryButton dataE2e='dateSpotReview-update-button' onClickEvent={onClickDateSpotReviewUpdateAction}>更新</SecondaryButton>
                     </ButtonParentDiv>
                     <ButtonParentDiv>
-                      <DangerButton onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
+                      <DangerButton dataE2e='dateSpotReview-delete-button' onClickEvent={onClickDateSpotReviewDeleteAction}>削除</DangerButton>
                     </ButtonParentDiv>
                   </ButtonArea>
                 </>
@@ -158,7 +158,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
                   <div className='p-1 max-h-20 overflow-y-scroll w-full h-full whitespace-pre-line'>{currentDateSpotReview.content}</div>
                   <div className='ml-auto pt-2 flex'>
                     <ButtonParentDiv>
-                      <BaseButton onClickEvent={onChangeOpen}>編集</BaseButton>
+                      <BaseButton dataE2e='dateSpotReview-edit-button' onClickEvent={onChangeOpen}>編集</BaseButton>
                     </ButtonParentDiv>
                   </div>
                 </>
@@ -170,7 +170,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   }else{
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='h-40 w-40' />
+        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
         {/* 星による評価 */}
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
@@ -181,9 +181,9 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
           <ul>
             {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
           </ul>
-          <TextArea placeholder='コメントを入力' value={content} onChange={onChangeContent} />
+          <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
           <div className='ml-auto pt-2'>
-            <BaseButton onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>
+            <BaseButton dataE2e='dateSpotReview-create-button' onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>
           </div>
         </UserInfoDiv>
       </Div>

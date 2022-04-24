@@ -38,7 +38,7 @@ export const apiRelationShipCreateAccess = (currentUser: UserResponseData, follo
   });
 };
 
-export const apiRelationShipDeleteAccess = (currentUser: UserResponseData, followedUser: UserResponseData, users: UserResponseData[]) => {
+export const apiRelationShipDestroyAccess = (currentUser: UserResponseData, followedUser: UserResponseData, users: UserResponseData[]) => {
   const currentTestUser = {
     id: currentUser.id,
     name: currentUser.name,

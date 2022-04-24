@@ -1,11 +1,11 @@
 import { guestUser, anotherTestUser, testUser } from '../fixtures/users/response';
-import { apiLoginAccess, apiUserIndexAccess, apiUserUpdateAccess, apiUserShowAccess, apiSignUpAccess, apiUserDeleteAccess } from '../support/backendAccessMock/users/apiUserAccess';
+import { apiLoginAccess, apiUserIndexAccess, apiUserUpdateAccess, apiUserShowAccess, apiSignUpAccess, apiUserDestroyAccess } from '../support/backendAccessMock/users/apiUserAccess';
 import { testUserInput } from '../fixtures/users/session';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
 import { userSigninSuccess } from '../support/hooks/session';
 import { spotReviewAndDateSpotResponseDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
 import { apiHomeTopAccess } from '../support/backendAccessMock/homes/apiHomeAccess';
-import { apiRelationShipCreateAccess, apiRelationShipDeleteAccess, apiFollowers, apiFollowings } from '../support/backendAccessMock/relationships/apiRelationShipAccess';
+import { apiRelationShipCreateAccess, apiRelationShipDestroyAccess, apiFollowers, apiFollowings } from '../support/backendAccessMock/relationships/apiRelationShipAccess';
 import { UserResponseData } from '../support/types/users/response';
 
 const users = [guestUser, testUser, anotherTestUser];
@@ -132,7 +132,7 @@ describe('Users', () => {
   it('ユーザーが退会する', () => {
     userSigninSuccess(testUser);
     cy.contains('設定').click();
-    apiUserDeleteAccess(testUser.id);
+    apiUserDestroyAccess(testUser.id);
     cy.contains('退会').click();
     cy.contains('退会しました');
   });
@@ -184,7 +184,7 @@ describe('Users', () => {
     userSigninSuccess(currentFollowActionUser(testUser, anotherTestUser));
     apiUserShowAccess(followedUser(anotherTestUser, testUser));
     cy.visit(`/users/${followedUser(anotherTestUser, testUser).id}`);
-    apiRelationShipDeleteAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
+    apiRelationShipDestroyAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
     dataE2eGet(`unfollow-button-${anotherTestUser.id}`).click();
     cy.contains('フォロー');
   });
@@ -207,7 +207,7 @@ describe('Users', () => {
     dataE2eGet(`follow-button-${anotherTestUser.id}`).click();
     cy.contains('フォロワー 1');
     cy.contains('フォロー中 1');
-    apiRelationShipDeleteAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
+    apiRelationShipDestroyAccess(currentFollowActionUser(testUser, anotherTestUser), followedUser(anotherTestUser, testUser), users);
     dataE2eGet(`unfollow-button-${anotherTestUser.id}`).click();
   });
 });

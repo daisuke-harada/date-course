@@ -1,5 +1,5 @@
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/layouts/users/UserImage';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
 import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';

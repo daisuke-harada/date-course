@@ -2,10 +2,10 @@ import { memo, VFC } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginStatusState } from 'store/session';
 
-import { GuestLoginButton } from 'components/atoms/button/GuestLoginButton';
+import { GuestLoginButton } from 'components/atoms/button/users/GuestLoginButton';
 import { MenuIconButton } from 'components/atoms/button/MenuIconButton';
 import tw from 'tailwind-styled-components';
-import { LogOutButton } from 'components/atoms/button/LogOutButton';
+import { LogOutButton } from 'components/atoms/button/users/LogOutButton';
 
 const MenuIconDivParent = tw.div`lg:hidden`;
 const MenuIconDivChild = tw.div`sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400`;
