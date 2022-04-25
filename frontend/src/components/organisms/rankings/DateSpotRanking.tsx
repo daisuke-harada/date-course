@@ -11,7 +11,7 @@ const Img = tw.img`w-20 h-20 m-auto bg-gray-100`;
 const NumberDiv = tw.div`w-20 h-20 pt-6 text-3xl text-center m-auto`;
 
 type Props = {
-  addressAndDateSpots: Array<AddressAndDateSpotJoinData>
+  addressAndDateSpots: AddressAndDateSpotJoinData[]
   prefectureId?: string,
   genreId?: string,
   comeTime?: string,

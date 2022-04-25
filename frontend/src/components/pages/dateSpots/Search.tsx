@@ -11,11 +11,11 @@ import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 
 export const Search: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
 
   const location = useLocation();
   const state = location.state as {
-    addressAndDateSpots: Array<AddressAndDateSpotJoinData>
+    addressAndDateSpots: AddressAndDateSpotJoinData[]
     prefectureId?: string,
     genreId?: string,
     comeTime?: string,

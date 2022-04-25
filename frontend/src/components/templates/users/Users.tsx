@@ -5,7 +5,7 @@ import { UserResponseData } from 'types/users/response';
 import { Loading } from 'components/pages/Loading';
 
 type Props = {
-  users: Array<UserResponseData>,
+  users: UserResponseData[],
   setUsers?: React.Dispatch<React.SetStateAction<UserResponseData[]>>,
   userSearchName?: string
 };

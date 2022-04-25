@@ -5,7 +5,7 @@ import { memo, VFC } from 'react';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {
-  addressAndDateSpots: Array<AddressAndDateSpotJoinData>,
+  addressAndDateSpots: AddressAndDateSpotJoinData[],
   prefectureId?: string,
   genreId?: string,
   comeTime?: string,

@@ -26,7 +26,7 @@ export const Search: VFC = memo(() => {
 
   const location = useLocation();
   const state = location.state as {
-    courses: Array<CourseResponseData>
+    courses: CourseResponseData[]
     prefectureId?: string,
   };
 

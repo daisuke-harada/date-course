@@ -35,7 +35,7 @@ export const Show: VFC = memo(() => {
   });
 
   // デートコースの距離、時間を管理するステートを設定
-  const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
+  const [legs, setLegs] = useState<{duration: string, distance: string}[]>([]);
   const navigate = useNavigate();
   const [travelModeText, setTravelModeText] = useState('');
   const getCurrentUser = useRecoilValue(currentUserState);

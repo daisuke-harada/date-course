@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   dateSpotId: number,
-  dateSpotReviews: Array<DateSpotReviewAndUserResponseData>,
+  dateSpotReviews: DateSpotReviewAndUserResponseData[],
   setDateSpotReviews: React.Dispatch<React.SetStateAction<never[]>>,
   setDateSpotAverageRate: React.Dispatch<React.SetStateAction<number>>
 };

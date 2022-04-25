@@ -6,7 +6,7 @@ import { prefectureDatas } from 'datas/prefectureDatas';
 import { Loading } from 'components/pages/Loading';
 
 type Props = {
-  courses: Array<CourseResponseData>,
+  courses: CourseResponseData[],
   searchPrefectureId?: number
 };
 
