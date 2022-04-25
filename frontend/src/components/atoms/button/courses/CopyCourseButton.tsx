@@ -30,7 +30,7 @@ export const CopyCourseButton: VFC<Props> = memo((props) => {
         getLoginStatus.status
         && getCurrentUser.user.admin === false
         &&
-        (<SecondaryButton dataE2e="copy-course-button" onClickEvent={onClickAddCourseAction}>デートコースをコピー</SecondaryButton>)
+        (<SecondaryButton dataE2e="copy-course-button" onClickEvent={onClickAddCourseAction}>新しいコース作成</SecondaryButton>)
       }
     </>
   );
