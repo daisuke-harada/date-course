@@ -27,11 +27,11 @@ end
 
 # デートコース作成
 course_create(2..6, [*1..6], "DRIVING")
-course_create(2..6, [*1..7], "DRIVING")
+course_create(4..6, [*1..7], "DRIVING")
 course_create(7..11, [*8..13], "BICYCLING")
-course_create(7..11, [*8..19], "DRIVING")
+course_create(9..11, [*8..19], "DRIVING")
 course_create(12..16, [*8..19], "DRIVING")
-course_create(12..16, [*20..25], "WALKING")
+course_create(14..16, [*20..25], "WALKING")
 course_create(17..20, [*26..31], "DRIVING")
 course_create(21..25, [*32..37], "DRIVING")
 course_create(26..30, [*32..38], "DRIVING")
