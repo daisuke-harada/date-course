@@ -39,7 +39,7 @@ export const Top: VFC = memo(() => {
         <Image src={`${process.env.PUBLIC_URL}/lp.jpg`} />
         {/* <h1 className='m-5 dtext-3xl font-bold z-10 bottom-0 absolute'>
           <BaseButton>デートコースを作成する</BaseButton>
-        </h1> */}
+        </h1>  */}
       </ImageParentDiv>
       <div className='mb-1'>
         <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをエリアから探す</p>
