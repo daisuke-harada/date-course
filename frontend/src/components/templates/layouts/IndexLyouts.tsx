@@ -11,6 +11,8 @@ export const IndexLayout: VFC<Props> = memo((props) => {
   return(
     <div className='md:flex-row w-full flex flex-col'>
       <div className='md:block hidden w-3/12 pl-5 pt-5'>
+      </div>
+      <div className='md:block hidden w-3/12 pl-5 pt-5 z-50 fixed'>
         { sideArea }
       </div>
       <div className='md:hidden w-full'>

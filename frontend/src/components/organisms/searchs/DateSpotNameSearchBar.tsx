@@ -23,14 +23,14 @@ export const DateSpotNameSearchBar: VFC = memo(() => {
   };
 
   return(
-    <div className='m-auto mt-10 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
+    <div className='m-auto mt-3 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
       <div className='lg:text-lg text-xs m-auto my-5 font-bold text-center'>
         デートスポット名検索
       </div>
-      <div className='p-3'>
+      <div className='px-3'>
         <Input onChange={onChangeSearchName} type='text' value={dateSpotName} placeholder='名前を入力' />
       </div>
-      <div className='m-auto my-5 lg:w-1/3 w-1/2'>
+      <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>
