@@ -44,4 +44,7 @@ https://www.datecourses.com/
 - e2eテスト
   - cypress
 
+# ネットワーク構成図
+https://github.com/daisuke-harada/date-course/issues/239#issue-1213827383
+
 
