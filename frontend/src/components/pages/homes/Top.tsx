@@ -1,4 +1,4 @@
-import { BaseButton } from 'components/atoms/button/BaseButton';
+// import { BaseButton } from 'components/atoms/button/BaseButton';
 import { Area } from 'components/organisms/card/homes/Area';
 import { Genres } from 'components/organisms/card/homes/Genres';
 import { MainGenre } from 'components/organisms/card/homes/MainGenre';
@@ -37,9 +37,9 @@ export const Top: VFC = memo(() => {
     <Loading loadingSwitch={addressAndDateSpots.length !== 0 && addressAndDateSpots[0].id === 0 && true}>
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/lp.jpg`} />
-        <h1 className='m-5 dtext-3xl font-bold z-10 bottom-0 absolute'>
+        {/* <h1 className='m-5 dtext-3xl font-bold z-10 bottom-0 absolute'>
           <BaseButton>デートコースを作成する</BaseButton>
-        </h1>
+        </h1> */}
       </ImageParentDiv>
       <div className='mb-1'>
         <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをエリアから探す</p>
