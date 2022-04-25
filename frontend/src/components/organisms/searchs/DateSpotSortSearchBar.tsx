@@ -8,7 +8,7 @@ import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
-const SelectParentDiv = tw.div`w-full p-3`;
+const SelectParentDiv = tw.div`w-full px-3`;
 
 type Props = {
   defaultPrefectureValue: string,
@@ -66,7 +66,7 @@ export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
         </div>
         <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
       </SelectParentDiv>
-      <div className='m-auto my-5 lg:w-1/3 w-1/2'>
+      <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
     </div>
