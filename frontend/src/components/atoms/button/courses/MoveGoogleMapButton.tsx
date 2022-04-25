@@ -4,7 +4,7 @@ import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 
 const Button = tw.button`btn bg-white text-black w-full border-2 border-gray-400 hover:border-gray-500 shadow-lg hover:shadow-none`;
-const Image = tw.img`sm:w-7 sm:h-7 w-4 h-4 inline mr-1`;
+const Image = tw.img`sm:w-7 sm:h-7 w-4 h-4 inline mb-1`;
 
 type Props = {
   courseDuringSpots: AddressAndDateSpotJoinData[]
