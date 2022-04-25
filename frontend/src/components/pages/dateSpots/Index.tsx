@@ -2,7 +2,6 @@ import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSear
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
-import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
@@ -30,7 +29,6 @@ export const Index: VFC = memo(() => {
           />
           <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
-          <UserNameSearchBar />
         </>
       }
       topArea={
