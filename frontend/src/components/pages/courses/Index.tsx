@@ -1,7 +1,6 @@
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
-import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { CourseResponseData } from 'types/courses/response';
@@ -40,7 +39,6 @@ export const Index: VFC = memo(() => {
           />
           <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
-          <UserNameSearchBar />
         </>
       }
 
