@@ -11,9 +11,9 @@ import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 
 export const Search: VFC = memo(() => {
-  const [users, setUsers] = useState<Array<UserResponseData>>([defaultUserResponseData]);
+  const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
   const location = useLocation();
-  const state = location.state as { users: Array<UserResponseData>, userSearchName: string };
+  const state = location.state as { users: UserResponseData[], userSearchName: string };
 
   useEffect(() => {
     setUsers(state.users);

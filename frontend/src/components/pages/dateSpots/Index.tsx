@@ -11,7 +11,7 @@ import { memo, useEffect, useState, VFC } from 'react';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 export const Index: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
 
   useEffect(() => {
     client.get('date_spots').then(response => {

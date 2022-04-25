@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 export const Show: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<Array<AddressAndDateSpotJoinData>>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
   const { id } = useParams();
 
   useEffect(() => {

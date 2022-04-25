@@ -4,7 +4,7 @@ import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 export type ManagementCourseData = {
   userId: number,
   user?: UserResponseData,
-  courseDuringSpots: Array<AddressAndDateSpotJoinData>
+  courseDuringSpots: AddressAndDateSpotJoinData[]
 };
 
 export type CourseInfoData = {

@@ -27,7 +27,7 @@ export const CreateCourse: VFC = memo(() => {
   const [noDuplicatePrefectureNames, setNoDuplicatePrefectureNames] = useState<string[]>([]);
 
   // デートコースの距離、時間を管理するステートを設定
-  const [legs, setLegs] = useState<Array<{duration: string, distance: string}>>([]);
+  const [legs, setLegs] = useState<{duration: string, distance: string}[]>([]);
 
   useEffect(() => {
     const prefectureNames = managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName));

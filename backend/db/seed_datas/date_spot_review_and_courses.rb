@@ -4,13 +4,13 @@ def date_spot_review_create(rate, content, user_id, date_spot_id)
   DateSpotReview.create(rate: rate, content: content, user_id: user_id, date_spot_id: date_spot_id)
 end
 
-def date_spot_id_arry_shuffle(date_spot_id_arry)
-  date_spot_id_arry.shuffle
+def date_spot_id_array_shuffle(date_spot_id_array)
+  date_spot_id_array.shuffle
 end
 
-def course_create(user_ids, date_spot_id_arry, travel_mode)
+def course_create(user_ids, date_spot_id_array, travel_mode)
   User.where(id: user_ids).each do |user|
-    date_spot_ids = date_spot_id_arry_shuffle(date_spot_id_arry)
+    date_spot_ids = date_spot_id_array_shuffle(date_spot_id_array)
     course = Course.create(user_id: user.id, travel_mode: travel_mode, authority: "公開")
     DuringSpot.create(course_id: course.id, date_spot_id: date_spot_ids[0])
     DuringSpot.create(course_id: course.id, date_spot_id: date_spot_ids[1])

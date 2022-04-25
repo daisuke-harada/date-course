@@ -9,7 +9,7 @@ import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import tw from 'tailwind-styled-components';
 
 type Props = {
-  courses: Array<CourseResponseData>,
+  courses: CourseResponseData[],
   userId: number
 };
 
@@ -18,7 +18,7 @@ const CourseParentButtonDiv = tw.div`xl:w-1/4 lg:text-xl md:w-1/3 md:text-base m
 
 export const MyPageCourses: VFC<Props> = memo((props) => {
   const { courses, userId } = props;
-  const [filterCourses, setFilterCourses] = useState<Array<CourseResponseData>>([]);
+  const [filterCourses, setFilterCourses] = useState<CourseResponseData[]>([]);
   const getCurrentUser = useRecoilValue(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);
 

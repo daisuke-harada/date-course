@@ -8,7 +8,7 @@ import { UserResponseData } from 'types/users/response';
 
 export const Followings: VFC = memo(() => {
   const { id } = useParams();
-  const [users, setUsers] = useState<Array<UserResponseData>>([defaultUserResponseData]);
+  const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
   const [userName, setUserName] = useState<string>('');
 
   useEffect(() => {
