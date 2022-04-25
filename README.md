@@ -45,6 +45,5 @@ https://www.datecourses.com/
   - cypress
 
 # ネットワーク構成図
-<img width="791" alt="スクリーンショット 2022-04-25 10 02 57" src="https://user-images.githubusercontent.com/59969400/165005040-eba8dea9-e4c4-4102-872c-a67bd085f2df.png">
-
+<img width="580" alt="スクリーンショット 2022-04-25 10 11 33" src="https://user-images.githubusercontent.com/59969400/165005469-3ef607b5-e9b7-42b6-9a42-e1cc7481ccbc.png">
 
