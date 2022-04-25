@@ -16,7 +16,7 @@ export const MainPrefecture: VFC<Props> = memo((props) => {
 
   return(
 
-    <Link className='md:w-3/12 md:h-60 bg-white m-3 h-20 border w-1/3 flex rounded-xl shadow-xl hover:scale-105 duration-300' to={`prefectures/${prefecture.attributes.id}`}>
+    <Link className='md:w-3/12 md:h-60 bg-white m-4 h-20 border w-1/3 flex rounded-xl shadow-xl hover:scale-105 duration-300' to={`prefectures/${prefecture.attributes.id}`}>
       <ImageParentDiv>
         <Image src={`${process.env.PUBLIC_URL}/prefectureImages/${prefecture.attributes.name}.jpg`} />
       </ImageParentDiv>

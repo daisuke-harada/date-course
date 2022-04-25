@@ -8,7 +8,7 @@ type Props = {
   area: AreaData
 }
 
-const MainDiv = tw.div`md:w-3/12 m-3 p-3 w-1/3 bg-white rounded-xl shadow-xl`;
+const MainDiv = tw.div`md:w-3/12 m-4 p-4 w-1/3 bg-white rounded-xl shadow-xl`;
 
 export const Area: VFC<Props> = memo((props) => {
 
