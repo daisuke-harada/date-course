@@ -49,9 +49,9 @@ RSpec.describe "Api::V1::Users", type: :request do
         "password_confirmation" => ""
       }
       expect(JSON.parse(response.body)["status"]).to eq(500)
-      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["can't be blank"])
-      expect(JSON.parse(response.body)["error_messages"]["email"]).to eq(["can't be blank", "is invalid"])
-      expect(JSON.parse(response.body)["error_messages"]["gender"]).to eq(["can't be blank"])
+      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
+      expect(JSON.parse(response.body)["error_messages"]["email"]).to eq(["を入力してください", "は不正な値です"])
+      expect(JSON.parse(response.body)["error_messages"]["gender"]).to eq(["を入力してください"])
       expect(JSON.parse(response.body)["error_messages"]["password"]).to eq(nil)
       expect(JSON.parse(response.body)["error_messages"]["password_confirmation"]).to eq(nil)
     end

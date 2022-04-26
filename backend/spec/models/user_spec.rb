@@ -33,43 +33,43 @@ RSpec.describe User, type: :model do
       it "名前がなければ保存できないこと" do
         user.name = nil
         user.valid?
-        expect(user.errors[:name]).to include("can't be blank")
+        expect(user.errors[:name]).to include("を入力してください")
       end
 
       it "名前の文字数が50文字を超えていると保存できないこと" do
         user.name = "a" * 51
         user.valid?
-        expect(user.errors[:name]).to include("is too long (maximum is 50 characters)")
+        expect(user.errors[:name]).to include("は50文字以内で入力してください")
       end
 
       it "すでに登録されている名前は保存できないこと" do
         FactoryBot.create(:user)
         user.valid?
-        expect(user.errors[:name]).to include("has already been taken")
+        expect(user.errors[:name]).to include("はすでに存在します")
       end
 
       it "メールアドレスが入力されていなければ保存できないこと" do
         user.email = nil
         user.valid?
-        expect(user.errors[:email]).to include("can't be blank")
+        expect(user.errors[:email]).to include("を入力してください")
       end
 
       it "メールアドレスの文字数が250文字を超えていると保存できないこと" do
         user.email = "a" * 241 + "@gamil.com"
         user.valid?
-        expect(user.errors[:email]).to include("is too long (maximum is 250 characters)")
+        expect(user.errors[:email]).to include("は250文字以内で入力してください")
       end
 
       it "すでに登録されているメールアドレスは保存できないこと" do
         FactoryBot.create(:user)
         user.valid?
-        expect(user.errors[:email]).to include("has already been taken")
+        expect(user.errors[:email]).to include("はすでに存在します")
       end
 
       it "性別が入力されていなければ保存できないこと" do
         user.gender = nil
         user.valid?
-        expect(user.errors[:gender]).to include("can't be blank")
+        expect(user.errors[:gender]).to include("を入力してください")
       end
     end
   end

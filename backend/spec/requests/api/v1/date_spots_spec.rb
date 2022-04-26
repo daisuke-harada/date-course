@@ -32,8 +32,8 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq(500)
-      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["can't be blank"])
-      expect(JSON.parse(response.body)["error_messages"]["genre_id"]).to eq(["can't be blank"])
+      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
+      expect(JSON.parse(response.body)["error_messages"]["genre_id"]).to eq(["を入力してください"])
     end
   end
 
@@ -72,8 +72,8 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq(500)
-      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["can't be blank"])
-      expect(JSON.parse(response.body)["error_messages"]["genre_id"]).to eq(["can't be blank"])
+      expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
+      expect(JSON.parse(response.body)["error_messages"]["genre_id"]).to eq(["を入力してください"])
     end
   end
 

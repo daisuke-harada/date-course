@@ -19,7 +19,7 @@ RSpec.describe Address, type: :model do
       it "都道府県idが入力されていない場合は、保存できないこと" do
         address.prefecture_id = nil
         address.valid?
-        expect(address.errors[:prefecture_id]).to include("can't be blank")
+        expect(address.errors[:prefecture_id]).to include("を入力してください")
       end
     end
   end
