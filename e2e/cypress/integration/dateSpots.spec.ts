@@ -1,3 +1,4 @@
+import { adminSigninSuccess } from './../support/hooks/session';
 import { spotReviewAndUserTestDatas } from './../fixtures/dateSpotReviews/spotReviewTestDatas';
 import { userSigninSuccess } from '../support/hooks/session';
 import { adminUser, testUser } from '../fixtures/users/response';
@@ -47,7 +48,7 @@ describe('dateSpots', () => {
   });
 
   it('新規登録画面でDateSpotの新規登録を行う', () => {
-    userSigninSuccess(adminUser);
+    adminSigninSuccess(adminUser);
     cy.visit('/dateSpots/new');
     dateSpotFormInput(
       addressAndDateSpotTestDatas[0].dateSpot.name,
@@ -64,7 +65,7 @@ describe('dateSpots', () => {
   });
 
   it('デートスポット情報を編集する', () => {
-    userSigninSuccess(adminUser);
+    adminSigninSuccess(adminUser);
     apiDateSpotShowAccess(addressAndDateSpotTestDatas[0]);
     cy.visit(`/dateSpots/${addressAndDateSpotTestDatas[0].id}`);
     dataE2eGet('dateSpot-edit-button').click();
@@ -108,7 +109,7 @@ describe('dateSpots', () => {
   });
 
   it('デートスポットを削除する', () => {
-    userSigninSuccess(adminUser);
+    adminSigninSuccess(adminUser);
     apiDateSpotShowAccess(addressAndDateSpotTestDatas[0]);
     cy.visit(`/dateSpots/${addressAndDateSpotTestDatas[0].id}`);
     dataE2eGet('dateSpot-edit-button').click();
