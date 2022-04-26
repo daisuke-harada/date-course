@@ -14,6 +14,7 @@ import { Loading } from 'components/pages/Loading';
 
 const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;
+const SubAreaDiv = tw.div`flex justify-center flex-wrap w-full`;
 
 export const Top: VFC = memo(() => {
   const [ areas, setAreas ] = useState<AreaData[]>([]);
@@ -43,7 +44,7 @@ export const Top: VFC = memo(() => {
       </ImageParentDiv>
       <div className='mb-1'>
         <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをエリアから探す</p>
-        <div className='flex justify-center flex-wrap w-full p-5'>
+        <SubAreaDiv>
           {
             mainPrefectures.map((mainPrefecture) => (
               <MainPrefecture key={mainPrefecture.attributes.id} prefecture={mainPrefecture} />
@@ -54,19 +55,19 @@ export const Top: VFC = memo(() => {
               <Area key={area.attributes.id} area={area} />
             ))
           }
-        </div>
+        </SubAreaDiv>
       </div>
       <div className='mb-1'>
         <p className='md:text-3xl font-bold text-xl pt-10 text-center'>デートスポットをジャンルで探す</p>
         <div className='flex'>
-          <div className='flex justify-center flex-wrap w-full p-5'>
+          <SubAreaDiv>
             {
               mainGenres.map((genre) => (
                 <MainGenre key={genre.attributes.id} genre={genre} />
               ))
             }
             <Genres genres={genres} />
-          </div>
+          </SubAreaDiv>
         </div>
       </div>
 

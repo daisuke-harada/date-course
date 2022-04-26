@@ -60,7 +60,7 @@ export const MultiBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='md:hidden mt-10 mb-6 shadow-xl bg-white border-b-2 flex flex-col' >
+    <div className='md:hidden sm:mt-4 mt-0 mb-6 shadow-xl bg-white border-b-2 flex flex-col' >
       <div className='w-full flex border-gray-400 border-b'>
         <DateSpotChoiceDiv className={`${dateSpotCondition} hover:bg-red-400`} onClick={onClickDateSpotCondition}>デートスポット</DateSpotChoiceDiv>
         <CourseChoiceDiv className={`${courseCondition} hover:bg-red-400`} onClick={onClickCourseCondition}>デートコース</CourseChoiceDiv>
