@@ -8,14 +8,13 @@ import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
-const SelectParentDiv = tw.div`w-full px-3`;
-
 type Props = {
   defaultPrefectureValue: string,
   defaultGenreValue: string,
   defaultBusinessTimeValue: string
 }
 
+const SelectParentDiv = tw.div`w-full px-3`;
 
 export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
   const {defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue} = props;

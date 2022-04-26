@@ -1,7 +1,6 @@
-import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
-import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { CourseResponseData } from 'types/courses/response';
@@ -10,6 +9,8 @@ import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSear
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
+import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 
 export const Search: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([

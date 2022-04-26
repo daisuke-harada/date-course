@@ -4,10 +4,6 @@ import { UserSearchArea } from 'components/molecules/searchs/UserSearchArea';
 import { memo, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
 
-const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r text-center border-gray-400 cursor-pointer`;
-const CourseChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white text-center border-gray-400 cursor-pointer`;
-const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l text-center border-gray-400 cursor-pointer`;
-
 type Props = {
   defaultDateSpotCondition: string,
   defaultCourseCondition: string,
@@ -19,6 +15,10 @@ type Props = {
   defaultGenreValue?: string,
   defaultBusinessTimeValue?: string
 }
+
+const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r text-center border-gray-400 cursor-pointer`;
+const CourseChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white text-center border-gray-400 cursor-pointer`;
+const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l text-center border-gray-400 cursor-pointer`;
 
 export const MultiBar: VFC<Props> = memo((props) => {
   const {

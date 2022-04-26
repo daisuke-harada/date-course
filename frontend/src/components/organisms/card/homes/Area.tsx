@@ -1,8 +1,9 @@
-import { prefectureDatas } from 'datas/prefectureDatas';
 import { VFC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { AreaData } from 'types/homes/data';
+import { prefectureDatas } from 'datas/prefectureDatas';
 
 type Props = {
   area: AreaData

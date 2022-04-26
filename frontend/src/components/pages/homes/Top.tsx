@@ -1,4 +1,9 @@
-// import { BaseButton } from 'components/atoms/button/BaseButton';
+import { memo, useEffect, useState, VFC } from 'react';
+import tw from 'tailwind-styled-components';
+
+import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
+import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
+import { Loading } from 'components/pages/Loading';
 import { Area } from 'components/organisms/card/homes/Area';
 import { Genres } from 'components/organisms/card/homes/Genres';
 import { MainGenre } from 'components/organisms/card/homes/MainGenre';
@@ -6,11 +11,6 @@ import { MainPrefecture } from 'components/organisms/card/homes/MainPrefecture';
 import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
-import { memo, useEffect, useState, VFC } from 'react';
-import tw from 'tailwind-styled-components';
-import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-import { AreaData, GenreData, PrefectureData } from 'types/homes/data';
-import { Loading } from 'components/pages/Loading';
 
 const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;

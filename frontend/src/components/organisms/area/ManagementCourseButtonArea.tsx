@@ -14,7 +14,7 @@ type Props = {
 }
 
 const ButtonArea = tw.div`flex flex-col items-center mx-auto my-10`;
-const ButtonParentDiv = tw.div`mobile(L):text-xl sm:text-2xl lg:text-4xl text-center m-5 w-1/2`
+const ButtonParentDiv = tw.div`mobile(L):text-xl sm:text-2xl lg:text-4xl text-center m-5 w-1/2`;
 
 export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   const { managementCourses, getCourseInfo } = props;

@@ -6,11 +6,11 @@ import { PrefectureSelect } from 'components/molecules/select/dateSpots/Prefectu
 import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
-const SelectParentDiv = tw.div`w-full px-3`;
-
 type Props = {
   defaultPrefectureValue: string
 }
+
+const SelectParentDiv = tw.div`w-full px-3`;
 
 export const CourseSortSearchBar: VFC<Props> = memo((props) => {
   const {defaultPrefectureValue} = props;

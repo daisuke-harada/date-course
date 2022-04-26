@@ -1,12 +1,13 @@
 import { memo, useEffect, useState, VFC } from 'react';
+import tw from 'tailwind-styled-components';
+import { useRecoilValue } from 'recoil';
+import { Link } from 'react-router-dom';
+
 import { CourseResponseData } from 'types/courses/response';
 import { MyPageCourseCard } from 'components/organisms/card/courses/MyPageCourseCard';
-import { useRecoilValue } from 'recoil';
 import { currentUserState, loginStatusState } from 'store/session';
-import { Link } from 'react-router-dom';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
-import tw from 'tailwind-styled-components';
 
 type Props = {
   courses: CourseResponseData[],

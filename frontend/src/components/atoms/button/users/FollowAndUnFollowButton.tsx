@@ -1,9 +1,10 @@
-import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session';
 import tw from 'tailwind-styled-components';
+
+import { currentUserState, loginStatusState } from 'store/session';
 import { UserResponseData } from 'types/users/response';
+import { client } from 'lib/api/client';
 
 type Props = {
   userId: number,

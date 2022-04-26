@@ -1,6 +1,7 @@
 import { VFC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { GenreData } from 'types/homes/data';
 
 type Props = {

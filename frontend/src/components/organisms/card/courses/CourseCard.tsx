@@ -1,19 +1,20 @@
-import { BaseButton } from 'components/atoms/button/BaseButton';
-import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
-import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
 import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { CourseResponseData } from 'types/courses/response';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
+import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
+
+type Props ={
+  course: CourseResponseData
+}
 
 const MainDiv = tw.div`mobile(L):w-auto w-full border px-2 bg-white rounded-3xl mx-2 mb-5 shadow-xl`;
 const DuringSpotsDiv = tw.div`flex justify-evenly`;
 const MainDl = tw.dl`text-left mb-5`
 const DD = tw.dd`mobile(M):text-base text-xs m-2 font-bold`;
-
-type Props ={
-  course: CourseResponseData
-}
 
 export const CourseCard: VFC<Props> = memo((props) =>{
   const { course } = props;
