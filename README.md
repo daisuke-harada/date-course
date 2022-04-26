@@ -1,4 +1,9 @@
 # DateCourses
+『DateCoruses』は無数のデートスポットを選択し、デートコースを作成するアプリです。
+ログインすることでデートコースを作成することができます。（ゲストログインを用意しているので、簡単にログインできます）
+デートスポットの作成に関しては管理者のみ作成できます（名前: admin, パスワード: administrator)
+基本機能はログイン無しで閲覧可能ですのでお気軽にご覧下さい。
+
 
 トップページ
 <img width="1428" alt="スクリーンショット 2022-04-25 10 17 11" src="https://user-images.githubusercontent.com/59969400/165005761-1b973980-a182-4800-a6f6-9be323b367f5.png">
@@ -31,7 +36,7 @@ https://www.datecourses.com
 - フロントエンド
   - HTML/CSS
   - TypeScript
-  - React.js
+  - React.js 17.0.2
   - tailwindcss(CSSフレームワーク)
   - googleMapApi(Directions API MapsJavaScript API)
 - バックエンド

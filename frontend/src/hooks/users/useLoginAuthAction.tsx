@@ -18,8 +18,10 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
   const afterLoginSuccess = (data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user});
-
-    navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}});
+    data.user.admin === false?
+    navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}})
+    :
+    navigate('/', {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}});
   };
 
   const loginAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
