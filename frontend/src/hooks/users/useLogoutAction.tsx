@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import { currentUserState, loginStatusState } from 'store/session';
 import { useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
+import { currentUserState, loginStatusState } from 'store/session';
 
 export const useLogoutAction = () => {
   const setLoginStatus = useSetRecoilState(loginStatusState);
