@@ -1,7 +1,8 @@
+import { memo, VFC } from 'react';
+
 import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
 import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
 import { Loading } from 'components/pages/Loading';
-import { memo, VFC } from 'react';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {

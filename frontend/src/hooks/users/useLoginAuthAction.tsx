@@ -1,8 +1,8 @@
-import { client } from 'lib/api/client';
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
+import { client } from 'lib/api/client';
 import { currentUserState, loginStatusState } from 'store/session';
 import { UserLoginResponseData } from 'types/users/response';
 import { SignInParams } from 'types/users/session';
@@ -18,8 +18,10 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
   const afterLoginSuccess = (data: UserLoginResponseData) => {
     setLoginStatus({status: data.loginStatus});
     setCurrentUser({user: data.user});
-
-    navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}});
+    data.user.admin === false?
+    navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}})
+    :
+    navigate('/', {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}});
   };
 
   const loginAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {

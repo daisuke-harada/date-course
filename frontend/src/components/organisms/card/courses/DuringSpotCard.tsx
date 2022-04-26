@@ -1,6 +1,7 @@
 import { memo, useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props ={

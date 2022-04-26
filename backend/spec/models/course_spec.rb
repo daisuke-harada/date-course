@@ -13,19 +13,19 @@ RSpec.describe Course, type: :model do
       it "交通手段が入力されていない場合、保存できないこと" do
         course.travel_mode = nil
         course.valid?
-        expect(course.errors[:travel_mode]).to include("can't be blank")
+        expect(course.errors[:travel_mode]).to include("を入力してください")
       end
 
       it "公開ステータスが入力されていない場合は、保存できないこと" do
         course.authority = nil
         course.valid?
-        expect(course.errors[:authority]).to include("can't be blank")
+        expect(course.errors[:authority]).to include("を入力してください")
       end
 
       it "use_idが入力されていない場合は、保存できないこと" do
         course.user_id = nil
         course.valid?
-        expect(course.errors[:user_id]).to include("can't be blank")
+        expect(course.errors[:user_id]).to include("を入力してください")
       end
     end
   end

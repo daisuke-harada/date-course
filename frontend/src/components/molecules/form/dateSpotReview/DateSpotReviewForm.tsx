@@ -13,18 +13,18 @@ import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import { StarRateForm } from 'components/atoms/form/StarRateForm';
 import { StarRateText } from 'components/atoms/text/StarRateText';
 
-const Div = tw.div`w-full flex`
-const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`
-const UserInfoDiv = tw.div`mobile(M):w-2/3 w-3/4 h-60 pt-5 px-2 flex flex-col`
-const ButtonParentDiv = tw.div`sm:text-base text-xs mx-1 my-1`
-const ButtonArea = tw.div`ml-auto pt-2 flex`
-
 type DateSpotRreviewParam = {
   rate: number,
   content: string,
   userId: number,
   dateSpotId: number,
 };
+
+const Div = tw.div`w-full flex`;
+const TextArea = tw.textarea`border-2 p-1 w-full h-full rounded-xl`;
+const UserInfoDiv = tw.div`mobile(M):w-2/3 w-3/4 h-60 pt-5 px-2 flex flex-col`;
+const ButtonParentDiv = tw.div`sm:text-base text-xs mx-1 my-1`;
+const ButtonArea = tw.div`ml-auto pt-2 flex`;
 
 type Props= {
   dateSpotId: number,

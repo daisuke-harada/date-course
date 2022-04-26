@@ -1,5 +1,6 @@
-import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 import { memo, VFC } from 'react';
+
+import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 
 type Props = {
   onChangeOpeningTimeValue: React.ChangeEventHandler<HTMLSelectElement>,

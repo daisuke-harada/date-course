@@ -175,6 +175,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-i18n (7.0.3)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (6.1.4.6)
       actionpack (= 6.1.4.6)
       activesupport (= 6.1.4.6)
@@ -266,6 +269,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.6)
+  rails-i18n
   ransack
   rspec-rails
   rubocop

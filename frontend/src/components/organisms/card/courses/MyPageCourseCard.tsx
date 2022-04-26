@@ -1,9 +1,10 @@
-import { BaseButton } from 'components/atoms/button/BaseButton';
-import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
 import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { CourseResponseData } from 'types/courses/response';
+import { BaseButton } from 'components/atoms/button/BaseButton';
+import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
 
 const MainDiv = tw.div`mobile(L):w-auto w-full border p-2 bg-white rounded-3xl mx-2 mb-5 shadow-xl`;
 const DuringSpotsDiv = tw.div`flex justify-evenly`;

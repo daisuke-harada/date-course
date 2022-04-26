@@ -2,13 +2,13 @@ import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-const Span = tw.span`m-2 font-bold`;
-
 type Props = {
   userId: number,
   followingIdsCount: number,
   followerIdsCount: number,
 };
+
+const Span = tw.span`m-2 font-bold`;
 
 export const FollowingsAndFollowersLinkArea: VFC<Props> = memo((props) => {
   const {userId, followingIdsCount, followerIdsCount} = props;

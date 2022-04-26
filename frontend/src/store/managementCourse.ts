@@ -1,6 +1,7 @@
-import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
 import { atomFamily } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+
+import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
 
 const { persistAtom } = recoilPersist();
 

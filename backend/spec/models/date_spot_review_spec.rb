@@ -18,7 +18,7 @@ RSpec.describe DateSpotReview, type: :model do
       it "コメント内容が75文字を超えていれば保存できないこと" do
         date_spot_review.content = "a" * 76
         date_spot_review.valid?
-        expect(date_spot_review.errors[:content]).to include("is too long (maximum is 75 characters)")
+        expect(date_spot_review.errors[:content]).to include("は75文字以内で入力してください")
       end
 
       it "user_idとdate_spot_idが空の場合保存できないこと" do
@@ -26,28 +26,28 @@ RSpec.describe DateSpotReview, type: :model do
         date_spot_review.date_spot_id = nil
         date_spot_review.valid?
         aggregate_failures do
-          expect(date_spot_review.errors[:user_id]).to include("can't be blank")
-          expect(date_spot_review.errors[:date_spot_id]).to include("can't be blank")
+          expect(date_spot_review.errors[:user_id]).to include("を入力してください")
+          expect(date_spot_review.errors[:date_spot_id]).to include("を入力してください")
         end
       end
 
       it "user_idが空の場合保存できないこと" do
         date_spot_review.user_id = nil
         date_spot_review.valid?
-        expect(date_spot_review.errors[:user_id]).to include("can't be blank")
+        expect(date_spot_review.errors[:user_id]).to include("を入力してください")
       end
 
       it "date_spot_idが空の場合保存できないこと" do
         date_spot_review.date_spot_id = nil
         date_spot_review.valid?
-        expect(date_spot_review.errors[:date_spot_id]).to include("can't be blank")
+        expect(date_spot_review.errors[:date_spot_id]).to include("を入力してください")
       end
 
       it "1人のユーザーが1つのデートスポットに二回以上レビューが保存できないこと" do
         FactoryBot.create(:date_spot_review)
         other_date_spot_review = FactoryBot.build(:date_spot_review)
         other_date_spot_review.valid?
-        expect(other_date_spot_review.errors[:user_id]).to include("has already been taken")
+        expect(other_date_spot_review.errors[:user_id]).to include("はすでに存在します")
       end
     end
   end

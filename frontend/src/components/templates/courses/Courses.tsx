@@ -1,9 +1,10 @@
-import { memo, VFC } from 'react';
+import { memo, useEffect, VFC } from 'react';
 
 import { CourseResponseData } from 'types/courses/response';
 import { CourseCard } from 'components/organisms/card/courses/CourseCard';
 import { prefectureDatas } from 'datas/prefectureDatas';
 import { Loading } from 'components/pages/Loading';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   courses: CourseResponseData[],
@@ -12,6 +13,13 @@ type Props = {
 
 export const Courses: VFC<Props> = memo((props) => {
   const { courses, searchPrefectureId } = props;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    searchPrefectureId === 0
+    &&
+    navigate('/courses/index');
+  });
 
   return(
     // coursesの初期値のidを0にしているため、初期値が読み込まれている間はLoading画面を表示させる。
@@ -22,7 +30,10 @@ export const Courses: VFC<Props> = memo((props) => {
         (
           <>
             {
-              searchPrefectureId &&
+              searchPrefectureId
+              &&
+              searchPrefectureId !== 0
+              &&
               <div className='text-xl px-2 mb-10 font-bold text-center'>
                 {
                   `${prefectureDatas.find((prefecture) => prefecture.id === searchPrefectureId)?.name}を含むデートコース`

@@ -1,4 +1,5 @@
 import { DateSpotResponseData } from 'types/dateSpots/response';
+
 export type DateSpotReviewAndUserResponseData = {
   id: number,
   rate: number,

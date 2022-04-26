@@ -1,3 +1,5 @@
+import { memo, useEffect, useState, VFC } from 'react';
+
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
@@ -5,7 +7,6 @@ import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBa
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { Users } from 'components/templates/users/Users';
 import { client } from 'lib/api/client';
-import { memo, useEffect, useState, VFC } from 'react';
 import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 

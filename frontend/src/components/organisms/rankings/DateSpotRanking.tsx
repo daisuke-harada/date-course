@@ -1,5 +1,6 @@
 import { memo, useEffect, useState, VFC } from 'react';
 import tw from 'tailwind-styled-components';
+
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
 import { prefectureDatas } from 'datas/prefectureDatas';

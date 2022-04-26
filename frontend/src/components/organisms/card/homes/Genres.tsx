@@ -1,6 +1,7 @@
 import { memo, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+
 import { GenreData } from 'types/homes/data';
 
 const MainDiv = tw.div`m-4 p-4 w-9/12 flex flex-wrap lg:justify-start justify-center`;

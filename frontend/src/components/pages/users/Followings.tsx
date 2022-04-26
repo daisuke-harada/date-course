@@ -1,9 +1,10 @@
-import { Users } from 'components/templates/users/Users';
-import { defaultUserResponseData } from 'datas/defaultUserData';
-import { client } from 'lib/api/client';
 import { memo, useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+
+import { Users } from 'components/templates/users/Users';
+import { defaultUserResponseData } from 'datas/defaultUserData';
+import { client } from 'lib/api/client';
 import { UserResponseData } from 'types/users/response';
 
 export const Followings: VFC = memo(() => {
