@@ -2,7 +2,6 @@ import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
@@ -39,7 +38,6 @@ export const Search: VFC = memo(() => {
           />
           <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
-          <UserNameSearchBar />
         </>
       }
 

@@ -26,6 +26,7 @@ https://www.datecourses.com
   - Reactを用いてSPA(SinglePagaApplication)を実装している点。
   - TypeScriptで開発を行なっている点。
   - CSSフレームワークにtailwindcssを利用している点。
+  - atomicデザインを使用している点。
 
 - テスト
   - バックエンドのテストとしてrspecを利用してrequestsテストとmodelテストを実装している点。
