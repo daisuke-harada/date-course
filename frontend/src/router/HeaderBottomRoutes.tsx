@@ -9,6 +9,11 @@ export const HeaderBottomRoutes =  () => {
 
   const headers = [
     {
+      text: 'Topページ',
+      dataE2e: 'top-link',
+      path: '/'
+    },
+    {
       text: 'デートスポットを探す',
       dataE2e: 'dateSpot-index',
       path: 'dateSpots/index'
