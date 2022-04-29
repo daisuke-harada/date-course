@@ -13,6 +13,7 @@ class Api::V1::DateSpotsController < ApplicationController
         city_name: Prefecture.find(params[:prefecture_id]).name + params[:city_name]
       }
     )
+
     if @date_spot.save
       render json: { status: :created, date_spot: @date_spot }
     else

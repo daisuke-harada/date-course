@@ -8,8 +8,6 @@ import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
-import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
-import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 
 export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
@@ -31,17 +29,7 @@ export const Index: VFC = memo(() => {
 
   return(
     <IndexLayout
-      sideArea={
-        <>
-          <DateSpotSortSearchBar
-            defaultPrefectureValue=''
-            defaultGenreValue=''
-            defaultBusinessTimeValue=''
-          />
-          <CourseSortSearchBar defaultPrefectureValue='' />
-          <DateSpotNameSearchBar />
-        </>
-      }
+      sideArea={<CourseSortSearchBar defaultPrefectureValue='' />}
 
       topArea={
         <MultiBar

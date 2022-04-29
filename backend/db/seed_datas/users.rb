@@ -13,7 +13,7 @@ end
   User.create(name: "test#{user_number}", email: "#{user_number}@gmail.com", gender: "女性", image: File.open("./public/images/user_images/woman#{rand(1..3)}.jpg"), password: "foobar#{user_number}", password_confirmation: "foobar#{user_number}")
 end
 
-User.create(name: "admin", email: "adminstrator@gmail.com", gender: "男性", image: File.open("./public/images/user_images/man#{rand(1..3)}.jpg"), password: "administrator", password_confirmation: "administrator", admin: true)
+User.create(name: "admin", email: "adminstrator@gmail.com", gender: "男性", image: File.open("./public/images/user_images/man#{rand(1..3)}.jpg"), password: "adminstrator", password_confirmation: "adminstrator", admin: true)
 
 (1..30).each do |user_id|
   if user_id == 29
