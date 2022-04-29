@@ -1,7 +1,6 @@
 import { memo, useEffect, useState, VFC } from 'react';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
@@ -28,7 +27,6 @@ export const Index: VFC = memo(() => {
             defaultGenreValue=''
             defaultBusinessTimeValue=''
           />
-          <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
         </>
       }
