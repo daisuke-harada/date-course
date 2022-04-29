@@ -6,6 +6,8 @@ import { BaseButton } from 'components/atoms/button/BaseButton';
 import { client } from 'lib/api/client';
 
 const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
+const MainDiv = tw.div`m-auto mt-3 p-3 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col`;
+const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const DateSpotNameSearchBar: VFC = memo(() => {
   const [ dateSpotName, setDateSpotName ] = useState('');
@@ -23,16 +25,16 @@ export const DateSpotNameSearchBar: VFC = memo(() => {
   };
 
   return(
-    <div className='m-auto mt-3 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col' >
-      <div className='lg:text-lg text-xs m-auto my-5 font-bold text-center'>
+    <MainDiv >
+      <TitleDiv>
         デートスポット名検索
-      </div>
+      </TitleDiv>
       <div className='px-3'>
         <Input onChange={onChangeSearchName} type='text' value={dateSpotName} placeholder='名前を入力' />
       </div>
       <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
-    </div>
+    </MainDiv>
   );
 });

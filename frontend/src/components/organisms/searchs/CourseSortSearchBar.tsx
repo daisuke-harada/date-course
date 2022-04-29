@@ -11,6 +11,8 @@ type Props = {
 }
 
 const SelectParentDiv = tw.div`w-full px-3`;
+const MainDiv = tw.div`m-auto mt-3 p-3 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col`;
+const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const CourseSortSearchBar: VFC<Props> = memo((props) => {
   const {defaultPrefectureValue} = props;
@@ -37,16 +39,16 @@ export const CourseSortSearchBar: VFC<Props> = memo((props) => {
   };
 
   return(
-    <div className='m-auto mt-3 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col' >
-      <div className='lg:text-lg text-xs m-auto my-5 font-bold text-center'>
+    <MainDiv>
+      <TitleDiv>
         デートコースエリア検索
-      </div>
+      </TitleDiv>
       <SelectParentDiv>
         <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
       <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>
       </div>
-    </div>
+    </MainDiv>
   );
 });
