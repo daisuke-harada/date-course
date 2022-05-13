@@ -9,7 +9,7 @@ import { Directions } from 'components/molecules/maps/Directions';
 import { LoadScript } from '@react-google-maps/api';
 import { Map } from 'components/molecules/maps/Map';
 import { CourseInfoSelect } from 'components/molecules/select/managementCourses/CourseInfoSelect';
-import { ManagementCourseButtonArea } from 'components/organisms/area/ManagementCourseButtonArea';
+import { ManagementCourseButtonArea } from 'components/organisms/area/courses/ManagementCourseButtonArea';
 import { Link } from 'react-router-dom';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
