@@ -25,6 +25,7 @@ export const CopyCourseButton: VFC<Props> = memo((props) => {
       setGlobalCourseInfo({travelMode: courseInfo.travelMode, authority: courseInfo.authority, noDuplicatePrefectureNames: courseInfo.noDuplicatePrefectureNames });
       navigate('/managementCourses/createCourse');
   };
+
   return(
     <>
       {

@@ -21,6 +21,9 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const onClickAddCourseAction = () => {
+    // 以下の2つの条件を満たしている場合のみデートコースにデートスポットを追加することができる
+    // ・recoilのステートであるmanagementCourseのuserIdが0の場合。
+    // ・DuringSpotsの中にaddressAndDateSpotのdateSpot.idが入っていない場合。
     if(managementCourses.userId === 0){
       setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: [addressAndDateSpot]});
       navigate('/managementCourses/createCourse');
@@ -33,6 +36,7 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
       navigate('/managementCourses/createCourse');
     };
   };
+
   return(
     <>
       {
