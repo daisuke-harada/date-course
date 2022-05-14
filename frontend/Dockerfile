@@ -1,7 +1,6 @@
 FROM node:17.4.0 as builder
 
 ENV APP_PATH /usr/src/datecourses
-ENV REACT_APP_ENVIRONMENT='production'
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
