@@ -18,9 +18,11 @@ export const MenuIconButton: VFC<Props> = memo((props) => {
     <>
       {isOpen?
         (
+          // ナビゲーションバーを閉じるボタン
           <SlideUpBtn data-e2e='slide-up-btn' onClick={onClickNavBarSwitch}>×</SlideUpBtn>
         ):
         (
+          // ナビゲーションバーを展開するボタン
           <SlideDownBtn data-e2e='slide-down-btn' onClick={onClickNavBarSwitch} >
             <TopBorder />
             <CenterBorder />
