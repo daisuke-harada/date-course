@@ -20,6 +20,7 @@ export const UserImage: VFC<Props> = memo((props) => {
   const [userImage, setUserImage] = useState(noImageUrl);
   const [genderBorderColor, setGenderBorderColor] = useState('');
 
+  // 性別が女性の場合と男性の場合で写真の枠の色を変更する。
   useEffect(() => {
     image && image.url !== null && setUserImage(image.url);
     if(gender === '女性'){
