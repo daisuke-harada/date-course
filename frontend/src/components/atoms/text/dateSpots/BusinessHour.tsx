@@ -12,7 +12,7 @@ const MainDiv = tw.div`mx-2 my-10 text-sm font-bold md:text-xl`;
 export const BusinessHour: VFC<Props> = memo((props) => {
   const { openingTime, closingTime } = props;
 
-  // 時間の部分だけ取り出す
+  // 年数や曜日の部分は除外して時間の部分だけ取り出す
   const fetchTime = (time: Date) => time.toString().substring(11, 16);
   if(openingTime && closingTime) {
     return(

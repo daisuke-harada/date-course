@@ -44,11 +44,13 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   const [currentDateSpotReview, setCurrentDateSpotReview] = useState<DateSpotReviewAndUserResponseData | undefined>();
   const onChangeContent: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback((e) => setContent(e.target.value), []);
   const onChangeRate: (new_rating: number) => void = useCallback((new_rating) => setRate(new_rating), []);
+
   const onChangeOpen: React.MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
     setEditOpen(!editOpen);
     currentDateSpotReview && setContent(currentDateSpotReview.content);
     currentDateSpotReview && setRate(currentDateSpotReview.rate);
   }, [editOpen, currentDateSpotReview]);
+
   const navigate = useNavigate();
 
   const onClickDateSpotReviewCreateAction: React.MouseEventHandler<HTMLButtonElement>  = () => {

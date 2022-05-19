@@ -8,8 +8,6 @@ type Props = {
   addClassName?: string
 };
 
-
-
 export const BusinessTimeSelect: VFC<Props> = memo((props) => {
   const {dataE2e, timeValue, onChangeTimeValue, addClassName} = props
   return(
