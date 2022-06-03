@@ -25,8 +25,8 @@ class ApplicationController < ActionController::API
       genre_name: address.date_spot.genre.name,
       latitude: address.latitude,
       longitude: address.longitude,
-      review_total_number: address.date_spot.date_spot_reviews.count,
-      average_rate: average_rate_calculation(address.date_spot.date_spot_reviews)
+      review_total_number: DateSpotReview.where(date_spot_id: address.date_spot.id).count,
+      average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: address.date_spot.id))
     }
   end
 
@@ -52,6 +52,7 @@ class ApplicationController < ActionController::API
       Prefecture.find(Address.find_by(date_spot_id: during_spot.date_spot_id).prefecture_id).name
     end
 
+    # 県名の重複をなくして返す
     prefecture_name.uniq
   end
 

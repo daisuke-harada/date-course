@@ -1,5 +1,6 @@
 FROM ruby:3.0.3
 
+# インストール可能なパッケージの更新 開発パッケージの一式ダウンロード
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # backendディレクトリもアプリと同じく作成する。そうしなければ、Could not locate Gemfile or .bundle/ directoryとなり、Gemfileを見つけれなくなる
 ENV APP_PATH /date-course-api
