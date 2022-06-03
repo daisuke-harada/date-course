@@ -1,9 +1,7 @@
 import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
-import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { Users } from 'components/templates/users/Users';
@@ -21,17 +19,7 @@ export const Search: VFC = memo(() => {
 
   return(
     <IndexLayout
-      sideArea={
-        <>
-          <DateSpotSortSearchBar
-            defaultPrefectureValue=''
-            defaultGenreValue=''
-            defaultBusinessTimeValue=''
-          />
-          <CourseSortSearchBar defaultPrefectureValue='' />
-          <UserNameSearchBar />
-        </>
-      }
+      sideArea={<UserNameSearchBar />}
 
       topArea = {
         <MultiBar

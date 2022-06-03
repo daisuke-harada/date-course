@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
-import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
@@ -36,7 +35,6 @@ export const Search: VFC = memo(() => {
             defaultGenreValue={state.genreId || ''}
             defaultBusinessTimeValue={state.comeTime || ''}
           />
-          <CourseSortSearchBar defaultPrefectureValue='' />
           <DateSpotNameSearchBar />
         </>
       }

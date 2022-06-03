@@ -11,12 +11,16 @@ type FlashMessageData = {
 const MessageDiv = tw.div`fixed duration-1000 z-50 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2`;
 
 export const FlashMessage: VFC = memo(() => {
+
+  // 初期値の際には画面外にフラッシュメッセージは存在している。
   const [condition, setCondition] = useState('translate-x-96');
   const location = useLocation();
   const state = location.state as FlashMessageData;
   // メッセージのスライド
   const messageSwitch = useCallback(()=> {
+    // メッセージを横軸にスライドさせて表示する。
     state !== null && setCondition('translate-x-0');
+    // 2行後にメッセージをスライドさせて画面外に隠す。
     state !== null && setTimeout(() => setCondition('translate-x-96'),2000);
   }, [state]);
 

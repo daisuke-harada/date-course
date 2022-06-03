@@ -1,5 +1,6 @@
 FROM ruby:3.0.3
 
+# インストール可能なパッケージの更新 開発パッケージの一式ダウンロード
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 # backendディレクトリもアプリと同じく作成する。そうしなければ、Could not locate Gemfile or .bundle/ directoryとなり、Gemfileを見つけれなくなる
 ENV APP_PATH /date-course-api
@@ -21,15 +22,15 @@ RUN mkdir -p tmp/pids
 
 EXPOSE 7777
 
-# CMD bin/setup \
-#     && rm -f tmp/pids/server.pid \
-#     && bundle exec rails s -p 7777 -b '0.0.0.0'
-
-# RDSのデータ情報をresetする。
-CMD DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop\
-    && rails db:create\
-    && rails db:migrate\
-    && rails db:seed\
-    && rm -f tmp/pids/server.pid\
+CMD bin/setup \
+    && rm -f tmp/pids/server.pid \
     && bundle exec rails s -p 7777 -b '0.0.0.0'
+
+# # RDSのデータ情報をresetする。
+# CMD DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop\
+#     && rails db:create\
+#     && rails db:migrate\
+#     && rails db:seed\
+#     && rm -f tmp/pids/server.pid\
+#     && bundle exec rails s -p 7777 -b '0.0.0.0'
 
