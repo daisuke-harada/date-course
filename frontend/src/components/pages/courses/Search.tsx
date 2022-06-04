@@ -34,7 +34,7 @@ export const Search: VFC = memo(() => {
 
   return(
     <IndexLayout
-      sideArea={<CourseSortSearchBar defaultPrefectureValue={state.prefectureId || ''} />}
+      sideArea={<CourseSortSearchBar defaultPrefectureId={state.prefectureId || ''} />}
       topArea ={
         <MultiBar
           defaultDateSpotCondition='bg-gray-300'

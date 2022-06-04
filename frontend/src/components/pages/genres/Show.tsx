@@ -31,7 +31,7 @@ export const Show: VFC = memo(() => {
             defaultGenreValue={`${id}`}
             defaultBusinessTimeValue=''
           />
-          <CourseSortSearchBar defaultPrefectureValue='' />
+          <CourseSortSearchBar defaultPrefectureId='' />
           <DateSpotNameSearchBar />
           <UserNameSearchBar />
         </>
