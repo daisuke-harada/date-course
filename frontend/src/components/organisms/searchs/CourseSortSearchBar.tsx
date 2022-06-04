@@ -7,7 +7,7 @@ import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  defaultPrefectureValue: string
+  defaultPrefectureId: string
 }
 
 const SelectParentDiv = tw.div`w-full px-3`;
@@ -15,14 +15,16 @@ const MainDiv = tw.div`m-auto mt-3 p-3 bg-white border-2 shadow-xl rounded-3xl b
 const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const CourseSortSearchBar: VFC<Props> = memo((props) => {
-  const {defaultPrefectureValue} = props;
 
-  const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureValue);
+  // 都道府県のIDを文字列で受け取る
+  const {defaultPrefectureId} = props;
+
+  const [prefectureId, setPrefectureId] = useState<string >(defaultPrefectureId);
   const navigate = useNavigate();
-  const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureValue(e.target.value), []);
+  const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureId(e.target.value), []);
 
   const search = {
-    prefectureId: prefectureValue
+    prefectureId: prefectureId
   };
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -44,7 +46,7 @@ export const CourseSortSearchBar: VFC<Props> = memo((props) => {
         デートコースエリア検索
       </TitleDiv>
       <SelectParentDiv>
-        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureId} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
       <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>

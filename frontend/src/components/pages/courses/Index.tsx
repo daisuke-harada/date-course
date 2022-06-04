@@ -29,7 +29,7 @@ export const Index: VFC = memo(() => {
 
   return(
     <IndexLayout
-      sideArea={<CourseSortSearchBar defaultPrefectureValue='' />}
+      sideArea={<CourseSortSearchBar defaultPrefectureId='' />}
 
       topArea={
         <MultiBar
