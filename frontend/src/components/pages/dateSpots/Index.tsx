@@ -23,8 +23,8 @@ export const Index: VFC = memo(() => {
       sideArea={
         <>
           <DateSpotSortSearchBar
-            defaultPrefectureValue=''
-            defaultGenreValue=''
+            defaultPrefectureId=''
+            defaultGenreId=''
             defaultBusinessTimeValue=''
           />
           <DateSpotNameSearchBar />
