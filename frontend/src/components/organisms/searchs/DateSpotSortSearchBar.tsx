@@ -9,8 +9,8 @@ import { client } from 'lib/api/client';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  defaultPrefectureValue: string,
-  defaultGenreValue: string,
+  defaultPrefectureId: string,
+  defaultGenreId: string,
   defaultBusinessTimeValue: string
 }
 
@@ -19,9 +19,9 @@ const MainDiv = tw.div`m-auto p-3 bg-white border-2 shadow-xl rounded-3xl border
 const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
-  const {defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue} = props;
-  const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureValue);
-  const [genreValue, setGenreValue] = useState<string>(defaultGenreValue);
+  const {defaultPrefectureId, defaultGenreId, defaultBusinessTimeValue} = props;
+  const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureId);
+  const [genreValue, setGenreValue] = useState<string>(defaultGenreId);
   const [businessTimeValue, setBusinessTimeValue] = useState(defaultBusinessTimeValue);
 
   const navigate = useNavigate();

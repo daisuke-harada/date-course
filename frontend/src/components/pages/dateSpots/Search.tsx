@@ -31,8 +31,8 @@ export const Search: VFC = memo(() => {
       sideArea={
         <>
           <DateSpotSortSearchBar
-            defaultPrefectureValue={state.prefectureId || ''}
-            defaultGenreValue={state.genreId || ''}
+            defaultPrefectureId={state.prefectureId || ''}
+            defaultGenreId={state.genreId || ''}
             defaultBusinessTimeValue={state.comeTime || ''}
           />
           <DateSpotNameSearchBar />

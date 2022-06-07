@@ -25,8 +25,8 @@ export const Show: VFC = memo(() => {
       sideArea={
         <>
           <DateSpotSortSearchBar
-            defaultPrefectureValue=''
-            defaultGenreValue={`${id}`}
+            defaultPrefectureId=''
+            defaultGenreId={`${id}`}
             defaultBusinessTimeValue=''
           />
           <DateSpotNameSearchBar />
