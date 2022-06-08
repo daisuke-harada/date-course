@@ -9,7 +9,9 @@
 トップページ
 <img width="1428" alt="スクリーンショット 2022-04-25 10 17 11" src="https://user-images.githubusercontent.com/59969400/165005761-1b973980-a182-4800-a6f6-9be323b367f5.png">
 リンク
-〜https://www.datecourses.com〜
+
+現在停止中
+~~https://www.datecourses.com~~
 
 
 # 特にみていただきたい点
