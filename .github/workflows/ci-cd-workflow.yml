@@ -63,7 +63,7 @@ jobs:
           # Cypress を ./e2e/ に配置しているため、working-directoryを指定する
           # デフォルトはルートディレクトリ
           working-directory: e2e
-  deploy: # ここからdeployå
+  deploy:
     needs: [e2e_test, backend_test]
     runs-on: ubuntu-latest
 
