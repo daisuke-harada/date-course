@@ -1,6 +1,6 @@
 name: ci-workflow
 on:
-  push:
+  pull_request:
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
