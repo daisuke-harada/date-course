@@ -1,9 +1,6 @@
 name: ci-workflow
 on:
   pull_request:
-    branches:
-      - master
-    types: [closed]
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
@@ -51,7 +48,6 @@ jobs:
           yarn start &
       - uses: cypress-io/github-action@v2
         with:
-          # Next.js (http://localhost:3000) の起動を待つ
           wait-on: "http://localhost:3000"
           # Cypress を ./e2e/ に配置しているため、working-directoryを指定する
           # デフォルトはルートディレクトリ
