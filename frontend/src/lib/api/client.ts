@@ -12,11 +12,13 @@ const options = {
 // axiosで受け取ったレスポンスの値をスネークケース→キャメルケースに変換
 // または送信するリクエストの値をキャメルケース→スネークケースに変換してくれるライブラリ
 export const client = applyCaseMiddleware(axios.create({
-  baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
+  // baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
+  baseURL: 'http://localhost:7777/api/v1',
 }), options);
 
 export const formDataClient = applyCaseMiddleware(axios.create({
-  baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
+  // baseURL: process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https://backend.datecourses.com/api/v1':'http://localhost:7777/api/v1',
+  baseURL: 'http://localhost:7777/api/v1',
   headers: {
     'content-type': 'multipart/form-data',
   },
