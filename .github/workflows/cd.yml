@@ -8,10 +8,10 @@ env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   AWS_REGION: ap-northeast-1
   ECS_WEBAPP_SERVICE: datecourses-web
-  WEBAPP_CONTAINER_NAME: datecourse-frontend-ecr
-  BACKEND_CONTAINER_NAME: datecourse-backend-ecr
-  WEBAPP_TAG: 1.0.0
-  BACKEND_TAG: 1.0.0
+  WEBAPP_CONTAINER_NAME: datecourses-frontend-ecr
+  BACKEND_CONTAINER_NAME: datecourses-backend-ecr
+  WEBAPP_TAG: latest
+  BACKEND_TAG: latest
 jobs:
   deploy:
     runs-on: ubuntu-latest
