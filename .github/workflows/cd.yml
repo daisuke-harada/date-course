@@ -7,10 +7,9 @@ on:
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   AWS_REGION: ap-northeast-1
-  ECS_WEBAPP_SERVICE: datecourses-frontend
-  ECS_BACKEND_SERVICE: datecourses-backend
-  WEBAPP_CONTAINER_NAME: datecourse-frontend-ecr
-  BACKEND_CONTAINER_NAME: datecourse-backend-ecr
+  ECS_WEBAPP_SERVICE: datecourses-web
+  WEBAPP_CONTAINER_NAME: datecourses-frontend-ecr
+  BACKEND_CONTAINER_NAME: datecourses-backend-ecr
   WEBAPP_TAG: latest
   BACKEND_TAG: latest
 jobs:
@@ -57,5 +56,4 @@ jobs:
     - name: Deploy to ECS
       run: |
         aws ecs update-service --service $ECS_WEBAPP_SERVICE --cluster datecourses-ecs-cluster --force-new-deployment
-        aws ecs update-service --service $ECS_BACKEND_SERVICE --cluster datecourses-ecs-cluster --force-new-deployment
 
