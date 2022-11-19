@@ -26,7 +26,7 @@ CMD bin/setup \
     && rm -f tmp/pids/server.pid \
     && bundle exec rails s -p 7777 -b '0.0.0.0'
 
-# # RDSのデータ情報をresetする。
+# RDSのデータ情報をresetする。
 # CMD DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop\
 #     && rails db:create\
 #     && rails db:migrate\

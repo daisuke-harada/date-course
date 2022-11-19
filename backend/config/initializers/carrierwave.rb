@@ -2,7 +2,7 @@ CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage :fog
     config.fog_provider = 'fog/aws'
-    config.fog_directory  = Rails.application.credentials[:FOG_DIRECTORY]
+    config.fog_directory  = ENV["FOG_DIRECTORY"]
     config.fog_public = false
     config.fog_credentials = {
       provider: 'AWS',
