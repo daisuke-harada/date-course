@@ -13,8 +13,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.develop
-    environment:
-      REACT_APP_BACKEND_DOMAIN_API: http://localhost:7777/api/v1
     command: sh -c "yarn start"
     volumes:
       - ./frontend:/usr/src/datecourses
