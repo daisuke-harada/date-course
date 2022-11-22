@@ -11,8 +11,8 @@ env:
   ECS_BACKEND_SERVICE: datecourses-backend
   WEBAPP_CONTAINER_NAME: datecourses-frontend-ecr
   BACKEND_CONTAINER_NAME: datecourses-backend-ecr
-  WEBAPP_TAG: latest
-  BACKEND_TAG: latest
+  WEBAPP_TAG: 1.0.0
+  BACKEND_TAG: 1.0.0
 jobs:
   deploy:
     runs-on: ubuntu-latest
