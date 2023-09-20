@@ -13,6 +13,8 @@
 現在停止中
 ~~https://www.datecourses.com~~
 
+terraform
+<https://github.com/daisuke-harada/date-course-terraform>
 
 # 特にみていただきたい点
 
