@@ -1,5 +1,36 @@
 class Api::V1::DateSpotsController < ApplicationController
-  before_action :date_spot_find_param_id, only: [:show, :update, :destroy]
+  before_action :set_date_spot, only: [:show, :update, :destroy]
+
+  def index
+    addresses = Address.all
+    @address_and_date_spots = addresses.map do |address|
+      address_and_date_spot_and_genre_name(address)
+    end
+    render json: {address_and_date_spots: @address_and_date_spots }
+  end
+
+  def show
+    @address = @date_spot.address
+    @date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
+      {
+        id: date_spot_review.id,
+        rate: date_spot_review.rate,
+        content: date_spot_review.content,
+        user_name: date_spot_review.user.name,
+        user_gender: date_spot_review.user.gender,
+        user_image: date_spot_review.user.image,
+        user_id: date_spot_review.user_id,
+        date_spot_id: date_spot_review.date_spot_id,
+      }
+    end
+
+    render json: {
+      address_and_date_spot: address_and_date_spot_and_genre_name(@address),
+      review_average_rate: average_rate_calculation(@date_spot.date_spot_reviews),
+      date_spot_reviews: @date_spot_reviews
+    }
+  end
+
 
   def create
     @date_spot = DateSpot.new(
@@ -44,39 +75,9 @@ class Api::V1::DateSpotsController < ApplicationController
     render json: {status: :deleted}
   end
 
-  def index
-    addresses = Address.all
-    @address_and_date_spots = addresses.map do |address|
-      address_and_date_spot_and_genre_name(address)
-    end
-    render json: {address_and_date_spots: @address_and_date_spots }
-  end
-
-  def show
-    @address = @date_spot.address
-    @date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
-      {
-        id: date_spot_review.id,
-        rate: date_spot_review.rate,
-        content: date_spot_review.content,
-        user_name: date_spot_review.user.name,
-        user_gender: date_spot_review.user.gender,
-        user_image: date_spot_review.user.image,
-        user_id: date_spot_review.user_id,
-        date_spot_id: date_spot_review.date_spot_id,
-      }
-    end
-
-    render json: {
-      address_and_date_spot: address_and_date_spot_and_genre_name(@address),
-      review_average_rate: average_rate_calculation(@date_spot.date_spot_reviews),
-      date_spot_reviews: @date_spot_reviews
-    }
-  end
-
   private
 
-  def date_spot_find_param_id
+  def set_date_spot
     @date_spot = DateSpot.find(params[:id])
   end
 

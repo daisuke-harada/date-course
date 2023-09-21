@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
+  # deviseに変えてもいい気がする
   def login
     @user = User.find_by(name: session_params[:name])
     if @user && @user.authenticate(session_params[:password])

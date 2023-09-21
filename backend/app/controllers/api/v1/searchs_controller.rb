@@ -1,4 +1,5 @@
 class Api::V1::SearchsController < ApplicationController
+  # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
   def date_spot_sort_search
     # genreとprefectureの検索を行う
     genre_prefecture_result = DateSpot.includes(:address).ransack(:address_prefecture_id_eq => params[:prefecture_id], :genre_id_eq => params[:genre_id]).result

@@ -9,6 +9,7 @@ class Api::V1::RegistrationsController < ApplicationController
   end
 
   private
+
   def registrations_params
     params.permit(:name, :email, :gender, :image, :password, :password_confirmation)
   end

@@ -1,5 +1,17 @@
 class Api::V1::CoursesController < ApplicationController
-  before_action :course_find_param_id, only: [:show, :update, :destroy]
+  before_action :set_course, only: [:show, :update, :destroy]
+
+  def index
+    @courses = Course.where(authority: '公開').map do |course|
+      course_info(course)
+    end
+
+    render json: { courses: @courses }
+  end
+
+  def show
+    render json: { course: course_info(@course) }
+  end
 
   def create
     @course = Course.new(course_params)
@@ -16,25 +28,13 @@ class Api::V1::CoursesController < ApplicationController
     render json: { status: :deleted }
   end
 
-  def show
-    render json: { course: course_info(@course) }
-  end
-
-  def index
-    @courses = Course.where(authority: '公開').map do |course|
-      course_info(course)
-    end
-
-    render json: { courses: @courses }
-  end
-
   private
 
   def course_params
     params.require(:course).permit(:user_id, :travel_mode, :authority)
   end
 
-  def course_find_param_id
+  def set_course
     @course = Course.find(params[:id])
   end
 end
