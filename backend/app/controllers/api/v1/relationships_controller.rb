@@ -35,6 +35,7 @@ class Api::V1::RelationshipsController < ApplicationController
     }
   end
 
+  # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
   def followings
     users = User.find(params[:user_id]).followings
     @users = users.map do |user|
@@ -43,6 +44,7 @@ class Api::V1::RelationshipsController < ApplicationController
     render json: { user_name: User.find(params[:user_id]).name, users: @users}
   end
 
+  # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
   def followers
     users = User.find(params[:user_id]).followers
     @users = users.map do |user|
