@@ -42,8 +42,6 @@ gem "geocoder"
 gem "ransack"
 gem "active_model_serializers"
 
-gem "rubocop", require:false
-gem "rubocop-rails", require:false
 gem "rails-i18n"
 
 group :development, :test do
