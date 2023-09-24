@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Address, type: :model do
   describe "#create" do
@@ -23,5 +23,4 @@ RSpec.describe Address, type: :model do
       end
     end
   end
-
 end

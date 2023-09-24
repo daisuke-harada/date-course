@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Courses", type: :request do
   describe "POST /create" do
@@ -11,9 +11,9 @@ RSpec.describe "Api::V1::Courses", type: :request do
         course: {
           user_id: course.user_id,
           travel_mode: course.travel_mode,
-          authority: course.authority,
+          authority: course.authority
         },
-        during_spots: [date_spot.id, other_spot.id],
+        during_spots: [date_spot.id, other_spot.id]
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq("created")

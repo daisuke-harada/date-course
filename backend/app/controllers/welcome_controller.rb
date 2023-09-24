@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def hello
-    render json: {message: 'hello'}
+    render json: {message: "hello"}
   end
 end

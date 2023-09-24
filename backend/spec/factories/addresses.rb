@@ -19,5 +19,4 @@ FactoryBot.define do
     city_name { "福岡市博多区住吉1丁目2" }
     date_spot_id { 1 }
   end
-
 end
