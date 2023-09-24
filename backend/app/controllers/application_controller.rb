@@ -1,19 +1,4 @@
 class ApplicationController < ActionController::API
-  # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
-  def user_and_userFollowingsAndFollowers(user)
-    {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      gender: user.gender,
-      image: user.image,
-      admin: user.admin,
-      password_digest: user.password_digest,
-      following_ids: user.followings.ids,
-      follower_ids: user.followers.ids
-    }
-  end
-
   # addressとDateSpotとgenre名を結合したデータを作成する
   def address_and_date_spot_and_genre_name(address)
     {
@@ -55,15 +40,4 @@ class ApplicationController < ActionController::API
     prefecture_name.uniq
   end
 
-  # コース情報を返す
-  def course_info(course)
-    {
-      id: course.id,
-      user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
-      travel_mode: course.travel_mode,
-      authority: course.authority,
-      course_during_spots: during_address_and_date_spots(course),
-      no_duplicate_prefecture_names: course_prefecture_names_no_duplicate(course)
-    }
-  end
 end

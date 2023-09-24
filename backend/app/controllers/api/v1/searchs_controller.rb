@@ -24,7 +24,8 @@ class Api::V1::SearchsController < ApplicationController
     end
 
     @result = course_ids.uniq.map do |course_id|
-      course_info(Course.find(course_id))
+      course = Course.find(course_id)
+      course.info
     end
 
     render json: {status: "success", courses: @result, prefecture_id: params[:prefecture_id]}
@@ -33,7 +34,7 @@ class Api::V1::SearchsController < ApplicationController
   def user_name_search
     users = User.ransack(name_cont: params[:user_name]).result
     @users = users.map do |user|
-      user_and_userFollowingsAndFollowers(user)
+      user.user_and_userFollowingsAndFollowers
     end
     render json: {users: @users}
   end
