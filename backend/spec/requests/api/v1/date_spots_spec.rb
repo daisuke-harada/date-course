@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::DateSpots", type: :request do
   describe "POST /create" do
@@ -11,7 +11,7 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
         "city_name" => address.city_name,
         "genre_id" => date_spot.genre_id,
         "opening_time" => date_spot.opening_time,
-        "closing_time" => date_spot.closing_time,
+        "closing_time" => date_spot.closing_time
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq("created")
@@ -28,7 +28,7 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
         "city_name" => "",
         "genre_id" => "",
         "opening_time" => date_spot.opening_time,
-        "closing_time" => date_spot.closing_time,
+        "closing_time" => date_spot.closing_time
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq(500)
@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
         "city_name" => other_address.city_name,
         "genre_id" => other_spot.genre_id,
         "opening_time" => other_spot.opening_time,
-        "closing_time" => other_spot.closing_time,
+        "closing_time" => other_spot.closing_time
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq("updated")
@@ -63,12 +63,12 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       other_address = FactoryBot.build(:other_address)
       other_spot = other_address.date_spot
       put "/api/v1/date_spots/#{date_spot.id}", params: {
-        "name" => '',
+        "name" => "",
         "prefecture_id" => other_address.prefecture_id,
-        "city_name" => '',
-        "genre_id" => '',
+        "city_name" => "",
+        "genre_id" => "",
         "opening_time" => other_spot.opening_time,
-        "closing_time" => other_spot.closing_time,
+        "closing_time" => other_spot.closing_time
       }
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["status"]).to eq(500)

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Registrations", type: :request do
   describe "POST /signup" do
@@ -22,7 +22,7 @@ RSpec.describe "Api::V1::Registrations", type: :request do
     end
 
     it "入力された値が正しくない場合はuserを登録することができず、エラーメッセージが設定される" do
-      post "/api/v1/signup", params: {"name" => "", "email" =>  "", "gender" => "", "password" => "", "password_confirmation" => ""}
+      post "/api/v1/signup", params: {"name" => "", "email" => "", "gender" => "", "password" => "", "password_confirmation" => ""}
       expect(JSON.parse(response.body)["status"]).to eq(500)
       expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
       expect(JSON.parse(response.body)["error_messages"]["email"]).to eq(["を入力してください", "は不正な値です"])
@@ -31,5 +31,4 @@ RSpec.describe "Api::V1::Registrations", type: :request do
       expect(JSON.parse(response.body)["error_messages"]["password_confirmation"]).to eq(nil)
     end
   end
-
 end

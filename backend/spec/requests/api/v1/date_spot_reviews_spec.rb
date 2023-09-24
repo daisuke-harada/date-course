@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::DateSpotReviews", type: :request do
   describe "POST /create" do
@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
       put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
         date_spot_review: {
           rate: 5.0,
-          content: '編集しました',
+          content: "編集しました",
           user_id: date_spot_review.user_id,
           date_spot_id: date_spot_review.date_spot_id
         }
@@ -66,7 +66,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
       put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
         date_spot_review: {
           rate: 5.0,
-          content: 'a'*101,
+          content: "a" * 101,
           user_id: date_spot_review.user_id,
           date_spot_id: date_spot_review.date_spot_id
         }

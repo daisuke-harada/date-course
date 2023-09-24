@@ -31,8 +31,8 @@ jobs:
           rails db:create
           rails db:migrate
           rails db:seed
-      - name: run rubocop
-        run: rubocop --fail-level W --display-only-fail-level-offenses
+      - name: run standardrb
+        run: standardrb
       - name: run rspec
         run: |
           cd backend

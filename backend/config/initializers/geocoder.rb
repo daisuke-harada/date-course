@@ -25,7 +25,6 @@ Geocoder.configure(
   #   expiration: 2.days,
   #   prefix: 'geocoder:'
   # }
-
   lookup: :google,
   always_raise: [
     Geocoder::OverQueryLimitError,
@@ -33,6 +32,6 @@ Geocoder.configure(
     Geocoder::InvalidRequest,
     Geocoder::InvalidApiKey
   ],
-  api_key:  Rails.application.credentials[:GOOGLE_MAP_API_KEY] ,
+  api_key: Rails.application.credentials[:GOOGLE_MAP_API_KEY],
   use_https: true
 )
