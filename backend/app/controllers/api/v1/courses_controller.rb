@@ -3,7 +3,7 @@ class Api::V1::CoursesController < ApplicationController
 
   def index
     @courses = Course.where(authority: "公開").map do |course|
-      course_info(course)
+      course.info
     end
 
     render json: {courses: @courses}

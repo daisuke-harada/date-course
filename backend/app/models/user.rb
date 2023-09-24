@@ -41,4 +41,19 @@ class User < ApplicationRecord
     relationship = relationships.find_by(follow_id: other_user.id)
     relationship&.destroy
   end
+
+    # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
+    def user_and_userFollowingsAndFollowers
+      {
+        id: self.id,
+        name: self.name,
+        email: self.email,
+        gender: self.gender,
+        image: self.image,
+        admin: self.admin,
+        password_digest: self.password_digest,
+        following_ids: self.followings.ids,
+        follower_ids: self.followers.ids
+      }
+    end
 end
