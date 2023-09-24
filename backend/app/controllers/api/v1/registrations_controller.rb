@@ -2,7 +2,7 @@ class Api::V1::RegistrationsController < ApplicationController
   def signup
     @user = User.new(registrations_params)
     if @user.save
-      render json: {status: :created, login_status: true, user: user_and_userFollowingsAndFollowers(@user)}
+      render json: {status: :created, login_status: true, user: @user.user_and_userFollowingsAndFollowers}
     else
       render json: {status: 500, error_messages: @user.errors.messages}
     end
