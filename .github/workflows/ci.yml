@@ -30,9 +30,11 @@ jobs:
           cd backend
           rails db:create
           rails db:migrate
-          rails db:seed
+          standardrb --fix
       - name: run standardrb
-        run: standardrb
+        run: |
+          cd backend
+          standardrb
       - name: run rspec
         run: |
           cd backend
