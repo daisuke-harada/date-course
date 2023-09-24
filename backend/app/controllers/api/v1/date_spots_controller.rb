@@ -6,7 +6,7 @@ class Api::V1::DateSpotsController < ApplicationController
     @address_and_date_spots = addresses.map do |address|
       address_and_date_spot_and_genre_name(address)
     end
-    render json: {address_and_date_spots: @address_and_date_spots }
+    render json: {address_and_date_spots: @address_and_date_spots}
   end
 
   def show
@@ -20,7 +20,7 @@ class Api::V1::DateSpotsController < ApplicationController
         user_gender: date_spot_review.user.gender,
         user_image: date_spot_review.user.image,
         user_id: date_spot_review.user_id,
-        date_spot_id: date_spot_review.date_spot_id,
+        date_spot_id: date_spot_review.date_spot_id
       }
     end
 
@@ -30,7 +30,6 @@ class Api::V1::DateSpotsController < ApplicationController
       date_spot_reviews: @date_spot_reviews
     }
   end
-
 
   def create
     @date_spot = DateSpot.new(
@@ -46,9 +45,9 @@ class Api::V1::DateSpotsController < ApplicationController
     )
 
     if @date_spot.save
-      render json: { status: :created, date_spot: @date_spot }
+      render json: {status: :created, date_spot: @date_spot}
     else
-      render json: { status: 500, error_messages: @date_spot.errors.messages}
+      render json: {status: 500, error_messages: @date_spot.errors.messages}
     end
   end
 
@@ -64,9 +63,9 @@ class Api::V1::DateSpotsController < ApplicationController
         city_name: Prefecture.find(params[:prefecture_id]).name + params[:city_name]
       }
     )
-      render json: {status: :updated, date_spot: @date_spot }
+      render json: {status: :updated, date_spot: @date_spot}
     else
-      render json: { status: 500, error_messages: @date_spot.errors.messages}
+      render json: {status: 500, error_messages: @date_spot.errors.messages}
     end
   end
 
@@ -83,6 +82,6 @@ class Api::V1::DateSpotsController < ApplicationController
 
   # 評価の平均値を計算する
   def average_rate_calculation(reviews)
-    reviews.sum(:rate) == 0? 0: (reviews.sum(:rate) / reviews.count).floor(1).to_f
+    (reviews.sum(:rate) == 0) ? 0 : (reviews.sum(:rate) / reviews.count).floor(1).to_f
   end
 end

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Relationships", type: :request do
   describe "POST /create" do
@@ -7,7 +7,7 @@ RSpec.describe "Api::V1::Relationships", type: :request do
       other_user = FactoryBot.create(:other_user)
       post "/api/v1/relationships", params: {
         "current_user_id" => user.id,
-        "followed_user_id"=> other_user.id
+        "followed_user_id" => other_user.id
       }
       expect(JSON.parse(response.body)["status"]).to eq("created")
       expect(JSON.parse(response.body)["current_user"]["id"]).to eq(user.id)

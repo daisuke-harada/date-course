@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Users", type: :request do
   describe "GET /index" do
@@ -28,7 +28,7 @@ RSpec.describe "Api::V1::Users", type: :request do
       user = FactoryBot.create(:user)
       put "/api/v1/users/#{user.id}", params: {
         "name" => "edit",
-        "email" =>  "edit@gmail.com",
+        "email" => "edit@gmail.com",
         "gender" => "女性",
         "password" => "edit_password",
         "password_confirmation" => "edit_password"
@@ -43,7 +43,7 @@ RSpec.describe "Api::V1::Users", type: :request do
       user = FactoryBot.create(:user)
       put "/api/v1/users/#{user.id}", params: {
         "name" => "",
-        "email" =>  "",
+        "email" => "",
         "gender" => "",
         "password" => "",
         "password_confirmation" => ""

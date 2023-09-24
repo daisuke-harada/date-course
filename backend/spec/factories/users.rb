@@ -3,7 +3,7 @@ FactoryBot.define do
     id { 1 }
     name { "田中健太郎" }
     email { "rspec1@gmail.com" }
-    gender { '男性' }
+    gender { "男性" }
     image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
@@ -13,7 +13,7 @@ FactoryBot.define do
     id { 2 }
     name { "原田大輔" }
     email { "rspec2@gmail.com" }
-    gender { '男性' }
+    gender { "男性" }
     image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
@@ -23,7 +23,7 @@ FactoryBot.define do
     id { 3 }
     name { "guest" }
     email { "rspec3@gmail.com" }
-    gender { '男性' }
+    gender { "男性" }
     image { nil }
     password { "foobar" }
     password_confirmation { "foobar" }
@@ -33,7 +33,7 @@ FactoryBot.define do
     id { 4 }
     name { "admin" }
     email { "rspec3@gmail.com" }
-    gender { '男性' }
+    gender { "男性" }
     image { nil }
     password { "adminlogin1099" }
     password_confirmation { "adminlogin1099" }

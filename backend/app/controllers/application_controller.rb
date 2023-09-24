@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
   def user_and_userFollowingsAndFollowers(user)
     {
@@ -11,7 +10,7 @@ class ApplicationController < ActionController::API
       admin: user.admin,
       password_digest: user.password_digest,
       following_ids: user.followings.ids,
-      follower_ids: user.followers.ids,
+      follower_ids: user.followers.ids
     }
   end
 
@@ -33,14 +32,14 @@ class ApplicationController < ActionController::API
   # 評価の平均値を計算する
   def average_rate_calculation(reviews)
     review_rate_total = 0
-    reviews.each{ |review| review_rate_total+=review.rate}
-    review_rate_total == 0? 0: review_rate_total / reviews.length
+    reviews.each { |review| review_rate_total += review.rate }
+    (review_rate_total == 0) ? 0 : review_rate_total / reviews.length
   end
 
   # デートコース関連
   # コース内のデートスポットの情報を配列にして返す
   def during_address_and_date_spots(course)
-    return course.during_spots.map do |during_spot|
+    course.during_spots.map do |during_spot|
       address_and_date_spot_and_genre_name(Address.find_by(date_spot_id: during_spot.date_spot_id))
     end
   end
@@ -58,7 +57,7 @@ class ApplicationController < ActionController::API
 
   # コース情報を返す
   def course_info(course)
-    return {
+    {
       id: course.id,
       user: user_and_userFollowingsAndFollowers(User.find(course.user_id)),
       travel_mode: course.travel_mode,

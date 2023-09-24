@@ -4,16 +4,16 @@ def spotAndAddressCreate(name, genre_id, opening_time, closing_time, prefecture_
 end
 
 def normal_time(time)
-  return "2000-01-01 #{time}"
+  "2000-01-01 #{time}"
 end
 
 # 深夜0時から5時までの時間帯のデータを入れる際に使用
 def midnight__time(time)
-  return "2000-01-02 #{time}"
+  "2000-01-02 #{time}"
 end
 
 def spot_image(id)
-  return "#{Genre.find(id).name}.jpg"
+  "#{Genre.find(id).name}.jpg"
 end
 
 # 東京 1〜6
@@ -24,9 +24,8 @@ spotAndAddressCreate("酒場シナトラ 東京駅店", 9, normal_time("11:00"),
 spotAndAddressCreate("カフェ バッハ", 3, normal_time("10:00"), normal_time("19:00"), 13, "台東区日本堤１丁目２３−９")
 spotAndAddressCreate("おもてなしとりよし 西新宿店", 2, normal_time("17:00"), normal_time("23:00"), 13, "新宿区西新宿1-10-2 110ビル 11F")
 
-#千葉 7
+# 千葉 7
 spotAndAddressCreate("東京ディズニーランド", 5, normal_time("10:00"), normal_time("19:00"), 12, "浦安市舞浜１−１")
-
 
 # 大阪 8〜13
 spotAndAddressCreate("純喫茶 アメリカン", 3, normal_time("09:00"), normal_time("22:00"), 27, "大阪市中央区道頓堀１丁目７−４")
@@ -43,7 +42,6 @@ spotAndAddressCreate("CINQUE IKARIYA（チンクエイカリヤ）", 2, normal_t
 spotAndAddressCreate("京都 焼き鳥 一", 2, normal_time("17:00"), normal_time("22:00"), 26, "京都市中京区四条室町菊水鉾町585 1F")
 spotAndAddressCreate("京都円山　天正", 9, normal_time("17:00"), normal_time("22:00"), 26, "京都市東山区祇園町北側338")
 spotAndAddressCreate("Walden Woods Kyoto", 3, normal_time("08:00"), normal_time("19:00"), 26, "京都市下京区栄町５０８−１")
-
 
 # 神奈川 20〜25
 spotAndAddressCreate("横浜ランドマークタワー", 11, "", "", 14, "横浜市西区みなとみらい２丁目２−１")
@@ -67,7 +65,7 @@ spotAndAddressCreate("つなぐダイニング ZINO 天神店", 8, normal_time("
 spotAndAddressCreate("大濠公園", 12, "", "", 40, "福岡市中央区大濠公園")
 spotAndAddressCreate("マリンワールド海の中道", 6, "", "", 40, "福岡市東区西戸崎18-28")
 spotAndAddressCreate("麺劇場 玄瑛", 2, normal_time("11:30"), normal_time("21:00"), 40, "福岡市中央区薬院 2-16-3")
-spotAndAddressCreate("芥屋の大門", 4, "", "",40, "糸島市志摩芥屋６７５－２")
+spotAndAddressCreate("芥屋の大門", 4, "", "", 40, "糸島市志摩芥屋６７５－２")
 
 # 熊本 38
 spotAndAddressCreate("あか牛丼いわさき", 2, normal_time("11:00"), midnight__time("00:00"), 43, "阿蘇市乙姫2006-2")
