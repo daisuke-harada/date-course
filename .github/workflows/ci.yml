@@ -30,7 +30,6 @@ jobs:
           cd backend
           rails db:create
           rails db:migrate
-          standardrb --fix
       - name: run standardrb
         run: |
           cd backend
