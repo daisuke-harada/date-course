@@ -14,7 +14,6 @@ class DateSpot < ApplicationRecord
     ["closing_time", "created_at", "genre_id", "id", "image", "name", "opening_time", "updated_at"]
   end
 
-
   def self.ransackable_associations(auth_object = nil)
     ["address", "date_spot_reviews", "during_spots", "genre"]
   end
