@@ -9,4 +9,8 @@ class Address < ApplicationRecord
 
   validates :city_name, presence: true
   validates :prefecture_id, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["city_name", "created_at", "date_spot_id", "id", "latitude", "longitude", "prefecture_id", "updated_at"]
+  end
 end

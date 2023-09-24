@@ -7,7 +7,7 @@ RSpec.describe "Api::V1::Searchs", type: :request do
       date_spot = address.date_spot
       post "/api/v1/date_spots/sort", params: {
         "prefecture_id" => "40",
-        "genre_id" => "1",
+        "genre_id" => 1,
         "come_time" => ""
       }
       expect(JSON.parse(response.body)["status"]).to eq("success")

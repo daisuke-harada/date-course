@@ -21,6 +21,17 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
+  # ransackで絞り込みたい際には許可するモデルを書く必要がある
+  def self.ransackable_attributes(auth_object = nil)
+    ["admin", "created_at", "email", "gender", "id", "image", "name", "password_digest", "updated_at"]
+  end
+
+  # ransackで絞り込みたい際には許可するモデルを書く必要がある
+  # まとめて書くことはできず、絞り込みの条件ごとに書く必要がある
+  def self.ransackable_associations(auth_object = nil)
+    ["course", "date_spot"]
+  end
+
   # フォロー機能のメソッド
   def follow(other_user)
     relationships.find_or_create_by(follow_id: other_user.id) unless self == other_user
