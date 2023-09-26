@@ -2,19 +2,18 @@ class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    users = User.where(admin: false)
-    @users = users.map do |user|
+    @users = User.where(admin: false).map do |user|
       user.user_and_userFollowingsAndFollowers
     end
     render json: {users: @users}
   end
 
   def show
-    @courses = @user.courses.map do |course|
+    courses = @user.courses.map do |course|
       course.info
     end
 
-    @date_spot_reviews = @user.date_spot_reviews.map do |review|
+    date_spot_reviews = @user.date_spot_reviews.map do |review|
       {
         id: review.id,
         rate: review.rate,
@@ -23,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
       }
     end
 
-    render json: {user: @user.user_and_userFollowingsAndFollowers, courses: @courses, date_spot_reviews: @date_spot_reviews}
+    render json: {user: @user.user_and_userFollowingsAndFollowers, courses: courses, date_spot_reviews: date_spot_reviews}
   end
 
   def update
