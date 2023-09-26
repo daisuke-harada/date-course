@@ -42,18 +42,18 @@ class User < ApplicationRecord
     relationship&.destroy
   end
 
-    # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
-    def user_and_userFollowingsAndFollowers
-      {
-        id: self.id,
-        name: self.name,
-        email: self.email,
-        gender: self.gender,
-        image: self.image,
-        admin: self.admin,
-        password_digest: self.password_digest,
-        following_ids: self.followings.ids,
-        follower_ids: self.followers.ids
-      }
-    end
+  # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
+  def user_and_userFollowingsAndFollowers
+    {
+      id: id,
+      name: name,
+      email: email,
+      gender: gender,
+      image: image,
+      admin: admin,
+      password_digest: password_digest,
+      following_ids: followings.ids,
+      follower_ids: followers.ids
+    }
+  end
 end

@@ -9,10 +9,10 @@ class Course < ApplicationRecord
   # コース情報を返す
   def info
     {
-      id: self.id,
-      user: self.user.user_and_userFollowingsAndFollowers,
-      travel_mode: self.travel_mode,
-      authority: self.authority,
+      id: id,
+      user: user.user_and_userFollowingsAndFollowers,
+      travel_mode: travel_mode,
+      authority: authority,
       course_during_spots: during_address_and_date_spots(self),
       no_duplicate_prefecture_names: course_prefecture_names_no_duplicate(self)
     }

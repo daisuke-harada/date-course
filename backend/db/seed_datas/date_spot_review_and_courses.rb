@@ -18,10 +18,10 @@ def course_create(user_ids, date_spot_id_array, travel_mode)
   end
 end
 
-#すべてのユーザーにランダムに5つレビューを投稿してもらう
+# すべてのユーザーにランダムに5つレビューを投稿してもらう
 User.where(admin: false).each do |user|
-  (1..5).each do
-    date_spot_review_create(rates.sample, "test"*18, user.id, Address.find(rand(1..38)).date_spot_id)
+  5.times do
+    date_spot_review_create(rates.sample, "test" * 18, user.id, Address.find(rand(1..38)).date_spot_id)
   end
 end
 

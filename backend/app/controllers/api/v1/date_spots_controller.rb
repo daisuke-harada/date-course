@@ -3,15 +3,15 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def index
     addresses = Address.all
-    @address_and_date_spots = addresses.map do |address|
+    address_and_date_spots = addresses.map do |address|
       address_and_date_spot_and_genre_name(address)
     end
-    render json: {address_and_date_spots: @address_and_date_spots}
+    render json: {address_and_date_spots: address_and_date_spots}
   end
 
   def show
-    @address = @date_spot.address
-    @date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
+    address = @date_spot.address
+    date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
       {
         id: date_spot_review.id,
         rate: date_spot_review.rate,
@@ -25,14 +25,14 @@ class Api::V1::DateSpotsController < ApplicationController
     end
 
     render json: {
-      address_and_date_spot: address_and_date_spot_and_genre_name(@address),
+      address_and_date_spot: address_and_date_spot_and_genre_name(address),
       review_average_rate: average_rate_calculation(@date_spot.date_spot_reviews),
-      date_spot_reviews: @date_spot_reviews
+      date_spot_reviews: date_spot_reviews
     }
   end
 
   def create
-    @date_spot = DateSpot.new(
+    date_spot = DateSpot.new(
       name: params[:name],
       genre_id: params[:genre_id],
       opening_time: params[:opening_time],
@@ -44,10 +44,10 @@ class Api::V1::DateSpotsController < ApplicationController
       }
     )
 
-    if @date_spot.save
-      render json: {status: :created, date_spot: @date_spot}
+    if date_spot.save
+      render json: {status: :created, date_spot: date_spot}
     else
-      render json: {status: 500, error_messages: @date_spot.errors.messages}
+      render json: {status: 500, error_messages: date_spot.errors.messages}
     end
   end
 
