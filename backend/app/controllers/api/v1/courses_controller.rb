@@ -2,11 +2,11 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :update, :destroy]
 
   def index
-    @courses = Course.where(authority: "公開").map do |course|
+    courses = Course.where(authority: "公開").map do |course|
       course.info
     end
 
-    render json: {courses: @courses}
+    render json: {courses: courses}
   end
 
   def show
