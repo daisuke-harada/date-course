@@ -10,7 +10,7 @@ class Course < ApplicationRecord
   def info
     {
       id: id,
-      user: user.user_and_userFollowingsAndFollowers,
+      user: user.info_with_following_and_followers_ids,
       travel_mode: travel_mode,
       authority: authority,
       course_during_spots: during_address_and_date_spots,
