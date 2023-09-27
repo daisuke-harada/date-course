@@ -43,7 +43,7 @@ class User < ApplicationRecord
   end
 
   # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
-  def user_and_userFollowingsAndFollowers
+  def info_with_following_and_followers_ids
     {
       id: id,
       name: name,
