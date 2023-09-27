@@ -16,7 +16,7 @@ class Address < ApplicationRecord
   end
 
   # addressとDateSpotとgenre名を結合したデータを作成する
-  def address_and_date_spot_and_genre_name
+  def combined_data_with_address_and_genre
     {
       id: id,
       city_name: city_name,
@@ -26,7 +26,7 @@ class Address < ApplicationRecord
       latitude: latitude,
       longitude: longitude,
       review_total_number: DateSpotReview.where(date_spot_id: date_spot.id).count,
-      average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: date_spot.id))
+      average_rate: date_spot.average_rate_calculation
     }
   end
 end

@@ -4,7 +4,7 @@ class Api::V1::DateSpotsController < ApplicationController
   def index
     addresses = Address.all
     address_and_date_spots = addresses.map do |address|
-      address_and_date_spot_and_genre_name(address)
+      address.combined_data_with_address_and_genre
     end
     render json: {address_and_date_spots: address_and_date_spots}
   end
@@ -25,8 +25,8 @@ class Api::V1::DateSpotsController < ApplicationController
     end
 
     render json: {
-      address_and_date_spot: address_and_date_spot_and_genre_name(address),
-      review_average_rate: average_rate_calculation(@date_spot.date_spot_reviews),
+      address_and_date_spot: address.combined_data_with_address_and_genre,
+      review_average_rate: @date_spot.average_rate_calculation,
       date_spot_reviews: date_spot_reviews
     }
   end

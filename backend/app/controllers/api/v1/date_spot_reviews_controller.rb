@@ -16,7 +16,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id
         }
       end
-      render json: {status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id))}
+      render json: {status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
       render json: {status: 500, error_messages: @date_spot_review.errors.messages}
     end
@@ -36,7 +36,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
           date_spot_id: date_spot_review.date_spot_id
         }
       end
-      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id))}
+      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
       render json: {status: 500, error_messages: @date_spot_review.errors.messages}
     end
@@ -63,7 +63,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
       }
     end
 
-    render json: {status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: average_rate_calculation(DateSpotReview.where(date_spot_id: date_spot_id))}
+    render json: {status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
   end
 
   private
