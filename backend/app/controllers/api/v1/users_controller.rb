@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @users = User.where(admin: false).map do |user|
-      user.user_and_userFollowingsAndFollowers
+      user.info_with_following_and_followers_ids
     end
     render json: {users: @users}
   end
@@ -22,12 +22,12 @@ class Api::V1::UsersController < ApplicationController
       }
     end
 
-    render json: {user: @user.user_and_userFollowingsAndFollowers, courses: courses, date_spot_reviews: date_spot_reviews}
+    render json: {user: @user.info_with_following_and_followers_ids, courses: courses, date_spot_reviews: date_spot_reviews}
   end
 
   def update
     if @user.update(user_params)
-      render json: {status: :updated, user: @user.user_and_userFollowingsAndFollowers}
+      render json: {status: :updated, user: @user.info_with_following_and_followers_ids}
     else
       render json: {status: 500, error_messages: @user.errors.messages}
     end

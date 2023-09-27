@@ -34,7 +34,7 @@ class Api::V1::SearchsController < ApplicationController
   def user_name_search
     users = User.ransack(name_cont: params[:user_name]).result
     @users = users.map do |user|
-      user.user_and_userFollowingsAndFollowers
+      user.info_with_following_and_followers_ids
     end
     render json: {users: @users}
   end
