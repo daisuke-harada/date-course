@@ -10,7 +10,7 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def show
-    render json: {course: course_info(@course)}
+    render json: {course: @course.info}
   end
 
   def create
