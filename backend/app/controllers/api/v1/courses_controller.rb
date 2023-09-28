@@ -1,5 +1,5 @@
 class Api::V1::CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :update, :destroy]
+  before_action :set_course, only: [:show, :destroy]
 
   def index
     courses = Course.where(authority: "公開").map do |course|
