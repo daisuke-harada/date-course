@@ -15,6 +15,7 @@ class Api::V1::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+
     if @course.save
       params[:during_spots].map do |during_spot_id|
         DuringSpot.create({course_id: @course.id, date_spot_id: during_spot_id})
