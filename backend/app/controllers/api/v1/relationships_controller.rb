@@ -5,8 +5,7 @@ class Api::V1::RelationshipsController < ApplicationController
     following = current_user.follow(followed_user)
     following.save
 
-    users = User.where(admin: false)
-    users = users.map do |user|
+    users = User.where(admin: false).map do |user|
       user.info_with_following_and_followers_ids
     end
 
@@ -23,9 +22,8 @@ class Api::V1::RelationshipsController < ApplicationController
     unfollowed_user = User.find(params[:other_user_id])
     unfollowing = current_user.unfollow(unfollowed_user)
     unfollowing.destroy
-    users = User.where(admin: false)
 
-    users = users.map do |user|
+    users = User.where(admin: false).map do |user|
       user.info_with_following_and_followers_ids
     end
 
