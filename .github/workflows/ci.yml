@@ -1,6 +1,11 @@
 name: ci-workflow
 on:
+  push:
+    branches:
+      - master
   pull_request:
+    branches:
+      - master
 env:
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   FRONTEND_DOMAIN: "http://localhost:3000"
