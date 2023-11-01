@@ -2,13 +2,13 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show destroy]
 
   def index
-    courses = Course.where(authority: "公開").map {|course| course.info }
+    courses = Course.where(authority: "公開").map { |course| course.info }
 
     render json: {courses: courses}
   end
 
   def show
-    render json: { course: @course.info }
+    render json: {course: @course.info}
   end
 
   def create
@@ -18,15 +18,15 @@ class Api::V1::CoursesController < ApplicationController
       params[:during_spots].each do |during_spot_id|
         @course.during_spots.create(date_spot_id: during_spot_id)
       end
-      render json: { status: :created, course_id: @course.id }
+      render json: {status: :created, course_id: @course.id}
     else
-      render json: { errors: @course.errors.full_messages }, status: :unprocessable_entity
+      render json: {errors: @course.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def destroy
     @course.destroy
-    render json: { status: :deleted }
+    render json: {status: :deleted}
   end
 
   private
