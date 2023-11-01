@@ -1,0 +1,56 @@
+name: ci-workflow
+on:
+  pull_request:
+env:
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  FRONTEND_DOMAIN: "http://localhost:3000"
+jobs:
+  backend_test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0.23
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options:
+          -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
+    container:
+      image: ruby:3.0.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup
+        run: |
+          cd backend
+          gem install bundler
+          bundle install
+      - name: setup migrate
+        run: |
+          cd backend
+          rails db:create
+          rails db:migrate
+      - name: run standardrb
+        run: |
+          cd backend
+          standardrb
+      - name: run rspec
+        run: |
+          cd backend
+          rspec
+  e2e_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup Frontend App
+        run: |
+          cd frontend
+          yarn
+          yarn build
+          yarn start &
+      - uses: cypress-io/github-action@v2
+        with:
+          wait-on: "http://localhost:3000"
+          # Cypress を ./e2e/ に配置しているため、working-directoryを指定する
+          # デフォルトはルートディレクトリ
+          working-directory: e2e

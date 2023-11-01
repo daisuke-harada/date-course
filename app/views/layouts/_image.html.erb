@@ -1,5 +1,0 @@
-<% if target_image.image.attached? %>
-  <%= image_tag target_image.image.variant(gravity: :center, resize:"#{width}x#{height}^", crop:"#{width}x#{height}+0+0"), class: "m-auto" %>
-<% else %>
-  <%= image_tag "no_image.jpg", size: "#{width}x#{height}", class: "m-auto" %>
-<% end %>
