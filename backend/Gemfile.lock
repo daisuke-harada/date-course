@@ -69,6 +69,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     base64 (0.1.1)
     bcrypt (3.1.19)
@@ -299,6 +302,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   active_model_serializers
+  annotate
   bcrypt
   bootsnap (>= 1.4.4)
   byebug
