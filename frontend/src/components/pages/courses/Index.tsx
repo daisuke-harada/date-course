@@ -7,7 +7,7 @@ import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSear
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 
 export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
@@ -23,7 +23,7 @@ export const Index: VFC = memo(() => {
 
   useEffect(() => {
     client.get('courses').then((response) => {
-      setCourses(response.data.courses);
+      setCourses(response.data);
     })
   }, []);
 

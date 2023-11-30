@@ -2,7 +2,7 @@ import { memo, useEffect, useState, VFC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';

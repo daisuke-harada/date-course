@@ -5,7 +5,7 @@ import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotName
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 
