@@ -6,7 +6,7 @@ import { Courses } from 'components/templates/courses/Courses';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 
 export const Index: VFC = memo(() => {
@@ -16,7 +16,7 @@ export const Index: VFC = memo(() => {
       user: defaultUserResponseData,
       travelMode: '',
       authority: '',
-      courseDuringSpots: [defaultAddfressAndDateSpotJoinData],
+      courseDuringSpots: [defaultAddressAndDateSpotJoinData],
       noDuplicatePrefectureNames: ['']
     }
   ]);

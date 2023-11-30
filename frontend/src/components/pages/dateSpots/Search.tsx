@@ -4,14 +4,14 @@ import { useLocation } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
 
 
 export const Search: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
 
   const location = useLocation();
   const state = location.state as {
