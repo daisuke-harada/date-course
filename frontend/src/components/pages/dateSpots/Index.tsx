@@ -5,12 +5,12 @@ import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotName
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 
 export const Index: VFC = memo(() => {
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
 
   useEffect(() => {
     client.get('date_spots').then(response => {

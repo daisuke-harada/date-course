@@ -20,7 +20,6 @@ class Api::V1::DateSpotReviewsController < ApplicationController
   end
 
   def destroy
-    date_spot_id = @date_spot_review.date_spot_id
     @date_spot_review.destroy
     render json: {status: :deleted, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
   end
@@ -50,5 +49,3 @@ class Api::V1::DateSpotReviewsController < ApplicationController
     end
   end
 end
-
-

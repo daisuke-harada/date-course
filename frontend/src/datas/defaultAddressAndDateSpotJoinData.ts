@@ -1,7 +1,7 @@
 import { defaultDateSpotData } from './defaultDateSpotData';
 import { AddressAndDateSpotJoinData } from "types/dateSpots/response";
 
-export const defaultAddfressAndDateSpotJoinData: AddressAndDateSpotJoinData = {
+export const defaultAddressAndDateSpotJoinData: AddressAndDateSpotJoinData = {
   id: 0,
   cityName: '',
   prefectureName: '',

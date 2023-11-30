@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { Users } from 'components/templates/users/Users';
 import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';

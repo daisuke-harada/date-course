@@ -48,11 +48,13 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      setManagementCourses({userId: response.data.course.user.id, user: response.data.course.user, courseDuringSpots: response.data.course.courseDuringSpots});
-      setCourseInfo({travelMode: response.data.course.travelMode, authority: response.data.course.authority, noDuplicatePrefectureNames: response.data.course.noDuplicatePrefectureNames});
-      if(response.data.course.travelMode === 'DRIVING'){
+
+      console.log(response.data)
+      setManagementCourses({userId: response.data.user.id, user: response.data.user, courseDuringSpots: response.data.courseDuringSpots});
+      setCourseInfo({travelMode: response.data.travelMode, authority: response.data.authority, noDuplicatePrefectureNames: response.data.noDuplicatePrefectureNames});
+      if(response.data.travelMode === 'DRIVING'){
         setTravelModeText('車');
-      }else if(response.data.course.travelMode === 'BICYCLING'){
+      }else if(response.data.travelMode === 'BICYCLING'){
         setTravelModeText('自転車');
       }else{
         setTravelModeText('歩き');

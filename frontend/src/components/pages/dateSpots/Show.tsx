@@ -12,7 +12,7 @@ import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Map } from 'components/molecules/maps/Map';
 import { DateSpotReviewArea } from 'components/organisms/area/dateSpotReviews/DateSpotReviewArea';
 import { StarRateText } from 'components/atoms/text/StarRateText';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { Loading } from '../Loading';
 import { AddCourseButton } from 'components/atoms/button/courses/AddCourseButton';
 
@@ -25,7 +25,7 @@ const SubArea = tw.div`md:w-1/2 w-full`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
-  const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>(defaultAddfressAndDateSpotJoinData);
+  const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>(defaultAddressAndDateSpotJoinData);
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
@@ -42,8 +42,6 @@ export const Show: VFC = memo(() => {
       setDateSpotAverageRate(response.data.reviewAverageRate);
     });
   }, [id]);
-
-  console.log(dateSpotReviews);
 
   return(
     <Loading loadingSwitch={addressAndDateSpot.id === 0 && true}>
