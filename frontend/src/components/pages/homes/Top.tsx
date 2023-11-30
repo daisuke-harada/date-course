@@ -9,7 +9,7 @@ import { Genres } from 'components/organisms/card/homes/Genres';
 import { MainGenre } from 'components/organisms/card/homes/MainGenre';
 import { MainPrefecture } from 'components/organisms/card/homes/MainPrefecture';
 import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 
 const ImageParentDiv = tw.div`relative h-96`;
@@ -21,7 +21,7 @@ export const Top: VFC = memo(() => {
   const [ mainGenres, setMainGenres ] = useState<GenreData[]>([]);
   const [ genres, setGenres ] = useState<GenreData[]>([]);
   const [ mainPrefectures, setMainPrefectures ] = useState<PrefectureData[]>([]);
-  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddfressAndDateSpotJoinData]);
+  const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
 
 
   useEffect(() => {
