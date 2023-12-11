@@ -12,6 +12,7 @@ type Props = {
 
 export const Users: VFC<Props> = memo((props) => {
   const { users, setUsers, userSearchName } = props;
+
   return(
     <Loading loadingSwitch={users.length !== 0 && users[0].id === 0 && true} >
       {
