@@ -20,7 +20,7 @@ export const UserNameSearchBar: VFC = memo(() => {
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('user_name_search', search).then(response => {
-      navigate('/users/search', {state: {users: response.data.users, userSearchName: userName}});
+      navigate('/users/search', {state: {users: response.data, userSearchName: userName}});
     });
   };
 
