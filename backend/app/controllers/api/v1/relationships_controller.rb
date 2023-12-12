@@ -9,9 +9,9 @@ class Api::V1::RelationshipsController < ApplicationController
 
     render json: {
       status: :created,
-      users: ActiveModelSerializers::SerializableResource.new(users, each_serializer: UserSerializer),
-      current_user: ActiveModelSerializers::SerializableResource.new(current_user, serializer: UserSerializer),
-      followed_user: ActiveModelSerializers::SerializableResource.new(followed_user, serializer: UserSerializer)
+      users: users.map { |user| UserSerializer.new(user).attributes },
+      current_user: UserSerializer.new(current_user).attributes,
+      followed_user: UserSerializer.new(followed_user).attributes
     }
   end
 
@@ -25,9 +25,9 @@ class Api::V1::RelationshipsController < ApplicationController
 
     render json: {
       status: :deleted,
-      users: ActiveModelSerializers::SerializableResource.new(users, each_serializer: UserSerializer),
-      current_user: ActiveModelSerializers::SerializableResource.new(current_user, serializer: UserSerializer),
-      unfollowed_user: ActiveModelSerializers::SerializableResource.new(un_followed_user, serializer: UserSerializer)
+      users: users.map { |user| UserSerializer.new(user).attributes },
+      current_user: UserSerializer.new(current_user).attributes,
+      unfollowed_user: UserSerializer.new(unfollowed_user).attributes
     }
   end
 
@@ -37,7 +37,7 @@ class Api::V1::RelationshipsController < ApplicationController
 
     followings = user.followings
 
-    render json: {user_name: user.name, users: ActiveModelSerializers::SerializableResource.new(followings, each_serializer: UserSerializer)}
+    render json: {user_name: user.name, users: followings.map { |user| UserSerializer.new(user).attributes }}
   end
 
   # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
@@ -46,6 +46,6 @@ class Api::V1::RelationshipsController < ApplicationController
 
     followers = user.followers
 
-    render json: {user_name: user.name, users: ActiveModelSerializers::SerializableResource.new(followers, each_serializer: UserSerializer)}
+    render json: {user_name: user.name, users: followers.map { |user| UserSerializer.new(user).attributes }}
   end
 end

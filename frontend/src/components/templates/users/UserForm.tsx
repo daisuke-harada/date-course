@@ -125,13 +125,13 @@ export const UserForm: VFC<Props> = memo((props) => {
     <MainDiv>
       <Title>{userFormTitle}</Title>
       <ul className='mt-5'>
-        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
+        {errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
       </ul>
       <ul>
-        {errorEmailMessages !== [] && errorEmailMessages.map((message)=><li className='text-red-500'>メールは{message}</li>)}
+        {errorEmailMessages.map((message)=><li className='text-red-500'>メールは{message}</li>)}
       </ul>
       <ul>
-        {errorPasswordMessages !== [] && errorPasswordMessages.map((message)=><li className='text-red-500'>パスワードは{message}</li>)}
+        {errorPasswordMessages.map((message)=><li className='text-red-500'>パスワードは{message}</li>)}
       </ul>
       <Form onSubmit={userRegitAction}>
         <Input data-e2e='user-form-name-input' placeholder='名前を入力' value={name} onChange={onChangeName} />
