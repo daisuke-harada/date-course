@@ -20,7 +20,8 @@ class Api::V1::SearchsController < ApplicationController
     during_spots = DuringSpot.includes(date_spot: :address).ransack(date_spot_address_prefecture_id_eq: params[:prefecture_id]).result
     course_ids = during_spots.pluck(:course_id)
     courses = Course.where(id: course_ids.uniq)
-    render json: {courses: ActiveModelSerializers::SerializableResource.new(courses, each_serializer: CourseSerializer), prefecture_id: params[:prefecture_id], status: "success"}
+
+    render json: {courses: courses.map { |course| CourseSerializer.new(course).attributes }, prefecture_id: params[:prefecture_id], status: "success"}
   end
 
   def user_name_search
