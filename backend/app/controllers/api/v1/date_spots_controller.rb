@@ -24,6 +24,8 @@ class Api::V1::DateSpotsController < ApplicationController
       }
     end
 
+    puts address
+
     render json: {
       address_and_date_spot: address.combined_data_with_address_and_genre,
       review_average_rate: @date_spot.average_rate_calculation,
