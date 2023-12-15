@@ -40,9 +40,12 @@ gem "geocoder"
 
 # 検索機能実装
 gem "ransack"
+
 gem "active_model_serializers"
 
 gem "rails-i18n"
+
+gem "annotate"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console

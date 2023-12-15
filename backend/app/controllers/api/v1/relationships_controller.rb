@@ -5,15 +5,13 @@ class Api::V1::RelationshipsController < ApplicationController
     following = current_user.follow(followed_user)
     following.save
 
-    users = User.where(admin: false).map do |user|
-      user.info_with_following_and_followers_ids
-    end
+    users = User.where(admin: false)
 
     render json: {
       status: :created,
-      users: users,
-      current_user: current_user.info_with_following_and_followers_ids,
-      followed_user: followed_user.info_with_following_and_followers_ids
+      users: users.map { |user| UserSerializer.new(user).attributes },
+      current_user: UserSerializer.new(current_user).attributes,
+      followed_user: UserSerializer.new(followed_user).attributes
     }
   end
 
@@ -23,15 +21,13 @@ class Api::V1::RelationshipsController < ApplicationController
     unfollowing = current_user.unfollow(unfollowed_user)
     unfollowing.destroy
 
-    users = User.where(admin: false).map do |user|
-      user.info_with_following_and_followers_ids
-    end
+    users = User.where(admin: false)
 
     render json: {
       status: :deleted,
-      users: users,
-      current_user: current_user.info_with_following_and_followers_ids,
-      unfollowed_user: unfollowed_user.info_with_following_and_followers_ids
+      users: users.map { |user| UserSerializer.new(user).attributes },
+      current_user: UserSerializer.new(current_user).attributes,
+      unfollowed_user: UserSerializer.new(unfollowed_user).attributes
     }
   end
 
@@ -39,21 +35,17 @@ class Api::V1::RelationshipsController < ApplicationController
   def followings
     user = User.find(params[:user_id])
 
-    followings = user.followings.map do |following_user|
-      following_user.info_with_following_and_followers_ids
-    end
+    followings = user.followings
 
-    render json: {user_name: user.name, users: followings}
+    render json: {user_name: user.name, users: followings.map { |user| UserSerializer.new(user).attributes }}
   end
 
   # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
   def followers
     user = User.find(params[:user_id])
 
-    followers = user.followers.map do |follower|
-      follower.info_with_following_and_followers_ids
-    end
+    followers = user.followers
 
-    render json: {user_name: user.name, users: followers}
+    render json: {user_name: user.name, users: followers.map { |user| UserSerializer.new(user).attributes }}
   end
 end

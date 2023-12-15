@@ -20,20 +20,14 @@
 #  fk_rails_...  (date_spot_id => date_spots.id)
 #  fk_rails_...  (user_id => users.id)
 #
-FactoryBot.define do
-  factory :date_spot_review do
-    id { 1 }
-    rate { 1 }
-    content { "MyText" }
-    association :user
-    association :date_spot
-  end
+class DateSpotReviewSerializer < ActiveModel::Serializer
+  attributes :id, :rate, :content, :user_id, :date_spot_id
 
-  factory :other_date_spot_review, class: DateSpotReview do
-    id { 2 }
-    rate { 1 }
-    content { "MyText2" }
-    association :user, factory: :other_user
-    date_spot_id { 1 }
+  attribute :user_name, if: :user_info_included?
+  attribute :user_gender, if: :user_info_included?
+  attribute :user_image, if: :user_info_included?
+
+  def user_info_included?
+    instance_options[:include_user_info]
   end
 end

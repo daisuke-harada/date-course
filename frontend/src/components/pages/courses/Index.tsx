@@ -6,8 +6,8 @@ import { Courses } from 'components/templates/courses/Courses';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
-import { defaultAddfressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
-import { IndexLayout } from 'components/templates/layouts/IndexLyouts';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 
 export const Index: VFC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
@@ -16,14 +16,14 @@ export const Index: VFC = memo(() => {
       user: defaultUserResponseData,
       travelMode: '',
       authority: '',
-      courseDuringSpots: [defaultAddfressAndDateSpotJoinData],
+      courseDuringSpots: [defaultAddressAndDateSpotJoinData],
       noDuplicatePrefectureNames: ['']
     }
   ]);
 
   useEffect(() => {
     client.get('courses').then((response) => {
-      setCourses(response.data.courses);
+      setCourses(response.data);
     })
   }, []);
 

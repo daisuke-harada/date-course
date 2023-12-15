@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  admin           :boolean          default(FALSE)
+#  email           :string(255)
+#  gender          :string(255)
+#  image           :string(255)
+#  name            :string(255)
+#  password_digest :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#  index_users_on_name   (name) UNIQUE
+#
 class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_secure_password
@@ -40,20 +59,5 @@ class User < ApplicationRecord
   def unfollow(other_user)
     relationship = relationships.find_by(follow_id: other_user.id)
     relationship&.destroy
-  end
-
-  # user情報をJSONで渡す際に、フォローしたユーザーのidとフォローされたユーザーのidを返せるようにする。
-  def info_with_following_and_followers_ids
-    {
-      id: id,
-      name: name,
-      email: email,
-      gender: gender,
-      image: image,
-      admin: admin,
-      password_digest: password_digest,
-      following_ids: followings.ids,
-      follower_ids: followers.ids
-    }
   end
 end
