@@ -11,18 +11,7 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def show
     address = @date_spot.address
-    date_spot_reviews = @date_spot.date_spot_reviews.map do |date_spot_review|
-      {
-        id: date_spot_review.id,
-        rate: date_spot_review.rate,
-        content: date_spot_review.content,
-        user_name: date_spot_review.user.name,
-        user_gender: date_spot_review.user.gender,
-        user_image: date_spot_review.user.image,
-        user_id: date_spot_review.user_id,
-        date_spot_id: date_spot_review.date_spot_id
-      }
-    end
+    date_spot_reviews = @date_spot.date_spot_reviews.map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes } }
 
     render json: {
       address_and_date_spot: address.combined_data_with_address_and_genre,
