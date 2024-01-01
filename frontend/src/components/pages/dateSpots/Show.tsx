@@ -25,6 +25,7 @@ const SubArea = tw.div`md:w-1/2 w-full`;
 
 export const Show: VFC = memo(() => {
   const { id } = useParams();
+  console.log(id)
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>(defaultAddressAndDateSpotJoinData);
   const [dateSpotReviews, setDateSpotReviews] = useState([]);
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
