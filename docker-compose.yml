@@ -33,8 +33,8 @@ services:
       - 7777:7777
     depends_on:
       - db
-    tty: true # binding.pryをdockerの環境でするために必要
-    stdin_open: true # binding.pryをdockerの環境でするために必要
+    tty: true
+    stdin_open: true
   # いったんe2eコンテナはコメントアウトする
   # e2e:
   #   image: cypress
