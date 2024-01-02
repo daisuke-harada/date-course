@@ -6,6 +6,7 @@ class Api::V1::DateSpotsController < ApplicationController
     address_and_date_spots = addresses.map do |address|
       address.combined_data_with_address_and_genre
     end
+
     render json: {address_and_date_spots: address_and_date_spots}
   end
 
@@ -39,7 +40,7 @@ class Api::V1::DateSpotsController < ApplicationController
     if date_spot.save
       render json: {status: :created, date_spot: date_spot}
     else
-      render json: {status: 500, error_messages: date_spot.errors.messages}
+      render json: ErrorSerializer.new(date_spot).as_json
     end
   end
 
@@ -57,7 +58,7 @@ class Api::V1::DateSpotsController < ApplicationController
     )
       render json: {status: :updated, date_spot: @date_spot}
     else
-      render json: {status: 500, error_messages: @date_spot.errors.messages}
+      render json: ErrorSerializer.new(@date_spot).as_json
     end
   end
 

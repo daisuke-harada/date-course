@@ -7,7 +7,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
     if @date_spot_review.save
       render json: {status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
-      render json: {status: 500, error_messages: @date_spot_review.errors.messages}
+      render json: ErrorSerializer.new(@date_spot_review).as_json
     end
   end
 
@@ -15,7 +15,7 @@ class Api::V1::DateSpotReviewsController < ApplicationController
     if @date_spot_review.update(date_spot_review_params)
       render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
-      render json: {status: 500, error_messages: @date_spot_review.errors.messages}
+      render json: ErrorSerializer.new(@date_spot_review).as_json
     end
   end
 

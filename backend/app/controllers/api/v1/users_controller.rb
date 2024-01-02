@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.update(user_params)
       render json: {status: :updated, user: UserSerializer.new(@user).attributes}
     else
-      render json: {status: 500, error_messages: @user.errors.messages}
+      render json: ErrorSerializer.new(@user).as_json
     end
   end
 
