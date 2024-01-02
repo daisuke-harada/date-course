@@ -19,7 +19,7 @@ class Api::V1::CoursesController < ApplicationController
       end
       render json: {status: :created, course_id: @course.id}
     else
-      render json: {errors: @course.errors.full_messages}, status: :unprocessable_entity
+      render json: ErrorSerializer.new(@course).as_json, status: :unprocessable_entity
     end
   end
 
