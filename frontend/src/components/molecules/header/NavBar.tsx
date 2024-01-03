@@ -14,7 +14,7 @@ type Props = {
   onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> ;
 }
 
-const Ul = tw.ul`lg:hidden duration-500 fixed top-24 text-center border rounded-b-lg bg-white z-40 shadow-2xl w-2/3 right-0`;
+const Ul = tw.ul`lg:hidden duration-500 fixed top-20 md:top-24 text-center border rounded-b-lg bg-white z-40 shadow-2xl w-2/3 right-0`;
 const IndexList = tw.li`px-4 py-4 text-black font-bold hover:bg-red-300 hover:text-black`;
 const ButtonList = tw.li`p-2 mt-3`;
 
