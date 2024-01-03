@@ -31,7 +31,7 @@ export const useLoginAuthAction = (signInParams: SignInParams) => {
         afterLoginSuccess(response.data);
       }else{
         // ログイン失敗のメッセージをrailsから受け取りstateにセットする。
-        setErrorMessages(response.data.errors);
+        setErrorMessages(response.data.errorMessages);
         // フラッシュメッセージにもエラーを表示させる。
         <Navigate to='./' state={{message: 'ログインに失敗しました', type: 'error-message', condition: true}} />
       }
