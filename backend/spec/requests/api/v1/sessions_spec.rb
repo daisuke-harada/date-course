@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Sessions", type: :request do
   describe "POST /login" do
+    let!(:user) { create(:user) }
+
     it "ユーザーのログインに成功する" do
-      user = FactoryBot.create(:user)
       post "/api/v1/login", params: {sign_in_params: {name: user.name, password: user.password}}
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["login_status"]).to eq(true)
@@ -17,12 +18,11 @@ RSpec.describe "Api::V1::Sessions", type: :request do
     end
 
     it "ユーザーのログインに失敗する" do
-      user = FactoryBot.create(:user)
       post "/api/v1/login", params: {sign_in_params: {name: "daisuke", password: user.password}}
       expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["login_status"]).to eq(false)
       expect(JSON.parse(response.body)["status"]).to eq(401)
-      expect(JSON.parse(response.body)["errors"]).to eq(["認証に失敗しました。", "正しい名前・パスワードを入力し直すか、新規登録を行ってください。"])
+      expect(JSON.parse(response.body)["error_messages"]).to eq(["認証に失敗しました。", "正しい名前・パスワードを入力し直すか、新規登録を行ってください。"])
     end
   end
 end

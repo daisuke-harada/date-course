@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::DateSpots", type: :request do
   describe "POST /create" do
+    let(:address) { build(:address) }
+    let(:date_spot) { address.date_spot }
+
     it "入力された値が正しい場合はdate_spotを登録することができる" do
-      address = FactoryBot.build(:address)
-      date_spot = address.date_spot
       post "/api/v1/date_spots", params: {
         "name" => date_spot.name,
         "prefecture_id" => address.prefecture_id,
@@ -20,8 +21,6 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
     end
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
-      address = FactoryBot.build(:address)
-      date_spot = address.date_spot
       post "/api/v1/date_spots", params: {
         "name" => "",
         "prefecture_id" => address.prefecture_id,
@@ -38,11 +37,11 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
   end
 
   describe "PUT /update" do
+    let(:address) { create(:address) }
+    let(:date_spot) { address.date_spot }
+    let(:other_address) { build(:other_address) }
+    let(:other_spot) { other_address.date_spot }
     it "入力された値が正しい場合はdate_spotを更新することができる" do
-      address = FactoryBot.create(:address)
-      date_spot = address.date_spot
-      other_address = FactoryBot.build(:other_address)
-      other_spot = other_address.date_spot
       put "/api/v1/date_spots/#{date_spot.id}", params: {
         "name" => other_spot.name,
         "prefecture_id" => other_address.prefecture_id,
@@ -58,10 +57,6 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
     end
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
-      address = FactoryBot.create(:address)
-      date_spot = address.date_spot
-      other_address = FactoryBot.build(:other_address)
-      other_spot = other_address.date_spot
       put "/api/v1/date_spots/#{date_spot.id}", params: {
         "name" => "",
         "prefecture_id" => other_address.prefecture_id,
@@ -78,18 +73,18 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
   end
 
   describe "DELETE /destroy" do
+    let(:date_spot) { create(:date_spot) }
     it "date_spot情報の削除に成功する" do
-      date_spot = FactoryBot.create(:date_spot)
       delete "/api/v1/date_spots/#{date_spot.id}"
       expect(JSON.parse(response.body)["status"]).to eq("deleted")
     end
   end
 
   describe "GET /show" do
+    let!(:address) { create(:address) }
+    let!(:date_spot_review) { create(:other_date_spot_review) }
+    let(:date_spot) { address.date_spot }
     it "date_spot詳細ページを表示する" do
-      address = FactoryBot.create(:address)
-      date_spot_review = FactoryBot.create(:other_date_spot_review)
-      date_spot = address.date_spot
       get "/api/v1/date_spots/#{date_spot.id}"
       expect(JSON.parse(response.body)["address_and_date_spot"]["date_spot"]["name"]).to eq(date_spot.name)
       expect(JSON.parse(response.body)["address_and_date_spot"]["date_spot"]["genre_id"]).to eq(date_spot.genre_id)
@@ -102,11 +97,12 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
   end
 
   describe "GET /index" do
+    let!(:address) { create(:address) }
+    let(:date_spot) { address.date_spot }
+    let!(:other_address) { create(:other_address) }
+    let(:other_spot) { other_address.date_spot }
+
     it "date_spot一覧ページを表示する" do
-      address = FactoryBot.create(:address)
-      date_spot = address.date_spot
-      other_address = FactoryBot.create(:other_address)
-      other_spot = other_address.date_spot
       get "/api/v1/date_spots"
       expect(JSON.parse(response.body)["address_and_date_spots"][0]["date_spot"]["name"]).to eq(date_spot.name)
       expect(JSON.parse(response.body)["address_and_date_spots"][0]["prefecture_name"]).to eq(address.prefecture.name)

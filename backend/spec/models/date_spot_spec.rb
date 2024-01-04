@@ -19,7 +19,7 @@ require "rails_helper"
 
 RSpec.describe DateSpot, type: :model do
   describe "#create" do
-    let(:date_spot) { FactoryBot.build(:date_spot) }
+    let(:date_spot) { build(:date_spot) }
 
     context "dates_spotを保存できる場合" do
       it "正常値の場合、保存できること" do

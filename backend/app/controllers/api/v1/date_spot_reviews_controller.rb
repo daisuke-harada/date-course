@@ -1,19 +1,24 @@
 class Api::V1::DateSpotReviewsController < ApplicationController
   before_action :set_date_spot, only: [:destroy, :update]
-  before_action :set_date_spot_reviews, only: [:create, :update, :destroy]
+  before_action :set_date_spot_reviews, only: [:destroy]
 
   def create
     @date_spot_review = DateSpotReview.new(date_spot_review_params)
+
     if @date_spot_review.save
-      render json: {status: :created, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
+      date_spot_reviews = DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }
+      render json: {status: :created, date_spot_reviews: date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
+      date_spot_reviews = DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }
       render json: ErrorSerializer.new(@date_spot_review).as_json
     end
   end
 
   def update
     if @date_spot_review.update(date_spot_review_params)
-      render json: {status: :updated, date_spot_reviews: @date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
+      date_spot_reviews = DateSpotReview.where(date_spot_id: @date_spot_review.date_spot_id).map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }
+
+      render json: {status: :updated, date_spot_reviews: date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
       render json: ErrorSerializer.new(@date_spot_review).as_json
     end

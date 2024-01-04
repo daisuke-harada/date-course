@@ -2,10 +2,11 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::DateSpotReviews", type: :request do
   describe "POST /create" do
+    let!(:user) { create(:user) }
+    let!(:date_spot) { create(:date_spot) }
+    let(:date_spot_review) { build(:date_spot_review) }
+
     it "入力された値が正しい場合はdate_spo_reviewを登録することができる" do
-      FactoryBot.create(:user)
-      FactoryBot.create(:date_spot)
-      date_spot_review = FactoryBot.build(:date_spot_review)
       post "/api/v1/date_spot_reviews", params: {
         date_spot_review: {
           rate: date_spot_review.rate,
@@ -25,9 +26,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
     end
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
-      FactoryBot.create(:date_spot)
-      FactoryBot.create(:user)
-      date_spot_review = FactoryBot.build(:date_spot_review)
+      date_spot_review = build(:date_spot_review)
       post "/api/v1/date_spot_reviews", params: {
         date_spot_review: {
           rate: date_spot_review.rate,
@@ -44,8 +43,9 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
   end
 
   describe "PUT /update" do
+    let!(:date_spot_review) { create(:date_spot_review) }
+
     it "入力された値が正しい場合はdate_spot_reviewsを更新することができる" do
-      date_spot_review = FactoryBot.create(:date_spot_review)
       put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
         date_spot_review: {
           rate: 5.0,
@@ -62,7 +62,6 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
     end
 
     it "入力された値が正しくない場合はエラーメッセージがレスポンスで返される" do
-      date_spot_review = FactoryBot.create(:date_spot_review)
       put "/api/v1/date_spot_reviews/#{date_spot_review.id}", params: {
         date_spot_review: {
           rate: 5.0,
@@ -78,17 +77,18 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
   end
 
   describe "DELETE /destroy" do
+    let!(:date_spot_review) { create(:date_spot_review) }
+    let!(:other_date_spot_review) { create(:other_date_spot_review) }
+
     it "date_spot情報の削除に成功する" do
-      date_spot_review = FactoryBot.create(:date_spot_review)
-      other_date_spot_review = FactoryBot.create(:other_date_spot_review)
       delete "/api/v1/date_spot_reviews/#{date_spot_review.id}"
       expect(JSON.parse(response.body)["status"]).to eq("deleted")
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(other_date_spot_review.rate)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(other_date_spot_review.content)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_name"]).to eq(other_date_spot_review.user.name)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_gender"]).to eq(other_date_spot_review.user.gender)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_id"]).to eq(other_date_spot_review.user_id)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["date_spot_id"]).to eq(other_date_spot_review.date_spot_id)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(date_spot_review.rate)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(date_spot_review.content)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_name"]).to eq(date_spot_review.user.name)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_gender"]).to eq(date_spot_review.user.gender)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_id"]).to eq(date_spot_review.user_id)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["date_spot_id"]).to eq(date_spot_review.date_spot_id)
       expect(JSON.parse(response.body)["review_average_rate"]).to eq(1.0)
     end
   end
