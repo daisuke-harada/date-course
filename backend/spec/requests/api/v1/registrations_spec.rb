@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Registrations", type: :request do
   describe "POST /signup" do
+    let(:user) { build(:user) }
+
     it "入力された値が正しい場合はuserを登録することができる" do
-      user = FactoryBot.build(:user)
       post "/api/v1/signup", params: {
         "name" => user.name, "email" =>  user.email,
         "gender" => user.gender, "password" => user.password,

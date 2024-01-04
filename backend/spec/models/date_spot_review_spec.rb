@@ -24,7 +24,7 @@ require "rails_helper"
 
 RSpec.describe DateSpotReview, type: :model do
   describe "#create" do
-    let(:date_spot_review) { FactoryBot.build(:date_spot_review) }
+    let(:date_spot_review) { build(:date_spot_review) }
     context "date_spot_reviewを保存できる場合" do
       it "正常値の場合、保存できること" do
         expect(date_spot_review).to be_valid
@@ -66,8 +66,8 @@ RSpec.describe DateSpotReview, type: :model do
       end
 
       it "1人のユーザーが1つのデートスポットに二回以上レビューが保存できないこと" do
-        FactoryBot.create(:date_spot_review)
-        other_date_spot_review = FactoryBot.build(:date_spot_review)
+        create(:date_spot_review)
+        other_date_spot_review = build(:date_spot_review)
         other_date_spot_review.valid?
         expect(other_date_spot_review.errors[:user_id]).to include("はすでに存在します")
       end
