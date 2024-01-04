@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Searchs", type: :request do
   describe "POST /date_spot_sort_search" do
+    let!(:address) { create(:address) }
+
     it "エリアが福岡県、ジャンルがショッピングモールのデートスポットを検索する" do
-      address = FactoryBot.create(:address)
       date_spot = address.date_spot
       post "/api/v1/date_spots/sort", params: {
         "prefecture_id" => "40",
@@ -18,8 +19,9 @@ RSpec.describe "Api::V1::Searchs", type: :request do
   end
 
   describe "POST /date_spot_name_search" do
+    let!(:address) { create(:address) }
+
     it "キャナルシティという名前のデートスポットを全て表示する" do
-      address = FactoryBot.create(:address)
       date_spot = address.date_spot
       post "/api/v1/date_spot_name_search", params: {
         "date_spot_name" => "キャナルシティ"
@@ -31,10 +33,11 @@ RSpec.describe "Api::V1::Searchs", type: :request do
   end
 
   describe "POST /course_sort_search" do
+    let!(:during_spot) { create(:during_spot) }
+    let!(:another_address) { create(:another_address) }
+    let!(:course) { during_spot.course }
+
     it "福岡県エリアのデートコースを表示する" do
-      during_spot = FactoryBot.create(:during_spot)
-      FactoryBot.create(:another_address)
-      course = during_spot.course
       post "/api/v1/courses/sort", params: {
         "prefecture_id" => "40"
       }
@@ -45,15 +48,16 @@ RSpec.describe "Api::V1::Searchs", type: :request do
   end
 
   describe "POST /user_name_search" do
+    let!(:user) { create(:guest) }
+
     it "名前がguestのユーザーを検索する" do
-      user = FactoryBot.create(:guest)
       post "/api/v1/user_name_search", params: {
         "user_name" => "guest"
       }
-      expect(JSON.parse(response.body)["users"][0]["id"]).to eq(user.id)
-      expect(JSON.parse(response.body)["users"][0]["name"]).to eq(user.name)
-      expect(JSON.parse(response.body)["users"][0]["email"]).to eq(user.email)
-      expect(JSON.parse(response.body)["users"][0]["gender"]).to eq(user.gender)
+      expect(JSON.parse(response.body)[0]["id"]).to eq(user.id)
+      expect(JSON.parse(response.body)[0]["name"]).to eq(user.name)
+      expect(JSON.parse(response.body)[0]["email"]).to eq(user.email)
+      expect(JSON.parse(response.body)[0]["gender"]).to eq(user.gender)
     end
   end
 end

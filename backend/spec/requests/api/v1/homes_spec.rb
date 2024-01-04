@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Homes", type: :request do
   describe "GET /top" do
+    let!(:date_spot) { create(:address).date_spot }
+    let!(:other_spot) { create(:other_address).date_spot }
+
     it "topページを表示する" do
-      date_spot = FactoryBot.create(:address).date_spot
-      other_spot = FactoryBot.create(:other_address).date_spot
       get "/api/v1/top"
       areas = Area.all.map do |area|
         {
@@ -14,7 +15,8 @@ RSpec.describe "Api::V1::Homes", type: :request do
           }
         }
       end
-      main_prefectures = Prefecture.find([13, 27, 40, 14, 23, 26]).map do |prefecture|
+
+      main_prefectures = Prefecture.where(id: [13, 27, 40, 14, 23, 26]).map do |prefecture|
         {
           "attributes" => {
             "id" => prefecture.id,
@@ -23,7 +25,8 @@ RSpec.describe "Api::V1::Homes", type: :request do
           }
         }
       end
-      main_genres = Genre.find([1, 2, 3, 4, 5, 6]).map do |genre|
+
+      main_genres = Genre.where(id: [1, 2, 3, 4, 5, 6]).map do |genre|
         {
           "attributes" => {
             "id" => genre.id,

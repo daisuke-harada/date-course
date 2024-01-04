@@ -21,14 +21,14 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   describe "#create" do
-    let(:user) { FactoryBot.build(:user) }
+    let(:user) { build(:user) }
     context "userを保存できる場合" do
       it "正常値の場合、保存できること" do
         expect(user).to be_valid
       end
 
       it "正常値の場合、admin属性がtrueのuserも保存できること" do
-        admin = FactoryBot.build(:admin)
+        admin = build(:admin)
         expect(admin).to be_valid
       end
 
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
       end
 
       it "すでに登録されている名前は保存できないこと" do
-        FactoryBot.create(:user)
+        create(:user)
         user.valid?
         expect(user.errors[:name]).to include("はすでに存在します")
       end
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
       end
 
       it "すでに登録されているメールアドレスは保存できないこと" do
-        FactoryBot.create(:user)
+        create(:user)
         user.valid?
         expect(user.errors[:email]).to include("はすでに存在します")
       end

@@ -23,10 +23,11 @@ require "rails_helper"
 RSpec.describe Relationship, type: :model do
   describe "#create" do
     context "relatiohshipを保存できる場合" do
-      let(:relationship) { FactoryBot.build(:relationship) }
+      let(:relationship) { build(:relationship) }
+      let!(:user) { create(:user) }
+      let!(:other_user) { create(:other_user) }
+
       it "正常値の場合、保存できること" do
-        FactoryBot.create(:user)
-        FactoryBot.create(:other_user)
         expect(relationship).to be_valid
       end
     end

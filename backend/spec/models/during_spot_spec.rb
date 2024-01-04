@@ -22,7 +22,7 @@ require "rails_helper"
 
 RSpec.describe DuringSpot, type: :model do
   describe "#create" do
-    let(:during_spot) { FactoryBot.build(:during_spot) }
+    let(:during_spot) { build(:during_spot) }
 
     context "during_spotを保存できる場合" do
       it "正常値の場合、保存できること" do
