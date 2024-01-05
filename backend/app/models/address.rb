@@ -20,6 +20,7 @@ class Address < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
   belongs_to :date_spot
+  delegate :name, to: :prefecture, prefix: true
 
   geocoded_by :city_name
   after_validation :geocode, if: :city_name_changed?
@@ -30,20 +31,5 @@ class Address < ApplicationRecord
   # ransackようのmethod
   def self.ransackable_attributes(auth_object = nil)
     ["city_name", "created_at", "date_spot_id", "id", "latitude", "longitude", "prefecture_id", "updated_at"]
-  end
-
-  # addressとDateSpotとgenre名を結合したデータを作成する
-  def combined_data_with_address_and_genre
-    {
-      id: id,
-      city_name: city_name,
-      prefecture_name: Prefecture.find(prefecture_id).name,
-      date_spot: date_spot,
-      genre_name: date_spot.genre.name,
-      latitude: latitude,
-      longitude: longitude,
-      review_total_number: DateSpotReview.where(date_spot_id: date_spot.id).count,
-      average_rate: date_spot.average_rate_calculation
-    }
   end
 end

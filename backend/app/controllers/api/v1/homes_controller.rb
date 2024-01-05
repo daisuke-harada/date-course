@@ -3,8 +3,8 @@ class Api::V1::HomesController < ApplicationController
     main_prefecture_ids = [13, 27, 40, 14, 23, 26]
     main_genre_ids = [1, 2, 3, 4, 5, 6]
 
-    address_and_date_spots = Address.all.map do |address|
-      address.combined_data_with_address_and_genre
+    address_and_date_spots = Address.includes(:date_spot).map do |address|
+      AddressSerializer.new(address)
     end
 
     render json: {
