@@ -24,7 +24,7 @@ class CourseSerializer < ActiveModel::Serializer
 
   attribute :course_during_spots do
     object.during_spots.map do |during_spot|
-      Address.find_by(date_spot_id: during_spot.date_spot_id).combined_data_with_address_and_genre
+      AddressSerializer.new(Address.find_by(date_spot_id: during_spot.date_spot_id))
     end
   end
 
