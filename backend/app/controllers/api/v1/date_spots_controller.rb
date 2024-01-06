@@ -8,9 +8,6 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def show
-    puts params
-    puts @date_spot
-
     address = @date_spot.address
     date_spot_reviews = @date_spot.date_spot_reviews.map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }
 

@@ -2,6 +2,7 @@ class Api::V1::SessionsController < ApplicationController
   # deviseに変えてもいい気がする
   def login
     user = User.find_by(name: session_params[:name])
+
     if user&.authenticate(session_params[:password])
       render json: SessionsSerializer.new(user).as_json
     else
