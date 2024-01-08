@@ -23,6 +23,7 @@ class DateSpot < ApplicationRecord
   accepts_nested_attributes_for :address
   has_many :date_spot_reviews, dependent: :destroy
   has_many :during_spots, dependent: :destroy
+  has_many :courses, through: :during_spots
 
   validates :name, presence: true
   validates :genre_id, presence: true
