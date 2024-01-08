@@ -9,7 +9,6 @@ class Api::V1::UsersController < ApplicationController
   def show
     courses = @user.courses
     date_spot_reviews = map_date_spot_reviews(@user.date_spot_reviews)
-    puts @user.courses
     render json: {user: UserSerializer.new(@user).attributes, courses: courses.map { |course| CourseSerializer.new(course).attributes }, date_spot_reviews: date_spot_reviews}
   end
 
@@ -17,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.update(user_params)
       render json: {status: :updated, user: UserSerializer.new(@user).attributes}
     else
-      render json: {status: 500, error_messages: @user.errors.messages}
+      render json: ErrorSerializer.new(@user).as_json
     end
   end
 

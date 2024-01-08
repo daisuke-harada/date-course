@@ -54,7 +54,7 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
   const navigate = useNavigate();
 
   const onClickDateSpotReviewCreateAction: React.MouseEventHandler<HTMLButtonElement>  = () => {
-    client.post('date_spot_reviews', dateSpotReview).then(response => {
+    client.post('date_spot_reviews', { dateSpotReview: dateSpotReview }).then(response => {
       response.data.status === 'created' && setDateSpotReviews(response.data.dateSpotReviews);
       response.data.status === 'created' && setContent('');
       response.data.status === 'created' && setRate(0);
@@ -135,12 +135,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
               (
                 <>
                   <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
-                  <ul className='mt-1'>
-                    {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
-                  </ul>
-                  <ul>
-                    {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
-                  </ul>
+                  {errorUserIdMessages.length > 0 &&
+                    <ul className='mt-1'>
+                      {errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
+                    </ul>
+                  }
+                  {errorContentMessages.length > 0 &&
+                    <ul>
+                      {errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
+                    </ul>
+                  }
                   <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
                   <ButtonArea>
                     <ButtonParentDiv>
@@ -177,12 +181,16 @@ export const DateSpotReviewForm: VFC<Props> = memo((props) => {
         <UserInfoDiv>
           <div>{getCurrentUser.user.name}</div>
           <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
-          <ul className='mt-1'>
-            {errorUserIdMessages !== [] && errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
-          </ul>
-          <ul>
-            {errorContentMessages !== [] && errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
-          </ul>
+          {errorUserIdMessages.length > 0 &&
+            <ul className='mt-1'>
+              {errorUserIdMessages.map((message)=><li className='text-red-500'>{message}</li>)}
+            </ul>
+          }
+          {errorContentMessages.length > 0 &&
+            <ul>
+              {errorContentMessages.map((message)=><li className='text-red-500'>コメントは{message}</li>)}
+            </ul>
+          }
           <TextArea data-e2e='dateSpotReview-comment-input' placeholder='コメントを入力' value={content} onChange={onChangeContent} />
           <div className='ml-auto pt-2'>
             <BaseButton dataE2e='dateSpotReview-create-button' onClickEvent={onClickDateSpotReviewCreateAction}>投稿</BaseButton>

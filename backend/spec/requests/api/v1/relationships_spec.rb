@@ -1,10 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "Api::V1::Relationships", type: :request do
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:other_user) }
+
   describe "POST /create" do
     it "ユーザーをフォローする" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
       post "/api/v1/relationships", params: {
         "current_user_id" => user.id,
         "followed_user_id" => other_user.id
@@ -16,10 +17,9 @@ RSpec.describe "Api::V1::Relationships", type: :request do
   end
 
   describe "DELETE /destroy" do
+    let!(:relationship) { create(:relationship) }
+
     it "ユーザーをアンフォローする" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
-      FactoryBot.create(:relationship)
       delete "/api/v1/relationships/#{user.id}/#{other_user.id}"
       expect(JSON.parse(response.body)["status"]).to eq("deleted")
       expect(JSON.parse(response.body)["current_user"]["id"]).to eq(user.id)
@@ -28,10 +28,9 @@ RSpec.describe "Api::V1::Relationships", type: :request do
   end
 
   describe "GET /followings" do
+    let!(:relationship) { create(:relationship) }
+
     it "ユーザーのフォローしているユーザーをレスポンスで返す" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
-      FactoryBot.create(:relationship)
       get "/api/v1/users/#{user.id}/followings"
       expect(JSON.parse(response.body)["user_name"]).to eq(user.name)
       expect(JSON.parse(response.body)["users"][0]["id"]).to eq(other_user.id)
@@ -43,10 +42,9 @@ RSpec.describe "Api::V1::Relationships", type: :request do
   end
 
   describe "GET /followers" do
+    let!(:relationship) { create(:relationship) }
+
     it "ユーザーがフォローされているユーザーをレスポンスで返す" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
-      FactoryBot.create(:relationship)
       get "/api/v1/users/#{other_user.id}/followers"
       expect(JSON.parse(response.body)["user_name"]).to eq(other_user.name)
       expect(JSON.parse(response.body)["users"][0]["id"]).to eq(user.id)

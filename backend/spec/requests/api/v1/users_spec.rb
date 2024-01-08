@@ -1,10 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "Api::V1::Users", type: :request do
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:other_user) }
+
   describe "GET /index" do
     it "user一覧ページを表示する" do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:other_user)
       get "/api/v1/users"
       expect(JSON.parse(response.body)["users"][0]["name"]).to eq(user.name)
       expect(JSON.parse(response.body)["users"][1]["name"]).to eq(other_user.name)
@@ -13,7 +14,6 @@ RSpec.describe "Api::V1::Users", type: :request do
 
   describe "GET /show" do
     it "user詳細ページを表示する" do
-      user = FactoryBot.create(:user)
       get "/api/v1/users/#{user.id}"
       expect(JSON.parse(response.body)["user"]["name"]).to eq(user.name)
       expect(JSON.parse(response.body)["user"]["email"]).to eq(user.email)
@@ -25,7 +25,6 @@ RSpec.describe "Api::V1::Users", type: :request do
 
   describe "PUT /update" do
     it "user情報の編集に成功する" do
-      user = FactoryBot.create(:user)
       put "/api/v1/users/#{user.id}", params: {
         "name" => "edit",
         "email" => "edit@gmail.com",
@@ -40,7 +39,6 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
 
     it "user情報の編集に失敗する" do
-      user = FactoryBot.create(:user)
       put "/api/v1/users/#{user.id}", params: {
         "name" => "",
         "email" => "",
@@ -59,7 +57,6 @@ RSpec.describe "Api::V1::Users", type: :request do
 
   describe "DELETE /destroy" do
     it "user情報の削除に成功する" do
-      user = FactoryBot.create(:user)
       delete "/api/v1/users/#{user.id}"
       expect(JSON.parse(response.body)["status"]).to eq("deleted")
     end
