@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id            :bigint           not null, primary key
+#  city_name     :string(255)
+#  latitude      :float(24)
+#  longitude     :float(24)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  date_spot_id  :integer
+#  prefecture_id :integer
+#
+# Indexes
+#
+#  index_addresses_on_date_spot_id_and_created_at   (date_spot_id,created_at)
+#  index_addresses_on_prefecture_id_and_created_at  (prefecture_id,created_at)
+#
 class AddressSerializer < ActiveModel::Serializer
   attributes :id, :city_name, :latitude, :longitude
 

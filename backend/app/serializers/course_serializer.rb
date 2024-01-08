@@ -23,8 +23,8 @@ class CourseSerializer < ActiveModel::Serializer
   attributes :id, :authority, :travel_mode, :user, :course_during_spots, :no_duplicate_prefecture_names
 
   attribute :course_during_spots do
-    object.during_spots.map do |during_spot|
-      AddressSerializer.new(Address.find_by(date_spot_id: during_spot.date_spot_id))
+    object.date_spots.map do |date_spot|
+      AddressSerializer.new(Address.find_by(date_spot_id: date_spot.id))
     end
   end
 
