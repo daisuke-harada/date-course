@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_082535) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_082535) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "prefecture_id"
     t.integer "date_spot_id"
     t.string "city_name"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["date_spot_id", "created_at"], name: "index_addresses_on_date_spot_id_and_created_at"
     t.index ["prefecture_id", "created_at"], name: "index_addresses_on_prefecture_id_and_created_at"
   end
@@ -28,8 +27,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
     t.bigint "user_id", null: false
     t.string "travel_mode", null: false
     t.string "authority", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
@@ -38,8 +37,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
     t.text "content"
     t.bigint "user_id"
     t.bigint "date_spot_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["date_spot_id"], name: "index_date_spot_reviews_on_date_spot_id"
     t.index ["user_id"], name: "index_date_spot_reviews_on_user_id"
   end
@@ -48,18 +47,18 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
     t.integer "genre_id"
     t.string "name"
     t.string "image"
-    t.datetime "opening_time"
-    t.datetime "closing_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "opening_time", precision: nil
+    t.datetime "closing_time", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["genre_id", "created_at"], name: "index_date_spots_on_genre_id_and_created_at"
   end
 
   create_table "during_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "date_spot_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_during_spots_on_course_id"
     t.index ["date_spot_id"], name: "index_during_spots_on_date_spot_id"
   end
@@ -67,8 +66,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "follow_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
@@ -80,8 +79,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_082535) do
     t.string "image"
     t.boolean "admin", default: false
     t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end

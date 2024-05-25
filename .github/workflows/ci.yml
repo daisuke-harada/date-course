@@ -22,7 +22,7 @@ jobs:
         options:
           -e MYSQL_ROOT_PASSWORD=password --entrypoint sh mysql:8.0.23 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     container:
-      image: ruby:3.0.3
+      image: ruby:3.3.0
     steps:
       - uses: actions/checkout@v2
       - name: setup
