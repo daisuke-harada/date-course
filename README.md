@@ -46,8 +46,8 @@ Terraform<br/>
   - tailwindcss(CSSフレームワーク)
   - googleMapApi(Directions API MapsJavaScript API)
 - バックエンド
-  - Ruby 3.0.3
-  - Ruby on Rails 6.1.4 (APIモード)
+  - Ruby 3.1.2
+  - Ruby on Rails 7.1.0 (APIモード)
   - Rubocop（コード解析ツール）
   - RSpec（テスト)
   - googleMapApi(Geocoding API)
