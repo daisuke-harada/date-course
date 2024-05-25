@@ -25,7 +25,7 @@ export const Show: VFC = memo(() => {
   const { id } = useParams();
   const [managementCourses, setManagementCourses] = useState<ManagementCourseData>({
     userId: 0,
-    courseDuringSpots: []
+    dateSpots: []
   });
 
   const [courseInfo, setCourseInfo] = useState<CourseInfoData>({
@@ -48,7 +48,7 @@ export const Show: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      setManagementCourses({userId: response.data.user.id, user: response.data.user, courseDuringSpots: response.data.courseDuringSpots});
+      setManagementCourses({userId: response.data.user.id, user: response.data.user, dateSpots: response.data.dateSpots});
       setCourseInfo({travelMode: response.data.travelMode, authority: response.data.authority, noDuplicatePrefectureNames: response.data.noDuplicatePrefectureNames});
       if(response.data.travelMode === 'DRIVING'){
         setTravelModeText('車');
@@ -78,7 +78,7 @@ export const Show: VFC = memo(() => {
         <CourseAreaDiv>
           <div className='md:w-1/3 w-full'>
             {
-              managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
+              managementCourses.dateSpots.map((courseDuringSpot, index) => (
                 <CourseDuringSpotCard
                   key={courseDuringSpot.id}
                   courseDuringSpot={courseDuringSpot}
@@ -109,7 +109,7 @@ export const Show: VFC = memo(() => {
             </Link>
           </ButtonParentDiv>
           <ButtonParentDiv>
-            <MoveGoogleMapButton courseDuringSpots={managementCourses.courseDuringSpots} />
+            <MoveGoogleMapButton dateSpots={managementCourses.dateSpots} />
           </ButtonParentDiv>
           <ButtonParentDiv>
             <CopyCourseButton managementCourses={managementCourses} courseInfo={courseInfo} />

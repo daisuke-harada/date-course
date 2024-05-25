@@ -19,9 +19,9 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
   const onChangeCourseIdValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setChangeCourseId(Number(e.target.value)), []);
 
   const onClickCourseChange = useCallback(() => {
-    const dateSpotIdAndName = (dateSpotId: number) => (managementCourses.courseDuringSpots.find(courseDuringSpot => courseDuringSpot.dateSpot.id === dateSpotId));
-    const dateSpotIndex = (addressAndDateSpot: AddressAndDateSpotJoinData) => (managementCourses.courseDuringSpots.indexOf(addressAndDateSpot));
-    const copyManagementCourses = managementCourses.courseDuringSpots.slice();
+    const dateSpotIdAndName = (dateSpotId: number) => (managementCourses.dateSpots.find(courseDuringSpot => courseDuringSpot.dateSpot.id === dateSpotId));
+    const dateSpotIndex = (addressAndDateSpot: AddressAndDateSpotJoinData) => (managementCourses.dateSpots.indexOf(addressAndDateSpot));
+    const copyManagementCourses = managementCourses.dateSpots.slice();
     const currentDateSpot = dateSpotIdAndName(currentDateSpotId) || {
       id: 0,
       cityName: '',
@@ -62,11 +62,11 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
       currentDateSpot
     );
     // 入れ替え完了した配列をセットする。
-    setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: copyManagementCourses});
+    setManagementCourses({userId: getCurrentUser.user.id, dateSpots: copyManagementCourses});
   }, [
       getCurrentUser.user.id,
       changeCourseId, currentDateSpotId,
-      managementCourses.courseDuringSpots,
+      managementCourses.dateSpots,
       setManagementCourses
     ]
   );
@@ -75,7 +75,7 @@ export const ChangeSelect: VFC<Props> = memo((props) => {
       <>
         <select data-e2e={`spot-change-select-${currentDateSpotId}`} className='mb-2 border-2 rounded-md font-bold' onChange={onChangeCourseIdValue}>
           <option value='0'>入れ替え対象を選択</option>
-          {managementCourses.courseDuringSpots
+          {managementCourses.dateSpots
             .filter(courseDuringSpot => courseDuringSpot.dateSpot.id !== currentDateSpotId)
             .map((courseDuringSpot) => {
             return(

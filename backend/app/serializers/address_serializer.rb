@@ -17,15 +17,12 @@
 #  index_addresses_on_prefecture_id_and_created_at  (prefecture_id,created_at)
 #
 class AddressSerializer < ActiveModel::Serializer
+  belongs_to :date_spot
   attributes :id, :city_name, :latitude, :longitude
 
   attribute :prefecture_name do
     # active_hashのprefectureを呼び出せないためこのような書き方にした
     object.prefecture_name
-  end
-
-  attribute :date_spot do
-    object.date_spot
   end
 
   attribute :genre_name do

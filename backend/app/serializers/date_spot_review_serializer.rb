@@ -21,7 +21,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class DateSpotReviewSerializer < ActiveModel::Serializer
-  attributes :id, :rate, :content, :user_id, :date_spot_id
+  belongs_to :date_spot
+  attributes :id, :rate, :content, :user_id
 
   attribute :user_name do
     object.user.name

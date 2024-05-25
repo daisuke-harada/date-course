@@ -35,7 +35,7 @@ const createCourse = (testUser: UserResponseData, travelMode: string, authority:
     user: testUser,
     travelMode: travelMode,
     authority: authority,
-    courseDuringSpots: addressAndDateSpots,
+    dateSpots: addressAndDateSpots,
     noDuplicatePrefectureNames: ['福岡']
   };
 
@@ -84,7 +84,7 @@ describe('courses', () => {
       user: testUser,
       travelMode: 'DRIVING',
       authority: '公開',
-      courseDuringSpots: addressAndDateSpots,
+      dateSpots: addressAndDateSpots,
       noDuplicatePrefectureNames: ['福岡']
     };
     apiCourseShowAccess(courseData);
@@ -109,7 +109,7 @@ describe('courses', () => {
       user: testUser,
       travelMode: 'DRIVING',
       authority: '公開',
-      courseDuringSpots: addressAndDateSpots,
+      dateSpots: addressAndDateSpots,
       noDuplicatePrefectureNames: ['福岡']
     };
     apiCourseShowAccess(courseData);
@@ -187,10 +187,10 @@ describe('courses', () => {
     apiCourseShowAccess(courseTestDatas[0]);
 
     // デートコース内のデートスポット情報を表示させるために必要。
-    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
+    courseTestDatas[0].dateSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
     cy.contains('詳細を見る').first().click();
 
-    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+    courseTestDatas[0].dateSpots.map((addressAndDateSpot) => {
       cy.contains(addressAndDateSpot.dateSpot.name);
       cy.contains(addressAndDateSpot.cityName);
       cy.contains(addressAndDateSpot.genreName);
@@ -206,16 +206,16 @@ describe('courses', () => {
     userSigninSuccess(anotherTestUser);
     apiCourseShowAccess(courseTestDatas[0]);
     // デートコース内のデートスポット情報を表示させるために必要。
-    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
+    courseTestDatas[0].dateSpots.map((addressAndDateSpot) => apiDateSpotShowAccess(addressAndDateSpot));
     cy.visit(`/courses/${courseTestDatas[0].id}`);
     dataE2eGet('copy-course-button').click();
-    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+    courseTestDatas[0].dateSpots.map((addressAndDateSpot) => {
       cy.contains(addressAndDateSpot.dateSpot.name);
       cy.contains(addressAndDateSpot.cityName);
       cy.contains(addressAndDateSpot.genreName);
     });
     cy.contains('登録').click();
-    courseTestDatas[0].courseDuringSpots.map((addressAndDateSpot) => {
+    courseTestDatas[0].dateSpots.map((addressAndDateSpot) => {
       cy.contains(addressAndDateSpot.dateSpot.name);
       cy.contains(addressAndDateSpot.cityName);
       cy.contains(addressAndDateSpot.genreName);

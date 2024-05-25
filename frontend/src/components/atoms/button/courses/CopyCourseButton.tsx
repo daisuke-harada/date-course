@@ -21,7 +21,7 @@ export const CopyCourseButton: VFC<Props> = memo((props) => {
   const setGlobalCourseInfo = useSetRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
 
   const onClickAddCourseAction = () => {
-      setGlobalManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: managementCourses.courseDuringSpots});
+      setGlobalManagementCourses({userId: getCurrentUser.user.id, dateSpots: managementCourses.dateSpots});
       setGlobalCourseInfo({travelMode: courseInfo.travelMode, authority: courseInfo.authority, noDuplicatePrefectureNames: courseInfo.noDuplicatePrefectureNames });
       navigate('/managementCourses/createCourse');
   };

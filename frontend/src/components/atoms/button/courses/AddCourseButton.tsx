@@ -25,14 +25,14 @@ export const AddCourseButton: VFC<Props> = memo((props) => {
     // ・recoilのステートであるmanagementCourseのuserIdが0の場合。
     // ・DuringSpotsの中にaddressAndDateSpotのdateSpot.idが入っていない場合。
     if(managementCourses.userId === 0){
-      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: [addressAndDateSpot]});
+      setManagementCourses({userId: getCurrentUser.user.id, dateSpots: [addressAndDateSpot]});
       navigate('/managementCourses/createCourse');
-    } else if(managementCourses.courseDuringSpots.some(spot => spot.dateSpot.id === addressAndDateSpot.dateSpot.id)){
+    } else if(managementCourses.dateSpots.some(spot => spot.dateSpot.id === addressAndDateSpot.dateSpot.id)){
       navigate('./', {state: {message: 'このスポットはすでに選択されています', type: 'error-message', condition: true}});
     } else {
-      const dateCourseIdAndNames = managementCourses.courseDuringSpots.slice();
+      const dateCourseIdAndNames = managementCourses.dateSpots.slice();
       dateCourseIdAndNames.push(addressAndDateSpot);
-      setManagementCourses({userId: getCurrentUser.user.id, courseDuringSpots: dateCourseIdAndNames});
+      setManagementCourses({userId: getCurrentUser.user.id, dateSpots: dateCourseIdAndNames});
       navigate('/managementCourses/createCourse');
     };
   };
