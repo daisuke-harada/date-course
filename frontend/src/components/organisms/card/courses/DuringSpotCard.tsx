@@ -14,7 +14,7 @@ export const DuringSpotCard: VFC<Props> = memo((props) => {
   const { duringSpot } = props;
   const noImage = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [ duringSpotImage, setDuringSpotImage] = useState(noImage);
-
+  console.log(duringSpot)
   useEffect(() => {
     duringSpot.dateSpot.image && duringSpot.dateSpot.image.url && setDuringSpotImage(duringSpot.dateSpot.image.url);
   }, [duringSpot]);

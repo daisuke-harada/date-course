@@ -18,7 +18,7 @@ export const courseTestDatas: CourseResponseData[] = [
     user: testUser,
     travelMode: 'DRIVING',
     authority: '公開',
-    courseDuringSpots: firstDuringSpots,
+    dateSpots: firstDuringSpots,
     noDuplicatePrefectureNames: createNoDuplicatePrefecture(firstDuringSpots)
   },
   {
@@ -26,7 +26,7 @@ export const courseTestDatas: CourseResponseData[] = [
     user: testUser,
     travelMode: 'DRIVING',
     authority: '公開',
-    courseDuringSpots: secondDuringSpots,
+    dateSpots: secondDuringSpots,
     noDuplicatePrefectureNames: createNoDuplicatePrefecture(secondDuringSpots)
   },
   {
@@ -34,7 +34,7 @@ export const courseTestDatas: CourseResponseData[] = [
     user: guestUser,
     travelMode: 'BICYCLING',
     authority: '公開',
-    courseDuringSpots: firstDuringSpots,
+    dateSpots: firstDuringSpots,
     noDuplicatePrefectureNames: createNoDuplicatePrefecture(firstDuringSpots)
   },
   {
@@ -42,7 +42,7 @@ export const courseTestDatas: CourseResponseData[] = [
     user: anotherTestUser,
     travelMode: 'DRIVING',
     authority: '公開',
-    courseDuringSpots: thirdDuringSpots,
+    dateSpots: thirdDuringSpots,
     noDuplicatePrefectureNames: createNoDuplicatePrefecture(thirdDuringSpots)
   }
 ]

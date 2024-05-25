@@ -2,14 +2,17 @@ class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    @users = User.where(admin: false)
-    render json: {users: @users.map { |user| UserSerializer.new(user).attributes }}
+    users = User.includes(:followers, :followings, courses: {date_spots: [:address, :date_spot_reviews]}).non_admins
+    render json: users
   end
 
   def show
     courses = @user.courses
-    date_spot_reviews = map_date_spot_reviews(@user.date_spot_reviews)
-    render json: {user: UserSerializer.new(@user).attributes, courses: courses.map { |course| CourseSerializer.new(course).attributes }, date_spot_reviews: date_spot_reviews}
+    render json: {
+      user: UserSerializer.new(@user).attributes,
+      courses: courses.map { |course| CourseSerializer.new(course).attributes },
+      date_spot_reviews: map_date_spot_reviews(@user.date_spot_reviews.includes(:date_spot))
+    }
   end
 
   def update

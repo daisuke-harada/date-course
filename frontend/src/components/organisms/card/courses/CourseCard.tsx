@@ -47,7 +47,7 @@ export const CourseCard: VFC<Props> = memo((props) =>{
       </div>
       <DuringSpotsDiv>
         {
-          course.courseDuringSpots.map(
+          course.dateSpots.map(
             (courseDuringSpot, index) => (
               index <= 2
               &&
@@ -56,7 +56,7 @@ export const CourseCard: VFC<Props> = memo((props) =>{
           )
         }
         {
-          course.courseDuringSpots.length < 3
+          course.dateSpots.length < 3
           &&
           <div className='bg-white rounded-xl shadow-xl m-1'>
             <div className='mobile(M):w-24 mobile(M):h-24 w-20 h-20 rounded-t-xl bg-gray-400'>

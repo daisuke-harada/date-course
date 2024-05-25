@@ -66,7 +66,7 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
         <DD>{addressAndDateSpot?.genreName}</DD>
         <DD>
           {
-            managementCourses.courseDuringSpots.length > 1
+            managementCourses.dateSpots.length > 1
             && addressAndDateSpot
             && setManagementCourses
             &&
@@ -88,7 +88,7 @@ export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
       {
         managementCourses
         &&
-        managementCourses.courseDuringSpots.length !== courseNumber + 1
+        managementCourses.dateSpots.length !== courseNumber + 1
         &&
         <RoadDiv>
           <div className='border-r-4 border-indigo-500 w-1/2'>

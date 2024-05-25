@@ -29,7 +29,7 @@ export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   }, [ resetManagementCourses, resetCourseInfo ]);
 
   const onClickCreateCourse = useCallback(() => {
-    const courseDuringSpotIds = managementCourses.courseDuringSpots.map((duringSpot) => duringSpot.id);
+    const courseDuringSpotIds = managementCourses.dateSpots.map((duringSpot) => duringSpot.id);
     const course = {
       userId: managementCourses.userId,
       duringSpots: courseDuringSpotIds,
@@ -47,7 +47,7 @@ export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
   return(
     <>
       {
-        managementCourses.courseDuringSpots && managementCourses.courseDuringSpots.length > 1
+        managementCourses.dateSpots && managementCourses.dateSpots.length > 1
         &&
         (
           <ButtonArea>

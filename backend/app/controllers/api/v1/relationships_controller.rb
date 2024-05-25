@@ -5,7 +5,7 @@ class Api::V1::RelationshipsController < ApplicationController
     following = current_user.follow(followed_user)
     following.save
 
-    users = User.where(admin: false)
+    users = User.non_admins
 
     render json: {
       status: :created,
@@ -21,7 +21,7 @@ class Api::V1::RelationshipsController < ApplicationController
     unfollowing = current_user.unfollow(unfollowed_user)
     unfollowing.destroy
 
-    users = User.where(admin: false)
+    users = User.non_admins
 
     render json: {
       status: :deleted,

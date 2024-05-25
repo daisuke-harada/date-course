@@ -18,9 +18,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Course < ApplicationRecord
+  belongs_to :user
   has_many :during_spots, dependent: :destroy
   has_many :date_spots, through: :during_spots
-  belongs_to :user
 
   validates :user_id, presence: true
   validates :authority, presence: true

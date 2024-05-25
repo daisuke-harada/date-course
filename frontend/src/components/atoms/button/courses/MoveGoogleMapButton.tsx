@@ -8,12 +8,12 @@ const Button = tw.button`btn bg-white text-black w-full border-2 border-gray-400
 const Image = tw.img`sm:w-7 sm:h-7 w-4 h-4 inline mb-1`;
 
 type Props = {
-  courseDuringSpots: AddressAndDateSpotJoinData[]
+  dateSpots: AddressAndDateSpotJoinData[]
 }
 
 export const MoveGoogleMapButton: VFC<Props> = memo((props) => {
-  const {courseDuringSpots} = props;
-  const maps = courseDuringSpots.map((spot) => `${spot.cityName}/`);
+  const {dateSpots} = props;
+  const maps = dateSpots.map((spot) => `${spot.cityName}/`);
 
   return(
     <a href={`https://maps.google.co.jp/maps/dir/${maps.map((cityName) => cityName)}`} target='_blank' rel='noopener noreferrer'>

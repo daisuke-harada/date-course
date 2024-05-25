@@ -15,7 +15,6 @@ const Image = tw.img`lg:bg-top object-cover absolute top-0 w-full h-full rounded
 export const MyPageReviews: VFC<Props> = memo((props) => {
   const { reviews } = props;
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
-
   return(
     <>
       <>

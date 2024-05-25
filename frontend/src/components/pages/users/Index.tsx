@@ -13,7 +13,8 @@ export const Index: VFC = memo(() => {
 
   useEffect(() => {
     client.get(`users`).then(response => {
-      setUsers(response.data.users);
+      console.log(response.data)
+      setUsers(response.data);
     });
   }, []);
 

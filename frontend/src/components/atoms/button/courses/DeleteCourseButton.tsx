@@ -19,13 +19,13 @@ export const DeleteCourseButton: VFC<Props> = memo((props) => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const onClickDeleteCourseAction = useCallback(() => {
-    const copyCourseDuringSpots = managementCourses.courseDuringSpots.slice();
+    const copyCourseDuringSpots = managementCourses.dateSpots.slice();
 
     copyCourseDuringSpots.splice(
-      managementCourses.courseDuringSpots.indexOf(addressAndDateSpot),
+      managementCourses.dateSpots.indexOf(addressAndDateSpot),
       1
     );
-    setManagementCourses({userId: managementCourses.userId, courseDuringSpots: copyCourseDuringSpots});
+    setManagementCourses({userId: managementCourses.userId, dateSpots: copyCourseDuringSpots});
   }, [addressAndDateSpot, managementCourses, setManagementCourses]);
 
   return(

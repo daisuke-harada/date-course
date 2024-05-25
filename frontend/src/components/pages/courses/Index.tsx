@@ -16,7 +16,7 @@ export const Index: VFC = memo(() => {
       user: defaultUserResponseData,
       travelMode: '',
       authority: '',
-      courseDuringSpots: [defaultAddressAndDateSpotJoinData],
+      dateSpots: [defaultAddressAndDateSpotJoinData],
       noDuplicatePrefectureNames: ['']
     }
   ]);

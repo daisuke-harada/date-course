@@ -8,7 +8,7 @@ const { persistAtom } = recoilPersist();
 export const managementCourseState = atomFamily<ManagementCourseData, { userId: number }>(
   {
     key: 'managementCourseState',
-    default: {userId: 0, courseDuringSpots: []},
+    default: {userId: 0, dateSpots: []},
     effects_UNSTABLE: [persistAtom]
   }
 );

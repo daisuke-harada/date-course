@@ -30,18 +30,18 @@ export const CreateCourse: VFC = memo(() => {
   const [legs, setLegs] = useState<{duration: string, distance: string}[]>([]);
 
   useEffect(() => {
-    const prefectureNames = managementCourses.courseDuringSpots.map((duringSpot) => (duringSpot.prefectureName));
+    const prefectureNames = managementCourses.dateSpots.map((duringSpot) => (duringSpot.prefectureName));
     setNoDuplicatePrefectureNames(Array.from(new Set(prefectureNames)));
-  }, [managementCourses.courseDuringSpots]);
+  }, [managementCourses.dateSpots]);
 
   return(
     <>
       {
-        managementCourses.courseDuringSpots &&
+        managementCourses.dateSpots &&
         <MainDiv>
           <TitleH1>デートコース作成</TitleH1>
           {
-            managementCourses.courseDuringSpots.length === 0?
+            managementCourses.dateSpots.length === 0?
             <div className='flex flex-col mb-16 text-center'>
               <CourseNotExistDiv>
                   現在登録されていません。<br/>
@@ -65,7 +65,7 @@ export const CreateCourse: VFC = memo(() => {
             :
             <>
               {
-                managementCourses.courseDuringSpots.length > 1
+                managementCourses.dateSpots.length > 1
                 &&
                 <div className='w-full mt-5'>
                   <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} noDuplicatePrefectureNames={noDuplicatePrefectureNames} />
@@ -74,7 +74,7 @@ export const CreateCourse: VFC = memo(() => {
               <CourseAreaDiv>
                 <div className='md:w-1/3 w-full'>
                   {
-                    managementCourses.courseDuringSpots.map((courseDuringSpot, index) => (
+                    managementCourses.dateSpots.map((courseDuringSpot, index) => (
                       <CourseDuringSpotCard
                         key={courseDuringSpot.dateSpot.id}
                         courseDuringSpot={courseDuringSpot}
@@ -88,8 +88,8 @@ export const CreateCourse: VFC = memo(() => {
                 </div>
                 <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
                   {
-                    managementCourses.courseDuringSpots.length === 1?
-                    <Map  addressAndDateSpot={managementCourses.courseDuringSpots[0]} />
+                    managementCourses.dateSpots.length === 1?
+                    <Map  addressAndDateSpot={managementCourses.dateSpots[0]} />
                     :
                     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
                       <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={getCourseInfo.travelMode} />
