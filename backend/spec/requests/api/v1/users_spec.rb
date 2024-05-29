@@ -7,8 +7,8 @@ RSpec.describe "Api::V1::Users", type: :request do
   describe "GET /index" do
     it "user一覧ページを表示する" do
       get "/api/v1/users"
-      expect(JSON.parse(response.body)["users"][0]["name"]).to eq(user.name)
-      expect(JSON.parse(response.body)["users"][1]["name"]).to eq(other_user.name)
+      expect(JSON.parse(response.body)[0]["name"]).to eq(user.name)
+      expect(JSON.parse(response.body)[1]["name"]).to eq(other_user.name)
     end
   end
 

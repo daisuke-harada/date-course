@@ -37,7 +37,7 @@ RSpec.describe "Api::V1::Courses", type: :request do
       get "/api/v1/courses/#{course.id}"
       expect(JSON.parse(response.body)["authority"]).to eq(course.authority)
       expect(JSON.parse(response.body)["travel_mode"]).to eq(course.travel_mode)
-      expect(JSON.parse(response.body)["course_during_spots"]).to eq([])
+      expect(JSON.parse(response.body)["date_spots"]).to eq([])
     end
   end
 

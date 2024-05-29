@@ -1,12 +1,15 @@
 class DateSpotSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image, :closing_time, :opening_time, :created_at, :updated_at, :average_rate
-
-  # belongs_to :genre
   has_one :address
   has_many :date_spot_reviews
   has_many :courses
 
-  def average_rate
+  attributes :id, :name, :image, :closing_time, :opening_time, :created_at, :updated_at
+
+  attribute :average_rate do
     object.average_rate_calculation
+  end
+
+  attribute :genre_id do
+    object.genre_id
   end
 end

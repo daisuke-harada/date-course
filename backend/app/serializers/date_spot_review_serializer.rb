@@ -22,7 +22,7 @@
 #
 class DateSpotReviewSerializer < ActiveModel::Serializer
   belongs_to :date_spot
-  attributes :id, :rate, :content, :user_id
+  attributes :id, :rate, :content, :user_id, :date_spot_id
 
   attribute :user_name do
     object.user.name
