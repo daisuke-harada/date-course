@@ -30,7 +30,7 @@ class AddressSerializer < ActiveModel::Serializer
   end
 
   attribute :review_total_number do
-    DateSpotReview.where(date_spot_id: object.date_spot.id).count
+    object.date_spot.date_spot_reviews.size
   end
 
   attribute :average_rate do

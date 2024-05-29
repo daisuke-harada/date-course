@@ -23,10 +23,10 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :admin, :email, :gender, :image, :name, :followerIds, :followingIds
 
   attribute :followerIds do
-    object.followers.ids
+    object.followers.pluck(:id)
   end
 
   attribute :followingIds do
-    object.followings.ids
+    object.followings.pluck(:id)
   end
 end
