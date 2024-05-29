@@ -1,14 +1,13 @@
 class Api::V1::SearchsController < ApplicationController
   # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
   def date_spot_sort_search
-    # genreとprefectureの検索を行う
-    genre_prefecture_result = DateSpot.includes(:address).ransack(address_prefecture_id_eq: params[:prefecture_id], genre_id_eq: params[:genre_id]).result
-
     # デートスポットの営業開始時刻がcome_timeの時刻より、早い時刻を検索する。
-    opening_time_search = genre_prefecture_result.ransack(opening_time_lteq: params[:come_time]).result
-
-    # opening_time_searchの検索結果からデートスポットの営業終了時刻がcome_timeの時刻より、遅い時刻を検索する
-    date_spot_search_params_decided = opening_time_search.ransack(closing_time_gteq: params[:come_time]).result
+    date_spot_search_params_decided = DateSpot.includes(:address, :date_spot_reviews)
+      .ransack(address_prefecture_id_eq: params[:prefecture_id],
+        genre_id_eq: params[:genre_id],
+        opening_time_lteq: params[:come_time],
+        closing_time_gteq: params[:come_time])
+      .result
 
     address_and_date_spots = date_spot_search_params_decided.map { |date_spot| AddressSerializer.new(date_spot.address) }
 
@@ -17,18 +16,17 @@ class Api::V1::SearchsController < ApplicationController
 
   def course_sort_search
     course_ids = DuringSpot.includes(date_spot: :address).ransack(date_spot_address_prefecture_id_eq: params[:prefecture_id]).result.pluck(:course_id).uniq
-    courses = Course.where(id: course_ids)
-
+    courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(id: course_ids)
     render json: {courses: courses.map { |course| CourseSerializer.new(course).attributes }, prefecture_id: params[:prefecture_id], status: "success"}
   end
 
   def user_name_search
-    users = User.ransack(name_cont: params[:user_name]).result
+    users = User.includes(:followers, :followings, courses: {date_spots: {address: {date_spot: :date_spot_reviews}}}).ransack(name_cont: params[:user_name]).result
     render json: users
   end
 
   def date_spot_name_search
-    date_spots = DateSpot.ransack(name_cont: params[:date_spot_name]).result
+    date_spots = DateSpot.includes(:address, :date_spot_reviews).ransack(name_cont: params[:date_spot_name]).result
     address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address) }
 
     render json: {address_and_date_spots: address_and_date_spots}

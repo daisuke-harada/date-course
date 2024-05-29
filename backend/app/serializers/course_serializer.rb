@@ -19,14 +19,21 @@
 #
 class CourseSerializer < ActiveModel::Serializer
   belongs_to :user
-  has_many :during_spots
-  has_many :date_spots, through: :during_spots
 
   attributes :id, :authority, :travel_mode, :user, :no_duplicate_prefecture_names
 
+  attribute :date_spots do
+    # object.date_spots.includes(:date_spot_reviews, :address).map do |date_spot|
+    #   AddressSerializer.new(date_spot.address)
+    # end
+    object.date_spots.map do |date_spot|
+      AddressSerializer.new(date_spot.address)
+    end
+  end
+
   attribute :no_duplicate_prefecture_names do
     # during_spots を通じて date_spots にアクセス
-    prefecture_ids = object.during_spots.map { |during_spot| during_spot.date_spot.address.prefecture_id }.uniq
+    prefecture_ids = object.date_spots.map { |date_spot| date_spot.address.prefecture_id }.uniq
     # 県名の重複をなくして返す
     Prefecture.where(id: prefecture_ids).pluck(:name).uniq
   end

@@ -2,7 +2,7 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show destroy]
 
   def index
-    courses = Course.where(authority: "公開")
+    courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(authority: "公開")
     render json: courses
   end
 
@@ -34,6 +34,6 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def set_course
-    @course = Course.find(params[:id])
+    @course = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).find(params[:id])
   end
 end

@@ -23,6 +23,7 @@ export const Index: VFC = memo(() => {
 
   useEffect(() => {
     client.get('courses').then((response) => {
+      // console.log(response.data);
       setCourses(response.data);
     })
   }, []);
