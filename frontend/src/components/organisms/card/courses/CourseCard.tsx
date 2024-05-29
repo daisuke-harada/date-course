@@ -6,6 +6,7 @@ import { CourseResponseData } from 'types/courses/response';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { DuringSpotCard } from 'components/organisms/card/courses/DuringSpotCard';
+import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
 
 type Props ={
   course: CourseResponseData
@@ -18,6 +19,7 @@ const DD = tw.dd`mobile(M):text-base text-xs m-2 font-bold`;
 
 export const CourseCard: VFC<Props> = memo((props) =>{
   const { course } = props;
+  console.log(course.dateSpots);
 
   return(
     <MainDiv>

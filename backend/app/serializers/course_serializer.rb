@@ -19,10 +19,14 @@
 #
 class CourseSerializer < ActiveModel::Serializer
   belongs_to :user
-  has_many :during_spots
-  has_many :date_spots, through: :during_spots
 
   attributes :id, :authority, :travel_mode, :user, :no_duplicate_prefecture_names
+
+  attribute :date_spots do
+    object.date_spots.map do |date_spot|
+      AddressSerializer.new(Address.find_by(date_spot_id: date_spot.id))
+    end
+  end
 
   attribute :no_duplicate_prefecture_names do
     # during_spots を通じて date_spots にアクセス
