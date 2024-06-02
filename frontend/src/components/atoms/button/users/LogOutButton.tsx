@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { useLogoutAction } from 'hooks/users/useLogoutAction';
+import { useLogoutAction } from 'hooks/users/useLogoutActionRecoil';
 
 const Button = tw.button`btn btn-red w-full`;
 
