@@ -1,4 +1,4 @@
-import { memo, VFC, useState, useCallback, useEffect } from 'react';
+import { memo, FC, useState, useCallback, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
@@ -33,7 +33,7 @@ type Props= {
   setDateSpotAverageRate: React.Dispatch<React.SetStateAction<number>>
 };
 
-export const DateSpotReviewForm: VFC<Props> = memo((props) => {
+export const DateSpotReviewForm: FC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [content, setContent] = useState<string>('');

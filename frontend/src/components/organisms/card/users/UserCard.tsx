@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { UserResponseData } from 'types/users/response';
@@ -16,7 +16,7 @@ type Props = {
 const Div = tw.div`m-2 font-bold mobile(L):text-sm sm:text-xl md:text-2xl`;
 const DD = tw.dd`m-5`;
 
-export const UserCard: VFC<Props> = memo((props) => {
+export const UserCard: FC<Props> = memo((props) => {
   const { user, setUsers } = props;
   const [genderTextColor, setGenderTextColor] = useState('');
 

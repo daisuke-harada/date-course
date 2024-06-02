@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -14,7 +14,7 @@ type Props = {
 const ImageParentDiv = tw.div`relative hover:scale-105 duration-75`;
 const Image = tw.img`lg:bg-top object-cover absolute top-0 w-full h-full rounded-xl border-4`;
 
-export const UserImage: VFC<Props> = memo((props) => {
+export const UserImage: FC<Props> = memo((props) => {
   const { addClassName, image, userId, gender } = props;
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [userImage, setUserImage] = useState(noImageUrl);

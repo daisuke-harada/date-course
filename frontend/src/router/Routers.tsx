@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import { PrefectureRoutes } from 'router/PrefectureRoutes';
 import { GenreRoutes } from './GenreRoutes';
 
 
-export const Routers: VFC = memo(() => {
+export const Routers: FC = memo(() => {
   return(
     <>
       <FlashMessage />

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
@@ -10,7 +10,7 @@ import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 
-export const Show: VFC = memo(() => {
+export const Show: FC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
   const { id } = useParams();
 

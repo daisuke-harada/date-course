@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -10,7 +10,7 @@ type Props ={
   genres: GenreData[]
 }
 
-export const Genres: VFC<Props> = memo((props) => {
+export const Genres: FC<Props> = memo((props) => {
 
   const { genres } = props;
 

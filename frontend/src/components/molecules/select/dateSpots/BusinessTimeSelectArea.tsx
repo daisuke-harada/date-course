@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
 
@@ -11,7 +11,7 @@ type Props = {
   closingDataE2e?: string,
 };
 
-export const BusinessTimeSelectArea: VFC<Props> = memo((props) => {
+export const BusinessTimeSelectArea: FC<Props> = memo((props) => {
   const {
     onChangeOpeningTimeValue,
     defaultOpeningTimeValue,

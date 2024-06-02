@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
@@ -9,7 +9,7 @@ import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { client } from 'lib/api/client';
 
-export const Index: VFC = memo(() => {
+export const Index: FC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
 
   useEffect(() => {

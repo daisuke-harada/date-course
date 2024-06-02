@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -10,11 +10,11 @@ type Props ={
 
 const Image = tw.img`mobile(M):w-24 mobile(M):h-24 w-20 h-20 rounded-t-xl`;
 
-export const DuringSpotCard: VFC<Props> = memo((props) => {
+export const DuringSpotCard: FC<Props> = memo((props) => {
   const { duringSpot } = props;
   const noImage = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [ duringSpotImage, setDuringSpotImage] = useState(noImage);
-  console.log(duringSpot)
+
   useEffect(() => {
     duringSpot.dateSpot.image && duringSpot.dateSpot.image.url && setDuringSpotImage(duringSpot.dateSpot.image.url);
   }, [duringSpot]);

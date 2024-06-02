@@ -1,11 +1,11 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { UserForm } from 'components/templates/users/UserForm';
 import { currentUserState } from 'store/session';
 
 
-export const Edit: VFC = memo(() => {
+export const Edit: FC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
 
   return(

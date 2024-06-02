@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { memo, useCallback, useEffect, useState, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import tw  from 'tailwind-styled-components';
 
@@ -10,7 +10,7 @@ type FlashMessageData = {
 
 const MessageDiv = tw.div`fixed duration-1000 z-50 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2`;
 
-export const FlashMessage: VFC = memo(() => {
+export const FlashMessage: FC = memo(() => {
 
   // 初期値の際には画面外にフラッシュメッセージは存在している。
   const [condition, setCondition] = useState('translate-x-96');

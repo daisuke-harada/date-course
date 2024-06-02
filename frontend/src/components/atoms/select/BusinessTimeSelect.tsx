@@ -1,5 +1,5 @@
 import { businessTimeDatas } from 'datas/businessTimeDatas';
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 type Props = {
   onChangeTimeValue: React.ChangeEventHandler<HTMLSelectElement>,
@@ -8,7 +8,7 @@ type Props = {
   addClassName?: string
 };
 
-export const BusinessTimeSelect: VFC<Props> = memo((props) => {
+export const BusinessTimeSelect: FC<Props> = memo((props) => {
   const {dataE2e, timeValue, onChangeTimeValue, addClassName} = props
   return(
     <select className={`text-xs ${addClassName}`} data-e2e={dataE2e} defaultValue={timeValue} onChange={onChangeTimeValue}>

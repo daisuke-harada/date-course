@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
@@ -10,7 +10,7 @@ type Props = {
 }
 
 
-export const CourseSearchArea: VFC<Props> = memo((props) => {
+export const CourseSearchArea: FC<Props> = memo((props) => {
   const { defaultPrefectureValue } = props;
   const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureValue || '');
   const navigate = useNavigate();

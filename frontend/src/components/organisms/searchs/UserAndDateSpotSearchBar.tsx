@@ -1,6 +1,6 @@
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { client } from 'lib/api/client';
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -9,7 +9,7 @@ const Input = tw.input`mt-0.5`;
 const RadioButtonDiv = tw.div`w-32 mx-2 my-6 flex`;
 const ButtonParentDiv = tw.div`text-center my-3 w-20`;
 
-export const UserAndDateSpotSearchBar: VFC = memo(() => {
+export const UserAndDateSpotSearchBar: FC = memo(() => {
 
   const [ searchTarget, setSearchTarget] = useState('DateSpot');
   const [ name, setName ] = useState('');

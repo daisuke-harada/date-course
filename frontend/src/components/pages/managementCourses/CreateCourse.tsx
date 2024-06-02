@@ -1,5 +1,5 @@
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
 
@@ -20,7 +20,7 @@ const CourseParentButtonDiv = tw.div`xl:w-1/4 lg:text-xl md:w-1/3 md:text-base m
 const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-2 font-bold pb-5`;
 const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 
-export const CreateCourse: VFC = memo(() => {
+export const CreateCourse: FC = memo(() => {
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
   const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));

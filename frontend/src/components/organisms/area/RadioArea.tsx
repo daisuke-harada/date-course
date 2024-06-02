@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const Label = tw.label`font-bold mobile(L):pt-3 mobile(L):mr-3 mr-2`;
 const Input = tw.input`mobile(L):mr-3 mr-2 mobile(L):p-2 mobile(L):mt-5`;
 
-export const RadioArea: VFC<Props>= memo((props) => {
+export const RadioArea: FC<Props>= memo((props) => {
   const {gender, onChangeRadioButton} = props;
   return(
     <div className='flex justify-start text-left w-2/3 mobile(M):ml-0 ml-8'>

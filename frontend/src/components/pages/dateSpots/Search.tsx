@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
@@ -10,7 +10,7 @@ import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotName
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
 
 
-export const Search: VFC = memo(() => {
+export const Search: FC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
 
   const location = useLocation();

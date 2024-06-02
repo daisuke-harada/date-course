@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import ReactStars from 'react-stars'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   edit?: boolean,
 };
 
-export const StarRateForm: VFC<Props> = memo((props) => {
+export const StarRateForm: FC<Props> = memo((props) => {
   const { rate, onChangeRate, edit, size } = props;
   return(
     // colorr1は選択されていない時の星の色。color2は選択されている時の星の色

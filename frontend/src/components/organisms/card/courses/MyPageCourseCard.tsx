@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -13,7 +13,7 @@ type Props ={
   course: CourseResponseData
 }
 
-export const MyPageCourseCard: VFC<Props> = memo((props) =>{
+export const MyPageCourseCard: FC<Props> = memo((props) =>{
   const { course } = props;
 
   return(

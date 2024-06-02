@@ -1,11 +1,11 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { useDeactivateAccountButtonAction } from 'hooks/users/useDeactivateAccountButtonAction';
 
 const ButtonParentDiv = tw.div`text-center p-1 mx-6 my-4`;
 
-export const DeactivateAcountButton: VFC = memo(() => {
+export const DeactivateAcountButton: FC = memo(() => {
   const { onCLickDeactivateAccountAction, loginStatus }= useDeactivateAccountButtonAction();
 
   return(

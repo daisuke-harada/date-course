@@ -1,5 +1,5 @@
 import { LoadScript } from '@react-google-maps/api';
-import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { memo, useCallback, useEffect, useState, FC } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
@@ -21,7 +21,7 @@ const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 const ButtonArea = tw.div`flex flex-col items-center mx-5 my-10`;
 const ButtonParentDiv = tw.div`lg:text-4xl sm:w-1/2 sm:text-2xl text-center m-5 w-3/4`
 
-export const Show: VFC = memo(() => {
+export const Show: FC = memo(() => {
   const { id } = useParams();
   const [managementCourses, setManagementCourses] = useState<ManagementCourseData>({
     userId: 0,

@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginStatusState } from 'store/session';
 
@@ -16,7 +16,7 @@ const MenuIconDivParent = tw.div`lg:hidden`;
 const MenuIconDivChild = tw.div`sm:h-24 sm:right-7 right-2 fixed  border-l-2 w-14 h-20 border-red-400`;
 const ButtonParentDiv = tw.div`lg:block hidden mt-5`;
 
-export const HeaderTopRight: VFC<Props> = memo((props) => {
+export const HeaderTopRight: FC<Props> = memo((props) => {
   const {onClickNavBarSwitch, isOpen} = props;
   const getLoginStatus = useRecoilValue(loginStatusState);
   return(

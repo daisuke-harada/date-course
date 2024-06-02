@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
@@ -16,7 +16,7 @@ const ImageParentDiv = tw.div`relative h-96`;
 const Image = tw.img`object-cover object-top absolute w-full h-full`;
 const SubAreaDiv = tw.div`flex justify-center flex-wrap w-full`;
 
-export const Top: VFC = memo(() => {
+export const Top: FC = memo(() => {
   const [ areas, setAreas ] = useState<AreaData[]>([]);
   const [ mainGenres, setMainGenres ] = useState<GenreData[]>([]);
   const [ genres, setGenres ] = useState<GenreData[]>([]);

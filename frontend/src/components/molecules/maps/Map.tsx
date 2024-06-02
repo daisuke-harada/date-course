@@ -1,4 +1,4 @@
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker} from '@react-google-maps/api';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
@@ -12,7 +12,7 @@ type Center = {
   lng: number,
 }
 
-export const Map: VFC<Props> = memo((props) => {
+export const Map: FC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const [size, setSize] = useState<undefined | google.maps.Size>(undefined);
 

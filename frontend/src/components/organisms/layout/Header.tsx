@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import {memo, useState, VFC } from 'react';
+import {memo, useState, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -12,7 +12,7 @@ const MainHeader = tw.header`lg:h-32 sm:h-24 bg-white w-full shadow-xl z-50 fixe
 const TopDiv = tw.div`lg:border-b-2 lg:flex-wrap w-full flex justify-around font-bold`;
 const TitleDiv = tw.div`lg:my-3 lg:mx-0 sm:text-6xl sm:m-3 cursor-pointer hover:text-yellow-500 text-4xl m-5 mx-4`;
 
-export const Header: VFC = memo(() => {
+export const Header: FC = memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClickNavBarSwitch: React.MouseEventHandler<HTMLElement> = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 

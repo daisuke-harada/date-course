@@ -1,4 +1,4 @@
-import { memo, VFC } from "react";
+import { memo, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -12,7 +12,7 @@ type Props = {
   courseInfo: CourseInfoData
 }
 
-export const CopyCourseButton: VFC<Props> = memo((props) => {
+export const CopyCourseButton: FC<Props> = memo((props) => {
   const { managementCourses, courseInfo } = props;
   const navigate = useNavigate();
   const getCurrentUser = useRecoilValue(currentUserState);

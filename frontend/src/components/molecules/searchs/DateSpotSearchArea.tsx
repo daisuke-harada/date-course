@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ type Props = {
   defaultBusinessTimeValue?: string
 }
 
-export const DateSpotSearchArea: VFC<Props> = memo((props) => {
+export const DateSpotSearchArea: FC<Props> = memo((props) => {
   const { dateSpotSearchName, defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue } = props;
 
   const [ dateSpotName, setDateSpotName ] = useState(dateSpotSearchName || '');

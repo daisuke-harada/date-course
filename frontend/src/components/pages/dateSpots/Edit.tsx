@@ -1,10 +1,10 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { DateSpotForm } from 'components/templates/dateSpots/DateSpotForm';
 
-export const Edit: VFC = memo(() => {
+export const Edit: FC = memo(() => {
   const location = useLocation();
   const state = location.state as {addressAndDateSpot: AddressAndDateSpotJoinData};
   const addressAndDateSpot = state.addressAndDateSpot;

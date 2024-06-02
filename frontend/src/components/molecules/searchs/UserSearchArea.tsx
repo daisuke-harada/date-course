@@ -1,4 +1,4 @@
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ type Props = {
 }
 
 
-export const UserSearchArea: VFC<Props> = memo((props) => {
+export const UserSearchArea: FC<Props> = memo((props) => {
   const { userSearchName } = props;
   const [ userName, setUserName ] = useState(userSearchName || '');
   const navigate = useNavigate();

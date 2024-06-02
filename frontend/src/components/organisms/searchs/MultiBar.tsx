@@ -1,7 +1,7 @@
 import { CourseSearchArea } from 'components/molecules/searchs/CourseSearchArea';
 import { DateSpotSearchArea } from 'components/molecules/searchs/DateSpotSearchArea';
 import { UserSearchArea } from 'components/molecules/searchs/UserSearchArea';
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -20,7 +20,7 @@ const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r tex
 const CourseChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white text-center border-gray-400 cursor-pointer`;
 const UserChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-l text-center border-gray-400 cursor-pointer`;
 
-export const MultiBar: VFC<Props> = memo((props) => {
+export const MultiBar: FC<Props> = memo((props) => {
   const {
     defaultDateSpotCondition,
     defaultCourseCondition,

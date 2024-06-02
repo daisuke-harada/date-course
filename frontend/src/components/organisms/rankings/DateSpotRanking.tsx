@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
@@ -19,7 +19,7 @@ type Props = {
   dateSpotSearchName?: string
 }
 
-export const DateSpotRanking: VFC<Props> = memo((props) => {
+export const DateSpotRanking: FC<Props> = memo((props) => {
   const { addressAndDateSpots, prefectureId, genreId, comeTime, dateSpotSearchName } = props;
   const top5 = addressAndDateSpots.sort((a, b) => (a.averageRate > b.averageRate ? -1 : 1)).slice(0, 5);
   const [array, setArray] = useState<(string | undefined)[]>([]);

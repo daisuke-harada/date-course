@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from 'react';
+import { memo, useCallback, useEffect, useState, FC } from 'react';
 import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 import { ManagementCourseData } from 'types/managementCourses/management';
@@ -13,7 +13,7 @@ type Props = {
   travelMode: string;
 };
 
-export const Directions: VFC<Props> = memo((props) => {
+export const Directions: FC<Props> = memo((props) => {
   const { managementCourses, setLegs, travelMode } = props;
 
   // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
@@ -36,7 +36,9 @@ export const Directions: VFC<Props> = memo((props) => {
     };
   };
 
-  const directionsCallback = useCallback((googleResponse) => {
+  const directionsCallback = useCallback((googleResponse: any) => {
+    console.log(googleResponse);
+
     if (googleResponse) {
       if (currentDirection) {
         if (

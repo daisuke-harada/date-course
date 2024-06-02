@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import { currentUserState, loginStatusState } from 'store/session';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ import { Loading } from '../Loading';
 const Span = tw.span`my-1 font-bold`;
 const ProfileDiv = tw.div`sm:my-8 my-4 mx-2 flex w-full`;
 
-export const Show: VFC = memo(() => {
+export const Show: FC = memo(() => {
   const getLoginStatus = useRecoilValue(loginStatusState);
   const getCurrentUser = useRecoilValue(currentUserState);
   const { id } = useParams();

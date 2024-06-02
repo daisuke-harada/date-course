@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 import { UserCard } from 'components/organisms/card/users/UserCard';
 import { UserResponseData } from 'types/users/response';
@@ -10,7 +10,7 @@ type Props = {
   userSearchName?: string
 };
 
-export const Users: VFC<Props> = memo((props) => {
+export const Users: FC<Props> = memo((props) => {
   const { users, setUsers, userSearchName } = props;
 
   return(

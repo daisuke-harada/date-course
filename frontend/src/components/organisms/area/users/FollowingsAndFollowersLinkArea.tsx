@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -11,7 +11,7 @@ type Props = {
   followerIdsCount: number,
 };
 
-export const FollowingsAndFollowersLinkArea: VFC<Props> = memo((props) => {
+export const FollowingsAndFollowersLinkArea: FC<Props> = memo((props) => {
   const {userId, followingIdsCount, followerIdsCount} = props;
 
   return(

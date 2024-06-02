@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC } from 'react';
+import { memo, useCallback, FC } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { UserForm } from 'components/templates/users/UserForm';
 import { currentUserState, loginStatusState } from 'store/session';
 import { UserLoginResponseData } from 'types/users/response';
 
-export const New: VFC = memo(() => {
+export const New: FC = memo(() => {
   const navigate = useNavigate();
   const setLoginStatus = useSetRecoilState(loginStatusState);
   const setCurrentUser = useSetRecoilState(currentUserState);

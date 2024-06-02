@@ -1,4 +1,4 @@
-FROM node:17.4.0
+FROM node:20.14.0
 
 ENV APP_PATH /usr/src/datecourses
 

@@ -1,4 +1,4 @@
-import { memo, ReactNode, VFC } from 'react';
+import { memo, ReactNode, FC } from 'react';
 
 type Props = {
   sideArea: ReactNode,
@@ -6,7 +6,7 @@ type Props = {
   mainArea: ReactNode
 }
 
-export const IndexLayout: VFC<Props> = memo((props) => {
+export const IndexLayout: FC<Props> = memo((props) => {
   const { sideArea, topArea, mainArea } = props;
   return(
     <div className='md:flex-row w-full flex flex-col'>

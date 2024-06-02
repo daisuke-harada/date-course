@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC } from 'react';
+import { memo, useCallback, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ type Props = {
 const ButtonArea = tw.div`flex flex-col items-center mx-auto my-10`;
 const ButtonParentDiv = tw.div`mobile(L):text-xl sm:text-2xl lg:text-4xl text-center m-5 w-1/2`;
 
-export const ManagementCourseButtonArea: VFC<Props> = memo((props) => {
+export const ManagementCourseButtonArea: FC<Props> = memo((props) => {
   const { managementCourses, getCourseInfo } = props;
 
   const navigate = useNavigate();

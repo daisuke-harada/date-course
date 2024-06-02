@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import ReactStars from 'react-stars'
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   size: number,
 };
 
-export const StarRateText: VFC<Props> = memo((props) => {
+export const StarRateText: FC<Props> = memo((props) => {
   const { rate, size } = props;
   return(
     // colorr1は選択されていない時の星の色。color2は選択されている時の星の色
