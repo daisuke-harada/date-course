@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -17,9 +17,8 @@ const DuringSpotsDiv = tw.div`flex justify-evenly`;
 const MainDl = tw.dl`text-left mb-5`
 const DD = tw.dd`mobile(M):text-base text-xs m-2 font-bold`;
 
-export const CourseCard: VFC<Props> = memo((props) =>{
+export const CourseCard: FC<Props> = memo((props) =>{
   const { course } = props;
-  console.log(course.dateSpots);
 
   return(
     <MainDiv>

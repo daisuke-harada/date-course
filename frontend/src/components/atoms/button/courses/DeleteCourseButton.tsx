@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC } from 'react';
+import { memo, useCallback, FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
 
@@ -14,7 +14,7 @@ type Props = {
 const ButtonParentDiv = tw.div`my-5 m-auto text-sm`;
 
 // デートコースの中から指定されたデートスポットを削除する。
-export const DeleteCourseButton: VFC<Props> = memo((props) => {
+export const DeleteCourseButton: FC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));

@@ -1,4 +1,4 @@
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -12,7 +12,7 @@ const Title = tw.h1`text-center font-bold`;
 const Input = tw.input`my-5 w-2/3 border-b-2 outline-none`;
 const ButtonParentDiv = tw.div`text-center p-1 my-4 m-auto`;
 
-export const Login: VFC = memo(() => {
+export const Login: FC = memo(() => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);

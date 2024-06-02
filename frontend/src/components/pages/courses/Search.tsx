@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
@@ -9,7 +9,7 @@ import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 
-export const Search: VFC = memo(() => {
+export const Search: FC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
     {
       id: 0,

@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 import { genreDatas } from 'datas/genreDatas';
 
@@ -9,7 +9,7 @@ type Props = {
   addClassName?: string
 };
 
-export const GenreSelect: VFC<Props> = memo((props) => {
+export const GenreSelect: FC<Props> = memo((props) => {
   const {onChangeValue, defaultValue, dataE2e, addClassName} = props
   return(
     <select data-e2e={dataE2e} className={`mb-2 lg:text-lg text-xs border-2 rounded-md ${addClassName}`} defaultValue={defaultValue} onChange={onChangeValue}>

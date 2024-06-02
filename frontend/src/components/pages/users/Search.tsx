@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
@@ -8,7 +8,7 @@ import { Users } from 'components/templates/users/Users';
 import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 
-export const Search: VFC = memo(() => {
+export const Search: FC = memo(() => {
   const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
   const location = useLocation();
   const state = location.state as { users: UserResponseData[], userSearchName: string };

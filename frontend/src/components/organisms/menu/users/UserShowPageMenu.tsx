@@ -1,4 +1,4 @@
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { CourseResponseData } from 'types/courses/response';
@@ -18,7 +18,7 @@ const ChildrenMenuDiv = tw.div`p-1`;
 const MenuBarDiv = tw.div`sm:text-xl lg:text-2xl text-xs w-1/2 h-full font-bold text-center py-2 text-white hover:bg-red-400`;
 const MenuTitleDiv = tw.div`sm:text-2xl lg:text-4xl text-center font-bold my-5`;
 
-export const UserShowPageMenu: VFC<Props> = memo((props) => {
+export const UserShowPageMenu: FC<Props> = memo((props) => {
   const { courses, userId, dateSpotReviews } = props
   const [switchTarget, setSwitchTarget] = useState('Course');
   const [courseColor, setCourseColor] = useState('bg-red-400');

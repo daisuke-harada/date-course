@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import { SetterOrUpdater, useRecoilValue } from 'recoil';
 
 import { currentUserState } from 'store/session';
@@ -12,7 +12,7 @@ type Props = {
   setManagementCourses: SetterOrUpdater<ManagementCourseData>,
 }
 
-export const ChangeSelect: VFC<Props> = memo((props) => {
+export const ChangeSelect: FC<Props> = memo((props) => {
   const { currentDateSpotId, managementCourses, setManagementCourses } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const [changeCourseId, setChangeCourseId] = useState(0);

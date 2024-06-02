@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 import { DateSpotCard } from 'components/organisms/card/dateSpots/DateSpotCard';
 import { DateSpotRanking } from 'components/organisms/rankings/DateSpotRanking';
@@ -13,7 +13,7 @@ type Props = {
   dateSpotSearchName?: string,
 };
 
-export const DateSpots: VFC<Props> = memo((props) => {
+export const DateSpots: FC<Props> = memo((props) => {
   const { addressAndDateSpots, prefectureId, genreId, comeTime, dateSpotSearchName } = props;
 
   return(

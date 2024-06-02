@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
 
@@ -16,7 +16,7 @@ type Props = {
 const FollowButton = tw.button`btn btn-yellow-green `
 const UnfollowButton = tw.button`btn btn-unfollow`;
 
-export const FollowAndUnFollowButton: VFC<Props> = memo((props) => {
+export const FollowAndUnFollowButton: FC<Props> = memo((props) => {
   const {userId, setUsers, setUser, addClassName} = props;
 
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);

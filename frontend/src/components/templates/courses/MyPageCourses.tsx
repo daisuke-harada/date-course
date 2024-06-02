@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ type Props = {
 const CourseNotExistDiv = tw.div`text-center sm:text-2xl m-auto my-5 text-blue-600 mobile(L):text-lg text-sm`;
 const CourseParentButtonDiv = tw.div`xl:w-1/4 lg:text-xl md:w-1/3 md:text-base mobile(L):w-1/2 mobile(L):text-sm w-3/4 text-xs m-auto mb-5`;
 
-export const MyPageCourses: VFC<Props> = memo((props) => {
+export const MyPageCourses: FC<Props> = memo((props) => {
   const { courses, userId } = props;
   const [filterCourses, setFilterCourses] = useState<CourseResponseData[]>([]);
   const getCurrentUser = useRecoilValue(currentUserState);

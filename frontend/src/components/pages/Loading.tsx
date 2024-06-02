@@ -1,4 +1,4 @@
-import { memo, ReactNode, VFC } from 'react';
+import { memo, ReactNode, FC } from 'react';
 import ReactLoading from 'react-loading';
 
 type Props ={
@@ -6,7 +6,7 @@ type Props ={
   loadingSwitch: boolean
 }
 
-export const Loading: VFC<Props> = memo((props) => {
+export const Loading: FC<Props> = memo((props) => {
   const { children, loadingSwitch } = props;
 
   if (loadingSwitch){

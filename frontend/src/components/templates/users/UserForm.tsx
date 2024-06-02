@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -27,7 +27,7 @@ const Input = tw.input`my-5 border-b-2 outline-none w-1/2 mobile(M):w-full mobil
 const ButtonParentDiv = tw.div`w-1/2 p-1 m-auto my-4`;
 const Form = tw.form`p-5 mt-2 flex flex-col content-center mobile(M):ml-2`;
 
-export const UserForm: VFC<Props> = memo((props) => {
+export const UserForm: FC<Props> = memo((props) => {
   const {nameDefaultValue, emailDefaultValue, genderDefaultValue,imageDefaultValue, userFormTitle, buttonName, afterLoginSuccess } = props;
 
   // エラーメッセージ用のステート

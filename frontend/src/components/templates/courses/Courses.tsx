@@ -1,4 +1,4 @@
-import { memo, useEffect, VFC } from 'react';
+import { memo, useEffect, FC } from 'react';
 
 import { CourseResponseData } from 'types/courses/response';
 import { CourseCard } from 'components/organisms/card/courses/CourseCard';
@@ -11,7 +11,7 @@ type Props = {
   searchPrefectureId?: number
 };
 
-export const Courses: VFC<Props> = memo((props) => {
+export const Courses: FC<Props> = memo((props) => {
   const { courses, searchPrefectureId } = props;
   const navigate = useNavigate();
 

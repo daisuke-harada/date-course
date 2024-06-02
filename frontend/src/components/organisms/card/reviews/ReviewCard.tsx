@@ -1,5 +1,5 @@
 import { StarRateText } from 'components/atoms/text/StarRateText';
-import { memo, ReactNode, VFC } from 'react';
+import { memo, ReactNode, FC } from 'react';
 
 type Props = {
   ImageDiv: ReactNode,
@@ -8,7 +8,7 @@ type Props = {
   content: string
 };
 
-export const ReviewCard: VFC<Props> = memo((props) => {
+export const ReviewCard: FC<Props> = memo((props) => {
   const {ImageDiv, name, rate, content } = props;
 
   return(

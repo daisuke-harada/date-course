@@ -1,4 +1,4 @@
-import { memo, useState, VFC } from 'react';
+import { memo, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
 const MainDiv = tw.div`m-auto mt-3 p-3 shadow-xl bg-white border-2 rounded-3xl border-gray-200 flex flex-col`;
 const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
-export const DateSpotNameSearchBar: VFC = memo(() => {
+export const DateSpotNameSearchBar: FC = memo(() => {
   const [ dateSpotName, setDateSpotName ] = useState('');
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setDateSpotName(e.target.value);

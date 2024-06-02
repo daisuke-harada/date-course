@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
@@ -11,7 +11,7 @@ type Props = {
   dateSpots: AddressAndDateSpotJoinData[]
 }
 
-export const MoveGoogleMapButton: VFC<Props> = memo((props) => {
+export const MoveGoogleMapButton: FC<Props> = memo((props) => {
   const {dateSpots} = props;
   const maps = dateSpots.map((spot) => `${spot.cityName}/`);
 

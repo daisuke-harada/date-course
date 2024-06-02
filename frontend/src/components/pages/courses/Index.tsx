@@ -1,5 +1,5 @@
 import { client } from 'lib/api/client';
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 
 import { CourseResponseData } from 'types/courses/response';
 import { Courses } from 'components/templates/courses/Courses';
@@ -9,7 +9,7 @@ import { defaultUserResponseData } from 'datas/defaultUserData';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 
-export const Index: VFC = memo(() => {
+export const Index: FC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
     {
       id: 0,
@@ -23,7 +23,6 @@ export const Index: VFC = memo(() => {
 
   useEffect(() => {
     client.get('courses').then((response) => {
-      // console.log(response.data);
       setCourses(response.data);
     })
   }, []);

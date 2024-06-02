@@ -1,10 +1,10 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 type Props = {
   selectImage: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export const ImageForm: VFC<Props> = memo((props) => {
+export const ImageForm: FC<Props> = memo((props) => {
   const { selectImage } = props;
   return(
     <div className='my-3 mobile(M):ml-0 ml-8'>

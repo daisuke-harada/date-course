@@ -1,4 +1,4 @@
-import { VFC, memo } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -11,7 +11,7 @@ type Props = {
 
 const MainDiv = tw.div`md:w-3/12 m-4 p-4 w-1/3 bg-white rounded-xl shadow-xl`;
 
-export const Area: VFC<Props> = memo((props) => {
+export const Area: FC<Props> = memo((props) => {
 
   const { area } = props;
 

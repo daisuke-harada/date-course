@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -12,7 +12,7 @@ const TopBorder = tw.div`absolute sm:w-14 w-10 border-red-400 border-t-4 inline-
 const CenterBorder = tw.div`absolute sm:w-14 w-10 border-red-400 border-t-4 inline-block top-4 right-0`;
 const BottomBorder = tw.div`absolute sm:w-14 w-10 border-red-400 border-t-4 inline-block top-8 right-0`;
 
-export const MenuIconButton: VFC<Props> = memo((props) => {
+export const MenuIconButton: FC<Props> = memo((props) => {
   const { onClickNavBarSwitch, isOpen } = props;
   return(
     <>

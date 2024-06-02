@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import tw from 'tailwind-styled-components';
@@ -14,7 +14,7 @@ type Props = {
 
 const ButtonParentDiv = tw.div`m-5 tex-sm`;
 
-export const AddCourseButton: VFC<Props> = memo((props) => {
+export const AddCourseButton: FC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const navigate = useNavigate();
   const getCurrentUser = useRecoilValue(currentUserState);

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { currentUserState, loginStatusState } from 'store/session'
@@ -23,7 +23,7 @@ const ImageParentDiv = tw.div`lg:mx-0 mx-auto lg:h-96 lg:w-96 mobile(M):h-80 mob
 const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-2xl`;
 const SubArea = tw.div`md:w-1/2 w-full`;
 
-export const Show: VFC = memo(() => {
+export const Show: FC = memo(() => {
   const { id } = useParams();
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>(defaultAddressAndDateSpotJoinData);
   const [dateSpotReviews, setDateSpotReviews] = useState([]);

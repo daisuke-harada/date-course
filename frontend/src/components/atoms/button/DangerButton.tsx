@@ -1,4 +1,4 @@
-import { memo, ReactNode, VFC } from 'react';
+import { memo, ReactNode, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const Button = tw.button`btn btn-red w-full`;
 
-export const DangerButton: VFC<Props> = memo((props) => {
+export const DangerButton: FC<Props> = memo((props) => {
   const {children, onClickEvent, dataE2e} = props;
   return(
     <Button data-e2e={dataE2e} onClick={onClickEvent}>{children}</Button>

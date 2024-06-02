@@ -1,8 +1,8 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 
 import { DateSpotForm } from 'components/templates/dateSpots/DateSpotForm';
 
-export const New: VFC = memo(() => {
+export const New: FC = memo(() => {
   return(
     <DateSpotForm
      dateSpotFormTitle='デートスポットの新規登録'

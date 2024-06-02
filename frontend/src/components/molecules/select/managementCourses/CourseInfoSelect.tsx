@@ -1,4 +1,4 @@
-import { memo, useEffect, VFC } from 'react';
+import { memo, useEffect, FC } from 'react';
 import { SetterOrUpdater } from 'recoil';
 import tw from 'tailwind-styled-components';
 
@@ -18,7 +18,7 @@ const Label = tw.label`font-bold m-2`;
 const Input = tw.input`mt-4 mx-2`;
 const MainDiv= tw.div`m-5 font-bold flex`;
 
-export const CourseInfoSelect: VFC<Props> = memo((props) => {
+export const CourseInfoSelect: FC<Props> = memo((props) => {
   const { setCourseInfo, getCourseInfo, noDuplicatePrefectureNames } = props;
 
   const onChangeTravelMode: React.ChangeEventHandler<HTMLSelectElement> = (e) => setCourseInfo({travelMode: e.target.value, authority: getCourseInfo.authority});

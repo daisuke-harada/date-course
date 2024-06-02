@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { PrefectureSelect } from 'components/molecules/select/dateSpots/PrefectureSelect';
@@ -31,7 +31,7 @@ type Props = {
 };
 
 
-export const DateSpotForm: VFC<Props> = memo((props) => {
+export const DateSpotForm: FC<Props> = memo((props) => {
   const {
     dateSpotFormTitle,
     formButtonName,
@@ -141,16 +141,16 @@ export const DateSpotForm: VFC<Props> = memo((props) => {
       <Title>{dateSpotFormTitle}</Title>
       {/* エラーメッセージ  */}
       <ul className='mt-5'>
-        {errorNameMessages !== [] && errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
+        {errorNameMessages.map((message)=><li className='text-red-500'>名前は{message}</li>)}
       </ul>
       <ul>
-        {errorGenreIdMessages !== [] && errorGenreIdMessages.map((message)=><li className='text-red-500'>ジャンルは{message}</li>)}
+        {errorGenreIdMessages.map((message)=><li className='text-red-500'>ジャンルは{message}</li>)}
       </ul>
       <ul>
-        {errorAddressPrefectureId !== [] && errorAddressPrefectureId.map((message)=><li className='text-red-500'>県名は{message}</li>)}
+        {errorAddressPrefectureId.map((message)=><li className='text-red-500'>県名は{message}</li>)}
       </ul>
       <ul>
-        {errorAddressCityName !== [] && errorAddressCityName.map((message)=><li className='text-red-500'>市町村名、番地は{message}</li>)}
+        {errorAddressCityName.map((message)=><li className='text-red-500'>市町村名、番地は{message}</li>)}
       </ul>
 
       <SubDiv>

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 import { SetterOrUpdater } from 'recoil';
 
@@ -27,7 +27,7 @@ const Image = tw.img`xl:w-60 lg:w-56 lg:h-56 md:w-40 md:h-40 w-32 h-32 mx-auto r
 const MainDl = tw.dl`xl:w-64 lg:w-60 w-44 text-center rounded-xl shadow-xl bg-white py-1 border m-auto`
 const RoadDiv = tw.div`xl:w-64 lg:w-60 md:w-44 md:h-32 m-auto flex justify-center`;
 
-export const CourseDuringSpotCard: VFC<Props> = memo((props) => {
+export const CourseDuringSpotCard: FC<Props> = memo((props) => {
   const { courseDuringSpot, managementCourses, setManagementCourses, courseNumber, leg} = props;
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;

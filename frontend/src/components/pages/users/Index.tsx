@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
@@ -8,12 +8,11 @@ import { client } from 'lib/api/client';
 import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';
 
-export const Index: VFC = memo(() => {
+export const Index: FC = memo(() => {
   const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
 
   useEffect(() => {
     client.get(`users`).then(response => {
-      console.log(response.data)
       setUsers(response.data);
     });
   }, []);

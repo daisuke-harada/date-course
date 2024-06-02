@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const MainDiv = tw.div`mx-2 my-10 text-sm font-bold md:text-xl`;
 
 
-export const BusinessHour: VFC<Props> = memo((props) => {
+export const BusinessHour: FC<Props> = memo((props) => {
   const { openingTime, closingTime } = props;
 
   // 年数や曜日の部分は除外して時間の部分だけ取り出す

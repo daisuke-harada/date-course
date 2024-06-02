@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { currentUserState, loginStatusState } from 'store/session';
@@ -15,7 +15,7 @@ type Props = {
   setDateSpotAverageRate: React.Dispatch<React.SetStateAction<number>>
 };
 
-export const DateSpotReviewArea: VFC<Props> = memo((props) => {
+export const DateSpotReviewArea: FC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
   const getCurrentUser = useRecoilValue(currentUserState);
   const getLoginStatus = useRecoilValue(loginStatusState);

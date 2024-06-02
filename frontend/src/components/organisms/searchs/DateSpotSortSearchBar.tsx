@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from 'react';
+import { memo, useCallback, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
@@ -18,7 +18,7 @@ const SelectParentDiv = tw.div`w-full px-3`;
 const MainDiv = tw.div`m-auto p-3 bg-white border-2 shadow-xl rounded-3xl border-gray-200 flex flex-col`;
 const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
-export const DateSpotSortSearchBar: VFC<Props> = memo((props) => {
+export const DateSpotSortSearchBar: FC<Props> = memo((props) => {
   const {defaultPrefectureId, defaultGenreId, defaultBusinessTimeValue} = props;
   const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureId);
   const [genreValue, setGenreValue] = useState<string>(defaultGenreId);

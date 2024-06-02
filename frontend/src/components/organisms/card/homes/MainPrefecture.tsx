@@ -1,4 +1,4 @@
-import { VFC, memo } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
@@ -11,7 +11,7 @@ type Props = {
 const ImageParentDiv = tw.div`relative w-1/2`;
 const Image = tw.img`object-cover absolute top-0 w-full h-full rounded-l-xl`;
 
-export const MainPrefecture: VFC<Props> = memo((props) => {
+export const MainPrefecture: FC<Props> = memo((props) => {
 
   const { prefecture } = props
 
