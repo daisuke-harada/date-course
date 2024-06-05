@@ -1,3 +1,4 @@
+import { initialLoginState } from 'defaults/userDefaults';
 import { SET_LOGIN_STATUS, SET_CURRENT_USER } from '../actions/sessionActions';
 import { User } from "types/users/session";
 
@@ -13,12 +14,7 @@ type CurrentUserAction = {
 
 type Action = LoginAction | CurrentUserAction;
 
-const initialState = {
-  loginStatus: false,
-  currentUser: {}
-};
-
-const loginReducer = (state = initialState, action: Action) => {
+const loginReducer = (state = initialLoginState, action: Action) => {
   switch (action.type) {
     case SET_LOGIN_STATUS:
       return {

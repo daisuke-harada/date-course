@@ -10,7 +10,7 @@ export const setLoginStatus = (status: boolean) => ({
   payload: status
 });
 
-export const setCurrentUser = (user: UserResponseData) => ({
+export const setCurrentUser = (user: UserResponseData | {}) => ({
   type: SET_CURRENT_USER,
   payload: user
 });

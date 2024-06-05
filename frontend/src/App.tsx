@@ -9,14 +9,14 @@ import store from './reducers/index';
 export const App = () => {
 
   return (
-    <RecoilRoot>
+    // <RecoilRoot>
       <BrowserRouter>
         <Provider store={store}>
-        <HeaderLayout>
-          <Routers />
-        </HeaderLayout>
+          <HeaderLayout>
+            <Routers />
+          </HeaderLayout>
         </Provider>
       </BrowserRouter>
-    </RecoilRoot>
+    //</RecoilRoot>
   );
 }

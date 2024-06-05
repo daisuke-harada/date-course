@@ -4,9 +4,13 @@ export type SignInParams = {
   password: string,
 }
 
+export type LoginState = {
+  loginStatus: boolean;
+  currentUser: User
+}
 // ユーザー
 export type User = {
-  id: number,
+  id?: number,
   name: string,
   email: string,
   gender: string,

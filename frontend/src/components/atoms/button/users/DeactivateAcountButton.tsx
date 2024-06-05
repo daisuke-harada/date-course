@@ -11,7 +11,7 @@ export const DeactivateAcountButton: FC = memo(() => {
   return(
     <>
       {
-        loginStatus.status === true &&
+        loginStatus === true &&
         <ButtonParentDiv>
           <button className='text-red-600 hover:text-red-800 font-bold mb-5' onClick={onCLickDeactivateAccountAction}>退会</button>
         </ButtonParentDiv>
