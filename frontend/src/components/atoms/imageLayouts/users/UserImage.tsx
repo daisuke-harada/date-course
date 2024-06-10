@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 type Props = {
   addClassName: string,
-  image: {
+  image?: {
     url: string | null
   },
   userId: number,

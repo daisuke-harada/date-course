@@ -7,8 +7,10 @@ import { Search } from 'components/pages/users/Search';
 import { New } from 'components/pages/users/New';
 import { Show } from 'components/pages/users/Show';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session';
+import { useSelector } from 'react-redux';
+
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type Props = {
   path: string,
@@ -16,8 +18,8 @@ type Props = {
 };
 
 export const UserRoutes: () => Props[] = () => {
-  const getLoginStatus = useRecoilValue(loginStatusState);
-  const getCurrentUser = useRecoilValue(currentUserState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
   const location = useLocation();
   // locationをグローバルステートに入れたら管理しやすくなるかな
   const userId: string = location.pathname.replace(/[^0-9]/g, '');
@@ -29,7 +31,7 @@ export const UserRoutes: () => Props[] = () => {
     },
     {
       path: ':id/edit',
-      element: getLoginStatus.status === true && Number(userId) === getCurrentUser.user.id?
+      element: getLoginStatus && Number(userId) === getCurrentUser.id?
       <Edit /> :
       <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />
     },
@@ -47,7 +49,7 @@ export const UserRoutes: () => Props[] = () => {
     },
     {
       path: 'new',
-      element: getLoginStatus.status === false?
+      element: !getLoginStatus ?
       <New /> :
       <Navigate to='/' state={{message: 'ログイン中はアクセスできません', type: 'error-message', condition: true}} />
     },

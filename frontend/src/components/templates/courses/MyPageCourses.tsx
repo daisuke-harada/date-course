@@ -1,13 +1,14 @@
 import { memo, useEffect, useState, FC } from 'react';
-import tw from 'tailwind-styled-components';
-import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import tw from 'tailwind-styled-components';
 
 import { CourseResponseData } from 'types/courses/response';
 import { MyPageCourseCard } from 'components/organisms/card/courses/MyPageCourseCard';
-import { currentUserState, loginStatusState } from 'store/session';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type Props = {
   courses: CourseResponseData[],
@@ -20,19 +21,19 @@ const CourseParentButtonDiv = tw.div`xl:w-1/4 lg:text-xl md:w-1/3 md:text-base m
 export const MyPageCourses: FC<Props> = memo((props) => {
   const { courses, userId } = props;
   const [filterCourses, setFilterCourses] = useState<CourseResponseData[]>([]);
-  const getCurrentUser = useRecoilValue(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const getLoginStatus = useSelector<RootState,boolean>(state => state.session.loginStatus)
 
   // 非公開ステータスのデートコースを他のユーザーに見れなくする
   useEffect(() => {
-    userId !== getCurrentUser.user.id?
+    userId !== getCurrentUser.id?
     setFilterCourses(courses.filter((course) =>(course.authority === '公開')))
     :
-    getLoginStatus.status === false?
+    !getLoginStatus?
     setFilterCourses(courses.filter((course) =>(course.authority === '公開')))
     :
     setFilterCourses(courses);
-  },[courses, getCurrentUser.user.id, getLoginStatus.status, userId]);
+  },[courses, getCurrentUser.id, getLoginStatus, userId]);
 
   return(
     <>

@@ -1,11 +1,13 @@
 import { memo, useCallback, FC } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import tw from 'tailwind-styled-components';
 
 import { managementCourseState } from 'store/managementCourse';
-import { currentUserState } from 'store/session';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { DangerButton } from '../DangerButton';
+import { useSelector } from 'react-redux';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
@@ -16,8 +18,8 @@ const ButtonParentDiv = tw.div`my-5 m-auto text-sm`;
 // デートコースの中から指定されたデートスポットを削除する。
 export const DeleteCourseButton: FC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
-  const getCurrentUser = useRecoilValue(currentUserState);
-  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.id}));
   const onClickDeleteCourseAction = useCallback(() => {
     const copyCourseDuringSpots = managementCourses.dateSpots.slice();
 

@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux';
+
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
-import { useRecoilValue } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session';
+import { User } from 'types/users/session';
+import { RootState } from 'reducers';
 
 export const HeaderTopLeftRoutes = () => {
-  const getLoginsStatus = useRecoilValue(loginStatusState);
-  const getCurrentUser = useRecoilValue(currentUserState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const getLoginsStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   const userRoutes = [
     {
@@ -32,9 +34,9 @@ export const HeaderTopLeftRoutes = () => {
     },
   ];
 
-  if(getLoginsStatus.status && getCurrentUser.user.admin === false) {
+  if(getLoginsStatus && getCurrentUser.admin === false) {
     return userRoutes;
-  }else if(getLoginsStatus.status && getCurrentUser.user.admin === true) {
+  }else if(getLoginsStatus && getCurrentUser.admin === true) {
     return adminRoutes;
   }else {
     return noLoginRoutes;

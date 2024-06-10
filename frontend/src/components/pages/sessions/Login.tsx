@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SignInParams } from 'types/users/session';
-import { useLoginAuthAction } from 'hooks/users/useLoginAuthAction';
+import { useLoginAuthAction } from 'hooks/users/useLoginAuthActionRecoil';
 
 const MainDiv = tw.div`user-form p-5`;
 const ErrorDiv = tw.li`my-5 tex-xs text-red-600`;

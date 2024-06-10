@@ -1,7 +1,6 @@
 import { memo, useEffect, useState, FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { currentUserState, loginStatusState } from 'store/session'
+import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
 import { client } from 'lib/api/client';
@@ -15,6 +14,9 @@ import { StarRateText } from 'components/atoms/text/StarRateText';
 import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
 import { Loading } from '../Loading';
 import { AddCourseButton } from 'components/atoms/button/courses/AddCourseButton';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
+
 
 const MainDiv = tw.div`border shadow-xl bg-white mt-10 p-3 rounded-2xl m-2`;
 const DateSpotNameTitle = tw.h1`w-full my-5 text-sm font-bold md:text-3xl`;
@@ -31,8 +33,8 @@ export const Show: FC = memo(() => {
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
   const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
-  const getCurrentUser = useRecoilValue(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   useEffect(() => {
     client.get(`date_spots/${id}`).then(response => {
@@ -70,8 +72,8 @@ export const Show: FC = memo(() => {
             </div>
             <div className='w-1/3 text-center mb-5'>
               {
-                getLoginStatus.status === true
-                && getCurrentUser.user.admin === true
+                getLoginStatus
+                && getCurrentUser.admin === true
                 && (
                   <BaseButton dataE2e='dateSpot-edit-button'>
                     <Link

@@ -1,11 +1,11 @@
 import { memo, FC } from 'react';
-import { useRecoilValue } from 'recoil';
-import { loginStatusState } from 'store/session';
 
 import { GuestLoginButton } from 'components/atoms/button/users/GuestLoginButton';
 import { MenuIconButton } from 'components/atoms/button/MenuIconButton';
 import tw from 'tailwind-styled-components';
 import { LogOutButton } from 'components/atoms/button/users/LogOutButton';
+import { useSelector } from 'react-redux';
+import { RootState } from 'reducers';
 
 type Props = {
   isOpen: boolean,
@@ -18,7 +18,8 @@ const ButtonParentDiv = tw.div`lg:block hidden mt-5`;
 
 export const HeaderTopRight: FC<Props> = memo((props) => {
   const {onClickNavBarSwitch, isOpen} = props;
-  const getLoginStatus = useRecoilValue(loginStatusState);
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+
   return(
     <>
       <MenuIconDivParent>
@@ -27,7 +28,7 @@ export const HeaderTopRight: FC<Props> = memo((props) => {
         </MenuIconDivChild>
       </MenuIconDivParent>
       <ButtonParentDiv>
-        { getLoginStatus.status === true?
+        { getLoginStatus ?
          <LogOutButton />:
          <GuestLoginButton />
         }

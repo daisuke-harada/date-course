@@ -37,7 +37,6 @@ export const Directions: FC<Props> = memo((props) => {
   };
 
   const directionsCallback = useCallback((googleResponse: any) => {
-    console.log(googleResponse);
 
     if (googleResponse) {
       if (currentDirection) {

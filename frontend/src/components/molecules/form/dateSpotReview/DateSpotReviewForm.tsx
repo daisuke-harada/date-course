@@ -1,10 +1,8 @@
 import { memo, FC, useState, useCallback, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { client } from 'lib/api/client';
-import { currentUserState } from 'store/session';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
@@ -12,6 +10,9 @@ import { DangerButton } from 'components/atoms/button/DangerButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import { StarRateForm } from 'components/atoms/form/StarRateForm';
 import { StarRateText } from 'components/atoms/text/StarRateText';
+import { useSelector } from 'react-redux';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type DateSpotRreviewParam = {
   rate: number,
@@ -35,7 +36,7 @@ type Props= {
 
 export const DateSpotReviewForm: FC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
-  const getCurrentUser = useRecoilValue(currentUserState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
   const [content, setContent] = useState<string>('');
   const [rate, setRate] = useState<number>(0);
   const [editOpen, setEditOpen] = useState<boolean>(false);
@@ -113,23 +114,23 @@ export const DateSpotReviewForm: FC<Props> = memo((props) => {
   const dateSpotReview: DateSpotRreviewParam = {
     rate: rate,
     content: content,
-    userId: getCurrentUser.user.id,
+    userId: getCurrentUser.id,
     dateSpotId: dateSpotId,
   };
 
   useEffect(()=> {
-    if(dateSpotReviews.map(dateSpotReview => dateSpotReview.userId).includes(getCurrentUser.user.id)){
-      setCurrentDateSpotReview(dateSpotReviews.find(dateSpotReview => dateSpotReview.userId === getCurrentUser.user.id));
+    if(dateSpotReviews.map(dateSpotReview => dateSpotReview.userId).includes(getCurrentUser.id)){
+      setCurrentDateSpotReview(dateSpotReviews.find(dateSpotReview => dateSpotReview.userId === getCurrentUser.id));
     };
   }, [dateSpotReviews, getCurrentUser]);
 
   if(currentDateSpotReview){
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
+        <UserImage userId={getCurrentUser.id} image={getCurrentUser.image} gender={getCurrentUser.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
         {/* 星による評価 */}
         <UserInfoDiv>
-          <div>{getCurrentUser.user.name}</div>
+          <div>{getCurrentUser.name}</div>
             {
               editOpen?
               (
@@ -176,10 +177,10 @@ export const DateSpotReviewForm: FC<Props> = memo((props) => {
   }else{
     return(
       <Div>
-        <UserImage userId={getCurrentUser.user.id} image={getCurrentUser.user.image} gender={getCurrentUser.user.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
+        <UserImage userId={getCurrentUser.id} image={getCurrentUser.image} gender={getCurrentUser.gender} addClassName='sm:w-48 sm:h-48 mobile(L):w-32 mobile(L):h-32 mobile(M):w-24 mobile(M):h-24 w-16 h-16' />
         {/* 星による評価 */}
         <UserInfoDiv>
-          <div>{getCurrentUser.user.name}</div>
+          <div>{getCurrentUser.name}</div>
           <StarRateForm rate={rate} size={30} onChangeRate={onChangeRate} edit={true} />
           {errorUserIdMessages.length > 0 &&
             <ul className='mt-1'>

@@ -7,7 +7,6 @@ import { SignInParams } from 'types/users/session';
 const Button = tw.button`btn btn-yellow-green w-full`;
 const Span = tw.div`text-xs`;
 
-
 export const GuestLoginButton: FC = memo(() => {
   const signInParams: SignInParams = {
     name: 'guest',

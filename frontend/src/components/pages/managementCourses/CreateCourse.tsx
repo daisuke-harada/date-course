@@ -1,10 +1,10 @@
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
 import { memo, useEffect, useState, FC } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
 import { managementCourseState, courseInfoState } from 'store/managementCourse';
-import { currentUserState } from 'store/session';
 import { Directions } from 'components/molecules/maps/Directions';
 import { LoadScript } from '@react-google-maps/api';
 import { Map } from 'components/molecules/maps/Map';
@@ -13,6 +13,8 @@ import { ManagementCourseButtonArea } from 'components/organisms/area/courses/Ma
 import { Link } from 'react-router-dom';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const CourseNotExistDiv = tw.div`text-center sm:text-2xl m-auto my-5 text-blue-600 mobile(L):text-lg text-sm`;
@@ -21,9 +23,9 @@ const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-2 font-bold pb-5`;
 const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 
 export const CreateCourse: FC = memo(() => {
-  const getCurrentUser = useRecoilValue(currentUserState);
-  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.user.id}));
-  const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.user.id}));
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.id}));
+  const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.id}));
   const [noDuplicatePrefectureNames, setNoDuplicatePrefectureNames] = useState<string[]>([]);
 
   // デートコースの距離、時間を管理するステートを設定
