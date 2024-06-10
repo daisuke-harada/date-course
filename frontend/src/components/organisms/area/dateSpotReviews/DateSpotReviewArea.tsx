@@ -1,12 +1,13 @@
 import { memo, FC } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useSelector } from 'react-redux';
 
-import { currentUserState, loginStatusState } from 'store/session';
 import { DateSpotReviewAndUserResponseData } from 'types/dateSpotReviews/response';
 import { DateSpotReviewForm } from 'components/molecules/form/dateSpotReview/DateSpotReviewForm';
 import { ReviewCard } from 'components/organisms/card/reviews/ReviewCard';
 import { UserImage } from 'components/atoms/imageLayouts/users/UserImage';
 import { Link } from 'react-router-dom';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type Props = {
   dateSpotId: number,
@@ -17,13 +18,13 @@ type Props = {
 
 export const DateSpotReviewArea: FC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
-  const getCurrentUser = useRecoilValue(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
 
   return(
     <>
       {
-        getLoginStatus.status === true
+        getLoginStatus
         &&
         <DateSpotReviewForm
           dateSpotId={dateSpotId}
@@ -41,7 +42,7 @@ export const DateSpotReviewArea: FC<Props> = memo((props) => {
         <h1 className='text-red-400 my-5 text-3xl'>このデートスポットにはレビューが投稿されていません</h1>
         :
         dateSpotReviews.map((dateSpotReview: DateSpotReviewAndUserResponseData) => {
-          if(dateSpotReview.userId !== getCurrentUser.user.id){
+          if(dateSpotReview.userId !== getCurrentUser.id){
             return (
               <ReviewCard
                 key={dateSpotReview.id}

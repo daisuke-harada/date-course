@@ -1,11 +1,12 @@
-import { useRecoilValue } from 'recoil';
+import { useSelector } from "react-redux";
 
-import { currentUserState, loginStatusState } from 'store/session';
+import { RootState } from "reducers";
+import { User } from "types/users/session";
 
 
 export const HeaderBottomRoutes =  () => {
-  const getLoginStatus = useRecoilValue(loginStatusState);
-  const getCurrentUser = useRecoilValue(currentUserState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const getLoginStatus = useSelector<RootState, User>(state => state.session.currentUser)
 
   const headers = [
     {
@@ -30,7 +31,7 @@ export const HeaderBottomRoutes =  () => {
     },
   ];
 
-  getLoginStatus.status && getCurrentUser.user.admin === false && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${getCurrentUser.user.id}` });
+  getLoginStatus && getCurrentUser.admin === false && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${getCurrentUser.id}` });
 
   return headers;
 }

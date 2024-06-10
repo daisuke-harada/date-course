@@ -1,17 +1,17 @@
 import { useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
-import { currentUserState, loginStatusState } from 'store/session';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setLoginStatus } from 'actions/sessionActions';
+import { initialUser } from 'defaults/userDefaults';
 
 export const useLogoutAction = () => {
-  const setLoginStatus = useSetRecoilState(loginStatusState);
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClickLogOut = useCallback(() => {
-    setLoginStatus({status: false});
-    setCurrentUser({user: {}});
+    dispatch(setLoginStatus(false))
+    dispatch(setCurrentUser(initialUser))
     navigate('/', {state: {message: 'ログアウトしました', type: 'success-message', condition: true}});
   }, [setLoginStatus, setCurrentUser, navigate]);
 

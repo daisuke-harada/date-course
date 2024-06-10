@@ -11,11 +11,13 @@ export const App = () => {
   return (
     // <RecoilRoot>
       <BrowserRouter>
+        <RecoilRoot>
         <Provider store={store}>
           <HeaderLayout>
             <Routers />
           </HeaderLayout>
         </Provider>
+        </RecoilRoot>
       </BrowserRouter>
     //</RecoilRoot>
   );

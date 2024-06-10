@@ -1,10 +1,13 @@
 import { memo, useCallback, useState, FC } from 'react';
-import { SetterOrUpdater, useRecoilValue } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
+import { useSelector } from 'react-redux';
 
-import { currentUserState } from 'store/session';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { ManagementCourseData } from 'types/managementCourses/management';
 import { BaseButton } from 'components/atoms/button/BaseButton';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
+
 
 type Props = {
   currentDateSpotId: number,
@@ -14,7 +17,7 @@ type Props = {
 
 export const ChangeSelect: FC<Props> = memo((props) => {
   const { currentDateSpotId, managementCourses, setManagementCourses } = props;
-  const getCurrentUser = useRecoilValue(currentUserState);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
   const [changeCourseId, setChangeCourseId] = useState(0);
   const onChangeCourseIdValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setChangeCourseId(Number(e.target.value)), []);
 
@@ -62,9 +65,9 @@ export const ChangeSelect: FC<Props> = memo((props) => {
       currentDateSpot
     );
     // 入れ替え完了した配列をセットする。
-    setManagementCourses({userId: getCurrentUser.user.id, dateSpots: copyManagementCourses});
+    setManagementCourses({userId: getCurrentUser.id, dateSpots: copyManagementCourses});
   }, [
-      getCurrentUser.user.id,
+      getCurrentUser.id,
       changeCourseId, currentDateSpotId,
       managementCourses.dateSpots,
       setManagementCourses

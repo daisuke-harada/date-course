@@ -6,16 +6,18 @@ import { formDataClient } from 'lib/api/client';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { RadioArea } from 'components/organisms/area/RadioArea';
 import { UserLoginResponseData } from 'types/users/response';
-import { currentUserState } from 'store/session';
-import { useRecoilState } from 'recoil';
 import { DeactivateAcountButton } from 'components/atoms/button/users/DeactivateAcountButton';
 import { ImageForm } from 'components/atoms/form/ImageForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
+import { setCurrentUser } from 'actions/sessionActions';
 
 type Props = {
   nameDefaultValue: string,
   emailDefaultValue: string,
   genderDefaultValue: string,
-  imageDefaultValue?: File,
+  imageDefaultValue?: string | null | undefined,
   userFormTitle: string,
   buttonName: string,
   afterLoginSuccess?: (data: UserLoginResponseData) => void,
@@ -35,11 +37,14 @@ export const UserForm: FC<Props> = memo((props) => {
   const [errorEmailMessages, setErrorEmailMessages] = useState([]);
   const [errorPasswordMessages, setErrorPasswordMessages] = useState([]);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+
   const [name, setName] = useState<string>(nameDefaultValue);
   const [email, setEmail] = useState<string>(emailDefaultValue);
   const [gender, setGender] = useState<string>(genderDefaultValue);
-  const [image, setImage] = useState<File | undefined>(imageDefaultValue);
+  const [image, setImage] = useState<string | File | null | undefined >(imageDefaultValue);
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
@@ -48,8 +53,6 @@ export const UserForm: FC<Props> = memo((props) => {
   const onChangePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => setPassword(e.target.value);
   const onChangePasswordConfirmation: React.ChangeEventHandler<HTMLInputElement> = (e) => setPasswordConfirmation(e.target.value);
   const onChangeRadioButton: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => setGender(e.target.value), []);
-
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
   const selectImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.currentTarget.files !== null){
@@ -94,13 +97,13 @@ export const UserForm: FC<Props> = memo((props) => {
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {
       // guestユーザーは退会できなくする。
-      if(currentUser.user.id === 1) {
+      if(currentUser.id === 1) {
         navigate(`./`, {state: {message: 'guestユーザーは情報を更新できません', type: 'error-message', condition: true}});
       }else{
-        formDataClient.put(`users/${currentUser.user.id}`, user).then(response => {
+        formDataClient.put(`users/${currentUser.id}`, user).then(response => {
           if (response.data.status === 'updated'){
             // 編集に成功したのでログイン情報も一緒に更新する。
-            setCurrentUser({user: response.data.user});
+            dispatch(setCurrentUser(response.data.user))
             // 画面遷移
             navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
           };

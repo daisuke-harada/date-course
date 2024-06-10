@@ -7,6 +7,7 @@ const Button = tw.button`btn btn-red w-full`;
 
 export const LogOutButton: FC = memo(() => {
   const { onClickLogOut } = useLogoutAction();
+
   return(
     <Button onClick={onClickLogOut}>ログアウト</Button>
   );

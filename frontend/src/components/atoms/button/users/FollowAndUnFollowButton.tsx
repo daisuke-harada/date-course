@@ -1,10 +1,12 @@
 import { memo, useEffect, useState, FC } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useDispatch, useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
-import { currentUserState, loginStatusState } from 'store/session';
+import { setCurrentUser } from 'actions/sessionActions';
 import { UserResponseData } from 'types/users/response';
 import { client } from 'lib/api/client';
+import { RootState } from 'reducers';
+import { User } from 'types/users/session';
 
 type Props = {
   userId: number,
@@ -13,47 +15,50 @@ type Props = {
   setUser?: React.Dispatch<React.SetStateAction<UserResponseData>>
 };
 
-const FollowButton = tw.button`btn btn-yellow-green `
+const FollowButton = tw.button`btn btn-yellow-green`;
 const UnfollowButton = tw.button`btn btn-unfollow`;
 
 export const FollowAndUnFollowButton: FC<Props> = memo((props) => {
   const {userId, setUsers, setUser, addClassName} = props;
 
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-  const getLoginStatus = useRecoilValue(loginStatusState);
+  const dispatch = useDispatch();
   const [currentUserId, setCurrentUserId] = useState<number>(0);
+  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
 
   useEffect(() => {
-    currentUser.user &&
-    setCurrentUserId(currentUser.user.id);
-  },[currentUser, userId]);
+    getCurrentUser && setCurrentUserId(getCurrentUser.id);
+  },[getCurrentUser, userId]);
 
   const onClickFollowAction = () => {
     client.post('relationships', {
-      currentUserId: currentUser.user.id,
+      currentUserId: getCurrentUser.id,
       followedUserId: userId,
     }).then(response => {
-      response.data.status === 'created' && setUsers && setUsers(response.data.users);
-      response.data.status === 'created' && setCurrentUser({user: response.data.currentUser});
-      response.data.status === 'created' && setUser && setUser(response.data.followedUser);
+      if (response.data.status === 'created') {
+        setUsers && setUsers(response.data.users);
+        dispatch(setCurrentUser(response.data.currentUser));
+        setUser && setUser(response.data.followedUser);
+      }
     });
   };
 
   const onClickUnfollowAction = () => {
     client.delete(`relationships/${currentUserId}/${userId}`).then(response => {
-      response.data.status === 'deleted' && setUsers && setUsers(response.data.users);
-      response.data.status === 'deleted' && setUser && setUser(response.data.unfollowedUser);
-      response.data.status === 'deleted' && setCurrentUser({user: response.data.currentUser});
+      if (response.data.status === 'deleted') {
+        setUsers && setUsers(response.data.users);
+        dispatch(setCurrentUser(response.data.currentUser));
+        setUser && setUser(response.data.unfollowedUser);
+      }
     });
   };
-
 
   return(
     <>
       {
-        getLoginStatus.status === true &&
+        getLoginStatus &&
         currentUserId !== userId &&
-        (currentUser.user.followingIds && currentUser.user.followingIds.includes(userId)?
+        (getCurrentUser.followingIds && getCurrentUser.followingIds.includes(userId) ?
         <UnfollowButton data-e2e={`unfollow-button-${userId}`} className={addClassName} onClick={onClickUnfollowAction}>フォロー中</UnfollowButton>
         :
         <FollowButton data-e2e={`follow-button-${userId}`} className={addClassName} onClick={onClickFollowAction}>フォロー</FollowButton>

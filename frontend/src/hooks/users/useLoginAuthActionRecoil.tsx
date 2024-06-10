@@ -1,23 +1,22 @@
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 
 import { client } from 'lib/api/client';
-import { currentUserState, loginStatusState } from 'store/session';
 import { UserLoginResponseData } from 'types/users/response';
 import { SignInParams } from 'types/users/session';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setLoginStatus } from 'actions/sessionActions';
 
 export const useLoginAuthAction = (signInParams: SignInParams) => {
-  const setLoginStatus = useSetRecoilState(loginStatusState);
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // エラーメッセージ用のステート
   const [errorMessages, setErrorMessages] = useState([]);
 
   const afterLoginSuccess = (data: UserLoginResponseData) => {
-    setLoginStatus({status: data.loginStatus});
-    setCurrentUser({user: data.user});
+    dispatch(setLoginStatus(true));
+    dispatch(setCurrentUser(data.user));
     data.user.admin === false?
     navigate(`/users/${data.user.id}`, {state: {message: 'ログインに成功しました', type: 'success-message', condition: true}})
     :
