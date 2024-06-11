@@ -7,7 +7,7 @@ import { RootState } from 'reducers';
 
 export const HeaderTopLeftRoutes = () => {
   const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginsStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   const userRoutes = [
     {
@@ -34,10 +34,10 @@ export const HeaderTopLeftRoutes = () => {
     },
   ];
 
-  if(getLoginsStatus && getCurrentUser.admin === false) {
-    return userRoutes;
-  }else if(getLoginsStatus && getCurrentUser.admin === true) {
+  if(getLoginStatus && getCurrentUser.admin === true) {
     return adminRoutes;
+  }else if(getLoginStatus ) {
+    return userRoutes;
   }else {
     return noLoginRoutes;
   };

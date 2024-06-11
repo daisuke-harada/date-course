@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { client } from 'lib/api/client';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoginStatus, setCurrentUser } from 'actions/sessionActions';
+import { setLoginStatus, setCurrentUser } from 'reducers/loginSlice';
 import { RootState } from 'reducers';
 import { User } from 'types/users/session';
 import { initialUser } from 'defaults/userDefaults';
@@ -29,4 +29,4 @@ export const useDeactivateAccountButtonAction = () => {
   };
 
   return { onCLickDeactivateAccountAction, loginStatus };
-}
+};

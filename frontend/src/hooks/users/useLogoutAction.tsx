@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { setLoginStatus, setCurrentUser } from 'actions/sessionActions';
+import { setLoginStatus, setCurrentUser } from 'reducers/loginSlice';
 import { initialUser } from '../../defaults/userDefaults';
 
 export const useLogoutAction = () => {
