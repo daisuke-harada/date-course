@@ -49,9 +49,7 @@ export const UserRoutes: () => Props[] = () => {
     },
     {
       path: 'new',
-      element: !getLoginStatus ?
-      <New /> :
-      <Navigate to='/' state={{message: 'ログイン中はアクセスできません', type: 'error-message', condition: true}} />
+      element: <New />
     },
     {
       path: 'search',

@@ -2,7 +2,7 @@ import { memo, useEffect, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
-import { setCurrentUser } from 'actions/sessionActions';
+import { setCurrentUser } from 'reducers/loginSlice';
 import { UserResponseData } from 'types/users/response';
 import { client } from 'lib/api/client';
 import { RootState } from 'reducers';

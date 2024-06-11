@@ -1,10 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { setLoginStatus, setCurrentUser } from 'actions/sessionActions';
+import { setLoginStatus, setCurrentUser } from 'reducers/loginSlice';
 import { SignInParams, User } from 'types/users/session';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { client } from 'lib/api/client';
-
 
 export const useLoginAuthAction = (signInParams: SignInParams) => {
   const dispatch = useDispatch();

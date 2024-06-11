@@ -1751,6 +1751,16 @@
   resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.19.2.tgz#24d9fb9aa555bb063ba5fe82f80fcd7d48662184"
   integrity sha512-x9ibmsP0ZVqzyCo1Pitbw+4b6iEXRw/r1TCy3vOUR3eKrzWLnHYZMR325BkZW2r8fnuWE/V3Fp4QZOP9qYORCw==
 
+"@reduxjs/toolkit@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-2.2.5.tgz#c0d2d8482ef80722bebe015ff05b06c34bfb6e0d"
+  integrity sha512-aeFA/s5NCG7NoJe/MhmwREJxRkDs0ZaSqt0MxhWUrwCf1UQXpwR87RROJEql0uAkLI6U7snBOYOcKw83ew3FPg==
+  dependencies:
+    immer "^10.0.3"
+    redux "^5.0.1"
+    redux-thunk "^3.1.0"
+    reselect "^5.1.0"
+
 "@remix-run/router@1.16.1":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.16.1.tgz#73db3c48b975eeb06d0006481bde4f5f2d17d1cd"
@@ -5604,6 +5614,11 @@ ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
 
+immer@^10.0.3:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-10.1.1.tgz#206f344ea372d8ea176891545ee53ccc062db7bc"
+  integrity sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==
+
 immer@^9.0.7:
   version "9.0.21"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.21.tgz#1e025ea31a40f24fb064f1fef23e931496330176"
@@ -8610,6 +8625,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
+
+reselect@^5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-5.1.1.tgz#c766b1eb5d558291e5e550298adb0becc24bb72e"
+  integrity sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"

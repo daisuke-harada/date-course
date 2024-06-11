@@ -5,13 +5,12 @@ import tw from 'tailwind-styled-components';
 import { formDataClient } from 'lib/api/client';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { RadioArea } from 'components/organisms/area/RadioArea';
-import { UserLoginResponseData } from 'types/users/response';
 import { DeactivateAcountButton } from 'components/atoms/button/users/DeactivateAcountButton';
 import { ImageForm } from 'components/atoms/form/ImageForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'reducers';
 import { User } from 'types/users/session';
-import { setCurrentUser } from 'actions/sessionActions';
+import { setCurrentUser } from 'reducers/loginSlice';
 
 type Props = {
   nameDefaultValue: string,
@@ -20,7 +19,7 @@ type Props = {
   imageDefaultValue?: string | null | undefined,
   userFormTitle: string,
   buttonName: string,
-  afterLoginSuccess?: (data: UserLoginResponseData) => void,
+  afterLoginSuccess?: (data: User) => void,
 };
 
 const MainDiv = tw.div`user-form`;
@@ -82,7 +81,7 @@ export const UserForm: FC<Props> = memo((props) => {
     if (afterLoginSuccess !== undefined){
       formDataClient.post('signup', user).then(response => {
         // 新規登録成功
-        afterLoginSuccess !== undefined && response.data.status === 'created' && afterLoginSuccess(response.data);
+        afterLoginSuccess !== undefined && response.data.status === 'created' && afterLoginSuccess(response.data.user);
 
         // 新規登録失敗
         if(response.data.status === 500){
