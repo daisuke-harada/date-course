@@ -27,6 +27,7 @@
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "redux": "^5.0.1",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
     "rimraf": "^5.0.7",
     "typescript": "^5.4.5",

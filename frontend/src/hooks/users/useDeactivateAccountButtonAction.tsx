@@ -29,4 +29,4 @@ export const useDeactivateAccountButtonAction = () => {
   };
 
   return { onCLickDeactivateAccountAction, loginStatus };
-}
+};

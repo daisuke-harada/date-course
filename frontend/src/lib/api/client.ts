@@ -28,6 +28,3 @@ formDataClient.interceptors.response.use(
     return { ...response.data, data }
   }
 )
-
-
-

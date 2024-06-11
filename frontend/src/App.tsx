@@ -9,7 +9,6 @@ import store from './reducers/index';
 export const App = () => {
 
   return (
-    // <RecoilRoot>
       <BrowserRouter>
         <RecoilRoot>
         <Provider store={store}>
@@ -19,6 +18,5 @@ export const App = () => {
         </Provider>
         </RecoilRoot>
       </BrowserRouter>
-    //</RecoilRoot>
   );
 }
