@@ -21,19 +21,19 @@ const CourseParentButtonDiv = tw.div`xl:w-1/4 lg:text-xl md:w-1/3 md:text-base m
 export const MyPageCourses: FC<Props> = memo((props) => {
   const { courses, userId } = props;
   const [filterCourses, setFilterCourses] = useState<CourseResponseData[]>([]);
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState,boolean>(state => state.session.loginStatus)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState,boolean>(state => state.session.loginStatus)
 
   // 非公開ステータスのデートコースを他のユーザーに見れなくする
   useEffect(() => {
-    userId !== getCurrentUser.id?
+    userId !== currentUser.id?
     setFilterCourses(courses.filter((course) =>(course.authority === '公開')))
     :
-    !getLoginStatus?
+    !loginStatus?
     setFilterCourses(courses.filter((course) =>(course.authority === '公開')))
     :
     setFilterCourses(courses);
-  },[courses, getCurrentUser.id, getLoginStatus, userId]);
+  },[courses, currentUser.id, loginStatus, userId]);
 
   return(
     <>

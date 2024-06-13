@@ -7,7 +7,7 @@ export const initialUser: User = {
   gender: '',
   passwordDigest: '',
   followingIds: [],
-  followers_ids: [],
+  followerIds: [],
 };
 
 export const initialLoginState: LoginState = {

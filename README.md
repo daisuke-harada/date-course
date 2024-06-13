@@ -29,6 +29,7 @@ Terraform<br/>
   - TypeScriptで開発を行なっている点。
   - CSSフレームワークにtailwindcssを利用している点。
   - atomicデザインを使用している点。
+  - Reduxで状態管理をしている点
 
 - バックエンド
   - RubyonRailsのAPIモードを利用し、APIサーバーとしてフロントエンドのリクエストに対してJSON形式でデータを返している点。
@@ -42,7 +43,7 @@ Terraform<br/>
 - フロントエンド
   - HTML/CSS
   - TypeScript
-  - React.js 17.0.2
+  - React.js 18.3.1
   - tailwindcss(CSSフレームワーク)
   - googleMapApi(Directions API MapsJavaScript API)
 - バックエンド

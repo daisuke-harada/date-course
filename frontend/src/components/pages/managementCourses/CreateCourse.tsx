@@ -1,10 +1,8 @@
 import { CourseDuringSpotCard } from 'components/organisms/card/managementCourses/CourseDuringSpotCard';
 import { memo, useEffect, useState, FC } from 'react';
-import { useRecoilState } from 'recoil';
 import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
-import { managementCourseState, courseInfoState } from 'store/managementCourse';
 import { Directions } from 'components/molecules/maps/Directions';
 import { LoadScript } from '@react-google-maps/api';
 import { Map } from 'components/molecules/maps/Map';
@@ -14,7 +12,8 @@ import { Link } from 'react-router-dom';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton';
 import { RootState } from 'reducers';
-import { User } from 'types/users/session';
+import { CourseInfoData, ManagementCourseData } from 'types/managementCourses/management';
+import { AddressAndDateSpotJoinData, DateSpotResponseData } from 'types/dateSpots/response';
 
 const MainDiv = tw.div`md:mx-20 mx-2 px-2 bg-white mt-10 py-5 shadow-xl rounded-2xl`;
 const CourseNotExistDiv = tw.div`text-center sm:text-2xl m-auto my-5 text-blue-600 mobile(L):text-lg text-sm`;
@@ -23,27 +22,26 @@ const TitleH1 = tw.h1`mobile(L):text-4xl text-center mt-2 font-bold pb-5`;
 const CourseAreaDiv = tw.div`flex-col md:flex-row w-full flex`;
 
 export const CreateCourse: FC = memo(() => {
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const [managementCourses, setManagementCourses] = useRecoilState(managementCourseState({userId: getCurrentUser.id}));
-  const [getCourseInfo, setCourseInfo] = useRecoilState(courseInfoState({userId: getCurrentUser.id}));
+  const managementCourse = useSelector<RootState, ManagementCourseData>(state => state.currentDateCourse.managementCourse);
+  const courseInfo = useSelector<RootState, CourseInfoData>(state => state.currentDateCourse.courseInfo)
   const [noDuplicatePrefectureNames, setNoDuplicatePrefectureNames] = useState<string[]>([]);
 
   // デートコースの距離、時間を管理するステートを設定
   const [legs, setLegs] = useState<{duration: string, distance: string}[]>([]);
 
   useEffect(() => {
-    const prefectureNames = managementCourses.dateSpots.map((duringSpot) => (duringSpot.prefectureName));
+    const prefectureNames = managementCourse.dateSpots.map((dateSpot: AddressAndDateSpotJoinData) => (dateSpot.prefectureName));
     setNoDuplicatePrefectureNames(Array.from(new Set(prefectureNames)));
-  }, [managementCourses.dateSpots]);
+  }, [managementCourse.dateSpots]);
 
   return(
     <>
       {
-        managementCourses.dateSpots &&
+        managementCourse.dateSpots &&
         <MainDiv>
           <TitleH1>デートコース作成</TitleH1>
           {
-            managementCourses.dateSpots.length === 0?
+            managementCourse.dateSpots.length === 0?
             <div className='flex flex-col mb-16 text-center'>
               <CourseNotExistDiv>
                   現在登録されていません。<br/>
@@ -67,21 +65,20 @@ export const CreateCourse: FC = memo(() => {
             :
             <>
               {
-                managementCourses.dateSpots.length > 1
+                managementCourse.dateSpots.length > 1
                 &&
                 <div className='w-full mt-5'>
-                  <CourseInfoSelect setCourseInfo={setCourseInfo} getCourseInfo={getCourseInfo} noDuplicatePrefectureNames={noDuplicatePrefectureNames} />
+                  <CourseInfoSelect noDuplicatePrefectureNames={noDuplicatePrefectureNames} />
                 </div>
               }
               <CourseAreaDiv>
                 <div className='md:w-1/3 w-full'>
                   {
-                    managementCourses.dateSpots.map((courseDuringSpot, index) => (
+                    managementCourse.dateSpots.map((courseDuringSpot, index) => (
                       <CourseDuringSpotCard
                         key={courseDuringSpot.dateSpot.id}
                         courseDuringSpot={courseDuringSpot}
-                        managementCourses={managementCourses}
-                        setManagementCourses={setManagementCourses}
+                        managementCourse={managementCourse}
                         courseNumber={index}
                         leg={legs[index]}
                       />
@@ -90,11 +87,11 @@ export const CreateCourse: FC = memo(() => {
                 </div>
                 <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
                   {
-                    managementCourses.dateSpots.length === 1?
-                    <Map  addressAndDateSpot={managementCourses.dateSpots[0]} />
+                    managementCourse.dateSpots.length === 1?
+                    <Map  addressAndDateSpot={managementCourse.dateSpots[0]} />
                     :
                     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                      <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={getCourseInfo.travelMode} />
+                      <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
                     </LoadScript>
                   }
                 </div>
@@ -102,8 +99,8 @@ export const CreateCourse: FC = memo(() => {
             </>
           }
           <ManagementCourseButtonArea
-            managementCourses={managementCourses}
-            getCourseInfo={getCourseInfo}
+            managementCourse={managementCourse}
+            getCourseInfo={courseInfo}
           />
         </MainDiv>
       }

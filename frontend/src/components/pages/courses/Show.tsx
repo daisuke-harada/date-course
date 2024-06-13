@@ -24,7 +24,7 @@ const ButtonParentDiv = tw.div`lg:text-4xl sm:w-1/2 sm:text-2xl text-center m-5 
 
 export const Show: FC = memo(() => {
   const { id } = useParams();
-  const [managementCourses, setManagementCourses] = useState<ManagementCourseData>({
+  const [managementCourse, setmanagementCourse] = useState<ManagementCourseData>({
     userId: 0,
     dateSpots: []
   });
@@ -39,17 +39,17 @@ export const Show: FC = memo(() => {
   const [legs, setLegs] = useState<{duration: string, distance: string}[]>([]);
   const navigate = useNavigate();
   const [travelModeText, setTravelModeText] = useState('');
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
 
   const onClickDeleteCourse = useCallback(()=>{
     client.delete(`courses/${id}`).then(response => {
-      response.data.status === 'deleted' && navigate(`/users/${getCurrentUser.id}`, {state: {message: 'デートコースを削除しました', type: 'success-message', condition: true}});
+      response.data.status === 'deleted' && navigate(`/users/${currentUser.id}`, {state: {message: 'デートコースを削除しました', type: 'success-message', condition: true}});
     });
-  },[id, getCurrentUser.id, navigate]);
+  },[id, currentUser.id, navigate]);
 
   useEffect(() => {
     client.get(`courses/${id}`).then(response => {
-      setManagementCourses({userId: response.data.user.id, user: response.data.user, dateSpots: response.data.dateSpots});
+      setmanagementCourse({userId: response.data.user.id, user: response.data.user, dateSpots: response.data.dateSpots});
       setCourseInfo({travelMode: response.data.travelMode, authority: response.data.authority, noDuplicatePrefectureNames: response.data.noDuplicatePrefectureNames});
       if(response.data.travelMode === 'DRIVING'){
         setTravelModeText('車');
@@ -62,7 +62,7 @@ export const Show: FC = memo(() => {
   }, [id]);
 
   return(
-    <Loading loadingSwitch={managementCourses.userId === 0 && true}>
+    <Loading loadingSwitch={managementCourse.userId === 0 && true}>
       <MainDiv>
         <TitleH1>デートコース詳細ページ</TitleH1>
         <div className='lg:ml-6 sm:ml-2 py-3 md:text-4xl mobile(L):text-xl text-sm font-bold'>
@@ -79,11 +79,11 @@ export const Show: FC = memo(() => {
         <CourseAreaDiv>
           <div className='md:w-1/3 w-full'>
             {
-              managementCourses.dateSpots.map((courseDuringSpot, index) => (
+              managementCourse.dateSpots.map((courseDuringSpot, index) => (
                 <CourseDuringSpotCard
                   key={courseDuringSpot.id}
                   courseDuringSpot={courseDuringSpot}
-                  managementCourses={managementCourses}
+                  managementCourse={managementCourse}
                   courseNumber={index}
                   leg={legs[index]}
                 />
@@ -93,30 +93,30 @@ export const Show: FC = memo(() => {
           <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
             {
               // userIdが初期値である0の場合に読み込まないようにする
-              managementCourses.userId !== 0
+              managementCourse.userId !== 0
               &&
               <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                <Directions managementCourses={managementCourses} setLegs={setLegs} travelMode={courseInfo.travelMode} />
+                <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
               </LoadScript>
             }
           </div>
         </CourseAreaDiv>
         <ButtonArea>
           <ButtonParentDiv>
-            <Link to={`/users/${managementCourses.userId}`}>
+            <Link to={`/users/${managementCourse.userId}`}>
               <BaseButton>
                   投稿者のページへ
               </BaseButton>
             </Link>
           </ButtonParentDiv>
           <ButtonParentDiv>
-            <MoveGoogleMapButton dateSpots={managementCourses.dateSpots} />
+            <MoveGoogleMapButton dateSpots={managementCourse.dateSpots} />
           </ButtonParentDiv>
           <ButtonParentDiv>
-            <CopyCourseButton managementCourses={managementCourses} courseInfo={courseInfo} />
+            <CopyCourseButton managementCourse={managementCourse} courseInfo={courseInfo} />
           </ButtonParentDiv>
           {
-            getCurrentUser.id === managementCourses.userId
+            currentUser.id === managementCourse.userId
             &&
             (
               <>

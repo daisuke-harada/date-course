@@ -33,8 +33,8 @@ export const Show: FC = memo(() => {
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
   const [dateSpotAverageRate, setDateSpotAverageRate] = useState(0);
 
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   useEffect(() => {
     client.get(`date_spots/${id}`).then(response => {
@@ -72,8 +72,8 @@ export const Show: FC = memo(() => {
             </div>
             <div className='w-1/3 text-center mb-5'>
               {
-                getLoginStatus
-                && getCurrentUser.admin === true
+                loginStatus
+                && currentUser.admin === true
                 && (
                   <BaseButton dataE2e='dateSpot-edit-button'>
                     <Link

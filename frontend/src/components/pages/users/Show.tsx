@@ -20,8 +20,8 @@ const Span = tw.span`my-1 font-bold`;
 const ProfileDiv = tw.div`sm:my-8 my-4 mx-2 flex w-full`;
 
 export const Show: FC = memo(() => {
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
   const { id } = useParams();
   const [user, setUser] = useState<UserResponseData>(
     {
@@ -85,7 +85,7 @@ export const Show: FC = memo(() => {
             </Span>
             <Span><FollowAndUnFollowButton addClassName='mobile(L):text-sm mofile(M):w-1/3 sm:text-2xl text-xs mt-0' userId={user.id} setUser={setUser} /></Span>
             <Span className='md:w-1/6 sm:w-1/4 mobile(L):text-sm sm:text-2xl text-xs mt-0 w-1/3'>
-              {(getLoginStatus && getCurrentUser.id === Number(id))
+              {(loginStatus && currentUser.id === Number(id))
                 &&
                 <Link className='text-white' to={`edit`}>
                   <BaseButton>

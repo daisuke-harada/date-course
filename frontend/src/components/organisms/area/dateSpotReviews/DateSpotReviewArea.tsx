@@ -18,13 +18,13 @@ type Props = {
 
 export const DateSpotReviewArea: FC<Props> = memo((props) => {
   const { dateSpotId, dateSpotReviews, setDateSpotReviews, setDateSpotAverageRate } = props;
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
 
   return(
     <>
       {
-        getLoginStatus
+        loginStatus
         &&
         <DateSpotReviewForm
           dateSpotId={dateSpotId}
@@ -42,7 +42,7 @@ export const DateSpotReviewArea: FC<Props> = memo((props) => {
         <h1 className='text-red-400 my-5 text-3xl'>このデートスポットにはレビューが投稿されていません</h1>
         :
         dateSpotReviews.map((dateSpotReview: DateSpotReviewAndUserResponseData) => {
-          if(dateSpotReview.userId !== getCurrentUser.id){
+          if(dateSpotReview.userId !== currentUser.id){
             return (
               <ReviewCard
                 key={dateSpotReview.id}

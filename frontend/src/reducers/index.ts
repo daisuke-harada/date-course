@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import loginReducer from './loginSlice';
+import currentDateCourseReducer from './currentDateCourseSlice';
 
 // key: 'root' は、永続化された状態のキーを指定します。
 // storage は、使用するストレージエンジンを指定します（ここではlocalStorage）。
@@ -9,12 +10,13 @@ import loginReducer from './loginSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['session']
+  whitelist: ['session', 'currentDateCourse']
 };
 
 // reducerをまとめます
 const rootReducer = combineReducers({
-  session: loginReducer
+  session: loginReducer,
+  currentDateCourse: currentDateCourseReducer
 });
 
 // すべてのreducerの中からwhitelistで指定されたものだけ永続化するようにする

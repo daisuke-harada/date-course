@@ -9,7 +9,7 @@ import { useCourseReset } from 'hooks/managementCourses/useCourseReset';
 import { client } from 'lib/api/client';
 
 type Props = {
-  managementCourses: ManagementCourseData,
+  managementCourse: ManagementCourseData,
   getCourseInfo: CourseInfoData,
 }
 
@@ -17,37 +17,38 @@ const ButtonArea = tw.div`flex flex-col items-center mx-auto my-10`;
 const ButtonParentDiv = tw.div`mobile(L):text-xl sm:text-2xl lg:text-4xl text-center m-5 w-1/2`;
 
 export const ManagementCourseButtonArea: FC<Props> = memo((props) => {
-  const { managementCourses, getCourseInfo } = props;
+  const { managementCourse, getCourseInfo } = props;
 
   const navigate = useNavigate();
 
-  const [ resetManagementCourses, resetCourseInfo ] = useCourseReset();
+  const [ resetmanagementCourse, resetCourseInfo ] = useCourseReset();
 
   const onClickAllDelete = useCallback(() => {
-    resetManagementCourses();
+    resetmanagementCourse();
     resetCourseInfo();
-  }, [ resetManagementCourses, resetCourseInfo ]);
+  }, [ resetmanagementCourse, resetCourseInfo ]);
 
   const onClickCreateCourse = useCallback(() => {
-    const courseDuringSpotIds = managementCourses.dateSpots.map((duringSpot) => duringSpot.id);
+    const courseDateSpotIds = managementCourse.dateSpots.map((dateSpot) => dateSpot.id);
+    console.log(courseDateSpotIds)
     const course = {
-      userId: managementCourses.userId,
-      duringSpots: courseDuringSpotIds,
+      userId: managementCourse.userId,
+      dateSpots: courseDateSpotIds,
       travelMode: getCourseInfo.travelMode,
       authority: getCourseInfo.authority
     }
 
     client.post('courses', course).then(response => {
       response.data.status === 'created' && navigate(`/courses/${response.data.courseId}`);
-      response.data.status === 'created' && resetManagementCourses();
+      response.data.status === 'created' && resetmanagementCourse();
       response.data.status === 'created' && resetCourseInfo();
     });
-  }, [ managementCourses, getCourseInfo, resetCourseInfo, resetManagementCourses, navigate ]);
+  }, [ managementCourse, getCourseInfo, resetCourseInfo, resetmanagementCourse, navigate ]);
 
   return(
     <>
       {
-        managementCourses.dateSpots && managementCourses.dateSpots.length > 1
+        managementCourse.dateSpots && managementCourse.dateSpots.length > 1
         &&
         (
           <ButtonArea>
