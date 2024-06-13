@@ -18,8 +18,8 @@ type Props = {
 };
 
 export const UserRoutes: () => Props[] = () => {
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
   const location = useLocation();
   // locationをグローバルステートに入れたら管理しやすくなるかな
   const userId: string = location.pathname.replace(/[^0-9]/g, '');
@@ -31,7 +31,7 @@ export const UserRoutes: () => Props[] = () => {
     },
     {
       path: ':id/edit',
-      element: getLoginStatus && Number(userId) === getCurrentUser.id?
+      element: loginStatus && Number(userId) === currentUser.id?
       <Edit /> :
       <Navigate to='/' state={{message: 'アカウント所有者しかアクセスできません', type: 'error-message', condition: true}} />
     },

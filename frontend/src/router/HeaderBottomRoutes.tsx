@@ -5,8 +5,8 @@ import { User } from "types/users/session";
 
 
 export const HeaderBottomRoutes =  () => {
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState, User>(state => state.session.currentUser)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState, User>(state => state.session.currentUser)
 
   const headers = [
     {
@@ -31,7 +31,7 @@ export const HeaderBottomRoutes =  () => {
     },
   ];
 
-  getLoginStatus && getCurrentUser.admin === false && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${getCurrentUser.id}` });
+  loginStatus && currentUser.admin === false && headers.push({ text: 'マイページ', dataE2e: 'myPage-data', path: `users/${currentUser.id}` });
 
   return headers;
 }

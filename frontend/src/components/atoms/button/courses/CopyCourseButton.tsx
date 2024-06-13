@@ -1,38 +1,36 @@
 import { memo, FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 
-import { courseInfoState, managementCourseState } from "store/managementCourse";
 import { CourseInfoData, ManagementCourseData } from "types/managementCourses/management";
 import { SecondaryButton } from "../SecondaryButton";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'reducers';
 import { User } from 'types/users/session';
+import { setCourseInfo, setManagementCourse } from "reducers/currentDateCourseSlice";
 
 type Props = {
-  managementCourses: ManagementCourseData,
+  managementCourse: ManagementCourseData,
   courseInfo: CourseInfoData
 }
 
 export const CopyCourseButton: FC<Props> = memo((props) => {
-  const { managementCourses, courseInfo } = props;
+  const { managementCourse, courseInfo } = props;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
-  const setGlobalManagementCourses = useSetRecoilState(managementCourseState({userId: getCurrentUser.id}));
-  const setGlobalCourseInfo = useSetRecoilState(courseInfoState({userId: getCurrentUser.id}));
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   const onClickAddCourseAction = () => {
-      setGlobalManagementCourses({userId: getCurrentUser.id, dateSpots: managementCourses.dateSpots});
-      setGlobalCourseInfo({travelMode: courseInfo.travelMode, authority: courseInfo.authority, noDuplicatePrefectureNames: courseInfo.noDuplicatePrefectureNames });
-      navigate('/managementCourses/createCourse');
+      dispatch(setManagementCourse({userId: currentUser.id, dateSpots: managementCourse.dateSpots}))
+      dispatch(setCourseInfo({travelMode: courseInfo.travelMode, authority: courseInfo.authority, noDuplicatePrefectureNames: courseInfo.noDuplicatePrefectureNames }))
+      navigate('/managementCourse/createCourse');
   };
 
   return(
     <>
       {
-        getLoginStatus
-        && getCurrentUser.admin === false
+        loginStatus
+        && currentUser.admin === false
         &&
         (<SecondaryButton dataE2e="copy-course-button" onClickEvent={onClickAddCourseAction}>新しいコース作成</SecondaryButton>)
       }

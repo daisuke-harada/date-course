@@ -36,7 +36,7 @@ export const Routers: FC = memo(() => {
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
-        <Route path='managementCourses' >
+        <Route path='managementCourse' >
           {ManagementCourseRoutes().map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}

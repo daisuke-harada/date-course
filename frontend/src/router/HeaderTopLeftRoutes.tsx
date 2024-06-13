@@ -6,13 +6,13 @@ import { User } from 'types/users/session';
 import { RootState } from 'reducers';
 
 export const HeaderTopLeftRoutes = () => {
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   const userRoutes = [
     {
       element: <BaseButton dataE2e='header-dateCourse-new-link' >デートコース作成</BaseButton>,
-      path: 'managementCourses/createCourse',
+      path: 'managementCourse/createCourse',
     }
   ];
 
@@ -34,9 +34,9 @@ export const HeaderTopLeftRoutes = () => {
     },
   ];
 
-  if(getLoginStatus && getCurrentUser.admin === true) {
+  if(loginStatus && currentUser.admin === true) {
     return adminRoutes;
-  }else if(getLoginStatus ) {
+  }else if(loginStatus ) {
     return userRoutes;
   }else {
     return noLoginRoutes;

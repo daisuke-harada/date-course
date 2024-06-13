@@ -23,16 +23,16 @@ export const FollowAndUnFollowButton: FC<Props> = memo((props) => {
 
   const dispatch = useDispatch();
   const [currentUserId, setCurrentUserId] = useState<number>(0);
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser);
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser);
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus);
 
   useEffect(() => {
-    getCurrentUser && setCurrentUserId(getCurrentUser.id);
-  },[getCurrentUser, userId]);
+    currentUser && setCurrentUserId(currentUser.id);
+  },[currentUser, userId]);
 
   const onClickFollowAction = () => {
     client.post('relationships', {
-      currentUserId: getCurrentUser.id,
+      currentUserId: currentUser.id,
       followedUserId: userId,
     }).then(response => {
       if (response.data.status === 'created') {
@@ -56,9 +56,9 @@ export const FollowAndUnFollowButton: FC<Props> = memo((props) => {
   return(
     <>
       {
-        getLoginStatus &&
+        loginStatus &&
         currentUserId !== userId &&
-        (getCurrentUser.followingIds && getCurrentUser.followingIds.includes(userId) ?
+        (currentUser.followingIds && currentUser.followingIds.includes(userId) ?
         <UnfollowButton data-e2e={`unfollow-button-${userId}`} className={addClassName} onClick={onClickUnfollowAction}>フォロー中</UnfollowButton>
         :
         <FollowButton data-e2e={`follow-button-${userId}`} className={addClassName} onClick={onClickFollowAction}>フォロー</FollowButton>

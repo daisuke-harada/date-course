@@ -1,6 +1,5 @@
 import { memo, useEffect, useState, FC } from 'react';
 import tw from 'tailwind-styled-components';
-import { SetterOrUpdater } from 'recoil';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { Link } from 'react-router-dom';
@@ -12,8 +11,7 @@ import { DeleteCourseButton } from 'components/atoms/button/courses/DeleteCourse
 
 type Props = {
   courseDuringSpot: AddressAndDateSpotJoinData,
-  managementCourses: ManagementCourseData,
-  setManagementCourses?: SetterOrUpdater<ManagementCourseData>,
+  managementCourse: ManagementCourseData,
   courseNumber: number,
   leg?: {
     duration: string;
@@ -28,7 +26,7 @@ const MainDl = tw.dl`xl:w-64 lg:w-60 w-44 text-center rounded-xl shadow-xl bg-wh
 const RoadDiv = tw.div`xl:w-64 lg:w-60 md:w-44 md:h-32 m-auto flex justify-center`;
 
 export const CourseDuringSpotCard: FC<Props> = memo((props) => {
-  const { courseDuringSpot, managementCourses, setManagementCourses, courseNumber, leg} = props;
+  const { courseDuringSpot, managementCourse, courseNumber, leg} = props;
   const [addressAndDateSpot, setAddressAndDateSpot] = useState<AddressAndDateSpotJoinData>();
   const noImageUrl = `${process.env.PUBLIC_URL}/no_image.jpg`;
   const [dateSpotImage, setDateSpotImage] = useState(noImageUrl);
@@ -66,29 +64,27 @@ export const CourseDuringSpotCard: FC<Props> = memo((props) => {
         <DD>{addressAndDateSpot?.genreName}</DD>
         <DD>
           {
-            managementCourses.dateSpots.length > 1
+            managementCourse.dateSpots.length > 1
             && addressAndDateSpot
-            && setManagementCourses
             &&
             <ChangeSelect
               currentDateSpotId={addressAndDateSpot.dateSpot.id}
-              managementCourses={managementCourses}
-              setManagementCourses={setManagementCourses}
+              managementCourse={managementCourse}
             />
           }
         </DD>
         <DD>
           {
-            setManagementCourses
+            managementCourse
             &&
             <DeleteCourseButton  addressAndDateSpot={courseDuringSpot} />
           }
         </DD>
       </MainDl>
       {
-        managementCourses
+        managementCourse
         &&
-        managementCourses.dateSpots.length !== courseNumber + 1
+        managementCourse.dateSpots.length !== courseNumber + 1
         &&
         <RoadDiv>
           <div className='border-r-4 border-indigo-500 w-1/2'>

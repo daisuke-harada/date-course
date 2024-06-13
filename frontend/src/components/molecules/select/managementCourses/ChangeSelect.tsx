@@ -1,30 +1,30 @@
 import { memo, useCallback, useState, FC } from 'react';
-import { SetterOrUpdater } from 'recoil';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { ManagementCourseData } from 'types/managementCourses/management';
 import { BaseButton } from 'components/atoms/button/BaseButton';
 import { RootState } from 'reducers';
 import { User } from 'types/users/session';
+import { setManagementCourse } from 'reducers/currentDateCourseSlice';
 
 
 type Props = {
   currentDateSpotId: number,
-  managementCourses: ManagementCourseData,
-  setManagementCourses: SetterOrUpdater<ManagementCourseData>,
+  managementCourse: ManagementCourseData,
 }
 
 export const ChangeSelect: FC<Props> = memo((props) => {
-  const { currentDateSpotId, managementCourses, setManagementCourses } = props;
-  const getCurrentUser = useSelector<RootState, User>(state => state.session.currentUser)
+  const { currentDateSpotId, managementCourse} = props;
+  const dispatch = useDispatch();
+  const currentUser = useSelector<RootState, User>(state => state.session.currentUser)
   const [changeCourseId, setChangeCourseId] = useState(0);
   const onChangeCourseIdValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setChangeCourseId(Number(e.target.value)), []);
 
   const onClickCourseChange = useCallback(() => {
-    const dateSpotIdAndName = (dateSpotId: number) => (managementCourses.dateSpots.find(courseDuringSpot => courseDuringSpot.dateSpot.id === dateSpotId));
-    const dateSpotIndex = (addressAndDateSpot: AddressAndDateSpotJoinData) => (managementCourses.dateSpots.indexOf(addressAndDateSpot));
-    const copyManagementCourses = managementCourses.dateSpots.slice();
+    const dateSpotIdAndName = (dateSpotId: number) => (managementCourse.dateSpots.find(courseDuringSpot => courseDuringSpot.dateSpot.id === dateSpotId));
+    const dateSpotIndex = (addressAndDateSpot: AddressAndDateSpotJoinData) => (managementCourse.dateSpots.indexOf(addressAndDateSpot));
+    const copymanagementCourse = managementCourse.dateSpots.slice();
     const currentDateSpot = dateSpotIdAndName(currentDateSpotId) || {
       id: 0,
       cityName: '',
@@ -52,25 +52,25 @@ export const ChangeSelect: FC<Props> = memo((props) => {
     const changeDateSpot = dateSpotIdAndName(changeCourseId) || currentDateSpot;
 
     // 入れ替え元と入れ替え先入れ替える
-    copyManagementCourses.splice(
+    copymanagementCourse.splice(
       dateSpotIndex(currentDateSpot),
       1,
       changeDateSpot
     );
 
     // 入れ替え先と入れ替え元を入れ替える
-    copyManagementCourses.splice(
+    copymanagementCourse.splice(
       dateSpotIndex(changeDateSpot),
       1,
       currentDateSpot
     );
     // 入れ替え完了した配列をセットする。
-    setManagementCourses({userId: getCurrentUser.id, dateSpots: copyManagementCourses});
+    dispatch(setManagementCourse({userId: currentUser.id, dateSpots: copymanagementCourse}));
   }, [
-      getCurrentUser.id,
+      currentUser.id,
       changeCourseId, currentDateSpotId,
-      managementCourses.dateSpots,
-      setManagementCourses
+      managementCourse.dateSpots,
+      dispatch
     ]
   );
 
@@ -78,7 +78,7 @@ export const ChangeSelect: FC<Props> = memo((props) => {
       <>
         <select data-e2e={`spot-change-select-${currentDateSpotId}`} className='mb-2 border-2 rounded-md font-bold' onChange={onChangeCourseIdValue}>
           <option value='0'>入れ替え対象を選択</option>
-          {managementCourses.dateSpots
+          {managementCourse.dateSpots
             .filter(courseDuringSpot => courseDuringSpot.dateSpot.id !== currentDateSpotId)
             .map((courseDuringSpot) => {
             return(

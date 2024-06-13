@@ -20,5 +20,5 @@ export type User = {
   passwordDigest: string,
   admin?: boolean,
   followingIds: number[],
-  followers_ids: number[],
+  followerIds: number[],
 }

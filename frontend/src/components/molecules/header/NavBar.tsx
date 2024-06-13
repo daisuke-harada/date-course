@@ -20,7 +20,7 @@ const ButtonList = tw.li`p-2 mt-3`;
 
 export const NavBar: FC<Props> = memo((props) => {
   const { isOpen, onClickNavBarSwitch } = props;
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   return (
     <Ul className={`${isOpen ? `display` : `hidden`} `}>
@@ -35,7 +35,7 @@ export const NavBar: FC<Props> = memo((props) => {
         </ButtonList>
       ))}
       <ButtonList onClick={onClickNavBarSwitch}>
-        {getLoginStatus ? <LogOutButton /> : <GuestLoginButton />}
+        {loginStatus ? <LogOutButton /> : <GuestLoginButton />}
       </ButtonList>
     </Ul>
   );

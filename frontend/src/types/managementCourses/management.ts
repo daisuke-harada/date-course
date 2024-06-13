@@ -12,3 +12,8 @@ export type CourseInfoData = {
   authority: string,
   noDuplicatePrefectureNames?: string[]
 };
+
+export type CurrentDateCourseState = {
+  managementCourse: ManagementCourseData,
+  courseInfo: CourseInfoData
+}

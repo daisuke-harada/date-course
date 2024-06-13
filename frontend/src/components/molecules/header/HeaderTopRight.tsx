@@ -18,7 +18,7 @@ const ButtonParentDiv = tw.div`lg:block hidden mt-5`;
 
 export const HeaderTopRight: FC<Props> = memo((props) => {
   const {onClickNavBarSwitch, isOpen} = props;
-  const getLoginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
+  const loginStatus = useSelector<RootState, boolean>(state => state.session.loginStatus)
 
   return(
     <>
@@ -28,7 +28,7 @@ export const HeaderTopRight: FC<Props> = memo((props) => {
         </MenuIconDivChild>
       </MenuIconDivParent>
       <ButtonParentDiv>
-        { getLoginStatus ?
+        { loginStatus ?
          <LogOutButton />:
          <GuestLoginButton />
         }

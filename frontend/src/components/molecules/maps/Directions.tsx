@@ -5,7 +5,7 @@ import { ManagementCourseData } from 'types/managementCourses/management';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {
-  managementCourses: ManagementCourseData,
+  managementCourse: ManagementCourseData,
   setLegs: React.Dispatch<React.SetStateAction<{
       duration: string;
       distance: string;
@@ -14,13 +14,13 @@ type Props = {
 };
 
 export const Directions: FC<Props> = memo((props) => {
-  const { managementCourses, setLegs, travelMode } = props;
+  const { managementCourse, setLegs, travelMode } = props;
 
   // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
   const [copyDuringSpots, setCopyDuringSpots] = useState<AddressAndDateSpotJoinData[]>([]);
   const [copyTravelMode, setCopyTravelMode] = useState<string>('');
-  const origin = { lat: managementCourses.dateSpots[0].latitude, lng: managementCourses.dateSpots[0].longitude};
-  const destination = { lat: managementCourses.dateSpots[managementCourses.dateSpots.length -1].latitude, lng: managementCourses.dateSpots[managementCourses.dateSpots.length -1].longitude};
+  const origin = { lat: managementCourse.dateSpots[0].latitude, lng: managementCourse.dateSpots[0].longitude};
+  const destination = { lat: managementCourse.dateSpots[managementCourse.dateSpots.length -1].latitude, lng: managementCourse.dateSpots[managementCourse.dateSpots.length -1].longitude};
   const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
   const [currentDirection, setCurrentDirection] = useState<google.maps.DirectionsResult | null>(null);
 
@@ -46,16 +46,16 @@ export const Directions: FC<Props> = memo((props) => {
         ) {
           // ルートが変更されたのでstateを更新する
           setCurrentDirection(googleResponse);
-        } else if(copyDuringSpots !== managementCourses.dateSpots || copyTravelMode !== travelMode){
+        } else if(copyDuringSpots !== managementCourse.dateSpots || copyTravelMode !== travelMode){
           // デートスポットの順番が入れ替えられたためstateを更新する
           setCurrentDirection(googleResponse);
           setCopyTravelMode(travelMode);
-          setCopyDuringSpots(managementCourses.dateSpots);
+          setCopyDuringSpots(managementCourse.dateSpots);
         }
       } else {
         if (googleResponse.status === 'OK') {
           // 現在設定されているデートスポットのコピーを作成する。そうすることでデートスポットの順番が入れ替わった際にもステートを更新できるようにする。
-          setCopyDuringSpots(managementCourses.dateSpots);
+          setCopyDuringSpots(managementCourse.dateSpots);
           setCopyTravelMode(travelMode);
           // 初めてルートが設定されたのでステートを更新する。
           setCurrentDirection(googleResponse);
@@ -64,18 +64,18 @@ export const Directions: FC<Props> = memo((props) => {
     }
     const legTexts = googleResponse.routes[0].legs.map((leg: google.maps.DirectionsLeg) => ({distance: leg.distance?.text, duration: leg.duration?.text}));
     setLegs(legTexts);
-  }, [currentDirection, managementCourses.dateSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
+  }, [currentDirection, managementCourse.dateSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
 
 
   useEffect(() => {
-    if(managementCourses.dateSpots.length > 2){
-      const copyCourses = managementCourses.dateSpots.slice();
+    if(managementCourse.dateSpots.length > 2){
+      const copyCourses = managementCourse.dateSpots.slice();
       copyCourses.splice( 0, 1);
       copyCourses.splice(copyCourses.length - 1, 1);
       // stopoverをtrueにすることで寄り道して行くことになる
       setTransitPoints(copyCourses.map((course)=>({location: new google.maps.LatLng(course.latitude, course.longitude), stopover: true})));
     }
-  }, [managementCourses.dateSpots]);
+  }, [managementCourse.dateSpots]);
 
   return(
     <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' zoom={17} >

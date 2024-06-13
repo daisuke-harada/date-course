@@ -198,7 +198,7 @@ describe('courses', () => {
   });
 
   it('ログインしてない状態で、デートコース作成機能に画面遷移できない', () => {
-    cy.visit(`/managementCourses/createCourse`);
+    cy.visit(`/managementCourse/createCourse`);
     cy.contains('アカウント所有者しかアクセスできません');
   })
 
