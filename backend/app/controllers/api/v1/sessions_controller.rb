@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       render json: user
     else
-      render json: { error_messages: ["認証に失敗しました。", "正しい名前・パスワードを入力し直すか、新規登録を行ってください。"] }, status: :unauthorized
+      render json: {error_messages: ["認証に失敗しました。", "正しい名前・パスワードを入力し直すか、新規登録を行ってください。"]}, status: :unauthorized
     end
   end
 

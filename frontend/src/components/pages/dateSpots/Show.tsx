@@ -75,15 +75,15 @@ export const Show: FC = memo(() => {
                 loginStatus
                 && currentUser.admin === true
                 && (
-                  <BaseButton dataE2e='dateSpot-edit-button'>
-                    <Link
+                  <Link
                       className='text-white'
                       to={`edit`}
                       state={{addressAndDateSpot: addressAndDateSpot}}
-                    >
-                      設定
-                    </Link>
-                  </BaseButton>
+                  >
+                    <BaseButton dataE2e='dateSpot-edit-button'>
+                        設定
+                    </BaseButton>
+                  </Link>
                 )
               }
             </div>

@@ -30,7 +30,6 @@ export const ManagementCourseButtonArea: FC<Props> = memo((props) => {
 
   const onClickCreateCourse = useCallback(() => {
     const courseDateSpotIds = managementCourse.dateSpots.map((dateSpot) => dateSpot.id);
-    console.log(courseDateSpotIds)
     const course = {
       userId: managementCourse.userId,
       dateSpots: courseDateSpotIds,
