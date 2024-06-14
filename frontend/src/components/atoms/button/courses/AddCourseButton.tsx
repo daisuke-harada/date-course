@@ -27,7 +27,6 @@ export const AddCourseButton: FC<Props> = memo((props) => {
     // 以下の2つの条件を満たしている場合のみデートコースにデートスポットを追加することができる
     // ・DuringSpotsの中にaddressAndDateSpotのdateSpot.idが入っていない場合。
     if(managementCourse.userId === 0){
-      console.log(addressAndDateSpot)
       dispatch(setManagementCourse({userId: currentUser.id, dateSpots: [addressAndDateSpot]}))
       navigate('/managementCourse/createCourse');
     } else if(managementCourse.dateSpots.some(spot => spot.dateSpot.id === addressAndDateSpot.dateSpot.id)){
