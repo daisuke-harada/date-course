@@ -21,9 +21,8 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def create
-    date_spot = DateSpot.new(date_spot_params.except(:prefecture_id, :city_name))
-    date_spot.build_address(prefecture_id: date_spot_params[:prefecture_id], city_name: date_spot_params[:city_name])
-    if date_spot.save
+    date_spot_form = DateSpotForm.new(date_spot_params)
+    if date_spot_form.save
       render json: {status: :created, date_spot: date_spot}
     else
       render json: ErrorSerializer.new(date_spot).as_json
@@ -31,14 +30,11 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def update
-    ActiveRecord::Base.transaction do
-      if @date_spot.update(date_spot_params.except(:prefecture_id, :city_name)) &&
-          @date_spot.address.update(prefecture_id: date_spot_params[:prefecture_id], city_name: date_spot_params[:city_name])
-        render json: {status: :updated, date_spot: @date_spot}
-      else
-        render json: ErrorSerializer.new(@date_spot).as_json
-        raise ActiveRecord::Rollback
-      end
+    date_spot_form = DateSpotForm.new(date_spot_params)
+    if date_spot_form.update(@date_spot)
+      render json: {status: :updated, date_spot: @date_spot}
+    else
+      render json: ErrorSerializer.new(@date_spot).as_json
     end
   end
 
@@ -55,6 +51,7 @@ class Api::V1::DateSpotsController < ApplicationController
 
   def date_spot_params
     params.permit(
+      :id,
       :name,
       :genre_id,
       :opening_time,
