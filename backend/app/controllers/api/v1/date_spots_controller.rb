@@ -50,7 +50,7 @@ class Api::V1::DateSpotsController < ApplicationController
   end
 
   def date_spot_params
-    params.permit(
+    params.require(:date_spot).permit(
       :id,
       :name,
       :genre_id,

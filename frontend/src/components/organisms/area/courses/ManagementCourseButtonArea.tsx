@@ -37,7 +37,7 @@ export const ManagementCourseButtonArea: FC<Props> = memo((props) => {
       authority: getCourseInfo.authority
     }
 
-    client.post('courses', course).then(response => {
+    client.post('courses', {course}).then(response => {
       response.data.status === 'created' && navigate(`/courses/${response.data.courseId}`);
       response.data.status === 'created' && resetmanagementCourse();
       response.data.status === 'created' && resetCourseInfo();

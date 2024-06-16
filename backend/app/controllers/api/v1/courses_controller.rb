@@ -11,10 +11,9 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def create
-    course = Course.new(course_params)
-    if course.save
-      params[:date_spots].each { |date_spot_id| course.during_spots.create(date_spot_id: date_spot_id) }
-      render json: {status: :created, course_id: course.id}
+    course_form = CourseForm.new(course_params)
+    if course_form.save
+      render json: {status: :created, course_id: course_form.id}
     else
       render json: ErrorSerializer.new(course).as_json, status: :unprocessable_entity
     end
@@ -28,7 +27,7 @@ class Api::V1::CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:user_id, :travel_mode, :authority)
+    params.require(:course).permit(:user_id, :travel_mode, :authority, date_spots: [])
   end
 
   def set_course
