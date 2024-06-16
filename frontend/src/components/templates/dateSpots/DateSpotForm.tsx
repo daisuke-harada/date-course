@@ -77,13 +77,13 @@ export const DateSpotForm: FC<Props> = memo((props) => {
 
   const createFormData = (): FormData => {
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('genreId', genreValue);
-    formData.append('openingTime', openingTime);
-    formData.append('closingTime', closingTime);
-    image && formData.append('image', image);
-    formData.append('prefectureId', prefectureValue);
-    formData.append('cityName', cityName);
+    formData.append('date_spot[name]', name);
+    formData.append('date_spot[genreId]', genreValue);
+    formData.append('date_spot[openingTime]', openingTime);
+    formData.append('date_spot[closingTime]', closingTime);
+    image && formData.append('date_spot[image]', image);
+    formData.append('date_spot[prefectureId]', prefectureValue);
+    formData.append('date_spot[cityName]', cityName);
     return formData;
   };
 
