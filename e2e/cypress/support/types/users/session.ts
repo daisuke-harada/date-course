@@ -13,7 +13,6 @@ export type User = {
   image?: {
     url: string | null
   },
-  passwordDigest: string,
   admin?: boolean,
   followingIds: number[],
   followers_ids: number[],

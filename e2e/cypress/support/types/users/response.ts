@@ -3,7 +3,6 @@ export type UserResponseData = {
   name: string,
   email: string,
   gender: string,
-  passwordDigest: string,
   admin?: boolean,
   image: {
     url: string | null
