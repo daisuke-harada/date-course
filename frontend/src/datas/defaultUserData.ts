@@ -5,7 +5,6 @@ export const defaultUserResponseData: UserResponseData = {
   name: '',
   email: '',
   gender: '',
-  passwordDigest: '',
   image: {
     url: null
   },

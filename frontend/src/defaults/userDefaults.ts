@@ -5,7 +5,6 @@ export const initialUser: User = {
   name: '',
   email: '',
   gender: '',
-  passwordDigest: '',
   followingIds: [],
   followerIds: [],
 };

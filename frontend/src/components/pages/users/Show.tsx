@@ -29,7 +29,6 @@ export const Show: FC = memo(() => {
       name: '',
       email: '',
       gender: '男性',
-      passwordDigest: '',
       admin: false,
       image: {
         url: null
