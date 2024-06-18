@@ -1,5 +1,5 @@
 import { memo, useState, FC } from 'react';
-import { GoogleMap, LoadScript, InfoWindow, Marker} from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, Marker} from '@react-google-maps/api';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
@@ -31,18 +31,16 @@ export const Map: FC<Props> = memo((props) => {
 
   return(
     <div className='h-full w-full px-2 m-auto' >
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} onLoad={() => createOffsetSize()} >
-        <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' center={center} zoom={17}>
-          <Marker position={center} />
-          <InfoWindow position={center} options={InfoWindowOptions}>
-            <div className='bg-white text-size'>
-              <h1>{addressAndDateSpot.dateSpot.name}</h1>
-              <p>{addressAndDateSpot.cityName}</p>
-              <a href={`https://maps.google.co.jp/maps?q=${addressAndDateSpot.cityName}&iwloc=J`} target='_blank' rel='noopener noreferrer'>Googleマップで見る</a>
-            </div>
-          </InfoWindow>
-        </GoogleMap>
-      </LoadScript>
+      <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' center={center} zoom={17}>
+        <Marker position={center} />
+        <InfoWindow position={center} options={InfoWindowOptions}>
+          <div className='bg-white text-size'>
+            <h1>{addressAndDateSpot.dateSpot.name}</h1>
+            <p>{addressAndDateSpot.cityName}</p>
+            <a href={`https://maps.google.co.jp/maps?q=${addressAndDateSpot.cityName}&iwloc=J`} target='_blank' rel='noopener noreferrer'>Googleマップで見る</a>
+          </div>
+        </InfoWindow>
+      </GoogleMap>
     </div>
   );
 });

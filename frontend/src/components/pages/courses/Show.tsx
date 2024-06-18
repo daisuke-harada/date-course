@@ -1,4 +1,3 @@
-import { LoadScript } from '@react-google-maps/api';
 import { memo, useCallback, useEffect, useState, FC } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
@@ -95,9 +94,7 @@ export const Show: FC = memo(() => {
               // userIdが初期値である0の場合に読み込まないようにする
               managementCourse.userId !== 0
               &&
-              <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
-              </LoadScript>
+              <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
             }
           </div>
         </CourseAreaDiv>
