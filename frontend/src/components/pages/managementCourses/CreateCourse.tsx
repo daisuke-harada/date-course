@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
 import { Directions } from 'components/molecules/maps/Directions';
-import { LoadScript } from '@react-google-maps/api';
 import { Map } from 'components/molecules/maps/Map';
 import { CourseInfoSelect } from 'components/molecules/select/managementCourses/CourseInfoSelect';
 import { ManagementCourseButtonArea } from 'components/organisms/area/courses/ManagementCourseButtonArea';
@@ -90,9 +89,7 @@ export const CreateCourse: FC = memo(() => {
                     managementCourse.dateSpots.length === 1?
                     <Map  addressAndDateSpot={managementCourse.dateSpots[0]} />
                     :
-                    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''} >
-                      <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
-                    </LoadScript>
+                    <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
                   }
                 </div>
               </CourseAreaDiv>
