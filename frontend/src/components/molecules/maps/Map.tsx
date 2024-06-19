@@ -1,5 +1,5 @@
-import { memo, useState, FC } from 'react';
-import { GoogleMap, InfoWindow, Marker} from '@react-google-maps/api';
+import { memo, useState, useEffect, FC } from 'react';
+import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
@@ -25,12 +25,8 @@ export const Map: FC<Props> = memo((props) => {
     pixelOffset: size,
   };
 
-  const createOffsetSize = () => {
-    return setSize(new window.google.maps.Size(0, -45));
-  };
-
-  return(
-    <div className='h-full w-full px-2 m-auto' >
+  return (
+    <div className='h-full w-full px-2 m-auto'>
       <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' center={center} zoom={17}>
         <Marker position={center} />
         <InfoWindow position={center} options={InfoWindowOptions}>
