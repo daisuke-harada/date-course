@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
 import { Directions } from 'components/molecules/maps/Directions';
-import { Map } from 'components/molecules/maps/Map';
+import { DateCourseMap } from 'components/molecules/maps/DateCourseMap';
+import { GoogleMap } from 'components/molecules/maps/GoogleMap';
 import { CourseInfoSelect } from 'components/molecules/select/managementCourses/CourseInfoSelect';
 import { ManagementCourseButtonArea } from 'components/organisms/area/courses/ManagementCourseButtonArea';
 import { Link } from 'react-router-dom';
@@ -87,7 +88,7 @@ export const CreateCourse: FC = memo(() => {
                 <div className='md:w-2/3 md:mt-0 md:mx-3 md:h-auto h-96 w-full mt-10 mx-0 rounded-xl'>
                   {
                     managementCourse.dateSpots.length === 1?
-                    <Map  addressAndDateSpot={managementCourse.dateSpots[0]} />
+                    <GoogleMap addressAndDateSpot={managementCourse.dateSpots[0]} />
                     :
                     <Directions managementCourse={managementCourse} setLegs={setLegs} travelMode={courseInfo.travelMode} />
                   }
