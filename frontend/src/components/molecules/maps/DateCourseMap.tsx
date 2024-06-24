@@ -1,5 +1,5 @@
-import { memo, useState, useEffect, FC } from 'react';
-import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
+import { memo, useState, FC } from 'react';
+import { GoogleMap, InfoWindow } from '@react-google-maps/api';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
@@ -12,7 +12,7 @@ type Center = {
   lng: number,
 }
 
-export const Map: FC<Props> = memo((props) => {
+export const DateCourseMap: FC<Props> = memo((props) => {
   const { addressAndDateSpot } = props;
   const [size, setSize] = useState<undefined | google.maps.Size>(undefined);
 
@@ -28,7 +28,6 @@ export const Map: FC<Props> = memo((props) => {
   return (
     <div className='h-full w-full px-2 m-auto'>
       <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' center={center} zoom={17}>
-        <Marker position={center} />
         <InfoWindow position={center} options={InfoWindowOptions}>
           <div className='bg-white text-size'>
             <h1>{addressAndDateSpot.dateSpot.name}</h1>
