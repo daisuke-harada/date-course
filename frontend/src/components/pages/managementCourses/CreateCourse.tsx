@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 
 import { Directions } from 'components/molecules/maps/Directions';
-import { DateCourseMap } from 'components/molecules/maps/DateCourseMap';
+
 import { GoogleMap } from 'components/molecules/maps/GoogleMap';
 import { CourseInfoSelect } from 'components/molecules/select/managementCourses/CourseInfoSelect';
 import { ManagementCourseButtonArea } from 'components/organisms/area/courses/ManagementCourseButtonArea';
