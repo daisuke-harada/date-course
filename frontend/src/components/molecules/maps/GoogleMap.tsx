@@ -1,7 +1,6 @@
 import { memo, useState, FC } from 'react';
-import { Marker, AdvancedMarker, Pin, Map, InfoWindow, useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
+import { AdvancedMarker, Pin, Map, InfoWindow, useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
-// import { InfoWindow } from '@react-google-maps/api';
 
 type Props = {
   addressAndDateSpot: AddressAndDateSpotJoinData
@@ -26,10 +25,10 @@ export const GoogleMap: FC<Props> = memo((props) => {
   return (
     <Map
       mapId={String(addressAndDateSpot.id)}
-      defaultZoom={20}
+       disableDefaultUI     defaultZoom={20}
       defaultCenter={center}
       gestureHandling={'greedy'}
-      disableDefaultUI
+
     >
       <AdvancedMarker
         ref={markerRef}
@@ -39,7 +38,7 @@ export const GoogleMap: FC<Props> = memo((props) => {
         onClick={() => setInfowindowOpen(!infowindowOpen)}
       >
         <Pin
-          background={'rgb(252 165 165)'}
+          background={'rgb(244, 114, 182)'}
           borderColor={'rgb(248 113 113)'}
           glyphColor={'rgb(239 68 68)'}>
         </Pin>
