@@ -16,7 +16,6 @@ export const GoogleMap: FC<Props> = memo((props) => {
   const [infowindowOpen, setInfowindowOpen] = useState(true);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
-
   const center: Center = {
     lat: addressAndDateSpot.latitude,
     lng: addressAndDateSpot.longitude,
@@ -25,10 +24,10 @@ export const GoogleMap: FC<Props> = memo((props) => {
   return (
     <Map
       mapId={String(addressAndDateSpot.id)}
-       disableDefaultUI     defaultZoom={20}
+      defaultZoom={20}
       defaultCenter={center}
       gestureHandling={'greedy'}
-
+      disableDefaultUI
     >
       <AdvancedMarker
         ref={markerRef}
