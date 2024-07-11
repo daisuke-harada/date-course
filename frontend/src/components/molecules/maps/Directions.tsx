@@ -37,7 +37,6 @@ export const Directions: FC<Props> = memo((props) => {
   };
 
   const directionsCallback = useCallback((googleResponse: any) => {
-
     if (googleResponse) {
       if (currentDirection) {
         if (
@@ -62,15 +61,28 @@ export const Directions: FC<Props> = memo((props) => {
         }
       }
     }
-    const legTexts = googleResponse.routes[0].legs.map((leg: google.maps.DirectionsLeg) => ({distance: leg.distance?.text, duration: leg.duration?.text}));
+
+    const legTexts = googleResponse.routes[0].legs.map(
+      (leg: google.maps.DirectionsLeg) => (
+        {
+          distance: leg.distance?.text,  // 距離
+          duration: leg.duration?.text   // 時間
+        }
+      )
+    );
+
     setLegs(legTexts);
   }, [currentDirection, managementCourse.dateSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
 
-
+  // こちらは中間地点を設定する機能になります。
   useEffect(() => {
     if(managementCourse.dateSpots.length > 2){
+      // slice()メソッドを使用して、managementCourse.dateSpotsのコピーを作成します。
+      // slice()は元の配列を変更せずに、新しい配列を返します。
       const copyCourses = managementCourse.dateSpots.slice();
-      copyCourses.splice( 0, 1);
+      // コピーした配列の最初の要素を削除します。
+      copyCourses.splice(0, 1);
+      // コピーした配列の最後の要素を削除します。
       copyCourses.splice(copyCourses.length - 1, 1);
       // stopoverをtrueにすることで寄り道して行くことになる
       setTransitPoints(copyCourses.map((course)=>({location: new google.maps.LatLng(course.latitude, course.longitude), stopover: true})));
