@@ -1,8 +1,7 @@
-import { memo, useCallback, useEffect, useState, FC } from 'react';
-import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { memo, useEffect, useState, FC } from 'react';
+import { Map, useMapsLibrary, useMap } from '@vis.gl/react-google-maps';
 
 import { ManagementCourseData } from 'types/managementCourses/management';
-import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 
 type Props = {
   managementCourse: ManagementCourseData,
@@ -16,102 +15,98 @@ type Props = {
 export const Directions: FC<Props> = memo((props) => {
   const { managementCourse, setLegs, travelMode } = props;
 
-  // directionsCallbackをデートスポットの情報を入れ替えた際にも変更できるように使用する
-  const [copyDuringSpots, setCopyDuringSpots] = useState<AddressAndDateSpotJoinData[]>([]);
-  const [copyTravelMode, setCopyTravelMode] = useState<string>('');
-  const origin = { lat: managementCourse.dateSpots[0].latitude, lng: managementCourse.dateSpots[0].longitude};
-  const destination = { lat: managementCourse.dateSpots[managementCourse.dateSpots.length -1].latitude, lng: managementCourse.dateSpots[managementCourse.dateSpots.length -1].longitude};
-  const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
+  const map = useMap();
+  const routesLibrary = useMapsLibrary('routes');
+  const [directionsService, setDirectionsService] = useState<google.maps.DirectionsService>();
+  const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer>();
   const [currentDirection, setCurrentDirection] = useState<google.maps.DirectionsResult | null>(null);
 
+  const origin = { lat: managementCourse.dateSpots[0].latitude, lng: managementCourse.dateSpots[0].longitude };
+  const destination = { lat: managementCourse.dateSpots[managementCourse.dateSpots.length - 1].latitude, lng: managementCourse.dateSpots[managementCourse.dateSpots.length - 1].longitude };
+  const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
+
   const googleMapsTravelMode = (travelMode: string) => {
-    if(travelMode === 'DRIVING'){
-      return google.maps.TravelMode.DRIVING;
-    }else if(travelMode === 'BICYCLING'){
-      return google.maps.TravelMode.BICYCLING
-    }else if(travelMode === 'WALKING'){
-      return google.maps.TravelMode.WALKING;
-    }else{
-      return google.maps.TravelMode.DRIVING;
-    };
+    switch (travelMode) {
+      case 'DRIVING':
+        return google.maps.TravelMode.DRIVING;
+      case 'BICYCLING':
+        return google.maps.TravelMode.BICYCLING;
+      case 'WALKING':
+        return google.maps.TravelMode.WALKING;
+      default:
+        return google.maps.TravelMode.DRIVING;
+    }
   };
 
-  const directionsCallback = useCallback((googleResponse: any) => {
-    if (googleResponse) {
-      if (currentDirection) {
-        if (
-          googleResponse === 'OK' &&
-          currentDirection.geocoded_waypoints && googleResponse.geocoded_waypoints.length !== currentDirection.geocoded_waypoints.length
-        ) {
-          // ルートが変更されたのでstateを更新する
-          setCurrentDirection(googleResponse);
-        } else if(copyDuringSpots !== managementCourse.dateSpots || copyTravelMode !== travelMode){
-          // デートスポットの順番が入れ替えられたためstateを更新する
-          setCurrentDirection(googleResponse);
-          setCopyTravelMode(travelMode);
-          setCopyDuringSpots(managementCourse.dateSpots);
-        }
-      } else {
-        if (googleResponse.status === 'OK') {
-          // 現在設定されているデートスポットのコピーを作成する。そうすることでデートスポットの順番が入れ替わった際にもステートを更新できるようにする。
-          setCopyDuringSpots(managementCourse.dateSpots);
-          setCopyTravelMode(travelMode);
-          // 初めてルートが設定されたのでステートを更新する。
-          setCurrentDirection(googleResponse);
-        }
-      }
-    }
-
-    const legTexts = googleResponse.routes[0].legs.map(
-      (leg: google.maps.DirectionsLeg) => (
-        {
-          distance: leg.distance?.text,  // 距離
-          duration: leg.duration?.text   // 時間
-        }
-      )
-    );
-
-    setLegs(legTexts);
-  }, [currentDirection, managementCourse.dateSpots, copyDuringSpots, setLegs, copyTravelMode, travelMode]);
-
-  // こちらは中間地点を設定する機能になります。
+  // Initialize directions service and renderer
   useEffect(() => {
-    if(managementCourse.dateSpots.length > 2){
-      // slice()メソッドを使用して、managementCourse.dateSpotsのコピーを作成します。
-      // slice()は元の配列を変更せずに、新しい配列を返します。
+    if (!routesLibrary || !map) return;
+    const service = new routesLibrary.DirectionsService();
+    const renderer = new routesLibrary.DirectionsRenderer({ map });
+    setDirectionsService(service);
+    setDirectionsRenderer(renderer);
+    renderer.setMap(map);  // Ensure the renderer is set to the map
+  }, [routesLibrary, map, travelMode, managementCourse.dateSpots]);
+
+  // Use directions service
+  useEffect(() => {
+    if (!directionsService || !directionsRenderer) return;
+
+    directionsService
+      .route({
+        origin,
+        destination,
+        travelMode: googleMapsTravelMode(travelMode),
+        waypoints: transitPoints,
+        provideRouteAlternatives: false
+      })
+      .then(response => {
+        directionsRenderer.setDirections(response);
+
+        // ルートの線の色を変更する。
+        directionsRenderer.setOptions({
+          polylineOptions: {
+            strokeColor: '#F87171',
+            strokeOpacity: 1,
+            strokeWeight: 6,
+          }
+        });
+
+        setCurrentDirection(response);
+        const legTexts = response.routes[0].legs.map(
+          (leg: google.maps.DirectionsLeg) => (
+            {
+              distance: leg.distance?.text || '',  // 距離
+              duration: leg.duration?.text || ''   // 時間
+            }
+          )
+        );
+        setLegs(legTexts);
+      });
+
+    return () => directionsRenderer.setMap(null);
+  }, [directionsService, directionsRenderer, setLegs, travelMode]);
+
+  useEffect(() => {
+    if (managementCourse.dateSpots.length > 2) {
       const copyCourses = managementCourse.dateSpots.slice();
-      // コピーした配列の最初の要素を削除します。
       copyCourses.splice(0, 1);
-      // コピーした配列の最後の要素を削除します。
       copyCourses.splice(copyCourses.length - 1, 1);
-      // stopoverをtrueにすることで寄り道して行くことになる
-      setTransitPoints(copyCourses.map((course)=>({location: new google.maps.LatLng(course.latitude, course.longitude), stopover: true})));
+      setTransitPoints(copyCourses.map((course) => ({ location: new google.maps.LatLng(course.latitude, course.longitude), stopover: true })));
     }
   }, [managementCourse.dateSpots]);
 
-  return(
-    <GoogleMap mapContainerClassName='w-full md:h-full h-96 rounded-2xl' zoom={17} >
-      <DirectionsService
-        options={{
-          origin: origin,
-          destination: destination,
-          travelMode: googleMapsTravelMode(travelMode),
-          waypoints: transitPoints,
-        }}
-        callback={directionsCallback}
-      />
-      {currentDirection !== null && (
-        <DirectionsRenderer
-          options={{
-            directions: currentDirection,
-            polylineOptions: {
-              strokeColor: '#F87171',
-              strokeOpacity: 1,
-              strokeWeight: 6
-            }
-          }}
-        />
+  return (
+    <Map
+      gestureHandling={'greedy'}
+      fullscreenControl={false}
+    >
+      {currentDirection && (
+        <>
+          <p>合計距離: {currentDirection.routes[0].legs.reduce((total, leg) => total + (leg.distance?.value || 0), 0) / 1000} km</p>
+          <p>合計時間: {currentDirection.routes[0].legs.reduce((total, leg) => total + (leg.duration?.value || 0), 0) / 60} 分</p>
+        </>
       )}
-    </GoogleMap>
+    </Map>
   );
 });
