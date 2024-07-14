@@ -27,7 +27,7 @@ export const Directions: FC<Props> = memo((props) => {
 
   const origin = { lat: managementCourse.dateSpots[0].latitude, lng: managementCourse.dateSpots[0].longitude };
   const destination = { lat: managementCourse.dateSpots[managementCourse.dateSpots.length - 1].latitude, lng: managementCourse.dateSpots[managementCourse.dateSpots.length - 1].longitude };
-  const [transitPoints, setTransitPoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
+  const [waypoints, setWaypoints] = useState<google.maps.DirectionsWaypoint[] | undefined>(undefined);
 
   const googleMapsTravelMode = (travelMode: string) => {
     switch (travelMode) {
@@ -42,22 +42,23 @@ export const Directions: FC<Props> = memo((props) => {
     }
   };
 
+  // 経由地地点を作成する
   useEffect(() => {
-    console.log(`${managementCourse.dateSpots} 経由地作成`)
     if (managementCourse.dateSpots.length > 2) {
       const copyCourses = managementCourse.dateSpots.slice();
       copyCourses.splice(0, 1);
       copyCourses.splice(copyCourses.length - 1, 1);
-      setTransitPoints(copyCourses.map((course) => ({
+      setWaypoints(copyCourses.map((course) => ({
         location: { lat: course.latitude, lng: course.longitude },
         stopover: true
       })));
+    }else{
+      setWaypoints(undefined)
     }
   }, [managementCourse.dateSpots]);
 
   // DirectionsServiceとDirectionsRendererを初期化する。
   useEffect(() => {
-    console.log(`${managementCourse.dateSpots} 初期化`)
     if (!routesLibrary || !map) return;
     // routeLibraryからDirectionsServiceを作成
     const service = new routesLibrary.DirectionsService();
@@ -70,14 +71,13 @@ export const Directions: FC<Props> = memo((props) => {
 
   // ルートを計算し、結果をレンダリングしてルート情報をstateに保存します。
   useEffect(() => {
-    console.log(`${managementCourse.dateSpots} ルート描画`)
     if (!directionsService || !directionsRenderer) return;
     // ルート情報を計算した、結果を受け取りdirectionsRenderer.setDirectionsで設定している。
     directionsService
       .route({
         origin,
         destination,
-        waypoints: transitPoints,
+        waypoints,
         travelMode: googleMapsTravelMode(travelMode),
         provideRouteAlternatives: false
       })
