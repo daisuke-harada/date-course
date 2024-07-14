@@ -17,6 +17,7 @@ export const Directions: FC<Props> = memo((props) => {
 
   const map = useMap();
   const routesLibrary = useMapsLibrary('routes');
+
   // 指定された出発地、目的地、およびオプションの経由地に基づいてルートを計算します。
   const [directionsService, setDirectionsService] = useState<google.maps.DirectionsService>();
   // ルート案内の結果を地図上に描画する役割
