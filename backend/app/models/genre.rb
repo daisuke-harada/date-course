@@ -3,6 +3,8 @@ class Genre < ActiveHash::Base
 
   has_many :date_spots
 
+  scope :majors, -> { where(id: [1, 2, 3, 4, 5, 6]) }
+
   self.data = [
     {id: 1, name: "ショッピングモール"}, {id: 2, name: "飲食店"}, {id: 3, name: "カフェ"},
     {id: 4, name: "アウトドア"}, {id: 5, name: "遊園地"}, {id: 6, name: "水族館"},
