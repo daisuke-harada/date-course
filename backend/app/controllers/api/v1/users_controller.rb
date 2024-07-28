@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
     render json: {
       user: UserSerializer.new(@user).attributes,
       courses: courses.map { |course| CourseSerializer.new(course).attributes },
-      date_spot_reviews: map_date_spot_reviews(date_spot_reviews)
+      date_spot_reviews: date_spot_reviews.map { |review| { id: review.id, rate: review.rate, content: review.content, date_spot: review.date_spot} }
     }
   end
 
@@ -37,16 +37,5 @@ class Api::V1::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def map_date_spot_reviews(reviews)
-    reviews.map do |review|
-      {
-        id: review.id,
-        rate: review.rate,
-        content: review.content,
-        date_spot: review.date_spot
-      }
-    end
   end
 end
