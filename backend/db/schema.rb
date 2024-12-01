@@ -11,7 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
-  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
     t.integer "prefecture_id"
     t.integer "date_spot_id"
     t.string "city_name"
@@ -23,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["prefecture_id", "created_at"], name: "index_addresses_on_prefecture_id_and_created_at"
   end
 
-  create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "travel_mode", null: false
     t.string "authority", null: false
@@ -32,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
-  create_table "date_spot_reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "date_spot_reviews", force: :cascade do |t|
     t.float "rate"
     t.text "content"
     t.bigint "user_id"
@@ -43,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["user_id"], name: "index_date_spot_reviews_on_user_id"
   end
 
-  create_table "date_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "date_spots", force: :cascade do |t|
     t.integer "genre_id"
     t.string "name"
     t.string "image"
@@ -54,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["genre_id", "created_at"], name: "index_date_spots_on_genre_id_and_created_at"
   end
 
-  create_table "during_spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "during_spots", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "date_spot_id", null: false
     t.datetime "created_at", null: false
@@ -63,7 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["date_spot_id"], name: "index_during_spots_on_date_spot_id"
   end
 
-  create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "relationships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "follow_id", null: false
     t.datetime "created_at", null: false
@@ -72,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_03_31_082535) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "gender"

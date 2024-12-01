@@ -4,8 +4,8 @@
 #
 #  id           :bigint           not null, primary key
 #  closing_time :datetime
-#  image        :string(255)
-#  name         :string(255)
+#  image        :string
+#  name         :string
 #  opening_time :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
