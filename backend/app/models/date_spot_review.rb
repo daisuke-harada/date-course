@@ -3,8 +3,8 @@
 # Table name: date_spot_reviews
 #
 #  id           :bigint           not null, primary key
-#  content      :text(65535)
-#  rate         :float(24)
+#  content      :text
+#  rate         :float
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  date_spot_id :bigint

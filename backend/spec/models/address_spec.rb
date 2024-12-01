@@ -3,9 +3,9 @@
 # Table name: addresses
 #
 #  id            :bigint           not null, primary key
-#  city_name     :string(255)
-#  latitude      :float(24)
-#  longitude     :float(24)
+#  city_name     :string
+#  latitude      :float
+#  longitude     :float
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  date_spot_id  :integer

@@ -3,8 +3,8 @@
 # Table name: courses
 #
 #  id          :bigint           not null, primary key
-#  authority   :string(255)      not null
-#  travel_mode :string(255)      not null
+#  authority   :string           not null
+#  travel_mode :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint           not null
