@@ -1,11 +1,11 @@
 import { guestUser, anotherTestUser, testUser } from '../fixtures/users/response';
-import { apiLoginAccess, apiUserIndexAccess, apiUserUpdateAccess, apiUserShowAccess, apiSignUpAccess, apiUserDestroyAccess } from '../support/backendAccessMock/users/apiUserAccess';
+import { apiLoginAccess, apiUserIndexAccess, apiUserUpdateAccess, apiUserShowAccess, apiSignUpAccess, apiUserDestroyAccess } from '../support/backend_railsAccessMock/users/apiUserAccess';
 import { testUserInput } from '../fixtures/users/session';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
 import { userSigninSuccess } from '../support/hooks/session';
 import { spotReviewAndDateSpotResponseDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
-import { apiHomeTopAccess } from '../support/backendAccessMock/homes/apiHomeAccess';
-import { apiRelationShipCreateAccess, apiRelationShipDestroyAccess, apiFollowers, apiFollowings } from '../support/backendAccessMock/relationships/apiRelationShipAccess';
+import { apiHomeTopAccess } from '../support/backend_railsAccessMock/homes/apiHomeAccess';
+import { apiRelationShipCreateAccess, apiRelationShipDestroyAccess, apiFollowers, apiFollowings } from '../support/backend_railsAccessMock/relationships/apiRelationShipAccess';
 import { UserResponseData } from '../support/types/users/response';
 
 const users = [guestUser, testUser, anotherTestUser];

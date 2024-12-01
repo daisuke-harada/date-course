@@ -1,11 +1,11 @@
-import { apiDateSpotReviewCreateAccess, apiDateSpotReviewUpdateAccess, apiDateSpotReviewDestroyAccess } from './../support/backendAccessMock/dateSpotReviews/apiDateSpotReviewAccess';
+import { apiDateSpotReviewCreateAccess, apiDateSpotReviewUpdateAccess, apiDateSpotReviewDestroyAccess } from './../support/backend_railsAccessMock/dateSpotReviews/apiDateSpotReviewAccess';
 import { DateSpotReviewAndUserResponseData } from './../support/types/dateSpotReviews/response';
 import { dataE2eGet } from './../support/hooks/dataE2eGet';
 import { spotReviewAndUserTestDatas } from '../fixtures/dateSpotReviews/spotReviewTestDatas';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { anotherTestUser } from '../fixtures/users/response';
 import { userSigninSuccess } from '../support/hooks/session';
-import { apiDateSpotShowAccess, apiDateSpotShowReviewsChangeAccess } from './../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { apiDateSpotShowAccess, apiDateSpotShowReviewsChangeAccess } from './../support/backend_railsAccessMock/dateSpots/apiDateSpotAccess';
 
 const dateSpotReviewFormInput = (review: DateSpotReviewAndUserResponseData) => {
   dataE2eGet('dateSpotReview-comment-input').clear();

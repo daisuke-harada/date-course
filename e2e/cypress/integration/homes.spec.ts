@@ -1,4 +1,4 @@
-import { apiHomeTopAccess } from "../support/backendAccessMock/homes/apiHomeAccess";
+import { apiHomeTopAccess } from "../support/backend_railsAccessMock/homes/apiHomeAccess";
 import { Genre, Prefecture } from "../support/types/datas/activeHash";
 
 const mainPrefectures: {attributes: Prefecture}[] = [

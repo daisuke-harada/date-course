@@ -10,10 +10,10 @@ close_project:
 	docker-compose down
 
 db-create:
-	docker-compose exec backend rails db:create
+	docker-compose exec backend_rails rails db:create
 
 db-migrate:
-	docker-compose exec backend rails db:migrate
+	docker-compose exec backend_rails rails db:migrate
 
 db-seed:
-	docker-compose exec backend rails db:seed
+	docker-compose exec backend_rails rails db:seed

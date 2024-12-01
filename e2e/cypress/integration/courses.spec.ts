@@ -1,10 +1,10 @@
-import { apiDateSpotShowAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { apiDateSpotShowAccess } from '../support/backend_railsAccessMock/dateSpots/apiDateSpotAccess';
 import { anotherTestUser, testUser } from '../fixtures/users/response';
 import { userSigninSuccess } from '../support/hooks/session';
-import { apiDateSpotIndexAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { apiDateSpotIndexAccess } from '../support/backend_railsAccessMock/dateSpots/apiDateSpotAccess';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
-import { apiCourseCreateAccess, apiCourseDestroyAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backendAccessMock/courses/apiCourseAccess';
+import { apiCourseCreateAccess, apiCourseDestroyAccess, apiCourseIndexAccess, apiCourseShowAccess } from '../support/backend_railsAccessMock/courses/apiCourseAccess';
 import { UserResponseData } from '../support/types/users/response';
 import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
 import { courseTestDatas } from '../fixtures/courses/courseTestDatas';

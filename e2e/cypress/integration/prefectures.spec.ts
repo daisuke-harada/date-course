@@ -1,6 +1,6 @@
 import { addressAndDateSpotTestDatas } from "../fixtures/dateSpots/addressAndDateSpotTestDatas";
-import { apiHomeTopAccess } from "../support/backendAccessMock/homes/apiHomeAccess";
-import { apiPrefectureShowAccess } from "../support/backendAccessMock/prefectures/apiPrefectureAccess";
+import { apiHomeTopAccess } from "../support/backend_railsAccessMock/homes/apiHomeAccess";
+import { apiPrefectureShowAccess } from "../support/backend_railsAccessMock/prefectures/apiPrefectureAccess";
 
 describe('prefectures', () => {
   it('ホームページから、県名を選択しその県名のデートスポット一覧ページへ遷移する', () => {
