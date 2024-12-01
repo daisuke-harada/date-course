@@ -17,7 +17,7 @@
 # This would use the information in config/locales/es.yml.
 #
 # The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
+# the default I18n backend_rails:
 #
 # true, false, on, off, yes, no
 #

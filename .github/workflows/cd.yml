@@ -8,9 +8,9 @@
 #   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 #   AWS_REGION: ap-northeast-1
 #   ECS_WEBAPP_SERVICE: datecourses-frontend
-#   ECS_BACKEND_SERVICE: datecourses-backend
+#   ECS_BACKEND_SERVICE: datecourses-backend_rails
 #   WEBAPP_CONTAINER_NAME: datecourses-frontend-ecr
-#   BACKEND_CONTAINER_NAME: datecourses-backend-ecr
+#   BACKEND_CONTAINER_NAME: datecourses-backend_rails-ecr
 #   WEBAPP_TAG: 1.0.0
 #   BACKEND_TAG: 1.0.0
 # jobs:
@@ -43,12 +43,12 @@
 #         docker push $ECR_REGISTRY/$WEBAPP_CONTAINER_NAME:$WEBAPP_TAG
 #         docker push $ECR_REGISTRY/$WEBAPP_CONTAINER_NAME:latest
 
-#     - name: backend push to ECR
-#       id: build-image-backend
+#     - name: backend_rails push to ECR
+#       id: build-image-backend_rails
 #       env:
 #         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 #       run: |
-#         cd backend
+#         cd backend_rails
 #         docker build -t $ECR_REGISTRY/$BACKEND_CONTAINER_NAME:$BACKEND_TAG .
 #         docker tag $ECR_REGISTRY/$BACKEND_CONTAINER_NAME:$BACKEND_TAG $ECR_REGISTRY/$BACKEND_CONTAINER_NAME:latest
 #         docker push $ECR_REGISTRY/$BACKEND_CONTAINER_NAME:$BACKEND_TAG

@@ -1,6 +1,6 @@
 import { addressAndDateSpotTestDatas } from "../fixtures/dateSpots/addressAndDateSpotTestDatas";
-import { apiGenreShowAccess } from "../support/backendAccessMock/genres/apiGenreAccess";
-import { apiHomeTopAccess } from "../support/backendAccessMock/homes/apiHomeAccess";
+import { apiGenreShowAccess } from "../support/backend_railsAccessMock/genres/apiGenreAccess";
+import { apiHomeTopAccess } from "../support/backend_railsAccessMock/homes/apiHomeAccess";
 
 describe('genres', () => {
   it('ホームページから、ジャンルを選択しそのジャンルのデートスポット一覧ページへ遷移する', () => {

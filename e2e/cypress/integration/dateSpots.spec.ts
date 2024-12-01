@@ -5,7 +5,7 @@ import { adminUser, testUser } from '../fixtures/users/response';
 import { dataE2eGet } from '../support/hooks/dataE2eGet';
 import { addressAndDateSpotTestDatas } from '../fixtures/dateSpots/addressAndDateSpotTestDatas';
 import { prefectureDatas } from '../fixtures/datas/prefectureDatas';
-import { apiDateSpotCreateAccess, apiDateSpotShowAccess, apiDateSpotIndexAccess, apiDateSpotUpdateAccess, apiDateSpotDestroyAccess } from '../support/backendAccessMock/dateSpots/apiDateSpotAccess';
+import { apiDateSpotCreateAccess, apiDateSpotShowAccess, apiDateSpotIndexAccess, apiDateSpotUpdateAccess, apiDateSpotDestroyAccess } from '../support/backend_railsAccessMock/dateSpots/apiDateSpotAccess';
 import { AddressAndDateSpotJoinData } from '../support/types/dateSpots/response';
 
 const dateSpotFormInput = (dateSpotName: string, prefectureName: string, cityName: string, genreId: number, openingTime: string, closingTime: string) => {
