@@ -1,6 +1,6 @@
 class Api::V1::HomesController < ApplicationController
   def top
-    render json: {
+    render status: :ok, json: {
       areas: Area.all,
       main_prefectures: Prefecture.majors,
       main_genres: Genre.majors,

@@ -89,27 +89,27 @@ export const DateSpotForm: FC<Props> = memo((props) => {
 
   const apiDateSpotCreateAccess = (dateSpot: FormData) => {
     formDataClient.post('date_spots', dateSpot).then(response => {
-      response.data.status === 'created' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '新規登録に成功しました', type: 'success-message', condition: true}});
-      if(response.data.status === 500) {
-        const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
-        name !== undefined && setErrorNameMessages(name);
-        genreId !== undefined && setErrorGenreIdMessages(genreId);
-        addressCityName !== undefined && setErrorAddressCityName(addressCityName);
-        addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
-      };
-    });
+      navigate(`/dateSpots/${response.data.id}`,  {state: {message: '新規登録に成功しました', type: 'success-message', condition: true}});
+    })
+    .catch(error => {
+      const { name, genreId, addressCityName, addressPrefectureId } = error.response.data.errorMessages;
+      name !== undefined && setErrorNameMessages(name);
+      genreId !== undefined && setErrorGenreIdMessages(genreId);
+      addressCityName !== undefined && setErrorAddressCityName(addressCityName);
+      addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
+    })
   };
 
   const apiDateSpotUpdateAccess = (dateSpot: FormData, dateSpotId: number) => {
     formDataClient.put(`date_spots/${dateSpotId}`, dateSpot).then(response => {
-      response.data.status === 'updated' && navigate(`/dateSpots/${response.data.dateSpot.id}`,  {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
-      if(response.data.status === 500) {
-        const { name, genreId, addressCityName, addressPrefectureId } = response.data.errorMessages;
-        name !== undefined && setErrorNameMessages(name);
-        genreId !== undefined && setErrorGenreIdMessages(genreId);
-        addressCityName !== undefined && setErrorAddressCityName(addressCityName);
-        addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
-      };
+      console.log(response)
+      navigate(`/dateSpots/${response.data.id}`,  {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
+    }).catch(error => {
+      const { name, genreId, addressCityName, addressPrefectureId } = error.response.data.errorMessages;
+      name !== undefined && setErrorNameMessages(name);
+      genreId !== undefined && setErrorGenreIdMessages(genreId);
+      addressCityName !== undefined && setErrorAddressCityName(addressCityName);
+      addressPrefectureId !== undefined && setErrorAddressPrefectureId(addressPrefectureId);
     });
   };
 
@@ -131,7 +131,7 @@ export const DateSpotForm: FC<Props> = memo((props) => {
   const onCLickDeleteDateSpotAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if(window.confirm('本当に削除しますか？')){
       client.delete(`date_spots/${dateSpotId}`).then(response => {
-        response.data.status === 'deleted' && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
+        response.status === 204 && navigate('/', {state: {message: '削除しました', type: 'success-message', condition: true}} );
       });
     };
   };

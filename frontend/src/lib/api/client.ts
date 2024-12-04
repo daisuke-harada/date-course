@@ -22,9 +22,9 @@ export const formDataClient = applyCaseMiddleware(axios.create({
   },
 }));
 
-formDataClient.interceptors.response.use(
-  (response: AxiosResponse): AxiosResponse => {
-    const data = response.data
-    return { ...response.data, data }
-  }
-)
+// formDataClient.interceptors.response.use(
+//   (response: AxiosResponse): AxiosResponse => {
+//     const data = response.data
+//     return { ...response.data, data }
+//   }
+// )

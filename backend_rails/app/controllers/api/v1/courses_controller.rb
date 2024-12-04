@@ -3,25 +3,25 @@ class Api::V1::CoursesController < ApplicationController
 
   def index
     courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(authority: "公開")
-    render json: courses
+    render status: :ok, json: courses
   end
 
   def show
-    render json: @course
+    render status: :ok, json: @course
   end
 
   def create
     course_form = CourseForm.new(course_params)
     if course_form.save
-      render json: {status: :created, course_id: course_form.id}
+      render status: :created, json: {course_id: course_form.id}
     else
-      render json: ErrorSerializer.new(course).as_json, status: :unprocessable_entity
+      render status: :unprocessable_entity, json: ErrorSerializer.new(course_form).as_json, status: :unprocessable_entity
     end
   end
 
   def destroy
     @course.destroy
-    render json: {status: :deleted}
+    render status: :no_content
   end
 
   private

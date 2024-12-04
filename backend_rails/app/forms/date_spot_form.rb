@@ -7,14 +7,12 @@ class DateSpotForm
 
   def save
     return false unless valid?
-
     ActiveRecord::Base.transaction do
-      date_spot = DateSpot.new(date_spot_attributes)
-      date_spot.build_address(address_attributes)
-      date_spot.save!
+      @date_spot = DateSpot.new(date_spot_attributes)
+      @date_spot.build_address(address_attributes)
+      @date_spot.save!
     end
-
-    true
+    @date_spot
   rescue ActiveRecord::RecordInvalid
     false
   end

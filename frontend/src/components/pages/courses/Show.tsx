@@ -42,7 +42,7 @@ export const Show: FC = memo(() => {
 
   const onClickDeleteCourse = useCallback(()=>{
     client.delete(`courses/${id}`).then(response => {
-      response.data.status === 'deleted' && navigate(`/users/${currentUser.id}`, {state: {message: 'デートコースを削除しました', type: 'success-message', condition: true}});
+      response.status === 204 && navigate(`/users/${currentUser.id}`, {state: {message: 'デートコースを削除しました', type: 'success-message', condition: true}});
     });
   },[id, currentUser.id, navigate]);
 

@@ -4,10 +4,6 @@ class RegistrationSerializer < ActiveModel::Serializer
     UserSerializer.new(object).attributes
   end
 
-  attribute :status do
-    :created
-  end
-
   attribute :login_status do
     true
   end

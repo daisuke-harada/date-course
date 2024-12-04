@@ -56,20 +56,18 @@ export const DateSpotReviewForm: FC<Props> = memo((props) => {
 
   const onClickDateSpotReviewCreateAction: React.MouseEventHandler<HTMLButtonElement>  = () => {
     client.post('date_spot_reviews', { dateSpotReview: dateSpotReview }).then(response => {
-      response.data.status === 'created' && setDateSpotReviews(response.data.dateSpotReviews);
-      response.data.status === 'created' && setContent('');
-      response.data.status === 'created' && setRate(0);
-      response.data.status === 'created' && setDateSpotAverageRate(response.data.reviewAverageRate);
-      response.data.status === 'created' && setErrorUserIdMessages([]);
-      response.data.status === 'created' && setErrorContentMessages([]);
-      response.data.status === 'created' && navigate(`./`, {state: {message: 'コメントを投稿しました', type: 'success-message', condition: true}});
-
-      if(response.data.status === 500){
-        const {userId, content} = response.data.errorMessages;
-        userId !== undefined && setErrorUserIdMessages(userId);
-        content !== undefined && setErrorContentMessages(content);
-        navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
-      };
+      setDateSpotReviews(response.data.dateSpotReviews);
+      setContent('');
+      setRate(0);
+      setDateSpotAverageRate(response.data.reviewAverageRate);
+      setErrorUserIdMessages([]);
+      setErrorContentMessages([]);
+      navigate(`./`, {state: {message: 'コメントを投稿しました', type: 'success-message', condition: true}});
+    }).catch(error => {
+      const {userId, content} = error.response.data.errorMessages;
+      userId !== undefined && setErrorUserIdMessages(userId);
+      content !== undefined && setErrorContentMessages(content);
+      navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
     });
   };
 
@@ -77,20 +75,19 @@ export const DateSpotReviewForm: FC<Props> = memo((props) => {
     currentDateSpotReview
     &&
     client.put(`date_spot_reviews/${currentDateSpotReview.id}`, dateSpotReview).then(response => {
-      response.data.status === 'updated' && setDateSpotReviews(response.data.dateSpotReviews);
-      response.data.status === 'updated' && setContent('');
-      response.data.status === 'updated' && setRate(0);
-      response.data.status === 'updated' && setDateSpotAverageRate(response.data.reviewAverageRate);
-      response.data.status === 'updated' && setErrorUserIdMessages([]);
-      response.data.status === 'updated' && setErrorContentMessages([]);
-      response.data.status === 'updated' && navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
-      response.data.status === 'updated' && setEditOpen(false);
-      if(response.data.status === 500){
-        const {userId, content} = response.data.errorMessages;
-        userId !== undefined && setErrorUserIdMessages(userId);
-        content !== undefined && setErrorContentMessages(content);
-        navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
-      };
+      setDateSpotReviews(response.data.dateSpotReviews);
+      setContent('');
+      setRate(0);
+      setDateSpotAverageRate(response.data.reviewAverageRate);
+      setErrorUserIdMessages([]);
+      setErrorContentMessages([]);
+      navigate(`./`, {state: {message: 'コメントを更新しました', type: 'success-message', condition: true}});
+      setEditOpen(false);
+    }).catch(error => {
+      const {userId, content} = error.response.data.errorMessages;
+      userId !== undefined && setErrorUserIdMessages(userId);
+      content !== undefined && setErrorContentMessages(content);
+      navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
     });
   };
 
@@ -99,15 +96,15 @@ export const DateSpotReviewForm: FC<Props> = memo((props) => {
     currentDateSpotReview
     &&
     client.delete(`date_spot_reviews/${currentDateSpotReview.id}`).then(response => {
-      response.data.status === 'deleted' && setDateSpotReviews(response.data.dateSpotReviews);
-      response.data.status === 'deleted' && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
-      response.data.status === 'deleted' && setContent('');
-      response.data.status === 'deleted' && setRate(0);
-      response.data.status === 'deleted' && setDateSpotAverageRate(response.data.reviewAverageRate);
-      response.data.status === 'deleted' && setErrorUserIdMessages([]);
-      response.data.status === 'deleted' && setErrorContentMessages([]);
-      response.data.status === 'deleted' && setCurrentDateSpotReview(undefined);
-      response.data.status === 'deleted' && setEditOpen(false);
+      response.status === 200 && setDateSpotReviews(response.data.dateSpotReviews);
+      response.status === 200 && navigate(`./`, {state: {message: 'コメントを削除しました', type: 'success-message', condition: true}});
+      response.status === 200 && setContent('');
+      response.status === 200 && setRate(0);
+      response.status === 200 && setDateSpotAverageRate(response.data.reviewAverageRate);
+      response.status === 200 && setErrorUserIdMessages([]);
+      response.status === 200 && setErrorContentMessages([]);
+      response.status === 200 && setCurrentDateSpotReview(undefined);
+      response.status === 200 && setEditOpen(false);
     });
   };
 

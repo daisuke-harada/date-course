@@ -54,7 +54,7 @@ export const DateSpotSearchArea: FC<Props> = memo((props) => {
 
   const onClickConditionSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spots/sort', conditionSearch).then(response => {
-      response.data.status === 'success' && navigate('/dateSpots/search',
+      navigate('/dateSpots/search',
         {
           state: {
             addressAndDateSpots: response.data.addressAndDateSpots,

@@ -30,5 +30,4 @@ class DateSpotReview < ApplicationRecord
   validates :date_spot_id, presence: true
 
   scope :for_date_spot, ->(date_spot_id) { where(date_spot_id: date_spot_id) }
-
 end
