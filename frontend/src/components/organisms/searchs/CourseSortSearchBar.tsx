@@ -29,7 +29,7 @@ export const CourseSortSearchBar: FC<Props> = memo((props) => {
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('courses/sort', search).then(response => {
-      response.data.status === 'success' && navigate('/courses/search',
+      navigate('/courses/search',
         {
           state: {
             courses: response.data.courses,

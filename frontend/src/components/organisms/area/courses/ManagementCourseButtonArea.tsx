@@ -38,9 +38,11 @@ export const ManagementCourseButtonArea: FC<Props> = memo((props) => {
     }
 
     client.post('courses', {course}).then(response => {
-      response.data.status === 'created' && navigate(`/courses/${response.data.courseId}`);
-      response.data.status === 'created' && resetmanagementCourse();
-      response.data.status === 'created' && resetCourseInfo();
+      response.status === 201 && navigate(`/courses/${response.data.courseId}`);
+      response.status === 201 && resetmanagementCourse();
+      response.status === 201 && resetCourseInfo();
+    }).catch(error => {
+      navigate(`./`, {state: {message: error.response.data.error_messages, type: 'error-message', condition: true}});
     });
   }, [ managementCourse, getCourseInfo, resetCourseInfo, resetmanagementCourse, navigate ]);
 

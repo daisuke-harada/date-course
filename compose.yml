@@ -18,14 +18,14 @@ services:
       - ./frontend:/usr/src/datecourses
     ports:
       - "3000:3000"
-  go_echo:
-    build:
-      context: ./go_echo
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./go_echo:/go_echo
+  # go_echo:
+  #   build:
+  #     context: ./go_echo
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./go_echo:/go_echo
   backend_rails:
     build:
       context: ./backend_rails

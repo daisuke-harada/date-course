@@ -80,18 +80,14 @@ export const UserForm: FC<Props> = memo((props) => {
     // 新規登録機能の際の挙動
     if (afterLoginSuccess !== undefined){
       formDataClient.post('signup', user).then(response => {
-        // 新規登録成功
-        afterLoginSuccess !== undefined && response.data.status === 'created' && afterLoginSuccess(response.data.user);
-
-        // 新規登録失敗
-        if(response.data.status === 500){
-          const {password, name, email} = response.data.errorMessages
-          // エラーメッセージをセットする。
-          name !== undefined && setErrorNameMessages(name);
-          email !== undefined && setErrorEmailMessages(email);
-          password !== undefined && setErrorPasswordMessages(password);
-          navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
-        };
+        afterLoginSuccess !== undefined && afterLoginSuccess(response.data.user);
+      }).catch(error => {
+        const {password, name, email} = error.response.data.errorMessages
+        // エラーメッセージをセットする。
+        name !== undefined && setErrorNameMessages(name);
+        email !== undefined && setErrorEmailMessages(email);
+        password !== undefined && setErrorPasswordMessages(password);
+        navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
       });
     // ユーザー編集機能の挙動。
     } else if (afterLoginSuccess === undefined) {

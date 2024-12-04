@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
     render json: {
       user: UserSerializer.new(@user).attributes,
       courses: courses.map { |course| CourseSerializer.new(course).attributes },
-      date_spot_reviews: date_spot_reviews.map { |review| { id: review.id, rate: review.rate, content: review.content, date_spot: review.date_spot} }
+      date_spot_reviews: date_spot_reviews.map { |review| {id: review.id, rate: review.rate, content: review.content, date_spot: review.date_spot} }
     }
   end
 
@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.update(user_params)
       render json: {status: :updated, user: UserSerializer.new(@user).attributes}
     else
-      render json: ErrorSerializer.new(@user).as_json
+      render status: :unprocessable_entity, json: ErrorSerializer.new(@user).as_json
     end
   end
 

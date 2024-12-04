@@ -35,21 +35,17 @@ export const FollowAndUnFollowButton: FC<Props> = memo((props) => {
       currentUserId: currentUser.id,
       followedUserId: userId,
     }).then(response => {
-      if (response.data.status === 'created') {
-        setUsers && setUsers(response.data.users);
-        dispatch(setCurrentUser(response.data.currentUser));
-        setUser && setUser(response.data.followedUser);
-      }
+      setUsers && setUsers(response.data.users);
+      dispatch(setCurrentUser(response.data.currentUser));
+      setUser && setUser(response.data.followedUser);
     });
   };
 
   const onClickUnfollowAction = () => {
     client.delete(`relationships/${currentUserId}/${userId}`).then(response => {
-      if (response.data.status === 'deleted') {
-        setUsers && setUsers(response.data.users);
-        dispatch(setCurrentUser(response.data.currentUser));
-        setUser && setUser(response.data.unfollowedUser);
-      }
+      setUsers && setUsers(response.data.users);
+      dispatch(setCurrentUser(response.data.currentUser));
+      setUser && setUser(response.data.unfollowedUser);
     });
   };
 

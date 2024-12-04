@@ -7,8 +7,7 @@ class Api::V1::RelationshipsController < ApplicationController
 
     users = User.non_admins
 
-    render json: {
-      status: :created,
+    render status: :created, json: {
       users: users.map { |user| UserSerializer.new(user).attributes },
       current_user: UserSerializer.new(current_user).attributes,
       followed_user: UserSerializer.new(followed_user).attributes
@@ -23,8 +22,7 @@ class Api::V1::RelationshipsController < ApplicationController
 
     users = User.non_admins
 
-    render json: {
-      status: :deleted,
+    render status: :ok, json: {
       users: users.map { |user| UserSerializer.new(user).attributes },
       current_user: UserSerializer.new(current_user).attributes,
       unfollowed_user: UserSerializer.new(unfollowed_user).attributes
