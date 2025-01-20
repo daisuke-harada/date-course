@@ -35,7 +35,7 @@ class Api::V1::RelationshipsController < ApplicationController
 
     followings = user.followings
 
-    render json: {user_name: user.name, users: followings.map { |user| UserSerializer.new(user).attributes }}
+    render status: :ok, json: {user_name: user.name, users: followings.map { |user| UserSerializer.new(user).attributes }}
   end
 
   # TODO: ネストさせてコントローラをわけてもいいかもしれない。action名をCRUD処理の名前にすべき
@@ -44,6 +44,6 @@ class Api::V1::RelationshipsController < ApplicationController
 
     followers = user.followers
 
-    render json: {user_name: user.name, users: followers.map { |user| UserSerializer.new(user).attributes }}
+    render status: :ok, json: {user_name: user.name, users: followers.map { |user| UserSerializer.new(user).attributes }}
   end
 end

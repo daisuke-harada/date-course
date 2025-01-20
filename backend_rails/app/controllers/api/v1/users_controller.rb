@@ -3,13 +3,13 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     users = User.includes(:followers, :followings, courses: {date_spots: {address: {date_spot: :date_spot_reviews}}}).non_admins
-    render json: users
+    render status: :ok, json: users
   end
 
   def show
     courses = @user.courses.includes(date_spots: {address: {date_spot: :date_spot_reviews}})
     date_spot_reviews = @user.date_spot_reviews.includes(:date_spot)
-    render json: {
+    render status: :ok, json: {
       user: UserSerializer.new(@user).attributes,
       courses: courses.map { |course| CourseSerializer.new(course).attributes },
       date_spot_reviews: date_spot_reviews.map { |review| {id: review.id, rate: review.rate, content: review.content, date_spot: review.date_spot} }
@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      render json: {status: :updated, user: UserSerializer.new(@user).attributes}
+      render status: :ok, json: @user
     else
       render status: :unprocessable_entity, json: ErrorSerializer.new(@user).as_json
     end
@@ -26,13 +26,13 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    render json: {status: :deleted}
+    render status: :no_content
   end
 
   private
 
   def user_params
-    params.permit(:name, :email, :gender, :image, :password, :password_confirmation)
+    params.permit(:id, :name, :email, :gender, :image, :password, :password_confirmation)
   end
 
   def set_user
