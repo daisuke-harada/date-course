@@ -18,11 +18,10 @@ export const useDeactivateAccountButtonAction = () => {
     }else {
       if(window.confirm('本当に退会しますか？')){
         client.delete(`users/${currentUser.id}`).then(response => {
-          if (response.data.status === 'deleted') {
-            dispatch(setLoginStatus(false))
-            dispatch(setCurrentUser(initialUser))
-            navigate('/', {state: {message: '退会しました', type: 'success-message', condition: true}});
-          }
+          dispatch(setLoginStatus(false))
+          dispatch(setCurrentUser(initialUser))
+        }).then(() => {
+          navigate('/', {state: {message: '退会しました', type: 'success-message', condition: true}});
         });
       };
     }

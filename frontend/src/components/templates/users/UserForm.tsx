@@ -76,7 +76,6 @@ export const UserForm: FC<Props> = memo((props) => {
 
   const userRegitAction =(e: React.FormEvent<HTMLFormElement>) => {
     const user = createFormData();
-
     // 新規登録機能の際の挙動
     if (afterLoginSuccess !== undefined){
       formDataClient.post('signup', user).then(response => {
@@ -96,22 +95,18 @@ export const UserForm: FC<Props> = memo((props) => {
         navigate(`./`, {state: {message: 'guestユーザーは情報を更新できません', type: 'error-message', condition: true}});
       }else{
         formDataClient.put(`users/${currentUser.id}`, user).then(response => {
-          if (response.data.status === 'updated'){
             // 編集に成功したのでログイン情報も一緒に更新する。
-            dispatch(setCurrentUser(response.data.user))
+            dispatch(setCurrentUser(response.data))
             // 画面遷移
-            navigate(`/users/${response.data.user.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
-          };
-
+            navigate(`/users/${response.data.id}`, {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
+        }).catch(error => {
           // 新規登録失敗
-          if(response.data.status === 500){
-            const {password, name, email} = response.data.errorMessages
-            // エラーメッセージをセットする。
-            name !== undefined && setErrorNameMessages(name);
-            email !== undefined && setErrorEmailMessages(email);
-            password !== undefined && setErrorPasswordMessages(password);
-            navigate(`./`, {state: {message: '登録に失敗しました。', type: 'error-message', condition: true}});
-          };
+          const {password, name, email} = error.response.data.errorMessages
+          // エラーメッセージをセットする。
+          name !== undefined && setErrorNameMessages(name);
+          email !== undefined && setErrorEmailMessages(email);
+          password !== undefined && setErrorPasswordMessages(password);
+          navigate(`./`, {state: {message: '更新に失敗しました。', type: 'error-message', condition: true}});
         });
       };
     };
