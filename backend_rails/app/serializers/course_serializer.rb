@@ -18,9 +18,20 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class CourseSerializer < ActiveModel::Serializer
-  belongs_to :user
+  attributes :id, :authority, :travel_mode, :no_duplicate_prefecture_names
 
-  attributes :id, :authority, :travel_mode, :user, :no_duplicate_prefecture_names
+  attribute :user do
+    {
+      id: object.user.id,
+      name: object.user.name,
+      email: object.user.email,
+      gender: object.user.gender,
+      image: {
+        url: object.user.image.url
+      },
+      admin: object.user.admin
+    }
+  end
 
   attribute :date_spots do
     # object.date_spots.includes(:date_spot_reviews, :address).map do |date_spot|

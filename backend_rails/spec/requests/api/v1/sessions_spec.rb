@@ -12,7 +12,6 @@ RSpec.describe "Api::V1::Sessions", type: :request do
       expect(JSON.parse(response.body)["user"]["email"]).to eq(user.email)
       expect(JSON.parse(response.body)["user"]["gender"]).to eq(user.gender)
       expect(JSON.parse(response.body)["user"]["admin"]).to eq(user.admin)
-      expect(JSON.parse(response.body)["user"]["password_digest"])
       expect(JSON.parse(response.body)["user"]["created_at"])
       expect(JSON.parse(response.body)["user"]["updated_at"])
     end
