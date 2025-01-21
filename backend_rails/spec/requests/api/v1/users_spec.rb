@@ -17,7 +17,6 @@ RSpec.describe "Api::V1::Users", type: :request do
       get "/api/v1/users/#{user.id}"
       expect(JSON.parse(response.body)["user"]["name"]).to eq(user.name)
       expect(JSON.parse(response.body)["user"]["email"]).to eq(user.email)
-      expect(JSON.parse(response.body)["user"]["password_digest"])
       expect(JSON.parse(response.body)["user"]["created_at"])
       expect(JSON.parse(response.body)["user"]["updated_at"])
     end

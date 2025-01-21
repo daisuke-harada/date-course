@@ -18,9 +18,11 @@
 #  index_users_on_name   (name) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  has_many :courses
-
   attributes :id, :admin, :email, :gender, :image, :name, :followerIds, :followingIds
+
+  attribute :courses do
+    object.courses.map { |course| CourseSerializer.new(course) }
+  end
 
   attribute :followerIds do
     object.followers.pluck(:id)
