@@ -6,7 +6,7 @@ class Api::V1::DateSpotsController < ApplicationController
       AddressSerializer.new(address).serializable_hash
     end
 
-    render status: :ok, json: {address_and_date_spots: address_and_date_spots}
+    render status: :ok, json: address_and_date_spots
   end
 
   def show
