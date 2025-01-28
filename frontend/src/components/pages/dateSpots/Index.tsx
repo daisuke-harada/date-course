@@ -14,7 +14,7 @@ export const Index: FC = memo(() => {
 
   useEffect(() => {
     client.get('date_spots').then(response => {
-      setAddressAndDateSpots(response.data.addressAndDateSpots);
+      setAddressAndDateSpots(response.data);
     })
   }, []);
 

@@ -44,12 +44,12 @@ export const Show: FC = memo(() => {
 
   useEffect(() => {
     client.get(`users/${id}`).then(response => {
-      setUser(response.data.user);
+      setUser(response.data);
       setCourses(response.data.courses);
       setDateSpotReviews(response.data.dateSpotReviews);
-      if(response.data.user.gender === '女性'){
+      if(response.data.gender === '女性'){
         setGenderTextColor('text-red-400');
-      }else if(response.data.user.gender === '男性'){
+      }else if(response.data.gender === '男性'){
         setGenderTextColor('text-blue-400');
       };
     });

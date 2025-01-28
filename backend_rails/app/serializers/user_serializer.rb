@@ -24,6 +24,10 @@ class UserSerializer < ActiveModel::Serializer
     object.courses.map { |course| CourseSerializer.new(course) }
   end
 
+  attribute :date_spot_reviews do
+    object.date_spot_reviews.map { |review| {id: review.id, rate: review.rate, content: review.content, date_spot: review.date_spot} }
+  end
+
   attribute :followerIds do
     object.followers.pluck(:id)
   end
