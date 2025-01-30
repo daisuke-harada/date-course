@@ -16,7 +16,9 @@ export const Show: FC = memo(() => {
 
   useEffect(() => {
     client.get(`prefectures/${id}`).then(response => {
-      setAddressAndDateSpots(response.data.addressAndDateSpots);
+      console.log(response)
+      console.log(response.data)
+      setAddressAndDateSpots(response.data);
     })
   }, [id]);
 
