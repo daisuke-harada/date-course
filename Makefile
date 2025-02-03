@@ -1,4 +1,4 @@
-setup: build start_project close_project db-create db-migrate db-seed
+setup: build start_project db-create db-migrate db-seed close_project
 
 build:
 	docker compose build
@@ -10,10 +10,10 @@ close_project:
 	docker compose down
 
 db-create:
-	docker compose exec backend_rails rails db:create
+	docker compose run --rm backend_rails rails db:create
 
 db-migrate:
-	docker compose exec backend_rails rails db:migrate
+	docker compose run --rm backend_rails rails db:migrate
 
 db-seed:
-	docker compose exec backend_rails rails db:seed
+	docker compose run --rm backend_rails rails db:seed
