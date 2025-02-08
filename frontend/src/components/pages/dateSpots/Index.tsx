@@ -25,7 +25,7 @@ export const Index: FC = memo(() => {
           <DateSpotSortSearchBar
             defaultPrefectureId=''
             defaultGenreId=''
-            defaultBusinessTimeValue=''
+            defaultComeTime=''
           />
           <DateSpotNameSearchBar />
         </>
@@ -39,7 +39,7 @@ export const Index: FC = memo(() => {
           dateSpotSearchName={''}
           defaultPrefectureValue={''}
           defaultGenreValue={''}
-          defaultBusinessTimeValue={''}
+          defaultComeTime={''}
         />
       }
       mainArea={<DateSpots addressAndDateSpots={addressAndDateSpots} />}

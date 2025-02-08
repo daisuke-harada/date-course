@@ -14,12 +14,8 @@ export const DateSpotNameSearchBar: FC = memo(() => {
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setDateSpotName(e.target.value);
 
-  const search = {
-    dateSpotName: dateSpotName,
-  }
-
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    client.post('date_spot_name_search', search).then(response => {
+    client.post('date_spot_name_search', {dateSpotName: dateSpotName}).then(response => {
       navigate('/dateSpots/search', {state: {addressAndDateSpots: response.data.addressAndDateSpots, dateSpotSearchName: dateSpotName}})
     });
   };

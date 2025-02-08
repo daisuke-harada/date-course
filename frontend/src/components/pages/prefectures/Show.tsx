@@ -29,7 +29,7 @@ export const Show: FC = memo(() => {
           <DateSpotSortSearchBar
             defaultPrefectureId={`${id}`}
             defaultGenreId=''
-            defaultBusinessTimeValue=''
+            defaultComeTime=''
           />
           <DateSpotNameSearchBar />
         </>

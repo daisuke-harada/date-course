@@ -13,7 +13,7 @@ type Props = {
   userSearchName?: string,
   defaultPrefectureValue?: string,
   defaultGenreValue?: string,
-  defaultBusinessTimeValue?: string
+  defaultComeTime?: string
 }
 
 const DateSpotChoiceDiv = tw.div`w-1/3 font-bold text-xs text-white border-r text-center border-gray-400 cursor-pointer`;
@@ -30,7 +30,7 @@ export const MultiBar: FC<Props> = memo((props) => {
     userSearchName,
     defaultPrefectureValue,
     defaultGenreValue,
-    defaultBusinessTimeValue
+    defaultComeTime
   } = props;
 
   const [ dateSpotCondition, setDateSpotCondition ] = useState(defaultDateSpotCondition);
@@ -72,7 +72,7 @@ export const MultiBar: FC<Props> = memo((props) => {
             dateSpotSearchName={dateSpotSearchName}
             defaultPrefectureValue={defaultPrefectureValue}
             defaultGenreValue={defaultGenreValue}
-            defaultBusinessTimeValue={defaultBusinessTimeValue}
+            defaultComeTime={defaultComeTime}
           />
         :
         searchSwitch === 'Course'?

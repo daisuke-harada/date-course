@@ -33,7 +33,7 @@ export const Search: FC = memo(() => {
           <DateSpotSortSearchBar
             defaultPrefectureId={state.prefectureId || ''}
             defaultGenreId={state.genreId || ''}
-            defaultBusinessTimeValue={state.comeTime || ''}
+            defaultComeTime={state.comeTime || ''}
           />
           <DateSpotNameSearchBar />
         </>
@@ -47,7 +47,7 @@ export const Search: FC = memo(() => {
           defaultSearchSwitch='DateSpot'
           defaultPrefectureValue={state.prefectureId}
           defaultGenreValue={state.genreId}
-          defaultBusinessTimeValue={state.comeTime}
+          defaultComeTime={state.comeTime}
           dateSpotSearchName={state.dateSpotSearchName}
         />
 

@@ -18,17 +18,17 @@ type Props = {
   dateSpotSearchName?: string,
   defaultPrefectureValue?: string,
   defaultGenreValue?: string,
-  defaultBusinessTimeValue?: string
+  defaultComeTime?: string
 }
 
 export const DateSpotSearchArea: FC<Props> = memo((props) => {
-  const { dateSpotSearchName, defaultPrefectureValue, defaultGenreValue, defaultBusinessTimeValue } = props;
+  const { dateSpotSearchName, defaultPrefectureValue, defaultGenreValue, defaultComeTime } = props;
 
   const [ dateSpotName, setDateSpotName ] = useState(dateSpotSearchName || '');
   const [ searchTarget, setSearchTarget] = useState(dateSpotSearchName? 'name' : 'condition');
   const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureValue || '');
   const [genreValue, setGenreValue] = useState<string>(defaultGenreValue || '');
-  const [businessTimeValue, setBusinessTimeValue] = useState(defaultBusinessTimeValue || '');
+  const [businessTimeValue, setBusinessTimeValue] = useState(defaultComeTime || '');
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setDateSpotName(e.target.value);
   const onChangeSearchTarget: React.ChangeEventHandler<HTMLInputElement> = (e) => setSearchTarget(e.target.value);
