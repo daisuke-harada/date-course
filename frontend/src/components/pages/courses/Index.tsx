@@ -37,7 +37,7 @@ export const Index: FC = memo(() => {
           defaultCourseCondition='bg-red-400'
           defaultUserCondition='bg-gray-300'
           defaultSearchSwitch='Course'
-          defaultPrefectureValue=''
+          defaultPrefectureId=''
         />
       }
 

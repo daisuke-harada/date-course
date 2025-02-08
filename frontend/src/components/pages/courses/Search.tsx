@@ -41,7 +41,7 @@ export const Search: FC = memo(() => {
           defaultCourseCondition='bg-red-400'
           defaultUserCondition='bg-gray-300'
           defaultSearchSwitch='Course'
-          defaultPrefectureValue={state.prefectureId}
+          defaultPrefectureId={state.prefectureId}
         />
       }
       mainArea={<Courses courses={courses} searchPrefectureId={Number(state.prefectureId)} />}

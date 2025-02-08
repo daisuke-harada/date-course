@@ -11,7 +11,7 @@ type Props = {
   defaultSearchSwitch: string,
   dateSpotSearchName?: string,
   userSearchName?: string,
-  defaultPrefectureValue?: string,
+  defaultPrefectureId?: string,
   defaultGenreValue?: string,
   defaultComeTime?: string
 }
@@ -28,7 +28,7 @@ export const MultiBar: FC<Props> = memo((props) => {
     defaultSearchSwitch,
     dateSpotSearchName,
     userSearchName,
-    defaultPrefectureValue,
+    defaultPrefectureId,
     defaultGenreValue,
     defaultComeTime
   } = props;
@@ -70,14 +70,14 @@ export const MultiBar: FC<Props> = memo((props) => {
         searchSwitch === 'DateSpot'?
           <DateSpotSearchArea
             dateSpotSearchName={dateSpotSearchName}
-            defaultPrefectureValue={defaultPrefectureValue}
+            defaultPrefectureId={defaultPrefectureId}
             defaultGenreValue={defaultGenreValue}
             defaultComeTime={defaultComeTime}
           />
         :
         searchSwitch === 'Course'?
           <CourseSearchArea
-            defaultPrefectureValue={defaultPrefectureValue}
+            defaultPrefectureId={defaultPrefectureId}
           />
         :
         <UserSearchArea userSearchName={userSearchName} />
