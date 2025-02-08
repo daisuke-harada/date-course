@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 type Props = {
   defaultPrefectureId: string,
   defaultGenreId: string,
-  defaultBusinessTimeValue: string
+  defaultComeTime: string
 }
 
 const SelectParentDiv = tw.div`w-full px-3`;
@@ -19,24 +19,18 @@ const MainDiv = tw.div`m-auto p-3 bg-white border-2 shadow-xl rounded-3xl border
 const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const DateSpotSortSearchBar: FC<Props> = memo((props) => {
-  const {defaultPrefectureId, defaultGenreId, defaultBusinessTimeValue} = props;
-  const [prefectureValue, setPrefectureValue] = useState<string >(defaultPrefectureId);
-  const [genreValue, setGenreValue] = useState<string>(defaultGenreId);
-  const [businessTimeValue, setBusinessTimeValue] = useState(defaultBusinessTimeValue);
+  const {defaultPrefectureId, defaultGenreId, defaultComeTime} = props;
+  const [prefectureId, setprefectureId] = useState<string >(defaultPrefectureId);
+  const [genreId, setgenreId] = useState<string>(defaultGenreId);
+  const [comeTime, setComeTime] = useState(defaultComeTime);
 
   const navigate = useNavigate();
-  const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureValue(e.target.value), []);
-  const onChangeGenreValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setGenreValue(e.target.value), []);
-  const onChangeBusinessTimeValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setBusinessTimeValue(e.target.value), []);
-
-  const search = {
-    prefectureId: prefectureValue,
-    genreId: genreValue,
-    comeTime: businessTimeValue,
-  };
+  const onChangeprefectureId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setprefectureId(e.target.value), []);
+  const onChangegenreId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setgenreId(e.target.value), []);
+  const onChangeComeTime: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setComeTime(e.target.value), []);
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    client.post('date_spots/sort', search).then(response => {
+    client.post('date_spots/sort', {prefectureId, genreId, comeTime}).then(response => {
       navigate('/dateSpots/search',
         {
           state: {
@@ -56,16 +50,16 @@ export const DateSpotSortSearchBar: FC<Props> = memo((props) => {
         デートスポット条件検索
       </TitleDiv>
       <SelectParentDiv>
-        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureId} onChangeValue={onChangeprefectureId} />
       </SelectParentDiv>
       <SelectParentDiv>
-        <GenreSelect addClassName='w-full border-red-100' dataE2e='dateSpot-genre-select' defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
+        <GenreSelect addClassName='w-full border-red-100' dataE2e='dateSpot-genre-select' defaultValue={genreId} onChangeValue={onChangegenreId} />
       </SelectParentDiv>
       <SelectParentDiv className='w-full flex'>
         <div className='font-bold lg:text-lg text-xs m-1'>
           来店希望時間
         </div>
-        <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={businessTimeValue} onChangeTimeValue={onChangeBusinessTimeValue} />
+        <BusinessTimeSelect addClassName='border-2 rounded-md border-red-100' timeValue={comeTime} onChangeTimeValue={onChangeComeTime} />
       </SelectParentDiv>
       <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>

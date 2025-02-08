@@ -14,12 +14,8 @@ export const UserNameSearchBar: FC = memo(() => {
   const navigate = useNavigate();
   const onChangeSearchName: React.ChangeEventHandler<HTMLInputElement> = (e) => setUserName(e.target.value);
 
-  const search = {
-    userName: userName,
-  }
-
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    client.post('user_name_search', search).then(response => {
+    client.post('user_name_search', { userName }).then(response => {
       navigate('/users/search', {state: {users: response.data, userSearchName: userName}});
     });
   };

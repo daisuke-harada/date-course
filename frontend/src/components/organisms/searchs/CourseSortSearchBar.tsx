@@ -23,12 +23,8 @@ export const CourseSortSearchBar: FC<Props> = memo((props) => {
   const navigate = useNavigate();
   const onChangePrefectureValue: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureId(e.target.value), []);
 
-  const search = {
-    prefectureId: prefectureId
-  };
-
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    client.post('courses/sort', search).then(response => {
+    client.post('courses/sort', {prefectureId: prefectureId}).then(response => {
       navigate('/courses/search',
         {
           state: {
