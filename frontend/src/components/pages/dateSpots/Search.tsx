@@ -45,8 +45,8 @@ export const Search: FC = memo(() => {
           defaultCourseCondition='bg-gray-300'
           defaultUserCondition='bg-gray-300'
           defaultSearchSwitch='DateSpot'
-          defaultPrefectureValue={state.prefectureId}
-          defaultGenreValue={state.genreId}
+          defaultPrefectureId={state.prefectureId}
+          defaultGenreId={state.genreId}
           defaultComeTime={state.comeTime}
           dateSpotSearchName={state.dateSpotSearchName}
         />

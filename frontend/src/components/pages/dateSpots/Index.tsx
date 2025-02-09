@@ -37,8 +37,8 @@ export const Index: FC = memo(() => {
           defaultUserCondition='bg-gray-300'
           defaultSearchSwitch='DateSpot'
           dateSpotSearchName={''}
-          defaultPrefectureValue={''}
-          defaultGenreValue={''}
+          defaultPrefectureId={''}
+          defaultGenreId={''}
           defaultComeTime={''}
         />
       }

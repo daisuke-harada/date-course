@@ -39,7 +39,7 @@ export const Show: FC = memo(() => {
           defaultCourseCondition='bg-gray-300'
           defaultUserCondition='bg-gray-300'
           defaultSearchSwitch='DateSpot'
-          defaultGenreValue={`${id}`}
+          defaultGenreId={`${id}`}
         />
       }
 
