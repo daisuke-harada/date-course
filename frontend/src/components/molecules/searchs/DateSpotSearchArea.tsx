@@ -44,7 +44,8 @@ export const DateSpotSearchArea: FC<Props> = memo((props) => {
 
   const onClickNameSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
     client.post('date_spot_name_search', {dateSpotName}).then(response => {
-      navigate('/dateSpots/search', {state: {addressAndDateSpots: response.data.addressAndDateSpots, dateSpotSearchName: dateSpotName}})
+      console.log(response.data)
+      navigate('/dateSpots/search', {state: {addressAndDateSpots: response.data, dateSpotSearchName: dateSpotName}})
     });
   };
 

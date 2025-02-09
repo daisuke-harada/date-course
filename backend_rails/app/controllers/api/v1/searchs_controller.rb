@@ -27,8 +27,8 @@ class Api::V1::SearchsController < ApplicationController
 
   def date_spot_name_search
     date_spots = DateSpot.includes(:address, :date_spot_reviews).ransack(name_cont: params[:date_spot_name]).result
-    address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address) }
+    address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address).serializable_hash }
 
-    render status: :ok, json: {address_and_date_spots: address_and_date_spots}
+    render status: :ok, json: address_and_date_spots
   end
 end

@@ -32,6 +32,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.includes(:followers, :followings, date_spot_reviews: :date_spot, courses: {date_spots: {address: {date_spot: :date_spot_reviews}}}).find(params[:id])
   end
 end
