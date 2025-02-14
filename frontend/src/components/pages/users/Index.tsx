@@ -12,6 +12,7 @@ export const Index: FC = memo(() => {
   const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
 
   useEffect(() => {
+    console.log('Fetching users');
     client.get(`users`).then(response => {
       setUsers(response.data);
     });

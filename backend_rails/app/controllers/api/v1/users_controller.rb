@@ -7,8 +7,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    courses = @user.courses.includes(date_spots: {address: {date_spot: :date_spot_reviews}})
-    date_spot_reviews = @user.date_spot_reviews.includes(:date_spot)
     render status: :ok, json: @user
   end
 
