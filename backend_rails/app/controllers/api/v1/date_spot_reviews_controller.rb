@@ -13,19 +13,17 @@ class Api::V1::DateSpotReviewsController < ApplicationController
 
   def update
     if @date_spot_review.update(date_spot_review_params)
-      date_spot_reviews = DateSpotReview.for_date_spot(@date_spot_review.date_spot_id).map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }
-
-      render status: :ok, json: {date_spot_reviews: date_spot_reviews, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
+      render status: :ok, json: {date_spot_reviews: DateSpotReview.for_date_spot(@date_spot_review.date_spot_id).map { |date_spot_review| DateSpotReviewSerializer.new(date_spot_review, include_user_info: true).attributes }, review_average_rate: @date_spot_review.date_spot.average_rate_calculation}
     else
       render status: :unprocessable_entity, json: ErrorSerializer.new(@date_spot_review).as_json
     end
   end
 
   def destroy
-    date_spot_id = @date_spot_review.date_spot.id
+    date_spot = @date_spot_review.date_spot
     @date_spot_review.destroy
     set_date_spot_reviews
-    render status: :ok, json: {date_spot_reviews: @date_spot_reviews, review_average_rate: DateSpot.find(date_spot_id).average_rate_calculation}
+    render status: :ok, json: {date_spot_reviews: @date_spot_reviews, review_average_rate: date_spot.average_rate_calculation}
   end
 
   private

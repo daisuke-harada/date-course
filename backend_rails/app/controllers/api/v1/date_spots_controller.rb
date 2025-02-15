@@ -24,7 +24,7 @@ class Api::V1::DateSpotsController < ApplicationController
     date_spot_form = DateSpotForm.new(date_spot_params)
     date_spot = date_spot_form.save
     if date_spot
-      render status: :created, json: date_spot
+      render status: :created, json: {date_spot_id: date_spot.id}
     else
       render status: :unprocessable_entity, json: ErrorSerializer.new(date_spot_form).as_json
     end
@@ -33,7 +33,7 @@ class Api::V1::DateSpotsController < ApplicationController
   def update
     date_spot_form = DateSpotForm.new(date_spot_params)
     if date_spot_form.update(@date_spot)
-      render status: :ok, json: @date_spot
+      render status: :ok, json: {date_spot_id: @date_spot.id}
     else
       render status: :unprocessable_entity, json: ErrorSerializer.new(@date_spot).as_json
     end

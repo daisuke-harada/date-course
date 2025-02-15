@@ -1,4 +1,4 @@
-setup: build start_project db-create db-migrate db-seed close_project
+setup: build db-create db-migrate db-seed
 
 build:
 	docker compose build

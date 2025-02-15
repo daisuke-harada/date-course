@@ -89,7 +89,8 @@ export const DateSpotForm: FC<Props> = memo((props) => {
 
   const apiDateSpotCreateAccess = (dateSpot: FormData) => {
     formDataClient.post('date_spots', dateSpot).then(response => {
-      navigate(`/dateSpots/${response.data.id}`,  {state: {message: '新規登録に成功しました', type: 'success-message', condition: true}});
+      console.log(response.data)
+      navigate(`/dateSpots/${response.data.dateSpotId}`,  {state: {message: '新規登録に成功しました', type: 'success-message', condition: true}});
     })
     .catch(error => {
       const { name, genreId, addressCityName, addressPrefectureId } = error.response.data.errorMessages;
@@ -103,7 +104,7 @@ export const DateSpotForm: FC<Props> = memo((props) => {
   const apiDateSpotUpdateAccess = (dateSpot: FormData, dateSpotId: number) => {
     formDataClient.put(`date_spots/${dateSpotId}`, dateSpot).then(response => {
       console.log(response)
-      navigate(`/dateSpots/${response.data.id}`,  {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
+      navigate(`/dateSpots/${response.data.dateSpotId}`,  {state: {message: '情報を更新しました', type: 'success-message', condition: true}});
     }).catch(error => {
       const { name, genreId, addressCityName, addressPrefectureId } = error.response.data.errorMessages;
       name !== undefined && setErrorNameMessages(name);
