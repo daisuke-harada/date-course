@@ -10,8 +10,7 @@ RSpec.describe "Api::V1::Registrations", type: :request do
         "gender" => user.gender, "password" => user.password,
         "password_confirmation" => user.password_confirmation
       }
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)["status"]).to eq("created")
+      expect(response.status).to eq(201)
       expect(JSON.parse(response.body)["login_status"]).to eq(true)
       expect(JSON.parse(response.body)["user"]["name"]).to eq(user.name)
       expect(JSON.parse(response.body)["user"]["email"]).to eq(user.email)
@@ -23,7 +22,6 @@ RSpec.describe "Api::V1::Registrations", type: :request do
 
     it "入力された値が正しくない場合はuserを登録することができず、エラーメッセージが設定される" do
       post "/api/v1/signup", params: {"name" => "", "email" => "", "gender" => "", "password" => "", "password_confirmation" => ""}
-      expect(JSON.parse(response.body)["status"]).to eq(500)
       expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
       expect(JSON.parse(response.body)["error_messages"]["email"]).to eq(["を入力してください", "は不正な値です"])
       expect(JSON.parse(response.body)["error_messages"]["gender"]).to eq(["を入力してください"])

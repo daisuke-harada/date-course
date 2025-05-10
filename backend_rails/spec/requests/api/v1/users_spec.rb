@@ -15,10 +15,10 @@ RSpec.describe "Api::V1::Users", type: :request do
   describe "GET /show" do
     it "user詳細ページを表示する" do
       get "/api/v1/users/#{user.id}"
-      expect(JSON.parse(response.body)["user"]["name"]).to eq(user.name)
-      expect(JSON.parse(response.body)["user"]["email"]).to eq(user.email)
-      expect(JSON.parse(response.body)["user"]["created_at"])
-      expect(JSON.parse(response.body)["user"]["updated_at"])
+      expect(JSON.parse(response.body)["name"]).to eq(user.name)
+      expect(JSON.parse(response.body)["email"]).to eq(user.email)
+      expect(JSON.parse(response.body)["created_at"])
+      expect(JSON.parse(response.body)["updated_at"])
     end
   end
 
@@ -31,10 +31,10 @@ RSpec.describe "Api::V1::Users", type: :request do
         "password" => "edit_password",
         "password_confirmation" => "edit_password"
       }
-      expect(JSON.parse(response.body)["status"]).to eq("updated")
-      expect(JSON.parse(response.body)["user"]["name"]).to eq("edit")
-      expect(JSON.parse(response.body)["user"]["email"]).to eq("edit@gmail.com")
-      expect(JSON.parse(response.body)["user"]["gender"]).to eq("女性")
+      expect(response.status).to eq(200)
+      expect(JSON.parse(response.body)["name"]).to eq("edit")
+      expect(JSON.parse(response.body)["email"]).to eq("edit@gmail.com")
+      expect(JSON.parse(response.body)["gender"]).to eq("女性")
     end
 
     it "user情報の編集に失敗する" do
@@ -45,7 +45,7 @@ RSpec.describe "Api::V1::Users", type: :request do
         "password" => "",
         "password_confirmation" => ""
       }
-      expect(JSON.parse(response.body)["status"]).to eq(500)
+      expect(response.status).to eq(422)
       expect(JSON.parse(response.body)["error_messages"]["name"]).to eq(["を入力してください"])
       expect(JSON.parse(response.body)["error_messages"]["email"]).to eq(["を入力してください", "は不正な値です"])
       expect(JSON.parse(response.body)["error_messages"]["gender"]).to eq(["を入力してください"])
@@ -57,7 +57,7 @@ RSpec.describe "Api::V1::Users", type: :request do
   describe "DELETE /destroy" do
     it "user情報の削除に成功する" do
       delete "/api/v1/users/#{user.id}"
-      expect(JSON.parse(response.body)["status"]).to eq("deleted")
+      expect(response.status).to eq(204)
     end
   end
 end

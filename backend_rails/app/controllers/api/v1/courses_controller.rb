@@ -15,7 +15,7 @@ class Api::V1::CoursesController < ApplicationController
     if course_form.save
       render status: :created, json: {course_id: course_form.id}
     else
-      render status: :unprocessable_entity, json: ErrorSerializer.new(course_form).as_json, status: :unprocessable_entity
+      render status: :unprocessable_entity, json: ErrorSerializer.new(course_form).as_json
     end
   end
 

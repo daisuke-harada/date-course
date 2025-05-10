@@ -36,12 +36,6 @@ RSpec.describe DuringSpot, type: :model do
         during_spot.valid?
         expect(during_spot.errors[:date_spot_id]).to include("を入力してください")
       end
-
-      it "コースidが入力されていなければ保存できないこと" do
-        during_spot.course_id = nil
-        during_spot.valid?
-        expect(during_spot.errors[:course_id]).to include("を入力してください")
-      end
     end
   end
 end

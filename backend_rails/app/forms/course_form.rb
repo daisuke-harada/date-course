@@ -6,14 +6,15 @@ class CourseForm
 
   def save
     return false unless valid?
-
+    return false if date_spots.empty?
     ActiveRecord::Base.transaction do
       course = Course.new(course_attributes)
-      date_spots.each { |date_spot_id| course.during_spots.build(date_spot_id: date_spot_id) }
+      date_spots.each do |date_spot_id|
+        course.during_spots.build(date_spot_id: date_spot_id)
+      end
       course.save!
       self.id = course.id
     end
-
     true
   rescue ActiveRecord::RecordInvalid
     false

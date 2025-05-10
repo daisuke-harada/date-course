@@ -11,7 +11,7 @@ RSpec.describe "Api::V1::Searchs", type: :request do
         "genre_id" => 1,
         "come_time" => ""
       }
-      expect(JSON.parse(response.body)["status"]).to eq("success")
+      expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["address_and_date_spots"][0]["date_spot"]["name"]).to eq(date_spot.name)
       expect(JSON.parse(response.body)["address_and_date_spots"][0]["prefecture_name"]).to eq(address.prefecture.name)
       expect(JSON.parse(response.body)["address_and_date_spots"][0]["city_name"]).to eq(address.city_name)
@@ -26,9 +26,9 @@ RSpec.describe "Api::V1::Searchs", type: :request do
       post "/api/v1/date_spot_name_search", params: {
         "date_spot_name" => "キャナルシティ"
       }
-      expect(JSON.parse(response.body)["address_and_date_spots"][0]["date_spot"]["name"]).to eq(date_spot.name)
-      expect(JSON.parse(response.body)["address_and_date_spots"][0]["prefecture_name"]).to eq(address.prefecture.name)
-      expect(JSON.parse(response.body)["address_and_date_spots"][0]["city_name"]).to eq(address.city_name)
+      expect(JSON.parse(response.body)[0]["date_spot"]["name"]).to eq(date_spot.name)
+      expect(JSON.parse(response.body)[0]["prefecture_name"]).to eq(address.prefecture.name)
+      expect(JSON.parse(response.body)[0]["city_name"]).to eq(address.city_name)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe "Api::V1::Searchs", type: :request do
       post "/api/v1/courses/sort", params: {
         "prefecture_id" => "40"
       }
-      expect(JSON.parse(response.body)["status"]).to eq("success")
+      expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["prefecture_id"]).to eq("40")
       expect(JSON.parse(response.body)["courses"][0]["id"]).to eq(course.id)
     end

@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::Relationships", type: :request do
         "current_user_id" => user.id,
         "followed_user_id" => other_user.id
       }
-      expect(JSON.parse(response.body)["status"]).to eq("created")
+      expect(response.status).to eq(201)
       expect(JSON.parse(response.body)["current_user"]["id"]).to eq(user.id)
       expect(JSON.parse(response.body)["followed_user"]["id"]).to eq(other_user.id)
     end
@@ -21,7 +21,7 @@ RSpec.describe "Api::V1::Relationships", type: :request do
 
     it "ユーザーをアンフォローする" do
       delete "/api/v1/relationships/#{user.id}/#{other_user.id}"
-      expect(JSON.parse(response.body)["status"]).to eq("deleted")
+      expect(response.status).to eq(200)
       expect(JSON.parse(response.body)["current_user"]["id"]).to eq(user.id)
       expect(JSON.parse(response.body)["unfollowed_user"]["id"]).to eq(other_user.id)
     end

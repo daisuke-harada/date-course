@@ -15,8 +15,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
           date_spot_id: date_spot_review.date_spot_id
         }
       }
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)["status"]).to eq("created")
+      expect(response.status).to eq(201)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(date_spot_review.rate)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(date_spot_review.content)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_name"]).to eq(date_spot_review.user.name)
@@ -35,8 +34,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
           date_spot_id: ""
         }
       }
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)["status"]).to eq(500)
+      expect(response.status).to eq(422)
       expect(JSON.parse(response.body)["error_messages"]["user_id"]).to eq(["を入力してください"])
       expect(JSON.parse(response.body)["error_messages"]["date_spot_id"]).to eq(["を入力してください"])
     end
@@ -55,7 +53,6 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
         }
       }
       expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)["status"]).to eq("updated")
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(5.0)
       expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq("編集しました")
       expect(JSON.parse(response.body)["review_average_rate"]).to eq(5.0)
@@ -70,8 +67,7 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
           date_spot_id: date_spot_review.date_spot_id
         }
       }
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)["status"]).to eq(500)
+      expect(response.status).to eq(422)
       expect(JSON.parse(response.body)["error_messages"]["content"]).to eq(["は75文字以内で入力してください"])
     end
   end
@@ -82,13 +78,13 @@ RSpec.describe "Api::V1::DateSpotReviews", type: :request do
 
     it "date_spot情報の削除に成功する" do
       delete "/api/v1/date_spot_reviews/#{date_spot_review.id}"
-      expect(JSON.parse(response.body)["status"]).to eq("deleted")
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(date_spot_review.rate)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(date_spot_review.content)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_name"]).to eq(date_spot_review.user.name)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_gender"]).to eq(date_spot_review.user.gender)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_id"]).to eq(date_spot_review.user_id)
-      expect(JSON.parse(response.body)["date_spot_reviews"][0]["date_spot_id"]).to eq(date_spot_review.date_spot_id)
+      expect(response.status).to eq(200)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["rate"]).to eq(other_date_spot_review.rate)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["content"]).to eq(other_date_spot_review.content)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_name"]).to eq(other_date_spot_review.user.name)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_gender"]).to eq(other_date_spot_review.user.gender)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["user_id"]).to eq(other_date_spot_review.user_id)
+      expect(JSON.parse(response.body)["date_spot_reviews"][0]["date_spot_id"]).to eq(other_date_spot_review.date_spot_id)
       expect(JSON.parse(response.body)["review_average_rate"]).to eq(1.0)
     end
   end

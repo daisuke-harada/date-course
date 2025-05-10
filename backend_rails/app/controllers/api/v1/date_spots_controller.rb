@@ -35,7 +35,7 @@ class Api::V1::DateSpotsController < ApplicationController
     if date_spot_form.update(@date_spot)
       render status: :ok, json: {date_spot_id: @date_spot.id}
     else
-      render status: :unprocessable_entity, json: ErrorSerializer.new(@date_spot).as_json
+      render status: :unprocessable_entity, json: ErrorSerializer.new(date_spot_form).as_json
     end
   end
 
