@@ -17,3 +17,6 @@ db-migrate:
 
 db-seed:
 	docker compose run --rm backend_rails rails db:seed
+
+rspec:
+	docker compose run --rm backend_rails bundle exec rspec

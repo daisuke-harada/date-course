@@ -111,5 +111,36 @@ RSpec.describe "Api::V1::DateSpots", type: :request do
       expect(JSON.parse(response.body)[1]["prefecture_name"]).to eq(other_address.prefecture.name)
       expect(JSON.parse(response.body)[1]["city_name"]).to eq(other_address.city_name)
     end
+
+    it "query param date_spot_name でフィルタできる" do
+      get "/api/v1/date_spots", params: { date_spot_name: date_spot.name[0..3] }
+      body = JSON.parse(response.body)
+      expect(body.any? { |a| a["date_spot"]["name"] == date_spot.name }).to be true
+      expect(body.all? { |a| a["date_spot"]["name"].include?(date_spot.name[0..3]) }).to be true
+    end
+
+    it "query param prefecture_id で絞り込める" do
+      get "/api/v1/date_spots", params: { prefecture_id: address.prefecture_id }
+      body = JSON.parse(response.body)
+      expect(body.all? { |a| a["prefecture_name"] == address.prefecture.name }).to be true
+    end
+
+    it "query param genre_id で絞り込める" do
+      get "/api/v1/date_spots", params: { genre_id: date_spot.genre_id }
+      body = JSON.parse(response.body)
+      expect(body.all? { |a| a["date_spot"]["genre_id"] == date_spot.genre_id }).to be true
+    end
+
+    it "query param come_time で開店時間/閉店時間で絞り込める" do
+      # come_time が date_spot の営業時間内で、other_spot は営業時間外になるように調整
+      other_spot.update(opening_time: "2000-01-01 00:00:00 UTC", closing_time: "2000-01-01 01:00:00 UTC")
+      come_time = "2000-01-01T12:00:00Z"
+
+      get "/api/v1/date_spots", params: { come_time: come_time }
+      body = JSON.parse(response.body)
+      # date_spot は含まれているが other_spot は含まれていないはず
+      expect(body.any? { |a| a["date_spot"]["name"] == date_spot.name }).to be true
+      expect(body.none? { |a| a["date_spot"]["name"] == other_spot.name }).to be true
+    end
   end
 end

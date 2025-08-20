@@ -5,9 +5,8 @@ Rails.application.routes.draw do
       get "/top", to: "homes#top"
       post "/signup", to: "registrations#signup"
       post "/login", to: "sessions#login"
+      # TODO: 検索系のエンドポイントが POST になっています。検索は原則 GET に変更することを検討してください。
       post "/user_name_search", to: "searchs#user_name_search"
-      post "/date_spot_name_search", to: "searchs#date_spot_name_search"
-      post "/date_spots/sort", to: "searchs#date_spot_sort_search"
       post "/courses/sort", to: "searchs#course_sort_search"
       resources :date_spots
       resources :date_spot_reviews, only: [:create, :destroy, :update]

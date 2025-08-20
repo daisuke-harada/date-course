@@ -2,8 +2,21 @@ class Api::V1::DateSpotsController < ApplicationController
   before_action :set_date_spot, only: [:show, :update, :destroy]
 
   def index
-    address_and_date_spots = Address.includes(date_spot: :date_spot_reviews).map do |address|
-      AddressSerializer.new(address).serializable_hash
+    if params[:date_spot_name].present? || params[:prefecture_id].present? || params[:genre_id].present? || params[:come_time].present?
+      date_spots = DateSpot.includes(:address, :date_spot_reviews).ransack(
+        name_cont: params[:date_spot_name],
+        address_prefecture_id_eq: params[:prefecture_id],
+        genre_id_eq: params[:genre_id],
+        opening_time_lteq: params[:come_time],
+        closing_time_gteq: params[:come_time]
+      ).result
+
+      # map to address serializer and deduplicate by address id
+      address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address).serializable_hash }.uniq { |a| a['id'] }
+    else
+      address_and_date_spots = Address.includes(date_spot: :date_spot_reviews).map do |address|
+        AddressSerializer.new(address).serializable_hash
+      end
     end
 
     render status: :ok, json: address_and_date_spots
