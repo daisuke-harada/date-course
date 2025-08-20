@@ -33,7 +33,7 @@ export const CourseSearchArea: FC<Props> = memo((props) => {
     <>
       <div className='pt-5 px-2 mx-auto text-center flex flex-col'>
         <div className='mb-2'>条件検索</div>
-        <PrefectureSelect addClassName='border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureId} onChangeValue={onChangePrefectureId} />
+        <PrefectureSelect addClassName='border-red-100' dataE2e='dateSpot-prefecture-select' value={prefectureId} onChangeValue={onChangePrefectureId} />
       </div>
       <div className='m-auto mb-5 mt-1 w-1/4'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>

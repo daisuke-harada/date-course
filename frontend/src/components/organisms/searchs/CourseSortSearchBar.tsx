@@ -42,7 +42,7 @@ export const CourseSortSearchBar: FC<Props> = memo((props) => {
         デートコースエリア検索
       </TitleDiv>
       <SelectParentDiv>
-        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureId} onChangeValue={onChangePrefectureValue} />
+        <PrefectureSelect addClassName='w-full border-red-100' dataE2e='dateSpot-prefecture-select' value={prefectureId} onChangeValue={onChangePrefectureValue} />
       </SelectParentDiv>
       <div className='m-auto my-2 lg:w-1/3 w-1/2'>
         <BaseButton onClickEvent={onClickSearch}>検索</BaseButton>

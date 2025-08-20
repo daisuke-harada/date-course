@@ -94,16 +94,16 @@ export const DateSpotSearchArea: FC<Props> = memo((props) => {
           <>
             <div className='mobile(L):justify-center justify-start flex overflow-x-scroll pb-2 whitespace-nowrap'>
               <SelectParentDiv>
-                <PrefectureSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-prefecture-select' defaultValue={prefectureId} onChangeValue={onChangePrefectureId} />
+                <PrefectureSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-prefecture-select' value={prefectureId} onChangeValue={onChangePrefectureId} />
               </SelectParentDiv>
               <SelectParentDiv>
-                <GenreSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-genre-select' defaultValue={genreId} onChangeValue={onChangeGenreId} />
+                <GenreSelect addClassName='w-20 border-red-100' dataE2e='dateSpot-genre-select' value={genreId} onChangeValue={onChangeGenreId} />
               </SelectParentDiv>
               <SelectParentDiv className='flex'>
                 <div className='font-bold text-sm mx-1 mt-1'>
                   来店希望時間
                 </div>
-                <BusinessTimeSelect addClassName='border-2 mb-1 rounded-md border-red-100' timeValue={comeTime} onChangeTimeValue={onChangeComeTime} />
+                <BusinessTimeSelect addClassName='border-2 mb-1 rounded-md border-red-100' value={comeTime} onChangeTimeValue={onChangeComeTime} />
               </SelectParentDiv>
             </div>
             <div className='m-auto my-5 w-1/4'>

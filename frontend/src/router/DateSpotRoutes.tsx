@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import { Edit } from 'components/pages/dateSpots/Edit';
 import { Index } from 'components/pages/dateSpots/Index';
-import { Search } from 'components/pages/dateSpots/Search';
 import { New } from 'components/pages/dateSpots/New';
 import { Show } from 'components/pages/dateSpots/Show';
 import { Page404 } from 'components/pages/Page404';
@@ -35,11 +34,6 @@ export const DateSpotRoutes = () =>{
       <New /> :
       <Navigate to='/' state={{message: '管理者しかアクセスできません', type: 'error-message', condition: true}} />
     },
-    {
-      path: 'search',
-      element: <Search />
-    },
-
     {
       path: '*',
       element: <Page404 />

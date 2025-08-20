@@ -12,7 +12,7 @@ class Api::V1::DateSpotsController < ApplicationController
       ).result
 
       # map to address serializer and deduplicate by address id
-      address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address).serializable_hash }.uniq { |a| a['id'] }
+      address_and_date_spots = date_spots.map { |date_spot| AddressSerializer.new(date_spot.address).serializable_hash }
     else
       address_and_date_spots = Address.includes(date_spot: :date_spot_reviews).map do |address|
         AddressSerializer.new(address).serializable_hash
