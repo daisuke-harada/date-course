@@ -26,10 +26,10 @@ export const BusinessTimeSelectArea: FC<Props> = memo((props) => {
       <div>営業時間</div>
       <div className='mb-5 border-b-2 outline-none'>
         <label>始業時間</label>
-        <BusinessTimeSelect dataE2e={openingDataE2e} timeValue={defaultOpeningTimeValue} onChangeTimeValue={onChangeOpeningTimeValue} />
+        <BusinessTimeSelect dataE2e={openingDataE2e} value={defaultOpeningTimeValue} onChangeTimeValue={onChangeOpeningTimeValue} />
             ~
         <label>終業時間</label>
-        <BusinessTimeSelect dataE2e={closingDataE2e} timeValue={defaultClosingTimeValue} onChangeTimeValue={onChangeClosingTimeValue} />
+        <BusinessTimeSelect dataE2e={closingDataE2e} value={defaultClosingTimeValue} onChangeTimeValue={onChangeClosingTimeValue} />
       </div>
     </>
   );

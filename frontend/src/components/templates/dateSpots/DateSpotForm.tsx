@@ -156,9 +156,9 @@ export const DateSpotForm: FC<Props> = memo((props) => {
 
       <SubDiv>
         <Input data-e2e='dateSpot-form-name-input' placeholder='名前を入力' value={name} onChange={onChangeName} />
-        <PrefectureSelect dataE2e='dateSpot-prefecture-select' defaultValue={prefectureValue} onChangeValue={onChangePrefectureValue} />
+        <PrefectureSelect dataE2e='dateSpot-prefecture-select' value={prefectureValue} onChangeValue={onChangePrefectureValue} />
         <Input data-e2e='dateSpot-form-cityName-input' placeholder='市町村名、番地' value={cityName} onChange={onChangeCityName} />
-        <GenreSelect dataE2e='dateSpot-genre-select' defaultValue={genreValue} onChangeValue={onChangeGenreValue} />
+        <GenreSelect dataE2e='dateSpot-genre-select' value={genreValue} onChangeValue={onChangeGenreValue} />
         <BusinessTimeSelectArea
           defaultOpeningTimeValue={openingTime}
           defaultClosingTimeValue={closingTime}
