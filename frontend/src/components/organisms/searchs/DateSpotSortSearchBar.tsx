@@ -5,7 +5,7 @@ import { BaseButton } from 'components/atoms/button/BaseButton';
 import { GenreSelect } from 'components/molecules/select/dateSpots/GenreSelect';
 import { PrefectureSelect } from 'components/molecules/select/dateSpots/PrefectureSelect';
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 type Props = {
   defaultPrefectureId: string,
@@ -19,37 +19,33 @@ const TitleDiv = tw.div`lg:text-lg text-xs m-auto my-5 font-bold text-center`;
 
 export const DateSpotSortSearchBar: FC<Props> = memo((props) => {
   const {defaultPrefectureId, defaultGenreId, defaultComeTime} = props;
-  const [prefectureId, setprefectureId] = useState<string >(defaultPrefectureId);
-  const [genreId, setgenreId] = useState<string>(defaultGenreId);
-  const [comeTime, setComeTime] = useState(defaultComeTime);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [prefectureId, setPrefectureId] = useState<string>(() => searchParams.get('prefecture_id') || defaultPrefectureId || '');
+  const [genreId, setGenreId] = useState<string>(() => searchParams.get('genre_id') || defaultGenreId || '');
+  const [comeTime, setComeTime] = useState(() => searchParams.get('come_time') || defaultComeTime || '');
 
   useEffect(() => {
-    setprefectureId(defaultPrefectureId || '');
-  }, [defaultPrefectureId]);
+    setPrefectureId(searchParams.get('prefecture_id') || '');
+    setGenreId(searchParams.get('genre_id') || '');
+    setComeTime(searchParams.get('come_time') || '');
+  }, [searchParams]);
 
-  useEffect(() => {
-    setgenreId(defaultGenreId || '');
-  }, [defaultGenreId]);
-
-  useEffect(() => {
-    setComeTime(defaultComeTime || '');
-  }, [defaultComeTime]);
-
-  const navigate = useNavigate();
-  const onChangeprefectureId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setprefectureId(e.target.value), []);
-  const onChangegenreId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setgenreId(e.target.value), []);
+  const onChangeprefectureId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureId(e.target.value), []);
+  const onChangegenreId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setGenreId(e.target.value), []);
   const onChangeComeTime: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setComeTime(e.target.value), []);
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    // クエリ名はバックエンドに合わせて snake_case にする
-    const query: Record<string, string> = {};
-    if (prefectureId) query.prefecture_id = prefectureId;
-    if (genreId) query.genre_id = genreId;
-    if (comeTime) query.come_time = comeTime;
+    const params = new URLSearchParams(searchParams);
+    if (prefectureId) params.set('prefecture_id', prefectureId);
+    else params.delete('prefecture_id');
 
-    const qs = new URLSearchParams(query).toString();
-    // Index がクエリを読み取って API を叩くため、ここでは navigate のみ行う
-    navigate(`/dateSpots/index${qs ? `?${qs}` : ''}`);
+    if (genreId) params.set('genre_id', genreId);
+    else params.delete('genre_id');
+
+    if (comeTime) params.set('come_time', comeTime);
+    else params.delete('come_time');
+
+    setSearchParams(params);
   };
 
   return(
