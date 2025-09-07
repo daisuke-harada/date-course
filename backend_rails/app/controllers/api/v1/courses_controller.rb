@@ -2,7 +2,13 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show destroy]
 
   def index
-    courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(authority: "公開")
+    if params[:prefecture_id].present?
+      course_ids = DuringSpot.includes(date_spot: :address).ransack(date_spot_address_prefecture_id_eq: params[:prefecture_id]).result.pluck(:course_id).uniq
+      courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(id: course_ids).where(authority: "公開")
+    else
+      courses = Course.includes(date_spots: {address: {date_spot: :date_spot_reviews}}, user: [:followers, :followings]).where(authority: "公開")
+    end
+
     render status: :ok, json: courses
   end
 

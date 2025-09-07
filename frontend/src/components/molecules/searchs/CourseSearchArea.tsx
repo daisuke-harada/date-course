@@ -1,9 +1,8 @@
-import { memo, useCallback, useState, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, memo, useCallback, useState } from 'react';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { client } from 'lib/api/client';
 import { PrefectureSelect } from '../select/dateSpots/PrefectureSelect';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   defaultPrefectureId?: string
@@ -13,20 +12,14 @@ type Props = {
 export const CourseSearchArea: FC<Props> = memo((props) => {
   const { defaultPrefectureId } = props;
   const [prefectureId, setPrefectureId] = useState<string >(defaultPrefectureId || '');
-  const navigate = useNavigate();
   const onChangePrefectureId: React.ChangeEventHandler<HTMLSelectElement> = useCallback((e) => setPrefectureId(e.target.value), []);
+  const navigate = useNavigate();
 
   const onClickSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    client.post('courses/sort', {prefectureId}).then(response => {
-      navigate('/courses/search',
-        {
-          state: {
-            courses: response.data.courses,
-            prefectureId: response.data.prefectureId,
-          }
-        }
-      )
-    })
+    const params = new URLSearchParams();
+    if(prefectureId) params.append('prefecture_id', prefectureId);
+    // coursesのindexページに検索パラメータ付きで遷移
+    navigate(`/courses/index?${params.toString()}`);
   };
 
   return(

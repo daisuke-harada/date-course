@@ -1,13 +1,11 @@
-import { memo, useCallback, useState, FC } from 'react';
-import tw from 'tailwind-styled-components';
-import { useNavigate } from 'react-router-dom';
+import { FC, memo, useCallback, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { BaseButton } from 'components/atoms/button/BaseButton';
-import { client } from 'lib/api/client';
-import { PrefectureSelect } from '../select/dateSpots/PrefectureSelect';
-import { GenreSelect } from '../select/dateSpots/GenreSelect';
 import { BusinessTimeSelect } from 'components/atoms/select/BusinessTimeSelect';
-import { useSearchParams } from 'react-router-dom';
+import { GenreSelect } from '../select/dateSpots/GenreSelect';
+import { PrefectureSelect } from '../select/dateSpots/PrefectureSelect';
+import tw from 'tailwind-styled-components';
 
 const Input = tw.input`py-1 px-3 w-full border-2 border-red-100 rounded-xl`;
 const RadioInput = tw.input`mx-1 mt-0.5`
@@ -25,6 +23,7 @@ type Props = {
 export const DateSpotSearchArea: FC<Props> = memo((props) => {
   const { dateSpotSearchName, defaultPrefectureId, defaultGenreId, defaultComeTime } = props;
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [ searchTarget, setSearchTarget] = useState(dateSpotSearchName? 'name' : 'condition');
   const [ dateSpotName, setDateSpotName ] = useState(() => searchParams.get('date_spot_name') || '');
   const [prefectureId, setPrefectureId] = useState<string>(() => searchParams.get('prefecture_id') || defaultPrefectureId || '');
@@ -39,25 +38,20 @@ export const DateSpotSearchArea: FC<Props> = memo((props) => {
 
 
   const onClickNameSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-    const params = new URLSearchParams(searchParams);
-    if (dateSpotName) params.set('date_spot_name', dateSpotName);
-    else params.delete('date_spot_name');
-    setSearchParams(params);
-
+    const params = new URLSearchParams();
+    if (dateSpotName) params.append('date_spot_name', dateSpotName);
+    // デートスポットのindexページに検索パラメータ付きで遷移
+    navigate(`/dateSpots/index?${params.toString()}`);
   };
 
   const onClickConditionSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
-   const params = new URLSearchParams(searchParams);
-    if (prefectureId) params.set('prefecture_id', prefectureId);
-    else params.delete('prefecture_id');
+    const params = new URLSearchParams();
+    if (prefectureId) params.append('prefecture_id', prefectureId);
+    if (genreId) params.append('genre_id', genreId);
+    if (comeTime) params.append('come_time', comeTime);
 
-    if (genreId) params.set('genre_id', genreId);
-    else params.delete('genre_id');
-
-    if (comeTime) params.set('come_time', comeTime);
-    else params.delete('come_time');
-
-    setSearchParams(params);
+    // デートスポットのindexページに検索パラメータ付きで遷移
+    navigate(`/dateSpots/index?${params.toString()}`);
   };
 
   return(
