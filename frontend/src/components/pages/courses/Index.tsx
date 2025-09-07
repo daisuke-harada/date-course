@@ -1,13 +1,14 @@
-import { client } from 'lib/api/client';
-import { memo, useEffect, useState, FC } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 
 import { CourseResponseData } from 'types/courses/response';
-import { Courses } from 'components/templates/courses/Courses';
 import { CourseSortSearchBar } from 'components/organisms/searchs/CourseSortSearchBar';
-import { MultiBar } from 'components/organisms/searchs/MultiBar';
-import { defaultUserResponseData } from 'datas/defaultUserData';
-import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { Courses } from 'components/templates/courses/Courses';
 import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
+import { MultiBar } from 'components/organisms/searchs/MultiBar';
+import { client } from 'lib/api/client';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { defaultUserResponseData } from 'datas/defaultUserData';
+import { useSearchParams } from 'react-router-dom';
 
 export const Index: FC = memo(() => {
   const [courses, setCourses] = useState<CourseResponseData[]>([
@@ -20,16 +21,19 @@ export const Index: FC = memo(() => {
       noDuplicatePrefectureNames: ['']
     }
   ]);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    client.get('courses').then((response) => {
+    const params: Record<string, string> = {};
+    if (searchParams.get('prefecture_id')) params.prefecture_id = searchParams.get('prefecture_id')!;
+    client.get('courses', { params }).then((response) => {
       setCourses(response.data);
-    })
-  }, []);
+    });
+  }, [searchParams]);
 
   return(
     <IndexLayout
-      sideArea={<CourseSortSearchBar defaultPrefectureId='' />}
+      sideArea={<CourseSortSearchBar />}
 
       topArea={
         <MultiBar
