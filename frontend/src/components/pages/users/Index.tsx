@@ -1,22 +1,26 @@
-import { memo, useEffect, useState, FC } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 
+import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
 import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { UserNameSearchBar } from 'components/organisms/searchs/UserNameSearchBar';
-import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
+import { UserResponseData } from 'types/users/response';
 import { Users } from 'components/templates/users/Users';
 import { client } from 'lib/api/client';
-import { UserResponseData } from 'types/users/response';
 import { defaultUserResponseData } from 'datas/defaultUserData';
+import { useSearchParams } from 'react-router-dom';
 
 export const Index: FC = memo(() => {
   const [users, setUsers] = useState<UserResponseData[]>([defaultUserResponseData]);
+  const [searchParams] = useSearchParams();
+  const userSearchName = searchParams.get('name') || '';
 
   useEffect(() => {
-    console.log('Fetching users');
-    client.get(`users`).then(response => {
+    const params: Record<string, string> = {};
+    if (userSearchName) params.name = userSearchName;
+    client.get('users', { params }).then(response => {
       setUsers(response.data);
     });
-  }, []);
+  }, [userSearchName]);
 
   return(
     <IndexLayout

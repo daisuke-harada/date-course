@@ -1,7 +1,11 @@
 rates = [2, 2.5, 3, 3.5, 4, 4.5, 5]
 
 def date_spot_review_create(rate, content, user_id, date_spot_id)
-  DateSpotReview.create(rate: rate, content: content, user_id: user_id, date_spot_id: date_spot_id)
+  # 重複を防ぐ（同じユーザーが同じスポットに複数レビューしないように）
+  DateSpotReview.find_or_create_by(user_id: user_id, date_spot_id: date_spot_id) do |review|
+    review.rate = rate
+    review.content = content
+  end
 end
 
 def date_spot_id_array_shuffle(date_spot_id_array)
@@ -10,6 +14,11 @@ end
 
 def course_create(user_ids, date_spot_id_array, travel_mode)
   User.where(id: user_ids).each do |user|
+    # ユーザーが既にコースを作成済みかチェック
+    if Course.exists?(user_id: user.id)
+      next # 既に作成済みの場合はスキップ
+    end
+
     date_spot_ids = date_spot_id_array_shuffle(date_spot_id_array)
     course = Course.create(user_id: user.id, travel_mode: travel_mode, authority: "公開")
     DuringSpot.create(course_id: course.id, date_spot_id: date_spot_ids[0])

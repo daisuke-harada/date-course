@@ -1,6 +1,18 @@
 def spotAndAddressCreate(name, genre_id, opening_time, closing_time, prefecture_id, city_name)
-  date_spot = DateSpot.create(name: name, genre_id: genre_id, image: File.open("./public/images/date_spot_images/#{spot_image(genre_id)}"), opening_time: opening_time, closing_time: closing_time)
-  Address.create(prefecture_id: prefecture_id, date_spot_id: date_spot.id, city_name: Prefecture.find(prefecture_id).name + city_name)
+  # 重複を防ぐためfind_or_create_byを使用
+  date_spot = DateSpot.find_or_create_by(name: name) do |spot|
+    spot.genre_id = genre_id
+    spot.image = File.open("./public/images/date_spot_images/#{spot_image(genre_id)}")
+    spot.opening_time = opening_time
+    spot.closing_time = closing_time
+  end
+
+  # Addressも重複チェック
+  full_city_name = Prefecture.find(prefecture_id).name + city_name
+  Address.find_or_create_by(date_spot_id: date_spot.id) do |address|
+    address.prefecture_id = prefecture_id
+    address.city_name = full_city_name
+  end
 end
 
 def normal_time(time)

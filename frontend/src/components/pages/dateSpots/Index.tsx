@@ -1,14 +1,14 @@
-import { memo, useEffect, useState, FC } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { FC, memo, useEffect, useState } from 'react';
 
 import { AddressAndDateSpotJoinData } from 'types/dateSpots/response';
 import { DateSpotNameSearchBar } from 'components/organisms/searchs/DateSpotNameSearchBar';
 import { DateSpotSortSearchBar } from 'components/organisms/searchs/DateSpotSortSearchBar';
-import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { DateSpots } from 'components/templates/dateSpots/DateSpots';
 import { IndexLayout } from 'components/templates/layouts/IndexLayouts';
-import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { MultiBar } from 'components/organisms/searchs/MultiBar';
 import { client } from 'lib/api/client';
+import { defaultAddressAndDateSpotJoinData } from 'datas/defaultAddressAndDateSpotJoinData';
+import { useSearchParams } from 'react-router-dom';
 
 export const Index: FC = memo(() => {
   const [addressAndDateSpots, setAddressAndDateSpots] = useState<AddressAndDateSpotJoinData[]>([defaultAddressAndDateSpotJoinData]);
@@ -20,23 +20,16 @@ export const Index: FC = memo(() => {
   const dateSpotSearchName = searchParams.get('date_spot_name') || '';
 
   useEffect(() => {
-    const qs = searchParams.toString();
-    if (qs) {
-      const params: Record<string, string> = {};
-      if (prefectureId) params.prefecture_id = prefectureId;
-      if (genreId) params.genre_id = genreId;
-      if (comeTime) params.come_time = comeTime;
-      if (dateSpotSearchName) params.date_spot_name = dateSpotSearchName;
+    const params: Record<string, string> = {};
+    if (prefectureId) params.prefecture_id = prefectureId;
+    if (genreId) params.genre_id = genreId;
+    if (comeTime) params.come_time = comeTime;
+    if (dateSpotSearchName) params.date_spot_name = dateSpotSearchName;
 
-      client.get('date_spots', { params }).then(response => {
-        setAddressAndDateSpots(response.data);
-      });
-    } else {
-      client.get('date_spots').then(response => {
-        setAddressAndDateSpots(response.data);
-      });
-    }
-  }, [searchParams]);
+    client.get('date_spots', { params }).then(response => {
+      setAddressAndDateSpots(response.data);
+    });
+  }, [prefectureId, genreId, comeTime, dateSpotSearchName]);
 
   return(
     <IndexLayout
