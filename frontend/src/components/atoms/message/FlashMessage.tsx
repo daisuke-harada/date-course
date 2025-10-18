@@ -1,6 +1,7 @@
-import { memo, useCallback, useEffect, useState, FC } from 'react';
-import { useLocation } from 'react-router-dom';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
+
 import tw  from 'tailwind-styled-components';
+import { useLocation } from 'react-router-dom';
 
 type FlashMessageData = {
   message: string,
@@ -8,7 +9,7 @@ type FlashMessageData = {
   condition: boolean
 };
 
-const MessageDiv = tw.div`fixed duration-1000 z-50 right-0 rounded-2xl text-white text-md mt-5 mr-1 p-2 transform`;
+const MessageDiv = tw.div`fixed duration-1000 z-50 right-10 rounded-2xl text-white text-md mt-5 mr-1 p-2 transform`;
 
 export const FlashMessage: FC = memo(() => {
   // 初期値の際には画面外にフラッシュメッセージは存在している。

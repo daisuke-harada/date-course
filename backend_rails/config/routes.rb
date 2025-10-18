@@ -5,7 +5,6 @@ Rails.application.routes.draw do
       get "/top", to: "homes#top"
       post "/signup", to: "registrations#signup"
       post "/login", to: "sessions#login"
-      post "/user_name_search", to: "searchs#user_name_search"
       resources :date_spots
       resources :date_spot_reviews, only: [:create, :destroy, :update]
       resources :prefectures, only: [:show]
