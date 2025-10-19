@@ -9,13 +9,13 @@ services:
       - pg-data:/var/lib/postgresql/data
     ports:
       - "5432:5432" # コンテナ側:ホスト側
-  frontend:
+  react:
     build:
-      context: ./frontend
+      context: ./submodules/react
       dockerfile: Dockerfile.develop
     command: sh -c "yarn start"
     volumes:
-      - ./frontend:/usr/src/datecourses
+      - ./submodules/react:/usr/src/datecourses
     ports:
       - "3000:3000"
   backend_rails:
@@ -39,9 +39,9 @@ services:
   #   build: ./e2e
   #   container_name: cypress
   #   depends_on:
-  #     - frontend
+  #     - react
   #   environment:
-  #     - CYPRESS_baseUrl=http://frontend:3000
+  #     - CYPRESS_baseUrl=http://react:3000
   #   # command: npx cypress open
   #   volumes:
   #     - ./e2e/cypress:/app/cypress
