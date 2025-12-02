@@ -1,3 +1,6 @@
 [submodule "submodules/react"]
 	path = submodules/react
 	url = https://github.com/daisuke-harada/date-course-React
+[submodule "submodules/rails"]
+	path = submodules/rails
+	url = https://github.com/daisuke-harada/date-course-rails
