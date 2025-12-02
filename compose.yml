@@ -20,13 +20,13 @@ services:
       - "3000:3000"
   backend_rails:
     build:
-      context: ./backend_rails
+      context: ./submodules/rails
       dockerfile: Dockerfile.develop
     environment:
       FRONTEND_DOMAIN: http://localhost:3000
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 7777 -b '0.0.0.0'"
     volumes:
-      - ./backend_rails:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
+      - ./submodules/rails:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
     ports:
       - 7777:7777
     depends_on:

@@ -1,4 +1,4 @@
-import { apiLoginAccess, apiUserShowAccess } from "../backend_railsAccessMock/users/apiUserAccess";
+import { apiLoginAccess, apiUserShowAccess } from "../submodules/railsAccessMock/users/apiUserAccess";
 import { UserResponseData } from "../types/users/response";
 import { dataE2eGet } from "./dataE2eGet";
 
