@@ -3,10 +3,10 @@ setup: build db-create db-migrate db-seed
 build:
 	docker compose build
 
-start_project:
-	docker compose up
+run:
+	docker c	docker compose run --rm backend_rails rails db:seedompose up
 
-close_project:
+down:
 	docker compose down
 
 db-create:
