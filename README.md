@@ -14,9 +14,11 @@
 ~~https://www.datecourses.com~~
 
 Terraform<br/>
-<https://github.com/daisuke-harada/date-course-terraform>
+
 
 # 特にみていただきたい点
+- サブモジュール管理
+  - 来的にRailsやReactから他の言語へ移行したり、フロントエンドに影響を与えずバックエンドだけを差し替えられるよう、Dockerのネットワークとプロファイル機能を活用して抽象化を行いました。これにより、CI/CDもリポジトリごとに独立させ、開発効率を高めています
 
 - インフラ
   - Dockerを用いて、ECS(Fargate)で本番環境をサーバーレスで運用している点。
