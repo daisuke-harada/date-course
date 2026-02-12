@@ -11,16 +11,19 @@ services:
       - "5432:5432" # コンテナ側:ホスト側
   react:
     build:
-      context: ./submodules/react
+      context: ./submodules/frontend/react
       dockerfile: Dockerfile.develop
     command: sh -c "yarn start"
+    environment:
+      NODE_ENV: development
+      REACT_APP_API_BASE: http://localhost:7777
     volumes:
-      - ./submodules/react:/usr/src/datecourses
+      - ./submodules/frontend/react:/usr/src/datecourses
     ports:
       - "3000:3000"
   backend_rails:
     build:
-      context: ./submodules/rails
+      context: ./submodules/backend/rails
       dockerfile: Dockerfile.develop
     environment:
       FRONTEND_DOMAIN: http://localhost:3000
