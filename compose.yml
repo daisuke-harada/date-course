@@ -11,28 +11,31 @@ services:
       - "5432:5432" # コンテナ側:ホスト側
   react:
     build:
-      context: ${FRONTEND_PATH}
+      context: ${REACT_FRONTEND_PATH}
       dockerfile: Dockerfile.develop
     command: sh -c "yarn start"
     environment:
       NODE_ENV: development
-      REACT_APP_API_BASE: http://localhost:${API_PORT}
+      REACT_APP_API_BASE: ${RAILS_API_DOMAIN}
     volumes:
-        - ./${FRONTEND_PATH}:/usr/src/datecourses
+        - ./${REACT_FRONTEND_PATH}:/usr/src/datecourses
     ports:
-      - "${FRONTEND_PORT}:3000"
+      - "${REACT_FRONTEND_PORT}:3000"
   backend_rails:
     build:
-      context: ${BACKEND_RAILS_PATH}
+      context: ${RAILS_API_PATH}
       dockerfile: Dockerfile.develop
     environment:
-      FRONTEND_DOMAIN: http://localhost:${FRONTEND_PORT}
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      REACT_FRONTEND_DOMAIN: ${REACT_FRONTEND_DOMAIN}
+      GOOGLE_MAP_API_KEY: ${GOOGLE_MAP_API_KEY}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 7777 -b '0.0.0.0'"
     volumes:
-        - ./${BACKEND_RAILS_PATH}:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
+        - ./${RAILS_API_PATH}:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
     ports:
-      - "${API_PORT}:7777"
+      - "${RAILS_API_PORT}:7777"
     depends_on:
       - db
     tty: true
