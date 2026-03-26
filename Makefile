@@ -4,7 +4,7 @@ build:
 	docker compose build
 
 run:
-	docker c	docker compose run --rm backend_rails rails db:seedompose up
+	docker compose up
 
 down:
 	docker compose down
