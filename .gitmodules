@@ -4,3 +4,6 @@
 [submodule "submodules/rails"]
 	path = submodules/backend/rails
 	url = https://github.com/daisuke-harada/date-course-rails
+[submodule "submodules/backend/go"]
+	path = submodules/backend/go
+	url = https://github.com/daisuke-harada/date-courses-go
