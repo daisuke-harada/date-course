@@ -83,7 +83,7 @@ fi
 
 echo ""
 echo "--- Rails response ------------------------------------------------"
-cat "$RAILS_OUT" | head -60
+cat "$RAILS_OUT" | jq -S .
 echo ""
 echo "--- Go response ---------------------------------------------------"
-cat "$GO_OUT" | head -60
+cat "$GO_OUT" | jq -S .
