@@ -1,10 +1,7 @@
-setup: build db-create db-migrate db-seed
+setup: init-backend-env build db-create db-migrate db-seed
 
 build:
 	docker compose build
-
-run:
-	docker compose up
 
 down:
 	docker compose down
@@ -22,14 +19,27 @@ rspec:
 	docker compose run --rm backend_rails bundle exec rspec
 
 # ============================================================
-# Rails サーバー (port: 7777): DB起動 → seed → サーバー起動 / 削除
+# メイン起動コマンド
+#   React は常に http://localhost:8080 (Nginx) に接続し
+#   Nginx が Rails または Go に振り分ける
 # ============================================================
 
-# Railsサーバーを DB起動・seed投入してから起動する
-rails-up:
+# React + Rails + Nginx を一括起動
+run-rails:
+	$(MAKE) switch-rails
 	docker compose up -d db
 	docker compose run --rm backend_rails rails db:create db:migrate db:seed
-	docker compose up backend_rails
+	docker compose up backend_rails react nginx
+
+# React + Go + Nginx を一括起動
+# ※ Go サーバーはホストで起動するため、別途 make go-up を実行してください
+run-go:
+	$(MAKE) switch-go
+	docker compose up react nginx
+
+# ============================================================
+# Rails サーバー操作
+# ============================================================
 
 # Railsサーバーおよび DB コンテナ・ボリュームを削除する
 rails-down:
@@ -46,6 +56,7 @@ rails-db-reset:
 # Goサーバーを DB起動・schema適用・seed投入してから起動する
 go-up:
 	cd submodules/backend/go && \
+	set -a && . ./.envrc && set +a && \
 	docker compose up -d db && \
 	docker compose exec db sh -c 'until pg_isready -U "$$POSTGRES_USER"; do sleep 1; done' && \
 	PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql && \
@@ -59,10 +70,48 @@ go-down:
 # Go の DB データのみ削除 (ボリュームごと削除して再作成)
 go-db-reset:
 	cd submodules/backend/go && \
+	set -a && . ./.envrc && set +a && \
 	docker compose down -v && \
 	docker compose up -d db && \
 	docker compose exec db sh -c 'until pg_isready -U "$$POSTGRES_USER"; do sleep 1; done' && \
 	PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql
+
+# ============================================================
+# Nginx バックエンド切り替え
+# ============================================================
+
+# .backend.env が無ければ Rails をデフォルトで作成
+init-backend-env:
+	@if [ ! -f .backend.env ]; then \
+		cp .backend.env.example .backend.env; \
+		echo "✅ .backend.env を作成しました (デフォルト: Rails)"; \
+	fi
+
+# 現在どちらのバックエンドが有効か確認
+backend-status:
+	@echo ">>> 現在のバックエンド設定:"
+	@cat .backend.env 2>/dev/null || echo "(未設定: デフォルト Rails)"
+
+# Rails バックエンドに切り替え（nginx を再作成して反映）
+switch-rails:
+	@echo "BACKEND_URL=http://backend_rails:7777" > .backend.env
+	@if docker ps --format "{{.Names}}" | grep -q "nginx"; then \
+		docker compose up -d --force-recreate nginx; \
+	else \
+		echo "⚠️  nginx is not running. Start with make run-rails."; \
+	fi
+	@echo "✅ Rails バックエンドに切り替えました (port: 7777)"
+
+# Go バックエンドに切り替え（nginx を再作成して反映）
+# ※ Go は host で go run しているため host.docker.internal 経由でアクセス
+switch-go:
+	@echo "BACKEND_URL=http://host.docker.internal:1099" > .backend.env
+	@if docker ps --format "{{.Names}}" | grep -q "nginx"; then \
+		docker compose up -d --force-recreate nginx; \
+	else \
+		echo "⚠️  nginx is not running. Start with make run-go."; \
+	fi
+	@echo "✅ Go バックエンドに切り替えました (port: 1099)"
 
 # ============================================================
 # curl 比較: 起動中のサーバーに叩く
@@ -107,4 +156,3 @@ curl-compare-with-servers:
 	@echo ">>> Stopping Rails server..."
 	docker compose down -v --remove-orphans
 	@cd submodules/backend/go && docker compose down -v --remove-orphans
-

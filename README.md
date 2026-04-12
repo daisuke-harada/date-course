@@ -16,6 +16,89 @@
 Terraform<br/>
 
 
+# ローカル開発環境
+
+## アーキテクチャ
+
+React は常に Nginx（port 8080）経由でバックエンドにアクセスします。  
+Nginx の向き先を切り替えるだけで、React を再起動せずに Rails ↔ Go を切り替えられます。
+
+```
+React (port 3000)
+    ↓ API リクエスト
+Nginx (port 8080)  ← make switch-rails / make switch-go で切り替え
+    ↓
+Rails (port 7777)  または  Go (port 1099)
+```
+
+## 初回セットアップ
+
+```bash
+# サブモジュールを取得
+git submodule update --init --recursive
+
+# .backend.env 作成・イメージビルド・DB 初期化
+make setup
+```
+
+## React + Rails で起動する
+
+```bash
+make run-rails
+```
+
+DB の作成・マイグレーション・シードを自動で行い、Rails / React / Nginx をまとめて起動します。
+
+## React + Go で起動する
+
+Go サーバーはホストで直接実行するため、**ターミナルを 2 つ**使います。
+
+```bash
+# ターミナル 1: Go サーバーを起動（DB 初期化 → seed → サーバー起動）
+make go-up
+
+# ターミナル 2: Nginx を Go モードに切り替えて React + Nginx を起動
+make run-go
+```
+
+## バックエンドを切り替える
+
+すでに起動中の状態で、もう一方のバックエンドに切り替えたいときに使います。
+
+```bash
+# → Rails に切り替え
+make switch-rails
+
+# → Go に切り替え
+make switch-go
+
+# 現在どちらが有効か確認
+make backend-status
+```
+
+Nginx が数秒で再起動し、React を再起動せずにバックエンドが切り替わります。
+
+## 停止する
+
+```bash
+# Rails / React / Nginx / DB を停止（ボリュームも削除）
+make rails-down
+
+# Go の DB コンテナを停止（ボリュームも削除）
+make go-down
+```
+
+## その他のコマンド
+
+| コマンド | 内容 |
+|---|---|
+| `make db-migrate` | Rails の DB マイグレーション |
+| `make db-seed` | Rails の seed データ投入 |
+| `make rails-db-reset` | Rails の DB データをリセット（テーブル構造は保持） |
+| `make go-db-reset` | Go の DB データをリセット |
+| `make rspec` | RSpec テストを実行 |
+| `make curl-compare` | 起動中の Rails と Go に同じリクエストを叩いてレスポンスを比較 |
+
 # 特にみていただきたい点
 - サブモジュール管理
   - 来的にRailsやReactから他の言語へ移行したり、フロントエンドに影響を与えずバックエンドだけを差し替えられるよう、Dockerのネットワークとプロファイル機能を活用して抽象化を行いました。これにより、CI/CDもリポジトリごとに独立させ、開発効率を高めています
