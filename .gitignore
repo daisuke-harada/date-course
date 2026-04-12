@@ -37,3 +37,6 @@ yarn-debug.log*
 .env
 .envrc
 /.vscode
+
+# バックエンド切り替え設定（ローカル専用）
+.backend.env
