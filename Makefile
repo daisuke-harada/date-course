@@ -55,6 +55,7 @@ rails-db-reset:
 
 # Goサーバーを DB起動・schema適用・seed投入してから起動する
 go-up:
+	-lsof -ti:1099 | xargs kill -9 2>/dev/null || true
 	cd submodules/backend/go && \
 	set -a && . ./.envrc && set +a && \
 	docker compose up -d db && \
