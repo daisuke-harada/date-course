@@ -1,3 +1,13 @@
+# ============================================================
+# ポート定義
+# ============================================================
+PORT_REACT     ?= 3000
+PORT_RAILS     ?= 7777
+PORT_GO        ?= 1099
+PORT_RAILS_DB  ?= 5432
+PORT_GO_DB     ?= 15432
+PORT_NGINX     ?= 8080
+
 setup: init-backend-env build db-create db-migrate db-seed
 
 build:
@@ -130,6 +140,28 @@ BODY       ?=
 
 curl-compare:
 	bash scripts/curl-compare.sh "$(METHOD)" "$(PATH)" "$(QUERY)" "$(BODY)"
+
+# ============================================================
+# 全サーバーのポートを kill する
+#   対象ポート:
+#     - React     : 3000
+#     - Rails     : 7777
+#     - Go        : 1099
+#     - Rails DB  : 5432
+#     - Go DB     : 15432
+#     - Nginx     : 8080
+# ============================================================
+kill-all-ports:
+	@for port in $(PORT_REACT) $(PORT_RAILS) $(PORT_GO) $(PORT_RAILS_DB) $(PORT_GO_DB) $(PORT_NGINX); do \
+		pids=$$(lsof -ti:$$port 2>/dev/null); \
+		if [ -n "$$pids" ]; then \
+			echo "🔪 port $$port を使用しているプロセス (PID: $$pids) を kill します"; \
+			echo "$$pids" | xargs kill -9; \
+		else \
+			echo "✅ port $$port は使用されていません"; \
+		fi; \
+	done
+	@echo "✅ 全ポートの kill が完了しました"
 
 # ============================================================
 # curl 比較: Rails と Go を両方起動してから叩く

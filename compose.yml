@@ -15,7 +15,7 @@ services:
     platform: linux/x86_64
     image: postgres:13
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pg-data:/var/lib/postgresql/data
     ports:
