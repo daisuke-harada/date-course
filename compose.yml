@@ -1,10 +1,21 @@
 services:
+  nginx:
+    image: nginx:alpine
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
+    volumes:
+      - ./nginx/entrypoint.sh:/entrypoint.sh:ro
+      - ./nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    env_file:
+      - .backend.env
+    ports:
+      - "8080:80"
+
   db:
     # M3チップに対応するために導入
     platform: linux/x86_64
     image: postgres:13
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pg-data:/var/lib/postgresql/data
     ports:
@@ -16,7 +27,9 @@ services:
     command: sh -c "yarn start"
     environment:
       NODE_ENV: development
-      REACT_APP_API_BASE: ${RAILS_API_DOMAIN}
+      # Nginx リバースプロキシ経由でバックエンドに接続（make switch-rails / make switch-go で切り替え）
+      REACT_APP_API_BASE: http://localhost:8080
+      REACT_APP_BACKEND_DOMAIN_API: http://localhost:8080/api/v1
     volumes:
         - ./${REACT_FRONTEND_PATH}:/usr/src/datecourses
     ports:
