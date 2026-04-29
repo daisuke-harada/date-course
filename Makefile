@@ -164,6 +164,20 @@ kill-all-ports:
 	@echo "✅ 全ポートの kill が完了しました"
 
 # ============================================================
+# Submodule shells - open an interactive shell in each submodule
+# Usage: make shell-go  (or shell-rails, shell-react)
+# ============================================================
+
+shell-go:
+	@cd submodules/backend/go && /bin/zsh -l
+
+shell-rails:
+	@cd submodules/backend/rails && /bin/zsh -l
+
+shell-react:
+	@cd submodules/frontend/react && /bin/zsh -l
+
+# ============================================================
 # curl 比較: Rails と Go を両方起動してから叩く
 #   両サーバー起動 → 比較 → 両サーバー停止
 # ============================================================
