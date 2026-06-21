@@ -95,19 +95,19 @@ go-db-reset:
 # ============================================================
 
 # React サブモジュールを main の最新にする
-update-react:
+submodules-update-react:
 	@echo ">>> React を main の最新に更新します"
 	cd submodules/frontend/react && git checkout main && git pull --ff-only
 	@echo "✅ React を更新しました"
 
 # Go サブモジュールを master の最新にする
-update-go:
+submodules-update-go:
 	@echo ">>> Go を master の最新に更新します"
 	cd submodules/backend/go && git checkout master && git pull --ff-only
 	@echo "✅ Go を更新しました"
 
 # React と Go を両方最新にする
-update-all: update-react update-go
+submodules-update-all: submodules-update-react submodules-update-go
 	@echo "✅ React と Go を最新に更新しました"
 
 # ============================================================
