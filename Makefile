@@ -88,6 +88,29 @@ go-db-reset:
 	PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql
 
 # ============================================================
+# Submodule 最新化
+#   各サブモジュールをデフォルトブランチに切り替えて最新を取得する
+#     - React : main
+#     - Go    : master
+# ============================================================
+
+# React サブモジュールを main の最新にする
+submodules-update-react:
+	@echo ">>> React を main の最新に更新します"
+	cd submodules/frontend/react && git checkout main && git pull --ff-only
+	@echo "✅ React を更新しました"
+
+# Go サブモジュールを master の最新にする
+submodules-update-go:
+	@echo ">>> Go を master の最新に更新します"
+	cd submodules/backend/go && git checkout master && git pull --ff-only
+	@echo "✅ Go を更新しました"
+
+# React と Go を両方最新にする
+submodules-update-all: submodules-update-react submodules-update-go
+	@echo "✅ React と Go を最新に更新しました"
+
+# ============================================================
 # Nginx バックエンド切り替え
 # ============================================================
 
