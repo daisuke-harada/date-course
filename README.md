@@ -7,7 +7,6 @@
 > これは実務で経験した「**PHP → Go への段階的リプレイス**」を、個人開発で再現・検証するために設計したものです。
 > Nginx の向き先を変えるだけで、同一の API 契約（OpenAPI）に対して 2 つの実装を差し替えられます。
 
-<!-- TODO: トップページのスクリーンショット / デモGIF をここに差し替え -->
 ![トップページ](https://user-images.githubusercontent.com/59969400/165005761-1b973980-a182-4800-a6f6-9be323b367f5.png)
 
 | | |
@@ -94,7 +93,7 @@ Rails (7777)      Go (1099)
 
 - Rails 版: Docker イメージを **ECS(Fargate)** でサーバレス運用。**ALB** で常時 SSL、画像は **S3**、CI/CD は **GitHub Actions**。
 - Go 版（date-courses-go）: **AWS Lambda + API Gateway + SAM(IaC)** によるフルサーバレス構成へ発展。
-- インフラ構成は別リポジトリ [date-course-terraform] でコード管理。
+- インフラ構成は別リポジトリ [terraform-aws-learning](https://github.com/daisuke-harada/terraform-aws-learning) でコード管理。
 </details>
 
 <details>
