@@ -60,7 +60,7 @@ rails-db-reset:
 	docker compose run --rm backend_rails rails db:truncate_all
 
 # ============================================================
-# Go サーバー (port: 1099): DB起動 → schema適用 → seed → サーバー起動 / 削除
+# Go サーバー (port: 1099): MySQL起動 → schema適用(mysqldef) → seed → サーバー起動 / 削除
 # ============================================================
 
 # Goサーバーを DB起動・schema適用・seed投入してから起動する
@@ -69,10 +69,10 @@ go-up:
 	cd submodules/backend/go && \
 	set -a && . ./.envrc && set +a && \
 	docker compose up -d db && \
-	docker compose exec db sh -c 'until pg_isready -U "$$POSTGRES_USER"; do sleep 1; done' && \
-	PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql && \
+	docker compose exec db sh -c 'until mysqladmin ping -u root -p"$$MYSQL_ROOT_PASSWORD" --silent 2>/dev/null; do sleep 1; done' && \
+	mysqldef -u "$${DB_USER}" -p"$${DB_PASSWORD}" -h "$${DB_HOST}" -P "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql && \
 	go run ./tools/seed/main.go && \
-	go run ./cmd/...
+	go run ./cmd/api
 
 # GoサーバーのDBコンテナ・ボリュームを削除する
 go-down:
@@ -84,8 +84,8 @@ go-db-reset:
 	set -a && . ./.envrc && set +a && \
 	docker compose down -v && \
 	docker compose up -d db && \
-	docker compose exec db sh -c 'until pg_isready -U "$$POSTGRES_USER"; do sleep 1; done' && \
-	PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql
+	docker compose exec db sh -c 'until mysqladmin ping -u root -p"$$MYSQL_ROOT_PASSWORD" --silent 2>/dev/null; do sleep 1; done' && \
+	mysqldef -u "$${DB_USER}" -p"$${DB_PASSWORD}" -h "$${DB_HOST}" -P "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql
 
 # ============================================================
 # Nginx バックエンド切り替え
@@ -189,10 +189,10 @@ curl-compare-with-servers:
 	@echo ">>> Starting Go server..."
 	cd submodules/backend/go && \
 	  docker compose up -d db && \
-	  docker compose exec db sh -c 'until pg_isready -U "$$POSTGRES_USER"; do sleep 1; done' && \
-	  PGPASSWORD="$${DB_PASSWORD}" psqldef -U "$${DB_USER}" -h "$${DB_HOST}" -p "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql && \
+	  docker compose exec db sh -c 'until mysqladmin ping -u root -p"$$MYSQL_ROOT_PASSWORD" --silent 2>/dev/null; do sleep 1; done' && \
+	  mysqldef -u "$${DB_USER}" -p"$${DB_PASSWORD}" -h "$${DB_HOST}" -P "$${DB_PORT}" "$${DB_NAME}" < internal/infrastructure/db/schema.sql && \
 	  go run ./tools/seed/main.go && \
-	  go run ./cmd/... &
+	  go run ./cmd/api &
 	@echo ">>> Waiting for servers to be ready..."
 	@until curl -sf http://localhost:7777/api/v1/top > /dev/null; do sleep 1; done
 	@until curl -sf http://localhost:1099/api/v1/top > /dev/null; do sleep 1; done
