@@ -1,6 +1,8 @@
 # date-course（モノレポルート）
 
-デートスポット・デートコース管理アプリのモノレポ。Nginx がリクエストを振り分け、React フロントエンドと Rails / Go バックエンドで構成される。
+デートスポット・デートコース管理アプリのモノレポ。React フロントエンドと Go バックエンドで構成される。
+
+**現在 Rails から Go へのリプレイス開発中。** ローカルで起動するのは Go + React のみで、React は Go サーバー（port 1099）を直接叩く。Rails / Nginx は停止中（`compose.yml` / `Makefile` でコメントアウト）。
 
 ## リポジトリ構成
 
@@ -8,28 +10,54 @@
 date-course/
 ├── submodules/
 │   ├── backend/
-│   │   ├── rails/   # Rails 7.1 REST API（JWT 認証）
-│   │   └── go/      # Go バックエンド（Rails リプレイス中）
+│   │   ├── go/      # Go バックエンド（リプレイス先・現行）
+│   │   └── rails/   # Rails 7.1 REST API（リプレイス元・停止中）
 │   └── frontend/
 │       └── react/   # React 18 + TypeScript SPA
-├── nginx/           # Nginx 設定（バックエンド切り替え対応）
-├── compose.yml      # Docker Compose（全サービス）
+├── nginx/           # Nginx 設定（Rails 併用時代の残存・現在未使用）
+├── scripts/         # curl-compare.sh（Rails ↔ Go 比較用・現在未使用）
+├── compose.yml      # Docker Compose（react のみ有効）
 └── Makefile         # 開発コマンド集
 ```
 
-各サービスの詳細は各ディレクトリの `CLAUDE.md` を参照。
+各サービスの詳細は各ディレクトリの `CLAUDE.md` を参照（Go 側は未作成）。
 
 ## 主要コマンド
 
 ```bash
-make run-rails        # React + Rails + Nginx を起動
-make run-go           # React + Nginx を起動（Go は別途 make go-up）
-make go-up            # Go サーバーを DB 込みで起動
-make switch-rails     # Nginx を Rails バックエンドに切り替え
-make switch-go        # Nginx を Go バックエンドに切り替え
-make rspec            # Rails の RSpec 実行
-make curl-compare     # Rails と Go のレスポンスを並べて比較
+make up            # Go + React をまとめて起動（停止は Ctrl+C）
+make down          # Go と React を停止（Go の DB コンテナは残る）
+make go-up         # Go サーバーを起動（MySQL 起動 → mysqldef で schema 適用 → seed → go run）
+make run-react     # React 開発サーバーのみ起動
+make go-down       # Go の DB コンテナ・ボリュームごと削除
+make go-db-reset   # Go の DB をボリュームごと削除して再作成・schema 再適用
+make build         # Docker イメージをビルド
+make kill-all-ports # React(3000) / Go(1099) / Go DB(15432) のプロセスを kill
+make shell-go      # Go サブモジュールでシェルを開く
+make shell-react   # React サブモジュールでシェルを開く
 ```
+
+Go サーバーはコンテナではなくホストで `go run` する。`go` と `mysqldef` がローカルに必要。
+
+## 環境変数
+
+いずれも Git 管理外。ルートは `.envrc.example` から作成する。
+
+| ファイル | 用途 |
+|--------|------|
+| `.envrc` | `compose.yml`（react サービス）が参照。`REACT_FRONTEND_PATH` / `REACT_FRONTEND_PORT` |
+| `submodules/frontend/react/.env` | `REACT_APP_GOOGLE_MAP_API_KEY` ほか。`.env.example` あり |
+| `submodules/backend/go/.envrc` | `DB_*` / `GOOGLE_MAPS_API_KEY`（Places API）/ `RECRUIT_API_KEY`（HotPepper）/ `JWT_SECRET_KEY` |
+
+Makefile は `set -a && . ./.envrc && set +a && docker compose` の形で `.envrc` を読むため、`.envrc` が無いと `make build` / `make up` が失敗する。
+
+## ポート
+
+| サービス | ポート |
+|--------|------|
+| React | 3000 |
+| Go | 1099 |
+| Go の MySQL | 15432 |
 
 ## 開発ワークフロー
 
@@ -42,19 +70,16 @@ make curl-compare     # Rails と Go のレスポンスを並べて比較
 - 実装の PR は完了した実装をすべて含めてからマージ依頼すること。
 - 設計・差分洗い出し・方針決定などはコードを伴わないため Issue にまとめる。
 
-## バックエンド切り替え
+## リプレイス状況
 
-Nginx の upstream を `.backend.env` で制御している。
-
-| バックエンド | URL |
-|-----------|-----|
-| Rails | `http://backend_rails:7777` |
-| Go | `http://host.docker.internal:1099`（ホストで go run） |
+- API 契約は `submodules/backend/go/api/OpenAPI.yaml` で定義し、`oapi-codegen` でハンドラのインターフェースを生成する。
+- **未対応**: デートスポットレビュー（登録・編集・削除・星評価）とレビュー由来のランキング。Go 側は OpenAPI・ハンドラとも未実装で、React 側もフィーチャーフラグ `REACT_APP_ENABLE_REVIEWS` で非表示にしている。
+- Rails に戻す場合は `compose.yml` と `Makefile` のコメントを解除し、React の環境変数を Nginx 経由（`http://localhost:8080`）に戻す必要がある。
 
 ## 関連リポジトリ（スタンドアロンクローン）
 
 | リポジトリ | 用途 |
 |---------|-----|
 | `date-course-react` | React フロントエンド単体開発 |
-| `date-course-rails` | Rails バックエンド単体開発 |
 | `date-courses-go` | Go バックエンド単体開発 |
+| `date-course-rails` | Rails バックエンド単体開発（停止中） |

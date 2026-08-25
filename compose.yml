@@ -1,25 +1,8 @@
 services:
-  nginx:
-    image: nginx:alpine
-    entrypoint: ["/bin/sh", "/entrypoint.sh"]
-    volumes:
-      - ./nginx/entrypoint.sh:/entrypoint.sh:ro
-      - ./nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
-    env_file:
-      - .backend.env
-    ports:
-      - "8080:80"
-
-  db:
-    # M3チップに対応するために導入
-    platform: linux/x86_64
-    image: postgres:13
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432" # コンテナ側:ホスト側
+  # ============================================================
+  # React (port: 3000)
+  #   Go バックエンド (host: 1099) を直接叩く
+  # ============================================================
   react:
     build:
       context: ${REACT_FRONTEND_PATH}
@@ -27,32 +10,63 @@ services:
     command: sh -c "yarn start"
     environment:
       NODE_ENV: development
-      # Nginx リバースプロキシ経由でバックエンドに接続（make switch-rails / make switch-go で切り替え）
-      REACT_APP_API_BASE: http://localhost:8080
-      REACT_APP_BACKEND_DOMAIN_API: http://localhost:8080/api/v1
+      # Go バックエンド (make go-up でホスト起動) に直接接続する
+      REACT_APP_API_BASE: http://localhost:1099
+      REACT_APP_BACKEND_DOMAIN_API: http://localhost:1099/api/v1
     volumes:
         - ./${REACT_FRONTEND_PATH}:/usr/src/datecourses
     ports:
       - "${REACT_FRONTEND_PORT}:3000"
-  backend_rails:
-    build:
-      context: ${RAILS_API_PATH}
-      dockerfile: Dockerfile.develop
-    environment:
-      REACT_FRONTEND_DOMAIN: ${REACT_FRONTEND_DOMAIN}
-      GOOGLE_MAP_API_KEY: ${GOOGLE_MAP_API_KEY}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_USER: ${POSTGRES_USER}
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 7777 -b '0.0.0.0'"
-    volumes:
-        - ./${RAILS_API_PATH}:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
-    ports:
-      - "${RAILS_API_PORT}:7777"
-    depends_on:
-      - db
-    tty: true
-    stdin_open: true
+
+  # ============================================================
+  # 以下は Rails リプレイス完了により停止中
+  #   Go + React のみで起動するため nginx / db(postgres) / backend_rails を無効化
+  #   Rails に戻す場合はコメントを解除し、react の環境変数を
+  #   http://localhost:8080 (nginx 経由) に戻すこと
+  # ============================================================
+
+  # nginx:
+  #   image: nginx:alpine
+  #   entrypoint: ["/bin/sh", "/entrypoint.sh"]
+  #   volumes:
+  #     - ./nginx/entrypoint.sh:/entrypoint.sh:ro
+  #     - ./nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+  #   env_file:
+  #     - .backend.env
+  #   ports:
+  #     - "8080:80"
+
+  # db:
+  #   # M3チップに対応するために導入
+  #   platform: linux/x86_64
+  #   image: postgres:13
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - pg-data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432" # コンテナ側:ホスト側
+
+  # backend_rails:
+  #   build:
+  #     context: ${RAILS_API_PATH}
+  #     dockerfile: Dockerfile.develop
+  #   environment:
+  #     REACT_FRONTEND_DOMAIN: ${REACT_FRONTEND_DOMAIN}
+  #     GOOGLE_MAP_API_KEY: ${GOOGLE_MAP_API_KEY}
+  #     POSTGRES_HOST: ${POSTGRES_HOST}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #   command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 7777 -b '0.0.0.0'"
+  #   volumes:
+  #       - ./${RAILS_API_PATH}:/date-course-api:cached # カレントディレクトリを/date-course-apiにバインドマウントしている
+  #   ports:
+  #     - "${RAILS_API_PORT}:7777"
+  #   depends_on:
+  #     - db
+  #   tty: true
+  #   stdin_open: true
+
   # いったんe2eコンテナはコメントアウトする
   # e2e:
   #   image: cypress
@@ -66,5 +80,7 @@ services:
   #   volumes:
   #     - ./e2e/cypress:/app/cypress
   #     - ./e2e/cypress.json:/app/cypress.json
-volumes:
-  pg-data:
+
+# Rails の PostgreSQL 用ボリューム（backend_rails / db 復活時に解除する）
+# volumes:
+#   pg-data:

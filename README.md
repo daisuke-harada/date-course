@@ -1,209 +1,224 @@
-# DateCourses 💑
+# DateCourses
 
-**無数のデートスポットから、自分だけのデートコースを作成・共有できる Web アプリケーション。**
+『DateCourses』は無数のデートスポットを選択し、デートコースを作成するアプリです。<br/>
+ログインすることでデートコースを作成できます。<br/>
+(ゲストログインを用意しているので、簡単にログインできます)<br/>
+デートスポットの作成に関しては管理者のみ作成できます（名前: admin, パスワード: adminstrator)<br/>
+基本機能はログイン無しで閲覧可能ですのでお気軽にご覧下さい。<br/>
 
-> 🎯 **このリポジトリの一番の見どころ**
-> フロントエンド（React）を一切止めずに、**バックエンドを Rails ↔ Go でシームレスに切り替えられる**構成にしています。
-> これは実務で経験した「**PHP → Go への段階的リプレイス**」を、個人開発で再現・検証するために設計したものです。
-> Nginx の向き先を変えるだけで、同一の API 契約（OpenAPI）に対して 2 つの実装を差し替えられます。
+トップページ
+<img width="1428" alt="スクリーンショット 2022-04-25 10 17 11" src="https://user-images.githubusercontent.com/59969400/165005761-1b973980-a182-4800-a6f6-9be323b367f5.png">
 
-![トップページ](https://user-images.githubusercontent.com/59969400/165005761-1b973980-a182-4800-a6f6-9be323b367f5.png)
+# 現在の開発状況
 
-| | |
-|---|---|
-| 🌐 デモ | ~~https://www.datecourses.com~~ （現在停止中・再公開準備中） |
-| 🔑 お試し | ゲストログインあり（登録不要で全機能を試せます） |
-| 👤 管理者 | name: `admin` / password: `adminstrator`（デートスポット登録が可能） |
+**バックエンドを Ruby on Rails から Go へリプレイス開発中です。**
 
----
+- 現在ローカルで起動するのは **Go + React** の構成のみです。React は Go サーバー（port 1099）を直接叩きます。
+- Rails 実装は `submodules/backend/rails` に残していますが、起動対象から外しています（`compose.yml` / `Makefile` でコメントアウト）。
+- 本番環境は停止中のため、デプロイ（CD）も無効化しています。動作確認はローカル環境で行ってください。
 
-## 目次
-
-- [プロジェクトの構成（リポジトリ地図）](#プロジェクトの構成リポジトリ地図)
-- [アーキテクチャ：Rails ↔ Go 切り替えの仕組み](#アーキテクチャrails--go-切り替えの仕組み)
-- [技術的なこだわり・工夫した点](#技術的なこだわり工夫した点)
-- [使用技術](#使用技術)
-- [ローカル開発環境](#ローカル開発環境)
-- [機能一覧](#機能一覧)
-- [構成図・ER図](#構成図er図)
-
----
-
-## プロジェクトの構成（リポジトリ地図）
-
-このリポジトリは **モノレポのルート**です。フロントエンド・バックエンドは Git サブモジュールとして独立管理し、**CI/CD をリポジトリごとに分離**しています。
+# ローカル開発環境
 
 ```
-date-course/ （← 今ここ：統合・起動・Nginx 切り替えを司るルート）
-├── submodules/
-│   ├── frontend/react/   → date-course-react   (React 18 + TypeScript SPA)
-│   └── backend/
-│       ├── rails/        → date-course-rails   (Ruby on Rails 7.1 / 旧実装・基準)
-│       └── go/           → date-courses-go      (Go + Echo / リプレイス実装)
-├── nginx/                Nginx 設定（バックエンド切り替え）
-├── compose.yml           Docker Compose（全サービス）
-└── Makefile              開発コマンド集
+React (port 3000)
+    ↓ API リクエスト
+Go (port 1099)
+    ↓
+MySQL (port 15432)
 ```
 
-| リポジトリ | 役割 | 主な技術 |
-|---|---|---|
-| **date-course**（本リポジトリ） | 統合・起動・バックエンド切り替え | Docker Compose / Nginx / Make |
-| [date-course-react](https://github.com/daisuke-harada/date-course-React) | フロントエンド | React 18 / TypeScript / Tailwind / Redux |
-| [date-course-rails](https://github.com/daisuke-harada/date-course-rails) | バックエンド（基準実装） | Ruby on Rails 7.1 (API) / RSpec |
-| [date-courses-go](https://github.com/daisuke-harada/date-courses-go) | バックエンド（リプレイス実装） | Go / Echo / OpenAPI / AWS Lambda |
+Go サーバーはコンテナではなくホストで直接実行するため、`go` と [`mysqldef`](https://github.com/sqldef/sqldef) がローカルにインストールされている必要があります。
 
----
-
-## アーキテクチャ：Rails ↔ Go 切り替えの仕組み
-
-React は常に Nginx（port 8080）経由で API を叩きます。**Nginx の upstream を切り替えるだけ**で、React を再起動せずに Rails と Go を入れ替えられます。
-
-```
-        React (port 3000)
-            │  API リクエスト
-            ▼
-        Nginx (port 8080)  ◀── make switch-rails / make switch-go
-            │
-   ┌────────┴────────┐
-   ▼                 ▼
-Rails (7777)      Go (1099)
-   └─── 同一の OpenAPI 契約に準拠 ───┘
-```
-
-**なぜこの構成にしたか（設計意図）**
-
-- 実務での PHP→Go リプレイスでは「**外形（API レスポンス）を一切変えずに中身だけ差し替える**」ことが最重要だった。これを個人開発でも安全に行える土台が欲しかった。
-- フロントとバックを疎結合にし、**フロントに影響を与えずバックエンドだけを差し替え**られるよう、Docker のネットワーク／プロファイル機能で抽象化。
-- 2 実装のレスポンス同一性を機械的に確認できるよう、`make curl-compare` で **Rails と Go に同じリクエストを投げて差分比較**できるようにした（＝移植のリグレッション検知）。
-
----
-
-## 技術的なこだわり・工夫した点
-
-<details>
-<summary><b>① バックエンドの差し替え可能性（Rails ↔ Go）</b></summary>
-
-- 同一の OpenAPI 契約に対して 2 実装を用意し、Nginx で切替。フロントは無改修。
-- `make curl-compare` でレスポンスの差分を検証し、移植の正しさを担保。
-- CI/CD をリポジトリごとに独立させ、各バックエンドを単体で開発・デプロイ可能。
-</details>
-
-<details>
-<summary><b>② インフラ（IaC / サーバレス）</b></summary>
-
-- Rails 版: Docker イメージを **ECS(Fargate)** でサーバレス運用。**ALB** で常時 SSL、画像は **S3**、CI/CD は **GitHub Actions**。
-- Go 版（date-courses-go）: **AWS Lambda + API Gateway + SAM(IaC)** によるフルサーバレス構成へ発展。
-- インフラ構成は別リポジトリ [terraform-aws-learning](https://github.com/daisuke-harada/terraform-aws-learning) でコード管理。
-</details>
-
-<details>
-<summary><b>③ フロントエンド</b></summary>
-
-- React + TypeScript の SPA。状態管理は Redux、UI は Tailwind CSS、Atomic Design でコンポーネントを整理。
-- Google Maps API（Directions / Maps JavaScript API）でデートコースを地図上に可視化。
-</details>
-
-<details>
-<summary><b>④ テスト</b></summary>
-
-- バックエンド: RSpec（request / model テスト）。
-- E2E: Cypress。
-- Go 版は OpenAPI からの型安全なハンドラ生成 ＋ `go test`。
-</details>
-
-<details>
-<summary><b>⑤ 実データの扱い（レビュー機能は本番で非表示）</b></summary>
-
-- デートスポットは HotPepper グルメAPIから取得した**実在・実名の店舗**。これに自作のユーザーレビュー（第三者評価）を公開すると**信用毀損・風評のリスク**があるため、**レビュー・評価（星）・人気ランキングUI は本番では非表示**にしている（フィーチャーフラグ `REACT_APP_ENABLE_REVIEWS`／ローカルでのみ有効化）。
-- 食べログ・ぐるなびの評価APIは取得不可（提供終了/有料）のため、正当な評価を載せる手段が無いことも踏まえた判断。
-- 実在店の正確な情報は、各スポットの **HotPepper 店舗ページへの導線**で本家へ誘導する方針。
-</details>
-
----
-
-## 使用技術
-
-| 領域 | 技術 |
-|---|---|
-| フロントエンド | TypeScript / React 18.3.1 / Tailwind CSS / Redux / Google Maps API |
-| バックエンド（基準） | Ruby 3.1.2 / Ruby on Rails 7.1.0（API モード）/ RuboCop / RSpec |
-| バックエンド（リプレイス） | Go / Echo / OpenAPI / JWT |
-| インフラ | Docker / docker-compose / Nginx / AWS（ECR, ECS Fargate, VPC, S3, Route53, ALB, RDS, ACM, SSM, Lambda）/ Terraform |
-| CI/CD | GitHub Actions |
-| E2E テスト | Cypress |
-
----
-
-## ローカル開発環境
-
-### 初回セットアップ
+## 初回セットアップ
 
 ```bash
 # サブモジュールを取得
 git submodule update --init --recursive
 
-# .backend.env 作成・イメージビルド・DB 初期化
-make setup
+# 環境変数ファイルを作成する
+cp .envrc.example .envrc
+cp submodules/frontend/react/.env.example submodules/frontend/react/.env
+
+# Docker イメージをビルド
+make build
 ```
 
-### 起動
+Go 側の環境変数は `submodules/backend/go/.envrc` に作成します（いずれも Git 管理外）。
+
+| ファイル | 主な変数 |
+|---|---|
+| `.envrc`（ルート） | `REACT_FRONTEND_PATH` / `REACT_FRONTEND_PORT` |
+| `submodules/frontend/react/.env` | `REACT_APP_GOOGLE_MAP_API_KEY`（Maps JavaScript API）※ 接続先は `compose.yml` が `http://localhost:1099/api/v1` を渡すため設定不要 |
+| `submodules/backend/go/.envrc` | `DB_*`（MySQL 接続情報）/ `RECRUIT_API_KEY`（HotPepper グルメAPI）/ `JWT_SECRET_KEY` / `GOOGLE_MAPS_API_KEY`（現状コードからは未使用だが必須項目のため要設定） |
+
+## 起動する
 
 ```bash
-# React + Rails で起動
-make run-rails
-
-# React + Go で起動（ターミナルを2つ使用）
-make go-up      # ターミナル1: Go サーバー（DB初期化→seed→起動）
-make run-go     # ターミナル2: Nginx を Go モードにして React + Nginx 起動
+# Go + React をまとめて起動（停止は Ctrl+C）
+make up
 ```
 
-### バックエンドの切り替え
+ターミナルを分けて動かす場合:
 
 ```bash
-make switch-rails   # → Rails に切り替え
-make switch-go      # → Go に切り替え
-make backend-status # 現在どちらが有効か確認
+# ターミナル1: Go サーバー（MySQL 起動 → schema 適用 → seed 投入 → サーバー起動）
+make go-up
+
+# ターミナル2: React 開発サーバー
+make run-react
 ```
 
-Nginx が数秒で再起動し、React を再起動せずにバックエンドが切り替わります。
+## 停止する
 
-### よく使うコマンド
+```bash
+# Go と React を停止（Go の DB コンテナは残る）
+make down
+
+# Go の DB コンテナ・ボリュームごと削除
+make go-down
+```
+
+## その他のコマンド
 
 | コマンド | 内容 |
 |---|---|
-| `make db-migrate` | Rails の DB マイグレーション |
-| `make db-seed` | Rails の seed データ投入 |
-| `make rails-db-reset` | Rails の DB データをリセット（テーブル構造は保持） |
-| `make go-db-reset` | Go の DB データをリセット |
-| `make rspec` | RSpec テストを実行 |
-| `make curl-compare` | 起動中の Rails と Go に同じリクエストを投げてレスポンスを比較 |
-| `make rails-down` / `make go-down` | 各バックエンドの停止（ボリュームも削除） |
+| `make build` | Docker イメージをビルド |
+| `make go-db-reset` | Go の DB をボリュームごと削除して再作成・schema 再適用 |
+| `make kill-all-ports` | React(3000) / Go(1099) / Go DB(15432) のプロセスを kill |
+| `make shell-go` | Go サブモジュールでシェルを開く |
+| `make shell-react` | React サブモジュールでシェルを開く |
 
----
+# リポジトリ構成
 
-## 機能一覧
+このリポジトリはモノレポのルートです。フロントエンド・バックエンドは Git サブモジュールとして独立管理し、リポジトリごとに CI を実行しています。
 
-### 基本機能（ログイン不要）
-- Top ページ（都道府県・ジャンル一覧、デートスポットのランキング表示）
-- デートコース：地図表示 / 詳細ページ / 一覧ページ
-- デートスポット：名前検索 / 一覧（ランキング）/ 詳細（紐づくレビュー一覧）
-- ユーザー：ゲストログイン / ログイン / 新規登録 / 詳細（登録コース・レビュー・フォロー/フォロワー）/ 一覧
-- 検索：デートコースをエリアで検索 / デートスポットを県名・ジャンルで条件検索 / ユーザーを名前で検索
+```
+date-course/
+├── submodules/
+│   ├── backend/
+│   │   ├── go/      # Go バックエンド（リプレイス先・現行）
+│   │   └── rails/   # Rails バックエンド（リプレイス元・停止中）
+│   └── frontend/
+│       └── react/   # React 18 + TypeScript SPA
+├── .envrc.example   # 環境変数のテンプレート
+├── compose.yml      # Docker Compose
+└── Makefile         # 開発コマンド集
+```
 
-### ログイン後機能
-- デートコース作成：スポットの追加 / 入れ替え / 削除 / 全削除 / 既存コースのコピー
-- デートスポットレビュー：登録 / 編集 / 削除 / 星による評価
-- ユーザー：情報更新 / 退会 / フォロー・フォロー解除
+| リポジトリ | 役割 |
+|---|---|
+| [date-course-React](https://github.com/daisuke-harada/date-course-React) | フロントエンド |
+| [date-courses-go](https://github.com/daisuke-harada/date-courses-go) | バックエンド（リプレイス先） |
+| [date-course-rails](https://github.com/daisuke-harada/date-course-rails) | バックエンド（リプレイス元・停止中） |
 
-### 管理者機能
-- デートスポット：登録 / 編集 / 削除
+# 特にみていただきたい点
 
----
+- リプレイス
+  - フロントエンドとバックエンドを Git サブモジュールで独立管理し、リポジトリ単位でバックエンドを差し替えられる構成にしている点。
+  - OpenAPI で API 契約を定義し、`oapi-codegen` でハンドラのインターフェースを生成することで、Rails 版と同じレスポンス形式を機械的に担保している点。
 
-## 構成図・ER図
+- 外部API連携
+  - HotPepper グルメAPI から店舗情報を取得し、Wikimedia API で画像を補完してデートスポットとして DB に一括登録するバッチ（`cmd/batch`）を実装している点。
 
-### ネットワーク構成図
-![ネットワーク構成図](https://user-images.githubusercontent.com/59969400/165005469-3ef607b5-e9b7-42b6-9a42-e1cc7481ccbc.png)
+- バックエンド（Go）
+  - レイヤードアーキテクチャ（domain / usecase / interface / infrastructure）で責務を分離している点。
+  - DI コンテナ（`uber-go/dig`）と `uber-go/mock` により、ハンドラごとのユニットテストを書ける構成にしている点。
+  - `mysqldef` で SQL スキーマファイルから宣言的にマイグレーションを行なっている点。
+  - JWT による認証を実装している点。
 
-### ER図
-![ER図](https://user-images.githubusercontent.com/59969400/165200635-5b0973b2-c9e3-46d7-91a6-635eb4623fb6.png)
+- フロントエンド
+  - Reactを用いてSPA(SinglePagaApplication)を実装している点。
+  - TypeScriptで開発を行なっている点。
+  - CSSフレームワークにtailwindcssを利用している点。
+  - atomicデザインを使用している点。
+  - Redux Toolkitで状態管理をしている点。
+
+- テスト・CI
+  - Go のハンドラ・ユースケースに対して `go test` でユニットテストを実装している点。
+  - Go リポジトリの GitHub Actions で、PR ごとに golangci-lint / build / test を実行している点。
+
+# 使用した技術
+
+- フロントエンド
+  - HTML/CSS
+  - TypeScript 5.4
+  - React.js 18.3.1
+  - tailwindcss(CSSフレームワーク)
+  - Redux Toolkit / redux-persist
+  - googleMapApi(Directions API MapsJavaScript API)
+- バックエンド
+  - Go 1.26
+  - Echo（Web フレームワーク）
+  - GORM / MySQL
+  - oapi-codegen（OpenAPI からのコード生成）
+  - mysqldef（宣言的マイグレーション）
+  - uber-go/dig（DI）・uber-go/mock（モック生成）
+  - JWT（認証）
+  - golangci-lint（コード解析ツール）
+- 外部API
+  - HotPepper グルメAPI（デートスポット情報の取得）
+  - Wikimedia API（画像の取得）
+- 開発環境
+  - Docker/docker-compose
+  - GitHubActions(CI)
+
+# 機能一覧
+
+## 基本機能
+  - Topページ表示(都道県・ジャンルを全て表示)
+  - デートコース
+    - デートコースをGoogleMapページで表示する機能
+    - デートコース詳細ページ表示
+    - デートコース一覧ページ表示
+  - デートスポット
+    - デートスポット名前検索機能
+    - デートスポット一覧ページ表示
+    - デートスポット詳細ページ表示
+  - ユーザー
+    - ゲストログイン機能
+    - ユーザーログイン機能
+    - ユーザー新規登録機能
+    - ユーザー詳細ページ表示(登録したデートコース・フォロー・フォロワー表示)
+    - ユーザー新規登録ページ表示
+    - ユーザー一覧ページ表示
+    - フォロー中一覧ページ表示
+    - フォロワー一覧ページ表示
+  - 検索機能
+    - デートコースを都道府県エリアで検索する機能
+    - デートスポット条件検索機能(県名、ジャンルで検索)
+    - ユーザーを名前で検索する機能
+
+## ログイン後機能
+  - デートコース
+    - デートスポットを作成中のデートコースに追加する機能
+    - デートコース内のデートスポットを入れ替える機能
+    - デートコース内のデートスポットを削除する機能
+    - デートコース内のデートスポットを全て削除する機能
+    - デートコース情報をデートコース作成ページにコピーする機能
+    - デートコース作成ページ表示
+    - デートコース削除機能
+  - ユーザー
+    - ユーザー情報更新機能
+    - ユーザー退会機能
+    - フォロー・フォロー解除機能
+    - ユーザー編集ページ表示
+
+## 管理者機能
+  - デートスポット
+    - デートスポット登録機能
+    - デートスポット編集機能
+    - デートスポット削除機能
+    - デートスポット新規登録ページ表示
+    - デートスポット編集ページ表示
+
+## 廃止予定の機能
+
+Rails 版にはあるが Go 版では未実装で、現在は無効化している機能です。
+
+  - デートスポットレビュー（登録・編集・削除・星による評価）
+  - レビューを元にしたデートスポットのランキング表示
+
+デートスポットは HotPepper グルメAPI から取得した実在・実名の店舗です。実在する店舗に自作のユーザーレビュー（第三者評価）を公開すると信用毀損・風評のリスクがあるため、Go 版へは移植せず廃止する方針です。
+
+# ER図
+<img width="652" alt="スクリーンショット 2022-04-26 10 24 49" src="https://user-images.githubusercontent.com/59969400/165200635-5b0973b2-c9e3-46d7-91a6-635eb4623fb6.png">

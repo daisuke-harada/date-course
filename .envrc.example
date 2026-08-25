@@ -1,0 +1,10 @@
+# このファイルを .envrc にコピーして使用する
+#   cp .envrc.example .envrc
+#
+# ルートの compose.yml（react サービス）が参照する変数のみを定義している。
+# Go バックエンドの設定は submodules/backend/go/.envrc に、
+# React のビルド時変数（API キーなど）は submodules/frontend/react/.env に定義する。
+
+# React
+export REACT_FRONTEND_PATH=submodules/frontend/react
+export REACT_FRONTEND_PORT=3000
